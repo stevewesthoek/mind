@@ -7,7 +7,7 @@ Obsidian vault for personal knowledge management. Independent git repo synced to
 ## Structure
 
 ```
-personal-brain/
+mind/
   01-inbox/           ← Capture point for new ideas
   02-strategy/        ← Brainstorming and strategic thinking
   03-projects/        ← Active projects with deadlines
@@ -43,10 +43,10 @@ personal-brain/
 ## Do not break
 
 - `.obsidian/` folder structure (Obsidian metadata)
-- Symlink from machine-brain/vault → this repo (referenced by AI agents)
+- Symlink from brain/mind → this repo (referenced by AI agents)
 - .gitignore exclusions (workspace.json, daily notes, trash)
 
 ## See also
 
-- `machine-brain/` repo — AI infrastructure, system configs, skills
-- `machine-brain/vault` → symlink to this repo (for AI context)
+- `brain/` repo — AI infrastructure, system configs, skills
+- `brain/mind` → symlink to this repo (for AI context)

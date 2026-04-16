@@ -1,1 +1,9 @@
-{}
+{
+  "newFileLocation": "folder",
+  "newFileFolderPath": "01-inbox",
+  "attachmentFolderPath": "06-resources/attachments",
+  "trashOption": "local",
+  "promptDelete": false,
+  "defaultViewMode": "source",
+  "foldHeading": false
+}
