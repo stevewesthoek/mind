@@ -11,14 +11,16 @@
             "id": "7c95a530340ebe38",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "kanban",
               "state": {
-                "file": "02-strategy/brainstorm/2026-04-10-quick-capture-demosaas-app-idea.md",
-                "mode": "source",
-                "source": false
+                "file": "kanban.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": []
+                }
               },
-              "icon": "lucide-file",
-              "title": "2026-04-10-quick-capture-demosaas-app-idea"
+              "icon": "lucide-trello",
+              "title": "kanban"
             }
           }
         ]
@@ -94,7 +96,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "02-strategy/brainstorm/2026-04-10-quick-capture-demosaas-app-idea.md",
+                "file": "02-strategy/brainstorm/2026-04-10-quick-capture-people-to-follow-on-x.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +106,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 2026-04-10-quick-capture-demosaas-app-idea"
+              "title": "Backlinks for 2026-04-10-quick-capture-people-to-follow-on-x"
             }
           },
           {
@@ -164,8 +166,19 @@
               "icon": "lucide-list",
               "title": "Outline of kanban"
             }
+          },
+          {
+            "id": "02d742fff29bf0d0",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
@@ -184,8 +197,10 @@
       "bases:Create new base": false
     }
   },
-  "active": "86fe36604e4aab36",
+  "active": "7c95a530340ebe38",
   "lastOpenFiles": [
+    "02-strategy/brainstorm/2026-04-10-quick-capture-people-to-follow-on-x.md",
+    "02-strategy/brainstorm/2026-04-10-quick-capture-demosaas-app-idea.md",
     "01-inbox/1776370087482-custom-gpt-write-test.md",
     "01-inbox/1776369607264-brain-bridge-phase-37-public-write-test.md",
     "01-inbox/1776369589369-brain-bridge-phase-37-local-write-test.md",
@@ -212,8 +227,6 @@
     "04-tasks/business-tasks/0695-verstuur-factuur-tdp.md",
     "04-tasks/business-tasks/0694-try-kirodev.md",
     "04-tasks/business-tasks/0693-use-notebook-lm-for-bible-studies.md",
-    "04-tasks/business-tasks/0692-kow-check-ing-aanpassingen.md",
-    "04-tasks/business-tasks/0691-maak-footer-mooi-kow-checking.md",
     "03-projects",
     "02-strategy/brainstorm",
     "02-strategy",
