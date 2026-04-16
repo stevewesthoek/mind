@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Obsidian runtime state (changes every open)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Obsidian daily notes — personal ephemeral
+daily/*.md
+
+# Obsidian trash
+.trash/
+
+# Obsidian Git plugin state
+.obsidian/plugins/obsidian-git/data/
+
+# Python/Node
+**/__pycache__/
+**/node_modules/
+*.pyc
+.venv/
+
+# Obsidian plugin caches
+.obsidian/cache/
