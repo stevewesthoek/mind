@@ -160,7 +160,7 @@
               "state": {
                 "file": "kanban.md",
                 "followCursor": false,
-                "showSearch": false,
+                "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
@@ -168,7 +168,7 @@
             }
           },
           {
-            "id": "02d742fff29bf0d0",
+            "id": "f172495bbe931c61",
             "type": "leaf",
             "state": {
               "type": "git-view",
@@ -197,7 +197,7 @@
       "bases:Create new base": false
     }
   },
-  "active": "7c95a530340ebe38",
+  "active": "7481e446b74cf077",
   "lastOpenFiles": [
     "02-strategy/brainstorm/2026-04-10-quick-capture-people-to-follow-on-x.md",
     "02-strategy/brainstorm/2026-04-10-quick-capture-demosaas-app-idea.md",
