@@ -133,50 +133,16 @@ kanban-plugin: board
 - [ ] [[04-tasks/personal-tasks/0592-find-osteopata.md|Find osteopata]] #p3 #you
 - [ ] [[04-tasks/personal-tasks/0593-emtpy-the-video-cassettes-miro.md|Emtpy the video cassette's Miro]] #p3 #you
 
-
 ## To Do
-
-- [ ] maak factuur TDP domeinen
-- [ ] Bring car to mechanic
-- [ ] Place baby bed down
-- [ ] Setup STB Facebook app ⏫
-- [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
-- [ ] Put money on bank account
-- [ ] Plantenpot aanpassen
-- [ ] plan NL trip
-- [ ] Fix Antenna
-- [ ] Decommision Hetzner 🔼
-- [ ] YA finance app
-- [ ] Empty mail
-- [ ] fix photo share JPV Bootcamp
-- [ ] Family finance app
-- [ ] Learn Portuguese app
-- [ ] Make Via di Eden editable for Joe
-- [ ] Make Oliveto Organizing editable for Ashley
-- [ ] Merge Stripe ProChat legacy into ProChat Studio
-- [ ] Improve thumbnails STB
-- [ ] Expand STB pipeline and start posting FB, YT & PIN
-- [ ] fix the obsidian way of working
-- [ ] add obsidian to phone
-- [ ] Product: ChatGPT bridge
-- [ ] Product: Model Router
-- [ ] empty ChatGPT into Obsidian
-- [ ] read mark's boek
-- [ ] Test van phone
-- [ ] Test 2
-- [ ] Test 3
 
 
 ## Doing
-
-- [ ] Vraag Jon voor verhuizen domein & give him a coinbase address
-- [ ] Apply for passport
-- [ ] Make my contact card iPhone
 
 
 ## Done
 
 **Complete**
+
 - [x] [[04-tasks/business-tasks/0259-boek-afspraak-met-antero.md|Boek afspraak met Antero]] #p2 #you
 - [x] [[04-tasks/business-tasks/0612-boek-afspraak-met-antero.md|Boek afspraak met Antero]] #p2 #you
 - [x] [[04-tasks/personal-tasks/0083-pay-phone-bill-wintre.md|Pay phone bill WinTre]] #p2 #you
@@ -795,10 +761,8 @@ kanban-plugin: board
 - [x] [[04-tasks/personal-tasks/0567-self-host-microsaasfast.md|Self Host MicroSaasFast]] #p3 #you
 
 
-
-
 %% kanban:settings
 ```
-{"tag-colors":[{"tagKey":"#p1","color":"#fff","backgroundColor":"#c0392b"},{"tagKey":"#p2","color":"#fff","backgroundColor":"#e67e22"},{"tagKey":"#p3","color":"#000","backgroundColor":"#f1c40f"},{"tagKey":"#p4","color":"#000","backgroundColor":"#2ecc71"},{"tagKey":"#p5","color":"#fff","backgroundColor":"#95a5a6"},{"tagKey":"#you","color":"#fff","backgroundColor":"#2980b9"},{"tagKey":"#ai","color":"#fff","backgroundColor":"#8e44ad"}],"date-format":"YYYY-MM-DD","time-format":"HH:mm","link-date-to-daily-note":true,"kanban-plugin":"board"}
+{"tag-colors": [{"tagKey": "#p1", "color": "#fff", "backgroundColor": "#c0392b"}, {"tagKey": "#p2", "color": "#fff", "backgroundColor": "#e67e22"}, {"tagKey": "#p3", "color": "#000", "backgroundColor": "#f1c40f"}, {"tagKey": "#p4", "color": "#000", "backgroundColor": "#2ecc71"}, {"tagKey": "#p5", "color": "#fff", "backgroundColor": "#95a5a6"}, {"tagKey": "#you", "color": "#fff", "backgroundColor": "#2980b9"}, {"tagKey": "#ai", "color": "#fff", "backgroundColor": "#8e44ad"}], "date-format": "YYYY-MM-DD", "time-format": "HH:mm", "link-date-to-daily-note": true}
 ```
 %%
