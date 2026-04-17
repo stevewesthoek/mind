@@ -4,7 +4,22 @@ type: dashboard
 
 # Command Center
 
-**Check these first. Everything else is reference.**
+**Your daily starting point. Check here first.**
+
+---
+
+## ⚡ Quick Navigation
+
+| What | Where | Purpose |
+|------|-------|---------|
+| **Kanban Board** | [[kanban]] | Drag tasks between To Do → Doing → Done |
+| **System Guide** | [[README]] | How the vault works (start here if lost) |
+| **Strategy** | [[02-strategy]] | Your committed decisions |
+| **Tasks** | [[04-tasks]] | Your work items |
+| **Projects** | [[03-projects]] | Active projects with timelines |
+| **Inbox** | [[01-inbox]] | Unprocessed captures (review weekly) |
+| **Areas** | [[05-areas]] | Ongoing responsibilities |
+| **Archive** | [[08-archive]] | Historical work (reference) |
 
 ---
 
@@ -12,57 +27,92 @@ type: dashboard
 
 ```dataview
 TABLE priority, assigned_to, due_date
-FROM "notes/tasks"
-WHERE status = "ready" OR status = "in-progress"
-AND due_date = dateformat(now, "yyyy-MM-dd")
+FROM "04-tasks"
+WHERE (status = "ready" OR status = "in-progress")
 SORT priority ASC
 LIMIT 5
 ```
 
+**No results?** Pick a task from Kanban "To Do" column.
+
 ---
 
-## ⚠️ Blocked
+## ⚠️ Blockers (Escalate Immediately)
 
 ```dataview
-LIST
-FROM "notes/tasks"
+LIST file.link, status, priority
+FROM "04-tasks"
 WHERE status = "blocked"
-LIMIT 5
+SORT priority DESC
 ```
 
-**⚠️ If anything here, escalate immediately.**
+**If anything above:** Stop. Unblock it first. Everything else waits.
 
 ---
 
-## 📥 Unprocessed Inbox
+## 📥 Inbox Backlog
 
 ```dataview
-LIST file.mtime
-FROM "notes/inbox"
-SORT file.mtime DESC
+TABLE file.ctime as Created, confidence, signal_quality
+FROM "01-inbox"
+SORT file.ctime DESC
 LIMIT 5
 ```
 
+**Review this weekly.** High confidence + high signal = keep. Low either = delete.
+
 ---
 
-## 🚀 Active Projects
+## 🚀 Active Projects (Timeline)
 
 ```dataview
-LIST status, target_end_date
-FROM "notes/projects"
+TABLE status, priority, target_end_date
+FROM "03-projects"
 WHERE status = "in-progress"
 SORT target_end_date ASC
 ```
 
----
-
-## Quick Links
-
-- [[kanban]] — Drag tasks between columns
-- [[strategy]] — Strategic decisions
-- [[areas]] — Ongoing areas
-- STRUCTURE.md — How this works
+**Overdue?** Check blockers above. Escalate if stuck.
 
 ---
 
-*Last updated: {{date:YYYY-MM-DD HH:mm}}*
+## 📋 What to Do Now
+
+**Next 5 minutes:**
+1. Open [[kanban]] 
+2. Pick 1-3 tasks from "To Do"
+3. Drag to "Doing" and work
+4. Drag to "Done" when finished
+
+**Weekly (20 min):**
+- Review [[01-inbox]] — delete low-signal captures
+- Check [[02-strategy]] — any draft → committed?
+- Check [[03-projects]] — blocked? overdue? complete?
+- Archive done tasks from [[04-tasks]] to [[08-archive]]
+- Review [[05-areas]] — any need attention?
+
+---
+
+## 🔧 System Status
+
+- **Capture pipeline**: n8n webhook `brain-inbox` (automatic every time you save from ChatGPT)
+- **Inbox classification**: Gemini (automatic, confidence + signal scores)
+- **Kanban sync**: Every 10 minutes
+- **Manual**: Everything else (you decide keep/delete, create strategy/project/task, execute)
+
+**See [[README#Automation--Cadence|README → Automation & Cadence]] for details.**
+
+---
+
+## 🆘 Something Stuck?
+
+- **Capture didn't appear?** Check [[01-inbox]] or see [[README#Troubleshooting|README → Troubleshooting]]
+- **Kanban out of sync?** Wait 10 min, or edit task file directly
+- **Can't find something?** Search with Cmd+Shift+F or check [[08-archive]]
+- **Inbox too full?** Archive low-signal captures to [[08-archive]]
+
+---
+
+**Last updated: {{date:YYYY-MM-DD HH:mm}}**
+
+*For the full system guide, see [[README]].*

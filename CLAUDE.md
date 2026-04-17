@@ -1,52 +1,30 @@
 # CLAUDE.md — personal-brain
 
-## Purpose
+For complete system documentation, see **[[README.md]]** — the single source of truth for how this vault works.
 
-Obsidian vault for personal knowledge management. Independent git repo synced to iOS via Obsidian Git.
+## AI Context
+
+**Repository:** Personal Obsidian knowledge vault (Save to Mind system)  
+**Type:** PARA-based personal knowledge management  
+**Entry point:** `README.md` (system guide) or `home.md` (dashboard)
 
 ## Structure
 
-```
-mind/
-  01-inbox/           ← Capture point for new ideas
-  02-strategy/        ← Brainstorming and strategic thinking
-  03-projects/        ← Active projects with deadlines
-  04-tasks/           ← Ongoing tasks by category
-  05-areas/           ← Long-term responsibilities and areas
-  06-resources/       ← Reference material and attachments
-  07-templates/       ← Note templates
-  08-archive/         ← Completed projects and areas
-  .obsidian/          ← Obsidian vault config (not committed except essentials)
-  home.md             ← Vault entry point
-  kanban.md           ← Kanban board for task tracking
-  STRUCTURE.md        ← Vault structure documentation
-```
-
-## Workflow
-
-**On Mac:**
-- Edit in Obsidian (points to this repo)
-- Commit with Obsidian Git plugin
-- Push to remote
-
-**On iOS:**
-- Clone this repo (200MB only)
-- Obsidian opens and syncs normally
-- Edit and push changes back
-
-## Sync
-
-- Bidirectional: Mac ↔ iOS via git
-- No special commands needed, just push/pull in Obsidian Git
-- Obsidian handles conflicts gracefully
+PARA folders (01-08): inbox, strategy, projects, tasks, areas, resources, templates, archive.  
+Root files: README.md (guide), home.md (dashboard), kanban.md (working board), CLAUDE.md (this file).
 
 ## Do not break
 
-- `.obsidian/` folder structure (Obsidian metadata)
-- Symlink from brain/mind → this repo (referenced by AI agents)
-- .gitignore exclusions (workspace.json, daily notes, trash)
+- PARA folder numbering (01-08)
+- `.obsidian/` structure (Obsidian vault config)
+- Symlink at `brain/mind` → this repo
+- `.gitignore` exclusions (workspace, daily notes, trash)
+- `08-archive/` as canonical archive location
 
-## See also
+## Integration Notes
 
-- `brain/` repo — AI infrastructure, system configs, skills
-- `brain/mind` → symlink to this repo (for AI context)
+- **Capture**: macOS shortcut → n8n webhook → Gemini classifies → lands in `01-inbox/`
+- **Kanban**: `kanban.md` (Obsidian Canvas) is the only working board
+- **Automation**: Runs in Brain Bridge (n8n) — auto-router (1 min), project-decomposer (5 min), kanban-syncer (10 min)
+
+For operational details, see README.md → Automation & Cadence.
