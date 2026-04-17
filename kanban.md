@@ -161,6 +161,14 @@ kanban-plugin: board
 - [ ] Product: Model Router
 - [ ] empty ChatGPT into Obsidian
 - [ ] read mark's boek
+<<<<<<< HEAD
+=======
+- [ ] Test van phone
+- [ ] Test 2
+- [ ] Test 3
+- [ ] Test 3q
+
+>>>>>>> origin/main
 
 ## Doing
 

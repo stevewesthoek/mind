@@ -70,9 +70,41 @@
               "icon": "lucide-trello",
               "title": "kanban"
             }
+          },
+          {
+            "id": "4bed26e7aa56f75e",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "kanban.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": []
+                }
+              },
+              "icon": "lucide-trello",
+              "title": "kanban"
+            }
+          },
+          {
+            "id": "a331879e3d6dfe81",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "kanban.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": []
+                }
+              },
+              "icon": "lucide-trello",
+              "title": "kanban"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -246,7 +278,7 @@
       "bases:Create new base": false
     }
   },
-  "active": "f0f93831d7d75dc8",
+  "active": "a331879e3d6dfe81",
   "lastOpenFiles": [
     "conflict-files-obsidian-git.md",
     "kanban.md",
