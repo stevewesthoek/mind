@@ -22,8 +22,57 @@
               "icon": "lucide-trello",
               "title": "kanban"
             }
+          },
+          {
+            "id": "189810b967a24a70",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "kanban.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": []
+                }
+              },
+              "icon": "lucide-trello",
+              "title": "kanban"
+            }
+          },
+          {
+            "id": "53eba3aaa24f9ebf",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "kanban.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": []
+                }
+              },
+              "icon": "lucide-trello",
+              "title": "kanban"
+            }
+          },
+          {
+            "id": "f0f93831d7d75dc8",
+            "type": "leaf",
+            "state": {
+              "type": "kanban",
+              "state": {
+                "file": "kanban.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": []
+                }
+              },
+              "icon": "lucide-trello",
+              "title": "kanban"
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -197,11 +246,11 @@
       "bases:Create new base": false
     }
   },
-  "active": "7c95a530340ebe38",
+  "active": "f0f93831d7d75dc8",
   "lastOpenFiles": [
-    "home.md",
-    "kanban.md",
     "conflict-files-obsidian-git.md",
+    "kanban.md",
+    "home.md",
     "02-strategy/brainstorm/2026-04-10-quick-capture-people-to-follow-on-x.md",
     "02-strategy/brainstorm/2026-04-10-quick-capture-demosaas-app-idea.md",
     "01-inbox/1776370087482-custom-gpt-write-test.md",
