@@ -173,6 +173,7 @@ kanban-plugin: board
 - [ ] Vraag Jon voor verhuizen domein & give him a coinbase address
 - [ ] Apply for passport
 - [ ] Make my contact card iPhone
+- [ ] tesss
 
 
 ## Done
