@@ -1,0 +1,1 @@
+Testing the fixed JSON body after removing extra closing brace.
