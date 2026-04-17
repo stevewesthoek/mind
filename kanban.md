@@ -165,7 +165,7 @@ kanban-plugin: board
 - [ ] Test van phone
 - [ ] Test 2
 - [ ] Test 3
-- [ ] Test 3
+- [ ] Test 3q
 
 
 ## Doing
