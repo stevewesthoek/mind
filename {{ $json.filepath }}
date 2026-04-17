@@ -1,0 +1,26 @@
+---
+type: capture
+source: chatgpt
+title: "Code Node Body Fix"
+para_type: project
+confidence: 0.9
+signal_quality: 0.9
+created: 2026-04-17
+status: unrouted
+---
+
+# Code Node Body Fix
+
+## Summary
+This note details the active process of testing a 'Code node' to ensure the proper construction of a GitHub API request body.
+
+## Key Points
+- Focus on 'Code node' functionality.
+- Objective is to properly construct GitHub API request body.
+- Involves active testing and validation.
+
+## Raw Content
+Testing with Code node to properly construct the GitHub API request body.
+
+---
+*Captured 2026-04-17 · 90% confidence · 90% signal · project*
