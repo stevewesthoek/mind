@@ -173,4 +173,3 @@ I can map the exact €29 funnel next.
 
 ## User
 Please save this whole conversation, all the messages, into Mind
-
