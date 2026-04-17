@@ -6,7 +6,7 @@ confidence: 0.95
 signal_quality: 0.90
 title: "AI Cost Router — Product Strategy & Market Analysis"
 created: 2026-04-17T22:36:35.557Z
-status: unrouted
+status: ready-for-review
 ---
 
 # Quick capture
