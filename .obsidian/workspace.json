@@ -197,8 +197,11 @@
       "bases:Create new base": false
     }
   },
-  "active": "f172495bbe931c61",
+  "active": "7c95a530340ebe38",
   "lastOpenFiles": [
+    "home.md",
+    "kanban.md",
+    "conflict-files-obsidian-git.md",
     "02-strategy/brainstorm/2026-04-10-quick-capture-people-to-follow-on-x.md",
     "02-strategy/brainstorm/2026-04-10-quick-capture-demosaas-app-idea.md",
     "01-inbox/1776370087482-custom-gpt-write-test.md",
@@ -211,7 +214,6 @@
     "notes",
     "01-inbox/2026-04-16-manual-test.md",
     "01-inbox/test-api-access.md",
-    "kanban.md",
     "CLAUDE.md",
     "04-tasks/business-tasks/0706-put-lanbot-on-a-single-page-vincent.md",
     "04-tasks/business-tasks/0705-todo-before-launch.md",
@@ -225,8 +227,6 @@
     "04-tasks/business-tasks/0697-transfer-ya-hosting.md",
     "04-tasks/business-tasks/0696-add-cursor-rules.md",
     "04-tasks/business-tasks/0695-verstuur-factuur-tdp.md",
-    "04-tasks/business-tasks/0694-try-kirodev.md",
-    "04-tasks/business-tasks/0693-use-notebook-lm-for-bible-studies.md",
     "03-projects",
     "02-strategy/brainstorm",
     "02-strategy",
