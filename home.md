@@ -10,16 +10,16 @@ type: dashboard
 
 ## ⚡ Quick Navigation
 
-| What | Where | Purpose |
-|------|-------|---------|
-| **Kanban Board** | [[kanban]] | Drag tasks between To Do → Doing → Done |
-| **System Guide** | [[README]] | How the vault works (start here if lost) |
-| **Strategy** | [[02-strategy]] | Your committed decisions |
-| **Tasks** | [[04-tasks]] | Your work items |
-| **Projects** | [[03-projects]] | Active projects with timelines |
-| **Inbox** | [[01-inbox]] | Unprocessed captures (review weekly) |
-| **Areas** | [[05-areas]] | Ongoing responsibilities |
-| **Archive** | [[08-archive]] | Historical work (reference) |
+| What             | Where           | Purpose                                  |
+| ---------------- | --------------- | ---------------------------------------- |
+| **Kanban Board** | [[KANBAN]]      | Drag tasks between To Do → Doing → Done  |
+| **System Guide** | [[README]]      | How the vault works (start here if lost) |
+| **Strategy**     | [[02-strategy]] | Your committed decisions                 |
+| **Tasks**        | [[04-tasks]]    | Your work items                          |
+| **Projects**     | [[03-projects]] | Active projects with timelines           |
+| **Inbox**        | [[01-inbox]]    | Unprocessed captures (review weekly)     |
+| **Areas**        | [[05-areas]]    | Ongoing responsibilities                 |
+| **Archive**      | [[08-archive]]  | Historical work (reference)              |
 
 ---
 
@@ -79,7 +79,7 @@ SORT target_end_date ASC
 ## 📋 What to Do Now
 
 **Next 5 minutes:**
-1. Open [[kanban]] 
+1. Open [[KANBAN]] 
 2. Pick 1-3 tasks from "To Do"
 3. Drag to "Doing" and work
 4. Drag to "Done" when finished
