@@ -1,22 +1,23 @@
 ---
 type: capture
-source: test-fixed-build
-para_type: project
-confidence: 0.8
+source: test-fixed-build-update
+para_type: inbox
+confidence: 0.9
 title: "Test Fixed Build Node"
-created: 2026-04-17T15:11:24.718Z
+created: 2026-04-17T15:11:51.306Z
 ---
 
 # Test Fixed Build Node
 
 ## Summary
-This note details the current activity of testing an updated 'Build Processed Note', likely as part of an effort to fix or improve a build process.
+This note indicates a general testing activity for a 'Fixed Build Node' focused on applying an update that replaces previous content.
 
 ## Key Points
-- Current activity is focused on testing.
-- The subject of the test is an updated 'Build Processed Note'.
-- The test is specifically related to a 'fixed build' node or process.
-- Implies a validation step for a recent change or update.
+- Testing activity initiated
+- Focus on an 'UPDATE' operation
+- Objective to replace previous content
+- Context is a 'Fixed Build Node'
+- Note serves as a generic status or system message
 
 ## Content
-Testing with updated Build Processed Note.
+Testing UPDATE - this should replace the previous content with an updated version.
