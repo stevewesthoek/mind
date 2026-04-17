@@ -1,0 +1,1 @@
+This is a test of the Mind Inbox webhook capturing directly.
