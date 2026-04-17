@@ -5,7 +5,7 @@ para_type: area
 confidence: 0.92
 signal_quality: 0.88
 created: 2026-04-18T12:15:00.000Z
-status: unrouted
+status: ready-for-review
 tags: []
 ---
 
