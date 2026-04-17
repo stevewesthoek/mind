@@ -1,18 +1,26 @@
 # Personal Knowledge Vault — Save to Mind
 
-**Your personal brain system for capture, strategy, projects, and execution.**
+**Your personal brain system for capturing ideas and organizing work through a simple PARA model.**
 
 ---
 
 ## What This Vault Is
 
-An Obsidian-based personal knowledge management system that automatically captures ideas from ChatGPT, classifies them, routes them through a PARA workflow (Projects, Areas, Resources, Archive), and helps you execute via kanban board.
+An Obsidian-based personal knowledge management system that automatically captures ideas from ChatGPT, classifies them using Gemini, and routes them into a simple PARA structure (Projects, Areas, Resources, Archive). You review captures, decide what to keep, then execute using the kanban board.
 
-- **Capture**: macOS shortcut sends text → n8n webhook → Gemini classifies → lands in inbox
-- **Route**: You review inbox, decide keep/delete
-- **Strategy**: Convert keepers into strategies, projects, and tasks
+**The user-facing model is simple PARA:**
+- **Inbox** — Temporary capture (review and decide)
+- **Projects** — Active work with deadlines
+- **Areas** — Ongoing responsibilities
+- **Resources** — Reference material
+- **Archive** — Historical reference
+
+**Workflow:**
+- **Capture**: macOS shortcut → n8n webhook → Gemini classifies → lands in inbox
+- **Review**: You read inbox items, keep what's valuable
+- **Route**: Automation moves captures to Projects, Areas, or Resources
 - **Execute**: Drag tasks on kanban board (To Do → Doing → Done)
-- **Archive**: Completed work moves to 08-archive for historical reference
+- **Archive**: Completed work moves to archive for historical reference
 
 ---
 

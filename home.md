@@ -14,8 +14,8 @@ type: dashboard
 | ---------------- | --------------- | ---------------------------------------- |
 | **Kanban Board** | [[KANBAN]]      | Drag tasks between To Do → Doing → Done  |
 | **System Guide** | [[README]]      | How the vault works (start here if lost) |
-| **Strategy**     | [[02-strategy]] | Your committed decisions                 |
-| **Tasks**        | [[04-tasks]]    | Your work items                          |
+| **Strategy**     | [[02-strategy]] | Internal (where captured decisions go)  |
+| **Tasks**        | [[04-tasks]]    | Internal (sub-items of projects)        |
 | **Projects**     | [[03-projects]] | Active projects with timelines           |
 | **Inbox**        | [[01-inbox]]    | Unprocessed captures (review weekly)     |
 | **Areas**        | [[05-areas]]    | Ongoing responsibilities                 |
