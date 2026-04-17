@@ -133,6 +133,7 @@ kanban-plugin: board
 - [ ] [[04-tasks/personal-tasks/0592-find-osteopata.md|Find osteopata]] #p3 #you
 - [ ] [[04-tasks/personal-tasks/0593-emtpy-the-video-cassettes-miro.md|Emtpy the video cassette's Miro]] #p3 #you
 
+
 ## To Do
 
 - [ ] maak factuur TDP domeinen
@@ -161,6 +162,10 @@ kanban-plugin: board
 - [ ] Product: Model Router
 - [ ] empty ChatGPT into Obsidian
 - [ ] read mark's boek
+- [ ] Test van phone
+- [ ] Test 2
+- [ ] Test 3
+
 
 ## Doing
 
@@ -172,7 +177,6 @@ kanban-plugin: board
 ## Done
 
 **Complete**
-
 - [x] [[04-tasks/business-tasks/0259-boek-afspraak-met-antero.md|Boek afspraak met Antero]] #p2 #you
 - [x] [[04-tasks/business-tasks/0612-boek-afspraak-met-antero.md|Boek afspraak met Antero]] #p2 #you
 - [x] [[04-tasks/personal-tasks/0083-pay-phone-bill-wintre.md|Pay phone bill WinTre]] #p2 #you
@@ -791,8 +795,10 @@ kanban-plugin: board
 - [x] [[04-tasks/personal-tasks/0567-self-host-microsaasfast.md|Self Host MicroSaasFast]] #p3 #you
 
 
+
+
 %% kanban:settings
 ```
-{"tag-colors": [{"tagKey": "#p1", "color": "#fff", "backgroundColor": "#c0392b"}, {"tagKey": "#p2", "color": "#fff", "backgroundColor": "#e67e22"}, {"tagKey": "#p3", "color": "#000", "backgroundColor": "#f1c40f"}, {"tagKey": "#p4", "color": "#000", "backgroundColor": "#2ecc71"}, {"tagKey": "#p5", "color": "#fff", "backgroundColor": "#95a5a6"}, {"tagKey": "#you", "color": "#fff", "backgroundColor": "#2980b9"}, {"tagKey": "#ai", "color": "#fff", "backgroundColor": "#8e44ad"}], "date-format": "YYYY-MM-DD", "time-format": "HH:mm", "link-date-to-daily-note": true}
+{"tag-colors":[{"tagKey":"#p1","color":"#fff","backgroundColor":"#c0392b"},{"tagKey":"#p2","color":"#fff","backgroundColor":"#e67e22"},{"tagKey":"#p3","color":"#000","backgroundColor":"#f1c40f"},{"tagKey":"#p4","color":"#000","backgroundColor":"#2ecc71"},{"tagKey":"#p5","color":"#fff","backgroundColor":"#95a5a6"},{"tagKey":"#you","color":"#fff","backgroundColor":"#2980b9"},{"tagKey":"#ai","color":"#fff","backgroundColor":"#8e44ad"}],"date-format":"YYYY-MM-DD","time-format":"HH:mm","link-date-to-daily-note":true,"kanban-plugin":"board"}
 ```
 %%
