@@ -6,6 +6,14 @@ kanban-plugin: board
 
 ## Backlog
 
+- [ ] **Save to Mind — next improvements** #machine #future [[06-resources/2026-04-18-save-to-mind-next-improvements-backlog-seed.md|backlog seed]]
+  - [ ] Normalize producer tags output so captures consistently include tags: [] in frontmatter
+  - [ ] Add lightweight regression check for producer/router contract — verify all 8 frontmatter fields present
+  - [ ] Add lightweight regression check for single-pass routing — ensure captures route once, not duplicate
+  - [ ] Add tiny operational smoke-test runbook for post-change verification
+  - [ ] Review whether confidence should always be serialized as float 0.0–1.0 (not 1 vs 1.0)
+  - [ ] Review whether additional observability/log retention would be useful — track routing performance
+
 - [ ] [[04-tasks/business-tasks/0241-read-book-the-one-things-by-gary-keller.md|Read book - The One Things by Gary Keller]] #p3 #you
 - [ ] [[04-tasks/business-tasks/0347-put-review-jon-cris-on-funnel.md|Put review Jon & Cris on funnel]] #p3 #you
 - [ ] [[04-tasks/business-tasks/0348-extend-the-presentation-with-the-other-plans.md|Extend the Presentation with the other plans]] #p3 #you
