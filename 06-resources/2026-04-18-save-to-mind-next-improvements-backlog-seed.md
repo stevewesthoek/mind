@@ -6,6 +6,7 @@ confidence: 0.95
 signal_quality: 0.92
 title: "Save to Mind — next improvements backlog seed"
 created: 2026-04-18T09:23:23.224Z
+status: ready-for-review
 ---
 
 # Save to Mind — next improvements backlog seed
