@@ -132,23 +132,22 @@ kanban-plugin: board
 - [ ] [[04-tasks/personal-tasks/0591-research-best-way-to-learn-portuguese.md|Research best way to learn Portuguese]] #p3 #you
 - [ ] [[04-tasks/personal-tasks/0592-find-osteopata.md|Find osteopata]] #p3 #you
 - [ ] [[04-tasks/personal-tasks/0593-emtpy-the-video-cassettes-miro.md|Emtpy the video cassette's Miro]] #p3 #you
+- [ ] Save to mind improvements #p3 #you
 	  - [ ] Normalize producer tags output so captures consistently include tags: [] in frontmatter
 	  - [ ] Add lightweight regression check for producer/router contract — verify all 8 frontmatter fields present
 	  - [ ] Add lightweight regression check for single-pass routing — ensure captures route once, not duplicate
 	  - [ ] Add tiny operational smoke-test runbook for post-change verification
 	  - [ ] Review whether confidence should always be serialized as float 0.0–1.0 (not 1 vs 1.0)
 	  - [ ] Review whether additional observability/log retention would be useful — track routing performance
+- [ ] 
 
 ## To Do
 
 - [ ] maak factuur TDP domeinen
-- [ ] Bring car to mechanic
-- [ ] Place baby bed down
 - [ ] Setup STB Facebook app ⏫
 - [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
 - [ ] Put money on bank account
 - [ ] Plantenpot aanpassen
-- [ ] plan NL trip
 - [ ] Fix Antenna
 - [ ] Decommision Hetzner 🔼
 - [ ] YA finance app
@@ -162,7 +161,6 @@ kanban-plugin: board
 - [ ] Improve thumbnails STB
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] fix the obsidian way of working
-- [ ] add obsidian to phone
 - [ ] Product: ChatGPT bridge
 - [ ] Product: Model Router
 - [ ] empty ChatGPT into Obsidian
@@ -171,10 +169,8 @@ kanban-plugin: board
 
 ## Doing
 
-- [ ] Vraag Jon voor verhuizen domein & give him a coinbase address
 - [ ] Apply for passport
-- [ ] Make my contact card iPhone
-- [ ] tesss
+- [ ] plan NL trip
 
 ## Done
 
@@ -796,6 +792,11 @@ kanban-plugin: board
 - [x] [[04-tasks/personal-tasks/0565-buy-a-drill.md|Buy a drill]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0566-fix-the-double-agenda-points.md|Fix the double agenda points]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0567-self-host-microsaasfast.md|Self Host MicroSaasFast]] #p3 #you
+- [x] Place baby bed down ✅ 2026-04-18
+- [x] Bring car to mechanic ✅ 2026-04-18
+- [x] Make my contact card iPhone ✅ 2026-04-18
+- [x] Vraag Jon voor verhuizen domein & give him a coinbase address ✅ 2026-04-18
+- [x] add obsidian to phone ✅ 2026-04-18
 
 
 %% kanban:settings
