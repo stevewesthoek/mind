@@ -60,10 +60,10 @@ An Obsidian-based personal knowledge management system that automatically captur
 
 ### Step 1: Capture (Automatic)
 
-You're in ChatGPT. You have an idea.
+You're in ChatGPT or elsewhere. You have an idea.
 - macOS shortcut copies text
-- Sends to webhook: `https://n8n.prochat.tools/webhook/brain-inbox`
-- n8n receives it
+- Sends to webhook: `https://n8n.prochat.tools/webhook/mind-inbox`
+- n8n receives it, classifies with Gemini, saves to inbox
 
 ### Step 2: Classify (Automatic — Gemini)
 
@@ -78,10 +78,14 @@ Low either = probably delete
 
 Capture appears in `01-inbox/` with frontmatter:
 - `type: capture`
+- `source: chatgpt|shortcut`
 - `para_type: project|area|resource|inbox`
 - `confidence: 0.0-1.0`
-- `signal_quality: 0.0-1.0`
-- `created: YYYY-MM-DD`
+- `signal_quality: 0.0-1.0` (may be absent; router handles fail-safe)
+- `created: ISO 8601 timestamp` (e.g., 2026-04-18T08:26:30.198Z)
+- `title: Refined title`
+- `tags: []`
+- `status: unrouted` (added by router on first processing)
 
 ### Step 4: Review (Manual)
 
