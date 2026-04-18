@@ -5,6 +5,7 @@ para_type: resource
 confidence: 1
 title: "API Rate Limiting Best Practices"
 created: 2026-04-18T08:55:23.422Z
+status: review-queue
 ---
 
 # API Rate Limiting Best Practices
