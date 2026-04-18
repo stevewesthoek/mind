@@ -6,6 +6,7 @@ confidence: 1
 signal_quality: 0.9
 title: "Personal Financial Health Quarterly Review Process"
 created: 2026-04-18T09:03:14.802Z
+status: ready-for-review
 ---
 
 # Personal Financial Health Quarterly Review Process
