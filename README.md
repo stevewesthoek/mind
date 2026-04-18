@@ -81,7 +81,7 @@ Capture appears in `01-inbox/` with frontmatter:
 - `source: chatgpt|shortcut`
 - `para_type: project|area|resource|inbox`
 - `confidence: 0.0-1.0`
-- `signal_quality: 0.0-1.0` (may be absent; router handles fail-safe)
+- `signal_quality: 0.0-1.0` (Gemini-computed quality score)
 - `created: ISO 8601 timestamp` (e.g., 2026-04-18T08:26:30.198Z)
 - `title: Refined title`
 - `tags: []`
