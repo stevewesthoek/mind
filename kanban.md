@@ -146,10 +146,10 @@ kanban-plugin: board
 - [ ] maak factuur TDP domeinen
 - [ ] Setup STB Facebook app ⏫
 - [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
+- [ ] Decommision Hetzner 🔼
 - [ ] Put money on bank account
 - [ ] Plantenpot aanpassen
 - [ ] Fix Antenna
-- [ ] Decommision Hetzner 🔼
 - [ ] YA finance app
 - [ ] Empty mail
 - [ ] fix photo share JPV Bootcamp
