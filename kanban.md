@@ -154,6 +154,7 @@ kanban-plugin: board
 - [ ] Empty mail
 - [ ] fix photo share JPV Bootcamp
 - [ ] Family finance app
+- [ ] IB aangifte doen
 - [ ] Learn Portuguese app
 - [ ] Make Via di Eden editable for Joe
 - [ ] Make Oliveto Organizing editable for Ashley
