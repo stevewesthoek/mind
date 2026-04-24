@@ -143,22 +143,17 @@ kanban-plugin: board
 
 ## To Do
 
-- [ ] maak factuur TDP domeinen
-- [ ] Setup STB Facebook app ⏫
 - [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
-- [ ] Decommision Hetzner 🔼
 - [ ] Put money on bank account
 - [ ] Plantenpot aanpassen
 - [ ] Fix Antenna
 - [ ] YA finance app
 - [ ] Empty mail
-- [ ] fix photo share JPV Bootcamp
 - [ ] Family finance app
 - [ ] IB aangifte doen
 - [ ] Learn Portuguese app
 - [ ] Make Via di Eden editable for Joe
 - [ ] Make Oliveto Organizing editable for Ashley
-- [ ] Merge Stripe ProChat legacy into ProChat Studio
 - [ ] Improve thumbnails STB
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] fix the obsidian way of working
@@ -172,6 +167,9 @@ kanban-plugin: board
 
 - [ ] Apply for passport
 - [ ] plan NL trip
+- [ ] Decommision Hetzner 🔼
+- [ ] maak factuur TDP domeinen
+- [ ] Setup STB Facebook app ⏫
 
 ## Done
 
