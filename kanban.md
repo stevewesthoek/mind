@@ -143,6 +143,7 @@ kanban-plugin: board
 
 ## To Do
 
+- [ ] Reserve place for test meetup
 - [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
 - [ ] Put money on bank account
 - [ ] Plantenpot aanpassen
