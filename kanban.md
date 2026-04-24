@@ -168,7 +168,6 @@ kanban-plugin: board
 - [ ] Apply for passport
 - [ ] plan NL trip
 - [ ] Decommision Hetzner 🔼
-- [ ] maak factuur TDP domeinen
 - [ ] Setup STB Facebook app ⏫
 
 ## Done
@@ -791,6 +790,7 @@ kanban-plugin: board
 - [x] [[04-tasks/personal-tasks/0565-buy-a-drill.md|Buy a drill]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0566-fix-the-double-agenda-points.md|Fix the double agenda points]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0567-self-host-microsaasfast.md|Self Host MicroSaasFast]] #p3 #you
+- [x] maak factuur TDP domeinen ✅ 2026-04-24
 - [x] Place baby bed down ✅ 2026-04-18
 - [x] Bring car to mechanic ✅ 2026-04-18
 - [x] Make my contact card iPhone ✅ 2026-04-18
