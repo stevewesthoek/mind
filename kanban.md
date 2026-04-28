@@ -158,7 +158,6 @@ kanban-plugin: board
 - [ ] Improve thumbnails STB
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] fix the obsidian way of working
-- [ ] Product: ChatGPT bridge
 - [ ] Product: Model Router
 - [ ] empty ChatGPT into Obsidian
 - [ ] read mark's boek
@@ -170,6 +169,7 @@ kanban-plugin: board
 - [ ] plan NL trip
 - [ ] Decommision Hetzner 🔼
 - [ ] Setup STB Facebook app ⏫
+- [ ] Product: ChatGPT bridge
 
 ## Done
 
