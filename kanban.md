@@ -144,6 +144,7 @@ kanban-plugin: board
 ## To Do
 
 - [ ] Fix Antenna
+- [ ] Make a strategy agent
 - [ ] Plantenpot aanpassen
 - [ ] Empty mail
 - [ ] Do the JPV Bootcamp tests
