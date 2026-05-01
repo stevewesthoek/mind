@@ -143,18 +143,20 @@ kanban-plugin: board
 
 ## To Do
 
+- [ ] Fix Antenna
+- [ ] Plantenpot aanpassen
+- [ ] Empty mail
+- [ ] Do the JPV Bootcamp tests
 - [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
 - [ ] Put money on bank account
-- [ ] Plantenpot aanpassen
-- [ ] Fix Antenna
-- [ ] YA finance app
-- [ ] Empty mail
-- [ ] Family finance app
-- [ ] IB aangifte doen
-- [ ] Learn Portuguese app
+- [ ] Send message to Norbert
+- [ ] Pay car taxes
 - [ ] Make Via di Eden editable for Joe
 - [ ] Make Oliveto Organizing editable for Ashley
-- [ ] Improve thumbnails STB
+- [ ] Learn Portuguese app
+- [ ] YA finance app
+- [ ] Family finance app
+- [ ] IB aangifte doen
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] fix the obsidian way of working
 - [ ] Product: Model Router
@@ -169,6 +171,7 @@ kanban-plugin: board
 - [ ] Decommision Hetzner 🔼
 - [ ] Setup STB Facebook app ⏫
 - [ ] Product: ChatGPT bridge
+- [ ] Improve thumbnails STB
 
 ## Done
 
