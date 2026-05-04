@@ -143,7 +143,6 @@ kanban-plugin: board
 
 ## To Do
 
-- [ ] Family finance app
 - [ ] IB aangifte doen
 - [ ] Apply for passport
 - [ ] Fix Antenna
@@ -168,10 +167,11 @@ kanban-plugin: board
 
 - [ ] Improve thumbnails STB
 - [ ] Setup STB Facebook app ⏫
+- [ ] Expand STB pipeline and start posting FB, YT & PIN
+- [ ] Family finance app
 - [ ] plan NL trip
 - [ ] Product: ChatGPT bridge
 - [ ] Marriage certificate
-- [ ] Expand STB pipeline and start posting FB, YT & PIN
 
 ## Done
 
