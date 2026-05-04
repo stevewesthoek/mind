@@ -166,7 +166,6 @@ kanban-plugin: board
 
 ## Doing
 
-- [ ] Decommision Hetzner 🔼
 - [ ] Improve thumbnails STB
 - [ ] Setup STB Facebook app ⏫
 - [ ] plan NL trip
@@ -794,6 +793,7 @@ kanban-plugin: board
 - [x] [[04-tasks/personal-tasks/0565-buy-a-drill.md|Buy a drill]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0566-fix-the-double-agenda-points.md|Fix the double agenda points]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0567-self-host-microsaasfast.md|Self Host MicroSaasFast]] #p3 #you
+- [x] Decommision Hetzner 🔼 ✅ 2026-05-04
 - [x] Do the JPV Bootcamp tests ✅ 2026-05-04
 - [x] Plantenpot aanpassen ✅ 2026-05-04
 - [x] maak factuur TDP domeinen ✅ 2026-04-24
