@@ -143,36 +143,36 @@ kanban-plugin: board
 
 ## To Do
 
-- [ ] Fix Antenna
-- [ ] Make a strategy agent
-- [ ] Plantenpot aanpassen
-- [ ] Empty mail
-- [ ] Do the JPV Bootcamp tests
-- [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
-- [ ] Put money on bank account
-- [ ] Send message to Norbert
-- [ ] Pay car taxes
-- [ ] Make Via di Eden editable for Joe
-- [ ] Make Oliveto Organizing editable for Ashley
-- [ ] Learn Portuguese app
-- [ ] YA finance app
 - [ ] Family finance app
 - [ ] IB aangifte doen
-- [ ] Expand STB pipeline and start posting FB, YT & PIN
+- [ ] Apply for passport
+- [ ] Fix Antenna
+- [ ] Pay car taxes
+- [ ] Send message to Norbert
+- [ ] Make Oliveto Organizing editable for Ashley
+- [ ] Make Via di Eden editable for Joe
+- [ ] Make a strategy agent
+- [ ] Empty mail
+- [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
+- [ ] Put money on bank account
+- [ ] Learn Portuguese app
+- [ ] YA finance app
 - [ ] fix the obsidian way of working
 - [ ] Product: Model Router
 - [ ] empty ChatGPT into Obsidian
 - [ ] read mark's boek
 - [ ] Sell video cameras Miro
+- [ ] Sell Miro's safe
 
 ## Doing
 
-- [ ] Apply for passport
-- [ ] plan NL trip
 - [ ] Decommision Hetzner 🔼
-- [ ] Setup STB Facebook app ⏫
-- [ ] Product: ChatGPT bridge
 - [ ] Improve thumbnails STB
+- [ ] Setup STB Facebook app ⏫
+- [ ] plan NL trip
+- [ ] Product: ChatGPT bridge
+- [ ] Marriage certificate
+- [ ] Expand STB pipeline and start posting FB, YT & PIN
 
 ## Done
 
@@ -794,6 +794,8 @@ kanban-plugin: board
 - [x] [[04-tasks/personal-tasks/0565-buy-a-drill.md|Buy a drill]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0566-fix-the-double-agenda-points.md|Fix the double agenda points]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0567-self-host-microsaasfast.md|Self Host MicroSaasFast]] #p3 #you
+- [x] Do the JPV Bootcamp tests ✅ 2026-05-04
+- [x] Plantenpot aanpassen ✅ 2026-05-04
 - [x] maak factuur TDP domeinen ✅ 2026-04-24
 - [x] Place baby bed down ✅ 2026-04-18
 - [x] Bring car to mechanic ✅ 2026-04-18
