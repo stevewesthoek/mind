@@ -143,19 +143,17 @@ kanban-plugin: board
 
 ## To Do
 
-- [ ] Make Oliveto Organizing editable for Ashley
-- [ ] Make Via di Eden editable for Joe
+- [ ] YA finance app
+- [ ] Learn Portuguese app
+- [ ] Product: Model Router
+- [ ] Empty mail
+- [ ] Fix Antenna
 - [ ] Send message to Norbert
 - [ ] Apply for passport
-- [ ] Fix Antenna
 - [ ] Make a strategy agent
-- [ ] Empty mail
 - [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
 - [ ] Put money on bank account
-- [ ] Learn Portuguese app
-- [ ] YA finance app
 - [ ] fix the obsidian way of working
-- [ ] Product: Model Router
 - [ ] empty ChatGPT into Obsidian
 - [ ] read mark's boek
 - [ ] Sell video cameras Miro
@@ -163,10 +161,12 @@ kanban-plugin: board
 
 ## Doing
 
-- [ ] IB aangifte doen
-- [ ] Improve thumbnails STB
 - [ ] Setup STB Facebook app ⏫
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
+- [ ] Make Via di Eden editable for Joe
+- [ ] Make Oliveto Organizing editable for Ashley
+- [ ] IB aangifte doen
+- [ ] Improve thumbnails STB
 - [ ] Family finance app
 - [ ] plan NL trip
 - [ ] Product: ChatGPT bridge
