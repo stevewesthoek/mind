@@ -143,13 +143,11 @@ kanban-plugin: board
 
 ## To Do
 
-- [ ] IB aangifte doen
-- [ ] Apply for passport
-- [ ] Fix Antenna
-- [ ] Pay car taxes
-- [ ] Send message to Norbert
 - [ ] Make Oliveto Organizing editable for Ashley
 - [ ] Make Via di Eden editable for Joe
+- [ ] Send message to Norbert
+- [ ] Apply for passport
+- [ ] Fix Antenna
 - [ ] Make a strategy agent
 - [ ] Empty mail
 - [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
@@ -165,6 +163,7 @@ kanban-plugin: board
 
 ## Doing
 
+- [ ] IB aangifte doen
 - [ ] Improve thumbnails STB
 - [ ] Setup STB Facebook app ⏫
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
@@ -793,6 +792,7 @@ kanban-plugin: board
 - [x] [[04-tasks/personal-tasks/0565-buy-a-drill.md|Buy a drill]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0566-fix-the-double-agenda-points.md|Fix the double agenda points]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0567-self-host-microsaasfast.md|Self Host MicroSaasFast]] #p3 #you
+- [x] Pay car taxes ✅ 2026-05-05
 - [x] Decommision Hetzner 🔼 ✅ 2026-05-04
 - [x] Do the JPV Bootcamp tests ✅ 2026-05-04
 - [x] Plantenpot aanpassen ✅ 2026-05-04
