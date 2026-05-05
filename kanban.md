@@ -161,12 +161,11 @@ kanban-plugin: board
 
 ## Doing
 
+- [ ] IB aangifte doen
 - [ ] Setup STB Facebook app ⏫
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Make Via di Eden editable for Joe
 - [ ] Make Oliveto Organizing editable for Ashley
-- [ ] IB aangifte doen
-- [ ] Improve thumbnails STB
 - [ ] Family finance app
 - [ ] plan NL trip
 - [ ] Product: ChatGPT bridge
@@ -792,6 +791,7 @@ kanban-plugin: board
 - [x] [[04-tasks/personal-tasks/0565-buy-a-drill.md|Buy a drill]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0566-fix-the-double-agenda-points.md|Fix the double agenda points]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0567-self-host-microsaasfast.md|Self Host MicroSaasFast]] #p3 #you
+- [x] Improve thumbnails STB ✅ 2026-05-06
 - [x] Pay car taxes ✅ 2026-05-05
 - [x] Decommision Hetzner 🔼 ✅ 2026-05-04
 - [x] Do the JPV Bootcamp tests ✅ 2026-05-04
