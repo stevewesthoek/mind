@@ -163,8 +163,8 @@ kanban-plugin: board
 
 - [ ] Setup STB Facebook app ⏫
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
-- [ ] Make Via di Eden editable for Joe
-- [ ] Make Oliveto Organizing editable for Ashley
+- [x] Make Via di Eden editable for Joe ✅ 2026-05-06
+- [x] Make Oliveto Organizing editable for Ashley ✅ 2026-05-06
 - [ ] Family finance app
 - [ ] plan NL trip
 - [ ] Product: ChatGPT bridge
