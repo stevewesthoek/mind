@@ -161,7 +161,6 @@ kanban-plugin: board
 
 ## Doing
 
-- [ ] IB aangifte doen
 - [ ] Setup STB Facebook app ⏫
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Make Via di Eden editable for Joe
@@ -791,6 +790,7 @@ kanban-plugin: board
 - [x] [[04-tasks/personal-tasks/0565-buy-a-drill.md|Buy a drill]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0566-fix-the-double-agenda-points.md|Fix the double agenda points]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0567-self-host-microsaasfast.md|Self Host MicroSaasFast]] #p3 #you
+- [x] IB aangifte doen ✅ 2026-05-06
 - [x] Improve thumbnails STB ✅ 2026-05-06
 - [x] Pay car taxes ✅ 2026-05-05
 - [x] Decommision Hetzner 🔼 ✅ 2026-05-04
