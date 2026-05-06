@@ -152,22 +152,22 @@ kanban-plugin: board
 - [ ] Apply for passport
 - [ ] Make a strategy agent
 - [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
-- [ ] Put money on bank account
 - [ ] fix the obsidian way of working
 - [ ] empty ChatGPT into Obsidian
 - [ ] read mark's boek
 - [ ] Sell video cameras Miro
 - [ ] Sell Miro's safe
+- [ ] Explore barcode idea
 
 ## Doing
 
-- [ ] Setup STB Facebook app ⏫
-- [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [x] Make Via di Eden editable for Joe ✅ 2026-05-06
 - [x] Make Oliveto Organizing editable for Ashley ✅ 2026-05-06
-- [ ] Family finance app
 - [ ] plan NL trip
+- [ ] Family finance app
 - [ ] Product: ChatGPT bridge
+- [ ] Setup STB Facebook app ⏫
+- [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Marriage certificate
 
 ## Done
@@ -790,6 +790,7 @@ kanban-plugin: board
 - [x] [[04-tasks/personal-tasks/0565-buy-a-drill.md|Buy a drill]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0566-fix-the-double-agenda-points.md|Fix the double agenda points]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0567-self-host-microsaasfast.md|Self Host MicroSaasFast]] #p3 #you
+- [x] Put money on bank account ✅ 2026-05-06
 - [x] IB aangifte doen ✅ 2026-05-06
 - [x] Improve thumbnails STB ✅ 2026-05-06
 - [x] Pay car taxes ✅ 2026-05-05
