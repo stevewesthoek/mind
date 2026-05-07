@@ -164,6 +164,7 @@ kanban-plugin: board
 - [x] Make Via di Eden editable for Joe ✅ 2026-05-06
 - [x] Make Oliveto Organizing editable for Ashley ✅ 2026-05-06
 - [ ] plan NL trip
+- [ ] Upgrade ACP from Bronze to Gold: https://join.acp.pt/
 - [ ] Family finance app
 - [ ] Product: ChatGPT bridge
 - [ ] Setup STB Facebook app ⏫
