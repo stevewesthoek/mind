@@ -143,6 +143,7 @@ kanban-plugin: board
 
 ## To Do
 
+- [ ] Make FB shorts account with free github repos
 - [ ] YA finance app
 - [ ] Learn Portuguese app
 - [ ] Product: Model Router
