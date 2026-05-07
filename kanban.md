@@ -146,6 +146,7 @@ kanban-plugin: board
 - [ ] Make FB shorts account with free github repos
 - [ ] YA finance app
 - [ ] Learn Portuguese app
+- [ ] fix the obsidian way of working
 - [ ] Product: Model Router
 - [ ] Empty mail
 - [ ] Fix Antenna
@@ -153,7 +154,6 @@ kanban-plugin: board
 - [ ] Apply for passport
 - [ ] Make a strategy agent
 - [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
-- [ ] fix the obsidian way of working
 - [ ] empty ChatGPT into Obsidian
 - [ ] read mark's boek
 - [ ] Sell video cameras Miro
@@ -166,10 +166,10 @@ kanban-plugin: board
 - [x] Make Oliveto Organizing editable for Ashley ✅ 2026-05-06
 - [ ] plan NL trip
 - [ ] Upgrade ACP from Bronze to Gold: https://join.acp.pt/
+- [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Family finance app
 - [ ] Product: ChatGPT bridge
 - [ ] Setup STB Facebook app ⏫
-- [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Marriage certificate
 
 ## Done
