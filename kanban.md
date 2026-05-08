@@ -162,9 +162,8 @@ kanban-plugin: board
 
 ## Doing
 
-- [x] Make Via di Eden editable for Joe ✅ 2026-05-06
-- [x] Make Oliveto Organizing editable for Ashley ✅ 2026-05-06
-- [ ] plan NL trip
+- [x] Make Via di Eden editable for Joe
+- [x] Make Oliveto Organizing editable for Ashley
 - [ ] Upgrade ACP from Bronze to Gold: https://join.acp.pt/
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Family finance app
@@ -792,6 +791,7 @@ kanban-plugin: board
 - [x] [[04-tasks/personal-tasks/0565-buy-a-drill.md|Buy a drill]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0566-fix-the-double-agenda-points.md|Fix the double agenda points]] #p3 #you
 - [x] [[04-tasks/personal-tasks/0567-self-host-microsaasfast.md|Self Host MicroSaasFast]] #p3 #you
+- [x] plan NL trip ✅ 2026-05-08
 - [x] Put money on bank account ✅ 2026-05-06
 - [x] IB aangifte doen ✅ 2026-05-06
 - [x] Improve thumbnails STB ✅ 2026-05-06
