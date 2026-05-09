@@ -163,10 +163,11 @@ kanban-plugin: board
 
 - [x] Make Via di Eden editable for Joe
 - [x] Make Oliveto Organizing editable for Ashley
+- [ ] Make the Gospel/Atheism paper
+- [ ] Family finance app
 - [ ] Make FB shorts account with free github repos
 - [ ] Upgrade ACP from Bronze to Gold: https://join.acp.pt/
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
-- [ ] Family finance app
 - [ ] Setup STB Facebook app ⏫
 - [ ] Marriage certificate
 
