@@ -1,25 +1,35 @@
-I have been thinking about your questions, and I want to answer you directly and carefully.
+I have been thinking about your questions, and I want to answer you from Scripture as clearly as I can.
 
-What matters most is not just whether you are interested in Jesus, but whether you understand what the gospel actually says. The gospel is not first a self-improvement message. It is a message about God, sin, justice, mercy, and rescue.
+The Bible says God made the world. “In the beginning God created the heaven and the earth” (Genesis 1:1). “The earth is the LORD’s, and the fulness thereof” (Psalm 24:1). John says, “All things were made by him” (John 1:3). So God is not one more being inside creation. He is the Creator, and that means He has the right to speak about what is good, true, and wrong.
 
-I understand the gospel through a legal and courtroom frame because Scripture uses that kind of language and because it helps make the issue plain.
+The Bible also says God is holy and righteous. “Holy, holy, holy, is the LORD of hosts” (Isaiah 6:3). “Be ye holy; for I am holy” (1 Peter 1:16). That means God is morally pure and set apart from evil. He is not corrupt. He is not compromised. He is righteous, which means He always does what is right.
 
-Here is the basic picture as I understand it.
+If morality is real, then there is a standard outside us. If there is a standard outside us, then there is law. If there is law, there is authority. If there is authority, there is a Judge. Scripture agrees with that. Abraham said, “Shall not the Judge of all the earth do right?” (Genesis 18:25). Hebrews says, “it is appointed unto men once to die, but after this the judgment” (Hebrews 9:27).
 
-God is the Creator. That means He made you, owns your life, and has a real right to speak about what is good, true, and wrong. God is also holy, which means He is morally pure and set apart from evil. He is righteous, which means He always does what is right. And He is Judge, which means He does not ignore sin or call evil good just because we want Him to.
+That is the courtroom picture the Bible gives us. God is Judge. Satan is the accuser. The law exposes guilt. Conscience bears witness. “The thought also and the mean while accusing or else excusing one another” (Romans 2:15). No one can bribe the court with good works. The Bible says, “there is none righteous, no, not one” (Romans 3:10), and “for all have sinned, and come short of the glory of God” (Romans 3:23).
 
-Sin is not just a mistake or a weakness. Sin is lawbreaking against God. It is rebellion against the One who made us. That is why sin is serious. If God is good, then evil really matters. If He is just, then He cannot simply pretend rebellion does not count.
+Sin is not just a mistake. The Bible says, “sin is the transgression of the law” (1 John 3:4). Sin is lawbreaking against God. That is why sin is serious. “The wages of sin is death” (Romans 6:23). Wages are payment. The Bible is saying sin earns a real penalty.
 
-That is also why good works cannot save us. A person cannot erase guilt by promising to do better. If a judge ignored the law because someone had enough nice qualities, that would not be justice. The problem is deeper than behavior. It is guilt before a holy God.
+That is also why good works cannot save us. The Bible says, “by the deeds of the law there shall no flesh be justified” (Romans 3:20). “Not by works of righteousness which we have done, but according to his mercy he saved us” (Titus 3:5). A person cannot erase guilt by promising to do better. A judge who ignores evil is not righteous. If God ignored sin, He would not be just.
 
 This is where Jesus comes in.
 
-Jesus lived without sin. He did not merely teach good things. He lived the righteous life humans failed to live. Then He died on the cross as a substitute. That means He took the penalty our sin deserved. He paid the debt we could not pay. In the Bible, blood is not a magic word. It is payment language. It points to the cost of sin and the seriousness of justice.
+The Bible says Jesus lived without sin. Hebrews says He was “in all points tempted like as we are, yet without sin” (Hebrews 4:15). The gospel says He is not only a teacher. He is the substitute, the mediator, the advocate, and the Lord. “For there is one God, and one mediator between God and men, the man Christ Jesus; who gave himself a ransom for all” (1 Timothy 2:5-6). “If any man sin, we have an advocate with the Father, Jesus Christ the righteous” (1 John 2:1).
 
-The resurrection matters because it shows death did not have the final word on Jesus. If Jesus stayed dead, the message would be incomplete. But if He rose, then God publicly vindicated Him. The resurrection is not a side issue. It is central to the claim that Jesus is who He said He is.
+Jesus did not only teach the way; He paid the debt. The Bible says, “we have redemption through his blood, even the forgiveness of sins” (Colossians 1:14). “Without shedding of blood is no remission” (Hebrews 9:22). “Ye were not redeemed with corruptible things ... but with the precious blood of Christ” (1 Peter 1:18-19). Blood in Scripture means life given. Jesus gave His life willingly for sinners.
 
-This is also why repentance and faith matter. Repentance means turning from sin and turning to God. Faith means trusting Jesus, not your own effort, to make you right with God. Salvation is grace, not earned works. Grace means undeserved favor. It means God gives what we could not earn and did not deserve.
+The Bible says this plainly in Isaiah 53: “he was wounded for our transgressions ... the LORD hath laid on him the iniquity of us all.” That is substitution. The righteous One takes the place of the guilty ones.
 
-I am not asking you to pretend the hard questions are easy. You have asked good questions about God, judgment, other religions, spiritual experiences, the serpent, evil, and the Bible itself. Those are real questions, and they deserve real answers. But none of those questions remove the central issue: if Jesus is risen, then He is not one option among many. He is the Lord you must answer to.
+The resurrection matters because it shows death did not have the final word on Jesus. “He was delivered for our offences, and was raised again for our justification” (Romans 4:25). “It was not possible that he should be holden of it” (Acts 2:24). And Paul says Jesus “rose again the third day according to the scriptures” and “was seen of Cephas, then of the twelve” and “of above five hundred brethren at once” (1 Corinthians 15:4-6).
 
-If you are willing, I would like to read one of the Gospels with you and talk through the questions one by one. I would also encourage you to pray honestly, even if it is simple and imperfect. Ask God to show you the truth about Jesus, about your sin, and about what you need from Him.
+That matters historically too. The Bible is not presenting a legend that developed centuries later. It presents a crucified Jesus, an empty grave, early resurrection proclamation, transformed disciples, and converted skeptics. James did not believe during Jesus’ ministry, and Paul persecuted the church before being confronted by the risen Christ. The resurrection is not blind faith. It is a historical claim that deserves to be weighed honestly.
+
+So why Jesus, not just religion? Because Christianity is not mainly “try harder.” Other religions often put the burden on works, performance, ritual, merit, or spiritual effort. The gospel says we cannot save ourselves. “By grace are ye saved through faith ... not of works” (Ephesians 2:8-9). Grace means undeserved mercy. Faith means trusting Jesus, not your own goodness.
+
+Repentance means turning from sin toward God. The Bible says, “Repent ye, and believe the gospel” (Mark 1:15). “Repent ye therefore, and be converted” (Acts 3:19). That is the right response.
+
+I know you have questions about God, judgment, other religions, spiritual experiences, the serpent, evil, and the Bible itself. Those questions matter. But they do not remove the main issue. If Jesus is risen, then He is not one option among many. He is the Lord you must answer to.
+
+What I would ask you to do now is simple. Read one Gospel with me, preferably John or Luke. Ask honest questions. Pray honestly. Consider whether Jesus is calling you. And if you see that He is true, repent and trust Him.
+
+I am not asking you to rush. I am asking you not to hide.

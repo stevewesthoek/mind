@@ -2,6 +2,10 @@
 
 ## Bible Passages
 
+- Romans 5:1
+- Romans 5:9
+- Romans 10:9-13
+- Philippians 3:9
 - Romans 3:23-26
 - Romans 6:23
 - John 3:16-18
@@ -10,28 +14,25 @@
 - Hebrews 9
 - Isaiah 53
 - 1 Corinthians 15:3-8
-- James 2:10-12
-- Romans 2:14-16
-- Romans 14:10-12
 - 1 John 2:1
 - 1 Timothy 2:5
 
 ## Historical Jesus
 
-- historical existence of Jesus
+- Tacitus
+- Josephus
+- Pliny
 - crucifixion
-- empty tomb discussion
-- skeptic conversions
-- disciples’ transformation
-- early creed dating
 - resurrection scholarship
+- early creed dating
+- skeptic conversions
 
 ## Atonement / Substitution
 
-- legal/courtroom biblical language
-- blood as life/payment language
 - substitutionary atonement
-- grace versus works
+- blood / life / payment language
+- ransom / redemption language
+- courtroom / legal biblical language
 
 ## Gospel Application Questions
 
@@ -44,4 +45,4 @@
 
 ## Notes
 
-- Once these are retrieved, the final letter can be tightened with stronger Bible references and clearer support for the courtroom model.
+- The final letter can be tightened further once the remaining Bible links are added.
