@@ -103,6 +103,14 @@ Bible/theology/apologetics research should live in:
 06-resources/research/notes/apologetics/
 ```
 
+For apologetics debate replies, use Steve's personal voice/debate standard before drafting:
+
+```text
+06-resources/research/notes/apologetics/steve-apologetics-voice-and-debate-standard.md
+```
+
+The default should be respectful but direct, fair but not timid, and claim-by-claim rather than a soft generalized essay.
+
 ### Business / Marketing
 
 Business and marketing research should live in:

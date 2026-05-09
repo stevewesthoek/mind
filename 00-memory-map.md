@@ -58,6 +58,7 @@ Research belongs under:
 | Theological question | `06-resources/research/notes/bible/theological-questions/` or `06-resources/research/notes/theology/` |
 | Comparative theological views | `06-resources/research/notes/bible/comparative-views/` |
 | Apologetics | `06-resources/research/notes/apologetics/` |
+| Steve's apologetics voice/debate style | `06-resources/research/notes/apologetics/steve-apologetics-voice-and-debate-standard.md` |
 | Marketing research | `06-resources/research/notes/marketing/` |
 | Business research | `06-resources/research/notes/business/` |
 | AI research | `06-resources/research/notes/ai/` |

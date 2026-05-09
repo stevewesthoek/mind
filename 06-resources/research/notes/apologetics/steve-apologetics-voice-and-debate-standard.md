@@ -1,0 +1,326 @@
+# Steve Apologetics Voice And Debate Standard
+
+**Status:** active personal writing standard  
+**Created:** 2026-05-09  
+**Scope:** apologetics replies, debate responses, rebuttals, claim-by-claim reviews, public/private responses to criticism of Steve's Christian claims, theology, ministry, or character.
+
+---
+
+## Why This Exists
+
+A previous AI-generated apologetics reply became too generalized, too conciliatory, and too detached from Steve's actual voice. It summarized broad worldview issues instead of answering the respondent's actual claims, accusations, misrepresentations, and logical fallacies one by one.
+
+That is not the desired default.
+
+Steve wants apologetics writing to be:
+
+- truthful
+- factual
+- concise where possible
+- direct
+- fair
+- honest
+- respectful
+- logically precise
+- claim-by-claim
+- willing to name misrepresentation and falsehood
+- unwilling to trade truth for politeness
+
+Respect does not mean becoming vague, passive, evasive, or overly nice.
+
+---
+
+## Core Voice
+
+Steve's apologetics voice should sound like:
+
+```text
+calm, direct, honest, precise, evidence-aware, and morally serious
+```
+
+Not like:
+
+```text
+overly diplomatic, vague, soft, academic, afraid to disagree, or generically polite
+```
+
+Steve is willing to be respectful, but he is not trying to sound neutral when something is false, dishonest, fallacious, or misrepresented.
+
+---
+
+## Non-Negotiable Writing Rules
+
+### 1. Answer the actual claims
+
+Do not replace a detailed response with a high-level worldview summary.
+
+If the respondent made 25 pages of claims, accusations, or objections, build a claim ledger and address them one by one.
+
+### 2. Separate the categories
+
+For each claim, classify it as one or more of:
+
+- factual claim
+- theological claim
+- philosophical claim
+- scientific claim
+- historical claim
+- logical argument
+- accusation
+- misrepresentation
+- rhetorical attack
+- emotional framing
+- category error
+- straw man
+- unsupported assertion
+
+### 3. Name falsehoods and misrepresentations clearly
+
+Use direct language when warranted:
+
+```text
+That is not what I argued.
+That misrepresents my position.
+That claim is unsupported.
+That conclusion does not follow.
+That is a category error.
+That response attacks a weaker version of my argument.
+That is an accusation, not an argument.
+```
+
+Do not soften these into vague language like:
+
+```text
+I see things somewhat differently.
+There may be a slight misunderstanding.
+This is perhaps another perspective.
+```
+
+unless the disagreement really is mild.
+
+### 4. Be fair, but not timid
+
+Fairness means:
+
+- quote or summarize the other person's claim accurately
+- answer the strongest reasonable version when possible
+- concede true corrections
+- remove weak claims from Steve's side
+- distinguish evidence from inference
+
+Fairness does not mean:
+
+- accepting false accusations
+- avoiding direct rebuttal
+- treating every criticism as equally valid
+- over-conceding to appear reasonable
+- hiding the force of the counterargument
+
+### 5. Prefer claim-by-claim structure
+
+Default response shape for debate material:
+
+```text
+Claim 1: [their claim]
+Response: [direct answer]
+Issue: [fallacy/misrepresentation/evidence problem, if any]
+Correction: [what Steve actually argues]
+Source/support: [Bible, logic, philosophy, history, science, or source note]
+```
+
+Use summary sections only after the detailed claim work has been done.
+
+### 6. Do not overgeneralize
+
+Avoid replacing specific disputed points with broad statements like:
+
+```text
+Theism remains a serious explanation.
+Naturalism has questions to answer.
+We should be gentle and respectful.
+```
+
+Those may be true, but they are not enough when the respondent made specific claims that need direct answers.
+
+### 7. Tone: firm and respectful
+
+The tone should be:
+
+- firm
+- sober
+- clear
+- truthful
+- non-mocking
+- non-hysterical
+- non-quarrelsome
+- not evasive
+
+Use `1 Peter 3:15-16` and `2 Timothy 2:24-26` as posture guardrails, not as a reason to become weak or vague.
+
+Gentleness is not the same as passivity.
+
+---
+
+## Debate Response Pipeline
+
+For serious apologetics exchanges, use this sequence:
+
+```text
+1. Preserve the raw source documents.
+2. Create a dialogue timeline.
+3. Create a complete claim ledger.
+4. Classify every claim.
+5. Identify misrepresentations and accusations.
+6. Identify logical fallacies and category errors.
+7. Identify which claims need sources.
+8. Answer claim-by-claim.
+9. Add Bible/theology support where relevant.
+10. Add philosophy/history/science support where relevant.
+11. Write a direct rebuttal draft.
+12. Run fairness review.
+13. Run human writing polish without softening the rebuttal.
+14. Produce a sendable response.
+```
+
+Do not jump from step 3 to a polished general essay.
+
+---
+
+## Preferred Output Files For Apologetics Cases
+
+For a serious back-and-forth, create or update:
+
+```text
+claim-ledger.md
+accusation-ledger.md
+misrepresentation-ledger.md
+fallacy-audit.md
+evidence-ledger.md
+claim-by-claim-response.md
+source-gap-check.md
+final-response.md
+sendable-response.md
+```
+
+`claim-by-claim-response.md` should usually come before `sendable-response.md`.
+
+---
+
+## How To Handle Accusations
+
+When the respondent makes accusations about Steve's motives, honesty, intelligence, character, faith, or argumentation, do not bury them inside a polite summary.
+
+Create an accusation ledger:
+
+```markdown
+| ID | Accusation | Source location | Type | Supported? | Response |
+|---|---|---|---|---|---|
+```
+
+Types may include:
+
+- character accusation
+- motive accusation
+- intellectual accusation
+- theological accusation
+- rhetorical attack
+- misrepresentation
+
+Default response principle:
+
+```text
+Answer accusations calmly, directly, and proportionally. Do not retaliate, but do not ignore false charges.
+```
+
+---
+
+## Logical Fallacy Handling
+
+When a fallacy or reasoning problem is present, name it plainly if useful.
+
+Common categories:
+
+- straw man
+- equivocation
+- category error
+- false dilemma
+- burden-of-proof shift
+- unsupported assertion
+- non sequitur
+- genetic fallacy
+- appeal to ridicule
+- ad hominem
+- special pleading
+- motte-and-bailey
+- argument from ignorance
+- overgeneralization
+
+Do not over-label every disagreement as a fallacy. Explain the reasoning problem in plain English.
+
+Example:
+
+```text
+This does not follow. Even if one of my examples was weak, that would not refute the larger argument about naturalism, reason, morality, and consciousness.
+```
+
+---
+
+## Good Sentence Patterns
+
+Use sentences like:
+
+```text
+That is not what I claimed.
+Here is the actual claim I made.
+Your response changes the target from X to Y.
+That objection may answer a weaker argument, but it does not answer the argument I actually made.
+I agree with this correction, and I would revise my wording here.
+This point needs a source before it can carry the weight you put on it.
+This is an assertion, not an argument.
+That accusation is not supported by the text.
+I can accept that my wording was too broad without accepting your conclusion.
+```
+
+---
+
+## Bad Default Patterns
+
+Avoid defaulting to:
+
+```text
+The strongest version of your objection is worth taking seriously...
+I agree with that criticism in part...
+Where I think the deeper disagreement remains...
+Theism remains a serious and coherent explanation...
+```
+
+These can be useful in moderation, but they become weak when the task requires direct rebuttal of many specific claims.
+
+---
+
+## Relationship To Human Writing Guardrails
+
+Use human-writing guardrails after the claim-by-claim work is complete.
+
+Human polish must not:
+
+- remove directness
+- soften necessary rebuttals
+- hide accusations
+- erase logical fallacy analysis
+- convert claim-by-claim work into a vague essay
+- make Steve sound less like himself
+
+---
+
+## Summary Rule
+
+For Steve's apologetics debate writing:
+
+```text
+Be respectful, but do not be soft.
+Be fair, but do not over-concede.
+Be concise, but do not skip claims.
+Be direct, but do not become insulting.
+Answer the actual claims one by one.
+```
