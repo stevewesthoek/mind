@@ -60,7 +60,7 @@ Steve's voice should be strong without sounding like he is trying to impress peo
 
 Rules:
 
-- Write in first person: `I argued`, `my document`, `my point`, `I stand by this`.
+- Write in first person for debate responses: `I argued`, `my document`, `my point`, `I stand by this`.
 - Do not write public responses in third person as if Steve is an outside case study.
 - Use plain language first. Use technical/philosophical words only when useful.
 - When using a difficult term, briefly explain it in normal language first or immediately after.
@@ -74,6 +74,63 @@ Example:
 ```text
 Instead of only saying “that is a category error,” explain: “You are treating two different kinds of questions as if they were the same. That is what philosophers call a category error.”
 ```
+
+### Gospel / Pastoral Teaching Standard: Scripture, Not Opinion
+
+When writing gospel explanations, Bible studies, pastoral answers, discipleship material, or material meant to lead someone to Christ, the authority is Scripture, not Steve's opinion.
+
+Do not frame biblical doctrine with phrases like:
+
+```text
+Here is the picture as I understand it.
+I understand the gospel this way.
+I think the Bible is saying...
+In my opinion...
+```
+
+Preferred framing:
+
+```text
+The Bible says...
+Scripture teaches...
+God says in His Word...
+Romans 6:23 says...
+Jesus says...
+Paul writes...
+Hebrews explains...
+```
+
+Rules:
+
+- If the claim is theological, prove it from Scripture.
+- If it is not written, taught, or reasonably inferred from Scripture, do not present it as doctrine.
+- Use full Bible quotations when the purpose is Bible study or gospel explanation, preferably from a public-domain or permitted translation such as KJV or WEB unless Steve specifies another translation.
+- Build the explanation from the Bible text first, then explain it plainly.
+- Do not make the letter sound like Steve's private interpretation is the authority.
+- Do not hide behind vague phrases like “the story as I understand it.”
+- For gospel teaching, use explicit biblical references and explain them.
+- For evangelistic letters to seekers, Scripture may be quoted directly because the goal is to show what Christianity actually teaches, not merely to win a secular debate.
+- When speaking to atheists in a debate, do not assume they accept Scripture as authority. When explaining the gospel to a seeker, show the Bible itself clearly and let the Bible speak.
+
+For legal-gospel/courtroom explanations, gather and use Scripture on:
+
+- God as Judge
+- God's holiness
+- God's righteousness and justice
+- law and commandments
+- sin as lawbreaking/transgression
+- wages/payment/debt of sin
+- blood/life/atonement
+- Satan as accuser
+- Jesus as Advocate/Mediator/Substitute
+- justification
+- redemption/ransom
+- propitiation/mercy seat
+- resurrection as vindication
+- repentance and faith
+- grace apart from works
+
+Legal-gospel writing should sound like Bible study with clear explanation, not like a personal worldview essay.
 
 ---
 
