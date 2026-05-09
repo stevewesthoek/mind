@@ -239,6 +239,32 @@ tags: []
 
 ---
 
+## AI Memory & Context Retrieval
+
+This vault is also Steve's AI-readable memory.
+
+AI agents should not load the whole vault into every session. They should start from the AI entrypoint files and retrieve context on demand:
+
+```text
+AGENTS.md
+00-start-here.md
+00-current-context.md
+00-memory-map.md
+```
+
+The intended startup protocol for Claude Code, Codex, Gemini, and other agents is:
+
+1. Read `AGENTS.md`.
+2. Read `00-start-here.md`.
+3. Read `00-current-context.md`.
+4. Read `00-memory-map.md`.
+5. Search/read only the relevant folders.
+6. Save durable outputs to the correct PARA location when asked.
+
+Research belongs under `06-resources/research/` when that folder exists. Strategy and committed decisions still belong under `02-strategy/`.
+
+---
+
 ## Automation & Cadence
 
 These automations run in the n8n Brain Bridge pipeline:
@@ -254,9 +280,13 @@ These automations run in the n8n Brain Bridge pipeline:
 ## Root-Level Files (What Each Is For)
 
 - **`README.md`** — This file. The single source of truth for how the vault works.
-- **`home.md`** — Dashboard. Start here daily. See focus, blockers, inbox, quick links.
-- **`kanban.md`** — Obsidian Canvas. Your working board (To Do → Doing → Done).
-- **`CLAUDE.md`** — AI-facing instructions (for Claude Code when accessing this vault).
+- **`AGENTS.md`** — Universal AI entrypoint for Claude Code, Codex, Gemini, and other agents.
+- **`00-start-here.md`** — Compact orientation for human and AI sessions.
+- **`00-current-context.md`** — Current priorities and context without loading the whole vault.
+- **`00-memory-map.md`** — Retrieval map that tells AI where to search/read for each kind of request.
+- **`home.md` / `HOME.md`** — Dashboard. Start here daily. See focus, blockers, inbox, quick links.
+- **`kanban.md` / `KANBAN.md`** — Obsidian Canvas. Your working board (To Do → Doing → Done).
+- **`CLAUDE.md`** — Claude Code compatibility instructions; points Claude to the universal AI entrypoint.
 
 ---
 

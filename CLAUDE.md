@@ -2,11 +2,23 @@
 
 For complete system documentation, see **[[README.md]]** — the single source of truth for how this vault works.
 
+## Required AI Startup Protocol
+
+For every new Claude Code session, start with:
+
+1. `AGENTS.md`
+2. `00-start-here.md`
+3. `00-current-context.md`
+4. `00-memory-map.md`
+5. `README.md` only when full vault/automation details are needed
+
+Do not load the whole vault. Use `00-memory-map.md`, then search/read only relevant files.
+
 ## AI Context
 
 **Repository:** Personal Obsidian knowledge vault (Save to Mind system)  
-**Type:** PARA-based personal knowledge management  
-**Entry point:** `README.md` (system guide) or `home.md` (dashboard)
+**Type:** PARA-based personal knowledge management and AI-readable memory  
+**Entry point:** `AGENTS.md` for agents, `HOME.md` for Steve, `README.md` for full system guide
 
 ## Structure
 
