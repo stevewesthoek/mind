@@ -14,6 +14,8 @@ type: dashboard
 | ---------------- | --------------- | ---------------------------------------- |
 | **Kanban Board** | [[KANBAN]]      | Drag tasks between To Do → Doing → Done  |
 | **System Guide** | [[README]]      | How the vault works (start here if lost) |
+| **AI Entry Point** | [[AGENTS]] | Instructions for Claude Code, Codex, Gemini, and other agents |
+| **AI Memory Map** | [[00-memory-map]] | Where AI should search/read for context |
 | **Strategy**     | [[02-strategy]] | Internal (where captured decisions go)  |
 | **Tasks**        | [[04-tasks]]    | Internal (sub-items of projects)        |
 | **Projects**     | [[03-projects]] | Active projects with timelines           |
