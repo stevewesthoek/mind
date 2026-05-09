@@ -8,19 +8,26 @@ gospel-dialogue-001
 
 - [`final-follow-up-letter.md`](./final-follow-up-letter.md)
 
-This is the actual follow-up letter to send.
+This is the Scripture-first legal-gospel version to send externally.
 
 ## Source Appendix
 
 - [`final-gospel-source-appendix.md`](./final-gospel-source-appendix.md)
 
-This is optional backup material if Steve wants concise support beside the letter.
+This is optional backup material if concise support is useful beside the letter.
 
 ## Checklist
 
 - [`final-gospel-export-checklist.md`](./final-gospel-export-checklist.md)
 
 This lists what to send, what to attach only if asked, and what to keep internal.
+
+## Bible Study Support
+
+- [`legal-gospel-bible-study.md`](./legal-gospel-bible-study.md)
+- [`legal-gospel-bible-verse-map.md`](./legal-gospel-bible-verse-map.md)
+
+These are support files behind the Scripture-first framework.
 
 ## Source Docs Used
 
@@ -29,4 +36,5 @@ This lists what to send, what to attach only if asked, and what to keep internal
 
 ## Warning
 
-Do not use the older draft files as the final sendable version. The v3 final letter is the source draft behind this export, but `final-follow-up-letter.md` is the version to send externally.
+Do not use the older pre-Scripture-first export files as the final sendable version.
+The current sendable version is `final-follow-up-letter.md`.
