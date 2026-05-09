@@ -9,4 +9,4 @@ Today
 - make a months worth of video's
 
 Tomorrow
-- post STB on FB and Pinterest  
+- post STB on FB and Pinterest
