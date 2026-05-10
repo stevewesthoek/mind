@@ -1,28 +1,26 @@
 # Final Gospel Source Appendix
 
-This appendix is optional backup material for the Scripture-first follow-up letter. It keeps the support concise and practical.
+This appendix is optional backup material for the sendable legal-gospel letter. It keeps the support concise and practical, while pointing back to the deeper study notes.
 
 KJV wording was used for the quoted passages in the study and letter. That keeps the quotations stable and easy to cross-check.
 
-## 1. Creator and Authority
+## 1. Scripture support categories
+
+### Creator and authority
 
 - Genesis 1:1
 - Psalm 24:1
 - John 1:1-3
 - Colossians 1:16-17
 
-**What this proves:** God created the world and therefore has rightful authority over it. The gospel starts with ownership, not human autonomy.
-
-## 2. Holiness and Righteousness
+### Holiness and righteousness
 
 - Leviticus 19:2
 - Isaiah 6:3
 - 1 Peter 1:15-16
 - Revelation 4:8
 
-**What this proves:** God is holy and righteous. The Judge is not corrupt and does not ignore evil.
-
-## 3. God as Judge
+### God as Judge
 
 - Genesis 18:25
 - Psalm 7:11
@@ -32,9 +30,7 @@ KJV wording was used for the quoted passages in the study and letter. That keeps
 - Hebrews 9:27
 - Revelation 20:11-15
 
-**What this proves:** Scripture presents God as Judge of all the earth, with final judgment still ahead.
-
-## 4. Law and Sin
+### Law and sin
 
 - Exodus 20
 - Deuteronomy 6:5
@@ -46,9 +42,7 @@ KJV wording was used for the quoted passages in the study and letter. That keeps
 - Romans 3:23
 - Isaiah 59:2
 
-**What this proves:** God has given law, and sin is lawbreaking that produces guilt and separation.
-
-## 5. Wages, Blood, and Atonement
+### Wages, blood, and atonement
 
 - Genesis 2:17
 - Ezekiel 18:20
@@ -62,9 +56,7 @@ KJV wording was used for the quoted passages in the study and letter. That keeps
 - 1 Peter 1:18-19
 - Revelation 1:5
 
-**What this proves:** Sin earns death, and Scripture ties forgiveness to costly atonement language, including blood and ransom.
-
-## 6. Accuser, Advocate, and Substitute
+### Accuser, advocate, and substitute
 
 - Job 1:6-12
 - Job 2:1-7
@@ -83,9 +75,7 @@ KJV wording was used for the quoted passages in the study and letter. That keeps
 - 1 Peter 2:24
 - 1 Peter 3:18
 
-**What this proves:** Scripture presents Satan as accuser, Jesus as Advocate and Mediator, and Christ as the substitute who bears sin.
-
-## 7. Justification, Redemption, and Grace
+### Justification, redemption, and grace
 
 - Romans 3:21-26
 - Romans 4:5
@@ -100,9 +90,7 @@ KJV wording was used for the quoted passages in the study and letter. That keeps
 - Titus 3:5
 - Romans 11:6
 
-**What this proves:** Salvation is by grace through faith, not by works. Christ’s blood secures redemption and justification.
-
-## 8. Resurrection
+### Resurrection
 
 - Romans 4:25
 - Acts 2:24
@@ -111,29 +99,46 @@ KJV wording was used for the quoted passages in the study and letter. That keeps
 - 1 Corinthians 15:17
 - 1 Peter 1:3
 
-**What this proves:** The resurrection is part of the gospel itself and is tied to vindication, justification, and living hope.
+## 2. Legal-gospel theme categories
 
-## 9. Historical Jesus and Resurrection Source Needs
+- God as Creator and owner
+- God as holy and righteous
+- God as Judge
+- moral law and authority
+- conscience as witness
+- sin as lawbreaking
+- guilt and separation
+- wages of sin as death
+- blood as life given
+- atonement and remission
+- Satan as accuser
+- Jesus as Advocate and Mediator
+- Jesus as substitute and ransom
+- justification by grace
+- redemption through blood
+- resurrection as vindication
+- repentance and faith
 
-What is already supported in the source notes:
-- Jesus as a historical figure
-- crucifixion
-- early resurrection proclamation
-- transformed disciples
-- converted skeptics such as James and Paul
-- cumulative historical case
-- miracles are possible if God exists
+## 3. Supporting study files
 
-What still needs tighter source support later:
+- [`legal-gospel-bible-study.md`](./legal-gospel-bible-study.md)
+- [`legal-gospel-bible-verse-map.md`](./legal-gospel-bible-verse-map.md)
+- [`bible-legal-theme-deep-scan-plan.md`](./bible-legal-theme-deep-scan-plan.md)
+
+## 4. Historical Jesus source note
+
+The current support already covers the basic historical case for Jesus, crucifixion, resurrection proclamation, transformed disciples, and converted skeptics.
+
+Optional future strengthening still needed if Steve wants a more explicit external appendix:
+
 - Tacitus
 - Josephus
 - Pliny
-- exact dating of the 1 Corinthians 15 creed
-- prophecy claims
-- empty tomb claims
-- “most scholars” claims
+- tighter dating for the 1 Corinthians 15 creed
+- explicit empty tomb sourcing
+- stronger support for prophecy claims
 
-## 10. Suggested Reading
+## 5. Suggested reading
 
 - Gospel of John
 - Gospel of Luke

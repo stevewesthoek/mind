@@ -2,27 +2,29 @@
 
 ## Strengths
 
-- The final letter is now Scripture-first, not opinion-framed.
+- The final letter is structured with chapters, subtitles, and a readable progression.
 - The legal/courtroom framework is central and easy to follow.
-- Jesus is central as Creator, substitute, mediator, advocate, and risen Lord.
+- Jesus is central as substitute, mediator, advocate, and risen Lord.
 - The call to repent, believe, and read a Gospel is clear.
 - The appendix stays concise and points back to the Bible study support files.
 
 ## Old Framing Corrected
 
 - The export bundle now points to `final-follow-up-letter.md` as the sendable version.
-- The bundle no longer presents the older pre-Scripture-first export as the final letter.
-- The source appendix now matches the Scripture-first structure.
+- The bundle no longer presents the older pre-structured export as the final letter.
+- The source appendix now matches the structured legal-gospel format.
 
 ## Places That May Be Too Long
 
-- The historical resurrection paragraph is the densest part of the letter.
+- The historical resurrection material is concise, but it is still the densest section.
 - The opening section on God, holiness, and the courtroom frame could be trimmed if Steve wants a shorter version.
 
-## Places That May Be Too Blunt
+## Tone Check
 
-- “He is the Lord you must answer to” is strong, but it fits the message.
-- “I am asking you not to hide” is direct; it works if the rest of the tone stays gentle.
+- The letter avoids sermon tone.
+- The letter avoids devotional framing.
+- The letter avoids generic gospel-tract language.
+- The tone stays factual, explanatory, logical, and direct.
 
 ## Places That May Need More Scripture
 
@@ -41,10 +43,16 @@
 - Yes.
 - The cross, blood, substitution, and resurrection are all central.
 
-## Whether the Call to Respond Is Clear
+## Whether Scripture Support Is Sufficient
 
 - Yes.
-- The letter invites the reader to read a Gospel, pray honestly, repent, and trust Jesus.
+- The letter uses Scripture as support without turning into a wall of verses.
+- The support is enough for a seeker-facing explanation, with room for future expansion if needed.
+
+## Whether the Document Is Ready To Send
+
+- Yes.
+- It is sendable as a structured legal-gospel follow-up.
 
 ## What to Improve Before Any Future Tightening
 
