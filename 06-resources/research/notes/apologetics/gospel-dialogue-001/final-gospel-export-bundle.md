@@ -8,7 +8,11 @@ gospel-dialogue-001
 
 - [`final-follow-up-letter.md`](./final-follow-up-letter.md)
 
-This is the current sendable legal-gospel version. The older earlier export is superseded.
+This is the current sendable legal-gospel version. It is exported from the v4 climactic Scripture-woven draft:
+
+- [`final-follow-up-letter-v4-climactic.md`](./final-follow-up-letter-v4-climactic.md)
+
+The older pre-v4 exports are superseded.
 
 ## Source Appendix
 
@@ -26,9 +30,11 @@ This lists what to send, what to attach only if asked, and what to keep internal
 
 - [`legal-gospel-bible-study.md`](./legal-gospel-bible-study.md)
 - [`legal-gospel-bible-verse-map.md`](./legal-gospel-bible-verse-map.md)
+- [`scripture-weaving-map.md`](./scripture-weaving-map.md)
+- [`legal-gospel-climax-notes.md`](./legal-gospel-climax-notes.md)
 - [`bible-legal-theme-deep-scan-plan.md`](./bible-legal-theme-deep-scan-plan.md)
 
-These are support files behind the Scripture-first framework.
+These are support files behind the Scripture-first, legal-gospel framework.
 
 ## Source Docs Used
 
@@ -39,4 +45,4 @@ These are support files behind the Scripture-first framework.
 ## Warning
 
 Do not use the older earlier export files as the final sendable version.
-The current sendable version is `final-follow-up-letter.md`.
+The current sendable version is `final-follow-up-letter.md`, exported from `final-follow-up-letter-v4-climactic.md`.
