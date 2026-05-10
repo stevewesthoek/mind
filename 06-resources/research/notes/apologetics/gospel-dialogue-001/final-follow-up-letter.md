@@ -175,7 +175,7 @@ But everyone still judges. Everyone still says some things are truly wrong and s
 
 The biblical worldview says morality is grounded in God’s holy character and rightful authority. If morality is only personal preference, then moral judgment loses objective authority.
 
-Other religions often put the final burden back on man: works, ritual, merit, effort, or enlightenment. The gospel says man is guilty and cannot pay the debt by works. Jesus pays the debt.
+Other religions often put the final burden back on man: works, ritual, merit, effort, or enlightenment.  Or claim that man is inherently good The gospel says man is guilty and cannot pay the debt by works. Jesus pays the debt.
 
 Islam stresses submission and judgment, but not a crucified and risen divine substitute paying sin’s debt in the Christian sense.
 Hindu traditions often frame the problem in terms of karma and rebirth, not guilt removed by a sinless substitute.
