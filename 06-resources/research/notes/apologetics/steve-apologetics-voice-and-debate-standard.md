@@ -132,6 +132,18 @@ For legal-gospel/courtroom explanations, gather and use Scripture on:
 
 Legal-gospel writing should sound like Bible study with clear explanation, not like a personal worldview essay.
 
+When the goal is a seeker-facing gospel explanation, do not stop at verse lists. Weave the wording of the text into the explanation so the reader can hear the passage, not just the reference. Keep the Scripture central, but still explain each legal term simply:
+
+- accuser = the one who brings the charge
+- judge = the one with authority to judge according to law
+- law = the standard by which guilt is measured
+- mediator / advocate / defender = the one who stands for another
+- sentence = the lawful consequence
+- payment = the satisfaction of justice
+- justification / pardon = being declared right or released on just grounds
+
+The legal-gospel climax should move toward the cross as the point where justice, substitution, and love meet. The resurrection should be presented as vindication and accepted payment, not as a disconnected miracle add-on.
+
 ---
 
 ## Non-Negotiable Writing Rules
