@@ -8,11 +8,11 @@ gospel-dialogue-001
 
 - [`final-follow-up-letter.md`](./final-follow-up-letter.md)
 
-This is the current sendable legal-gospel version. It is exported from the v4 climactic Scripture-woven draft:
+This is the current sendable legal-gospel version. It is exported from the v6 Genesis-to-cross expanded draft:
 
-- [`final-follow-up-letter-v4-climactic.md`](./final-follow-up-letter-v4-climactic.md)
+- [`final-follow-up-letter-v6-genesis-trinity-objections.md`](./final-follow-up-letter-v6-genesis-trinity-objections.md)
 
-The older pre-v4 exports are superseded.
+The older pre-v6 exports are superseded.
 
 ## Source Appendix
 
@@ -28,6 +28,11 @@ This lists what to send, what to attach only if asked, and what to keep internal
 
 ## Bible Study Support
 
+- [`final-follow-up-letter-v6-genesis-trinity-objections.md`](./final-follow-up-letter-v6-genesis-trinity-objections.md)
+- [`genesis-to-cross-framework-map.md`](./genesis-to-cross-framework-map.md)
+- [`trinity-and-incarnation-plain-language-notes.md`](./trinity-and-incarnation-plain-language-notes.md)
+- [`resurrection-legal-meaning-expanded.md`](./resurrection-legal-meaning-expanded.md)
+- [`seeker-hard-questions-map.md`](./seeker-hard-questions-map.md)
 - [`legal-gospel-bible-study.md`](./legal-gospel-bible-study.md)
 - [`legal-gospel-bible-verse-map.md`](./legal-gospel-bible-verse-map.md)
 - [`scripture-weaving-map.md`](./scripture-weaving-map.md)
@@ -45,4 +50,4 @@ These are support files behind the Scripture-first, legal-gospel framework.
 ## Warning
 
 Do not use the older earlier export files as the final sendable version.
-The current sendable version is `final-follow-up-letter.md`, exported from `final-follow-up-letter-v4-climactic.md`.
+The current sendable version is `final-follow-up-letter.md`, exported from `final-follow-up-letter-v6-genesis-trinity-objections.md`.

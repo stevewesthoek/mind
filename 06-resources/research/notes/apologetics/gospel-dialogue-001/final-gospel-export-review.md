@@ -3,7 +3,11 @@
 ## Strengths
 
 - The final letter is structured with chapters, subtitles, and a readable progression.
+- The current export now uses the v6 Genesis-to-cross expanded draft.
+- The letter starts in creation and Eden before moving to law, court, cross, and resurrection.
 - The legal/courtroom framework is central and easy to follow.
+- The Trinity and incarnation are explained in plain language.
+- The resurrection’s legal meaning is stronger than in earlier exports.
 - Jesus is central as substitute, mediator, advocate, and risen Lord.
 - The call to repent, believe, and read a Gospel is clear.
 - The appendix stays concise and points back to the Bible study support files.

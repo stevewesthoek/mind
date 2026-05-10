@@ -4,9 +4,9 @@
 
 - `final-follow-up-letter.md`
 
-This is now the v4 climactic Scripture-woven legal-gospel version exported from:
+This is now the v6 Genesis-to-cross expanded legal-gospel version exported from:
 
-- `final-follow-up-letter-v4-climactic.md`
+- `final-follow-up-letter-v6-genesis-trinity-objections.md`
 
 ## Attach If Useful
 
@@ -14,6 +14,12 @@ This is now the v4 climactic Scripture-woven legal-gospel version exported from:
 
 ## Keep Internal
 
+- `final-follow-up-letter-v6-genesis-trinity-objections.md`
+- `final-follow-up-letter-v6-review.md`
+- `genesis-to-cross-framework-map.md`
+- `trinity-and-incarnation-plain-language-notes.md`
+- `resurrection-legal-meaning-expanded.md`
+- `seeker-hard-questions-map.md`
 - `final-follow-up-letter-v4-climactic.md`
 - `final-follow-up-letter-v4-climactic-review.md`
 - `legal-gospel-climax-notes.md`
