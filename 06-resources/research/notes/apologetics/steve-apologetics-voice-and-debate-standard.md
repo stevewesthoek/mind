@@ -144,6 +144,8 @@ When the goal is a seeker-facing gospel explanation, do not stop at verse lists.
 
 The legal-gospel climax should move toward the cross as the point where justice, substitution, and love meet. The resurrection should be presented as vindication and accepted payment, not as a disconnected miracle add-on.
 
+For longer seeker-facing pieces, it is appropriate to begin in Genesis, explain the fall, then move through law, court, accusation, substitution, cross, resurrection, and response. Hard objections should be handled in appendices or compact side sections unless the prompt explicitly asks for a debate essay. Keep the main letter readable and climactic.
+
 ---
 
 ## Non-Negotiable Writing Rules
