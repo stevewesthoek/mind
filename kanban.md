@@ -150,7 +150,6 @@ kanban-plugin: board
 - [ ] Empty mail
 - [ ] Fix Antenna
 - [ ] Send message to Norbert
-- [ ] Apply for passport
 - [ ] Make a strategy agent
 - [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
 - [ ] empty ChatGPT into Obsidian
@@ -168,8 +167,9 @@ kanban-plugin: board
 - [ ] Make FB shorts account with free github repos
 - [ ] Upgrade ACP from Bronze to Gold: https://join.acp.pt/
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
-- [ ] Setup STB Facebook app ⏫
-- [ ] Marriage certificate
+- [x] Setup STB Facebook app ⏫ ✅ 2026-05-11
+- [x] Marriage certificate ✅ 2026-05-11
+- [ ] Apply for passport
 
 ## Done
 
