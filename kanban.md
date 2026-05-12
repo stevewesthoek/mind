@@ -144,6 +144,7 @@ kanban-plugin: board
 ## To Do
 
 - [ ] YA finance app
+- [ ] Check with Mark & Yosef meeten
 - [ ] Learn Portuguese app
 - [ ] fix the obsidian way of working
 - [ ] Product: Model Router
