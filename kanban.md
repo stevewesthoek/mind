@@ -158,6 +158,9 @@ kanban-plugin: board
 - [ ] Sell video cameras Miro
 - [ ] Sell Miro's safe
 - [ ] Explore barcode idea
+- [ ] Fix the curtains
+- [ ] Buy paint & filler & brushes
+- [ ] Clean garage floor
 
 ## Doing
 
