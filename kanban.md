@@ -169,7 +169,7 @@ kanban-plugin: board
 - [ ] Make the Gospel/Atheism paper
 - [ ] Family finance app
 - [ ] Make FB shorts account with free github repos
-- [ ] Upgrade ACP from Bronze to Gold: https://join.acp.pt/
+- [x] Upgrade ACP from Bronze to Gold: https://join.acp.pt/ ✅ 2026-05-13
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [x] Setup STB Facebook app ⏫ ✅ 2026-05-11
 - [x] Marriage certificate ✅ 2026-05-11
