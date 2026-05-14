@@ -166,14 +166,14 @@ kanban-plugin: board
 
 - [x] Make Via di Eden editable for Joe
 - [x] Make Oliveto Organizing editable for Ashley
+- [x] Upgrade ACP from Bronze to Gold: https://join.acp.pt/ ✅ 2026-05-13
+- [x] Setup STB Facebook app ⏫ ✅ 2026-05-11
+- [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Make the Gospel/Atheism paper
 - [ ] Family finance app
 - [ ] Make FB shorts account with free github repos
-- [x] Upgrade ACP from Bronze to Gold: https://join.acp.pt/ ✅ 2026-05-13
-- [ ] Expand STB pipeline and start posting FB, YT & PIN
-- [x] Setup STB Facebook app ⏫ ✅ 2026-05-11
-- [x] Marriage certificate ✅ 2026-05-11
 - [ ] Apply for passport
+- [x] Marriage certificate ✅ 2026-05-11
 
 ## Done
 
