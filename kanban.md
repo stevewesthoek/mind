@@ -143,7 +143,6 @@ kanban-plugin: board
 
 ## To Do
 
-- [ ] YA finance app
 - [ ] Check with Mark & Yosef meeten
 - [ ] Learn Portuguese app
 - [ ] fix the obsidian way of working
@@ -171,6 +170,7 @@ kanban-plugin: board
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Make the Gospel/Atheism paper
 - [ ] Family finance app
+- [ ] YA finance app
 - [ ] Make FB shorts account with free github repos
 - [ ] Apply for passport
 - [x] Marriage certificate ✅ 2026-05-11
