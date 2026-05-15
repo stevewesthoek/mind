@@ -145,6 +145,7 @@ kanban-plugin: board
 
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Learn Portuguese app
+- [ ] Apply for passport
 - [ ] fix the obsidian way of working
 - [ ] Product: Model Router
 - [ ] Empty mail
@@ -172,7 +173,6 @@ kanban-plugin: board
 - [ ] Family finance app
 - [ ] YA finance app
 - [ ] Make FB shorts account with free github repos
-- [ ] Apply for passport
 - [x] Marriage certificate ✅ 2026-05-11
 
 ## Done
