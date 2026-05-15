@@ -143,8 +143,6 @@ kanban-plugin: board
 
 ## To Do
 
-- [ ] Expand STB pipeline and start posting FB, YT & PIN
-- [ ] Learn Portuguese app
 - [ ] Apply for passport
 - [ ] fix the obsidian way of working
 - [ ] Product: Model Router
@@ -169,6 +167,8 @@ kanban-plugin: board
 - [x] Upgrade ACP from Bronze to Gold: https://join.acp.pt/ ✅ 2026-05-13
 - [x] Setup STB Facebook app ⏫ ✅ 2026-05-11
 - [x] Check with Mark & Yosef meeten ✅ 2026-05-14
+- [ ] Expand STB pipeline and start posting FB, YT & PIN
+- [ ] Learn Portuguese app
 - [ ] Make the Gospel/Atheism paper
 - [ ] Family finance app
 - [ ] YA finance app
