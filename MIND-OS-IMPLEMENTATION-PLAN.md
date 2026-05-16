@@ -8,6 +8,10 @@
 
 Migrate this Obsidian vault from the current numbered PARA structure into a clean unnumbered Mind OS structure maintained by the model router and connected to Brain Core.
 
+## Execution Status
+
+This document records the planning snapshot only. No folder moves, n8n workflow changes, or router implementation changes have been performed yet.
+
 ## Confirmed Choices
 
 - Use clean folder names, not numeric prefixes.
