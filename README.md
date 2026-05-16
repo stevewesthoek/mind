@@ -1,6 +1,17 @@
 # Personal Knowledge Vault — Save to Mind
 
-**Your personal brain system for capturing ideas and organizing work through a simple PARA model.**
+**Your personal brain system for capturing ideas and organizing work through Obsidian.**
+
+## Current Migration Direction
+
+This vault is migrating from the numbered PARA folder model to the unnumbered Mind OS structure described in:
+
+- `MIND-OS-ROADMAP.md`
+- `MIND-OS-IMPLEMENTATION-PLAN.md`
+
+Save-to-Mind remains the permanent capture doorway. The target path will move from `01-inbox/` to `capture/inbox/` after the new structure and model-router contract are in place.
+
+The existing PARA folders remain active until migration is validated.
 
 ---
 
