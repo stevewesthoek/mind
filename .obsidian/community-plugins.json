@@ -2,5 +2,7 @@
   "dataview",
   "obsidian-tasks-plugin",
   "obsidian-kanban",
-  "obsidian-git"
+  "obsidian-git",
+  "ghostty-terminal",
+  "obsidian-icon-folder"
 ]

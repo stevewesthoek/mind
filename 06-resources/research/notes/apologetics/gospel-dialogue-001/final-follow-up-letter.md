@@ -50,7 +50,7 @@ Paul also describes the deeper rebellion of humanity: people “became vain in t
 
 ## 5. The fall: sin, shame, separation, and death
 
-After sin, Adam and Eve hid. “And the eyes of them both were opened, and they knew that they were naked” (Genesis 3:7). Shame entered. Blame entered. Separation entered. Death entered.
+After the first or original sin (also called the Fall), Adam and Eve hid. “And the eyes of them both were opened, and they knew that they were naked” (Genesis 3:7). Shame entered because of their new knowledge of nakedness. Blame entered because of their disobedience. Separation entered because they could no longer walked with their holy God. Death entered because of God's warning "you shal surely die".
 
 They heard God’s voice and hid themselves (Genesis 3:8). Adam blamed Eve, and Eve blamed the serpent (Genesis 3:12-13). The legal problem was now open.
 
@@ -62,7 +62,7 @@ This is where the legal problem begins. Sin is not just emotional brokenness; it
 
 ## 6. Why God is holy, righteous, and just
 
-Holy means set apart from evil. Righteous means always right in character and judgment. Just means judges according to truth, not corruption.
+Holy means 'set apart' from evil. Righteous means always right in character and judgment. Just means judges according to truth, not corruption.
 
 Isaiah hears the heavenly cry: “Holy, holy, holy, is the LORD of hosts” (Isaiah 6:3). Peter says, “Be ye holy; for I am holy” (1 Peter 1:16). Moses says, “a God of truth and without iniquity, just and right is he” (Deuteronomy 32:4). David says, “The LORD shall endure for ever: he hath prepared his throne for judgment. And he shall judge the world in righteousness” (Psalm 9:7-8).
 
@@ -70,7 +70,7 @@ Abraham asked, “Shall not the Judge of all the earth do right?” (Genesis 18:
 
 ## 7. The courtroom: Judge, law, accuser, defender, guilty person
 
-Start with earthly legal terms:
+We all recognize these earthyl legal terms and structures:
 
 - accuser = one who brings the charge
 - judge = one with authority to judge according to law
@@ -81,11 +81,11 @@ Start with earthly legal terms:
 - payment = satisfaction of justice
 - pardon/justification = being declared right on just grounds
 
-Then apply them to the Bible.
+We often don't realise that these are biblical concepts and come from the Bible.
 
 God is Judge. God’s law is the standard. Satan is the accuser. Humanity is guilty. Conscience bears witness. Jesus is Advocate, Mediator, Defender, Substitute.
 
-Job gives a glimpse into heavenly court/accountability language. “Now there was a day when the sons of God came to present themselves before the LORD, and Satan came also among them” (Job 1:6). Satan is not equal to God. He is present under God’s sovereignty, and he accuses Job (Job 1:9-11). The same pattern appears again in Job 2:1-7.
+Job (a book in the Old Testament and a character in the book of Job) gives a glimpse into heavenly court/accountability language. “Now there was a day when the sons of God came to present themselves before the LORD, and Satan came also among them” (Job 1:6). Satan is not equal to God. He is present under God’s sovereignty, and he accuses Job (Job 1:9-11). The same pattern appears again in Job 2:1-7.
 
 Zechariah 3 gives the same courtroom picture: “Satan standing at his right hand to resist him” (Zechariah 3:1). Joshua stands in filthy garments, and God says, “Take away the filthy garments from him” (Zechariah 3:4). Then He says, “Behold, I have caused thine iniquity to pass from thee” (Zechariah 3:4).
 
@@ -93,7 +93,7 @@ Revelation 12:10 calls Satan “the accuser of our brethren.” John says, “we
 
 ## 8. Why God allows evil, Satan, demons, and suffering
 
-God is not the author of evil in the sense of being morally corrupt or sinning. “Let no man say when he is tempted, I am tempted of God: for God cannot be tempted with evil, neither tempteth he any man” (James 1:13).
+God is not the author of evil in the sense of being morally corrupt or sinning. “Let no man say when he is tempted, I am tempted of God: for God cannot be tempted with evil, neither tempts He any man” (James 1:13).
 
 God allows created beings real moral agency. The Bible presents creation as good: “God saw every thing that he had made, and, behold, it was very good” (Genesis 1:31). A real world with real love includes real choice. That means evil can be chosen by creatures without God being evil.
 
