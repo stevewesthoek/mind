@@ -55,6 +55,7 @@ Current `/orchestrators` and `/capabilities` behavior:
 - `/orchestrators` lists placeholder orchestrator surfaces such as Video Orchestrator, Mind Model Router, and Office Nightly Scheduler
 - `/capabilities` lists read endpoints and approval-request endpoints
 - capability manifest reports `executableActionsEnabled: false`
+- `/runtime/reports` lists read-only runtime report summaries for model-router, approval-audit, and future report slots; it does not write to Mind and always reports `writesToMind: false` and `executableActions: false`
 
 Current scheduler behavior:
 
@@ -74,6 +75,7 @@ Current local-app/video/approval behavior:
 - `POST /scheduler/jobs/:id/request-run`, `POST /skills/profile`, `POST /sessions/:id/resume`, and `POST /local-apps/:id/start|stop|restart` create approval requests only
 - `POST /approvals/:id/approve` and `POST /approvals/:id/reject` update approval status only
 - approval endpoints return `executed: false` and do not run actions yet
+- runtime reports and approval audit logs are Brain-owned; do not copy them into Mind notes
 
 ## Current status
 

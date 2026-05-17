@@ -10,6 +10,7 @@ This file is the short-term context surface for the model router. Keep it compac
 - `mind` stores human memory, live work, sources, and archive.
 - `brain` stores executable infrastructure, Brain Core, scheduler jobs, and the model-router implementation.
 - New captures should eventually land in `capture/inbox/` after Save-to-Mind is updated and validated.
+- Brain Core runtime reports remain read-only and Brain-owned; do not copy them into `mind`.
 
 ## Migration guardrails
 

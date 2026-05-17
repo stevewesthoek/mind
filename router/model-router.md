@@ -48,6 +48,8 @@ These are advisory plans only. Planned writes are not executed from this vault.
 - Compile old PARA material into the new structure.
 - Preserve legacy folders until validation is complete.
 - Surface failures in `capture/failed/`.
+- Treat Brain Core `/runtime/reports` and approval audit state as read-only runtime surfaces owned by Brain; do not store report JSON or audit logs in Mind.
+- `POST` action requests still return `executed: false` until explicit execution is approved and implemented.
 
 ## Non-responsibilities
 

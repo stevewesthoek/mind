@@ -28,6 +28,7 @@ GET /sessions
 - Brain Core `/sessions` exists and is read-only.
 - The adapter supports configured session directories and fallback placeholders.
 - Obsidian integration is not live yet; use the Brain Core endpoint as the runtime source.
+- Session visibility should remain read-only; runtime session logs do not belong in Mind notes.
 
 ## Safety rules
 

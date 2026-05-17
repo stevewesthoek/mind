@@ -10,6 +10,7 @@ This is the lightweight operating dashboard for the Mind OS structure.
 - [[projects]] — current projects.
 - [[sessions]] — AI session visibility.
 - [[machine]] — Brain Core machine and scheduler entry point.
+- [[machine]] — Brain Core machine, capabilities, and runtime reports entry point.
 - [[video]] — Video Orchestrator visibility.
 - [[business]] — sparse business operating surface.
 - [[workflows]] — workflow launch and tracking.

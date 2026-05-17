@@ -28,6 +28,7 @@ It should point to current business work without becoming a duplicate project da
 
 - Business work still primarily lives in existing task/project structures.
 - Model-router automation is not yet allowed to rewrite or archive legacy numbered folders.
+- Business runtime reports remain Brain-owned; keep report output and runtime logs out of Mind notes.
 - Future router phases may compile durable business knowledge into `wiki/business.md` and current work into `live/projects.md` / `live/tasks.md`.
 
 ## Related pages

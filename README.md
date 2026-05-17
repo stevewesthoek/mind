@@ -101,6 +101,8 @@ Capture appears in `capture/inbox/` with frontmatter:
 
 If a capture is intentionally exercised through the failure-buffer test path, it lands in `capture/failed/` with `type: failed-capture` and `status: needs-retry`.
 
+Brain Core runtime reports are read-only and live in the Brain repo. They are exposed through `/runtime/reports` for status only; do not store report output or runtime logs in Mind notes.
+
 ### Step 4: Review (Manual)
 
 1. Open `home.md` → see unprocessed inbox count
@@ -159,6 +161,8 @@ tags: []
 ```
 
 **Read-only.** Just review and keep/delete.
+
+Legacy numbered folders remain read-only references until an explicit archive phase is approved.
 
 ### Strategy
 

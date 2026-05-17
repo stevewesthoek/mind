@@ -14,7 +14,7 @@ type: dashboard
 | ---------------- | --------------- | ---------------------------------------- |
 | **Today**       | [[TODAY]]       | Current daily focus surface              |
 | **Live Dashboard** | [[live/dashboard]] | New Mind OS operating dashboard       |
-| **Machine**      | [[live/machine]] | Local Brain Core status entry point       |
+| **Machine**      | [[live/machine]] | Local Brain Core status and runtime reports entry point       |
 | **Sessions**     | [[live/sessions]] | AI session visibility surface             |
 | **Video**        | [[live/video]] | Video Orchestrator visibility surface       |
 | **Business**     | [[live/business]] | Sparse business operating surface        |
@@ -107,6 +107,7 @@ SORT target_end_date ASC
 ## 🔧 System Status
 
 - **Capture pipeline**: n8n webhook `/mind-inbox` (automatic every time you save from ChatGPT; writes to `capture/inbox/`, and test-only failure buffering now writes to `capture/failed/`; legacy `01-inbox/` remains for historical reference)
+- **Runtime reports**: Brain-owned read-only summaries at `/runtime/reports`; they are not stored in Mind notes.
 - **Inbox classification**: Gemini (automatic, confidence + signal scores)
 - **Kanban sync**: Every 10 minutes
 - **Manual**: Everything else (you decide keep/delete, create strategy/project/task, execute)

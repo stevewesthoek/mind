@@ -49,6 +49,7 @@ Checks:
 - failed captures are not stuck
 - Brain Core is reachable when needed
 - scheduler latest run is fresh when scheduler integration exists
+- runtime reports remain Brain-owned and are not written back into Mind notes
 
 ## Reports
 

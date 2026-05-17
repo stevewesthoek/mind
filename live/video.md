@@ -28,6 +28,7 @@ GET /video/queue
 - Brain Core `/video/status` and `/video/queue` exist as read-only placeholders.
 - No video jobs are started from Brain Core yet.
 - No upload or render mutation endpoint exists yet.
+- Runtime video reports should stay Brain-owned until a real adapter exists; do not duplicate queue logs or report JSON into Mind.
 
 ## Safety rules
 
