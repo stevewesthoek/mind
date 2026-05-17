@@ -306,3 +306,14 @@ The migration is complete when:
 - Old numbered folders are archived or legacy-only.
 - The user no longer needs to think about where notes go.
 - The vault gets cleaner, faster, and more useful over time.
+
+
+## Next Conversation Handoff Prompt — 2026-05-17
+
+Use this prompt to continue the Brain + Mind roadmap in a new conversation:
+
+```text
+Please continue from the Brain and Mind handoffs. First read, in brain: docs/system/brain-mind-roadmap-handoff-2026-05-17.md, docs/system/brain-mind-roadmap-agent-handoff-2026-05-17.md, operations/specs/brain-core-first-action-feature-flag.md, operations/runbooks/brain-core-approval-gates.md, and operations/runbooks/brain-core-first-action-incident-response.md. Then read, in mind: MIND-OS-HANDOFF-2026-05-17-CONTINUATION.md, MIND-OS-ROADMAP.md, and MIND-OS-IMPLEMENTATION-PLAN.md. Verify git status in both repos. Treat the latest Brain pushed commit as d2b5ae96 and the latest known Mind pushed commit as 6def53a. Do not stage unrelated Claude plan cleanup, Firecrawl logs, or Mind .obsidian plugin/config state unless explicitly reviewed. Continue the roadmap from the documented state, preserving the safety boundaries: no broad shell runner, no model-router writes to Mind, no runtime logs/secrets in Mind, and no plugin install into Mind without approval. Validate before committing and push only reviewed, tested changes.
+```
+
+Current Mind caution: do not stage `.obsidian/community-plugins.json` or `.obsidian/plugins/**` without explicit path-by-path review.
