@@ -24,6 +24,8 @@ GET /status
 GET /sessions
 GET /skills
 GET /repos
+GET /orchestrators
+GET /capabilities
 GET /scheduler/status
 GET /scheduler/latest-run
 GET /scheduler/jobs
@@ -48,10 +50,17 @@ Current `/repos` behavior:
 - reports whether known handoff files exist
 - does not copy handoff contents, logs, or runtime state into this note
 
+Current `/orchestrators` and `/capabilities` behavior:
+
+- `/orchestrators` lists placeholder orchestrator surfaces such as Video Orchestrator, Mind Model Router, and Office Nightly Scheduler
+- `/capabilities` lists read endpoints and approval-request endpoints
+- capability manifest reports `executableActionsEnabled: false`
+
 Current scheduler behavior:
 
-- `/scheduler/status`, `/scheduler/latest-run`, and `/scheduler/jobs` are placeholder only
-- reports that the scheduler adapter is not connected yet
+- `/scheduler/status`, `/scheduler/latest-run`, and `/scheduler/jobs` are read-only
+- returns placeholder state until Brain Core finds `runtime/local/model-router/latest.json` or a configured safe report path
+- exposes model-router dry-run report status when the report exists
 - does not inspect logs
 - does not run scheduler jobs
 - does not mutate scheduler state
@@ -60,8 +69,11 @@ Current local-app/video/approval behavior:
 
 - `/local-apps` is a placeholder local service list
 - `/video/status` and `/video/queue` are placeholder Video Orchestrator surfaces
-- `/approvals` is a placeholder approval list
-- no action or approval mutation endpoints exist yet
+- `/approvals` reads the current in-memory approval request surface or a placeholder
+- `POST /actions/request?kind=<safe-action-kind>` creates an approval record only
+- `POST /scheduler/jobs/:id/request-run`, `POST /skills/profile`, `POST /sessions/:id/resume`, and `POST /local-apps/:id/start|stop|restart` create approval requests only
+- `POST /approvals/:id/approve` and `POST /approvals/:id/reject` update approval status only
+- approval endpoints return `executed: false` and do not run actions yet
 
 ## Current status
 
@@ -69,6 +81,25 @@ Current local-app/video/approval behavior:
 - Phase 1 is read-only.
 - `/sessions` and `/skills` start as placeholders until clean adapters are migrated from ProBot backend logic.
 - Mutation endpoints are intentionally not implemented yet.
+
+## Brain Console integration
+
+The future Obsidian `brain-console` plugin or integration layer should render Brain Core data using read-only widget contracts from `brain/projects/brain-core/src/obsidian.ts`.
+
+Initial widget surfaces:
+
+```text
+brain-status
+brain-sessions
+brain-repos
+brain-skills
+brain-scheduler
+brain-local-apps
+brain-video-queue
+brain-approvals
+```
+
+This page remains readable even when Brain Core is offline.
 
 ## Safety rules
 

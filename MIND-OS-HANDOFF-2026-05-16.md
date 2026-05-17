@@ -686,3 +686,78 @@ Mind safety preserved:
 - No legacy numbered folders moved, archived, deleted, or rewritten.
 - No KANBAN changes.
 - No `.obsidian` plugin files were written by this slice.
+
+## Brain Core capability manifest and request-only action targets — 2026-05-17
+
+Brain added more complete roadmap endpoint coverage.
+
+Mind update:
+
+```text
+live/machine.md
+```
+
+New Brain Core read endpoints documented:
+
+```text
+GET /orchestrators
+GET /capabilities
+```
+
+New request-only POST routes documented:
+
+```text
+POST /scheduler/jobs/:id/request-run
+POST /skills/profile?profile=<profile>
+POST /sessions/:id/resume
+POST /local-apps/:id/start
+POST /local-apps/:id/stop
+POST /local-apps/:id/restart
+```
+
+Safety preserved:
+
+- These routes create approval requests only.
+- Responses still return `executed: false`.
+- No scheduler jobs are run.
+- No skill profile is switched.
+- No sessions are resumed.
+- No local apps are started/stopped/restarted.
+- No external systems are mutated.
+- No secrets stored in Mind.
+- No runtime logs copied into Mind.
+- No legacy numbered folders moved, archived, deleted, or rewritten.
+
+Validation reported from `brain`:
+
+- `npm run ci` passed in `projects/brain-core`.
+- 23 Node route/adapter/widget/health/audit/action-target tests passed.
+
+## Brain Core scheduler runtime-report bridge — 2026-05-17
+
+Brain Core now reads the model-router dry-run runtime report when it exists.
+
+Mind update:
+
+```text
+live/machine.md
+```
+
+Behavior documented:
+
+- `/scheduler/status`, `/scheduler/latest-run`, and `/scheduler/jobs` are read-only.
+- Brain Core returns placeholder state until it finds `runtime/local/model-router/latest.json` or a configured safe report path.
+- When present, the report exposes model-router dry-run status in Brain Core.
+- Brain Core does not inspect logs, run scheduler jobs, or mutate scheduler state.
+
+Safety preserved:
+
+- No scheduler jobs run from Mind.
+- No runtime logs copied into Mind.
+- No Mind files written, moved, deleted, archived, compacted, split, or rewritten.
+- No legacy numbered folders moved, archived, deleted, or rewritten.
+
+Validation reported from `brain`:
+
+- `npm run ci` passed in `projects/brain-core`.
+- 24 Node route/adapter/widget/health/audit/action-target tests passed.
