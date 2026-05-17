@@ -4,7 +4,19 @@ type: dashboard
 
 # Command Center
 
-**Your daily starting point. Check here first.**
+**Your daily starting point. Use the Brain Console plugin dashboard first; this page is reference fallback.**
+
+## 🧠 Brain Console Plugin Dashboard
+
+The **Obsidian Brain Console plugin** is now your primary system cockpit. It displays:
+- **Status pills**: Brain Core, Model Router, Scheduler, Save-to-Mind, Approvals, Maintenance queues
+- **6 core cards**: Wiki Health, Maintenance Previews, Approvals, Scheduler Status, Brain Core readiness, Next Safe Action
+- **Action buttons**: Refresh (manual only), Request Dry Run, View Latest, Open Mind, Wiki Log
+- **Activity panel**: Recent sessions, runtime reports, maintenance previews
+
+**Install/open the Brain Console plugin** in Obsidian (right sidebar icon or command: "Open Brain Console"). It pulls live data from Brain Core — no raw Markdown files, no manual updates needed.
+
+---
 
 ---
 
