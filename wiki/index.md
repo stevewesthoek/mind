@@ -2,6 +2,10 @@
 
 Compiled durable memory lives in this folder.
 
+See also:
+
+- [[log]] — append-only maintenance ledger for ingests, compilations, lint passes, and accepted updates.
+
 ## Domains
 
 - [[people]]

@@ -12,6 +12,7 @@ This map tells the model router where to look and where to write.
 - `live/workflows.md` — workflow launch and tracking surface.
 - `live/decisions.md` — current committed decisions.
 - `wiki/` — compiled durable memory.
+  - `wiki/log.md` — append-only maintenance ledger.
 - `sources/` — raw evidence and source material.
 - `archive/` — completed, old, or legacy material.
 
@@ -35,4 +36,5 @@ During migration, the router may read these folders but must not move/delete the
 3. `wiki/index.md`
 4. Domain files in `wiki/`
 5. `sources/index.md`
-6. Legacy numbered folders when needed
+6. `wiki/log.md`
+7. Legacy numbered folders when needed

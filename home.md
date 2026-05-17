@@ -28,7 +28,7 @@ type: dashboard
 | **Strategy**     | [[02-strategy]] | Internal (where captured decisions go)  |
 | **Tasks**        | [[04-tasks]]    | Internal (sub-items of projects)        |
 | **Projects**     | [[03-projects]] | Active projects with timelines           |
-| **Inbox**        | [[01-inbox]]    | Unprocessed captures (review weekly)     |
+| **Inbox**        | [[capture/inbox|capture/inbox]]    | Unprocessed captures (review weekly)     |
 | **Areas**        | [[05-areas]]    | Ongoing responsibilities                 |
 | **Archive**      | [[08-archive]]  | Historical work (reference)              |
 
@@ -107,6 +107,7 @@ SORT target_end_date ASC
 ## 🔧 System Status
 
 - **Capture pipeline**: n8n webhook `/mind-inbox` (automatic every time you save from ChatGPT; writes to `capture/inbox/`, and test-only failure buffering now writes to `capture/failed/`; legacy `01-inbox/` remains for historical reference)
+- **Wiki log**: [[wiki/log]] — append-only wiki maintenance ledger
 - **Runtime reports**: Brain-owned read-only summaries at `/runtime/reports`; they are not stored in Mind notes.
 - **Inbox classification**: Gemini (automatic, confidence + signal scores)
 - **Kanban sync**: Every 10 minutes
