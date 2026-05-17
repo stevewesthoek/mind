@@ -24,6 +24,7 @@ GET /status
 GET /sessions
 GET /skills
 GET /repos
+GET /scheduler/status
 ```
 
 Current `/sessions` behavior:
@@ -40,6 +41,14 @@ Current `/repos` behavior:
 - reports whether repos exist
 - reports whether known handoff files exist
 - does not copy handoff contents, logs, or runtime state into this note
+
+Current `/scheduler/status` behavior:
+
+- placeholder only
+- reports that the scheduler adapter is not connected yet
+- does not inspect logs
+- does not run scheduler jobs
+- does not mutate scheduler state
 
 ## Current status
 

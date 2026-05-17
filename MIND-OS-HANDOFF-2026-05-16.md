@@ -467,3 +467,27 @@ Validation reported from `brain`:
 - 7 Node route/adapter tests passed.
 - JSON validation passed.
 - Secret scan passed.
+
+## Brain Core `/scheduler/status` continuation — 2026-05-17
+
+Brain Core added a read-only `/scheduler/status` placeholder endpoint in `brain`.
+
+Mind update:
+
+```text
+live/machine.md
+```
+
+The machine page now lists `GET /scheduler/status` and documents that it is placeholder-only. It does not inspect logs, run scheduler jobs, or mutate scheduler state.
+
+Safety preserved:
+
+- No secrets stored in Mind.
+- No runtime logs copied into Mind.
+- No legacy numbered folders moved, archived, deleted, or rewritten.
+- No KANBAN changes.
+
+Validation reported from `brain`:
+
+- `npm run ci` passed in `projects/brain-core`.
+- 8 Node route/adapter tests passed.
