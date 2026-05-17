@@ -54,11 +54,12 @@ CLAUDE.md
 
 Do not break existing automations:
 
-- capture pipeline writes to `01-inbox/`
-- auto-router may process inbox notes
-- project-decomposer may use strategies/projects/tasks
-- kanban-syncer syncs `04-tasks/` with `KANBAN.md`
-- Obsidian uses this repo as a vault
+- Save-to-Mind now targets `capture/inbox/`; legacy `01-inbox/` remains historical/reference unless an explicit migration task says otherwise.
+- failed captures belong in `capture/failed/`.
+- auto-router/model-router may inspect inbox notes, but write/apply remains blocked unless explicitly approved.
+- project-decomposer may use strategies/projects/tasks.
+- kanban-syncer syncs task surfaces with `KANBAN.md`.
+- Obsidian uses this repo as a vault.
 
 Never commit secrets, OAuth tokens, API keys, cookies, private keys, service account files, `.env` values, or credentials.
 
@@ -90,14 +91,13 @@ Use these defaults:
 
 | Information type | Default location |
 |---|---|
-| Raw capture, unsorted idea | `01-inbox/` |
-| Final strategy, positioning, decision, conviction applied to an organisation | `02-strategy/` |
-| Active project with outcome/deadline | `03-projects/` |
-| Atomic executable task | `04-tasks/` |
-| Long-term responsibility | `05-areas/` |
-| Research, notes, references, source material | `06-resources/` |
-| Reusable template | `07-templates/` |
-| Completed or historical material | `08-archive/` |
+| Raw capture, unsorted idea | `capture/inbox/` |
+| Failed raw capture needing retry | `capture/failed/` |
+| Current operating task/project summaries | `live/` |
+| Compiled durable knowledge | `wiki/` |
+| Raw evidence and source material | `sources/` |
+| Completed, old, or historical material | `archive/` |
+| Legacy strategy/project/task/area/resource material | numbered folders remain read-only references until explicit migration |
 
 ## Research Rules
 

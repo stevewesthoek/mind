@@ -23,8 +23,9 @@ Maintains:
 - `router/current.md`
 - `TODAY.md`
 - `wiki/index.md`
+- `wiki/log.md` as an append-only maintenance ledger
 
-Purpose: keep short-term memory fresh and long-term memory compact.
+Purpose: keep short-term memory fresh, long-term memory compact, and the wiki's evolution auditable without storing Brain runtime logs in Mind.
 
 ## Hygiene loop
 
@@ -35,6 +36,8 @@ Checks:
 - oversized files
 - orphan notes
 - broken links
+- missing source trace on compiled pages
+- contradictions or stale claims superseded by newer sources
 - unprocessed sources
 - old inbox items
 

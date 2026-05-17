@@ -7,7 +7,10 @@
 - Failed raw captures go to `capture/failed/` with enough context to retry.
 - Durable facts are compiled into `wiki/`.
 - Current tasks and projects are summarized in `live/`.
-- Sources remain in `sources/`; compiled knowledge links back when useful.
+- Sources remain in `sources/`; raw sources and original captures are source-of-truth material and must not be silently rewritten.
+- Compiled knowledge in `wiki/` and `live/` links back to sources or captures when useful.
+- `wiki/index.md` is the content catalog.
+- `wiki/log.md` is the append-only knowledge-maintenance ledger for ingests, compilations, lint passes, important queries, and accepted updates.
 - Legacy numbered folders are read-only references during migration.
 
 ## Safety rules

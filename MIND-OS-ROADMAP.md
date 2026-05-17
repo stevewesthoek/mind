@@ -59,6 +59,7 @@ mind/
 
   wiki/
     index.md
+    log.md
     people.md
     organisations.md
     business.md
@@ -120,6 +121,8 @@ live/decisions.md  committed current decisions
 Compiled long-term memory.
 
 This is the model-router-maintained knowledge layer. It should be concise, useful, linked, and human-readable.
+
+`wiki/index.md` is the content catalog. `wiki/log.md` is an append-only maintenance ledger for ingests, compilations, lint passes, important queries, and accepted updates. It is not a Brain runtime log.
 
 ### `sources/`
 

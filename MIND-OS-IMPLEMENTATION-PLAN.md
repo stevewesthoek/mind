@@ -196,6 +196,18 @@ HOME.md
 TODAY.md
 ```
 
+## LLM Wiki Alignment Additions
+
+Add these lean primitives before any broad model-router write/apply behavior:
+
+```text
+wiki/log.md      append-only maintenance ledger, not a Brain runtime log
+source trace     compiled pages should link back to sources or captures when useful
+lint checks      contradictions, stale claims, orphan pages, missing links, oversized files, stale captures, failed captures
+```
+
+Raw sources and original captures are source-of-truth material. The model router may compile and summarize into `wiki/` and `live/`, but it must not silently rewrite raw sources or original captures.
+
 ## Router Maintenance Loops
 
 ### Compile loop
