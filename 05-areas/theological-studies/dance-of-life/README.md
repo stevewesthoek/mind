@@ -3,7 +3,7 @@
 Transcribed notes from the [Dance of Life Library](https://ln5.sync.com/dl/8cd2a10a0).
 Each series has a dedicated NotebookLM notebook prefixed `DOL -` for AI-assisted study.
 
-*Last updated: 2026-05-16*
+*Last updated: 2026-05-17*
 
 ## Series
 
