@@ -568,3 +568,121 @@ Safety preserved:
 - No duplicate task/project database created.
 - No legacy numbered folders moved, archived, deleted, or rewritten.
 - No KANBAN changes.
+
+## Brain Console integration contract — 2026-05-17
+
+Brain added a safe Phase 3 foundation contract for a future Obsidian `brain-console` plugin/integration layer.
+
+Mind update:
+
+```text
+live/machine.md
+```
+
+The machine page now documents the read-only Brain Console widget surfaces:
+
+```text
+brain-status
+brain-sessions
+brain-repos
+brain-skills
+brain-scheduler
+brain-local-apps
+brain-video-queue
+brain-approvals
+```
+
+Safety preserved:
+
+- No plugin code was written into `.obsidian` from this slice.
+- No secrets stored in Mind.
+- No runtime logs copied into Mind.
+- No action or approval mutation endpoints exist yet.
+- Mind remains readable without Brain Core online.
+
+## Brain Core Phase 4 approval boundary — 2026-05-17
+
+Brain added a safe approval-aware action boundary.
+
+Mind update:
+
+```text
+live/machine.md
+```
+
+The machine page now documents these local-only Brain Core POST routes:
+
+```text
+POST /actions/request?kind=<safe-action-kind>
+POST /approvals/:id/approve
+POST /approvals/:id/reject
+```
+
+Safety preserved:
+
+- Approval records are in-memory only in this slice.
+- Approval endpoints return `executed: false`.
+- No shell commands are run.
+- No scheduler jobs are triggered.
+- No local apps are started/stopped/restarted.
+- No sessions are resumed.
+- No external systems are mutated.
+- No secrets stored in Mind.
+
+Validation reported from `brain`:
+
+- `npm run ci` passed in `projects/brain-core`.
+- 18 Node route/adapter/widget tests passed.
+
+## Brain Core Phase 7 hardening slice — 2026-05-17
+
+Brain added a Brain Core restore/health/rollback runbook and a Brain Console health-check contract.
+
+Relevant Brain files:
+
+```text
+operations/runbooks/brain-core.md
+projects/brain-core/src/obsidian.ts
+projects/brain-core/src/tests/obsidian.test.ts
+```
+
+Mind impact:
+
+- No new runtime state was copied into Mind.
+- `live/machine.md` remains the sparse human-facing entry point.
+- Obsidian should remain readable if Brain Core is offline.
+
+Validation reported from `brain`:
+
+- `npm run ci` passed in `projects/brain-core`.
+- 19 Node route/adapter/widget/health tests passed.
+
+## Brain Core approval audit + blocked plugin handoff — 2026-05-17
+
+Brain continued the remaining roadmap work until blocked by repo policy or live access.
+
+Brain Core added:
+
+```text
+GET /approvals/audit
+BRAIN_CORE_APPROVAL_AUDIT_PATH optional JSONL persistence
+```
+
+Safety preserved:
+
+- Approval endpoints still return `executed: false`.
+- Audit logs must not be stored in Mind notes.
+- No executable actions were enabled.
+- No runtime logs copied into Mind.
+
+Blocked and skipped:
+
+- A standalone Brain Console Obsidian plugin project could not be created because the Brain repo write policy blocks `projects/brain-console-obsidian/`.
+- Plugin implementation details were recorded in `brain/operations/specs/brain-console-obsidian-plugin.md`.
+- Live integrations that require direct local runtime access were captured in `brain/docs/system/1778991704100-codex-prompt-complete-live-brain-core-integrations-2026-05-17.md`.
+
+Mind safety preserved:
+
+- No legacy numbered folders moved, archived, deleted, or rewritten.
+- No KANBAN changes.
+- No `.obsidian` plugin files were written by this slice.
