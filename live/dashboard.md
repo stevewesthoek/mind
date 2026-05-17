@@ -8,6 +8,10 @@ This is the lightweight operating dashboard for the Mind OS structure.
 - [[../TODAY|TODAY]] — today’s focus.
 - [[tasks]] — current tasks.
 - [[projects]] — current projects.
+- [[sessions]] — AI session visibility.
+- [[machine]] — Brain Core machine and scheduler entry point.
+- [[video]] — Video Orchestrator visibility.
+- [[business]] — sparse business operating surface.
 - [[workflows]] — workflow launch and tracking.
 - [[decisions]] — current committed decisions.
 

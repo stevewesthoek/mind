@@ -25,6 +25,12 @@ GET /sessions
 GET /skills
 GET /repos
 GET /scheduler/status
+GET /scheduler/latest-run
+GET /scheduler/jobs
+GET /local-apps
+GET /video/status
+GET /video/queue
+GET /approvals
 ```
 
 Current `/sessions` behavior:
@@ -42,13 +48,20 @@ Current `/repos` behavior:
 - reports whether known handoff files exist
 - does not copy handoff contents, logs, or runtime state into this note
 
-Current `/scheduler/status` behavior:
+Current scheduler behavior:
 
-- placeholder only
+- `/scheduler/status`, `/scheduler/latest-run`, and `/scheduler/jobs` are placeholder only
 - reports that the scheduler adapter is not connected yet
 - does not inspect logs
 - does not run scheduler jobs
 - does not mutate scheduler state
+
+Current local-app/video/approval behavior:
+
+- `/local-apps` is a placeholder local service list
+- `/video/status` and `/video/queue` are placeholder Video Orchestrator surfaces
+- `/approvals` is a placeholder approval list
+- no action or approval mutation endpoints exist yet
 
 ## Current status
 

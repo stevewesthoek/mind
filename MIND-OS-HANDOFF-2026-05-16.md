@@ -491,3 +491,80 @@ Validation reported from `brain`:
 
 - `npm run ci` passed in `projects/brain-core`.
 - 8 Node route/adapter tests passed.
+
+## Brain Core Phase 1 endpoint completion — 2026-05-17
+
+Brain Core completed the remaining read-only Phase 1 endpoint surface.
+
+Mind update:
+
+```text
+live/machine.md
+```
+
+The machine page now lists and describes the complete read-only endpoint surface:
+
+```text
+GET /status
+GET /sessions
+GET /skills
+GET /repos
+GET /scheduler/status
+GET /scheduler/latest-run
+GET /scheduler/jobs
+GET /local-apps
+GET /video/status
+GET /video/queue
+GET /approvals
+```
+
+Safety preserved:
+
+- No secrets stored in Mind.
+- No runtime logs copied into Mind.
+- No scheduler jobs run from Mind.
+- No video jobs started from Mind.
+- No approval decisions implemented in Mind.
+- No legacy numbered folders moved, archived, deleted, or rewritten.
+- No KANBAN changes.
+
+Validation reported from `brain`:
+
+- `npm run ci` passed in `projects/brain-core`.
+- 14 Node route/adapter tests passed.
+
+## Mind Phase 2 cockpit completion — 2026-05-17
+
+Completed the next sparse Obsidian cockpit slice.
+
+New pages:
+
+```text
+live/sessions.md
+live/video.md
+live/business.md
+```
+
+Updated pages:
+
+```text
+HOME.md
+README.md
+live/dashboard.md
+```
+
+Purpose:
+
+- Give Obsidian a clear human-facing surface for sessions, video, and business operations.
+- Keep runtime truth in Brain Core and source systems.
+- Avoid turning Mind notes into databases, logs, queues, or credential stores.
+
+Safety preserved:
+
+- No secrets stored in Mind.
+- No runtime logs copied into Mind.
+- No session transcripts copied into Mind.
+- No video queue dumps copied into Mind.
+- No duplicate task/project database created.
+- No legacy numbered folders moved, archived, deleted, or rewritten.
+- No KANBAN changes.
