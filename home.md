@@ -15,6 +15,9 @@ type: dashboard
 | **Today**       | [[TODAY]]       | Current daily focus surface              |
 | **Live Dashboard** | [[live/dashboard]] | New Mind OS operating dashboard       |
 | **Machine**      | [[live/machine]] | Local Brain Core status entry point       |
+| **Sessions**     | [[live/sessions]] | AI session visibility surface             |
+| **Video**        | [[live/video]] | Video Orchestrator visibility surface       |
+| **Business**     | [[live/business]] | Sparse business operating surface        |
 | **Live Tasks**   | [[live/tasks]]  | Compact current task surface             |
 | **Live Projects** | [[live/projects]] | Compact current project surface       |
 | **Workflows**    | [[live/workflows]] | Research, design, code, video, deploy, memory |
