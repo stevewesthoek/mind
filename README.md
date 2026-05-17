@@ -9,7 +9,7 @@ This vault is migrating from the numbered PARA folder model to the unnumbered Mi
 - `MIND-OS-ROADMAP.md`
 - `MIND-OS-IMPLEMENTATION-PLAN.md`
 
-Save-to-Mind remains the permanent capture doorway. The target path will move from `01-inbox/` to `capture/inbox/` after the new structure and model-router contract are in place.
+Save-to-Mind remains the permanent capture doorway. The target path now writes to `capture/inbox/`.
 
 The existing PARA folders remain active until migration is validated.
 
@@ -27,7 +27,8 @@ An Obsidian-based personal knowledge management system that automatically captur
 - **Archive** — Historical reference
 
 **Workflow:**
-- **Capture**: macOS shortcut → n8n webhook → Gemini classifies → lands in inbox
+- **Capture**: macOS shortcut → n8n webhook → Gemini classifies → lands in `capture/inbox/`
+- **Failure buffer**: test-only recoverable failures land in `capture/failed/`
 - **Review**: You read inbox items, keep what's valuable
 - **Route**: Automation moves captures to Projects, Areas, or Resources
 - **Execute**: Drag tasks on kanban board (To Do → Doing → Done)
@@ -38,7 +39,7 @@ An Obsidian-based personal knowledge management system that automatically captur
 ## The PARA Folder Structure
 
 ```
-01-inbox/          ← Raw captures from ChatGPT (Gemini-classified)
+capture/inbox/     ← Raw captures from ChatGPT (Gemini-classified)
                      Review these regularly. Low-quality captures → delete. Keep ones with signal.
 
 02-strategy/       ← Strategic decisions you've committed to
@@ -87,7 +88,7 @@ Low either = probably delete
 
 ### Step 3: Land in Inbox (Automatic)
 
-Capture appears in `01-inbox/` with frontmatter:
+Capture appears in `capture/inbox/` with frontmatter:
 - `type: capture`
 - `source: chatgpt|shortcut`
 - `para_type: project|area|resource|inbox`
@@ -97,6 +98,8 @@ Capture appears in `01-inbox/` with frontmatter:
 - `title: Refined title`
 - `tags: []`
 - `status: unrouted` (added by router on first processing)
+
+If a capture is intentionally exercised through the failure-buffer test path, it lands in `capture/failed/` with `type: failed-capture` and `status: needs-retry`.
 
 ### Step 4: Review (Manual)
 
@@ -242,7 +245,7 @@ tags: []
 
 ## Weekly Review (20 minutes)
 
-1. **Check `01-inbox/`** — Any unprocessed captures waiting?
+1. **Check `capture/inbox/`** — Any unprocessed captures waiting?
 2. **Check `02-strategy/`** — Any draft decisions ready to commit?
 3. **Check `03-projects/`** — Any blocked projects? Any complete?
 4. **Archive done tasks** from `04-tasks/` to `08-archive/`
@@ -296,6 +299,7 @@ These automations run in the n8n Brain Bridge pipeline:
 - **`00-current-context.md`** — Current priorities and context without loading the whole vault.
 - **`00-memory-map.md`** — Retrieval map that tells AI where to search/read for each kind of request.
 - **`home.md` / `HOME.md`** — Dashboard. Start here daily. See focus, blockers, inbox, quick links.
+- **`live/machine.md`** — Sparse Brain Core machine status entry point; links to runtime API instead of storing runtime truth.
 - **`kanban.md` / `KANBAN.md`** — Obsidian Canvas. Your working board (To Do → Doing → Done).
 - **`CLAUDE.md`** — Claude Code compatibility instructions; points Claude to the universal AI entrypoint.
 
@@ -305,7 +309,7 @@ These automations run in the n8n Brain Bridge pipeline:
 
 ❌ **Don't:**
 - Create tasks outside `04-tasks/`
-- Put strategy notes in `01-inbox/`
+- Put strategy notes in `capture/inbox/`
 - Edit templates (copy them instead)
 - Keep multiple kanban files (one: `kanban.md`)
 - Overthink folder structure (it's fixed, use it as-is)
@@ -321,8 +325,8 @@ These automations run in the n8n Brain Bridge pipeline:
 ## Troubleshooting
 
 **My capture didn't appear in inbox:**
-- Check `01-inbox/` exists and is readable
-- Verify webhook is live: `https://n8n.prochat.tools/webhook/brain-inbox`
+- Check `capture/inbox/` exists and is readable
+- Verify webhook is live: `https://n8n.prochat.tools/webhook/mind-inbox`
 - Check n8n execution logs in Brain Bridge
 - Try manual test via cURL or Postman
 
@@ -336,7 +340,7 @@ These automations run in the n8n Brain Bridge pipeline:
 - Check file mtime to find recent archives
 
 **Inbox is overflowing:**
-- Review `01-inbox/` with Gemini scoring in mind
+- Review `capture/inbox/` with Gemini scoring in mind
 - Delete low-signal captures (< 0.5 confidence AND signal)
 - Move keepers to `02-strategy/` or `03-projects/`
 
