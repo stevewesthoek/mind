@@ -12,6 +12,33 @@ Keep the vault small, current, useful, and safe while preserving history.
 capture -> classify -> route -> compile -> dashboard -> maintain
 ```
 
+## Current dry-run loops
+
+Implementation lives in `brain/projects/model-router/`.
+
+Current loops are dry-run only:
+
+```text
+mind-compile-loop
+mind-memory-loop
+mind-hygiene-loop
+mind-drift-error-loop
+```
+
+The planner may report proposed actions such as:
+
+```text
+compile-capture
+promote-memory
+summarize-file
+split-file
+archive-stale-capture
+review-failed-capture
+verify-contract
+```
+
+These are advisory plans only. Planned writes are not executed from this vault.
+
 ## Responsibilities
 
 - Classify captures.
@@ -24,6 +51,8 @@ capture -> classify -> route -> compile -> dashboard -> maintain
 
 ## Non-responsibilities
 
+- Do not execute planned writes directly from this vault.
+- Do not compact, split, archive, move, delete, or rewrite files without an explicit approved apply phase.
 - Do not execute arbitrary shell commands from this vault.
 - Do not store or reveal secrets.
 - Do not directly control runtime systems.
