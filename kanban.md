@@ -35,8 +35,6 @@ kanban-plugin: board
 
 ## Doing
 
-- [x] Make Via di Eden editable for Joe
-- [x] Make Oliveto Organizing editable for Ashley
 - [x] Setup STB Facebook app ⏫ ✅ 2026-05-11
 - [ ] fix the obsidian way of working
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
@@ -50,6 +48,8 @@ kanban-plugin: board
 
 **Complete**
 
+- [x] Make Oliveto Organizing editable for Ashley
+- [x] Make Via di Eden editable for Joe
 - [x] Check with Mark & Yosef meeten ✅ 2026-05-14
 - [x] Upgrade ACP from Bronze to Gold: https://join.acp.pt/ ✅ 2026-05-13
 - [x] Product: ChatGPT bridge ✅ 2026-05-08
