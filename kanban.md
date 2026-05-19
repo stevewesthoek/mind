@@ -18,7 +18,6 @@ kanban-plugin: board
 ## To Do
 
 - [ ] Apply for passport
-- [ ] fix the obsidian way of working
 - [ ] Product: Model Router
 - [ ] Empty mail
 - [ ] Fix Antenna
@@ -38,13 +37,11 @@ kanban-plugin: board
 
 - [x] Make Via di Eden editable for Joe
 - [x] Make Oliveto Organizing editable for Ashley
-- [x] Upgrade ACP from Bronze to Gold: https://join.acp.pt/ ✅ 2026-05-13
 - [x] Setup STB Facebook app ⏫ ✅ 2026-05-11
-- [x] Check with Mark & Yosef meeten ✅ 2026-05-14
+- [ ] fix the obsidian way of working
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Learn Portuguese app
 - [ ] Make the Gospel/Atheism paper
-- [ ] Family finance app
 - [ ] YA finance app
 - [ ] Make FB shorts account with free github repos
 - [x] Marriage certificate ✅ 2026-05-11
@@ -53,8 +50,11 @@ kanban-plugin: board
 
 **Complete**
 
+- [x] Check with Mark & Yosef meeten ✅ 2026-05-14
+- [x] Upgrade ACP from Bronze to Gold: https://join.acp.pt/ ✅ 2026-05-13
 - [x] Product: ChatGPT bridge ✅ 2026-05-08
 - [x] plan NL trip ✅ 2026-05-08
+- [x] Family finance app ✅ 2026-05-19
 - [x] Put money on bank account ✅ 2026-05-06
 - [x] IB aangifte doen ✅ 2026-05-06
 - [x] Improve thumbnails STB ✅ 2026-05-06
