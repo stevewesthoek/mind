@@ -2,142 +2,97 @@
 type: dashboard
 ---
 
-# Command Center
+# Mind — User Manual
 
-**Your daily starting point. Use the Brain Console plugin dashboard first; this page is reference fallback.**
-
-## 🧠 Brain Console Plugin Dashboard
-
-The **Obsidian Brain Console plugin** is now your primary system cockpit. It displays:
-- **Status pills**: Brain Core, Model Router, Scheduler, Save-to-Mind, Approvals, Maintenance queues
-- **6 core cards**: Wiki Health, Maintenance Previews, Approvals, Scheduler Status, Brain Core readiness, Next Safe Action
-- **Action buttons**: Refresh (manual only), Request Dry Run, View Latest, Open Mind, Wiki Log
-- **Activity panel**: Recent sessions, runtime reports, maintenance previews
-
-**Install/open the Brain Console plugin** in Obsidian (right sidebar icon or command: "Open Brain Console"). It pulls live data from Brain Core — no raw Markdown files, no manual updates needed.
+This is your personal knowledge system. Most of it runs automatically. This file tells you what happens without you, what you need to do, and where everything lives.
 
 ---
 
----
+## What happens automatically (you do nothing)
 
-## ⚡ Quick Navigation
+**Every night, the system runs three jobs:**
 
-| What             | Where           | Purpose                                  |
-| ---------------- | --------------- | ---------------------------------------- |
-| **Today**       | [[TODAY]]       | Current daily focus surface              |
-| **Live Dashboard** | [[live/dashboard]] | New Mind OS operating dashboard       |
-| **Machine**      | [[live/machine]] | Local Brain Core status and runtime reports entry point       |
-| **Sessions**     | [[live/sessions]] | AI session visibility surface             |
-| **Video**        | [[live/video]] | Video Orchestrator visibility surface       |
-| **Business**     | [[live/business]] | Sparse business operating surface        |
-| **Live Tasks**   | [[live/tasks]]  | Compact current task surface             |
-| **Live Projects** | [[live/projects]] | Compact current project surface       |
-| **Workflows**    | [[live/workflows]] | Research, design, code, video, deploy, memory |
-| **Kanban Board** | [[KANBAN]]      | Existing board; unchanged during migration |
-| **System Guide** | [[README]]      | How the vault works (start here if lost) |
-| **AI Entry Point** | [[AGENTS]] | Instructions for Claude Code, Codex, Gemini, and other agents |
-| **AI Memory Map** | [[00-memory-map]] | Where AI should search/read for context |
-| **Strategy**     | [[02-strategy]] | Internal (where captured decisions go)  |
-| **Tasks**        | [[04-tasks]]    | Internal (sub-items of projects)        |
-| **Projects**     | [[03-projects]] | Active projects with timelines           |
-| **Inbox**        | [[capture/inbox|capture/inbox]]    | Unprocessed captures (review weekly)     |
-| **Areas**        | [[05-areas]]    | Ongoing responsibilities                 |
-| **Archive**      | [[08-archive]]  | Historical work (reference)              |
+1. **New captures land in your inbox** — Anything you save via "Save to Mind" (from any device, any AI session) is automatically classified and dropped into `capture/inbox/`. You do not need to file it yourself.
+
+2. **The compile loop reads your inbox** — Every morning, each new capture has been read, classified, and a proposed action has been written to `wiki/log.md`. The file is never moved automatically. You review and decide.
+
+3. **Memory context is refreshed** — All AI sessions (Claude, Codex, Gemini) are updated with your latest memory index overnight. When you start a session the next day, all three AIs already know what was saved.
 
 ---
 
-## 🎯 Today's Focus
+## What you need to do (your daily interaction)
 
-```dataview
-TABLE priority, assigned_to, due_date
-FROM "04-tasks"
-WHERE (status = "ready" OR status = "in-progress")
-SORT priority ASC
-LIMIT 5
+**One regular review: `wiki/log.md`**
+
+Open `wiki/log.md`. Each line added by the system looks like this:
+
+> `2026-05-22 — compile-suggest — **Title** (project page) → propose move capture/inbox/filename.md → live/projects/slug.md`
+
+For each line, decide:
+- **Accept** — move or copy the file to the proposed destination yourself, then delete the line.
+- **Reject** — delete the line.
+- **Later** — leave it. It stays until you act on it.
+
+That is the only maintenance task this system asks of you.
+
+**Your working board: `KANBAN.md`**
+
+This is your daily driver. Open it to see what is to-do, in-progress, and done. Tasks on the Kanban are managed by you — add, move, and complete them as you work.
+
+---
+
+## Where everything lives
+
+| What | Where |
+|------|-------|
+| New captures (unreviewed) | `capture/inbox/` |
+| Pending system proposals | `wiki/log.md` |
+| Active tasks | `live/tasks.md` |
+| Active projects | `live/projects/` |
+| Committed decisions | `live/decisions.md` |
+| Your working board | `KANBAN.md` |
+| Business & org knowledge | `wiki/organisations/` (ProChat, Arkware, Yeshua Academy) |
+| Personal areas (faith, family, health) | `wiki/areas/` |
+| Apologetics research | `sources/research/apologetics/` |
+| Bible studies | `sources/research/bible/` |
+| Theology | `sources/research/theology/` |
+| Marketing & business research | `sources/research/marketing/` · `sources/research/business/` |
+| Books and people | `sources/research/books/` · `sources/research/people/` |
+| Completed / legacy material | `archive/` |
+
+---
+
+## How a capture flows through the system
+
+```
+You save something (voice, text, AI session)
+        ↓
+n8n webhook → Gemini classifies it → lands in capture/inbox/
+        ↓
+Nightly: compile loop reads inbox → proposes where it belongs → appends to wiki/log.md
+        ↓
+You review wiki/log.md → accept (move it) or reject (delete line)
+        ↓
+File lives in its permanent home (live/ or wiki/ or sources/)
 ```
 
-**No results?** Pick a task from Kanban "To Do" column.
+---
+
+## AI memory — how it connects
+
+When you tell any AI "remember this" or save a preference, it goes into the shared memory store. Every AI session the next day already knows. You never re-explain preferences.
+
+- **Save:** say "remember this" or "save this preference" to any AI
+- **Recall:** the AI knows automatically — no command needed
+- **Review:** say "show all my memories" to any AI
+
+The memory system is separate from Mind notes. Notes are your knowledge. Memory is your AI context.
 
 ---
 
-## ⚠️ Blockers (Escalate Immediately)
+## What this system does NOT do automatically
 
-```dataview
-LIST file.link, status, priority
-FROM "04-tasks"
-WHERE status = "blocked"
-SORT priority DESC
-```
-
-**If anything above:** Stop. Unblock it first. Everything else waits.
-
----
-
-## 📥 Inbox Backlog
-
-```dataview
-TABLE file.ctime as Created, confidence, signal_quality
-FROM "01-inbox"
-SORT file.ctime DESC
-LIMIT 5
-```
-
-**Review this weekly.** High confidence + high signal = keep. Low either = delete.
-
----
-
-## 🚀 Active Projects (Timeline)
-
-```dataview
-TABLE status, priority, target_end_date
-FROM "03-projects"
-WHERE status = "in-progress"
-SORT target_end_date ASC
-```
-
-**Overdue?** Check blockers above. Escalate if stuck.
-
----
-
-## 📋 What to Do Now
-
-**Next 5 minutes:**
-1. Open [[KANBAN]] 
-2. Pick 1-3 tasks from "To Do"
-3. Drag to "Doing" and work
-4. Drag to "Done" when finished
-
-**Weekly (20 min):**
-- Review [[01-inbox]] — delete low-signal captures
-- Check [[02-strategy]] — any draft → committed?
-- Check [[03-projects]] — blocked? overdue? complete?
-- Archive done tasks from [[04-tasks]] to [[08-archive]]
-- Review [[05-areas]] — any need attention?
-
----
-
-## 🔧 System Status
-
-- **Capture pipeline**: n8n webhook `/mind-inbox` (automatic every time you save from ChatGPT; writes to `capture/inbox/`, and test-only failure buffering now writes to `capture/failed/`; legacy `01-inbox/` remains for historical reference)
-- **Wiki log**: [[wiki/log]] — append-only wiki maintenance ledger
-- **Runtime reports**: Brain-owned read-only summaries at `/runtime/reports`; they are not stored in Mind notes.
-- **Inbox classification**: Gemini (automatic, confidence + signal scores)
-- **Kanban sync**: Every 10 minutes
-- **Manual**: Everything else (you decide keep/delete, create strategy/project/task, execute)
-
-**See [[README#Automation--Cadence|README → Automation & Cadence]] for details.**
-
----
-
-## 🆘 Something Stuck?
-
-- **Capture didn't appear?** Check [[capture/inbox]] or see [[README#Troubleshooting|README → Troubleshooting]]
-- **Kanban out of sync?** Wait 10 min, or edit task file directly
-- **Can't find something?** Search with Cmd+Shift+F or check [[08-archive]]
-- **Inbox too full?** Archive low-signal captures to [[08-archive]]
-
----
-
-**Last updated: {{date:YYYY-MM-DD HH:mm}}**
-
-*For the full system guide, see [[README]].*
+- Move files for you — it only proposes moves in `wiki/log.md`
+- Manage your Kanban — that is always manual
+- Approve decisions — those go in `live/decisions.md` only when you write them
+- Clean up your archive — `archive/` is append-only history
