@@ -67,7 +67,7 @@ Then retrieve only relevant files.
 Research lives in:
 
 ```text
-sources/research/notes/
+sources/research/
 ```
 
 Research is not the same as strategy. Research can be uncertain, exploratory, or source-heavy. Strategy is committed and canonical (lives in `wiki/organisations/`).
@@ -76,9 +76,9 @@ Use this flow:
 
 ```text
 Research question
-  → sources/research/notes/<category>/
+  → sources/research/<category>/
 Synthesis / brief
-  → sources/research/notes/<category>/ or sources/research/
+  → sources/research/<category>/ or sources/research/
 Committed decision
   → wiki/organisations/<org>/ or live/decisions.md
 Executable action
@@ -102,7 +102,7 @@ Do not duplicate canonical organisation truth into research notes. Link to it or
 Use safe defaults:
 
 - Capture first: `capture/inbox/`
-- Research/reference: `sources/research/notes/`
+- Research/reference: `sources/research/`
 - Final decisions: `wiki/organisations/` or `live/decisions.md`
 - Tasks: `live/tasks.md`
 - Completed history: `archive/`

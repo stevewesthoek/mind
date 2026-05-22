@@ -10,11 +10,11 @@ Every AI agent working with this repo must start here.
 
 Then read, in this order:
 
-1. `00-start-here.md` — high-level map and operating model.
-2. `00-current-context.md` — current priorities and active context.
-3. `00-memory-map.md` — where to search for the user's request.
-4. `README.md` — full vault/automation documentation when needed.
-5. `CLAUDE.md` — Claude-specific compatibility notes; also useful to other agents.
+1. `router/00-start-here.md` — high-level map and operating model.
+2. `router/00-current-context.md` — current priorities and active context.
+3. `router/00-memory-map.md` — where to search for the user's request.
+4. `router/README.md` — full vault/automation documentation when needed.
+5. `router/CLAUDE.md` — Claude-specific compatibility notes; also useful to other agents.
 
 Do not scan the whole repo blindly. Use the memory map, then search/read only the relevant files.
 
@@ -33,10 +33,17 @@ Use `mind` for Steve-specific context and durable knowledge.
 Do not rename or replace these root files unless explicitly asked:
 
 ```text
-README.md
 HOME.md
 KANBAN.md
-CLAUDE.md
+TODAY.md
+```
+
+Do not rename or replace these router files unless explicitly asked:
+
+```text
+router/AGENTS.md
+router/CLAUDE.md
+router/README.md
 ```
 
 Do not break existing automations:
@@ -92,7 +99,7 @@ Use these defaults:
 Research belongs under:
 
 ```text
-sources/research/notes/
+sources/research/
 ```
 
 Use research folders for investigation, source notes, drafts, Bible studies, marketing research, business research, AI research, book notes, and evidence gathering.
@@ -104,9 +111,9 @@ Use `wiki/organisations/` only when research becomes a committed strategy, minis
 Bible and theology research usually belongs under:
 
 ```text
-sources/research/notes/bible/
-sources/research/notes/theology/
-sources/research/notes/apologetics/
+sources/research/bible/
+sources/research/theology/
+sources/research/apologetics/
 ```
 
 Canonical Yeshua Academy ministry truth belongs under:
@@ -122,8 +129,8 @@ Do not overwrite Yeshua Academy canonical files with raw research. Research shou
 Marketing and business research usually belongs under:
 
 ```text
-sources/research/notes/marketing/
-sources/research/notes/business/
+sources/research/marketing/
+sources/research/business/
 ```
 
 Canonical ProChat or Arkware strategy belongs under:
@@ -179,9 +186,8 @@ A good session:
 
 ## Related Files
 
-- `00-start-here.md` — concise human/AI orientation.
-- `00-current-context.md` — current priorities and active focus.
-- `00-memory-map.md` — routing map for context retrieval.
-- `06-resources/research/README.md` — research system and categories.
-- `README.md` — full vault documentation.
-- `CLAUDE.md` — existing Claude Code notes.
+- `router/00-start-here.md` — concise human/AI orientation.
+- `router/00-current-context.md` — current priorities and active focus.
+- `router/00-memory-map.md` — routing map for context retrieval.
+- `router/README.md` — full vault documentation.
+- `router/CLAUDE.md` — Claude-specific notes.

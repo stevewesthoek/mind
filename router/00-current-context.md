@@ -39,7 +39,7 @@ archive/old/      Legacy numbered PARA folders (read-only backup)
 Research lives inside this repo under:
 
 ```text
-sources/research/notes/
+sources/research/
 ```
 
 Subfolders: `bible/`, `theology/`, `apologetics/`, `marketing/`, `business/`, `books/`, `people/`, `organisations/`, `ai/`.
@@ -107,15 +107,15 @@ wiki/areas/theological-studies/
 Bible/theology/apologetics research lives in:
 
 ```text
-sources/research/notes/bible/
-sources/research/notes/theology/
-sources/research/notes/apologetics/
+sources/research/bible/
+sources/research/theology/
+sources/research/apologetics/
 ```
 
 For apologetics debate replies, use Steve's personal voice/debate standard before drafting:
 
 ```text
-sources/research/notes/apologetics/steve-apologetics-voice-and-debate-standard.md
+sources/research/apologetics/steve-apologetics-voice-and-debate-standard.md
 ```
 
 The default should be respectful but direct, fair but not timid, and claim-by-claim rather than a soft generalized essay.
@@ -125,8 +125,8 @@ The default should be respectful but direct, fair but not timid, and claim-by-cl
 Business and marketing research lives in:
 
 ```text
-sources/research/notes/business/
-sources/research/notes/marketing/
+sources/research/business/
+sources/research/marketing/
 ```
 
 Committed business/brand/growth strategy belongs under the relevant organisation:
@@ -142,7 +142,7 @@ When the user says:
 | Natural language request | Default action |
 |---|---|
 | "remember this" | save to `capture/inbox/` unless category is obvious |
-| "research this" | create/use `sources/research/notes/` |
+| "research this" | create/use `sources/research/` |
 | "turn this into strategy" | draft in `wiki/organisations/` or `live/decisions.md` |
 | "make a task" | add to `live/tasks.md` |
 | "archive this" | ask before moving to `archive/` |

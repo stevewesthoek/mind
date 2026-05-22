@@ -23,7 +23,7 @@ Use this before answering Steve-specific questions.
 | Active projects | `live/projects.md` | `live/tasks.md` |
 | Tasks or execution | `live/tasks.md`, `KANBAN.md` | `live/projects.md` |
 | Long-term responsibilities | `wiki/areas/` | `wiki/` |
-| Research or references | `sources/research/notes/` | `sources/` |
+| Research or references | `sources/research/` | `sources/` |
 | Old/completed work | `archive/` | `archive/old/` |
 | Raw captures | `capture/inbox/` | `capture/failed/` |
 | Templates | `wiki/templates/` | existing files of same type |
@@ -35,7 +35,7 @@ Use this before answering Steve-specific questions.
 |---|---|
 | ProChat | `wiki/organisations/prochat/` |
 | ProChat brand/messaging | `wiki/organisations/prochat/brand/` |
-| ProChat growth/marketing | `wiki/organisations/prochat/growth/`, then `sources/research/notes/marketing/` |
+| ProChat growth/marketing | `wiki/organisations/prochat/growth/`, then `sources/research/marketing/` |
 | ProChat YouTube/content | `wiki/organisations/prochat/youtube/` |
 | ProChat legal | `wiki/organisations/prochat/legal/` |
 | Arkware | `wiki/organisations/arkware/` |
@@ -48,24 +48,24 @@ Use this before answering Steve-specific questions.
 Research belongs under:
 
 ```text
-sources/research/notes/
+sources/research/
 ```
 
 | User asks about | Search/create under |
 |---|---|
-| Bible passage study | `sources/research/notes/bible/passages/` |
-| Bible topic | `sources/research/notes/bible/topics/` |
-| Bible word study | `sources/research/notes/bible/word-studies/` |
-| Theological question | `sources/research/notes/bible/theological-questions/` or `sources/research/notes/theology/` |
-| Comparative theological views | `sources/research/notes/bible/comparative-views/` |
-| Apologetics | `sources/research/notes/apologetics/` |
-| Steve's apologetics voice/debate style | `sources/research/notes/apologetics/steve-apologetics-voice-and-debate-standard.md` |
-| Marketing research | `sources/research/notes/marketing/` |
-| Business research | `sources/research/notes/business/` |
-| AI research | `sources/research/notes/ai/` |
-| Book notes | `sources/research/notes/books/` |
-| Person research | `sources/research/notes/people/` |
-| Organisation research | `sources/research/notes/organisations/` |
+| Bible passage study | `sources/research/bible/passages/` |
+| Bible topic | `sources/research/bible/topics/` |
+| Bible word study | `sources/research/bible/word-studies/` |
+| Theological question | `sources/research/bible/theological-questions/` or `sources/research/theology/` |
+| Comparative theological views | `sources/research/bible/comparative-views/` |
+| Apologetics | `sources/research/apologetics/` |
+| Steve's apologetics voice/debate style | `sources/research/apologetics/steve-apologetics-voice-and-debate-standard.md` |
+| Marketing research | `sources/research/marketing/` |
+| Business research | `sources/research/business/` |
+| AI research | `sources/research/ai/` |
+| Book notes | `sources/research/books/` |
+| Person research | `sources/research/people/` |
+| Organisation research | `sources/research/organisations/` |
 | Source files | `sources/` |
 
 ## Bible / Theology Routing
@@ -76,10 +76,10 @@ Use both wiki and sources, but do not mix them up.
 |---|---|
 | Canonical Yeshua Academy ministry truth | `wiki/organisations/yeshua-academy/` |
 | Ongoing theological responsibility area | `wiki/areas/theological-studies/` |
-| Bible research notes | `sources/research/notes/bible/` |
-| Theology research notes | `sources/research/notes/theology/` |
-| Apologetics research notes | `sources/research/notes/apologetics/` |
-| Sermon or Bible-study drafts | `sources/research/notes/bible/` unless promoted to a project |
+| Bible research notes | `sources/research/bible/` |
+| Theology research notes | `sources/research/theology/` |
+| Apologetics research notes | `sources/research/apologetics/` |
+| Sermon or Bible-study drafts | `sources/research/bible/` unless promoted to a project |
 
 Rule:
 
@@ -94,8 +94,8 @@ Do not overwrite strategy with raw research.
 
 | Need | Location |
 |---|---|
-| Marketing research | `sources/research/notes/marketing/` |
-| Business research | `sources/research/notes/business/` |
+| Marketing research | `sources/research/marketing/` |
+| Business research | `sources/research/business/` |
 | Brand truth | `wiki/organisations/<org>/brand/` |
 | Growth playbooks | `wiki/organisations/<org>/growth/` |
 | Offers | `wiki/organisations/<org>/offers.md` or brand/offer files |
@@ -107,7 +107,7 @@ Do not overwrite strategy with raw research.
 | User says | Save default |
 |---|---|
 | "remember this" | `capture/inbox/` if unsorted; otherwise relevant folder |
-| "save this as research" | `sources/research/notes/` or relevant research category |
+| "save this as research" | `sources/research/` or relevant research category |
 | "this is a decision" | `live/decisions.md` or `wiki/organisations/<org>/` |
 | "make a task" | `live/tasks.md` |
 | "make a project" | `live/projects.md` |
@@ -159,7 +159,7 @@ Then answer from the most relevant files.
 Use:
 
 ```text
-sources/research/notes/bible/comparative-views/
+sources/research/bible/comparative-views/
 ```
 
 If saving, create a research note there. Do not alter Yeshua Academy strategy unless asked.
@@ -178,8 +178,8 @@ Search:
 
 ```text
 wiki/organisations/yeshua-academy/
-sources/research/notes/bible/
-sources/research/notes/theology/
+sources/research/bible/
+sources/research/theology/
 ```
 
 Separate existing canonical truth from new research or recommendations.
