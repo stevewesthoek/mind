@@ -11,77 +11,75 @@ Use this before answering Steve-specific questions.
 3. Search the smallest relevant folder first.
 4. Read the most relevant files.
 5. State when context was not found.
-6. Save durable output only in the correct PARA location.
+6. Save durable output only in the correct location.
 
 ## High-Level Routing
 
 | User asks about | Search first | Then search |
 |---|---|---|
-| Current priorities | `00-current-context.md`, `HOME.md`, `KANBAN.md` | `04-tasks/`, `03-projects/` |
+| Current priorities | `00-current-context.md`, `HOME.md`, `KANBAN.md` | `live/tasks.md`, `live/projects.md` |
 | How the vault works | `AGENTS.md`, `00-start-here.md`, `README.md` | `CLAUDE.md` |
-| Strategy or decisions | `02-strategy/` | `06-resources/`, `08-archive/` |
-| Active projects | `03-projects/` | `04-tasks/`, `02-strategy/` |
-| Tasks or execution | `04-tasks/`, `KANBAN.md` | `03-projects/` |
-| Long-term responsibilities | `05-areas/` | `02-strategy/`, `06-resources/` |
-| Research or references | `06-resources/research/` | `06-resources/`, `01-inbox/` |
-| Old/completed work | `08-archive/` | relevant original folder |
-| Raw captures | `01-inbox/` | `08-archive/` |
-| Templates | `07-templates/` | existing files of same type |
+| Strategy or decisions | `wiki/organisations/`, `live/decisions.md` | `archive/old/legacy-02-strategy/` |
+| Active projects | `live/projects.md` | `live/tasks.md` |
+| Tasks or execution | `live/tasks.md`, `KANBAN.md` | `live/projects.md` |
+| Long-term responsibilities | `wiki/areas/` | `wiki/` |
+| Research or references | `sources/research/notes/` | `sources/` |
+| Old/completed work | `archive/` | `archive/old/` |
+| Raw captures | `capture/inbox/` | `capture/failed/` |
+| Templates | `wiki/templates/` | existing files of same type |
+| Router/automation rules | `router/` | `AGENTS.md` |
 
 ## Organisation Routing
 
 | User asks about | Search first |
 |---|---|
-| ProChat | `02-strategy/organisations/prochat/` |
-| ProChat brand/messaging | `02-strategy/organisations/prochat/brand/` |
-| ProChat growth/marketing | `02-strategy/organisations/prochat/growth/`, then `06-resources/research/notes/marketing/` |
-| ProChat YouTube/content | `02-strategy/organisations/prochat/youtube/` |
-| ProChat legal | `02-strategy/organisations/prochat/legal/` |
-| Arkware | `02-strategy/organisations/arkware/` |
-| Yeshua Academy | `02-strategy/organisations/yeshua-academy/` |
-| Organisation ecosystem | `02-strategy/organisations/ecosystem.md` |
-| Organisation conventions | `02-strategy/organisations/conventions.md` |
+| ProChat | `wiki/organisations/prochat/` |
+| ProChat brand/messaging | `wiki/organisations/prochat/brand/` |
+| ProChat growth/marketing | `wiki/organisations/prochat/growth/`, then `sources/research/notes/marketing/` |
+| ProChat YouTube/content | `wiki/organisations/prochat/youtube/` |
+| ProChat legal | `wiki/organisations/prochat/legal/` |
+| Arkware | `wiki/organisations/arkware/` |
+| Yeshua Academy | `wiki/organisations/yeshua-academy/` |
+| Organisation ecosystem | `wiki/organisations/ecosystem.md` |
+| Organisation conventions | `wiki/organisations/conventions.md` |
 
 ## Research Routing
 
 Research belongs under:
 
 ```text
-06-resources/research/
+sources/research/notes/
 ```
 
 | User asks about | Search/create under |
 |---|---|
-| Bible passage study | `06-resources/research/notes/bible/passages/` |
-| Bible topic | `06-resources/research/notes/bible/topics/` |
-| Bible word study | `06-resources/research/notes/bible/word-studies/` |
-| Theological question | `06-resources/research/notes/bible/theological-questions/` or `06-resources/research/notes/theology/` |
-| Comparative theological views | `06-resources/research/notes/bible/comparative-views/` |
-| Apologetics | `06-resources/research/notes/apologetics/` |
-| Steve's apologetics voice/debate style | `06-resources/research/notes/apologetics/steve-apologetics-voice-and-debate-standard.md` |
-| Marketing research | `06-resources/research/notes/marketing/` |
-| Business research | `06-resources/research/notes/business/` |
-| AI research | `06-resources/research/notes/ai/` |
-| Book notes | `06-resources/research/notes/books/` |
-| Person research | `06-resources/research/notes/people/` |
-| Organisation research | `06-resources/research/notes/organisations/` |
-| Source files | `06-resources/research/sources/` |
-| Research briefs | `06-resources/research/briefs/` |
-| Research reports | `06-resources/research/reports/` |
-| Bibliographies | `06-resources/research/bibliographies/` |
+| Bible passage study | `sources/research/notes/bible/passages/` |
+| Bible topic | `sources/research/notes/bible/topics/` |
+| Bible word study | `sources/research/notes/bible/word-studies/` |
+| Theological question | `sources/research/notes/bible/theological-questions/` or `sources/research/notes/theology/` |
+| Comparative theological views | `sources/research/notes/bible/comparative-views/` |
+| Apologetics | `sources/research/notes/apologetics/` |
+| Steve's apologetics voice/debate style | `sources/research/notes/apologetics/steve-apologetics-voice-and-debate-standard.md` |
+| Marketing research | `sources/research/notes/marketing/` |
+| Business research | `sources/research/notes/business/` |
+| AI research | `sources/research/notes/ai/` |
+| Book notes | `sources/research/notes/books/` |
+| Person research | `sources/research/notes/people/` |
+| Organisation research | `sources/research/notes/organisations/` |
+| Source files | `sources/` |
 
 ## Bible / Theology Routing
 
-Use both strategy and research, but do not mix them up.
+Use both wiki and sources, but do not mix them up.
 
 | Need | Location |
 |---|---|
-| Canonical Yeshua Academy ministry truth | `02-strategy/organisations/yeshua-academy/` |
-| Ongoing theological responsibility area | `05-areas/theological-studies/` |
-| Bible research notes | `06-resources/research/notes/bible/` |
-| Theology research notes | `06-resources/research/notes/theology/` |
-| Apologetics research notes | `06-resources/research/notes/apologetics/` |
-| Sermon or Bible-study drafts | `06-resources/research/notes/bible/` unless promoted to a project |
+| Canonical Yeshua Academy ministry truth | `wiki/organisations/yeshua-academy/` |
+| Ongoing theological responsibility area | `wiki/areas/theological-studies/` |
+| Bible research notes | `sources/research/notes/bible/` |
+| Theology research notes | `sources/research/notes/theology/` |
+| Apologetics research notes | `sources/research/notes/apologetics/` |
+| Sermon or Bible-study drafts | `sources/research/notes/bible/` unless promoted to a project |
 
 Rule:
 
@@ -96,25 +94,25 @@ Do not overwrite strategy with raw research.
 
 | Need | Location |
 |---|---|
-| Marketing research | `06-resources/research/notes/marketing/` |
-| Business research | `06-resources/research/notes/business/` |
-| Brand truth | `02-strategy/organisations/<org>/brand/` |
-| Growth playbooks | `02-strategy/organisations/<org>/growth/` |
-| Offers | `02-strategy/organisations/<org>/offers.md` or brand/offer files |
-| Active campaign/project | `03-projects/` |
-| Atomic task | `04-tasks/` |
+| Marketing research | `sources/research/notes/marketing/` |
+| Business research | `sources/research/notes/business/` |
+| Brand truth | `wiki/organisations/<org>/brand/` |
+| Growth playbooks | `wiki/organisations/<org>/growth/` |
+| Offers | `wiki/organisations/<org>/offers.md` or brand/offer files |
+| Active campaign/project | `live/projects.md` |
+| Atomic task | `live/tasks.md` |
 
 ## Natural Language Save Rules
 
 | User says | Save default |
 |---|---|
-| "remember this" | `01-inbox/` if unsorted; otherwise relevant folder |
-| "save this as research" | `06-resources/research/inbox/` or relevant research category |
-| "this is a decision" | `02-strategy/` |
-| "make a task" | `04-tasks/` |
-| "make a project" | `03-projects/` |
-| "this is reference" | `06-resources/` |
-| "archive this" | ask before moving to `08-archive/` |
+| "remember this" | `capture/inbox/` if unsorted; otherwise relevant folder |
+| "save this as research" | `sources/research/notes/` or relevant research category |
+| "this is a decision" | `live/decisions.md` or `wiki/organisations/<org>/` |
+| "make a task" | `live/tasks.md` |
+| "make a project" | `live/projects.md` |
+| "this is reference" | `sources/` |
+| "archive this" | ask before moving to `archive/` |
 
 ## Write Safety
 
@@ -151,7 +149,7 @@ Then recommend a safe save location.
 Search:
 
 ```text
-02-strategy/organisations/prochat/brand/
+wiki/organisations/prochat/brand/
 ```
 
 Then answer from the most relevant files.
@@ -161,29 +159,27 @@ Then answer from the most relevant files.
 Use:
 
 ```text
-06-resources/research/notes/bible/comparative-views/
+sources/research/notes/bible/comparative-views/
 ```
 
 If saving, create a research note there. Do not alter Yeshua Academy strategy unless asked.
 
 ### Example: "Make this a task"
 
-Create a new task file in:
+Add to:
 
 ```text
-04-tasks/
+live/tasks.md
 ```
-
-Use task frontmatter compatible with existing templates.
 
 ### Example: "What should we teach at Yeshua Academy?"
 
 Search:
 
 ```text
-02-strategy/organisations/yeshua-academy/
-06-resources/research/notes/bible/
-06-resources/research/notes/theology/
+wiki/organisations/yeshua-academy/
+sources/research/notes/bible/
+sources/research/notes/theology/
 ```
 
 Separate existing canonical truth from new research or recommendations.

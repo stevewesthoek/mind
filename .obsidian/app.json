@@ -5,5 +5,6 @@
   "trashOption": "local",
   "promptDelete": false,
   "defaultViewMode": "source",
-  "foldHeading": false
+  "foldHeading": false,
+  "showInlineTitle": true
 }

@@ -7,8 +7,8 @@ Agents should read this early, but should not treat it as exhaustive. Use `00-me
 ## Status
 
 ```yaml
-status: draft
-last_reviewed: 2026-05-09
+status: active
+last_reviewed: 2026-05-22
 owner: Steve Westhoek
 purpose: Keep AI sessions oriented without loading the whole vault.
 ```
@@ -20,26 +20,35 @@ Steve uses this repo as a personal Obsidian vault and AI-readable memory.
 The `brain` repo contains AI infrastructure, skills, system configs, and automation logic.
 The `mind` repo contains personal knowledge, strategy, convictions, business/ministry context, projects, tasks, and research.
 
-## Current Architecture Decision
-
-Research should live inside this repo, under:
+## Current Folder Structure
 
 ```text
-06-resources/research/
+capture/inbox/    New captures from Save-to-Mind automation
+capture/failed/   Failed captures needing retry
+capture/daily/    Daily scratch/notes
+live/             Active work surfaces (tasks, projects, decisions, workflows)
+wiki/             Compiled durable knowledge
+sources/          Raw evidence, research notes, source material
+router/           Model-router contract and rules
+archive/          Completed, old, or legacy material
+archive/old/      Legacy numbered PARA folders (read-only backup)
 ```
 
-Do not create separate research repos by default.
+## Current Architecture Decision
 
-Use folders inside the research area for Bible, theology, apologetics, marketing, business, AI, books, people, and organisations.
+Research lives inside this repo under:
 
-Split into a separate repo only if there is a strong boundary:
+```text
+sources/research/notes/
+```
 
-- different collaborators
-- different privacy/confidentiality level
-- different publishing workflow
-- large files/media
-- productized/public research library
-- legal/copyright separation
+Subfolders: `bible/`, `theology/`, `apologetics/`, `marketing/`, `business/`, `books/`, `people/`, `organisations/`, `ai/`.
+
+Organisation strategy is compiled, committed knowledge that lives in:
+
+```text
+wiki/organisations/
+```
 
 ## Current AI Memory Decision
 
@@ -52,7 +61,7 @@ They should:
 3. Read this file.
 4. Read `00-memory-map.md`.
 5. Search/read only relevant files.
-6. Save durable outputs in the correct PARA location when asked.
+6. Save durable outputs in the correct location when asked.
 
 ## Important Active Context Areas
 
@@ -61,22 +70,22 @@ They should:
 - `README.md` documents the vault and automations.
 - `HOME.md` is the human daily dashboard.
 - `KANBAN.md` is the working board.
-- `04-tasks/` is automation-sensitive and syncs with the kanban system.
+- `live/tasks.md` is the current tasks summary.
 
 ### Organisations
 
 Canonical organisation truth lives in:
 
 ```text
-02-strategy/organisations/
+wiki/organisations/
 ```
 
-Known organisation folders include:
+Known organisation folders:
 
 ```text
-02-strategy/organisations/prochat/
-02-strategy/organisations/arkware/
-02-strategy/organisations/yeshua-academy/
+wiki/organisations/prochat/
+wiki/organisations/arkware/
+wiki/organisations/yeshua-academy/
 ```
 
 Use these folders for committed strategy, positioning, messaging, offers, brand truth, ministry truth, and organisational decisions.
@@ -86,44 +95,44 @@ Use these folders for committed strategy, positioning, messaging, offers, brand 
 Yeshua Academy context lives in:
 
 ```text
-02-strategy/organisations/yeshua-academy/
+wiki/organisations/yeshua-academy/
 ```
 
-Theological studies and ongoing responsibility context may live in:
+Theological studies and ongoing responsibility context lives in:
 
 ```text
-05-areas/theological-studies/
+wiki/areas/theological-studies/
 ```
 
-Bible/theology/apologetics research should live in:
+Bible/theology/apologetics research lives in:
 
 ```text
-06-resources/research/notes/bible/
-06-resources/research/notes/theology/
-06-resources/research/notes/apologetics/
+sources/research/notes/bible/
+sources/research/notes/theology/
+sources/research/notes/apologetics/
 ```
 
 For apologetics debate replies, use Steve's personal voice/debate standard before drafting:
 
 ```text
-06-resources/research/notes/apologetics/steve-apologetics-voice-and-debate-standard.md
+sources/research/notes/apologetics/steve-apologetics-voice-and-debate-standard.md
 ```
 
 The default should be respectful but direct, fair but not timid, and claim-by-claim rather than a soft generalized essay.
 
 ### Business / Marketing
 
-Business and marketing research should live in:
+Business and marketing research lives in:
 
 ```text
-06-resources/research/notes/business/
-06-resources/research/notes/marketing/
+sources/research/notes/business/
+sources/research/notes/marketing/
 ```
 
-Committed business/brand/growth strategy belongs under the relevant organisation in:
+Committed business/brand/growth strategy belongs under the relevant organisation:
 
 ```text
-02-strategy/organisations/
+wiki/organisations/
 ```
 
 ## Current Writing Defaults
@@ -132,13 +141,12 @@ When the user says:
 
 | Natural language request | Default action |
 |---|---|
-| "remember this" | save to `01-inbox/` unless category is obvious |
-| "research this" | create/use `06-resources/research/` |
-| "turn this into strategy" | draft in `02-strategy/` |
-| "make this a project" | create under `03-projects/` |
-| "make this a task" | create under `04-tasks/` with proper task frontmatter |
-| "archive this" | ask before moving to `08-archive/` |
-| "what do I believe/decide/plan?" | search `02-strategy/`, then relevant resources |
+| "remember this" | save to `capture/inbox/` unless category is obvious |
+| "research this" | create/use `sources/research/notes/` |
+| "turn this into strategy" | draft in `wiki/organisations/` or `live/decisions.md` |
+| "make a task" | add to `live/tasks.md` |
+| "archive this" | ask before moving to `archive/` |
+| "what do I believe/decide/plan?" | search `wiki/organisations/`, then relevant sources |
 
 ## Maintenance Rule
 

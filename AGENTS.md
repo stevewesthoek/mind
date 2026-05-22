@@ -30,19 +30,6 @@ Use `mind` for Steve-specific context and durable knowledge.
 
 ## Non-Negotiable Safety Rules
 
-Do not rename, move, or delete these existing PARA folders:
-
-```text
-01-inbox/
-02-strategy/
-03-projects/
-04-tasks/
-05-areas/
-06-resources/
-07-templates/
-08-archive/
-```
-
 Do not rename or replace these root files unless explicitly asked:
 
 ```text
@@ -54,12 +41,13 @@ CLAUDE.md
 
 Do not break existing automations:
 
-- Save-to-Mind now targets `capture/inbox/`; legacy `01-inbox/` remains historical/reference unless an explicit migration task says otherwise.
-- failed captures belong in `capture/failed/`.
+- Save-to-Mind targets `capture/inbox/` — do not change this path.
+- Failed captures belong in `capture/failed/`.
 - auto-router/model-router may inspect inbox notes, but write/apply remains blocked unless explicitly approved.
-- project-decomposer may use strategies/projects/tasks.
 - kanban-syncer syncs task surfaces with `KANBAN.md`.
 - Obsidian uses this repo as a vault.
+
+Do not write into `archive/old/` — those are read-only legacy backups.
 
 Never commit secrets, OAuth tokens, API keys, cookies, private keys, service account files, `.env` values, or credentials.
 
@@ -97,34 +85,34 @@ Use these defaults:
 | Compiled durable knowledge | `wiki/` |
 | Raw evidence and source material | `sources/` |
 | Completed, old, or historical material | `archive/` |
-| Legacy strategy/project/task/area/resource material | numbered folders remain read-only references until explicit migration |
+| Legacy material (read-only) | `archive/old/` |
 
 ## Research Rules
 
 Research belongs under:
 
 ```text
-06-resources/research/
+sources/research/notes/
 ```
 
 Use research folders for investigation, source notes, drafts, Bible studies, marketing research, business research, AI research, book notes, and evidence gathering.
 
-Use `02-strategy/` only when research becomes a committed strategy, ministry conviction, business decision, messaging decision, or canonical organisational truth.
+Use `wiki/organisations/` only when research becomes a committed strategy, ministry conviction, business decision, messaging decision, or canonical organisational truth.
 
 ## Bible / Theology Rules
 
 Bible and theology research usually belongs under:
 
 ```text
-06-resources/research/notes/bible/
-06-resources/research/notes/theology/
-06-resources/research/notes/apologetics/
+sources/research/notes/bible/
+sources/research/notes/theology/
+sources/research/notes/apologetics/
 ```
 
 Canonical Yeshua Academy ministry truth belongs under:
 
 ```text
-02-strategy/organisations/yeshua-academy/
+wiki/organisations/yeshua-academy/
 ```
 
 Do not overwrite Yeshua Academy canonical files with raw research. Research should feed strategy after review.
@@ -134,15 +122,15 @@ Do not overwrite Yeshua Academy canonical files with raw research. Research shou
 Marketing and business research usually belongs under:
 
 ```text
-06-resources/research/notes/marketing/
-06-resources/research/notes/business/
+sources/research/notes/marketing/
+sources/research/notes/business/
 ```
 
 Canonical ProChat or Arkware strategy belongs under:
 
 ```text
-02-strategy/organisations/prochat/
-02-strategy/organisations/arkware/
+wiki/organisations/prochat/
+wiki/organisations/arkware/
 ```
 
 ## Natural Language Workflow

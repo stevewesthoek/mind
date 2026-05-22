@@ -27,19 +27,15 @@ mind  = Steve's personal memory: knowledge, strategy, tasks, research, convictio
 If the user asks how an AI/tool works, inspect `brain`.
 If the user asks what Steve believes, plans, knows, is building, or has decided, inspect `mind`.
 
-## PARA Structure
-
-Do not rename or restructure these folders.
+## Folder Structure
 
 ```text
-01-inbox/     Raw captures and unsorted material
-02-strategy/  Committed strategy, decisions, positioning, convictions-in-use
-03-projects/  Active work with outcomes/timelines
-04-tasks/     Atomic executable tasks; syncs with KANBAN.md
-05-areas/     Ongoing responsibilities
-06-resources/ Reference material, research, notes, source material
-07-templates/ Reusable note templates
-08-archive/   Completed or historical material
+capture/   Raw incoming captures (inbox/, daily/, failed/)
+live/      Active work surfaces (tasks, projects, decisions, workflows)
+wiki/      Compiled durable knowledge (organisations, areas, faith, business, etc.)
+sources/   Raw evidence and research notes (research/notes/bible, apologetics, etc.)
+router/    Model-router contract, rules, and maintenance definitions
+archive/   Old, completed, or legacy material (archive/old/ for legacy numbered folders)
 ```
 
 ## Daily Human Interface
@@ -71,32 +67,32 @@ Then retrieve only relevant files.
 Research lives in:
 
 ```text
-06-resources/research/
+sources/research/notes/
 ```
 
-Research is not the same as strategy. Research can be uncertain, exploratory, or source-heavy. Strategy is committed and canonical.
+Research is not the same as strategy. Research can be uncertain, exploratory, or source-heavy. Strategy is committed and canonical (lives in `wiki/organisations/`).
 
 Use this flow:
 
 ```text
 Research question
-  → 06-resources/research/
+  → sources/research/notes/<category>/
 Synthesis / brief
-  → 06-resources/research/briefs/ or reports/
+  → sources/research/notes/<category>/ or sources/research/
 Committed decision
-  → 02-strategy/
+  → wiki/organisations/<org>/ or live/decisions.md
 Executable action
-  → 04-tasks/
+  → live/tasks.md
 ```
 
 ## Core Organisation Context
 
-Important organisation strategy currently lives under:
+Important organisation strategy lives under:
 
 ```text
-02-strategy/organisations/prochat/
-02-strategy/organisations/arkware/
-02-strategy/organisations/yeshua-academy/
+wiki/organisations/prochat/
+wiki/organisations/arkware/
+wiki/organisations/yeshua-academy/
 ```
 
 Do not duplicate canonical organisation truth into research notes. Link to it or update it only when the user asks for a committed change.
@@ -105,10 +101,26 @@ Do not duplicate canonical organisation truth into research notes. Link to it or
 
 Use safe defaults:
 
-- Capture first: `01-inbox/`
-- Research/reference: `06-resources/research/`
-- Final decisions: `02-strategy/`
-- Tasks: `04-tasks/`
-- Completed history: `08-archive/`
+- Capture first: `capture/inbox/`
+- Research/reference: `sources/research/notes/`
+- Final decisions: `wiki/organisations/` or `live/decisions.md`
+- Tasks: `live/tasks.md`
+- Completed history: `archive/`
 
 Ask before moving, deleting, renaming, bulk editing, or changing automation-sensitive files.
+
+## Legacy Material
+
+Old numbered PARA folders have been archived to:
+
+```text
+archive/old/legacy-01-inbox/
+archive/old/legacy-02-strategy/
+archive/old/legacy-03-projects/
+archive/old/legacy-05-areas/
+archive/old/legacy-06-resources/
+archive/old/legacy-07-templates/
+archive/old/legacy-08-archive/
+```
+
+These are read-only backups. Do not write new content there.

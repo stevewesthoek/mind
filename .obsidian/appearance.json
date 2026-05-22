@@ -1,6 +1,10 @@
 {
-  "accentColor": "#5628c3",
+  "accentColor": "",
   "interfaceFontFamily": "",
   "monospaceFontFamily": "JetBrainsMono Nerd Font Mono",
-  "translucency": true
+  "translucency": true,
+  "cssTheme": "",
+  "showRibbon": true,
+  "showViewHeader": false,
+  "baseFontSize": 16
 }
