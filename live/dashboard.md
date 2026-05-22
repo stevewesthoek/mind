@@ -23,6 +23,7 @@ If you need to browse Mind Markdown directly (plugin unavailable):
 - [[sessions]] — AI session visibility (fallback)
 - [[machine]] — Brain Core machine entry point (fallback; plugin is primary)
 - [[video]] — Video Orchestrator visibility (fallback)
+- [[fala]] — Fala local language-learning cockpit
 - [[business]] — sparse business operating surface
 - [[workflows]] — workflow launch and tracking
 - [[decisions]] — current committed decisions

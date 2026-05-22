@@ -9,6 +9,7 @@ Migration note: legacy project material remains in the existing numbered structu
 - Mind OS migration
 - Brain Core and Obsidian cockpit migration
 - Model router foundation
+- Fala local learning cockpit integration
 
 ## Rules
 
