@@ -35,19 +35,20 @@ kanban-plugin: board
 
 ## Doing
 
-- [x] Setup STB Facebook app ⏫ ✅ 2026-05-11
-- [ ] fix the obsidian way of working
+- [ ] Setup STB Facebook app ⏫
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
-- [ ] Learn Portuguese app
 - [ ] Make the Gospel/Atheism paper
 - [ ] YA finance app
 - [ ] Make FB shorts account with free github repos
 - [x] Marriage certificate ✅ 2026-05-11
+- [ ] Portuguese criminal record
 
 ## Done
 
 **Complete**
 
+- [x] fix the obsidian way of working ✅ 2026-05-23
+- [x] Learn Portuguese app ✅ 2026-05-23
 - [x] Make Oliveto Organizing editable for Ashley
 - [x] Make Via di Eden editable for Joe
 - [x] Check with Mark & Yosef meeten ✅ 2026-05-14
