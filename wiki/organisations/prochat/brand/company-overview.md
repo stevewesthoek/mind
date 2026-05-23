@@ -68,18 +68,22 @@ These are one-time purchase products.
 
 ### Platform Layer
 
-A subscription SaaS product.
+A source-available platform product with paid commercial licensing and managed hosting.
 
 ProChat OS
 
-A dashboard designed to help founders monitor and manage multiple SaaS products.
+ProChat OS is the structured operating layer for AI-powered SaaS builders. It connects private memory, AI agents, workflow automation, local runtimes, project context, cloud deployments, and operational visibility into one coherent system.
 
 Functions may include:
 
-• API monitoring  
-• system status overview  
-• subscription monitoring  
-• SaaS infrastructure visibility
+• private memory and project context  
+• AI agent/session operations  
+• workflow automation  
+• local runtime control  
+• API and system status overview  
+• subscription and infrastructure visibility  
+• CLI-driven install, update, deploy, and support workflows  
+• optional managed single-tenant hosting
 
 ProChat OS is the long-term flagship product.
 

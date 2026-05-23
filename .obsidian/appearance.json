@@ -3,7 +3,7 @@
   "interfaceFontFamily": "",
   "monospaceFontFamily": "JetBrainsMono Nerd Font Mono",
   "translucency": true,
-  "cssTheme": "",
+  "cssTheme": "Cupertino",
   "showRibbon": true,
   "showViewHeader": false,
   "baseFontSize": 16

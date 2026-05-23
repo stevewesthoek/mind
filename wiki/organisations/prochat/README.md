@@ -14,10 +14,11 @@ Canonical ProChat organisation context.
 
 Start here:
 1. `brand/company-overview.md`
-2. `brand/positioning.md`
-3. `brand/messaging-framework.md`
-4. `brand/offer-architecture.md`
-5. `playbooks/saas-reference.md`
+2. `brand/prochat-os.md`
+3. `brand/positioning.md`
+4. `brand/messaging-framework.md`
+5. `brand/offer-architecture.md`
+6. `playbooks/saas-reference.md`
 
 ## Rule
 
