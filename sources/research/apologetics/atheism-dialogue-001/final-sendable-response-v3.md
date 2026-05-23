@@ -16,7 +16,7 @@ So if you want to say, "bare atheism is not identical to a formal religion," fin
 
 ## Faith, Trust, And Starting Commitments
 
-You tried to flatten faith into blind credulity — meaning you reduced it to "believing without any reason" — and then knocked down that flattened version. That is a straw man fallacy. A straw man is when you misrepresent someone's argument into an easier version and then defeat that easier version instead of the real one. It is a fallacy because you are not actually engaging with what the person said. I did not say every kind of trust is blind faith. I said atheism and naturalism rely on philosophical starting commitments — foundational assumptions about reality — that science itself does not establish. Those are not the same thing.
+You tried to flatten faith into blind credulity — meaning you reduced it to "believing without any reason" — and then knocked down that flattened version. That is a straw man fallacy. A straw man is when you misrepresent someone's argument into an easier version and then defeat that easier version instead of the real one. It is a fallacy because you are not actually engaging with what I said. I did not say every kind of trust is blind faith. I said atheism and naturalism rely on philosophical starting commitments — foundational assumptions about reality — that science itself does not establish. Those are not the same thing.
 
 Think of it this way: before a scientist can even start an experiment, they have to assume that the world follows consistent rules, that their mind can reason about it reliably, and that logic actually works. Science uses those assumptions but cannot prove them from inside the lab. That is the point.
 
@@ -58,7 +58,7 @@ If your answer is simply that the universe happens to be consistent, that does n
 
 ## Consciousness
 
-You repeatedly lean on brain dependence as if it settled the issue. It does not. Brain dependence is real. I have never denied that. But correlation is not explanation. Two things happening together does not prove one causes or fully explains the other.
+You repeatedly lean on brain dependence as if it settled the issue. It does not. Brain dependence is real. I have never denied that. But correlation is not causation nor explanation. Two things happening together does not prove one causes or fully explains the other.
 
 Here is a simple analogy: if I damage your TV's circuit board, the picture disappears. That proves the circuit board and the picture are connected. It does not prove the picture is nothing but the circuit board. It does not tell you where the broadcast signal came from. Brain damage affects consciousness — but that does not prove consciousness is nothing but matter.
 
@@ -80,11 +80,11 @@ That is the real question. Where does moral authority come from in a purely athe
 
 Your objection from religious disagreement does not refute revelation. Different religions disagree with each other — that is not news. The existence of disagreement does not prove revelation is false. It only proves disagreement exists.
 
-This is a non sequitur — a Latin phrase meaning "it does not follow." A non sequitur is a conclusion that does not logically follow from the evidence given. Think of it this way: many people disagree about whether the earth is round or flat. That disagreement does not prove the earth's shape is unknowable. The disagreement is a fact about people, not a proof about the subject. The same applies here: disagreement about which revelation is true does not prove that no revelation is true.
+This is a non sequitur — a Latin phrase meaning "it does not follow." A non sequitur is a conclusion that does not logically follow from the evidence given. Think of it this way: many people disagree about whether it is healthy to be a vegan. That disagreement does not prove the health effects is unknowable. The disagreement is a fact about people, not a proof about the subject. The same applies here: disagreement about which revelation is true does not prove that no revelation is true.
 
 Your "Scripture was misused for slavery and witch hunts" line also does not refute Scripture. This is a genetic fallacy — the error of judging something by its misuse or its origin instead of by its actual content. A knife can be misused to hurt someone, but that does not mean knives do not cut bread. Abuse of a source is not the same as falsifying the source.
 
-As a Christian, I read this through Scripture's framework: people suppress truth, worship created things, and need their thoughts renewed. I am not asking you to grant that as final authority before you can understand my argument. I am telling you how I see the whole issue.
+As a Christian, I interpret this whole debate through what the Bible teaches: that people naturally push down the truth about God, replace Him with other things they treat as ultimate, and need their thinking fundamentally changed. I am not asking you to accept the Bible as your authority before you can engage with my argument. I am being transparent about where I am standing and why I see the issue the way I do.
 
 ## Origins, Evolution, Information, And Abiogenesis
 
@@ -108,7 +108,7 @@ Calling the resurrection "2,000-year-old hearsay" is not serious historical reas
 
 Historical reasoning works by source quality, proximity to events, multiple attestation (meaning several independent sources confirm the same thing), explanatory power, and comparative judgment. Britannica treats Jesus as a historical figure. SEP discusses miracles as a serious philosophical topic.
 
-1 Corinthians 15:3-8 matters here because scholars — including critics of Christianity — date it to within a few years of the crucifixion. That is not late legendary material. Paul lists named eyewitnesses while many of them were still alive, which means his readers could check his claims. If you want to reject the resurrection, do it on historical grounds. But "hearsay" is not a historical argument. It is a slogan.
+1 Corinthians 15:3-8 matters here because scholars — including critics of Christianity — date it to within a few years of the crucifixion. That is not late legendary material. Paul the Apostle lists named eyewitnesses while many of them were still alive, which means his readers could check his claims. If you want to reject the resurrection, do it on historical grounds. But "hearsay" is not a historical argument. It is a slogan.
 
 ## Rhetorical Labels Are Not Refutations
 
@@ -124,4 +124,4 @@ So here is the core point again, plainly: you have not refuted my actual documen
 
 Christianity explains reality, reason, morality, meaning, creation, sin, worship, and resurrection better than atheistic naturalism does. That is not a slogan. It is the actual burden of the debate. If you want to keep insisting on a narrower definition of religion while ignoring the functional worldview claim, then you still have not answered the argument.
 
-I stand by my point: atheism can function as a religion, worldview, false worship, and redirected allegiance. If you want to overturn that, prove why the functional and worldview definition is invalid.
+I stand by my point: atheism functions as a religion, worldview, false worship, and redirected allegiance. If you want to overturn that, prove why the functional and worldview definition is invalid. Until then, I consider you a fervent, devout and zealous member of the church of scientism.
