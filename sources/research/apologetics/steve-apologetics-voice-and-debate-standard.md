@@ -508,3 +508,74 @@ Answer the actual claims one by one.
 Defend Steve's stated thesis unless sourced proof shows it is false.
 Put factual concerns in advisory notes instead of weakening the rebuttal.
 ```
+
+---
+
+## Gospel Legal-Framework Voice: Version 4 Direction
+
+This section governs the voice, structure, and logic of gospel explanations written in the legal-framework mode — letters and documents that present the gospel as a legal case.
+
+### Tone: Factual, Not Narrative
+
+The tone is factual, explanatory, descriptive, and logical. It is not narrative. It is not a bedtime story. The document is not leading the reader through an emotional experience. It is laying out a case.
+
+Do not write:
+- "Imagine you are watching..."
+- "Think about what that means for you..."
+- "Picture a courtroom..."
+- "Like a film playing out..."
+
+These are story-opening devices. They belong to narrative writing. Legal-framework gospel writing does not need them.
+
+Write instead in direct declarative sentences. State facts. Explain terms. Draw conclusions. Move to the next point.
+
+### Analogies: Clarity Only
+
+Analogies are tools for clarity, not atmosphere. When a concept from Scripture or theology is difficult to grasp in the abstract, a clear-cut, universally understood real-world situation may be placed beside it to illuminate it. The analogy clarifies the concept. Then the writing moves on.
+
+Analogies must not linger. They must not become illustrations that build mood or emotion. If the real-world situation makes the concept plain, one or two sentences are sufficient. Then proceed.
+
+Introduce analogies this way: state the real-world situation first, map it to the biblical concept, and continue. Do not use "Imagine" or "Picture" or "Think of it like." A parallel statement is enough: "Here is a parallel:" or simply the statement itself, followed immediately by the application.
+
+### The Courtroom Frame Is Real, Not Only Metaphorical
+
+The legal-trial framing is not a teaching device imposed from outside onto the biblical text. The legal trial between God and humanity is a real event. The courtroom language in the Bible — Judge, law, guilt, accusation, sentence, substitute, advocate, verdict — is the actual language of Scripture describing actual spiritual and legal realities. The analogy serves because the reality behind it is genuinely legal. Write accordingly. Do not qualify it as merely a metaphor.
+
+### The Document Must Build a Legal Case
+
+The document must answer four questions. Every section must contribute to answering these questions, and the reader must be able to say by the end that each one has been addressed.
+
+1. Why is God who He is? — His authority, holiness, righteousness, and justice are not arbitrary. They are grounded in what He is and in the fact that He is Creator.
+2. Why do we need the gospel? — Because guilt before a holy God is real, legal, and cannot be cancelled by human effort or good intention.
+3. Why couldn't it be any other way? — Because justice requires payment. A holy God cannot overlook sin without becoming unjust. The debt cannot be paid by the guilty party using the same currency the debt is owed in. Only a substitute who is fully human and fully divine can satisfy both requirements.
+4. Why is the gospel the best explanation of morality, of all worldviews, of the state of the world today? — Because every other system misdiagnoses the problem, puts the burden on the guilty to pay what they cannot pay, and has no answer for a debt already owed to a standard they cannot override.
+
+### Structure: Climax at the Cross
+
+The document must build toward the cross as its structural climax. Everything before the cross establishes the legal case. The guilt is real. The standard is real. The debt is real. The accuser is real. The payment is required. Nothing in the build-up resolves the problem.
+
+The cross section is the peak. It is where justice is satisfied, where the substitute absorbs the full legal sentence, and where the case turns. It must be written to carry that weight. Not emotionally. Factually. With the weight of the full case already in view.
+
+Only two things follow the cross: the verdict (resurrection as legal vindication that the payment was accepted) and the reader's response (repentance and faith as the correct human answer to what has been established).
+
+### The Price Was Paid for the Reader Personally
+
+The closing movement must make clear that the payment at the cross was not a general transaction for a vague category of people. It was specific. The reader must understand that the debt that was paid was their own debt, carried on Jesus by God's deliberate act, for them personally. This is not sentiment. It is a legal fact the reader must receive.
+
+### Sentence Style: Lawyer, Not Preacher
+
+Write like a lawyer laying out a case, not like a preacher telling a story.
+
+Preferred sentence patterns:
+- "This is legal language: transgression means stepping over a boundary that was clearly set."
+- "The wages of sin is death. Wages are earned payment — the result you receive for what you have done."
+- "God placed the entire guilt of humanity on Jesus. This was not an accident. This was the plan."
+- "The resurrection is heaven's legal verdict. The payment was accepted. The case is closed."
+
+Avoid:
+- "Think about what that means..."
+- "Let that sink in..."
+- "What a remarkable truth..."
+- "This is the most beautiful thing..."
+
+These are homiletic and devotional moves. Legal-framework gospel writing makes its emotional impact through the weight of the facts stated plainly, not through devotional framing.
