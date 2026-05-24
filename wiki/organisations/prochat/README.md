@@ -13,12 +13,13 @@ Canonical ProChat organisation context.
 ## Recommended reading order
 
 Start here:
-1. `brand/company-overview.md`
-2. `brand/prochat-os.md`
-3. `brand/positioning.md`
-4. `brand/messaging-framework.md`
-5. `brand/offer-architecture.md`
-6. `playbooks/saas-reference.md`
+1. `brand/prochat-os-strategy-draft.md` — current active strategy discovery
+2. `brand/company-overview.md`
+3. `brand/prochat-os.md`
+4. `brand/positioning.md`
+5. `brand/messaging-framework.md`
+6. `brand/offer-architecture.md`
+7. `playbooks/saas-reference.md`
 
 ## Rule
 
