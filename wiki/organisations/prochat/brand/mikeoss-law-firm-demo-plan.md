@@ -32,15 +32,27 @@ MikeOSS is a legal document assistant with:
 
 ## Recommended v1 architecture
 
-For the first demo, use the simplest cloud-hybrid setup:
+For the first demo, use the existing Dokploy environment instead of AWS.
+
+Reason:
 
 ```text
-AWS EC2 demo server
-  ├─ Mike frontend
-  ├─ Mike backend
-  ├─ Nginx/Caddy reverse proxy
-  ├─ PM2 or systemd process management
-  └─ LibreOffice for DOC/DOCX support
+This is only a demo. AWS adds friction. Dokploy already exists, already has routing, Cloudflare, domains, and a deployment workflow.
+```
+
+Use the Dokploy-specific checklist:
+
+```text
+mikeoss-dokploy-demo-checklist.md
+```
+
+Recommended first demo architecture:
+
+```text
+Dokploy server
+  ├─ Mike frontend service
+  ├─ Mike backend service
+  └─ Dokploy/Traefik/Cloudflare routing
 
 Managed services
   ├─ Supabase project for Auth/Postgres
@@ -48,7 +60,7 @@ Managed services
   └─ Claude/Gemini/OpenAI API key
 ```
 
-Do not start by self-hosting every component. The goal is fast demo readiness, not perfect infrastructure.
+AWS remains relevant later for customer-owned or ProChat-managed production installs.
 
 ## Recommended AWS demo setup
 
@@ -142,3 +154,37 @@ I can set up a private legal AI document workspace for your firm, using open-sou
 - create law-firm Loom script
 - create outreach list
 - test one demo deployment before contacting firms
+
+
+
+
+## Dokploy demo shortcut — 2026-05-24
+
+For the first demo, prefer Dokploy over AWS if the existing Dokploy environment is available.
+
+Reason:
+
+```text
+It is only a demo. AWS adds friction. Dokploy is faster because the server already exists.
+```
+
+Dedicated Dokploy checklist:
+
+```text
+mikeoss-dokploy-demo-checklist.md
+```
+
+Helper script:
+
+```text
+mikeoss-dokploy-deploy-script.sh
+```
+
+Recommended demo domains:
+
+```text
+legal-demo.prochat.tools      → MikeOSS frontend
+legal-demo-api.prochat.tools  → MikeOSS backend
+```
+
+AWS remains relevant later for customer-owned or ProChat-managed production installs.

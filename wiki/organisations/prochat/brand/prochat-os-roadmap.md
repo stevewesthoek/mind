@@ -41,13 +41,15 @@ Create a concrete demo law firms can understand.
 Primary artifact:
 
 ```text
-private MikeOSS demo server + fake legal matter data + Loom demo
+private MikeOSS Dokploy demo + fake legal matter data + Loom demo
 ```
 
 Tasks:
 
-- deploy MikeOSS on AWS demo server
+- deploy MikeOSS on existing Dokploy environment for the demo
+- use `legal-demo.prochat.tools` and `legal-demo-api.prochat.tools`
 - use hosted Supabase and Cloudflare R2 for fast setup
+- keep AWS for later customer-owned or ProChat-managed production installs
 - create fake legal matter pack
 - show messy documents and notes becoming structured legal/admin output
 - record 60–90 second Loom
