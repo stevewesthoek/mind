@@ -47,7 +47,7 @@ private MikeOSS Dokploy demo + fake legal matter data + Loom demo
 Tasks:
 
 - deploy MikeOSS on existing Dokploy environment for the demo
-- use `legal-demo.prochat.tools` and `legal-demo-api.prochat.tools`
+- use `legal.prochat.tools` and `legal-api.prochat.tools`
 - use hosted Supabase and Cloudflare R2 for fast setup
 - keep AWS for later customer-owned or ProChat-managed production installs
 - create fake legal matter pack
