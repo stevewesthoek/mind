@@ -1337,3 +1337,966 @@ Possible areas to explore:
 - temporary support access
 - self-hosted agent with ProChat Cloud control plane
 - on-prem/local connector that calls ProChat APIs without exposing all data
+
+
+
+
+## Interview answers — 2026-05-24 round 6
+
+### Niche comparison principle
+
+The first niche should be selected by two criteria:
+
+```text
+1. businesses with money
+2. businesses with a painful workflow ProChat OS can actually improve
+```
+
+Do not choose a niche only because it has a big business problem. The problem must match ProChat OS's strength: turning messy inputs into structured outputs and agentic workflow execution.
+
+### Niche notes
+
+#### Real estate agents
+
+Real estate agents have big business problems, especially finding homeowners/sellers.
+
+However, that is not the first ProChat OS wedge. ProChat OS can help with admin, follow-up, and document workflows, but the main growth pain for real estate agents is lead/seller acquisition. That makes real estate a weaker first niche for the current offer.
+
+Decision:
+
+```text
+Real estate is not the first niche.
+```
+
+#### Law firms
+
+Law firms may be a strong niche because they need to process information, documents, and clients efficiently.
+
+If they can process client information faster, they can potentially serve more clients or reduce admin load.
+
+Potential fit:
+
+```text
+messy client documents + case notes + forms + emails → structured case/client summaries, checklists, timelines, tasks, follow-ups
+```
+
+#### Accountants
+
+Accountants remain a strong possible first niche because they process many documents, client records, receipts, forms, missing-document requests, and admin workflows.
+
+However, the exact painful workflow is unknown and must be discovered by talking to accountants.
+
+#### Creators / YouTubers / SaaS builders
+
+Creators and SaaS builders are also strong possible niches.
+
+Examples:
+
+- automatic YouTube video production workflows
+- research-to-script workflows
+- content calendar automation
+- git commits to X/social posting
+- product update announcements
+- SaaS build-in-public automation
+
+This may be easier to demonstrate publicly because it connects to ProChat's own content automation and video orchestration systems.
+
+### First workflow uncertainty
+
+The exact first workflow cannot be chosen from theory.
+
+It must be discovered from real conversations.
+
+Current stance:
+
+```text
+Do not assume what accountants, lawyers, or creators hate doing. Show the before/after concept, then ask them what workflow they would want automated.
+```
+
+### Demo strategy
+
+The first demo does not need to be a complete real implementation.
+
+It can be a fake/sample-data visualization that sells the before/after dream:
+
+```text
+before: messy, scattered, unstructured information
+
+after: structured, usable output that saves admin time
+```
+
+The goal is not to perfectly model a niche workflow. The goal is to make the viewer recognize:
+
+```text
+I have messy workflows like this.
+This could save time.
+I am interested in this new agentic AI stuff.
+I want someone to automate this for me.
+```
+
+### Outreach strategy direction
+
+Use the demo as a conversation starter, not as a finished product pitch.
+
+Possible approach:
+
+1. Create a short Loom video showing messy information becoming structured output.
+2. Reach out to accountants/law firms/creators with a niche-specific version.
+3. Ask what annoying workflow takes too much time in their business.
+4. Try to get them on a call.
+5. Learn the real pain before building the real workflow.
+
+### Workflow entry point preference
+
+The easiest first workflow entry point may be:
+
+```text
+send messy data to a private email address
+```
+
+This avoids forcing the customer to learn a new dashboard.
+
+Important principle:
+
+```text
+Nobody wants to learn another tool. Nobody wants to change their workflow.
+```
+
+ProChat OS should fit into the customer's existing workflow first. The dashboard is for visibility and control, not the primary input method.
+
+### Possible first agent naming direction
+
+Not decided yet.
+
+Current instinct:
+
+```text
+Document Workflow Agent
+Admin Workflow Agent
+```
+
+The final name should be based on the customer's language, not internal technical language.
+
+### Validation principle
+
+The first mission is not to sell the final ProChat OS package.
+
+The first mission is to discover:
+
+- which niche has the strongest pain
+- which workflow they already hate
+- which workflow is easy to visualize
+- which workflow they would pay to stop doing manually
+- which deployment/integration pattern is acceptable
+
+### Key insight
+
+ProChat OS should not ask customers to adapt to another dashboard.
+
+ProChat OS should adapt to their existing flow:
+
+```text
+email in
+file in
+form in
+folder in
+API in
+
+structured output out
+email out
+task out
+CRM out
+report out
+```
+
+
+
+
+## Outreach and validation phase — 2026-05-24
+
+### Purpose
+
+The next phase is not to finalize the full product or build a complete niche workflow.
+
+The next phase is to validate which market and workflow creates the strongest pull for ProChat OS.
+
+The strategic question:
+
+```text
+Which niche has a painful, repetitive, documentation/admin/content workflow where messy inputs can be transformed into structured outputs that save time and create obvious value?
+```
+
+### Validation principle
+
+Do not assume the customer's pain from the outside.
+
+Show the concept, then ask what workflow they want automated.
+
+The demo should be a conversation starter, not a finished product pitch.
+
+### First outreach asset
+
+Create a short visual Loom demo, 60–90 seconds.
+
+The Loom should show:
+
+```text
+messy inputs
+emails + PDFs + notes + forms + links + files + voice notes
+
+→ ProChat OS in the middle
+memory + agents + workflow rules + approvals + output routing
+
+→ structured outputs
+summary + checklist + tasks + draft follow-up + report + CRM-ready fields
+```
+
+The goal is to make the viewer recognize:
+
+```text
+I have messy workflows like this.
+This could save time.
+I want to know what this could automate in my business.
+```
+
+### Three outreach test niches
+
+Run the first outreach tests against three niches:
+
+1. **Accountants**
+   - likely pain: client intake, missing documents, document collection, admin, bookkeeping/tax prep support
+   - demo framing: messy client documents and emails become structured intake output
+
+2. **Law firms**
+   - likely pain: client intake, case documents, forms, evidence, timelines, follow-ups
+   - demo framing: messy client information becomes structured case/client summary and task list
+
+3. **Creators / SaaS builders**
+   - likely pain: research, content creation, product updates, Git commits, X posts, YouTube workflows
+   - demo framing: messy research/product activity becomes content drafts, publishing tasks, and structured plans
+
+Real estate is not the first outreach niche because the biggest growth pain is homeowner/seller acquisition, which does not directly match the current ProChat OS wedge.
+
+### Outreach method
+
+Use short Loom + short personalized message.
+
+Best platforms to test:
+
+- LinkedIn direct message
+- email/contact form
+- local business network
+- warm introductions if available
+
+The first target is a conversation, not a direct sale.
+
+### Example accountant outreach
+
+```text
+Hi [Name], I’m testing a new agentic workflow system called ProChat OS.
+
+The idea is simple: it takes messy inputs like client emails, PDFs, notes, forms, and document requests, then turns them into structured summaries, checklists, follow-up drafts, and tasks.
+
+I made a short visual demo here: [Loom]
+
+I’m not trying to sell a finished accounting tool yet. I’m trying to understand which admin/document workflows accountants actually hate doing manually.
+
+Is there one repetitive workflow in your firm that takes too much time and feels like it should be automated?
+```
+
+### Example law firm outreach
+
+```text
+Hi [Name], I’m testing a new agentic workflow system called ProChat OS.
+
+It turns messy client information — emails, documents, notes, forms, and attachments — into structured summaries, checklists, draft follow-ups, and tasks.
+
+I made a short visual demo here: [Loom]
+
+I’m trying to learn which document/admin workflows law firms actually want automated, instead of guessing from the outside.
+
+Is there one repetitive workflow in your firm that eats time and should be handled more automatically?
+```
+
+### Example creator / SaaS builder outreach
+
+```text
+Hi [Name], I’m testing ProChat OS, an agentic workflow system that turns messy inputs into structured outputs.
+
+Example: research links, notes, Git commits, product updates, and ideas go in — then content drafts, X posts, video outlines, and publishing tasks come out.
+
+I made a short visual demo here: [Loom]
+
+I’m looking for creators/builders who already feel buried in manual content/admin work. Is there one workflow you wish could run automatically in the background?
+```
+
+### Discovery call questions
+
+Ask:
+
+1. What repetitive admin, document, or content task do you hate most?
+2. Where does the information come from?
+3. What does the finished output need to look like?
+4. Who uses that output?
+5. What happens if it is late or wrong?
+6. How often does this happen?
+7. How long does it take manually?
+8. What tools are involved today?
+9. Would an assistant need approval before sending or updating anything?
+10. If this was automated, what would it be worth per month?
+
+### Outreach success criteria
+
+The outreach phase is successful when at least one niche shows strong pull:
+
+- people respond to the Loom
+- they can quickly name a painful workflow
+- the workflow repeats often
+- the workflow has messy inputs and structured outputs
+- the manual time cost is obvious
+- they would consider paying for managed automation
+- they are willing to join a pilot call
+
+### Next decision after outreach
+
+After outreach, choose the first commercial wedge:
+
+```text
+first niche + first workflow + first managed pilot promise
+```
+
+Only after this should the strategy move from draft/discovery to final operating strategy.
+
+
+
+
+## Interview answers — 2026-05-24 round 7
+
+### Channel split by audience
+
+Creators and SaaS builders should not be contacted directly for the first manual outreach phase.
+
+They should be attracted organically through automated content channels such as:
+
+- YouTube
+- Facebook channels/pages/groups
+- other automated or semi-automated social channels
+
+This means creators/SaaS builders remain an important audience, but they belong to the content/inbound channel, not the local direct-sales channel.
+
+### Local direct outreach focus
+
+Local direct outreach should focus on businesses in the immediate environment where Steve can personally build trust and get calls.
+
+Current local outreach candidates:
+
+- accountants
+- law firms
+
+The strategy should choose one first local niche for continuity and focus.
+
+### Current hypothesis
+
+Law firms may be the better first local outreach niche because:
+
+- they likely have higher willingness to pay
+- they process lots of documents and client information
+- admin speed can directly affect case throughput and client service
+- structured information has high value
+- document-heavy workflows fit the ProChat OS messy-input-to-structured-output story
+
+However, this should still be tested against accountants because accountants may have more standardized recurring document workflows that are easier to automate and demonstrate.
+
+### Updated validation split
+
+```text
+Direct local outreach:
+  primary test = law firms or accountants
+
+Organic content / inbound:
+  creators, SaaS builders, personal developers
+```
+
+### Open decision
+
+Choose whether the first local outreach niche should be:
+
+1. law firms
+2. accountants
+
+Criteria to compare:
+
+- willingness to pay
+- urgency of pain
+- ease of explaining the demo
+- ease of getting a meeting
+- security/compliance sensitivity
+- workflow standardization
+- risk of errors
+- local trust requirements
+- speed to first paid pilot
+
+
+
+
+## Niche and channel decision — 2026-05-24
+
+### First local direct-sales niche
+
+Decision:
+
+```text
+Law firms first.
+```
+
+Reasoning:
+
+- law firms have money
+- law firms handle large amounts of messy client information
+- law firms have document-heavy workflows
+- client intake and admin processing are easy to visualize
+- faster information structuring can help with throughput, response speed, and internal organization
+- the ProChat OS value can be positioned safely as admin/workflow support, not legal advice
+
+First law-firm positioning:
+
+```text
+ProChat OS gives your firm a 24/7 agentic employee that turns messy client emails, PDFs, notes, forms, and attachments into structured intake summaries, missing-information checklists, task lists, and draft follow-ups — with human approval first.
+```
+
+### Second local comparison niche
+
+Decision:
+
+```text
+Accountants second.
+```
+
+Reasoning:
+
+- accountants also have document-heavy workflows
+- accountants likely have recurring intake and missing-document pain
+- accountants may be a strong follow-up niche if law firm response is weak
+- accountants are useful as a comparison group for outreach response and workflow clarity
+
+### Organic/inbound audience
+
+Decision:
+
+```text
+SaaS builders, solo developers, creators, and influencers should be reached through social media and automated content channels, not direct local outreach.
+```
+
+Primary channels:
+
+- YouTube
+- Facebook channels/pages/groups
+- other automated or semi-automated social channels
+
+Reasoning:
+
+- creators and SaaS builders are better attracted through examples, content, and public workflows
+- this audience can see ProChat OS in action through build-in-public, video automation, content automation, and agentic workflow demos
+- direct sales effort should stay focused on local businesses where trust and calls matter more
+
+### Current priority order
+
+```text
+1. Law firms — direct local outreach
+2. Accountants — second comparison/local outreach niche
+3. SaaS builders / creators / influencers — organic social content funnel
+```
+
+
+
+
+## MikeOSS as possible legal low-entry offer — 2026-05-24
+
+### Context
+
+MikeOSS (`mikeoss.com`) is an open-source legal AI platform positioned as an open-source alternative to Harvey and Legora.
+
+It is relevant to the ProChat OS law-firm wedge because it already targets legal document workflows and includes features that law firms can understand quickly.
+
+### Relevant MikeOSS positioning/features
+
+From the public site and GitHub repository, MikeOSS appears to offer:
+
+- legal document assistant
+- project/matter-scoped workspaces
+- document upload and chat
+- document citations
+- tabular review across many documents
+- reusable workflows/templates
+- self-hostable deployment
+- customer-owned model keys
+- open codebase
+- Next.js frontend, Express backend, Supabase Auth/Postgres, and R2/S3-compatible object storage
+- AGPL-3.0 license
+
+### Strategic fit
+
+MikeOSS could become a low-entry legal wedge under the ProChat OS strategy.
+
+Possible offer:
+
+```text
+We install an open-source legal document AI workspace for your firm, then extend it with ProChat OS agentic workflows for intake, admin, follow-up, document organization, and structured outputs.
+```
+
+This could lower the adoption barrier because the first value is already visible:
+
+```text
+upload documents → ask questions → get cited answers → run review workflows
+```
+
+Then ProChat OS becomes the integration and automation layer around it.
+
+### Why it helps
+
+- faster legal demo
+- law firms immediately understand document AI
+- lower product-build burden for ProChat v1
+- open-source/self-hosted story supports trust
+- can be installed on the firm's own infrastructure
+- creates upsell path into ProChat OS workflows
+
+### Potential upsell ladder
+
+```text
+1. MikeOSS install / legal document AI workspace
+2. ProChat OS integration layer
+3. Client intake workflow
+4. Admin/document workflow agent
+5. Email/follow-up workflow
+6. Matter status/reporting workflow
+7. Managed ProChat OS support plan
+```
+
+### Important caution
+
+MikeOSS is licensed AGPL-3.0, so legal review is required before building commercial proprietary extensions around it.
+
+Safe direction:
+
+- offer installation, configuration, hosting, and support services
+- keep any MikeOSS modifications compliant with AGPL obligations
+- separate ProChat OS proprietary/source-available modules clearly if they communicate over APIs rather than forming a derivative work
+- verify license boundaries before packaging or reselling a modified MikeOSS product
+
+### Strategic conclusion
+
+MikeOSS should not replace ProChat OS.
+
+It can be used as a low-entry legal implementation block:
+
+```text
+MikeOSS = legal document workspace
+ProChat OS = agentic workflow OS and integration layer around the firm's real processes
+```
+
+This may make law firms easier to approach because the first offer becomes tangible before the broader ProChat OS vision is introduced.
+
+
+
+
+## Locked decision — MikeOSS legal wedge — 2026-05-24
+
+Decision:
+
+```text
+Use MikeOSS as the first tangible law-firm wedge for ProChat OS.
+```
+
+MikeOSS should be used to create a concrete legal AI document workspace demo that can be shown to lawyers before introducing the broader ProChat OS vision.
+
+### Strategic role
+
+```text
+MikeOSS = low-entry legal document AI workspace
+ProChat OS = broader Agentic Workflow OS and integration layer
+```
+
+MikeOSS does not replace ProChat OS. It gives law firms an immediate, understandable first use case:
+
+```text
+upload legal/client documents → ask questions → review/cite/structure information → see the value of private AI workflows
+```
+
+ProChat OS is then sold as the managed system around and beyond this:
+
+- hosting
+- setup
+- support
+- intake workflows
+- document/admin workflows
+- follow-up workflows
+- matter reporting
+- integrations
+- agentic workflow orchestration
+
+### Intended first path
+
+1. Build an Amazon/AWS demo server.
+2. Install MikeOSS on it.
+3. Use it as a private demo environment.
+4. Let selected lawyers test it with sample or safe documents.
+5. Learn what they value and what workflows they want automated.
+6. Offer to install/manage it for their firm.
+7. Upsell ProChat OS as the Agentic Workflow OS around the document workspace.
+
+### Open implementation questions
+
+- Which AWS instance size is enough for a demo?
+- Should the demo use hosted Supabase/R2 or self-hosted Postgres/object storage?
+- Should law firms test with sample data only at first?
+- How to handle model API keys and privacy?
+- How to comply with MikeOSS AGPL-3.0 obligations?
+- How to separate MikeOSS from proprietary/source-available ProChat OS modules?
+- What is the simplest demo flow for lawyers?
+
+
+
+
+## MikeOSS execution plan link — 2026-05-24
+
+The MikeOSS legal wedge now has a dedicated execution plan:
+
+```text
+wiki/organisations/prochat/brand/mikeoss-law-firm-demo-plan.md
+```
+
+Use that document for the practical AWS demo, law-firm demo, AGPL caution, and ProChat OS upsell path.
+
+Strategic summary:
+
+```text
+MikeOSS = first tangible legal AI document workspace demo
+ProChat OS = the broader Agentic Workflow OS installed around, beside, and beyond MikeOSS
+```
+
+MikeOSS is not ProChat OS. It is an implementation block and wedge for the law-firm niche.
+
+
+
+
+## Technical definition of ProChat OS — 2026-05-24
+
+### Core question
+
+What exactly does a client install when they install ProChat OS?
+
+### Technical answer — draft
+
+ProChat OS is not one model, one dashboard, one chatbot, or one workflow.
+
+Technically, ProChat OS is an installable agentic workflow runtime made of five core parts:
+
+```text
+1. Workflow runtime
+2. Memory/context store
+3. Tool and connector layer
+4. Model routing layer
+5. Control console / approval layer
+```
+
+Together, these parts let a customer connect messy inputs to structured outputs through configurable agents and workflows.
+
+### The smallest installable core
+
+The smallest real ProChat OS installation should include:
+
+```text
+prochat-core
+  - local/API service that runs workflows
+  - job scheduler / queue
+  - workflow definitions
+  - event log
+  - approval gates
+
+prochat-memory
+  - structured memory store
+  - business/project/person/context records
+  - document/context index
+  - retrieval interface for agents
+
+prochat-connectors
+  - input connectors: email, folder, webhook, forms, API, CLI
+  - output connectors: email draft, report, task, CRM update, file, webhook
+
+prochat-model-router
+  - model/provider selection
+  - local vs cloud model routing
+  - cost/latency/quality controls
+  - provider keys owned by the customer
+
+prochat-console
+  - dashboard/command center
+  - workflow visibility
+  - approvals
+  - status
+  - logs
+  - configuration UI where needed
+```
+
+### What is core vs optional
+
+#### Core
+
+Core means ProChat OS is not really ProChat OS without it.
+
+Core components:
+
+- workflow runtime
+- memory/context store
+- connector interface
+- model router / AI selector
+- approval and event log
+- control console, even if minimal
+- CLI/API for setup and operation
+
+#### Optional modules
+
+Optional modules are installable blocks on top of the core:
+
+- MikeOSS legal document workspace
+- video orchestrator
+- content engine
+- monitoring workflows
+- CRM integrations
+- email assistant
+- document workflow agent
+- local app builder
+- social posting workflows
+- custom niche agents
+
+### What ProChat OS is not
+
+ProChat OS is not:
+
+- only the model router
+- only the AI model selector
+- only the memory repo
+- only the Brain Console dashboard
+- only MikeOSS
+- only a chatbot
+- only an API wrapper
+- only a SaaS dashboard
+
+Those are pieces or modules. ProChat OS is the runtime system that combines them.
+
+### How current repos map to ProChat OS
+
+Current pattern:
+
+```text
+mind repo
+  → prototype of the memory/context layer
+
+brain repo
+  → prototype of system rules, skills, workflows, model routing, runbooks, runtime docs, and operational logic
+
+Brain Console
+  → prototype of the command center / dashboard / control plane
+
+ProBot / Brain Core concepts
+  → prototype of the API, agent, session, status, approval, and integration layer
+```
+
+A client should not install Steve's private `mind` or `brain` repos directly.
+
+A public/customer ProChat OS installation should be a sanitized productized repo/package that implements the same architecture without Steve's private memory.
+
+### Client installation shape
+
+A client installs something like:
+
+```text
+prochat-os/
+  core/              workflow runtime and API
+  memory/            customer memory/context store
+  connectors/        input/output integrations
+  router/            model selector and provider routing
+  console/           command center and approvals
+  cli/               install, configure, update, support commands
+  modules/           optional workflow blocks
+```
+
+### Runtime shape
+
+A working ProChat OS instance runs as:
+
+```text
+API service
+scheduler / worker
+memory database / document store
+object/file storage
+model router
+connector workers
+control console
+CLI
+```
+
+### Deployment shape
+
+For a law firm pilot, ProChat OS could run as:
+
+```text
+customer-owned or ProChat-managed AWS server
+  ├─ ProChat Core API
+  ├─ ProChat Memory DB
+  ├─ ProChat Connector workers
+  ├─ ProChat Model Router
+  ├─ ProChat Console
+  ├─ optional MikeOSS instance
+  └─ optional workflow modules
+```
+
+### Technical product definition
+
+Current best technical definition:
+
+```text
+ProChat OS is an installable agentic workflow runtime that combines memory, model routing, connectors, workflows, approvals, and a control console so customer-specific agents can transform messy inputs into structured outputs and actions.
+```
+
+### Important productization requirement
+
+Before selling ProChat OS as a product, the current private pattern must be extracted into a clean installable package.
+
+The first productized version should not expose Steve's private repos. It should create an empty customer instance with:
+
+- their own memory
+- their own workflows
+- their own credentials
+- their own connectors
+- their own logs
+- their own optional modules
+
+### Open technical decisions
+
+Need to decide:
+
+- Is `prochat-core` one monolith first or multiple services?
+- Which database powers memory/context first?
+- Is the model router required in v1, or can v1 use one configured provider?
+- Is Brain Console required in v1, or can the first control surface be CLI + simple status page?
+- What is the first connector: email inbox, folder upload, webhook, or form?
+- What is the first output connector: email draft, report, task list, or CRM-ready JSON?
+- How much of this can be built by adapting existing brain/Brain Console work?
+
+
+
+
+## Strategy clarification — brand-agnostic website vs niche outreach — 2026-05-24
+
+### Settled decision
+
+The ProChat website and main public messaging should be business-agnostic.
+
+The website should focus on:
+
+```text
+ProChat OS
+Agentic Workflow OS
+messy inputs → structured outputs/actions
+business tools integration
+24/7 agentic employee
+customer-controlled infrastructure
+managed/commercial support
+```
+
+The website should not be primarily about lawyers, law firms, MikeOSS, accountants, SaaSKit, WaaSKit, or any single niche.
+
+### Law-firm wedge role
+
+Law firms are the first direct-outreach niche only.
+
+This is a go-to-market wedge, not the whole company strategy.
+
+```text
+Public website = ProChat OS, business-agnostic
+Direct outreach = law firms first, using MikeOSS as a tangible legal AI document workspace wedge
+Future comparison niche = accountants
+Organic channel = creators, SaaS builders, personal developers, influencers
+```
+
+### MikeOSS role
+
+MikeOSS is not ProChat OS and should not define the ProChat website.
+
+MikeOSS is a specific implementation block for the law-firm outreach path:
+
+```text
+MikeOSS = legal document AI workspace demo/install
+ProChat OS = Agentic Workflow OS installed around and beyond it
+```
+
+### Technical definition — polished version
+
+ProChat OS should be documented from the beginning as an installable runtime, not as a vague concept.
+
+Final working technical definition:
+
+```text
+ProChat OS is an installable Agentic Workflow OS: a private workflow runtime that connects messy inputs to business tools through memory, connectors, model routing, workflow agents, approvals, logs, and a control console.
+```
+
+Customer-facing technical explanation:
+
+```text
+We install a private workflow runtime on your server. It connects to selected inputs like email, files, forms, folders, APIs, or webhooks. It stores your business context, runs configurable agents, asks for approval when needed, and sends structured outputs to the tools you already use.
+```
+
+### Settled core architecture
+
+ProChat OS consists of these core installable parts:
+
+1. workflow runtime / API
+2. memory and context store
+3. input/output connectors
+4. model router / AI selector
+5. approval and event log
+6. control console
+7. CLI for install, update, configuration, and support
+8. optional workflow modules
+
+### Settled non-definition
+
+ProChat OS is not:
+
+- the model router alone
+- the memory store alone
+- Brain Console alone
+- MikeOSS alone
+- a dashboard alone
+- a chatbot alone
+- a single SaaS tool
+- a fixed kit
+
+### Strategy finalization status
+
+The core strategy is now stable enough to convert into a cleaner canonical strategy document.
+
+What is settled:
+
+- ProChat OS is the flagship
+- category is Agentic Workflow OS
+- website is business-agnostic
+- law firms are first direct outreach niche
+- MikeOSS is a niche wedge, not the main product
+- creators/SaaS builders are reached through organic channels
+- legacy kits remain real but secondary/legacy
+- free personal GitHub version + paid managed/commercial support remains the licensing direction
+- ProChat OS is technically an installable runtime with core components
+
+What is not settled but can be left as execution-stage decisions:
+
+- exact first law-firm workflow
+- exact pricing
+- exact first AWS deployment architecture
+- exact public landing page copy
+- exact ProChat OS v1 implementation plan
+- exact demo script and outreach sequence
+
+These do not block canonical strategy. They belong in roadmap, offer, implementation, and outreach docs.

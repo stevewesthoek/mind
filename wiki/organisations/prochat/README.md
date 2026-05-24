@@ -13,13 +13,15 @@ Canonical ProChat organisation context.
 ## Recommended reading order
 
 Start here:
-1. `brand/prochat-os-strategy-draft.md` — current active strategy discovery
-2. `brand/company-overview.md`
-3. `brand/prochat-os.md`
-4. `brand/positioning.md`
-5. `brand/messaging-framework.md`
-6. `brand/offer-architecture.md`
-7. `playbooks/saas-reference.md`
+1. `brand/prochat-os-strategy.md` — canonical ProChat OS business strategy
+2. `brand/prochat-os-technical-definition.md` — what ProChat OS is technically
+3. `brand/prochat-os-go-to-market.md` — website, outreach, and channel plan
+4. `brand/prochat-os-roadmap.md` — execution sequence
+5. `brand/mikeoss-law-firm-demo-plan.md` — first law-firm wedge plan
+6. `brand/prochat-os-strategy-draft.md` — source history and discovery notes
+7. `brand/company-overview.md`
+8. `brand/prochat-os.md`
+9. `brand/messaging-framework.md`
 
 ## Rule
 
