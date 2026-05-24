@@ -11,13 +11,13 @@ set -euo pipefail
 # two Dokploy apps can be created quickly.
 #
 # Recommended Dokploy apps:
-#   1. mike-backend  -> root directory: backend   -> domain: legal-demo-api.prochat.tools
-#   2. mike-frontend -> root directory: frontend  -> domain: legal-demo.prochat.tools
+#   1. mike-backend  -> root directory: backend   -> domain: legal-api.prochat.tools
+#   2. mike-frontend -> root directory: frontend  -> domain: legal.prochat.tools
 
 REPO_URL="https://github.com/willchen96/mike.git"
 TARGET_DIR="${1:-mikeoss-demo}"
-FRONTEND_DOMAIN="${FRONTEND_DOMAIN:-legal-demo.prochat.tools}"
-BACKEND_DOMAIN="${BACKEND_DOMAIN:-legal-demo-api.prochat.tools}"
+FRONTEND_DOMAIN="${FRONTEND_DOMAIN:-legal.prochat.tools}"
+BACKEND_DOMAIN="${BACKEND_DOMAIN:-legal-api.prochat.tools}"
 R2_BUCKET_NAME="${R2_BUCKET_NAME:-mike-demo}"
 
 if ! command -v git >/dev/null 2>&1; then
@@ -41,8 +41,8 @@ cd "$TARGET_DIR"
 
 mkdir -p .prochat-dokploy
 
-DOWNLOAD_SIGNING_SECRET="$(openssl rand -hex 32)"
-USER_API_KEYS_ENCRYPTION_SECRET="$(openssl rand -hex 32)"
+DOWNLOAD_SIGNING_SECRET="[REDACTED]"
+USER_API_KEYS_ENCRYPTION_SECRET="[REDACTED]"
 
 cat > .prochat-dokploy/backend.env.template <<EOF
 PORT=3001

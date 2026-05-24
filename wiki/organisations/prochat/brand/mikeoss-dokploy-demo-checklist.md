@@ -25,17 +25,21 @@ Possible options:
 
 ```text
 mike.prochat.tools
-legal-demo.prochat.tools
+legal.prochat.tools
+legal-api.prochat.tools
 law-demo.prochat.tools
 ```
 
 Recommended:
 
 ```text
-legal-demo.prochat.tools
+legal.prochat.tools
+legal-api.prochat.tools
 ```
 
-Reason: it is clearer for law-firm outreach and avoids making `mike` look like a ProChat-owned product name.
+Note: `legal-api@prochat.tools` is an email address. For the API service, use the hostname `legal-api.prochat.tools` unless an email mailbox is intentionally needed later.
+
+Reason: `legal.prochat.tools` is clearer for law-firm outreach and avoids making `mike` look like a ProChat-owned product name.
 
 ## MikeOSS requirements
 
@@ -84,8 +88,8 @@ The first shared demo should be a visualization and proof of concept, not a prod
 
 ## Pre-deployment checklist
 
-- [ ] Choose subdomain, preferably `legal-demo.prochat.tools`.
-- [ ] Create DNS record pointing the subdomain to the Dokploy server.
+- [ ] Choose subdomains: `legal.prochat.tools` for frontend and `legal-api.prochat.tools` for backend.
+- [ ] Create DNS records pointing both subdomains to the Dokploy server.
 - [ ] Create Supabase project for MikeOSS demo.
 - [ ] Run MikeOSS `backend/schema.sql` in Supabase SQL editor.
 - [ ] Create Cloudflare R2 bucket, e.g. `mike-demo`.
@@ -103,7 +107,7 @@ The first shared demo should be a visualization and proof of concept, not a prod
 
 ```env
 PORT=3001
-FRONTEND_URL=https://legal-demo.prochat.tools
+FRONTEND_URL=https://legal.prochat.tools
 DOWNLOAD_SIGNING_SECRET=<random-32-byte-hex>
 SUPABASE_URL=https://<project>.supabase.co
 SUPABASE_SECRET_KEY=<supabase-service-role-key>
@@ -123,7 +127,7 @@ USER_API_KEYS_ENCRYPTION_SECRET=<long-random-secret>
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://<project>.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=<supabase-anon-key>
-NEXT_PUBLIC_API_BASE_URL=https://legal-demo-api.prochat.tools
+NEXT_PUBLIC_API_BASE_URL=https://legal-api.prochat.tools
 ```
 
 ## Domain pattern
@@ -131,15 +135,15 @@ NEXT_PUBLIC_API_BASE_URL=https://legal-demo-api.prochat.tools
 Recommended two-subdomain pattern:
 
 ```text
-legal-demo.prochat.tools      → Mike frontend
-legal-demo-api.prochat.tools  → Mike backend
+legal.prochat.tools      → Mike frontend
+legal-api.prochat.tools  → Mike backend
 ```
 
 Alternative path-based pattern:
 
 ```text
-legal-demo.prochat.tools      → frontend
-legal-demo.prochat.tools/api  → backend
+legal.prochat.tools      → frontend
+legal.prochat.tools/api  → backend
 ```
 
 Use two subdomains first because it is simpler and matches Mike's `NEXT_PUBLIC_API_BASE_URL` expectation.
@@ -163,7 +167,7 @@ Root directory: backend
 Build command: npm install && npm run build
 Start command: npm start
 Port: 3001
-Domain: legal-demo-api.prochat.tools
+Domain: legal-api.prochat.tools
 ```
 
 Add backend environment variables.
@@ -177,7 +181,7 @@ Root directory: frontend
 Build command: npm install && npm run build
 Start command: npm start
 Port: 3000
-Domain: legal-demo.prochat.tools
+Domain: legal.prochat.tools
 ```
 
 Add frontend environment variables.
@@ -196,7 +200,7 @@ services:
     command: sh -c "npm install && npm run build && npm start"
     environment:
       PORT: "3001"
-      FRONTEND_URL: "https://legal-demo.prochat.tools"
+      FRONTEND_URL: "https://legal.prochat.tools"
     ports:
       - "3001:3001"
 
@@ -207,7 +211,7 @@ services:
       - ./:/app
     command: sh -c "npm install && npm run build && npm start"
     environment:
-      NEXT_PUBLIC_API_BASE_URL: "https://legal-demo-api.prochat.tools"
+      NEXT_PUBLIC_API_BASE_URL: "https://legal-api.prochat.tools"
     ports:
       - "3000:3000"
 ```
@@ -233,7 +237,7 @@ Use PDFs only. Avoid DOC/DOCX until the demo works.
 
 ## First-run checklist
 
-- [ ] Open `https://legal-demo.prochat.tools`.
+- [ ] Open `https://legal.prochat.tools`.
 - [ ] Sign up as demo admin/user.
 - [ ] If Supabase confirmation blocks login, disable email confirmation for demo or configure SMTP.
 - [ ] Add provider key in app if not set globally.
@@ -341,3 +345,178 @@ Both scripts contain no real secrets and should remain templates.
 - [ ] Upload fake legal sample data.
 - [ ] Record Loom.
 - [ ] Send first law-firm outreach batch.
+
+
+
+
+## Domain override — final demo domains
+
+Use these domains for the MikeOSS legal demo:
+
+```text
+legal.prochat.tools      → Mike frontend
+legal-api.prochat.tools  → Mike backend/API
+```
+
+Important clarification:
+
+```text
+legal-api@prochat.tools
+```
+
+is an email address, not an API hostname. For the backend API service, use:
+
+```text
+legal-api.prochat.tools
+```
+
+If an email inbox is needed later for intake or support, `legal-api@prochat.tools` can be created separately as a mailbox or alias, but it should not be used as the API URL.
+
+When older examples in this checklist mention `legal.prochat.tools` or `legal-api.prochat.tools`, treat them as superseded by the final domains above.
+
+## MikeOSS frontend changes, branding, and AGPL note
+
+MikeOSS is licensed under AGPL-3.0. That means ProChat may run it, modify it, and offer paid installation/hosting/support, but modifications come with source-code obligations, especially when users interact with the modified software over a network.
+
+### Can the frontend be changed?
+
+Yes, technically and legally under AGPL-3.0, the frontend can be changed.
+
+However, if ProChat modifies the MikeOSS frontend and makes that modified version available to users over the network, ProChat must be prepared to provide the Corresponding Source for the modified covered work under AGPL-3.0 terms.
+
+Safe first demo approach:
+
+```text
+Do not modify the MikeOSS frontend for the shared demo.
+Use the unmodified app, configure deployment/env only, and keep MikeOSS notices intact.
+```
+
+### Can MikeOSS be rebranded?
+
+Treat rebranding carefully.
+
+Possible:
+
+- use a neutral deployment label such as `Legal AI Demo`
+- frame it as an open-source MikeOSS-based legal document workspace
+- add ProChat OS around it as a separate workflow/integration layer
+- provide installation, hosting, support, and configuration services
+
+Avoid without legal review:
+
+- removing MikeOSS copyright/license notices
+- implying ProChat created MikeOSS
+- hiding that the legal document workspace is based on MikeOSS
+- distributing or operating a modified proprietary fork without AGPL compliance
+- mixing MikeOSS code directly into closed/source-available ProChat OS code
+
+Recommended first positioning:
+
+```text
+Private Legal AI Workspace powered by MikeOSS, installed and managed by ProChat.
+```
+
+Then ProChat OS remains the upsell and separate product:
+
+```text
+MikeOSS = legal document workspace
+ProChat OS = Agentic Workflow OS and managed workflow layer around it
+```
+
+### Practical rule
+
+For v1:
+
+```text
+Configure, host, support, and integrate around MikeOSS.
+Do not heavily modify or rebrand the MikeOSS frontend yet.
+Keep ProChat OS separate as the workflow layer.
+```
+
+Later, if ProChat wants a fully branded legal workspace, review the AGPL obligations and decide whether to:
+
+1. maintain an AGPL-compliant MikeOSS fork with public source,
+2. build a separate ProChat legal UI from scratch,
+3. use MikeOSS only as a backend/reference tool,
+4. or request a separate commercial license from the MikeOSS author if available.
+
+
+
+
+## License and branding note
+
+MikeOSS is licensed under AGPL-3.0.
+
+### Can the frontend be changed?
+
+Yes, the frontend can be changed.
+
+AGPL-3.0 allows modification, including frontend changes, but the modified version must comply with AGPL terms.
+
+For a network/server app, if the modified version is used by users over a network, those users must be offered access to the corresponding source code of the modified version.
+
+### Can it be rebranded?
+
+Technically, yes, it can be rebranded as a modified AGPL version if the license terms are followed.
+
+However, do not imply that ProChat owns the original MikeOSS project, and do not remove copyright/license notices that must remain.
+
+Safe wording:
+
+```text
+Powered by MikeOSS, configured and managed by ProChat.
+```
+
+or:
+
+```text
+Private legal AI workspace, deployed and managed by ProChat using MikeOSS.
+```
+
+Avoid wording like:
+
+```text
+ProChat Legal OS
+```
+
+unless the fork/rebrand/license/trademark boundaries have been reviewed.
+
+### Recommended first demo approach
+
+For the first demo, do not change the frontend branding heavily.
+
+Use MikeOSS mostly as-is and add ProChat branding around the demo page, Loom, outreach, and managed service offer.
+
+Recommended:
+
+- keep MikeOSS license notices intact
+- keep source availability clear
+- use `legal.prochat.tools` as the demo domain
+- describe it as a MikeOSS-powered legal AI workspace
+- sell ProChat OS as the workflow layer around it
+
+### Recommended client install approach
+
+For client installs:
+
+1. Install unmodified or lightly configured MikeOSS first.
+2. Keep MikeOSS AGPL notices and source availability intact.
+3. If frontend/backend code is modified, make the modified source available as required.
+4. Keep ProChat OS modules separate where possible.
+5. Sell installation, hosting, configuration, support, and ProChat OS workflow integrations.
+
+### Commercial caution
+
+AGPL allows charging for copies, hosting, support, and services, but it does not allow taking a modified covered work proprietary.
+
+Therefore:
+
+```text
+Good first business model:
+install + configure + host + support + integrate around MikeOSS
+
+Riskier model:
+closed-source proprietary rebrand/fork of MikeOSS
+```
+
+Before reselling a heavily modified/rebranded MikeOSS product, get legal review.
