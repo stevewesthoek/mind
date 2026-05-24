@@ -35,13 +35,13 @@ kanban-plugin: board
 
 ## Doing
 
+- [ ] Make the Gospel/Atheism paper
+- [ ] Portuguese criminal record
 - [ ] Setup STB Facebook app ⏫
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
-- [ ] Make the Gospel/Atheism paper
-- [ ] YA finance app
 - [ ] Make FB shorts account with free github repos
+- [ ] YA finance app
 - [x] Marriage certificate ✅ 2026-05-11
-- [ ] Portuguese criminal record
 
 ## Done
 
