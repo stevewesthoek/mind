@@ -416,3 +416,186 @@ Should ProChat OS be marketed first as:
 5. or an AI employee factory with safety boundaries?
 
 This needs further interview work before final positioning.
+
+
+
+
+## Deep-dive market research notes — 2026-05-24
+
+These notes are based on a first live scan of current 2026 market language around agentic OS, OpenClaw-style tools, Hermes-style memory systems, Product Hunt, Indie Hackers, and Reddit discussions.
+
+### Current market pattern
+
+The market is moving from `AI chatbots` to `agentic operating systems`.
+
+The strongest products and conversations are no longer about a single chatbot. They are about:
+
+- persistent agents
+- memory
+- tool use
+- scheduled workflows
+- local or governed execution
+- human approvals
+- audit trails
+- business-specific automations
+- managed deployment
+- secure data boundaries
+
+This validates the move away from fixed kits and toward ProChat OS as an agentic workflow operating system.
+
+### Competitive/category signals
+
+Observed current category examples:
+
+- OpenFang-style agent OS products emphasize autonomous workers, schedules, security systems, many tools, multiple channels, model routing, sandboxing, audit trails, and single-binary deployment.
+- Hermes-style systems emphasize persistent memory, self-improving skills, scheduled workflows, subagents, web automation, and business context.
+- OpenClaw-like ecosystems appear to be expanding into managed deployment, mobile management, AI agent orchestration, full-service onboarding, and tool publishing.
+- Enterprise AI OS discussions emphasize Microsoft/Azure ecosystems, Salesforce customer operations, regulated environments, and quick multi-agent workflow deployment.
+- Local/on-prem agent systems are being positioned around privacy, cost control, and secure sandboxes.
+
+### Implication for ProChat OS
+
+ProChat OS should not present itself as another chatbot, another no-code automation tool, or another SaaS kit.
+
+It should present itself as:
+
+```text
+The operating layer that gives AI memory, tools, workflows, approvals, context, and execution across a person's or business's real work.
+```
+
+### Best current business use cases
+
+The clearest small-business use cases are operational and back-office workflows, especially where inputs and outputs are clear and mistakes are reviewable before external damage happens.
+
+Strong first modules:
+
+1. **Business memory and knowledge base**
+   - capture decisions, notes, research, files, and instructions
+   - make them available to agents and humans
+
+2. **Inbox and follow-up agent**
+   - draft replies
+   - summarize emails
+   - flag urgent items
+   - prepare follow-up tasks
+
+3. **Lead intake and qualification**
+   - collect inbound leads
+   - enrich/summarize
+   - route to CRM or spreadsheet
+   - draft first response
+
+4. **Meeting/action agent**
+   - summarize meetings
+   - extract decisions
+   - create tasks
+   - update memory
+
+5. **Back-office automation agent**
+   - invoice matching
+   - appointment reminders
+   - document filing
+   - status reports
+
+6. **Local app builder / personal developer workflow**
+   - turn ideas into small local tools
+   - connect agents to code repos
+   - remember project context
+   - produce handoffs and updates
+
+7. **Content/research workflow**
+   - monitor topics
+   - create drafts
+   - produce YouTube/social content packages
+   - keep brand voice consistent
+
+### Market warning
+
+Broad autonomous agents are harder to sell to small businesses because they feel abstract, risky, and hard to trust.
+
+A better first sales promise is:
+
+```text
+Start with one reliable AI worker that handles one boring but valuable workflow.
+```
+
+Then ProChat OS becomes the system that lets customers add more AI workers over time.
+
+### Possible ProChat OS module language
+
+Instead of selling only the whole OS, sell blocks:
+
+- ProChat Memory
+- ProChat Agents
+- ProChat Automations
+- ProChat Console
+- ProChat Local Apps
+- ProChat Managed
+- ProChat Deploy
+- ProChat Content Engine
+- ProChat Business Ops
+
+Each block should connect back to the full ProChat OS.
+
+### Updated strategic hypothesis
+
+The first commercial wedge should probably be managed, narrow, operational AI workflows for small businesses and solo builders.
+
+Draft wedge:
+
+```text
+We install a private AI operating system for your business, then start with one useful AI worker: memory, inbox, leads, meetings, reports, content, or local apps.
+```
+
+This is easier to understand than:
+
+```text
+We sell an agentic AI operating system.
+```
+
+### Layman explanation of managed productized service
+
+A managed productized service means:
+
+```text
+You are not selling random custom work.
+You are selling the same system repeatedly, with setup and support included.
+```
+
+For ProChat OS, that means:
+
+```text
+I install ProChat OS for you, connect it to your workflows, keep it updated, and help you run it. The core system stays the same. The modules and integrations vary by customer.
+```
+
+### Current strongest positioning candidate
+
+```text
+ProChat OS is a private AI operating system for solo builders and small businesses. It gives your AI memory, tools, agents, workflows, and a control console so it can help with real work instead of staying trapped inside separate chat windows.
+```
+
+### Current strongest commercial offer candidate
+
+```text
+Managed ProChat OS Pilot
+
+I install a private AI operating system for your business and configure one useful AI worker for a real workflow. You use it for 30 days. If it saves time or creates value, you continue on a managed plan.
+```
+
+### Unresolved positioning tension
+
+There are two possible first markets:
+
+1. **Solo builder / personal developer OS**
+   - easier to demonstrate publicly
+   - strong YouTube content fit
+   - more technical audience
+   - may have lower willingness to pay initially
+
+2. **Small business AI operations OS**
+   - clearer managed-service revenue
+   - less technical customers need setup
+   - good local outreach fit
+   - requires clearer business ROI and trust
+
+The strategy may need both, but the first paid offer should likely choose one primary wedge.
