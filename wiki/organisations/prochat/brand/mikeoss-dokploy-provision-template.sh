@@ -23,8 +23,8 @@ set -euo pipefail
 : "${MIKE_BACKEND_IMAGE:=ghcr.io/prochattools/mike-legal-demo-backend:latest}"
 
 # Domains.
-: "${MIKE_FRONTEND_DOMAIN:=legal-demo.prochat.tools}"
-: "${MIKE_BACKEND_DOMAIN:=legal-demo-api.prochat.tools}"
+: "${MIKE_FRONTEND_DOMAIN:=legal.prochat.tools}"
+: "${MIKE_BACKEND_DOMAIN:=legal-api.prochat.tools}"
 
 # Optional metadata for Dokploy deployments.
 DEPLOY_TITLE="${DEPLOY_TITLE:-MikeOSS legal demo deploy}"

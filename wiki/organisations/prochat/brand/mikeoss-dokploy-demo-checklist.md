@@ -520,3 +520,96 @@ closed-source proprietary rebrand/fork of MikeOSS
 ```
 
 Before reselling a heavily modified/rebranded MikeOSS product, get legal review.
+
+
+
+
+## License and rebranding guidance
+
+MikeOSS is licensed under AGPL-3.0-only.
+
+This means the demo and any client install must treat MikeOSS as open-source AGPL software, not as proprietary ProChat-owned code.
+
+### Can ProChat change the frontend?
+
+Yes, technically and legally, the frontend can be changed because AGPL allows modification.
+
+However, if ProChat modifies MikeOSS and lets users interact with that modified version over a network, the modified MikeOSS source code must be made available to those users under the AGPL terms.
+
+Practical rule:
+
+```text
+If we modify MikeOSS, we must be prepared to publish those MikeOSS modifications.
+```
+
+### Can ProChat rebrand MikeOSS?
+
+Caution required.
+
+For the safest first demo and client installs:
+
+```text
+Do not rebrand MikeOSS as ProChat-owned software.
+Do not remove license notices.
+Do not hide that the legal document workspace is MikeOSS / AGPL software.
+```
+
+Safer wording:
+
+```text
+Installed and managed by ProChat.
+Powered by MikeOSS, an AGPL open-source legal document workspace.
+Extended with ProChat OS workflows.
+```
+
+### What can be branded as ProChat?
+
+ProChat can brand the surrounding service and workflow layer:
+
+- ProChat OS
+- managed installation
+- support and hosting
+- workflow configuration
+- law-firm intake workflows
+- ProChat-created connectors
+- ProChat-created orchestration around MikeOSS
+- ProChat dashboard/console if separate from MikeOSS
+
+Do not imply ProChat owns MikeOSS itself.
+
+### Safest first approach
+
+For the first demo:
+
+```text
+Use MikeOSS mostly unmodified.
+Use the legal.prochat.tools domain.
+Keep MikeOSS notices intact.
+Use fake legal data.
+Brand the service as a ProChat-managed legal AI demo.
+Position ProChat OS as the workflow layer around it.
+```
+
+### Client deployment approach
+
+For a client install, safest offer:
+
+```text
+We install and manage an open-source legal document AI workspace for your firm, then add ProChat OS workflows around it.
+```
+
+If a client wants frontend branding changes:
+
+- allow minor configuration or theme changes only after checking license implications
+- keep copyright/license notices intact
+- provide source for modified MikeOSS code to the users of that instance
+- keep ProChat proprietary/source-available modules separate where possible
+
+### Separation principle
+
+```text
+MikeOSS changes = AGPL source obligations.
+ProChat OS separate services/modules = keep separately licensed if they communicate over APIs and are not derivative works.
+```
+
+This boundary should be reviewed by a software/IP lawyer before selling heavily modified deployments.
