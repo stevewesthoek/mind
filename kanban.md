@@ -35,7 +35,6 @@ kanban-plugin: board
 
 ## Doing
 
-- [ ] Make the Gospel/Atheism paper
 - [ ] Portuguese criminal record
 - [ ] Setup STB Facebook app ⏫
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
@@ -47,6 +46,7 @@ kanban-plugin: board
 
 **Complete**
 
+- [x] Make the Gospel/Atheism paper ✅ 2026-05-27
 - [x] fix the obsidian way of working ✅ 2026-05-23
 - [x] Learn Portuguese app ✅ 2026-05-23
 - [x] Make Oliveto Organizing editable for Ashley
