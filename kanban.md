@@ -17,7 +17,6 @@ kanban-plugin: board
 
 ## To Do
 
-- [ ] Apply for passport
 - [ ] Product: Model Router
 - [ ] Empty mail
 - [ ] Fix Antenna
@@ -35,17 +34,18 @@ kanban-plugin: board
 
 ## Doing
 
-- [ ] Portuguese criminal record
 - [ ] Setup STB Facebook app ⏫
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Make FB shorts account with free github repos
 - [ ] YA finance app
-- [x] Marriage certificate ✅ 2026-05-11
+- [ ] Marriage certificate
+- [ ] Apply for passport
 
 ## Done
 
 **Complete**
 
+- [x] Portuguese criminal record ✅ 2026-05-27
 - [x] Make the Gospel/Atheism paper ✅ 2026-05-27
 - [x] fix the obsidian way of working ✅ 2026-05-23
 - [x] Learn Portuguese app ✅ 2026-05-23
