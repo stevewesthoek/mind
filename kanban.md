@@ -34,7 +34,6 @@ kanban-plugin: board
 
 ## Doing
 
-- [ ] Setup STB Facebook app ⏫
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Make FB shorts account with free github repos
 - [ ] YA finance app
@@ -45,6 +44,7 @@ kanban-plugin: board
 
 **Complete**
 
+- [x] Setup STB Facebook app ⏫ ✅ 2026-05-28
 - [x] Portuguese criminal record ✅ 2026-05-27
 - [x] Make the Gospel/Atheism paper ✅ 2026-05-27
 - [x] fix the obsidian way of working ✅ 2026-05-23
