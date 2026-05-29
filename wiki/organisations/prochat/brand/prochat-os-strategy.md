@@ -814,11 +814,136 @@ G completion criteria:
 The schema examples above define the contract all future code must use.
 ```
 
-First real implementation target after G:
+## F/G bridge — Step Functions writes canonical status metadata
+
+The first real implementation target after the metadata contract is:
 
 ```text
 Step Functions writes and updates metadata/status.json instead of metadata/status-started.json and metadata/status-completed.json.
 ```
+
+This proves the schema is not only documentation.
+
+Scope boundaries for the bridge:
+
+- keep this as a skeleton state machine only
+- do not call Bedrock, Polly, Transcribe, or MediaConvert yet
+- do not build approval UI
+- do not build a customer dashboard
+- do not expand providers
+- do not redesign the workflow
+
+Required behavior:
+
+1. On start, write `jobs/{jobId}/metadata/status.json` using the canonical `status.json` shape.
+2. Use `draft` as the closest documented starting status.
+3. After the wait/test step, overwrite the same `metadata/status.json` file.
+4. Use `exported` as the documented completed status.
+5. Stop targeting `metadata/status-started.json` and `metadata/status-completed.json`.
+
+Minimal ASL skeleton:
+
+```json
+{
+  "Comment": "AWS-backed Video Orchestrator skeleton that writes canonical metadata/status.json only.",
+  "StartAt": "BuildStartedStatus",
+  "States": {
+    "BuildStartedStatus": {
+      "Type": "Pass",
+      "Parameters": {
+        "bucket.$": "$.bucket",
+        "jobId.$": "$.jobId",
+        "statusDocument": {
+          "jobId.$": "$.jobId",
+          "status": "draft",
+          "currentStep": "skeleton_started",
+          "completedSteps": [],
+          "failedStep": null,
+          "lastError": null,
+          "startedAt.$": "$.State.EnteredTime",
+          "completedAt": null,
+          "updatedAt.$": "$.State.EnteredTime",
+          "stepFunctionsExecutionArn.$": "$.Execution.Id",
+          "retryCount": 0
+        }
+      },
+      "Next": "WriteStartedStatus"
+    },
+    "WriteStartedStatus": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::aws-sdk:s3:putObject",
+      "Parameters": {
+        "Bucket.$": "$.bucket",
+        "Key.$": "States.Format('jobs/{}/metadata/status.json', $.jobId)",
+        "ContentType": "application/json",
+        "Body.$": "States.JsonToString($.statusDocument)"
+      },
+      "Next": "WaitForSkeletonTest"
+    },
+    "WaitForSkeletonTest": {
+      "Type": "Wait",
+      "Seconds": 5,
+      "Next": "BuildCompletedStatus"
+    },
+    "BuildCompletedStatus": {
+      "Type": "Pass",
+      "Parameters": {
+        "bucket.$": "$.bucket",
+        "jobId.$": "$.jobId",
+        "statusDocument": {
+          "jobId.$": "$.jobId",
+          "status": "exported",
+          "currentStep": "complete",
+          "completedSteps": [
+            "skeleton_started",
+            "status_json_written",
+            "wait_test_completed"
+          ],
+          "failedStep": null,
+          "lastError": null,
+          "startedAt.$": "$.Execution.StartTime",
+          "completedAt.$": "$.State.EnteredTime",
+          "updatedAt.$": "$.State.EnteredTime",
+          "stepFunctionsExecutionArn.$": "$.Execution.Id",
+          "retryCount": 0
+        }
+      },
+      "Next": "WriteCompletedStatus"
+    },
+    "WriteCompletedStatus": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::aws-sdk:s3:putObject",
+      "Parameters": {
+        "Bucket.$": "$.bucket",
+        "Key.$": "States.Format('jobs/{}/metadata/status.json', $.jobId)",
+        "ContentType": "application/json",
+        "Body.$": "States.JsonToString($.statusDocument)"
+      },
+      "End": true
+    }
+  }
+}
+```
+
+Test input:
+
+```json
+{
+  "bucket": "prochat-video-dev",
+  "jobId": "test-001"
+}
+```
+
+Validation checklist:
+
+```text
+Run one execution against test-001.
+Confirm S3 contains jobs/test-001/metadata/status.json.
+Confirm status.json is overwritten from draft to exported.
+Confirm status-started.json and status-completed.json are no longer the target files.
+```
+
+After the bridge is validated, H approval checkpoint becomes the next task.
 
 Implementation principles:
 

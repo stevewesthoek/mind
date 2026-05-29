@@ -57,6 +57,7 @@ Current implementation progress:
 ✅ E. Test MediaConvert on one sample clip
 ✅ F. Create first Step Functions skeleton
 ✅ G. Define canonical job metadata schema
+⬜ F/G Bridge. Step Functions writes canonical metadata/status.json
 ⬜ H. Add approval checkpoint
 ⬜ I. Generate one complete 60-second internal video
 ```
@@ -66,6 +67,7 @@ Current phase:
 ```text
 Phase 1 — Infrastructure Validation: COMPLETE
 Phase 2 — Metadata Contract: COMPLETE
+Phase 2 bridge — Canonical status writer: ACTIVE
 ```
 
 Canonical metadata files:
@@ -78,16 +80,18 @@ metadata/assets.json
 metadata/cost.json
 ```
 
-Goal:
-
-```text
-One source of truth per job.
-```
-
-Current next implementation target:
+Current active implementation target:
 
 ```text
 Step Functions writes and updates metadata/status.json instead of metadata/status-started.json and metadata/status-completed.json.
+```
+
+Required validation:
+
+```text
+Run one execution against test-001.
+Confirm S3 contains jobs/test-001/metadata/status.json.
+Confirm status-started.json and status-completed.json are no longer the target files.
 ```
 
 Do not move to approval checkpoints or complete 60-second generation until Step Functions uses canonical metadata/status.json and the change is validated and committed.
