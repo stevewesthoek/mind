@@ -191,6 +191,18 @@ The full technical definition lives in:
 prochat-os-technical-definition.md
 ```
 
+## Canonical document hierarchy
+
+Use this hierarchy to prevent strategy drift:
+
+1. `prochat-os-strategy.md` defines the business direction and non-goals.
+2. `prochat-os-roadmap.md` defines phase order, active execution lane, and progress tracking rules.
+3. `prochat-os-technical-definition.md` defines the installable runtime and module boundaries.
+4. `prochat-os-go-to-market.md` defines public positioning, outreach wedges, and validation rules.
+5. Live notes such as `live/video.md` are visibility surfaces only, not strategy sources.
+
+If documents conflict, update the lower-level document to match the higher-level canonical source.
+
 ## Canonical Video Orchestrator direction
 
 The Video Orchestrator is a ProChat OS module, not a separate platform.

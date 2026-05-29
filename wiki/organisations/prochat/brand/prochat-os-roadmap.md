@@ -12,6 +12,49 @@ Do not start with the full platform, full SaaS, or every connector.
 
 Start with a tangible demo, validate one painful workflow, then productize the runtime.
 
+## Execution control
+
+This roadmap is the canonical progress-control document for ProChat OS execution.
+
+Every implementation slice should have:
+
+- one phase
+- one goal
+- one bounded task
+- one clear output
+- one validation step
+- one commit
+- one handoff note or resume point
+
+Use this order for every work session:
+
+```text
+read canonical strategy
+→ identify active roadmap phase
+→ execute the next bounded task
+→ validate
+→ commit only touched files
+→ update the roadmap status or handoff note when state changes
+```
+
+Low-reasoning LLMs should be given only one bounded task at a time, with exact files, expected output, validation command, and commit message.
+
+## Active execution lane
+
+The broad business roadmap still starts with the legal/MikeOSS wedge for customer discovery.
+
+The active engineering lane is the AWS-backed Video Orchestrator proof because it validates ProChat OS workflows and creates internal content for ProChat and Says The Bible.
+
+This does not change the business positioning: ProChat OS is the product; Video Orchestrator is a module.
+
+Current next task:
+
+```text
+Create private S3 dev bucket and first job-folder structure for the AWS-backed Video Orchestrator proof.
+```
+
+Do not move to Bedrock, Polly, Transcribe, MediaConvert, Step Functions, approvals, or rendering until the S3 storage proof is completed, validated, and committed.
+
 ## Phase 0 — Strategy and definition
 
 Status: complete enough to proceed.
