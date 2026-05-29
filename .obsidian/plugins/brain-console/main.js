@@ -49,6 +49,5391 @@ function isLikelyLocalhost(hostname) {
 // src/view.ts
 var import_obsidian = require("obsidian");
 
+// src/components/VO/types.ts
+var DEFAULT_DATE_RANGE = {
+  preset: "week",
+  startDate: new Date(Date.now() - 7 * 24 * 60 * 60 * 1e3).toISOString().split("T")[0],
+  endDate: (/* @__PURE__ */ new Date()).toISOString().split("T")[0]
+};
+
+// src/components/VO/VOContext.ts
+var STORAGE_KEY = "vo-context-state";
+function getInitialState() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) return {
+      projectId: null,
+      accountId: null,
+      platformTargets: [],
+      pipelineProfileId: null,
+      dateRange: DEFAULT_DATE_RANGE
+    };
+    const parsed = JSON.parse(stored);
+    return {
+      projectId: parsed.projectId ?? null,
+      accountId: parsed.accountId ?? null,
+      platformTargets: parsed.platformTargets ?? [],
+      pipelineProfileId: parsed.pipelineProfileId ?? null,
+      dateRange: parsed.dateRange ?? DEFAULT_DATE_RANGE
+    };
+  } catch {
+    return {
+      projectId: null,
+      accountId: null,
+      platformTargets: [],
+      pipelineProfileId: null,
+      dateRange: DEFAULT_DATE_RANGE
+    };
+  }
+}
+var VOContextManager = class {
+  state = getInitialState();
+  listeners = /* @__PURE__ */ new Set();
+  getState() {
+    return { ...this.state };
+  }
+  subscribe(listener) {
+    this.listeners.add(listener);
+    return () => this.listeners.delete(listener);
+  }
+  notify() {
+    this.listeners.forEach((listener) => listener(this.getState()));
+    this.persist();
+  }
+  persist() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state));
+    } catch {
+    }
+  }
+  setProjectId(projectId) {
+    this.state = {
+      ...this.state,
+      projectId,
+      accountId: null,
+      platformTargets: [],
+      pipelineProfileId: null
+    };
+    this.notify();
+  }
+  setAccountId(accountId) {
+    this.state = {
+      ...this.state,
+      accountId,
+      platformTargets: []
+    };
+    this.notify();
+  }
+  setPlatformTargets(platformTargets) {
+    this.state = {
+      ...this.state,
+      platformTargets
+    };
+    this.notify();
+  }
+  setPipelineProfileId(pipelineProfileId) {
+    this.state = {
+      ...this.state,
+      pipelineProfileId
+    };
+    this.notify();
+  }
+  setDateRange(dateRange) {
+    this.state = {
+      ...this.state,
+      dateRange
+    };
+    this.notify();
+  }
+  reset() {
+    this.state = getInitialState();
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+    }
+    this.notify();
+  }
+};
+var instance = null;
+function getVOContextManager() {
+  if (!instance) {
+    instance = new VOContextManager();
+  }
+  return instance;
+}
+
+// src/components/VO/VOContextBar.ts
+var VOContextBar = class {
+  container;
+  projects = [];
+  accounts = [];
+  pipelineProfiles = [];
+  selector;
+  ctx = getVOContextManager();
+  unsubscribe = null;
+  constructor(container, data) {
+    this.container = container;
+    this.projects = data.projects || [];
+    this.accounts = data.accounts || [];
+    this.pipelineProfiles = data.pipelineProfiles || [];
+    this.selector = data.selector;
+    this.unsubscribe = this.ctx.subscribe(() => this.render());
+    this.render();
+  }
+  destroy() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
+  getFilteredAccounts() {
+    const state = this.ctx.getState();
+    return this.accounts.filter((a) => a.projectId === state.projectId);
+  }
+  getSelectedAccount() {
+    const state = this.ctx.getState();
+    return this.getFilteredAccounts().find((a) => a.id === state.accountId);
+  }
+  getFilteredProfiles() {
+    const state = this.ctx.getState();
+    return this.pipelineProfiles.filter((p) => p.projectId === state.projectId);
+  }
+  render() {
+    const state = this.ctx.getState();
+    const filteredAccounts = this.getFilteredAccounts();
+    const selectedAccount = this.getSelectedAccount();
+    const filteredProfiles = this.getFilteredProfiles();
+    this.container.innerHTML = `
+      <div class="vo-context-bar">
+        <div class="vo-context-selectors">
+          ${this.renderProjectSelector()}
+          ${this.renderAccountSelector(filteredAccounts)}
+          ${this.renderPlatformTargets(selectedAccount)}
+          ${this.renderProfileSelector(filteredProfiles)}
+        </div>
+        <div class="vo-context-meta">
+          ${this.renderSelectorHealthChip()}
+          ${this.renderDateRange()}
+        </div>
+      </div>
+    `;
+    this.attachEventListeners(filteredAccounts, filteredProfiles);
+  }
+  renderProjectSelector() {
+    const state = this.ctx.getState();
+    return `
+      <div class="vo-selector">
+        <label>Project</label>
+        <select class="vo-select vo-project-select" ${this.projects.length === 0 ? "disabled" : ""}>
+          <option value="">\u2014 Choose project \u2014</option>
+          ${this.projects.map((p) => `
+            <option value="${p.id}" ${p.id === state.projectId ? "selected" : ""}>
+              ${p.name}
+            </option>
+          `).join("")}
+        </select>
+      </div>
+    `;
+  }
+  renderAccountSelector(filteredAccounts) {
+    const state = this.ctx.getState();
+    return `
+      <div class="vo-selector">
+        <label>Account</label>
+        <select class="vo-select vo-account-select" ${!state.projectId || filteredAccounts.length === 0 ? "disabled" : ""}>
+          <option value="">\u2014 Choose account \u2014</option>
+          ${filteredAccounts.map((a) => `
+            <option value="${a.id}" ${a.id === state.accountId ? "selected" : ""}>
+              ${a.handle} (${a.platform})
+            </option>
+          `).join("")}
+        </select>
+      </div>
+    `;
+  }
+  renderPlatformTargets(selectedAccount) {
+    const state = this.ctx.getState();
+    if (!selectedAccount) {
+      return `
+        <div class="vo-selector">
+          <label>Platform Targets</label>
+          <div class="vo-platform-targets">
+            <span class="vo-placeholder">Select account first</span>
+          </div>
+        </div>
+      `;
+    }
+    return `
+      <div class="vo-selector">
+        <label>Platform Targets</label>
+        <div class="vo-platform-targets">
+          <label class="vo-checkbox">
+            <input
+              type="checkbox"
+              class="vo-platform-checkbox"
+              value="${selectedAccount.platform}"
+              ${state.platformTargets.includes(selectedAccount.platform) ? "checked" : ""}
+            />
+            ${selectedAccount.platform.toUpperCase()}
+          </label>
+        </div>
+      </div>
+    `;
+  }
+  renderProfileSelector(filteredProfiles) {
+    const state = this.ctx.getState();
+    return `
+      <div class="vo-selector">
+        <label>Pipeline Profile</label>
+        <select class="vo-select vo-profile-select" ${!state.projectId || filteredProfiles.length === 0 ? "disabled" : ""}>
+          <option value="">\u2014 Choose profile \u2014</option>
+          ${filteredProfiles.map((p) => `
+            <option value="${p.id}" ${p.id === state.pipelineProfileId ? "selected" : ""}>
+              ${p.name}
+            </option>
+          `).join("")}
+        </select>
+      </div>
+    `;
+  }
+  renderDateRange() {
+    const state = this.ctx.getState();
+    const dateLabel = state.dateRange.preset === "custom" ? `${state.dateRange.startDate} to ${state.dateRange.endDate}` : state.dateRange.preset.charAt(0).toUpperCase() + state.dateRange.preset.slice(1);
+    return `
+      <div class="vo-date-range">
+        <label>Date Range</label>
+        <div class="vo-date-buttons">
+          <button class="vo-date-btn ${state.dateRange.preset === "today" ? "active" : ""}" data-preset="today">
+            Today
+          </button>
+          <button class="vo-date-btn ${state.dateRange.preset === "week" ? "active" : ""}" data-preset="week">
+            Week
+          </button>
+          <button class="vo-date-btn ${state.dateRange.preset === "month" ? "active" : ""}" data-preset="month">
+            Month
+          </button>
+          <button class="vo-date-btn ${state.dateRange.preset === "custom" ? "active" : ""}" data-preset="custom">
+            Custom
+          </button>
+        </div>
+        <span class="vo-date-display">${dateLabel}</span>
+      </div>
+    `;
+  }
+  renderSelectorHealthChip() {
+    const selector = this.selector;
+    const state = !selector ? "unknown" : selector.running && selector.healthy ? "healthy" : selector.running ? "degraded" : "stopped";
+    const statusLabel = state === "healthy" ? "Running" : state === "degraded" ? "Degraded" : state === "stopped" ? "Stopped" : "Unknown";
+    const currentProvider = selector?.providers?.find((provider) => provider.healthy)?.id ?? selector?.providers?.[0]?.id ?? "No provider";
+    const lastChecked = selector?.lastChecked ? new Date(selector.lastChecked).toLocaleTimeString() : "Not checked";
+    return `
+      <div class="vo-selector-health-chip vo-selector-health-chip--${state}" title="AI selector last checked: ${lastChecked}">
+        <span class="vo-selector-health-dot"></span>
+        <span class="vo-selector-health-main">AI Selector ${statusLabel}</span>
+        <span class="vo-selector-health-provider">${currentProvider}</span>
+      </div>
+    `;
+  }
+  attachEventListeners(filteredAccounts, filteredProfiles) {
+    const projectSelect = this.container.querySelector(".vo-project-select");
+    const accountSelect = this.container.querySelector(".vo-account-select");
+    const profileSelect = this.container.querySelector(".vo-profile-select");
+    const platformCheckbox = this.container.querySelector(".vo-platform-checkbox");
+    const dateButtons = this.container.querySelectorAll("[data-preset]");
+    if (projectSelect) {
+      projectSelect.addEventListener("change", (e) => {
+        const target = e.target;
+        this.ctx.setProjectId(target.value || null);
+      });
+    }
+    if (accountSelect) {
+      accountSelect.addEventListener("change", (e) => {
+        const target = e.target;
+        this.ctx.setAccountId(target.value || null);
+      });
+    }
+    if (profileSelect) {
+      profileSelect.addEventListener("change", (e) => {
+        const target = e.target;
+        this.ctx.setPipelineProfileId(target.value || null);
+      });
+    }
+    if (platformCheckbox) {
+      platformCheckbox.addEventListener("change", (e) => {
+        const target = e.target;
+        const updated = target.checked ? [target.value] : [];
+        this.ctx.setPlatformTargets(updated);
+      });
+    }
+    dateButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const preset = btn.getAttribute("data-preset");
+        this.setDatePreset(preset);
+      });
+    });
+  }
+  setDatePreset(preset) {
+    const now = /* @__PURE__ */ new Date();
+    let startDate;
+    switch (preset) {
+      case "today":
+        startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        break;
+      case "week":
+        startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1e3);
+        break;
+      case "month":
+        startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+        break;
+      case "custom":
+        return;
+    }
+    this.ctx.setDateRange({
+      preset,
+      startDate: startDate.toISOString().split("T")[0],
+      endDate: now.toISOString().split("T")[0]
+    });
+  }
+};
+
+// src/components/Design/shadcn-components.ts
+function Badge(props) {
+  const { count, status = "ok", className = "" } = props;
+  return `<span class="bc-badge ${status} ${className}">${count}</span>`;
+}
+function StatusPill(props) {
+  const { status, label, icon = "\u25CF", className = "" } = props;
+  const mappedStatus = status === "ok" ? "online" : status === "warning" ? "degraded" : status;
+  return `<div class="bc-status-pill ${mappedStatus} ${className}">${icon} ${label}</div>`;
+}
+
+// src/components/VO/OverviewPanel.ts
+var BASE_URL = "http://localhost:4877";
+var REFRESH_INTERVAL_MS = 3e4;
+var OverviewPanel = class {
+  container;
+  selector;
+  analytics;
+  accountStats;
+  accounts = [];
+  voStatus;
+  ctx = getVOContextManager();
+  unsubscribe = null;
+  refreshTimer = null;
+  loading = false;
+  constructor(container, data) {
+    this.container = container;
+    this.selector = data.selector;
+    this.analytics = data.analytics;
+    this.accountStats = data.accountStats;
+    this.accounts = data.accounts || [];
+    this.unsubscribe = this.ctx.subscribe(() => this.render());
+    this.render();
+    this.fetchLiveData();
+    this.refreshTimer = setInterval(() => this.fetchLiveData(), REFRESH_INTERVAL_MS);
+  }
+  async fetchLiveData() {
+    this.loading = true;
+    try {
+      const [statusRes, analyticsRes] = await Promise.allSettled([
+        fetch(`${BASE_URL}/api/infra/video-orchestrator/status`).then((r) => r.json()),
+        fetch(`${BASE_URL}/api/video-orchestrator/analytics/summary`).then((r) => r.json())
+      ]);
+      if (statusRes.status === "fulfilled") {
+        this.voStatus = statusRes.value;
+      }
+      if (analyticsRes.status === "fulfilled") {
+        this.analytics = analyticsRes.value;
+      }
+    } catch {
+    } finally {
+      this.loading = false;
+      this.render();
+    }
+  }
+  render() {
+    this.container.innerHTML = `
+      <div class="vo-overview-panel">
+        ${this.renderRefreshIndicator()}
+        ${this.renderWorkerHealthCard()}
+        ${this.renderAiSelectorCard()}
+        ${this.renderActiveJobsCard()}
+        ${this.renderQuotaWarningsCard()}
+        ${this.renderCredentialStatusCard()}
+        ${this.renderBlockers()}
+      </div>
+    `;
+  }
+  renderRefreshIndicator() {
+    return `
+      <div class="vo-overview-refresh-bar">
+        <span class="vo-overview-refresh-label">
+          ${this.loading ? "Refreshing..." : "Auto-refreshes every 30s"}
+        </span>
+        <span class="vo-overview-refresh-dot ${this.loading ? "vo-refresh-dot--active" : ""}"></span>
+      </div>
+    `;
+  }
+  renderWorkerHealthCard() {
+    const queueDepth = this.voStatus?.queueDepth;
+    const pending = queueDepth?.pending ?? "\u2013";
+    const running = queueDepth?.running ?? "\u2013";
+    const failed = queueDepth?.failed ?? "\u2013";
+    const hasStatus = this.voStatus?.ok !== void 0;
+    const workerOk = this.voStatus?.ok ?? null;
+    const workerStatus = workerOk === true ? "Online" : workerOk === false ? "Error" : "Unknown";
+    const statusPill = workerOk === true ? "ok" : workerOk === false ? "error" : "warning";
+    return `
+      <div class="vo-overview-card">
+        <div class="vo-card-header">
+          <span class="vo-card-icon">\u2699</span>
+          <span class="vo-card-label">Worker Health</span>
+          ${StatusPill({ status: statusPill, label: workerStatus })}
+        </div>
+        <div class="vo-card-body">
+          <div class="vo-card-stat-row">
+            <span class="vo-card-stat-label">Queue: Pending</span>
+            <span class="vo-card-stat-value">${pending}</span>
+          </div>
+          <div class="vo-card-stat-row">
+            <span class="vo-card-stat-label">Queue: Running</span>
+            <span class="vo-card-stat-value" style="color: var(--bc-blue)">${running}</span>
+          </div>
+          <div class="vo-card-stat-row">
+            <span class="vo-card-stat-label">Queue: Failed</span>
+            <span class="vo-card-stat-value" style="color: var(--bc-red)">${failed}</span>
+          </div>
+          ${this.voStatus?.lastJobAt ? `
+            <div class="vo-card-stat-row">
+              <span class="vo-card-stat-label">Last Job</span>
+              <span class="vo-card-stat-value">${this.formatDate(this.voStatus.lastJobAt)}</span>
+            </div>
+          ` : ""}
+        </div>
+      </div>
+    `;
+  }
+  renderAiSelectorCard() {
+    const selectorHealthy = this.selector?.healthy ?? false;
+    const selectorRunning = this.selector?.running ?? false;
+    const selectorLabel = selectorHealthy ? "Healthy" : selectorRunning ? "Degraded" : "Offline";
+    const statusPill = selectorHealthy ? "ok" : selectorRunning ? "warning" : "error";
+    const providerCount = this.selector?.providers?.length ?? 0;
+    const healthyProviders = this.selector?.providers?.filter((p) => p.healthy).length ?? 0;
+    return `
+      <div class="vo-overview-card">
+        <div class="vo-card-header">
+          <span class="vo-card-icon">\u25C6</span>
+          <span class="vo-card-label">AI Selector Status</span>
+          ${StatusPill({ status: statusPill, label: selectorLabel })}
+        </div>
+        <div class="vo-card-body">
+          ${providerCount > 0 ? `
+            <div class="vo-card-stat-row">
+              <span class="vo-card-stat-label">Providers</span>
+              <span class="vo-card-stat-value">${healthyProviders}/${providerCount} healthy</span>
+            </div>
+          ` : `
+            <div class="vo-card-stat-row">
+              <span class="vo-card-stat-label">Providers</span>
+              <span class="vo-card-stat-value vo-muted">No data</span>
+            </div>
+          `}
+          ${this.selector?.error ? `
+            <div class="vo-card-alert">${this.selector.error}</div>
+          ` : ""}
+          ${this.selector?.uptime ? `
+            <div class="vo-card-stat-row">
+              <span class="vo-card-stat-label">Uptime</span>
+              <span class="vo-card-stat-value">${this.selector.uptime}</span>
+            </div>
+          ` : ""}
+          ${(this.selector?.providers ?? []).map((p) => `
+            <div class="vo-card-provider-row">
+              <span class="vo-card-provider-dot" style="background: ${p.healthy ? "var(--bc-green)" : "var(--bc-red)"}"></span>
+              <span class="vo-card-provider-name">${p.id}</span>
+              <span class="vo-card-provider-state vo-muted">${p.circuitState}</span>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  }
+  renderActiveJobsCard() {
+    const running = this.voStatus?.queueDepth?.running ?? null;
+    const byType = this.voStatus?.jobsByType ?? {};
+    const typeEntries = Object.entries(byType);
+    const accounts = this.voStatus?.activeAccounts ?? null;
+    return `
+      <div class="vo-overview-card">
+        <div class="vo-card-header">
+          <span class="vo-card-icon">\u25B6</span>
+          <span class="vo-card-label">Active Jobs</span>
+          ${StatusPill({ status: "ok", label: `${running ?? "\u2013"} running` })}
+        </div>
+        <div class="vo-card-body">
+          ${accounts !== null ? `
+            <div class="vo-card-stat-row">
+              <span class="vo-card-stat-label">Active Accounts</span>
+              <span class="vo-card-stat-value">${accounts}</span>
+            </div>
+          ` : ""}
+          ${typeEntries.length > 0 ? typeEntries.map(([type, count]) => `
+            <div class="vo-card-stat-row">
+              <span class="vo-card-stat-label">${type}</span>
+              <span class="vo-card-stat-value">${count}</span>
+            </div>
+          `).join("") : `
+            <div class="vo-card-stat-row">
+              <span class="vo-card-stat-label vo-muted">No active job breakdown</span>
+            </div>
+          `}
+          ${this.renderRecentPosts()}
+        </div>
+      </div>
+    `;
+  }
+  renderRecentPosts() {
+    const recent = this.voStatus?.recentPosts;
+    if (!recent || recent.length === 0) return "";
+    return `
+      <div class="vo-card-divider"></div>
+      <div class="vo-card-sublabel">Recent Posts</div>
+      ${recent.slice(0, 3).map((post) => `
+        <div class="vo-card-post-row">
+          <span class="vo-card-post-platform">${post.platform}</span>
+          <span class="vo-card-post-handle">${post.accountHandle}</span>
+          <span class="vo-card-post-time vo-muted">${this.formatDate(post.postedAt)}</span>
+        </div>
+      `).join("")}
+    `;
+  }
+  renderQuotaWarningsCard() {
+    const accountsByPlatform = this.voStatus?.accountsByPlatform ?? {};
+    const platformEntries = Object.entries(accountsByPlatform);
+    const quotaWarnings = [];
+    for (const account of this.accounts) {
+      if (account.quotaState === "limited") {
+        quotaWarnings.push(`${account.handle} (${account.platform}) quota limited`);
+      }
+    }
+    const hasWarnings = quotaWarnings.length > 0;
+    const statusPill = hasWarnings ? "warning" : "ok";
+    const badgeLabel = hasWarnings ? `${quotaWarnings.length} warning${quotaWarnings.length !== 1 ? "s" : ""}` : "All OK";
+    return `
+      <div class="vo-overview-card ${hasWarnings ? "vo-overview-card--warn" : ""}">
+        <div class="vo-card-header">
+          <span class="vo-card-icon">\u26A1</span>
+          <span class="vo-card-label">Quota Warnings</span>
+          ${StatusPill({ status: statusPill, label: badgeLabel })}
+        </div>
+        <div class="vo-card-body">
+          ${hasWarnings ? quotaWarnings.map((w) => `
+            <div class="vo-card-warning-row">
+              <span class="vo-card-warning-dot" style="background: var(--bc-yellow)"></span>
+              <span class="vo-card-warning-text">${w}</span>
+            </div>
+          `).join("") : `
+            <div class="vo-card-stat-row">
+              <span class="vo-card-stat-label vo-muted">No quota warnings</span>
+            </div>
+          `}
+          ${platformEntries.length > 0 ? `
+            <div class="vo-card-divider"></div>
+            <div class="vo-card-sublabel">Accounts by Platform</div>
+            ${platformEntries.map(([platform, count]) => `
+              <div class="vo-card-stat-row">
+                <span class="vo-card-stat-label">${platform}</span>
+                <span class="vo-card-stat-value">${count}</span>
+              </div>
+            `).join("")}
+          ` : ""}
+        </div>
+      </div>
+    `;
+  }
+  renderCredentialStatusCard() {
+    const missing = this.accounts.filter((a) => a.credentialState === "missing");
+    const manual = this.accounts.filter((a) => a.credentialState === "manual");
+    const connected = this.accounts.filter((a) => a.credentialState === "connected");
+    const total = this.accounts.length;
+    const hasIssues = missing.length > 0;
+    const statusPill = hasIssues ? "error" : "ok";
+    const badgeLabel = hasIssues ? `${missing.length} missing` : total > 0 ? "All configured" : "No accounts";
+    return `
+      <div class="vo-overview-card ${hasIssues ? "vo-overview-card--alert" : ""}">
+        <div class="vo-card-header">
+          <span class="vo-card-icon">\u{1F511}</span>
+          <span class="vo-card-label">Credential Status</span>
+          ${StatusPill({ status: statusPill, label: badgeLabel })}
+        </div>
+        <div class="vo-card-body">
+          ${total === 0 ? `
+            <div class="vo-card-stat-row">
+              <span class="vo-card-stat-label vo-muted">No accounts configured</span>
+            </div>
+          ` : `
+            <div class="vo-card-stat-row">
+              <span class="vo-card-stat-label">Connected</span>
+              <span class="vo-card-stat-value" style="color: var(--bc-green)">${connected.length}</span>
+            </div>
+            <div class="vo-card-stat-row">
+              <span class="vo-card-stat-label">Manual</span>
+              <span class="vo-card-stat-value" style="color: var(--bc-yellow)">${manual.length}</span>
+            </div>
+            <div class="vo-card-stat-row">
+              <span class="vo-card-stat-label">Missing</span>
+              <span class="vo-card-stat-value" style="color: var(--bc-red)">${missing.length}</span>
+            </div>
+          `}
+          ${missing.length > 0 ? `
+            <div class="vo-card-divider"></div>
+            ${missing.map((a) => `
+              <div class="vo-card-warning-row">
+                <span class="vo-card-warning-dot" style="background: var(--bc-red)"></span>
+                <span class="vo-card-warning-text">${a.handle} (${a.platform})</span>
+              </div>
+            `).join("")}
+          ` : ""}
+        </div>
+      </div>
+    `;
+  }
+  renderBlockers() {
+    const blockers = this.collectBlockers();
+    if (blockers.length === 0) {
+      return "";
+    }
+    return `
+      <div class="vo-overview-card vo-overview-card--alert">
+        <div class="vo-card-header">
+          <span class="vo-card-icon">\u26A0</span>
+          <span class="vo-card-label">Blockers</span>
+          ${Badge({ count: blockers.length, status: "error" })}
+        </div>
+        <div class="vo-card-body">
+          <div class="vo-blockers-list">
+            ${blockers.map((blocker) => `
+              <div class="vo-blocker">
+                <div class="vo-blocker-icon">\u26A0\uFE0F</div>
+                <div class="vo-blocker-content">
+                  <div class="vo-blocker-title">${blocker.title}</div>
+                  <div class="vo-blocker-detail">${blocker.detail}</div>
+                  <div class="vo-blocker-guidance">${blocker.guidance}</div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  collectBlockers() {
+    const blockers = [];
+    const state = this.ctx.getState();
+    if (this.selector && !this.selector.healthy) {
+      blockers.push({
+        title: "AI Selector Degraded",
+        detail: this.selector.error || "The AI model selector service is not responding normally",
+        guidance: "Check selector logs at ~/.config/video-orchestrator/logs/selector.log"
+      });
+    }
+    if (state.accountId && this.accounts.length > 0) {
+      const account = this.accounts.find((a) => a.id === state.accountId);
+      if (account && account.credentialState === "missing") {
+        blockers.push({
+          title: "Missing Credentials",
+          detail: `${account.handle} (${account.platform}) lacks configured credentials`,
+          guidance: "Configure credentials in Brain Console credentials section, then restart the worker."
+        });
+      }
+    }
+    if (state.accountId && this.accountStats?.stats) {
+      const stats = this.accountStats.stats.find((s) => s.accountId === state.accountId);
+      if (stats && stats.failedJobs30d > stats.succeededJobs30d * 2 && stats.totalJobs30d > 0) {
+        const failRate = (stats.failedJobs30d / stats.totalJobs30d * 100).toFixed(0);
+        blockers.push({
+          title: `High Failure Rate (${failRate}%)`,
+          detail: `${stats.accountHandle} has ${stats.failedJobs30d} failed jobs in last 30 days`,
+          guidance: `Review failed job logs and quota limits for ${stats.platform}.`
+        });
+      }
+    }
+    return blockers;
+  }
+  formatDate(iso) {
+    if (!iso) return "\u2013";
+    try {
+      return new Date(iso).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    } catch {
+      return iso;
+    }
+  }
+  destroy() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+    if (this.refreshTimer !== null) {
+      clearInterval(this.refreshTimer);
+      this.refreshTimer = null;
+    }
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/PipelinesPanel.ts
+var PIPELINE_STAGES = [
+  "Intake",
+  "Script",
+  "Assets",
+  "Design",
+  "Voiceover",
+  "Visuals",
+  "Assembly",
+  "Publishing"
+];
+var PipelinesPanel = class {
+  container;
+  profiles = [];
+  contentItems = [];
+  liveJobs = [];
+  ctx = getVOContextManager();
+  unsubscribe = null;
+  selectedProfileId = null;
+  selectedRunId = null;
+  loading = false;
+  constructor(container, data) {
+    this.container = container;
+    this.profiles = data.profiles || [];
+    this.contentItems = data.contentItems || [];
+    this.unsubscribe = this.ctx.subscribe(() => this.render());
+    this.render();
+    this.fetchLiveJobs();
+  }
+  async fetchLiveJobs() {
+    const state = this.ctx.getState();
+    this.loading = true;
+    try {
+      const url = state.projectId ? `http://localhost:4877/api/infra/video-orchestrator/jobs?limit=50&projectId=${encodeURIComponent(state.projectId)}` : "http://localhost:4877/api/infra/video-orchestrator/jobs?limit=50";
+      const res = await fetch(url);
+      if (res.ok) {
+        const data = await res.json();
+        this.liveJobs = data.jobs || [];
+      }
+    } catch {
+    } finally {
+      this.loading = false;
+      this.render();
+    }
+  }
+  render() {
+    const state = this.ctx.getState();
+    const profilesForProject = this.profiles.filter((p) => p.projectId === state.projectId);
+    const runs = this.buildRuns();
+    this.container.innerHTML = `
+      <div class="vo-pipelines-panel vo-pipelines-panel--threecol">
+        <div class="vo-pipelines-left">
+          ${this.renderStageMap(profilesForProject)}
+          ${this.renderProfileSelector(profilesForProject)}
+        </div>
+        <div class="vo-pipelines-center">
+          ${this.renderRunHistory(runs)}
+        </div>
+        <div class="vo-pipelines-right ${this.selectedRunId ? "vo-pipelines-right--open" : ""}">
+          ${this.renderRunDetail(runs)}
+        </div>
+      </div>
+    `;
+    this.attachEventListeners(profilesForProject, runs);
+  }
+  renderStageMap(profiles) {
+    const currentProfileId = this.selectedProfileId || profiles[0]?.id;
+    const profile = profiles.find((p) => p.id === currentProfileId);
+    const stages = profile?.enabledStages ?? [];
+    return `
+      <div class="vo-pipelines-card">
+        <h3 class="vo-overview-title">Pipeline Stages</h3>
+        <div class="vo-stage-map vo-stage-map--horizontal">
+          ${PIPELINE_STAGES.map((stageName, idx) => {
+      const configuredStage = stages.find((s) => s.label.toLowerCase().includes(stageName.toLowerCase()));
+      const statusClass = configuredStage ? this.getStageStatusClass(configuredStage.status) : "vo-status-disabled";
+      const status = configuredStage?.status ?? "n/a";
+      return `
+              <div class="vo-stage-item vo-stage-item--compact">
+                <div class="vo-stage-number">${idx + 1}</div>
+                <div class="vo-stage-content">
+                  <div class="vo-stage-name">${stageName}</div>
+                  <div class="vo-stage-status ${statusClass}">${status}</div>
+                </div>
+                ${idx < PIPELINE_STAGES.length - 1 ? '<div class="vo-stage-arrow">\u2192</div>' : ""}
+              </div>
+            `;
+    }).join("")}
+        </div>
+      </div>
+    `;
+  }
+  renderProfileSelector(profiles) {
+    if (profiles.length === 0) {
+      return `
+        <div class="vo-pipelines-card">
+          <p class="vo-placeholder">No pipeline profiles for this project</p>
+        </div>
+      `;
+    }
+    return `
+      <div class="vo-pipelines-card">
+        <h3 class="vo-overview-title">Profile</h3>
+        <div class="vo-pipeline-selector">
+          ${profiles.map((p) => `
+            <button
+              class="vo-pipeline-btn ${this.selectedProfileId === p.id || !this.selectedProfileId && profiles[0]?.id === p.id ? "active" : ""}"
+              data-profile-id="${p.id}"
+            >
+              <span class="vo-pipeline-name">${p.name}</span>
+              <span class="vo-pipeline-targets">${p.targetPlatforms.join(", ")}</span>
+            </button>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  }
+  renderRunHistory(runs) {
+    if (this.loading) {
+      return `
+        <div class="vo-pipelines-card">
+          <h3 class="vo-overview-title">Run History</h3>
+          <p class="vo-placeholder">Loading...</p>
+        </div>
+      `;
+    }
+    if (runs.length === 0) {
+      return `
+        <div class="vo-pipelines-card">
+          <h3 class="vo-overview-title">Run History</h3>
+          <p class="vo-placeholder">No runs recorded</p>
+        </div>
+      `;
+    }
+    return `
+      <div class="vo-pipelines-card vo-pipelines-card--fill">
+        <h3 class="vo-overview-title">Run History</h3>
+        <div class="vo-runs-table">
+          <div class="vo-runs-header vo-runs-header--extended">
+            <div class="vo-run-col-id">ID</div>
+            <div class="vo-run-col-status">Status</div>
+            <div class="vo-run-col-stage">Stage</div>
+            <div class="vo-run-col-progress">Progress</div>
+            <div class="vo-run-col-date">Started</div>
+            <div class="vo-run-col-date">Completed</div>
+          </div>
+          ${runs.map((run) => `
+            <div
+              class="vo-run-row ${this.selectedRunId === run.id ? "vo-run-row--selected" : ""}"
+              data-run-id="${run.id}"
+              title="Click to see detail"
+            >
+              <div class="vo-run-row-main vo-run-row-main--extended">
+                <div class="vo-run-col-id vo-monospace">${run.id.slice(0, 10)}\u2026</div>
+                <div class="vo-run-col-status">
+                  <span class="vo-run-status ${this.getRunStatusClass(run.status)}">${run.status}</span>
+                </div>
+                <div class="vo-run-col-stage">${run.stage}</div>
+                <div class="vo-run-col-progress">
+                  <div class="vo-progress-bar-wrap">
+                    <div class="vo-progress-bar-fill" style="width: ${run.progress}%"></div>
+                  </div>
+                  <span class="vo-progress-label">${run.progress}%</span>
+                </div>
+                <div class="vo-run-col-date">${run.startedAt}</div>
+                <div class="vo-run-col-date">${run.completedAt ?? "\u2013"}</div>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    `;
+  }
+  renderRunDetail(runs) {
+    if (!this.selectedRunId) {
+      return `
+        <div class="vo-pipelines-card vo-pipelines-detail-placeholder">
+          <p class="vo-placeholder">Click a run row to see detail</p>
+        </div>
+      `;
+    }
+    const run = runs.find((r) => r.id === this.selectedRunId);
+    if (!run) {
+      return `
+        <div class="vo-pipelines-card">
+          <p class="vo-placeholder">Run not found</p>
+        </div>
+      `;
+    }
+    return `
+      <div class="vo-pipelines-card vo-pipelines-detail-panel">
+        <div class="vo-detail-panel-header">
+          <h3 class="vo-overview-title">Run Detail</h3>
+          <button class="vo-detail-close-btn" data-action="close-detail">\u2715</button>
+        </div>
+        <div class="vo-detail-panel-body">
+          <div class="vo-run-detail-row">
+            <span class="vo-detail-key">ID</span>
+            <span class="vo-detail-value vo-detail-monospace">${run.id}</span>
+          </div>
+          <div class="vo-run-detail-row">
+            <span class="vo-detail-key">Status</span>
+            <span class="vo-detail-value">
+              <span class="vo-run-status ${this.getRunStatusClass(run.status)}">${run.status}</span>
+            </span>
+          </div>
+          <div class="vo-run-detail-row">
+            <span class="vo-detail-key">Stage</span>
+            <span class="vo-detail-value">${run.stage}</span>
+          </div>
+          <div class="vo-run-detail-row">
+            <span class="vo-detail-key">Progress</span>
+            <span class="vo-detail-value">${run.progress}%</span>
+          </div>
+          <div class="vo-run-detail-row">
+            <span class="vo-detail-key">Started</span>
+            <span class="vo-detail-value">${run.startedAt}</span>
+          </div>
+          <div class="vo-run-detail-row">
+            <span class="vo-detail-key">Completed</span>
+            <span class="vo-detail-value">${run.completedAt ?? "\u2013"}</span>
+          </div>
+          <div class="vo-run-detail-row">
+            <span class="vo-detail-key">Content</span>
+            <span class="vo-detail-value">${run.contentTitle}</span>
+          </div>
+          ${run.errorMessage ? `
+            <div class="vo-run-detail-row vo-detail-error">
+              <span class="vo-detail-key">Error</span>
+              <span class="vo-detail-value vo-detail-monospace">${run.errorMessage}</span>
+            </div>
+          ` : ""}
+          ${run.logs && run.logs.length > 0 ? `
+            <div class="vo-detail-section-label">Logs</div>
+            <div class="vo-detail-logs">
+              ${run.logs.map((log) => `<div class="vo-detail-log-line">${log}</div>`).join("")}
+            </div>
+          ` : ""}
+          ${run.artifacts && run.artifacts.length > 0 ? `
+            <div class="vo-detail-section-label">Artifacts</div>
+            <div class="vo-detail-artifacts">
+              ${run.artifacts.map((a) => `<div class="vo-detail-artifact">${a}</div>`).join("")}
+            </div>
+          ` : ""}
+        </div>
+      </div>
+    `;
+  }
+  buildRuns() {
+    const state = this.ctx.getState();
+    const now = /* @__PURE__ */ new Date();
+    if (this.liveJobs.length > 0) {
+      return this.liveJobs.map((job) => {
+        const jobStatus = this.mapJobStatus(job.jobStatus);
+        const progress = this.estimateProgress(job.pipelineState, jobStatus);
+        return {
+          id: job.jobId,
+          contentItemId: job.jobId,
+          contentTitle: job.title ?? `Job ${job.jobId}`,
+          date: this.formatDate(job.createdAt),
+          status: jobStatus,
+          progress,
+          startedAt: this.formatDate(job.createdAt),
+          completedAt: job.completedAt ? this.formatDate(job.completedAt) : null,
+          stage: job.pipelineState || job.jobType,
+          errorMessage: job.errorMessage ?? void 0,
+          logs: job.errorMessage ? [`[${job.jobStatus}] ${job.errorMessage}`] : [],
+          artifacts: job.adapterMode ? [`adapter: ${job.adapterMode}`] : []
+        };
+      });
+    }
+    if (!state.projectId) return [];
+    const fixtureRuns = [
+      { status: "completed", progress: 100, stage: "Publishing" },
+      { status: "completed", progress: 100, stage: "Publishing" },
+      { status: "completed", progress: 100, stage: "Publishing" },
+      { status: "failed", progress: 62, stage: "Captions", errorMessage: "Timeout waiting for caption service" },
+      { status: "running", progress: 37, stage: "Script" },
+      { status: "queued", progress: 0, stage: "Intake" }
+    ];
+    const projectItems = this.contentItems.filter((i) => i.projectId === state.projectId);
+    return projectItems.slice(0, 6).map((item, idx) => {
+      const runDate = new Date(now.getTime() - idx * 24 * 60 * 60 * 1e3);
+      const fixture = fixtureRuns[idx] ?? fixtureRuns[0];
+      return {
+        id: `run-${item.id}-${idx}`,
+        contentItemId: item.id,
+        contentTitle: item.title,
+        date: this.formatDate(runDate.toISOString()),
+        status: fixture.status,
+        progress: fixture.progress,
+        startedAt: this.formatDate(runDate.toISOString()),
+        completedAt: fixture.status === "completed" || fixture.status === "failed" ? this.formatDate(new Date(runDate.getTime() + 2 * 60 * 60 * 1e3).toISOString()) : null,
+        stage: fixture.stage,
+        errorMessage: fixture.errorMessage,
+        logs: fixture.errorMessage ? [`[error] ${fixture.errorMessage}`, "[info] Retrying with fallback..."] : ["[info] Pipeline started", `[info] Stage: ${fixture.stage}`],
+        artifacts: fixture.status === "completed" ? ["video.mp4", "captions.srt", "thumbnail.jpg"] : []
+      };
+    });
+  }
+  mapJobStatus(jobStatus) {
+    switch (jobStatus?.toLowerCase()) {
+      case "completed":
+      case "done":
+        return "completed";
+      case "failed":
+      case "error":
+        return "failed";
+      case "running":
+      case "in_progress":
+        return "running";
+      case "pending":
+      case "queued":
+      default:
+        return "queued";
+    }
+  }
+  estimateProgress(pipelineState, status) {
+    if (status === "completed") return 100;
+    if (status === "queued") return 0;
+    if (status === "failed") {
+      const stageIndex2 = PIPELINE_STAGES.findIndex((s) => s.toLowerCase() === pipelineState?.toLowerCase());
+      return stageIndex2 >= 0 ? Math.round(stageIndex2 / PIPELINE_STAGES.length * 100) : 50;
+    }
+    const stageIndex = PIPELINE_STAGES.findIndex((s) => s.toLowerCase() === pipelineState?.toLowerCase());
+    return stageIndex >= 0 ? Math.round((stageIndex + 0.5) / PIPELINE_STAGES.length * 100) : 33;
+  }
+  getStageStatusClass(status) {
+    switch (status) {
+      case "enabled":
+        return "vo-status-enabled";
+      case "approval-gated":
+        return "vo-status-approval";
+      case "manual-only":
+        return "vo-status-manual";
+      case "disabled":
+        return "vo-status-disabled";
+      default:
+        return "";
+    }
+  }
+  getRunStatusClass(status) {
+    switch (status) {
+      case "completed":
+        return "vo-run-completed";
+      case "failed":
+        return "vo-run-failed";
+      case "running":
+        return "vo-run-in-progress";
+      case "queued":
+        return "vo-run-blocked";
+      default:
+        return "";
+    }
+  }
+  formatDate(iso) {
+    if (!iso) return "\u2013";
+    try {
+      return new Date(iso).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    } catch {
+      return iso;
+    }
+  }
+  attachEventListeners(profiles, runs) {
+    this.container.querySelectorAll(".vo-pipeline-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const target = e.currentTarget;
+        const profileId = target.getAttribute("data-profile-id");
+        this.container.querySelectorAll(".vo-pipeline-btn").forEach((b) => b.classList.remove("active"));
+        target.classList.add("active");
+        this.selectedProfileId = profileId;
+        this.render();
+      });
+    });
+    this.container.querySelectorAll(".vo-run-row").forEach((row) => {
+      row.addEventListener("click", () => {
+        const runId = row.getAttribute("data-run-id");
+        if (this.selectedRunId === runId) {
+          this.selectedRunId = null;
+        } else {
+          this.selectedRunId = runId;
+        }
+        this.render();
+      });
+    });
+    const closeBtn = this.container.querySelector('[data-action="close-detail"]');
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        this.selectedRunId = null;
+        this.render();
+      });
+    }
+  }
+  destroy() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/AccountsPanel.ts
+var PLATFORM_ICONS = {
+  youtube: "\u25B6",
+  "youtube-shorts": "\u25B6",
+  tiktok: "\u266A",
+  instagram: "\u25C9",
+  facebook: "f",
+  linkedin: "in",
+  pinterest: "P"
+};
+var QUOTA_LIMITS = {
+  youtube: 1e4,
+  "youtube-shorts": 1e4,
+  tiktok: 500,
+  instagram: 200,
+  facebook: 300,
+  linkedin: 300,
+  pinterest: 1e3
+};
+var AccountsPanel = class {
+  container;
+  accounts = [];
+  profiles = [];
+  accountStats = [];
+  ctx = getVOContextManager();
+  unsubscribe = null;
+  constructor(container, data) {
+    this.container = container;
+    this.accounts = data.accounts || [];
+    this.profiles = data.profiles || [];
+    this.accountStats = data.accountStats || [];
+    this.unsubscribe = this.ctx.subscribe(() => this.render());
+    this.render();
+  }
+  render() {
+    const state = this.ctx.getState();
+    const accountsForProject = this.accounts.filter((a) => a.projectId === state.projectId);
+    this.container.innerHTML = `
+      <div class="vo-accounts-panel">
+        ${this.renderSummaryBar(accountsForProject)}
+        ${this.renderAccountCards(accountsForProject)}
+      </div>
+    `;
+  }
+  renderSummaryBar(accounts) {
+    if (accounts.length === 0) return "";
+    const configured = accounts.filter((a) => a.credentialState === "connected").length;
+    const expired = accounts.filter((a) => a.credentialState === "missing").length;
+    const manual = accounts.filter((a) => a.credentialState === "manual").length;
+    const active = accounts.filter((a) => a.status === "active").length;
+    return `
+      <div class="vo-accounts-summary-bar">
+        <div class="vo-accounts-summary-stat">
+          <span class="vo-accounts-summary-value" style="color: var(--bc-status-ok)">${configured}</span>
+          <span class="vo-accounts-summary-label">Connected</span>
+        </div>
+        <div class="vo-accounts-summary-stat">
+          <span class="vo-accounts-summary-value" style="color: var(--bc-status-warning)">${manual}</span>
+          <span class="vo-accounts-summary-label">Manual</span>
+        </div>
+        <div class="vo-accounts-summary-stat">
+          <span class="vo-accounts-summary-value" style="color: var(--bc-status-error)">${expired}</span>
+          <span class="vo-accounts-summary-label">Missing</span>
+        </div>
+        <div class="vo-accounts-summary-stat">
+          <span class="vo-accounts-summary-value" style="color: var(--bc-accent)">${active}</span>
+          <span class="vo-accounts-summary-label">Active</span>
+        </div>
+        <div class="vo-accounts-summary-stat">
+          <span class="vo-accounts-summary-value">${accounts.length}</span>
+          <span class="vo-accounts-summary-label">Total</span>
+        </div>
+      </div>
+    `;
+  }
+  renderAccountCards(accounts) {
+    if (accounts.length === 0) {
+      return `
+        <div class="vo-empty-state">
+          <p>No platform accounts configured for this project</p>
+        </div>
+      `;
+    }
+    return `
+      <div class="vo-accounts-grid">
+        ${accounts.map((account) => this.renderAccountCard(account)).join("")}
+      </div>
+    `;
+  }
+  renderAccountCard(account) {
+    const stats = this.accountStats.find((s) => s.accountId === account.id);
+    const successRate = stats?.successRate30d !== null && stats?.successRate30d !== void 0 ? `${(stats.successRate30d * 100).toFixed(0)}%` : "N/A";
+    return `
+      <div class="vo-account-card">
+        ${this.renderAccountHeader(account)}
+        ${this.renderConnectionStateBadge(account)}
+        ${this.renderAccountBody(account, stats, successRate)}
+        ${this.renderQuotaBar(account, stats)}
+        ${this.renderSchedulerToggle(account)}
+        ${this.renderAccountFooter(account)}
+      </div>
+    `;
+  }
+  renderAccountHeader(account) {
+    const icon = PLATFORM_ICONS[account.platform] ?? "\u25CB";
+    return `
+      <div class="vo-account-header">
+        <div class="vo-account-icon">
+          <span class="vo-platform-icon">${icon}</span>
+        </div>
+        <div class="vo-account-title">
+          <div class="vo-account-handle">${account.handle}</div>
+          <div class="vo-account-platform">${account.platform}</div>
+        </div>
+      </div>
+    `;
+  }
+  renderConnectionStateBadge(account) {
+    const label = this.getConnectionStateLabel(account.credentialState);
+    const statusPill = this.getConnectionStatusForPill(account.credentialState);
+    return `
+      <div class="vo-account-connection-banner">
+        ${StatusPill({ status: statusPill, label })}
+        ${StatusPill({ status: this.getAdapterStatusForPill(account.adapterStatus), label: this.getAdapterLabel(account.adapterStatus) })}
+      </div>
+    `;
+  }
+  renderAccountBody(account, stats, successRate) {
+    return `
+      <div class="vo-account-body">
+        <div class="vo-account-row">
+          <span class="vo-account-label">Status</span>
+          <span class="vo-account-value ${this.getStatusClass(account.status)}">${account.status}</span>
+        </div>
+
+        <div class="vo-account-row">
+          <span class="vo-account-label">Quota State</span>
+          <span class="vo-account-value ${this.getQuotaStateClass(account.quotaState)}">${account.quotaState}</span>
+        </div>
+
+        ${stats ? `
+          <div class="vo-account-row">
+            <span class="vo-account-label">Success Rate (30d)</span>
+            <span class="vo-account-value">${successRate}</span>
+          </div>
+          <div class="vo-account-row">
+            <span class="vo-account-label">Jobs (30d)</span>
+            <span class="vo-account-value">${stats.succeededJobs30d}/${stats.totalJobs30d}</span>
+          </div>
+          ${stats.lastJobAt ? `
+            <div class="vo-account-row">
+              <span class="vo-account-label">Last Job</span>
+              <span class="vo-account-value">${this.formatDate(stats.lastJobAt)}</span>
+            </div>
+          ` : ""}
+        ` : ""}
+      </div>
+    `;
+  }
+  renderQuotaBar(account, stats) {
+    const limit = QUOTA_LIMITS[account.platform] ?? 1e3;
+    const usage = stats?.totalJobs30d ?? 0;
+    const pct = Math.min(100, Math.round(usage / limit * 100));
+    const barColor = pct >= 90 ? "var(--bc-red)" : pct >= 70 ? "var(--bc-yellow)" : "var(--bc-green)";
+    return `
+      <div class="vo-account-quota-section">
+        <div class="vo-account-quota-row">
+          <span class="vo-account-label">Quota Usage</span>
+          <span class="vo-account-quota-text">${usage} / ${limit}</span>
+        </div>
+        <div class="vo-quota-bar-track">
+          <div
+            class="vo-quota-bar-fill"
+            style="width: ${pct}%; background: ${barColor};"
+            title="${pct}% of quota used"
+          ></div>
+        </div>
+      </div>
+    `;
+  }
+  renderSchedulerToggle(account) {
+    const isActive = account.status === "active";
+    const policyLabel = account.schedulerPolicy || "not-set";
+    return `
+      <div class="vo-account-scheduler-row">
+        <span class="vo-account-label">Scheduler</span>
+        <div class="vo-scheduler-toggle-wrap">
+          <div class="vo-scheduler-toggle vo-scheduler-toggle--${isActive ? "on" : "off"}" title="Read-only in Phase 0.9">
+            <div class="vo-scheduler-toggle-thumb"></div>
+          </div>
+          <span class="vo-scheduler-policy-label">${policyLabel}</span>
+        </div>
+      </div>
+    `;
+  }
+  renderAccountFooter(account) {
+    return `
+      <div class="vo-account-footer">
+        <div class="vo-account-profiles">
+          <div class="vo-profiles-label">Enabled Profiles</div>
+          <div class="vo-profiles-list">
+            ${this.renderEnabledProfiles(account.enabledPipelineProfileIds)}
+          </div>
+        </div>
+      </div>
+      ${account.capabilities.length > 0 ? `
+        <div class="vo-account-capabilities">
+          <div class="vo-capabilities-label">Capabilities</div>
+          <div class="vo-capabilities-tags">
+            ${account.capabilities.map((cap) => `
+              <span class="vo-capability-tag">${cap}</span>
+            `).join("")}
+          </div>
+        </div>
+      ` : ""}
+    `;
+  }
+  renderEnabledProfiles(profileIds) {
+    if (profileIds.length === 0) {
+      return '<span class="vo-placeholder">None</span>';
+    }
+    const profileNames = profileIds.map((id) => this.profiles.find((p) => p.id === id)?.name || id).slice(0, 3);
+    const more = profileIds.length > 3 ? ` +${profileIds.length - 3}` : "";
+    return profileNames.map((name) => `<span class="vo-profile-tag">${name}</span>`).join("") + (more ? `<span class="vo-profile-tag">${more}</span>` : "");
+  }
+  getConnectionStateLabel(state) {
+    switch (state) {
+      case "connected":
+        return "Connected";
+      case "missing":
+        return "Credentials Missing";
+      case "manual":
+        return "Manual";
+      default:
+        return state;
+    }
+  }
+  getAdapterLabel(state) {
+    switch (state) {
+      case "ready-read-only":
+        return "direct_upload";
+      case "manual-package":
+        return "n8n_fallback";
+      case "disabled":
+        return "manual_only";
+      default:
+        return state;
+    }
+  }
+  getConnectionStatusForPill(state) {
+    switch (state) {
+      case "connected":
+        return "ok";
+      case "missing":
+        return "error";
+      case "manual":
+        return "warning";
+      default:
+        return "warning";
+    }
+  }
+  getAdapterStatusForPill(state) {
+    switch (state) {
+      case "ready-read-only":
+        return "ok";
+      case "manual-package":
+        return "warning";
+      case "disabled":
+        return "error";
+      default:
+        return "warning";
+    }
+  }
+  getCredentialColor(state) {
+    switch (state) {
+      case "connected":
+        return "#4ade80";
+      case "missing":
+        return "#fb7185";
+      case "manual":
+        return "#facc15";
+      default:
+        return "#60a5fa";
+    }
+  }
+  getAdapterColor(state) {
+    switch (state) {
+      case "ready-read-only":
+        return "#4ade80";
+      case "manual-package":
+        return "#facc15";
+      case "disabled":
+        return "#fb7185";
+      default:
+        return "#60a5fa";
+    }
+  }
+  getStatusClass(status) {
+    switch (status) {
+      case "active":
+        return "vo-status-active";
+      case "manual-only":
+        return "vo-status-manual";
+      case "blocked":
+        return "vo-status-blocked";
+      default:
+        return "";
+    }
+  }
+  getQuotaStateClass(quotaState) {
+    switch (quotaState) {
+      case "ok":
+        return "vo-status-active";
+      case "limited":
+        return "vo-status-manual";
+      case "unknown":
+      default:
+        return "";
+    }
+  }
+  formatDate(iso) {
+    if (!iso) return "\u2013";
+    try {
+      return new Date(iso).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    } catch {
+      return iso;
+    }
+  }
+  destroy() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/HistoryPanel.ts
+var PAGE_SIZE = 50;
+var HistoryPanel = class {
+  container;
+  contentItems = [];
+  accounts = [];
+  ctx = getVOContextManager();
+  unsubscribe = null;
+  // Filter state
+  filterAccount = "";
+  filterPlatform = "";
+  filterStatus = "";
+  filterDateStart = "";
+  filterDateEnd = "";
+  sortBy = "publishedAt";
+  sortDesc = true;
+  currentPage = 0;
+  constructor(container, data) {
+    this.container = container;
+    this.contentItems = data.contentItems || [];
+    this.accounts = data.accounts || [];
+    this.unsubscribe = this.ctx.subscribe(() => {
+      this.currentPage = 0;
+      this.render();
+    });
+    this.render();
+  }
+  render() {
+    const state = this.ctx.getState();
+    const allEntries = this.buildEntries(state);
+    const filtered = this.applyFilters(allEntries);
+    const sorted = this.applySort(filtered);
+    const pageEntries = sorted.slice(this.currentPage * PAGE_SIZE, (this.currentPage + 1) * PAGE_SIZE);
+    const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
+    this.container.innerHTML = `
+      <div class="vo-history-panel">
+        ${this.renderFilters(state, allEntries)}
+        ${this.renderTable(pageEntries)}
+        ${this.renderPagination(sorted.length, totalPages)}
+      </div>
+    `;
+    this.attachEventListeners();
+  }
+  renderFilters(state, allEntries) {
+    const accountsForProject = this.accounts.filter((a) => a.projectId === state.projectId);
+    const platforms = [...new Set(allEntries.map((e) => e.platform).filter(Boolean))].sort();
+    return `
+      <div class="vo-history-filters">
+        ${accountsForProject.length > 0 ? `
+          <div class="vo-filter-group">
+            <label class="vo-filter-label">Account</label>
+            <select class="vo-filter-select" data-filter="account">
+              <option value="">All accounts</option>
+              ${accountsForProject.map((a) => `
+                <option value="${a.id}" ${this.filterAccount === a.id ? "selected" : ""}>${a.handle}</option>
+              `).join("")}
+            </select>
+          </div>
+        ` : ""}
+
+        <div class="vo-filter-group">
+          <label class="vo-filter-label">Platform</label>
+          <select class="vo-filter-select" data-filter="platform">
+            <option value="">All platforms</option>
+            ${platforms.map((p) => `
+              <option value="${p}" ${this.filterPlatform === p ? "selected" : ""}>${p}</option>
+            `).join("")}
+          </select>
+        </div>
+
+        <div class="vo-filter-group">
+          <label class="vo-filter-label">Status</label>
+          <select class="vo-filter-select" data-filter="status">
+            <option value="">All statuses</option>
+            <option value="published" ${this.filterStatus === "published" ? "selected" : ""}>Published</option>
+            <option value="scheduled" ${this.filterStatus === "scheduled" ? "selected" : ""}>Scheduled</option>
+            <option value="failed" ${this.filterStatus === "failed" ? "selected" : ""}>Failed</option>
+            <option value="draft" ${this.filterStatus === "draft" ? "selected" : ""}>Draft</option>
+          </select>
+        </div>
+
+        <div class="vo-filter-group">
+          <label class="vo-filter-label">From</label>
+          <input
+            class="vo-filter-date"
+            type="date"
+            data-filter="dateStart"
+            value="${this.filterDateStart}"
+          />
+        </div>
+
+        <div class="vo-filter-group">
+          <label class="vo-filter-label">To</label>
+          <input
+            class="vo-filter-date"
+            type="date"
+            data-filter="dateEnd"
+            value="${this.filterDateEnd}"
+          />
+        </div>
+
+        <div class="vo-filter-group">
+          <label class="vo-filter-label">Sort</label>
+          <select class="vo-filter-select" data-filter="sortBy">
+            <option value="publishedAt" ${this.sortBy === "publishedAt" ? "selected" : ""}>Published At</option>
+            <option value="status" ${this.sortBy === "status" ? "selected" : ""}>Status</option>
+            <option value="account" ${this.sortBy === "account" ? "selected" : ""}>Account</option>
+            <option value="platform" ${this.sortBy === "platform" ? "selected" : ""}>Platform</option>
+          </select>
+        </div>
+
+        <div class="vo-filter-group">
+          <label class="vo-filter-label">Order</label>
+          <button class="vo-filter-sort-btn" data-action="toggle-sort" title="Toggle sort direction">
+            ${this.sortDesc ? "\u2193 Desc" : "\u2191 Asc"}
+          </button>
+        </div>
+      </div>
+    `;
+  }
+  renderTable(entries) {
+    if (entries.length === 0) {
+      return `
+        <div class="vo-empty-state">
+          <p>No history entries found</p>
+        </div>
+      `;
+    }
+    return `
+      <div class="vo-history-table">
+        <div class="vo-history-header vo-history-header--extended">
+          <div class="vo-history-col-id">Content Item ID</div>
+          <div class="vo-history-col-platform">Platform</div>
+          <div class="vo-history-col-account">Account</div>
+          <div class="vo-history-col-status">Status</div>
+          <div class="vo-history-col-date">Published At</div>
+          <div class="vo-history-col-error">Error</div>
+        </div>
+        ${entries.map((entry) => this.renderRow(entry)).join("")}
+      </div>
+    `;
+  }
+  renderRow(entry) {
+    return `
+      <div class="vo-history-row" data-entry-id="${entry.id}">
+        <div class="vo-history-row-main vo-history-row-main--extended">
+          <div class="vo-history-col-id vo-monospace">${entry.contentItemId.slice(0, 12)}\u2026</div>
+          <div class="vo-history-col-platform">${entry.platform}</div>
+          <div class="vo-history-col-account">${entry.accountHandle}</div>
+          <div class="vo-history-col-status">
+            <span class="vo-history-status ${this.getStatusClass(entry.status)}">${entry.status}</span>
+          </div>
+          <div class="vo-history-col-date">${entry.publishedAt}</div>
+          <div class="vo-history-col-error ${entry.error ? "vo-detail-error" : "vo-muted"}">
+            ${entry.error ? entry.error.slice(0, 40) + (entry.error.length > 40 ? "\u2026" : "") : "\u2013"}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  renderPagination(total, totalPages) {
+    if (totalPages <= 1) {
+      return `<div class="vo-history-pagination-bar"><span class="vo-muted">${total} entries</span></div>`;
+    }
+    const start = this.currentPage * PAGE_SIZE + 1;
+    const end = Math.min((this.currentPage + 1) * PAGE_SIZE, total);
+    return `
+      <div class="vo-history-pagination-bar">
+        <span class="vo-muted">${start}\u2013${end} of ${total}</span>
+        <div class="vo-history-pagination-controls">
+          <button
+            class="vo-pagination-btn"
+            data-action="page-prev"
+            ${this.currentPage === 0 ? "disabled" : ""}
+          >\u2190 Prev</button>
+          <span class="vo-pagination-page">${this.currentPage + 1} / ${totalPages}</span>
+          <button
+            class="vo-pagination-btn"
+            data-action="page-next"
+            ${this.currentPage >= totalPages - 1 ? "disabled" : ""}
+          >Next \u2192</button>
+        </div>
+      </div>
+    `;
+  }
+  buildEntries(state) {
+    const now = /* @__PURE__ */ new Date();
+    const fixtureStatuses = ["published", "published", "failed", "scheduled", "draft"];
+    const errors = [
+      "Connection timeout to platform API",
+      "OAuth token expired",
+      "Upload size limit exceeded"
+    ];
+    const projectItems = this.contentItems.filter((i) => i.projectId === state.projectId);
+    const entries = [];
+    projectItems.forEach((item, itemIdx) => {
+      const targets = item.platformTargets.length > 0 ? item.platformTargets : [{ platformAccountId: null, platform: "unknown", mode: "manual-package", status: "draft", approvalRequired: false, id: item.id }];
+      targets.forEach((target, targetIdx) => {
+        const account = this.accounts.find((a) => a.id === target.platformAccountId);
+        const entryDate = new Date(now.getTime() - (itemIdx * 3 + targetIdx) * 12 * 60 * 60 * 1e3);
+        const statusIdx = (itemIdx + targetIdx) % fixtureStatuses.length;
+        const status = fixtureStatuses[statusIdx];
+        const hasError = status === "failed";
+        entries.push({
+          id: `h-${item.id}-${targetIdx}`,
+          contentItemId: item.id,
+          contentTitle: item.title,
+          projectId: item.projectId,
+          accountId: account?.id ?? "unknown",
+          accountHandle: account?.handle ?? target.platform ?? "Unknown",
+          platform: account?.platform ?? target.platform ?? "unknown",
+          status,
+          publishedAt: entryDate.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+          }),
+          error: hasError ? errors[itemIdx % errors.length] : void 0
+        });
+      });
+    });
+    return entries;
+  }
+  applyFilters(entries) {
+    return entries.filter((e) => {
+      if (this.filterAccount && e.accountId !== this.filterAccount) return false;
+      if (this.filterPlatform && e.platform !== this.filterPlatform) return false;
+      if (this.filterStatus && e.status !== this.filterStatus) return false;
+      return true;
+    });
+  }
+  applySort(entries) {
+    const sorted = [...entries].sort((a, b) => {
+      let cmp = 0;
+      switch (this.sortBy) {
+        case "status":
+          cmp = a.status.localeCompare(b.status);
+          break;
+        case "account":
+          cmp = a.accountHandle.localeCompare(b.accountHandle);
+          break;
+        case "platform":
+          cmp = a.platform.localeCompare(b.platform);
+          break;
+        case "publishedAt":
+        default:
+          cmp = 0;
+          break;
+      }
+      return this.sortDesc ? -cmp : cmp;
+    });
+    return sorted;
+  }
+  getStatusClass(status) {
+    switch (status) {
+      case "published":
+        return "vo-history-published";
+      case "failed":
+        return "vo-history-failed";
+      case "draft":
+        return "vo-history-pending";
+      case "scheduled":
+        return "vo-history-scheduled";
+      default:
+        return "";
+    }
+  }
+  attachEventListeners() {
+    this.container.querySelectorAll(".vo-filter-select[data-filter]").forEach((el) => {
+      el.addEventListener("change", (e) => {
+        const filter = e.currentTarget.getAttribute("data-filter");
+        const value = e.currentTarget.value;
+        this.currentPage = 0;
+        switch (filter) {
+          case "account":
+            this.filterAccount = value;
+            break;
+          case "platform":
+            this.filterPlatform = value;
+            break;
+          case "status":
+            this.filterStatus = value;
+            break;
+          case "sortBy":
+            this.sortBy = value;
+            break;
+        }
+        this.render();
+      });
+    });
+    this.container.querySelectorAll(".vo-filter-date[data-filter]").forEach((el) => {
+      el.addEventListener("change", (e) => {
+        const filter = e.currentTarget.getAttribute("data-filter");
+        const value = e.currentTarget.value;
+        this.currentPage = 0;
+        if (filter === "dateStart") this.filterDateStart = value;
+        if (filter === "dateEnd") this.filterDateEnd = value;
+        this.render();
+      });
+    });
+    const sortBtn = this.container.querySelector('[data-action="toggle-sort"]');
+    if (sortBtn) {
+      sortBtn.addEventListener("click", () => {
+        this.sortDesc = !this.sortDesc;
+        this.currentPage = 0;
+        this.render();
+      });
+    }
+    const prevBtn = this.container.querySelector('[data-action="page-prev"]');
+    const nextBtn = this.container.querySelector('[data-action="page-next"]');
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        if (this.currentPage > 0) {
+          this.currentPage--;
+          this.render();
+        }
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        this.currentPage++;
+        this.render();
+      });
+    }
+  }
+  destroy() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/StudioPanel.ts
+var STUDIO_TABS = [
+  { id: "brief", label: "Brief" },
+  { id: "script", label: "Script" },
+  { id: "media", label: "Media" },
+  { id: "captions", label: "Captions" },
+  { id: "thumbnails", label: "Thumbnails" },
+  { id: "seo", label: "SEO" },
+  { id: "preview", label: "Preview" }
+];
+var StudioPanel = class {
+  container;
+  contentItems = [];
+  ctx = getVOContextManager();
+  unsubscribe = null;
+  selectedItemId = null;
+  activeTab = "brief";
+  loading = false;
+  constructor(container, data) {
+    this.container = container;
+    this.contentItems = data.contentItems || [];
+    this.unsubscribe = this.ctx.subscribe(() => this.render());
+    this.render();
+    this.fetchContentItems();
+  }
+  async fetchContentItems() {
+    const state = this.ctx.getState();
+    if (!state.projectId) return;
+    this.loading = true;
+    this.render();
+    try {
+      const res = await fetch(
+        `http://localhost:4877/api/video-orchestrator/content-items?projectId=${encodeURIComponent(state.projectId)}`
+      );
+      if (res.ok) {
+        const data = await res.json();
+        if (data.items && data.items.length > 0) {
+          this.contentItems = data.items;
+          if (!this.selectedItemId) {
+            this.selectedItemId = data.items[0].id;
+          }
+        }
+      }
+    } catch {
+    } finally {
+      this.loading = false;
+      this.render();
+    }
+  }
+  render() {
+    const state = this.ctx.getState();
+    const projectItems = this.contentItems.filter((i) => i.projectId === state.projectId);
+    const selectedItem = projectItems.find((i) => i.id === this.selectedItemId) ?? projectItems[0] ?? null;
+    if (this.loading) {
+      this.container.innerHTML = `
+        <div class="vo-studio-panel">
+          <div class="vo-empty-state"><p>Loading content items...</p></div>
+        </div>
+      `;
+      return;
+    }
+    if (projectItems.length === 0) {
+      this.container.innerHTML = `
+        <div class="vo-studio-panel">
+          <div class="vo-empty-state"><p>No content items found for this project</p></div>
+        </div>
+      `;
+      return;
+    }
+    this.container.innerHTML = `
+      <div class="vo-studio-panel">
+        ${this.renderItemSelector(projectItems, selectedItem)}
+        ${selectedItem ? this.renderStudioTabs(selectedItem) : ""}
+        ${selectedItem ? this.renderTabContent(selectedItem) : ""}
+      </div>
+    `;
+    this.attachEventListeners();
+  }
+  renderItemSelector(items, selected) {
+    return `
+      <div class="vo-studio-item-selector">
+        <label class="vo-filter-label">Content Item</label>
+        <select class="vo-filter-select vo-studio-item-select">
+          ${items.map((item) => `
+            <option value="${item.id}" ${selected?.id === item.id ? "selected" : ""}>${item.title}</option>
+          `).join("")}
+        </select>
+        <span class="vo-studio-item-status ${this.getStatusClass(selected?.status ?? "")}">
+          ${selected?.status ?? ""}
+        </span>
+      </div>
+    `;
+  }
+  renderStudioTabs(item) {
+    return `
+      <div class="vo-studio-tab-row">
+        ${STUDIO_TABS.map((tab) => `
+          <button
+            class="vo-studio-tab ${this.activeTab === tab.id ? "vo-studio-tab--active" : ""}"
+            data-tab="${tab.id}"
+          >${tab.label}</button>
+        `).join("")}
+      </div>
+    `;
+  }
+  renderTabContent(item) {
+    switch (this.activeTab) {
+      case "brief":
+        return this.renderBriefTab(item);
+      case "script":
+        return this.renderScriptTab(item);
+      case "media":
+        return this.renderMediaTab(item);
+      case "captions":
+        return this.renderCaptionsTab(item);
+      case "thumbnails":
+        return this.renderThumbnailsTab(item);
+      case "seo":
+        return this.renderSeoTab(item);
+      case "preview":
+        return this.renderPreviewTab(item);
+      default:
+        return "";
+    }
+  }
+  renderBriefTab(item) {
+    const brief = `Title: ${item.title}
+
+Source: ${item.canonicalSource}
+
+Slug: ${item.sourceSlug}
+
+Pipeline Profile: ${item.pipelineProfileId}
+
+Status: ${item.status}`;
+    return `
+      <div class="vo-studio-tab-content">
+        <div class="vo-studio-card">
+          <div class="vo-studio-card-header">Brief</div>
+          <div class="vo-studio-card-body">
+            <div class="vo-studio-readonly-label">Project Brief</div>
+            <textarea class="vo-studio-textarea" readonly>${brief}</textarea>
+          </div>
+        </div>
+        <div class="vo-studio-card">
+          <div class="vo-studio-card-header">Metadata</div>
+          <div class="vo-studio-card-body">
+            <div class="vo-studio-meta-grid">
+              <div class="vo-studio-meta-item">
+                <span class="vo-studio-meta-key">ID</span>
+                <span class="vo-studio-meta-value vo-monospace">${item.id}</span>
+              </div>
+              <div class="vo-studio-meta-item">
+                <span class="vo-studio-meta-key">Package ID</span>
+                <span class="vo-studio-meta-value vo-monospace">${item.packageId || "\u2013"}</span>
+              </div>
+              <div class="vo-studio-meta-item">
+                <span class="vo-studio-meta-key">Platform Targets</span>
+                <span class="vo-studio-meta-value">${item.platformTargets.length} target(s)</span>
+              </div>
+              <div class="vo-studio-meta-item">
+                <span class="vo-studio-meta-key">Artifacts</span>
+                <span class="vo-studio-meta-value">${item.artifactVariants.length} variant(s)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  renderScriptTab(item) {
+    const scriptArtifact = item.artifactVariants.find((v) => v.kind === "video");
+    const scriptContent = scriptArtifact ? `[Script artifact found \u2014 formatId: ${scriptArtifact.formatId}]
+
+Status: ${scriptArtifact.status}
+Platform: ${scriptArtifact.platform}
+
+[Script content would appear here when fully generated]` : `No script artifact found for this content item.
+
+This content item has ${item.artifactVariants.length} artifact variant(s) of kinds: ${[...new Set(item.artifactVariants.map((v) => v.kind))].join(", ") || "none"}`;
+    return `
+      <div class="vo-studio-tab-content">
+        <div class="vo-studio-card">
+          <div class="vo-studio-card-header">
+            Script
+            ${scriptArtifact ? `<span class="vo-studio-badge vo-studio-badge--${scriptArtifact.status}">${scriptArtifact.status}</span>` : ""}
+          </div>
+          <div class="vo-studio-card-body">
+            <div class="vo-studio-readonly-label">Script Text (read-only)</div>
+            <textarea class="vo-studio-textarea vo-studio-textarea--tall" readonly>${scriptContent}</textarea>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  renderMediaTab(item) {
+    const videoVariants = item.artifactVariants.filter((v) => v.kind === "video");
+    return `
+      <div class="vo-studio-tab-content">
+        <div class="vo-studio-card">
+          <div class="vo-studio-card-header">Media Files</div>
+          <div class="vo-studio-card-body">
+            ${videoVariants.length === 0 ? `
+              <div class="vo-studio-media-empty">
+                <div class="vo-studio-media-placeholder">
+                  <span class="vo-studio-media-icon">\u25B6</span>
+                  <span class="vo-studio-media-label">No media files generated yet</span>
+                </div>
+              </div>
+            ` : videoVariants.map((v) => `
+              <div class="vo-studio-media-item">
+                <div class="vo-studio-media-preview">
+                  <div class="vo-studio-media-thumb">
+                    <span class="vo-studio-media-icon">\u25B6</span>
+                  </div>
+                </div>
+                <div class="vo-studio-media-info">
+                  <div class="vo-studio-media-title">${v.formatId}</div>
+                  <div class="vo-studio-media-meta">${v.platform} \xB7 <span class="vo-studio-badge vo-studio-badge--${v.status}">${v.status}</span></div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+        <div class="vo-studio-card">
+          <div class="vo-studio-card-header">Source Info</div>
+          <div class="vo-studio-card-body">
+            <div class="vo-studio-meta-grid">
+              <div class="vo-studio-meta-item">
+                <span class="vo-studio-meta-key">Canonical Source</span>
+                <span class="vo-studio-meta-value vo-monospace">${item.canonicalSource}</span>
+              </div>
+              <div class="vo-studio-meta-item">
+                <span class="vo-studio-meta-key">Source Slug</span>
+                <span class="vo-studio-meta-value vo-monospace">${item.sourceSlug}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  renderCaptionsTab(item) {
+    const captionVariants = item.artifactVariants.filter((v) => v.kind === "captions");
+    const srtPreview = captionVariants.length > 0 ? `1
+00:00:00,000 --> 00:00:03,000
+[Captions artifact found: ${captionVariants[0].formatId}]
+
+2
+00:00:03,000 --> 00:00:06,000
+Status: ${captionVariants[0].status}
+
+[Full SRT content would load here]` : `[No captions artifact found for this content item]
+
+Available artifact kinds: ${[...new Set(item.artifactVariants.map((v) => v.kind))].join(", ") || "none"}`;
+    return `
+      <div class="vo-studio-tab-content">
+        <div class="vo-studio-card">
+          <div class="vo-studio-card-header">
+            Captions (SRT)
+            ${captionVariants.length > 0 ? `<span class="vo-studio-badge vo-studio-badge--${captionVariants[0].status}">${captionVariants[0].status}</span>` : ""}
+          </div>
+          <div class="vo-studio-card-body">
+            <div class="vo-studio-readonly-label">SRT Preview (read-only)</div>
+            <textarea class="vo-studio-textarea vo-studio-textarea--tall vo-monospace-textarea" readonly>${srtPreview}</textarea>
+            ${captionVariants.length > 1 ? `
+              <div class="vo-studio-caption-variants">
+                ${captionVariants.map((v) => `
+                  <span class="vo-studio-badge vo-studio-badge--${v.status}">${v.platform}: ${v.formatId}</span>
+                `).join("")}
+              </div>
+            ` : ""}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  renderThumbnailsTab(item) {
+    const thumbVariants = item.artifactVariants.filter((v) => v.kind === "thumbnail");
+    return `
+      <div class="vo-studio-tab-content">
+        <div class="vo-studio-card">
+          <div class="vo-studio-card-header">Thumbnails</div>
+          <div class="vo-studio-card-body">
+            ${thumbVariants.length === 0 ? `
+              <div class="vo-studio-thumb-empty">
+                <span class="vo-studio-media-icon">\u25FB</span>
+                <span class="vo-studio-media-label">No thumbnails generated yet</span>
+              </div>
+            ` : `
+              <div class="vo-studio-thumb-carousel">
+                ${thumbVariants.map((v, idx) => `
+                  <div class="vo-studio-thumb-card">
+                    <div class="vo-studio-thumb-preview">
+                      <span class="vo-studio-thumb-index">#${idx + 1}</span>
+                    </div>
+                    <div class="vo-studio-thumb-label">${v.formatId}</div>
+                    <div class="vo-studio-thumb-meta">${v.platform}</div>
+                    <span class="vo-studio-badge vo-studio-badge--${v.status}">${v.status}</span>
+                  </div>
+                `).join("")}
+              </div>
+            `}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  renderSeoTab(item) {
+    const metadataVariants = item.artifactVariants.filter((v) => v.kind === "metadata");
+    const targets = item.platformTargets;
+    return `
+      <div class="vo-studio-tab-content">
+        <div class="vo-studio-card">
+          <div class="vo-studio-card-header">SEO Metadata</div>
+          <div class="vo-studio-card-body">
+            <div class="vo-studio-seo-form">
+              <div class="vo-studio-seo-field">
+                <label class="vo-studio-seo-label">Title</label>
+                <div class="vo-studio-seo-value">${item.title}</div>
+              </div>
+              <div class="vo-studio-seo-field">
+                <label class="vo-studio-seo-label">Canonical Source</label>
+                <div class="vo-studio-seo-value vo-monospace">${item.canonicalSource}</div>
+              </div>
+              <div class="vo-studio-seo-field">
+                <label class="vo-studio-seo-label">Platform Targets</label>
+                <div class="vo-studio-seo-value">
+                  ${targets.length > 0 ? targets.map((t) => `
+                    <span class="vo-studio-badge vo-studio-badge--${t.status}">${t.platform}</span>
+                  `).join(" ") : '<span class="vo-muted">None</span>'}
+                </div>
+              </div>
+              ${metadataVariants.length > 0 ? `
+                <div class="vo-studio-seo-field">
+                  <label class="vo-studio-seo-label">Metadata Artifacts</label>
+                  <div class="vo-studio-seo-value">
+                    ${metadataVariants.map((v) => `
+                      <div class="vo-studio-meta-item">
+                        <span class="vo-studio-meta-key">${v.platform}</span>
+                        <span class="vo-studio-meta-value">${v.formatId} \xB7 <span class="vo-studio-badge vo-studio-badge--${v.status}">${v.status}</span></span>
+                      </div>
+                    `).join("")}
+                  </div>
+                </div>
+              ` : ""}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  renderPreviewTab(item) {
+    const videoArtifact = item.artifactVariants.find((v) => v.kind === "video");
+    const captionArtifact = item.artifactVariants.find((v) => v.kind === "captions");
+    const thumbArtifact = item.artifactVariants.find((v) => v.kind === "thumbnail");
+    return `
+      <div class="vo-studio-tab-content">
+        <div class="vo-studio-card">
+          <div class="vo-studio-card-header">Preview</div>
+          <div class="vo-studio-card-body">
+            <div class="vo-studio-preview-player">
+              <div class="vo-studio-preview-viewport">
+                <div class="vo-studio-preview-placeholder">
+                  <span class="vo-studio-preview-icon">\u25B6</span>
+                  <span class="vo-studio-preview-label">${videoArtifact ? `Video: ${videoArtifact.formatId}` : "No video artifact ready"}</span>
+                </div>
+                ${captionArtifact ? `
+                  <div class="vo-studio-preview-captions">
+                    <span class="vo-studio-caption-overlay">[Captions: ${captionArtifact.formatId}]</span>
+                  </div>
+                ` : ""}
+              </div>
+              <div class="vo-studio-preview-controls">
+                <div class="vo-studio-preview-progress">
+                  <div class="vo-studio-preview-bar"></div>
+                </div>
+                <div class="vo-studio-preview-meta">
+                  <span class="vo-muted">${item.title}</span>
+                  <span class="vo-studio-badge vo-studio-badge--${item.status}">${item.status}</span>
+                </div>
+              </div>
+            </div>
+            <div class="vo-studio-preview-artifacts">
+              <div class="vo-studio-artifact-row">
+                <span class="vo-studio-artifact-label">Video</span>
+                <span class="vo-studio-badge ${videoArtifact ? `vo-studio-badge--${videoArtifact.status}` : "vo-studio-badge--missing"}">${videoArtifact ? videoArtifact.status : "not generated"}</span>
+              </div>
+              <div class="vo-studio-artifact-row">
+                <span class="vo-studio-artifact-label">Captions</span>
+                <span class="vo-studio-badge ${captionArtifact ? `vo-studio-badge--${captionArtifact.status}` : "vo-studio-badge--missing"}">${captionArtifact ? captionArtifact.status : "not generated"}</span>
+              </div>
+              <div class="vo-studio-artifact-row">
+                <span class="vo-studio-artifact-label">Thumbnail</span>
+                <span class="vo-studio-badge ${thumbArtifact ? `vo-studio-badge--${thumbArtifact.status}` : "vo-studio-badge--missing"}">${thumbArtifact ? thumbArtifact.status : "not generated"}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  getStatusClass(status) {
+    switch (status) {
+      case "draft":
+        return "vo-studio-status--draft";
+      case "package-preview":
+        return "vo-studio-status--preview";
+      case "blocked":
+        return "vo-studio-status--blocked";
+      default:
+        return "";
+    }
+  }
+  attachEventListeners() {
+    const itemSelect = this.container.querySelector(".vo-studio-item-select");
+    if (itemSelect) {
+      itemSelect.addEventListener("change", (e) => {
+        this.selectedItemId = e.target.value;
+        this.render();
+      });
+    }
+    this.container.querySelectorAll(".vo-studio-tab").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const tab = e.currentTarget.getAttribute("data-tab");
+        if (tab) {
+          this.activeTab = tab;
+          this.render();
+        }
+      });
+    });
+  }
+  destroy() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/ApprovalQueuePanel.ts
+var BASE_URL2 = "http://localhost:4877";
+function formatRelativeTime(iso) {
+  const ms = Date.now() - new Date(iso).getTime();
+  const minutes = Math.floor(ms / 6e4);
+  if (minutes < 2) return "just now";
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  return `${Math.floor(hours / 24)}d ago`;
+}
+function formatExpiryLabel(expiresAt) {
+  const remaining = new Date(expiresAt).getTime() - Date.now();
+  if (remaining < 0) return "expired";
+  const minutes = Math.floor(remaining / 6e4);
+  if (minutes < 5) return `expires in ${minutes}m \u26A0`;
+  if (minutes < 60) return `expires in ${minutes}m`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `expires in ${hours}h`;
+  return `expires in ${Math.floor(hours / 24)}d`;
+}
+var ApprovalQueuePanel = class {
+  container;
+  projectId;
+  approvals = [];
+  selectedIds = /* @__PURE__ */ new Set();
+  selectedApprovalId = null;
+  selectedVariantId = null;
+  metadataDraft = {
+    title: "",
+    description: "",
+    tags: "",
+    hashtags: ""
+  };
+  isLoading = false;
+  constructor(container, projectId) {
+    this.container = container;
+    this.projectId = projectId;
+  }
+  async initialize() {
+    this.renderShell();
+    await this.loadApprovals();
+  }
+  renderShell() {
+    this.container.innerHTML = `
+      <div class="vo-approval-queue bc-aq">
+        <div class="bc-aq__header">
+          <span class="bc-aq__title">VO Approval Queue</span>
+          <div class="bc-aq__header-actions">
+            <button class="brain-console__link-button" id="bc-aq-refresh">Refresh</button>
+          </div>
+        </div>
+        <div class="bc-aq__body" id="bc-aq-body">
+          <p class="brain-console__detail">Loading approvals...</p>
+        </div>
+      </div>
+    `;
+    const refreshBtn = this.container.querySelector("#bc-aq-refresh");
+    refreshBtn?.addEventListener("click", () => this.loadApprovals());
+  }
+  async loadApprovals() {
+    if (this.isLoading) return;
+    this.isLoading = true;
+    const body = this.container.querySelector("#bc-aq-body");
+    if (body) body.innerHTML = '<p class="brain-console__detail">Loading...</p>';
+    try {
+      const qs = this.projectId ? `?projectId=${encodeURIComponent(this.projectId)}` : "";
+      const res = await fetch(`${BASE_URL2}/api/video-orchestrator/approvals${qs}`);
+      const data = await res.json();
+      this.approvals = Array.isArray(data.approvals) ? data.approvals : [];
+      this.selectedIds = /* @__PURE__ */ new Set();
+      this.renderBody();
+    } catch {
+      if (body) body.innerHTML = '<p class="brain-console__detail">Failed to load approvals.</p>';
+    } finally {
+      this.isLoading = false;
+    }
+  }
+  renderBody() {
+    const body = this.container.querySelector("#bc-aq-body");
+    if (!body) return;
+    body.innerHTML = "";
+    this.selectedIds = /* @__PURE__ */ new Set();
+    const pending = this.approvals.filter((a) => a.status === "pending");
+    const decided = this.approvals.filter((a) => a.status !== "pending");
+    if (pending.length === 0 && decided.length === 0) {
+      body.innerHTML = '<p class="brain-console__detail">No approval records found.</p>';
+      return;
+    }
+    if (pending.length > 0) {
+      const toolbar = document.createElement("div");
+      toolbar.className = "bc-aq__toolbar";
+      const selectAllLabel = document.createElement("label");
+      selectAllLabel.className = "bc-aq__select-all-label";
+      const selectAllCb = document.createElement("input");
+      selectAllCb.type = "checkbox";
+      selectAllCb.title = "Select all pending";
+      selectAllLabel.appendChild(selectAllCb);
+      selectAllLabel.append(" Select all");
+      const bulkApproveBtn = document.createElement("button");
+      bulkApproveBtn.className = "brain-console__local-app-action is-enabled bc-aq__btn-approve";
+      bulkApproveBtn.textContent = "Approve Selected";
+      bulkApproveBtn.disabled = true;
+      const bulkRejectBtn = document.createElement("button");
+      bulkRejectBtn.className = "brain-console__local-app-action bc-aq__btn-reject";
+      bulkRejectBtn.textContent = "Reject Selected";
+      bulkRejectBtn.disabled = true;
+      toolbar.appendChild(selectAllLabel);
+      toolbar.appendChild(bulkApproveBtn);
+      toolbar.appendChild(bulkRejectBtn);
+      body.appendChild(toolbar);
+      const updateToolbar = () => {
+        const has = this.selectedIds.size > 0;
+        bulkApproveBtn.disabled = !has;
+        bulkRejectBtn.disabled = !has;
+        selectAllCb.indeterminate = this.selectedIds.size > 0 && this.selectedIds.size < pending.length;
+        selectAllCb.checked = this.selectedIds.size === pending.length && pending.length > 0;
+      };
+      selectAllCb.addEventListener("change", () => {
+        if (selectAllCb.checked) {
+          for (const a of pending) this.selectedIds.add(a.id);
+        } else {
+          this.selectedIds.clear();
+        }
+        body.querySelectorAll(".bc-aq__item-cb").forEach((cb) => {
+          cb.checked = selectAllCb.checked;
+        });
+        updateToolbar();
+      });
+      const handleBulk = (approved) => {
+        if (this.selectedIds.size === 0) return;
+        const ids = Array.from(this.selectedIds);
+        bulkApproveBtn.disabled = true;
+        bulkRejectBtn.disabled = true;
+        bulkApproveBtn.textContent = approved ? "Approving..." : "Approve Selected";
+        bulkRejectBtn.textContent = approved ? "Reject Selected" : "Rejecting...";
+        void this.bulkDecide(ids, approved).then((ok) => {
+          if (ok) void this.loadApprovals();
+          else {
+            bulkApproveBtn.textContent = "Approve Selected";
+            bulkRejectBtn.textContent = "Reject Selected";
+            updateToolbar();
+          }
+        });
+      };
+      bulkApproveBtn.addEventListener("click", () => handleBulk(true));
+      bulkRejectBtn.addEventListener("click", () => handleBulk(false));
+      const section = document.createElement("div");
+      section.className = "bc-aq__section";
+      const sectionLabel = document.createElement("p");
+      sectionLabel.className = "bc-aq__section-label";
+      sectionLabel.textContent = `Pending (${pending.length})`;
+      section.appendChild(sectionLabel);
+      const list = document.createElement("div");
+      list.className = "bc-aq__list";
+      for (const approval of pending) {
+        const item = document.createElement("div");
+        item.className = "bc-aq__item bc-aq__item--pending";
+        if (approval.id === this.selectedApprovalId) {
+          item.classList.add("bc-aq__item--selected");
+        }
+        const cbLabel = document.createElement("label");
+        cbLabel.className = "bc-aq__item-cb-label";
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.className = "bc-aq__item-cb";
+        cbLabel.appendChild(cb);
+        cb.addEventListener("change", () => {
+          if (cb.checked) this.selectedIds.add(approval.id);
+          else this.selectedIds.delete(approval.id);
+          updateToolbar();
+        });
+        const info = document.createElement("div");
+        info.className = "bc-aq__item-info";
+        const typeEl = document.createElement("span");
+        typeEl.className = "bc-aq__item-type";
+        typeEl.textContent = approval.type;
+        const projEl = document.createElement("span");
+        projEl.className = "bc-aq__item-project brain-console__detail";
+        projEl.textContent = approval.projectId;
+        const ageEl = document.createElement("span");
+        ageEl.className = "bc-aq__item-age brain-console__detail";
+        ageEl.textContent = formatRelativeTime(approval.createdAt);
+        info.appendChild(typeEl);
+        info.appendChild(projEl);
+        info.appendChild(ageEl);
+        if (approval.expiresAt) {
+          const expiryLabel = formatExpiryLabel(approval.expiresAt);
+          const expiryEl = document.createElement("span");
+          expiryEl.className = "bc-aq__item-expiry brain-console__detail";
+          expiryEl.textContent = expiryLabel;
+          if (expiryLabel.includes("\u26A0")) {
+            expiryEl.style.color = "var(--bc-yellow, orange)";
+          }
+          info.appendChild(expiryEl);
+        }
+        const actions = document.createElement("div");
+        actions.className = "bc-aq__item-actions";
+        const approveBtn = document.createElement("button");
+        approveBtn.className = "brain-console__local-app-action is-enabled bc-aq__btn-approve bc-aq__btn-sm";
+        approveBtn.textContent = "Approve";
+        const rejectBtn = document.createElement("button");
+        rejectBtn.className = "brain-console__local-app-action bc-aq__btn-reject bc-aq__btn-sm";
+        rejectBtn.textContent = "Reject";
+        approveBtn.addEventListener("click", () => {
+          approveBtn.disabled = true;
+          rejectBtn.disabled = true;
+          approveBtn.textContent = "...";
+          void this.singleDecide(approval.id, true).then(() => this.loadApprovals());
+        });
+        rejectBtn.addEventListener("click", () => {
+          approveBtn.disabled = true;
+          rejectBtn.disabled = true;
+          rejectBtn.textContent = "...";
+          void this.singleDecide(approval.id, false).then(() => this.loadApprovals());
+        });
+        actions.appendChild(approveBtn);
+        actions.appendChild(rejectBtn);
+        item.appendChild(cbLabel);
+        item.appendChild(info);
+        item.appendChild(actions);
+        item.addEventListener("click", (event) => {
+          const target = event.target;
+          if (target.closest("button") || target.closest("input")) return;
+          this.selectedApprovalId = approval.id;
+          this.seedDraftFromApproval(approval);
+          this.renderBody();
+        });
+        list.appendChild(item);
+      }
+      section.appendChild(list);
+      body.appendChild(section);
+    }
+    if (this.selectedApprovalId) {
+      const selected = pending.find((a) => a.id === this.selectedApprovalId) ?? null;
+      if (selected) {
+        body.appendChild(this.renderPreviewPanel(selected));
+      }
+    }
+    if (decided.length > 0) {
+      const decidedSection = document.createElement("div");
+      decidedSection.className = "bc-aq__section";
+      const decidedLabel = document.createElement("p");
+      decidedLabel.className = "bc-aq__section-label brain-console__detail";
+      decidedLabel.textContent = `Decided (${decided.length})`;
+      decidedSection.appendChild(decidedLabel);
+      const decidedList = document.createElement("div");
+      decidedList.className = "bc-aq__list bc-aq__list--decided";
+      for (const approval of decided.slice(0, 10)) {
+        const item = document.createElement("div");
+        item.className = `bc-aq__item bc-aq__item--${approval.status}`;
+        const info = document.createElement("div");
+        info.className = "bc-aq__item-info";
+        const typeEl = document.createElement("span");
+        typeEl.className = "bc-aq__item-type";
+        typeEl.textContent = approval.type;
+        const projEl = document.createElement("span");
+        projEl.className = "bc-aq__item-project brain-console__detail";
+        projEl.textContent = approval.projectId;
+        const badge = document.createElement("span");
+        badge.className = `bc-aq__badge bc-aq__badge--${approval.status}`;
+        badge.textContent = approval.status;
+        badge.title = approval.decisionReason ?? "";
+        info.appendChild(typeEl);
+        info.appendChild(projEl);
+        info.appendChild(badge);
+        item.appendChild(info);
+        decidedList.appendChild(item);
+      }
+      if (decided.length > 10) {
+        const more = document.createElement("p");
+        more.className = "brain-console__detail";
+        more.textContent = `\u2026and ${decided.length - 10} more`;
+        decidedSection.appendChild(more);
+      }
+      decidedSection.appendChild(decidedList);
+      body.appendChild(decidedSection);
+    }
+  }
+  seedDraftFromApproval(approval) {
+    this.selectedVariantId = null;
+    this.metadataDraft = {
+      title: "",
+      description: "",
+      tags: "",
+      hashtags: ""
+    };
+    if (approval.type === "metadata") {
+      const payload = approval.requestPayload ?? {};
+      this.metadataDraft = {
+        title: String(payload.title ?? payload.youtubeTitle ?? ""),
+        description: String(payload.description ?? payload.youtubeDescription ?? ""),
+        tags: Array.isArray(payload.tags) ? payload.tags.join(", ") : String(payload.tags ?? ""),
+        hashtags: Array.isArray(payload.hashtags) ? payload.hashtags.join(" ") : String(payload.hashtags ?? "")
+      };
+    }
+  }
+  renderPreviewPanel(approval) {
+    const panel = document.createElement("div");
+    panel.className = "bc-aq__preview";
+    const header = document.createElement("div");
+    header.className = "bc-aq__preview-header";
+    header.innerHTML = `
+      <div>
+        <div class="bc-aq__preview-title">Preview: ${approval.type}</div>
+        <div class="brain-console__detail">${approval.id}</div>
+      </div>
+      <button class="brain-console__link-button" id="bc-aq-close-preview">Close</button>
+    `;
+    panel.appendChild(header);
+    const content = document.createElement("div");
+    content.className = "bc-aq__preview-content";
+    if (approval.type === "thumbnail") {
+      content.appendChild(this.renderThumbnailPreview(approval));
+    } else if (approval.type === "metadata") {
+      content.appendChild(this.renderMetadataPreview(approval));
+    } else {
+      const empty = document.createElement("div");
+      empty.className = "vo-empty-state";
+      empty.textContent = "No special preview available for this approval type.";
+      content.appendChild(empty);
+    }
+    panel.appendChild(content);
+    const actions = document.createElement("div");
+    actions.className = "bc-aq__preview-actions";
+    const approveBtn = document.createElement("button");
+    approveBtn.className = "brain-console__local-app-action is-enabled bc-aq__btn-approve";
+    approveBtn.textContent = "Approve Selected";
+    approveBtn.addEventListener("click", () => {
+      approveBtn.disabled = true;
+      void this.singleDecide(approval.id, true, this.buildDecisionNote(approval)).then(() => this.loadApprovals());
+    });
+    const rejectBtn = document.createElement("button");
+    rejectBtn.className = "brain-console__local-app-action bc-aq__btn-reject";
+    rejectBtn.textContent = "Reject";
+    rejectBtn.addEventListener("click", () => {
+      rejectBtn.disabled = true;
+      void this.singleDecide(approval.id, false, this.buildDecisionNote(approval)).then(() => this.loadApprovals());
+    });
+    actions.appendChild(approveBtn);
+    actions.appendChild(rejectBtn);
+    panel.appendChild(actions);
+    panel.querySelector("#bc-aq-close-preview")?.addEventListener("click", () => {
+      this.selectedApprovalId = null;
+      this.selectedVariantId = null;
+      this.renderBody();
+    });
+    return panel;
+  }
+  renderThumbnailPreview(approval) {
+    const wrap = document.createElement("div");
+    const variants = this.extractVariants(approval);
+    wrap.innerHTML = `
+      <div class="bc-aq__preview-section">
+        <div class="bc-aq__preview-section-label">Thumbnail variants</div>
+        <div class="bc-aq__variant-grid" id="bc-aq-thumbnail-variants"></div>
+      </div>
+    `;
+    const grid = wrap.querySelector("#bc-aq-thumbnail-variants");
+    if (!grid) return wrap;
+    variants.forEach((variant, index) => {
+      const card = document.createElement("button");
+      const isSelected = this.selectedVariantId === variant.id || !this.selectedVariantId && index === 0;
+      if (!this.selectedVariantId && index === 0) {
+        this.selectedVariantId = variant.id;
+      }
+      card.type = "button";
+      card.className = `bc-aq__variant-card${isSelected ? " bc-aq__variant-card--selected" : ""}`;
+      card.innerHTML = `
+        <div class="bc-aq__variant-media">${variant.previewUrl ? `<img src="${variant.previewUrl}" alt="${variant.label} preview" />` : `<div class="bc-aq__variant-placeholder">${variant.label}</div>`}</div>
+        <div class="bc-aq__variant-meta">
+          <div class="bc-aq__variant-label">${variant.label}</div>
+          <div class="brain-console__detail">${variant.id}</div>
+        </div>
+      `;
+      card.addEventListener("click", () => {
+        this.selectedVariantId = variant.id;
+        this.renderBody();
+      });
+      grid.appendChild(card);
+    });
+    return wrap;
+  }
+  renderMetadataPreview(approval) {
+    const wrap = document.createElement("div");
+    wrap.className = "bc-aq__metadata-preview";
+    wrap.innerHTML = `
+      <div class="bc-aq__preview-section">
+        <div class="bc-aq__preview-section-label">Edit metadata before approval</div>
+        <label class="bc-aq__field">
+          <span>Title</span>
+          <input id="bc-aq-title" type="text" value="${this.escapeAttr(this.metadataDraft.title)}" />
+        </label>
+        <label class="bc-aq__field">
+          <span>Description</span>
+          <textarea id="bc-aq-description" rows="4">${this.metadataDraft.description}</textarea>
+        </label>
+        <label class="bc-aq__field">
+          <span>Tags</span>
+          <input id="bc-aq-tags" type="text" value="${this.escapeAttr(this.metadataDraft.tags)}" placeholder="comma-separated" />
+        </label>
+        <label class="bc-aq__field">
+          <span>Hashtags</span>
+          <input id="bc-aq-hashtags" type="text" value="${this.escapeAttr(this.metadataDraft.hashtags)}" placeholder="#tag #tag" />
+        </label>
+      </div>
+    `;
+    const sync = () => {
+      this.metadataDraft = {
+        title: wrap.querySelector("#bc-aq-title")?.value ?? "",
+        description: wrap.querySelector("#bc-aq-description")?.value ?? "",
+        tags: wrap.querySelector("#bc-aq-tags")?.value ?? "",
+        hashtags: wrap.querySelector("#bc-aq-hashtags")?.value ?? ""
+      };
+    };
+    wrap.querySelectorAll("input, textarea").forEach((el) => {
+      el.addEventListener("input", sync);
+    });
+    return wrap;
+  }
+  extractVariants(approval) {
+    const payload = approval.requestPayload ?? {};
+    const rawVariants = Array.isArray(payload.variants) ? payload.variants : [];
+    if (rawVariants.length > 0) {
+      return rawVariants.map((variant, index) => ({
+        id: String(variant.id ?? `variant-${index + 1}`),
+        label: String(variant.label ?? variant.name ?? `Variant ${index + 1}`),
+        previewUrl: typeof variant.previewUrl === "string" ? variant.previewUrl : void 0
+      }));
+    }
+    const baseLabel = approval.type === "thumbnail" ? "Thumbnail" : "Variant";
+    return [
+      { id: "variant-a", label: `${baseLabel} A` },
+      { id: "variant-b", label: `${baseLabel} B` }
+    ];
+  }
+  buildDecisionNote(approval) {
+    if (approval.type === "thumbnail" && this.selectedVariantId) {
+      return `selected_variant:${this.selectedVariantId}`;
+    }
+    if (approval.type === "metadata") {
+      return JSON.stringify(this.metadataDraft);
+    }
+    return void 0;
+  }
+  escapeAttr(value) {
+    return value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+  }
+  async bulkDecide(ids, approved) {
+    try {
+      const res = await fetch(`${BASE_URL2}/api/video-orchestrator/approvals/bulk-decide`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ approvalIds: ids, approved })
+      });
+      const data = await res.json();
+      return data.ok === true;
+    } catch {
+      return false;
+    }
+  }
+  async singleDecide(approvalId, approved, note) {
+    const action = approved ? "approve" : "reject";
+    try {
+      await fetch(`${BASE_URL2}/api/video-orchestrator/approvals/${encodeURIComponent(approvalId)}/${action}`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ note })
+      });
+    } catch {
+    }
+  }
+  destroy() {
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/ThumbnailStudioPanel.ts
+var BASE_URL3 = "http://localhost:4877";
+var DEFAULT_TEMPLATES = [
+  {
+    id: "bold-text",
+    label: "Bold Text",
+    description: "High-contrast headline treatment for primary YouTube thumbnails."
+  },
+  {
+    id: "minimal-curiosity",
+    label: "Minimal Curiosity",
+    description: "Cleaner curiosity framing with lighter copy density."
+  }
+];
+var ThumbnailStudioPanel = class {
+  container;
+  projectId;
+  approvals = [];
+  selectedApprovalId = null;
+  selectedVariantId = null;
+  headlineDraft = "";
+  isLoading = false;
+  isSubmitting = false;
+  constructor(container, projectId) {
+    this.container = container;
+    this.projectId = projectId;
+  }
+  async initialize() {
+    await this.loadApprovals();
+  }
+  async loadApprovals() {
+    if (this.isLoading) return;
+    this.isLoading = true;
+    this.render();
+    try {
+      const qs = this.projectId ? `?projectId=${encodeURIComponent(this.projectId)}` : "";
+      const res = await fetch(`${BASE_URL3}/api/video-orchestrator/approvals${qs}`);
+      const data = await res.json();
+      this.approvals = Array.isArray(data.approvals) ? data.approvals.filter((a) => a.type === "thumbnail") : [];
+      const pending = this.getPendingApprovals();
+      if (pending.length === 0) {
+        this.selectedApprovalId = null;
+        this.selectedVariantId = null;
+        this.headlineDraft = "";
+      } else if (!this.selectedApprovalId || !pending.some((a) => a.id === this.selectedApprovalId)) {
+        this.selectApproval(pending[0].id);
+      } else {
+        this.syncVariantSelection();
+      }
+    } catch {
+      this.approvals = [];
+    } finally {
+      this.isLoading = false;
+      this.render();
+    }
+  }
+  getPendingApprovals() {
+    return this.approvals.filter((a) => a.status === "pending");
+  }
+  getSelectedApproval() {
+    return this.getPendingApprovals().find((a) => a.id === this.selectedApprovalId) ?? null;
+  }
+  extractVariants(approval) {
+    if (!approval) return [];
+    const payload = approval.requestPayload ?? {};
+    const rawVariants = Array.isArray(payload.variants) ? payload.variants : [];
+    if (rawVariants.length > 0) {
+      return rawVariants.map((variant, index) => ({
+        id: String(variant.id ?? `variant-${index + 1}`),
+        label: String(variant.label ?? variant.name ?? `Variant ${index + 1}`),
+        templateId: String(variant.templateId ?? variant.template ?? DEFAULT_TEMPLATES[index % DEFAULT_TEMPLATES.length]?.id ?? "custom"),
+        previewUrl: typeof variant.previewUrl === "string" ? variant.previewUrl : void 0,
+        headlineText: String(variant.headlineText ?? variant.headline ?? variant.label ?? `Variant ${index + 1}`),
+        active: Boolean(variant.active)
+      }));
+    }
+    return [
+      {
+        id: "variant-a",
+        label: "Variant A",
+        templateId: "bold-text",
+        headlineText: "Default A headline",
+        active: true
+      },
+      {
+        id: "variant-b",
+        label: "Variant B",
+        templateId: "minimal-curiosity",
+        headlineText: "Default B headline"
+      }
+    ];
+  }
+  syncVariantSelection() {
+    const approval = this.getSelectedApproval();
+    const variants = this.extractVariants(approval);
+    if (variants.length === 0) {
+      this.selectedVariantId = null;
+      this.headlineDraft = "";
+      return;
+    }
+    const selected = variants.find((variant) => variant.id === this.selectedVariantId);
+    if (selected) {
+      if (!this.headlineDraft) {
+        this.headlineDraft = selected.headlineText;
+      }
+      return;
+    }
+    const fallback = variants.find((variant) => variant.active) ?? variants[0];
+    this.selectedVariantId = fallback.id;
+    this.headlineDraft = fallback.headlineText;
+  }
+  selectApproval(approvalId) {
+    this.selectedApprovalId = approvalId;
+    this.selectedVariantId = null;
+    this.headlineDraft = "";
+    this.syncVariantSelection();
+    this.render();
+  }
+  selectVariant(variantId) {
+    this.selectedVariantId = variantId;
+    const selected = this.extractVariants(this.getSelectedApproval()).find((variant) => variant.id === variantId);
+    if (selected) {
+      this.headlineDraft = selected.headlineText;
+    }
+    this.render();
+  }
+  render() {
+    const pending = this.getPendingApprovals();
+    const selectedApproval = this.getSelectedApproval();
+    const variants = this.extractVariants(selectedApproval);
+    const selectedVariant = variants.find((variant) => variant.id === this.selectedVariantId) ?? null;
+    const activeTemplateId = selectedVariant?.templateId ?? DEFAULT_TEMPLATES[0].id;
+    if (this.isLoading && this.approvals.length === 0) {
+      this.container.innerHTML = '<div class="vo-empty-state"><p>Loading thumbnail approvals...</p></div>';
+      return;
+    }
+    if (pending.length === 0) {
+      this.container.innerHTML = `
+        <div class="vo-thumbnail-studio">
+          <div class="vo-panel-header">
+            <h3>Thumbnail Studio</h3>
+          </div>
+          <div class="vo-empty-state">
+            <p>No pending thumbnail approvals for this project.</p>
+          </div>
+        </div>
+      `;
+      return;
+    }
+    this.container.innerHTML = `
+      <div class="vo-thumbnail-studio">
+        <div class="vo-panel-header">
+          <h3>Thumbnail Studio</h3>
+          <button class="brain-console__link-button" id="vo-thumb-refresh"${this.isSubmitting ? " disabled" : ""}>Refresh</button>
+        </div>
+        <div class="vo-thumbnail-studio__layout">
+          <section class="vo-thumbnail-studio__column vo-thumbnail-studio__column--queue">
+            <div class="vo-thumbnail-studio__card">
+              <div class="vo-thumbnail-studio__card-header">Approval Queue</div>
+              <div class="vo-thumbnail-studio__queue">
+                ${pending.map((approval) => `
+                  <button
+                    class="vo-thumbnail-studio__queue-item${approval.id === this.selectedApprovalId ? " is-selected" : ""}"
+                    data-approval-id="${approval.id}"
+                    type="button"
+                  >
+                    <span class="vo-thumbnail-studio__queue-title">${this.escapeHtml(approval.id)}</span>
+                    <span class="vo-thumbnail-studio__queue-meta">${this.escapeHtml(this.formatRelativeTime(approval.createdAt))}</span>
+                  </button>
+                `).join("")}
+              </div>
+            </div>
+            <div class="vo-thumbnail-studio__card">
+              <div class="vo-thumbnail-studio__card-header">Template Library</div>
+              <div class="vo-thumbnail-studio__templates">
+                ${DEFAULT_TEMPLATES.map((template) => `
+                  <div class="vo-thumbnail-studio__template${template.id === activeTemplateId ? " is-active" : ""}">
+                    <div class="vo-thumbnail-studio__template-name">${this.escapeHtml(template.label)}</div>
+                    <div class="vo-thumbnail-studio__template-desc">${this.escapeHtml(template.description)}</div>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </section>
+          <section class="vo-thumbnail-studio__column vo-thumbnail-studio__column--preview">
+            <div class="vo-thumbnail-studio__card">
+              <div class="vo-thumbnail-studio__card-header">Preview Surface</div>
+              <div class="vo-thumbnail-studio__preview-surface">
+                <div class="vo-thumbnail-studio__preview-frame">
+                  ${selectedVariant?.previewUrl ? `<img src="${this.escapeAttr(selectedVariant.previewUrl)}" alt="${this.escapeAttr(selectedVariant.label)} preview" />` : `<div class="vo-thumbnail-studio__preview-placeholder">${this.escapeHtml(selectedVariant?.label ?? "Variant")}</div>`}
+                  <div class="vo-thumbnail-studio__preview-headline">${this.escapeHtml(this.headlineDraft || selectedVariant?.headlineText || "")}</div>
+                </div>
+                <div class="vo-thumbnail-studio__preview-meta">
+                  <div><strong>Variant:</strong> ${this.escapeHtml(selectedVariant?.label ?? "None")}</div>
+                  <div><strong>Template:</strong> ${this.escapeHtml(activeTemplateId)}</div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="vo-thumbnail-studio__column vo-thumbnail-studio__column--controls">
+            <div class="vo-thumbnail-studio__card">
+              <div class="vo-thumbnail-studio__card-header">Variant Selector</div>
+              <div class="vo-thumbnail-studio__variants">
+                ${variants.map((variant) => `
+                  <button
+                    class="vo-thumbnail-studio__variant${variant.id === this.selectedVariantId ? " is-selected" : ""}"
+                    type="button"
+                    data-variant-id="${variant.id}"
+                  >
+                    <span class="vo-thumbnail-studio__variant-label">${this.escapeHtml(variant.label)}</span>
+                    <span class="vo-thumbnail-studio__variant-meta">${this.escapeHtml(variant.templateId)}</span>
+                  </button>
+                `).join("")}
+              </div>
+            </div>
+            <div class="vo-thumbnail-studio__card">
+              <div class="vo-thumbnail-studio__card-header">Headline Edit</div>
+              <div class="vo-thumbnail-studio__form">
+                <label class="vo-form-group">
+                  <span class="vo-form-label">Manual Headline</span>
+                  <input id="vo-thumb-headline" class="vo-form-input" type="text" value="${this.escapeAttr(this.headlineDraft)}" ${this.isSubmitting ? "disabled" : ""} />
+                </label>
+                <div class="vo-form-actions">
+                  <button class="vo-button vo-button-primary" id="vo-thumb-approve" ${!selectedApproval || !selectedVariant || this.isSubmitting ? "disabled" : ""}>${this.isSubmitting ? "Saving..." : "Approve Variant"}</button>
+                  <button class="vo-button" id="vo-thumb-reject" ${!selectedApproval || this.isSubmitting ? "disabled" : ""}>Reject</button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    `;
+    this.attachListeners();
+  }
+  attachListeners() {
+    this.container.querySelector("#vo-thumb-refresh")?.addEventListener("click", () => {
+      void this.loadApprovals();
+    });
+    this.container.querySelectorAll("[data-approval-id]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const approvalId = button.getAttribute("data-approval-id");
+        if (approvalId) {
+          this.selectApproval(approvalId);
+        }
+      });
+    });
+    this.container.querySelectorAll("[data-variant-id]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const variantId = button.getAttribute("data-variant-id");
+        if (variantId) {
+          this.selectVariant(variantId);
+        }
+      });
+    });
+    this.container.querySelector("#vo-thumb-headline")?.addEventListener("input", (event) => {
+      this.headlineDraft = event.target.value;
+      const preview = this.container.querySelector(".vo-thumbnail-studio__preview-headline");
+      if (preview) {
+        preview.textContent = this.headlineDraft;
+      }
+    });
+    this.container.querySelector("#vo-thumb-approve")?.addEventListener("click", () => {
+      void this.submitDecision(true);
+    });
+    this.container.querySelector("#vo-thumb-reject")?.addEventListener("click", () => {
+      void this.submitDecision(false);
+    });
+  }
+  async submitDecision(approved) {
+    const approval = this.getSelectedApproval();
+    if (!approval) return;
+    this.isSubmitting = true;
+    this.render();
+    try {
+      await fetch(`${BASE_URL3}/api/video-orchestrator/approvals/${approval.id}/decision`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          approved,
+          note: JSON.stringify({
+            selectedVariantId: this.selectedVariantId,
+            manualHeadline: this.headlineDraft.trim() || void 0
+          })
+        })
+      });
+      await this.loadApprovals();
+    } finally {
+      this.isSubmitting = false;
+      this.render();
+    }
+  }
+  formatRelativeTime(iso) {
+    const ms = Date.now() - new Date(iso).getTime();
+    const minutes = Math.floor(ms / 6e4);
+    if (minutes < 2) return "just now";
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    return `${Math.floor(hours / 24)}d ago`;
+  }
+  escapeHtml(value) {
+    return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+  }
+  escapeAttr(value) {
+    return this.escapeHtml(value).replaceAll("'", "&#39;");
+  }
+  destroy() {
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/DeadLetterReviewPanel.ts
+var BASE_URL4 = "http://localhost:4877";
+function formatDate(value) {
+  if (!value) return "\u2014";
+  try {
+    return new Date(value).toLocaleString();
+  } catch {
+    return value;
+  }
+}
+var DeadLetterReviewPanel = class {
+  container;
+  projectId;
+  jobs = [];
+  isLoading = false;
+  constructor(container, projectId) {
+    this.container = container;
+    this.projectId = projectId;
+  }
+  async initialize() {
+    this.renderShell();
+    await this.loadJobs();
+  }
+  renderShell() {
+    this.container.innerHTML = `
+      <div class="vo-dead-letter">
+        <div class="vo-panel-header">
+          <h3>Dead Letter Review</h3>
+          <button class="vo-btn-secondary" id="dead-letter-refresh">Refresh</button>
+        </div>
+        <div class="vo-dead-letter__subtitle">Jobs that exhausted worker retries and require operator review before requeueing.</div>
+        <div class="vo-dead-letter__list" id="dead-letter-list">
+          <div class="vo-empty-state">Loading dead jobs...</div>
+        </div>
+      </div>
+    `;
+    this.container.querySelector("#dead-letter-refresh")?.addEventListener("click", () => {
+      void this.loadJobs();
+    });
+  }
+  async loadJobs() {
+    if (this.isLoading) return;
+    this.isLoading = true;
+    try {
+      const url = `${BASE_URL4}/api/infra/video-orchestrator/jobs?projectId=${encodeURIComponent(this.projectId)}&status=dead&limit=50`;
+      const res = await fetch(url);
+      const data = await res.json();
+      this.jobs = Array.isArray(data.jobs) ? data.jobs : [];
+      this.renderJobs();
+    } catch {
+      const listEl = this.container.querySelector("#dead-letter-list");
+      if (listEl) {
+        listEl.innerHTML = '<div class="vo-empty-state">Failed to load dead jobs.</div>';
+      }
+    } finally {
+      this.isLoading = false;
+    }
+  }
+  renderJobs() {
+    const listEl = this.container.querySelector("#dead-letter-list");
+    if (!listEl) return;
+    if (this.jobs.length === 0) {
+      listEl.innerHTML = '<div class="vo-empty-state">No dead jobs in the queue.</div>';
+      return;
+    }
+    listEl.innerHTML = this.jobs.map((job) => `
+      <article class="vo-dead-letter__card">
+        <div class="vo-dead-letter__header">
+          <div>
+            <div class="vo-dead-letter__title">${this.escapeHtml(job.title ?? `Job ${job.jobId}`)}</div>
+            <div class="vo-dead-letter__meta">${this.escapeHtml(job.jobType)}${job.platform ? ` \u2022 ${this.escapeHtml(job.platform)}` : ""}${job.accountHandle ? ` \u2022 ${this.escapeHtml(job.accountHandle)}` : ""}</div>
+          </div>
+          <span class="vo-status-badge vo-status-failed">Dead</span>
+        </div>
+
+        <div class="vo-dead-letter__grid">
+          <div><span class="vo-dead-letter__label">Job ID</span><span class="vo-dead-letter__value vo-monospace">${this.escapeHtml(job.jobId)}</span></div>
+          <div><span class="vo-dead-letter__label">Pipeline State</span><span class="vo-dead-letter__value">${this.escapeHtml(job.pipelineState)}</span></div>
+          <div><span class="vo-dead-letter__label">Adapter</span><span class="vo-dead-letter__value">${this.escapeHtml(job.adapterMode ?? "\u2014")}</span></div>
+          <div><span class="vo-dead-letter__label">Created</span><span class="vo-dead-letter__value">${this.escapeHtml(formatDate(job.createdAt))}</span></div>
+          <div><span class="vo-dead-letter__label">Completed</span><span class="vo-dead-letter__value">${this.escapeHtml(formatDate(job.completedAt))}</span></div>
+        </div>
+
+        <div class="vo-dead-letter__error">
+          <div class="vo-dead-letter__label">Error</div>
+          <div class="vo-dead-letter__error-text">${this.escapeHtml(job.errorMessage ?? "No error message recorded.")}</div>
+        </div>
+
+        <div class="vo-dead-letter__actions">
+          <div class="vo-dead-letter__action-note">Review the failure context, fix the underlying cause, then requeue from the package or worker workflow.</div>
+        </div>
+      </article>
+    `).join("");
+  }
+  escapeHtml(value) {
+    return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+  }
+  destroy() {
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/PackageStatusPanel.ts
+var PackageStatusPanel = class {
+  container;
+  packages = /* @__PURE__ */ new Map();
+  refreshInterval = null;
+  constructor(container) {
+    this.container = container;
+  }
+  async initialize() {
+    this.render();
+    this.startAutoRefresh();
+  }
+  render() {
+    const html = `
+      <div class="vo-package-status">
+        <div class="vo-panel-header">
+          <h3>Package Execution</h3>
+          <button class="vo-btn-secondary" id="status-refresh">Refresh</button>
+        </div>
+
+        <div class="vo-packages-list" id="packages-list">
+          <div class="vo-empty-state">No packages to track</div>
+        </div>
+      </div>
+    `;
+    this.container.innerHTML = html;
+    const refreshBtn = this.container.querySelector("#status-refresh");
+    refreshBtn?.addEventListener("click", () => this.loadPackages());
+  }
+  async loadPackages() {
+    this.renderPackages();
+  }
+  trackPackage(packageId, status) {
+    this.packages.set(packageId, status);
+    this.renderPackages();
+  }
+  renderPackages() {
+    const listEl = this.container.querySelector("#packages-list");
+    if (!listEl) return;
+    if (this.packages.size === 0) {
+      listEl.innerHTML = '<div class="vo-empty-state">No packages to track</div>';
+      return;
+    }
+    const packagesHtml = Array.from(this.packages.values()).map((pkg) => this.renderPackageCard(pkg)).join("");
+    listEl.innerHTML = packagesHtml;
+  }
+  renderPackageCard(pkg) {
+    const stageBars = this.renderStageProgress(pkg);
+    const currentJobInfo = pkg.currentJob ? `<div class="vo-current-job">
+           <span>${pkg.currentJob.type}</span>
+           <span class="vo-job-status">${pkg.currentJob.status}</span>
+         </div>` : "";
+    return `
+      <div class="vo-package-card" data-package-id="${pkg.id}">
+        <div class="vo-package-header">
+          <h4>${pkg.contentItemId}</h4>
+          <span class="vo-status-badge vo-status-${pkg.status}">${pkg.status}</span>
+        </div>
+
+        <div class="vo-progress-section">
+          <div class="vo-progress-bar">
+            <div class="vo-progress-fill" style="width: ${pkg.progressPercent}%"></div>
+          </div>
+          <span class="vo-progress-text">${pkg.progressPercent}%</span>
+        </div>
+
+        <div class="vo-stages-section">
+          ${stageBars}
+        </div>
+
+        ${currentJobInfo}
+
+        <div class="vo-package-actions">
+          <button class="vo-btn-small" data-package-id="${pkg.id}">View Details</button>
+        </div>
+      </div>
+    `;
+  }
+  renderStageProgress(pkg) {
+    const stages = ["thumbnail", "metadata", "final_review", "publishing"];
+    return stages.map((stage) => {
+      let stageClass = "vo-stage-pending";
+      if (pkg.completedStages.includes(stage)) {
+        stageClass = "vo-stage-completed";
+      } else if (pkg.failedStages.includes(stage)) {
+        stageClass = "vo-stage-failed";
+      } else if (pkg.stage === stage) {
+        stageClass = "vo-stage-active";
+      }
+      return `<div class="vo-stage-item ${stageClass}" title="${stage}">${stage.slice(0, 3)}</div>`;
+    }).join("");
+  }
+  startAutoRefresh() {
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval);
+    }
+    this.refreshInterval = window.setInterval(() => {
+      this.loadPackages();
+    }, 3e4);
+  }
+  destroy() {
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval);
+    }
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/PublishingDashboardPanel.ts
+var PublishingDashboardPanel = class {
+  container;
+  metrics = null;
+  jobs = [];
+  projectId;
+  refreshInterval = null;
+  constructor(container, projectId) {
+    this.container = container;
+    this.projectId = projectId;
+  }
+  async initialize() {
+    this.render();
+    await this.loadMetrics();
+    await this.loadPublishingQueue();
+    this.startAutoRefresh();
+  }
+  render() {
+    const html = `
+      <div class="vo-publishing-dashboard">
+        <div class="vo-panel-header">
+          <h3>Publishing Dashboard</h3>
+          <button class="vo-btn-secondary" id="publish-refresh">Refresh</button>
+        </div>
+
+        <div class="vo-metrics-grid" id="metrics-grid">
+          <div class="vo-metric-card">
+            <span class="vo-metric-label">Total Published</span>
+            <span class="vo-metric-value" id="metric-total">\u2014</span>
+          </div>
+          <div class="vo-metric-card">
+            <span class="vo-metric-label">This Week</span>
+            <span class="vo-metric-value" id="metric-week">\u2014</span>
+          </div>
+          <div class="vo-metric-card">
+            <span class="vo-metric-label">Avg Time</span>
+            <span class="vo-metric-value" id="metric-avgtime">\u2014</span>
+          </div>
+          <div class="vo-metric-card">
+            <span class="vo-metric-label">Failure Rate</span>
+            <span class="vo-metric-value" id="metric-failure">\u2014</span>
+          </div>
+        </div>
+
+        <div class="vo-section">
+          <h4>Platform Breakdown</h4>
+          <div class="vo-platform-breakdown" id="platform-breakdown"></div>
+        </div>
+
+        <div class="vo-section">
+          <h4>Publishing Queue</h4>
+          <div class="vo-queue-table" id="queue-table">
+            <div class="vo-empty-state">Loading...</div>
+          </div>
+        </div>
+      </div>
+    `;
+    this.container.innerHTML = html;
+    const refreshBtn = this.container.querySelector("#publish-refresh");
+    refreshBtn?.addEventListener("click", async () => {
+      await this.loadMetrics();
+      await this.loadPublishingQueue();
+    });
+  }
+  async loadMetrics() {
+    try {
+      const response = await fetch(
+        `/api/video-orchestrator/analytics/publishing?projectId=${this.projectId}`
+      );
+      const data = await response.json();
+      if (data.ok && data.metrics) {
+        this.metrics = data.metrics;
+        this.updateMetricsDisplay();
+      }
+    } catch (error) {
+      console.error("Failed to load metrics:", error);
+    }
+  }
+  updateMetricsDisplay() {
+    if (!this.metrics) return;
+    const updateEl = (id, value) => {
+      const el = this.container.querySelector(id);
+      if (el) {
+        if (typeof value === "number") {
+          if (id.includes("avgtime")) {
+            el.textContent = value > 0 ? `${Math.round(value)}m` : "\u2014";
+          } else if (id.includes("failure")) {
+            el.textContent = `${(value * 100).toFixed(1)}%`;
+          } else {
+            el.textContent = String(value);
+          }
+        }
+      }
+    };
+    updateEl("#metric-total", this.metrics.totalPublished);
+    updateEl("#metric-week", this.metrics.thisWeek);
+    updateEl("#metric-avgtime", this.metrics.avgTimeToPublish);
+    updateEl("#metric-failure", this.metrics.failureRate);
+    this.renderPlatformBreakdown();
+  }
+  renderPlatformBreakdown() {
+    if (!this.metrics) return;
+    const breakdownEl = this.container.querySelector("#platform-breakdown");
+    if (!breakdownEl) return;
+    const platforms = Object.entries(this.metrics.platformBreakdown);
+    if (platforms.length === 0) {
+      breakdownEl.innerHTML = '<p class="vo-empty-state">No platform data</p>';
+      return;
+    }
+    const maxCount = Math.max(...platforms.map(([, count]) => count), 1);
+    const html = platforms.map(
+      ([platform, count]) => `
+      <div class="vo-platform-item">
+        <span class="vo-platform-name">${platform}</span>
+        <div class="vo-platform-bar">
+          <div class="vo-platform-fill" style="width: ${count / maxCount * 100}%"></div>
+        </div>
+        <span class="vo-platform-count">${count}</span>
+      </div>
+    `
+    ).join("");
+    breakdownEl.innerHTML = html;
+  }
+  async loadPublishingQueue() {
+    try {
+      const response = await fetch(
+        `/api/video-orchestrator/publishing/queue?projectId=${this.projectId}`
+      );
+      const data = await response.json();
+      if (data.ok) {
+        this.jobs = data.jobs || [];
+        this.renderQueue();
+      }
+    } catch (error) {
+      console.error("Failed to load publishing queue:", error);
+    }
+  }
+  renderQueue() {
+    const tableEl = this.container.querySelector("#queue-table");
+    if (!tableEl) return;
+    if (this.jobs.length === 0) {
+      tableEl.innerHTML = '<div class="vo-empty-state">No publishing jobs</div>';
+      return;
+    }
+    const rows = this.jobs.map(
+      (job) => `
+      <div class="vo-queue-row">
+        <div class="vo-queue-col">${job.packageId}</div>
+        <div class="vo-queue-col">${job.platformId}</div>
+        <div class="vo-queue-col">
+          <span class="vo-status-badge vo-status-${job.status}">${job.status}</span>
+        </div>
+        <div class="vo-queue-col">${job.publishedAt ? new Date(job.publishedAt).toLocaleDateString() : "\u2014"}</div>
+      </div>
+    `
+    ).join("");
+    tableEl.innerHTML = `
+      <div class="vo-queue-header">
+        <div class="vo-queue-col">Package</div>
+        <div class="vo-queue-col">Platform</div>
+        <div class="vo-queue-col">Status</div>
+        <div class="vo-queue-col">Published</div>
+      </div>
+      ${rows}
+    `;
+  }
+  startAutoRefresh() {
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval);
+    }
+    this.refreshInterval = window.setInterval(async () => {
+      await this.loadMetrics();
+      await this.loadPublishingQueue();
+    }, 6e4);
+  }
+  destroy() {
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval);
+    }
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/EventLogPanel.ts
+var EventLogPanel = class {
+  container;
+  projectId;
+  eventTypeFilter = "";
+  refreshInterval = null;
+  lastRefreshTime = (/* @__PURE__ */ new Date()).toISOString();
+  totalEventCount = 0;
+  constructor(container, projectId) {
+    this.container = container;
+    this.projectId = projectId;
+  }
+  async initialize() {
+    this.render();
+    await this.loadEvents();
+    this.startAutoRefresh();
+  }
+  render() {
+    this.container.innerHTML = `
+      <div class="vo-event-log">
+        <div class="vo-event-header">
+          <h2>Event Log</h2>
+          <div class="vo-event-controls">
+            <select class="vo-event-filter-select" id="event-filter">
+              <option value="">All Events</option>
+              <option value="package">Package Events</option>
+              <option value="approval">Approval Events</option>
+              <option value="publish">Publishing Events</option>
+              <option value="webhook">Webhook Events</option>
+            </select>
+            <button class="vo-event-refresh-btn" id="event-refresh-btn">Refresh</button>
+          </div>
+        </div>
+
+        <div class="vo-event-metrics">
+          <div class="vo-event-metric">
+            <span class="vo-metric-label">Total Events</span>
+            <span class="vo-metric-value" id="event-total">0</span>
+          </div>
+          <div class="vo-event-metric">
+            <span class="vo-metric-label">Last Event</span>
+            <span class="vo-metric-value" id="event-last">\u2014</span>
+          </div>
+          <div class="vo-event-metric">
+            <span class="vo-metric-label">Status</span>
+            <span class="vo-metric-value vo-status-ready" id="event-status">Ready</span>
+          </div>
+        </div>
+
+        <div class="vo-event-table-container" id="event-container">
+          <div class="vo-loading">Loading events...</div>
+        </div>
+      </div>
+    `;
+    const filterSelect = this.container.querySelector("#event-filter");
+    const refreshBtn = this.container.querySelector("#event-refresh-btn");
+    filterSelect?.addEventListener("change", (e) => {
+      this.eventTypeFilter = e.target.value;
+      this.loadEvents();
+    });
+    refreshBtn?.addEventListener("click", () => {
+      this.loadEvents();
+    });
+  }
+  async loadEvents() {
+    const container = this.container.querySelector("#event-container");
+    if (!container) return;
+    try {
+      container.innerHTML = '<div class="vo-loading">Loading events...</div>';
+      const filterParam = this.eventTypeFilter ? `&eventType=${encodeURIComponent(this.eventTypeFilter)}.*` : "";
+      const res = await fetch(`/api/video-orchestrator/events/stream?projectId=${encodeURIComponent(this.projectId)}&limit=50${filterParam}`);
+      if (!res.ok) {
+        container.innerHTML = '<div class="vo-error">Failed to load events</div>';
+        return;
+      }
+      const data = await res.json();
+      if (!data.ok) {
+        container.innerHTML = `<div class="vo-error">${data.error ?? "Failed to load events"}</div>`;
+        return;
+      }
+      const events = data.events ?? [];
+      this.totalEventCount = data.count ?? 0;
+      this.updateMetrics(events);
+      if (events.length === 0) {
+        container.innerHTML = `
+          <div class="vo-empty-state">
+            <p>No events recorded${this.eventTypeFilter ? " for this filter" : " yet"}</p>
+          </div>
+        `;
+        return;
+      }
+      const tableHtml = `
+        <table class="vo-event-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Actor</th>
+              <th>Timestamp</th>
+              <th>Status</th>
+              <th>Payload</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${events.map((evt) => this.renderEventRow(evt)).join("")}
+          </tbody>
+        </table>
+      `;
+      container.innerHTML = tableHtml;
+      this.attachEventRowListeners();
+    } catch (error) {
+      container.innerHTML = `<div class="vo-error">Error loading events: ${error instanceof Error ? error.message : "Unknown error"}</div>`;
+    }
+  }
+  renderEventRow(event) {
+    const typeCategory = event.type.split(".")[0];
+    const statusClass = `vo-event-status-${event.status}`;
+    const payloadPreview = JSON.stringify(event.payload).slice(0, 50) + (JSON.stringify(event.payload).length > 50 ? "..." : "");
+    return `
+      <tr data-event-id="${event.id}" class="vo-event-row">
+        <td>
+          <span class="vo-event-type-badge vo-badge-${typeCategory}">
+            ${event.type}
+          </span>
+        </td>
+        <td>${this.escapeHtml(event.actor)}</td>
+        <td>${new Date(event.at).toLocaleString()}</td>
+        <td>
+          <span class="${statusClass}">
+            ${event.status}
+          </span>
+        </td>
+        <td>
+          <code class="vo-event-payload-preview">${this.escapeHtml(payloadPreview)}</code>
+        </td>
+      </tr>
+    `;
+  }
+  attachEventRowListeners() {
+    const rows = this.container.querySelectorAll(".vo-event-row");
+    rows.forEach((row) => {
+      row.addEventListener("click", () => {
+      });
+    });
+  }
+  updateMetrics(events) {
+    const totalEl = this.container.querySelector("#event-total");
+    const lastEl = this.container.querySelector("#event-last");
+    const statusEl = this.container.querySelector("#event-status");
+    if (totalEl) {
+      totalEl.textContent = this.totalEventCount.toString();
+    }
+    if (lastEl && events.length > 0) {
+      const lastEvent = events[0];
+      const timeDiff = this.getTimeAgo(lastEvent.at);
+      lastEl.textContent = timeDiff;
+    }
+    if (statusEl) {
+      statusEl.textContent = "Ready";
+      statusEl.className = "vo-metric-value vo-status-ready";
+    }
+  }
+  getTimeAgo(isoTime) {
+    const now = /* @__PURE__ */ new Date();
+    const then = new Date(isoTime);
+    const seconds = Math.floor((now.getTime() - then.getTime()) / 1e3);
+    if (seconds < 60) return `${seconds}s ago`;
+    if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+    if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+    return `${Math.floor(seconds / 86400)}d ago`;
+  }
+  escapeHtml(text) {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    };
+    return text.replace(/[&<>"']/g, (c) => map[c]);
+  }
+  startAutoRefresh() {
+    if (this.refreshInterval) clearInterval(this.refreshInterval);
+    this.refreshInterval = window.setInterval(() => {
+      this.loadEvents();
+    }, 15e3);
+  }
+  destroy() {
+    if (this.refreshInterval) clearInterval(this.refreshInterval);
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/StudioDashboardPanel.ts
+var StudioDashboardPanel = class {
+  container;
+  projectId;
+  refreshInterval = null;
+  constructor(container, projectId) {
+    this.container = container;
+    this.projectId = projectId;
+  }
+  async initialize() {
+    this.render();
+    await this.loadAll();
+    this.startAutoRefresh();
+  }
+  render() {
+    this.container.innerHTML = `
+      <div class="vo-dashboard-panel">
+        <div class="vo-panel-header">
+          <h2>VO Studio Dashboard</h2>
+          <button class="vo-btn-secondary" id="dashboard-refresh">Refresh</button>
+        </div>
+
+        <div class="vo-overview-card">
+          <div class="vo-overview-title">Pipeline Health</div>
+          <div class="vo-health-grid" id="dashboard-health-grid">
+            <div class="vo-health-indicator">
+              <div class="vo-health-score" id="health-score-value">\u2014</div>
+              <div class="vo-health-badge" id="health-status-badge">\u2014</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="vo-overview-card">
+          <div class="vo-overview-title">Routing Statistics</div>
+          <div class="vo-activity-grid" id="dashboard-routing-grid">
+            <div class="vo-activity-stat">
+              <span class="vo-stat-label">Platforms</span>
+              <span class="vo-stat-value" id="routing-platform-count">\u2014</span>
+            </div>
+            <div class="vo-activity-stat">
+              <span class="vo-stat-label">Mapped Events</span>
+              <span class="vo-stat-value" id="routing-event-count">\u2014</span>
+            </div>
+            <div class="vo-activity-stat">
+              <span class="vo-stat-label">Last Route</span>
+              <span class="vo-stat-value" id="routing-last-at">\u2014</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="vo-overview-card">
+          <div class="vo-overview-title">Webhook Summary</div>
+          <div class="vo-stats-table" id="dashboard-webhook-table">
+            <div class="vo-stat-row">
+              <span class="vo-stat-key">Success</span>
+              <span class="vo-stat-value" id="webhook-success">\u2014</span>
+            </div>
+            <div class="vo-stat-row">
+              <span class="vo-stat-key">Failures</span>
+              <span class="vo-stat-value" id="webhook-failure">\u2014</span>
+            </div>
+            <div class="vo-stat-row">
+              <span class="vo-stat-key">Rate</span>
+              <span class="vo-stat-value" id="webhook-rate">\u2014%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="vo-overview-card">
+          <div class="vo-overview-title">Worker Health</div>
+          <div class="vo-stats-table" id="dashboard-worker-health">
+            <div class="vo-stat-row">
+              <span class="vo-stat-key">Status</span>
+              <span class="vo-stat-value" id="worker-health-status">\u2014</span>
+            </div>
+            <div class="vo-stat-row">
+              <span class="vo-stat-key">PID</span>
+              <span class="vo-stat-value" id="worker-health-pid">\u2014</span>
+            </div>
+            <div class="vo-stat-row">
+              <span class="vo-stat-key">Detail</span>
+              <span class="vo-stat-value" id="worker-health-detail">\u2014</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="vo-overview-card">
+          <div class="vo-overview-title">Recent Events</div>
+          <div id="dashboard-events-list" class="vo-event-list-preview">
+            <!-- Events will be populated here -->
+          </div>
+        </div>
+
+        <div class="vo-overview-card">
+          <div class="vo-overview-title">Quick Actions</div>
+          <div class="vo-quick-actions">
+            <button class="vo-btn-secondary" data-tab="approvals">Approvals Queue</button>
+            <button class="vo-btn-secondary" data-tab="packages">Package Status</button>
+            <button class="vo-btn-secondary" data-tab="publishing">Publishing</button>
+            <button class="vo-btn-secondary" data-tab="events">Event Log</button>
+            <button class="vo-btn-secondary" data-tab="webhooks">Webhooks</button>
+          </div>
+        </div>
+      </div>
+    `;
+    const refreshBtn = this.container.querySelector("#dashboard-refresh");
+    refreshBtn?.addEventListener("click", () => {
+      this.loadAll();
+    });
+  }
+  async loadAll() {
+    await Promise.allSettled([
+      this.loadHealth(),
+      this.loadRoutingStats(),
+      this.loadWebhookSummary(),
+      this.loadWorkerHealth(),
+      this.loadRecentEvents()
+    ]);
+  }
+  async loadHealth() {
+    try {
+      const res = await fetch(`/api/video-orchestrator/analytics/pipeline-health?projectId=${encodeURIComponent(this.projectId)}`);
+      const data = await res.json();
+      if (data.ok && data.health) {
+        const scoreEl = this.container.querySelector("#health-score-value");
+        const badgeEl = this.container.querySelector("#health-status-badge");
+        if (scoreEl) {
+          scoreEl.textContent = data.health.score.toString();
+          scoreEl.className = `vo-health-score vo-health-score-${data.health.status}`;
+        }
+        if (badgeEl) {
+          badgeEl.textContent = data.health.status;
+          badgeEl.className = `vo-health-badge vo-status-${data.health.status}`;
+        }
+      }
+    } catch (error) {
+    }
+  }
+  async loadRoutingStats() {
+    try {
+      const res = await fetch(`/api/video-orchestrator/analytics/routing-statistics?projectId=${encodeURIComponent(this.projectId)}`);
+      const data = await res.json();
+      if (data.ok && data.stats) {
+        const stats = data.stats || [];
+        const platformCountEl = this.container.querySelector("#routing-platform-count");
+        const eventCountEl = this.container.querySelector("#routing-event-count");
+        const lastAtEl = this.container.querySelector("#routing-last-at");
+        if (platformCountEl) {
+          platformCountEl.textContent = stats.length.toString();
+        }
+        if (eventCountEl) {
+          const totalEvents = stats.reduce((sum, s) => sum + (s.mappingCount || 0), 0);
+          eventCountEl.textContent = totalEvents.toString();
+        }
+        if (lastAtEl && stats.length > 0) {
+          const lastEntry = stats[0];
+          lastAtEl.textContent = new Date(lastEntry.lastRoutedAt).toLocaleTimeString();
+        }
+      }
+    } catch (error) {
+    }
+  }
+  async loadWebhookSummary() {
+    try {
+      const res = await fetch(`/api/video-orchestrator/analytics/webhook-delivery-rates?projectId=${encodeURIComponent(this.projectId)}`);
+      const data = await res.json();
+      if (data.ok && data.metrics) {
+        const metrics = data.metrics;
+        const successEl = this.container.querySelector("#webhook-success");
+        const failureEl = this.container.querySelector("#webhook-failure");
+        const rateEl = this.container.querySelector("#webhook-rate");
+        if (successEl) {
+          successEl.textContent = metrics.successCount.toString();
+        }
+        if (failureEl) {
+          failureEl.textContent = metrics.failureCount.toString();
+        }
+        if (rateEl) {
+          rateEl.textContent = `${Math.round(metrics.successRate)}%`;
+        }
+      }
+    } catch (error) {
+    }
+  }
+  async loadWorkerHealth() {
+    try {
+      const res = await fetch(`/api/infra/video-orchestrator/worker-health`);
+      const data = await res.json();
+      const statusEl = this.container.querySelector("#worker-health-status");
+      const pidEl = this.container.querySelector("#worker-health-pid");
+      const detailEl = this.container.querySelector("#worker-health-detail");
+      if (statusEl) {
+        statusEl.textContent = data.status;
+        statusEl.className = `vo-stat-value vo-worker-health-${data.status}`;
+      }
+      if (pidEl) {
+        pidEl.textContent = data.pid ? String(data.pid) : "\u2014";
+      }
+      if (detailEl) {
+        detailEl.textContent = data.detail;
+      }
+    } catch {
+    }
+  }
+  async loadRecentEvents() {
+    try {
+      const res = await fetch(`/api/video-orchestrator/events/stream?projectId=${encodeURIComponent(this.projectId)}&limit=5`);
+      const data = await res.json();
+      if (data.ok && data.events) {
+        const events = data.events || [];
+        const listEl = this.container.querySelector("#dashboard-events-list");
+        if (listEl) {
+          if (events.length === 0) {
+            listEl.innerHTML = '<div class="vo-empty-state"><p>No events recorded yet</p></div>';
+          } else {
+            listEl.innerHTML = events.map((evt) => this.renderEventRow(evt)).join("");
+          }
+        }
+      }
+    } catch (error) {
+    }
+  }
+  renderEventRow(event) {
+    const typeCategory = event.type.split(".")[0];
+    const timeAgo = this.getTimeAgo(event.at);
+    return `
+      <div class="vo-dashboard-event-row">
+        <span class="vo-event-type-badge vo-badge-${typeCategory}">
+          ${this.escapeHtml(event.type)}
+        </span>
+        <span class="vo-event-actor">${this.escapeHtml(event.actor)}</span>
+        <span class="vo-event-time">${timeAgo}</span>
+      </div>
+    `;
+  }
+  getTimeAgo(isoTime) {
+    const now = /* @__PURE__ */ new Date();
+    const then = new Date(isoTime);
+    const seconds = Math.floor((now.getTime() - then.getTime()) / 1e3);
+    if (seconds < 60) return `${seconds}s ago`;
+    if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+    if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+    return `${Math.floor(seconds / 86400)}d ago`;
+  }
+  escapeHtml(text) {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    };
+    return text.replace(/[&<>"']/g, (c) => map[c]);
+  }
+  startAutoRefresh() {
+    if (this.refreshInterval) clearInterval(this.refreshInterval);
+    this.refreshInterval = window.setInterval(() => {
+      this.loadAll();
+    }, 6e4);
+  }
+  destroy() {
+    if (this.refreshInterval) clearInterval(this.refreshInterval);
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/AuditLogPanel.ts
+var AuditLogPanel = class {
+  container;
+  projectId;
+  allEntries = [];
+  constructor(container, projectId) {
+    this.container = container;
+    this.projectId = projectId;
+  }
+  async initialize() {
+    this.render();
+    await this.loadAuditLog();
+  }
+  render() {
+    this.container.innerHTML = `
+      <div class="vo-audit-log-panel">
+        <div class="vo-panel-header">
+          <h3>Approval Audit Log</h3>
+          <div class="vo-panel-header-actions">
+            <input type="text" id="audit-filter" placeholder="Filter by approval ID..." class="vo-filter-input">
+            <button class="vo-btn-secondary" id="audit-refresh">Refresh</button>
+          </div>
+        </div>
+
+        <div class="vo-audit-table-wrapper">
+          <table class="vo-audit-table">
+            <thead>
+              <tr>
+                <th>Approval ID</th>
+                <th>Action</th>
+                <th>Actor</th>
+                <th>Timestamp</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="audit-log-tbody">
+              <tr><td colspan="5" class="vo-loading-state">Loading audit log...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+    const filterInput = this.container.querySelector("#audit-filter");
+    filterInput?.addEventListener("input", (e) => {
+      const value = e.target.value;
+      this.filterLog(value);
+    });
+    const refreshBtn = this.container.querySelector("#audit-refresh");
+    refreshBtn?.addEventListener("click", () => {
+      this.loadAuditLog();
+    });
+  }
+  async loadAuditLog() {
+    const tbody = this.container.querySelector("#audit-log-tbody");
+    if (tbody) {
+      tbody.innerHTML = '<tr><td colspan="5" class="vo-loading-state">Loading...</td></tr>';
+    }
+    try {
+      const url = `http://localhost:4877/api/video-orchestrator/audit-log?projectId=${encodeURIComponent(this.projectId)}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data.ok && data.entries) {
+        this.allEntries = data.entries;
+        this.renderLog(data.entries);
+      } else {
+        this.showError(data.error ?? "Failed to load audit log");
+      }
+    } catch (error) {
+      this.showError(error instanceof Error ? error.message : "Network error");
+    }
+  }
+  renderLog(entries) {
+    const tbody = this.container.querySelector("#audit-log-tbody");
+    if (!tbody) return;
+    if (entries.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" class="vo-empty-state">No audit log entries</td></tr>';
+      return;
+    }
+    tbody.innerHTML = entries.map(
+      (entry) => `
+      <tr data-approval-id="${this.escapeAttr(entry.approvalId)}">
+        <td class="vo-approval-id">${this.escapeHtml(entry.approvalId)}</td>
+        <td><span class="vo-action-badge vo-action-${this.escapeAttr(entry.action)}">${this.escapeHtml(entry.action)}</span></td>
+        <td>${this.escapeHtml(entry.actor)}</td>
+        <td title="${this.escapeAttr(entry.timestamp)}">${new Date(entry.timestamp).toLocaleString()}</td>
+        <td><button class="vo-btn-small vo-btn-details" data-entry-id="${this.escapeAttr(entry.id)}" data-details="${this.escapeAttr(JSON.stringify(entry.details))}">View</button></td>
+      </tr>
+    `
+    ).join("");
+    tbody.querySelectorAll(".vo-btn-details").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const target = e.target;
+        const details = target.getAttribute("data-details") ?? "{}";
+        this.showDetails(details);
+      });
+    });
+  }
+  filterLog(value) {
+    const rows = Array.from(
+      this.container.querySelectorAll("#audit-log-tbody tr[data-approval-id]")
+    );
+    const query = value.toLowerCase().trim();
+    for (const row of rows) {
+      const approvalId = (row.getAttribute("data-approval-id") ?? "").toLowerCase();
+      row.style.display = query === "" || approvalId.includes(query) ? "" : "none";
+    }
+  }
+  showDetails(detailsJson) {
+    try {
+      const details = JSON.parse(detailsJson);
+      const message = Object.entries(details).map(([k, v]) => `${k}: ${String(v)}`).join("\n");
+      alert(message || "No details available");
+    } catch {
+      alert("Could not parse details");
+    }
+  }
+  showError(message) {
+    const tbody = this.container.querySelector("#audit-log-tbody");
+    if (tbody) {
+      tbody.innerHTML = `<tr><td colspan="5" class="vo-error">${this.escapeHtml(message)}</td></tr>`;
+    }
+  }
+  escapeHtml(text) {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    };
+    return text.replace(/[&<>"']/g, (c) => map[c] ?? c);
+  }
+  escapeAttr(text) {
+    return text.replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+  }
+  destroy() {
+    this.allEntries = [];
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/OperatorDashboardPanel.ts
+var OperatorDashboardPanel = class {
+  container;
+  projectId;
+  refreshInterval = null;
+  constructor(container, projectId) {
+    this.container = container;
+    this.projectId = projectId;
+  }
+  async initialize() {
+    this.render();
+    await this.loadAll();
+    this.startAutoRefresh();
+  }
+  render() {
+    this.container.innerHTML = `
+      <div class="vo-operator-dashboard">
+        <div class="vo-panel-header">
+          <h2>Operator Dashboard</h2>
+          <button id="dashboard-refresh" class="vo-btn-secondary">Refresh</button>
+        </div>
+
+        <div class="vo-stats-grid">
+          <div class="vo-stat-card">
+            <div class="vo-stat-label">Total Approvals (30d)</div>
+            <div class="vo-stat-value" id="stat-total">\u2014</div>
+          </div>
+
+          <div class="vo-stat-card">
+            <div class="vo-stat-label">Approval Rate</div>
+            <div class="vo-stat-value" id="stat-rate">\u2014</div>
+          </div>
+
+          <div class="vo-stat-card">
+            <div class="vo-stat-label">Avg Decision Time</div>
+            <div class="vo-stat-value" id="stat-avg-time">\u2014</div>
+          </div>
+
+          <div class="vo-stat-card">
+            <div class="vo-stat-label">Pending (Current)</div>
+            <div class="vo-stat-value" id="stat-pending">\u2014</div>
+          </div>
+        </div>
+
+        <div class="vo-charts-grid">
+          <div class="vo-chart-card">
+            <h3>Approvals by Type</h3>
+            <div id="chart-by-type" class="vo-chart-bars"></div>
+          </div>
+
+          <div class="vo-chart-card">
+            <h3>Top Rejection Reasons</h3>
+            <ul id="chart-rejections" class="vo-rejection-list"></ul>
+          </div>
+
+          <div class="vo-chart-card">
+            <h3>Operator Performance</h3>
+            <table id="chart-operators" class="vo-operator-table">
+              <thead>
+                <tr>
+                  <th>Operator</th>
+                  <th>Decisions</th>
+                  <th>Approval %</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    `;
+    this.container.querySelector("#dashboard-refresh")?.addEventListener("click", () => {
+      this.loadAll();
+    });
+  }
+  async loadAll() {
+    await Promise.allSettled([this.loadStats(), this.loadPendingCount()]);
+  }
+  async loadStats() {
+    try {
+      const url = `http://localhost:4877/api/video-orchestrator/analytics/approvals?projectId=${encodeURIComponent(this.projectId)}&since=30d`;
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data.ok && data.stats) {
+        this.renderStats(data.stats);
+      } else {
+        console.error("Failed to load operator dashboard stats:", data.error);
+      }
+    } catch (error) {
+      console.error("Error loading operator dashboard stats:", error);
+    }
+  }
+  async loadPendingCount() {
+    try {
+      const url = `http://localhost:4877/api/video-orchestrator/approvals?projectId=${encodeURIComponent(this.projectId)}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      const pendingEl = this.container.querySelector("#stat-pending");
+      if (pendingEl && data.ok) {
+        pendingEl.textContent = String(data.count ?? 0);
+      }
+    } catch (error) {
+      console.error("Error loading pending count:", error);
+    }
+  }
+  renderStats(stats) {
+    const totalEl = this.container.querySelector("#stat-total");
+    if (totalEl) totalEl.textContent = String(stats.totalRequested);
+    const rateEl = this.container.querySelector("#stat-rate");
+    if (rateEl) rateEl.textContent = `${(stats.approvalRate * 100).toFixed(1)}%`;
+    const avgTimeEl = this.container.querySelector("#stat-avg-time");
+    if (avgTimeEl) {
+      avgTimeEl.textContent = stats.avgDecisionTimeMinutes > 0 ? `${stats.avgDecisionTimeMinutes.toFixed(0)}m` : "\u2014";
+    }
+    const byTypeContainer = this.container.querySelector("#chart-by-type");
+    if (byTypeContainer) {
+      const entries = Object.entries(stats.byType);
+      if (entries.length === 0) {
+        byTypeContainer.innerHTML = '<p class="vo-empty-state">No data</p>';
+      } else {
+        byTypeContainer.innerHTML = entries.map(([type, data]) => {
+          const pct = data.requested > 0 ? Math.round(data.approved / data.requested * 100) : 0;
+          return `
+            <div class="vo-chart-row">
+              <span class="vo-chart-label">${this.escapeHtml(type)}</span>
+              <div class="vo-bar-track">
+                <div class="vo-bar-fill" style="width: ${pct}%"></div>
+              </div>
+              <span class="vo-chart-count">${data.approved}/${data.requested}</span>
+            </div>
+          `;
+        }).join("");
+      }
+    }
+    const rejectionsEl = this.container.querySelector("#chart-rejections");
+    if (rejectionsEl) {
+      const sorted = Object.entries(stats.rejectionReasons).sort(([, a], [, b]) => b - a);
+      const top5 = sorted.slice(0, 5);
+      if (top5.length === 0) {
+        rejectionsEl.innerHTML = '<li class="vo-empty-state">No rejections</li>';
+      } else {
+        rejectionsEl.innerHTML = top5.map(([reason, count]) => `<li>${this.escapeHtml(reason)}: <strong>${count}</strong></li>`).join("");
+      }
+    }
+    const operatorTbody = this.container.querySelector("#chart-operators tbody");
+    if (operatorTbody) {
+      const entries = Object.entries(stats.byOperator);
+      if (entries.length === 0) {
+        operatorTbody.innerHTML = '<tr><td colspan="3" class="vo-empty-state">No operator data</td></tr>';
+      } else {
+        operatorTbody.innerHTML = entries.sort(([, a], [, b]) => b.decided - a.decided).map(
+          ([operator, data]) => `
+          <tr>
+            <td>${this.escapeHtml(operator)}</td>
+            <td>${data.decided}</td>
+            <td>${(data.approvalRate * 100).toFixed(1)}%</td>
+          </tr>
+        `
+        ).join("");
+      }
+    }
+  }
+  startAutoRefresh() {
+    if (this.refreshInterval) clearInterval(this.refreshInterval);
+    this.refreshInterval = window.setInterval(
+      () => {
+        this.loadAll();
+      },
+      5 * 60 * 1e3
+    );
+  }
+  escapeHtml(text) {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    };
+    return text.replace(/[&<>"']/g, (c) => map[c] ?? c);
+  }
+  destroy() {
+    if (this.refreshInterval) clearInterval(this.refreshInterval);
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/JobProgressPanel.ts
+var BASE_URL5 = "http://localhost:4877";
+function formatDate2(value) {
+  try {
+    return new Date(value).toLocaleString();
+  } catch {
+    return value;
+  }
+}
+function normalizeStatus(job) {
+  if (job.jobStatus === "pending") return "pending";
+  if (job.jobStatus === "failed" || job.jobStatus === "dead") return "failed";
+  if (job.jobStatus === "succeeded") return "done";
+  if (job.jobStatus === "running" && job.pipelineState === "awaiting-approval") {
+    return "awaiting-approval";
+  }
+  if (job.pipelineState === "approved" || job.pipelineState === "awaiting-approval") {
+    return "awaiting-approval";
+  }
+  return "processing";
+}
+function estimateProgress(job) {
+  switch (normalizeStatus(job)) {
+    case "pending":
+      return 0;
+    case "awaiting-approval":
+      return 55;
+    case "processing":
+      return 65;
+    case "done":
+      return 100;
+    case "failed":
+      return 100;
+  }
+}
+var JobProgressPanel = class {
+  container;
+  projectId;
+  jobs = [];
+  refreshInterval = null;
+  isLoading = false;
+  constructor(container, projectId) {
+    this.container = container;
+    this.projectId = projectId;
+  }
+  async initialize() {
+    this.renderShell();
+    await this.loadJobs();
+    this.startAutoRefresh();
+  }
+  renderShell() {
+    this.container.innerHTML = `
+      <div class="vo-job-progress">
+        <div class="vo-panel-header">
+          <h3>Job Progress</h3>
+          <button class="vo-btn-secondary" id="job-progress-refresh">Refresh</button>
+        </div>
+        <div class="vo-job-progress-subtitle">Composition, subtitles, thumbnails, metadata, and publishing jobs.</div>
+        <div class="vo-jobs-list" id="jobs-list">
+          <div class="vo-empty-state">Loading jobs...</div>
+        </div>
+      </div>
+    `;
+    this.container.querySelector("#job-progress-refresh")?.addEventListener("click", () => {
+      void this.loadJobs();
+    });
+  }
+  async loadJobs() {
+    if (this.isLoading) return;
+    this.isLoading = true;
+    const listEl = this.container.querySelector("#jobs-list");
+    if (listEl && this.jobs.length === 0) {
+      listEl.innerHTML = '<div class="vo-empty-state">Loading jobs...</div>';
+    }
+    try {
+      const qs = this.projectId ? `?projectId=${encodeURIComponent(this.projectId)}` : "";
+      const res = await fetch(`${BASE_URL5}/api/infra/video-orchestrator/jobs${qs}`);
+      const data = await res.json();
+      this.jobs = Array.isArray(data.jobs) ? data.jobs : [];
+      this.renderJobs();
+    } catch {
+      if (listEl) {
+        listEl.innerHTML = '<div class="vo-empty-state">Failed to load jobs.</div>';
+      }
+    } finally {
+      this.isLoading = false;
+    }
+  }
+  renderJobs() {
+    const listEl = this.container.querySelector("#jobs-list");
+    if (!listEl) return;
+    if (this.jobs.length === 0) {
+      listEl.innerHTML = '<div class="vo-empty-state">No jobs found for this project.</div>';
+      return;
+    }
+    listEl.innerHTML = this.jobs.map((job) => this.renderJobCard(job)).join("");
+  }
+  renderJobCard(job) {
+    const normalizedStatus = normalizeStatus(job);
+    const progress = estimateProgress(job);
+    const approvalLabel = normalizedStatus === "awaiting-approval" ? "Awaiting Operator Decision" : normalizedStatus === "processing" ? "Processing" : normalizedStatus === "done" ? "Completed" : normalizedStatus === "failed" ? "Failed" : "Pending";
+    const errorHtml = job.errorMessage ? `<div class="vo-job-error">${job.errorMessage}</div>` : "";
+    return `
+      <article class="vo-job-card vo-job-card--${normalizedStatus}" data-job-id="${job.jobId}">
+        <div class="vo-job-card__header">
+          <div>
+            <div class="vo-job-card__title">${job.title ?? `Job ${job.jobId}`}</div>
+            <div class="vo-job-card__meta">${job.jobType}${job.platform ? ` \u2022 ${job.platform}` : ""}${job.accountHandle ? ` \u2022 @${job.accountHandle}` : ""}</div>
+          </div>
+          <span class="vo-status-badge vo-status-${normalizedStatus}">${approvalLabel}</span>
+        </div>
+
+        <div class="vo-job-card__progress">
+          <div class="vo-progress-bar-wrap">
+            <div class="vo-progress-bar-fill" style="width: ${progress}%"></div>
+          </div>
+          <span class="vo-progress-label">${progress}%</span>
+        </div>
+
+        <div class="vo-job-card__details">
+          <div><span class="vo-job-card__label">Stage</span> ${job.pipelineState}</div>
+          <div><span class="vo-job-card__label">Adapter</span> ${job.adapterMode ?? "\u2014"}</div>
+          <div><span class="vo-job-card__label">Created</span> ${formatDate2(job.createdAt)}</div>
+          <div><span class="vo-job-card__label">Completed</span> ${job.completedAt ? formatDate2(job.completedAt) : "\u2014"}</div>
+        </div>
+
+        ${errorHtml}
+      </article>
+    `;
+  }
+  startAutoRefresh() {
+    if (this.refreshInterval) {
+      window.clearInterval(this.refreshInterval);
+    }
+    this.refreshInterval = window.setInterval(() => {
+      void this.loadJobs();
+    }, 3e4);
+  }
+  destroy() {
+    if (this.refreshInterval) {
+      window.clearInterval(this.refreshInterval);
+      this.refreshInterval = null;
+    }
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/MetadataGeneratorPanel.ts
+var BASE_URL6 = "http://localhost:4877";
+var MetadataGeneratorPanel = class {
+  container;
+  projectId;
+  contentItemId = "";
+  templateId = "";
+  lastResult = null;
+  isSubmitting = false;
+  constructor(container, projectId) {
+    this.container = container;
+    this.projectId = projectId;
+  }
+  async initialize() {
+    this.render();
+  }
+  render() {
+    this.container.innerHTML = `
+      <div class="vo-metadata-generator">
+        <div class="vo-panel-header">
+          <h3>Metadata Generator</h3>
+        </div>
+        <div class="vo-metadata-generator__form">
+          <label class="vo-form-group">
+            <span class="vo-form-label">Content Item ID</span>
+            <input id="vo-meta-content-item" class="vo-form-input" type="text" value="${this.escapeHtml(this.contentItemId)}" placeholder="content-..." ${this.isSubmitting ? "disabled" : ""} />
+          </label>
+          <label class="vo-form-group">
+            <span class="vo-form-label">Template ID</span>
+            <input id="vo-meta-template-id" class="vo-form-input" type="text" value="${this.escapeHtml(this.templateId)}" placeholder="optional" ${this.isSubmitting ? "disabled" : ""} />
+          </label>
+          <div class="vo-form-actions">
+            <button class="vo-button vo-button-primary" id="vo-meta-generate" ${this.isSubmitting ? "disabled" : ""}>${this.isSubmitting ? "Generating..." : "Generate Metadata"}</button>
+          </div>
+        </div>
+        ${this.renderResult()}
+      </div>
+    `;
+    this.container.querySelector("#vo-meta-generate")?.addEventListener("click", () => {
+      void this.handleGenerate();
+    });
+    this.container.querySelector("#vo-meta-content-item")?.addEventListener("input", (event) => {
+      this.contentItemId = event.target.value;
+    });
+    this.container.querySelector("#vo-meta-template-id")?.addEventListener("input", (event) => {
+      this.templateId = event.target.value;
+    });
+  }
+  renderResult() {
+    if (!this.lastResult) return "";
+    if (!this.lastResult.ok) {
+      return `<div class="vo-form-error">${this.escapeHtml(this.lastResult.error ?? "Metadata generation failed")}</div>`;
+    }
+    const meta = this.lastResult.preview?.metadata;
+    if (!meta) return "";
+    return `
+      <div class="vo-metadata-generator__preview">
+        <div class="vo-metadata-generator__section-title">Preview</div>
+        <div><strong>Title:</strong> ${this.escapeHtml(meta.youtubeTitle ?? "")}</div>
+        <div><strong>Description:</strong> ${this.escapeHtml(meta.youtubeDescription ?? "")}</div>
+        <div><strong>Tags:</strong> ${this.escapeHtml((meta.youtubeTags ?? []).join(", "))}</div>
+        <div><strong>Captions:</strong></div>
+        <div class="vo-metadata-generator__mono">${this.escapeHtml(meta.tiktokCaption ?? "")}</div>
+        <div class="vo-metadata-generator__mono">${this.escapeHtml(meta.instagramCaption ?? "")}</div>
+        <div><strong>Hashtags:</strong> ${this.escapeHtml((meta.hashtags ?? []).join(" "))}</div>
+        <div><strong>Source:</strong> ${this.escapeHtml(meta.source ?? "fallback")}</div>
+      </div>
+    `;
+  }
+  async handleGenerate() {
+    const contentItemInput = this.container.querySelector("#vo-meta-content-item");
+    const templateInput = this.container.querySelector("#vo-meta-template-id");
+    this.contentItemId = contentItemInput?.value ?? this.contentItemId;
+    this.templateId = templateInput?.value ?? this.templateId;
+    if (!this.projectId || !this.contentItemId.trim()) {
+      this.lastResult = { ok: false, error: "projectId and contentItemId are required" };
+      this.render();
+      return;
+    }
+    this.isSubmitting = true;
+    this.render();
+    try {
+      const res = await fetch(`${BASE_URL6}/api/video-orchestrator/metadata/generate`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          projectId: this.projectId,
+          contentItemId: this.contentItemId,
+          templateId: this.templateId || void 0
+        })
+      });
+      this.lastResult = await res.json();
+    } catch (error) {
+      this.lastResult = { ok: false, error: error instanceof Error ? error.message : "Request failed" };
+    } finally {
+      this.isSubmitting = false;
+      this.render();
+    }
+  }
+  escapeHtml(value) {
+    return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+  }
+  destroy() {
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/FeedbackLoopPanel.ts
+var BASE_URL7 = "http://localhost:4877";
+var FeedbackLoopPanel = class {
+  container;
+  projectId;
+  summary = null;
+  refreshInterval = null;
+  constructor(container, projectId) {
+    this.container = container;
+    this.projectId = projectId;
+  }
+  async initialize() {
+    this.render();
+    await this.load();
+    this.startAutoRefresh();
+  }
+  render() {
+    this.container.innerHTML = `
+      <div class="vo-feedback-loop">
+        <div class="vo-panel-header">
+          <h3>Feedback Loop</h3>
+          <button class="vo-btn-secondary" id="feedback-refresh">Refresh</button>
+        </div>
+        <div id="feedback-summary" class="vo-feedback-summary">
+          <div class="vo-empty-state">Loading feedback...</div>
+        </div>
+      </div>
+    `;
+    this.container.querySelector("#feedback-refresh")?.addEventListener("click", () => {
+      void this.load();
+    });
+  }
+  async load() {
+    try {
+      const res = await fetch(`${BASE_URL7}/api/video-orchestrator/analytics/feedback?projectId=${encodeURIComponent(this.projectId)}`);
+      this.summary = await res.json();
+      this.renderSummary();
+    } catch {
+      const el = this.container.querySelector("#feedback-summary");
+      if (el) el.innerHTML = '<div class="vo-empty-state">Failed to load feedback.</div>';
+    }
+  }
+  renderSummary() {
+    const el = this.container.querySelector("#feedback-summary");
+    if (!el || !this.summary) return;
+    const { outcomes, metrics, recommendation } = this.summary;
+    const packageCards = this.buildPackageAggregates(metrics);
+    const summary7d = this.buildWindowSummary(metrics, 7);
+    const summary30d = this.buildWindowSummary(metrics, 30);
+    const thumbnailStatus = this.buildThumbnailStatus(metrics, recommendation.bestThumbnailVariant);
+    el.innerHTML = `
+      <div class="vo-feedback-card">
+        <div class="vo-feedback-label">Recommendation</div>
+        <div class="vo-feedback-value">${this.escapeHtml(recommendation.note)}</div>
+        <div class="vo-feedback-subvalue">Thumbnail: ${this.escapeHtml(recommendation.bestThumbnailVariant ?? "\u2014")}</div>
+        <div class="vo-feedback-subvalue">Metadata: ${this.escapeHtml(recommendation.bestMetadataVariant ?? "\u2014")}</div>
+      </div>
+      <div class="vo-feedback-grid">
+        <div class="vo-feedback-card">
+          <div class="vo-feedback-label">Outcomes</div>
+          <div class="vo-feedback-value">${outcomes.length}</div>
+          <div class="vo-feedback-subvalue">Publish success/failure records</div>
+        </div>
+        <div class="vo-feedback-card">
+          <div class="vo-feedback-label">Metrics</div>
+          <div class="vo-feedback-value">${metrics.length}</div>
+          <div class="vo-feedback-subvalue">24h performance snapshots</div>
+        </div>
+      </div>
+      <div class="vo-feedback-grid vo-feedback-grid--triple">
+        <div class="vo-feedback-card">
+          <div class="vo-feedback-label">Channel Summary \xB7 7d</div>
+          <div class="vo-feedback-value">${summary7d.totalViews}</div>
+          <div class="vo-feedback-subvalue">Views</div>
+          <div class="vo-feedback-subvalue">Avg CTR ${summary7d.avgCtr.toFixed(2)}% \xB7 ${summary7d.snapshotCount} snapshot(s)</div>
+        </div>
+        <div class="vo-feedback-card">
+          <div class="vo-feedback-label">Channel Summary \xB7 30d</div>
+          <div class="vo-feedback-value">${summary30d.totalViews}</div>
+          <div class="vo-feedback-subvalue">Views</div>
+          <div class="vo-feedback-subvalue">Avg CTR ${summary30d.avgCtr.toFixed(2)}% \xB7 ${summary30d.snapshotCount} snapshot(s)</div>
+        </div>
+        <div class="vo-feedback-card">
+          <div class="vo-feedback-label">Thumbnail A/B Status</div>
+          <div class="vo-feedback-value">${this.escapeHtml(thumbnailStatus.label)}</div>
+          <div class="vo-feedback-subvalue">${this.escapeHtml(thumbnailStatus.detail)}</div>
+          <div class="vo-feedback-subvalue">${this.escapeHtml(thumbnailStatus.secondary)}</div>
+        </div>
+      </div>
+      <div class="vo-feedback-card vo-feedback-card--manual">
+        <div class="vo-feedback-label">YouTube Test & Compare</div>
+        <div class="vo-feedback-value">Manual in YouTube Studio</div>
+        <div class="vo-feedback-subvalue">No public developer API is currently wired for starting or reading thumbnail experiments.</div>
+        <div class="vo-feedback-subvalue">Operator flow: open YouTube Studio on desktop, use Thumbnail \u2192 Test & compare, upload up to 3 thumbnails, then review Reach analytics.</div>
+      </div>
+      <div class="vo-feedback-section">
+        <div class="vo-feedback-section-title">Per-Video Performance</div>
+        <div class="vo-feedback-video-grid">
+          ${packageCards.length > 0 ? packageCards.map((card) => `
+            <div class="vo-feedback-card vo-feedback-card--video">
+              <div class="vo-feedback-label">${this.escapeHtml(card.packageId)}</div>
+              <div class="vo-feedback-value">${card.views24h}</div>
+              <div class="vo-feedback-subvalue">Views \xB7 Avg CTR ${card.avgCtr.toFixed(2)}%</div>
+              <div class="vo-feedback-subvalue">Engagement ${card.avgEngagementRate.toFixed(2)}% \xB7 ${card.snapshotCount} snapshot(s)</div>
+              <div class="vo-feedback-subvalue">Thumbnail ${this.escapeHtml(card.thumbnailVariant ?? "\u2014")} \xB7 Metadata ${this.escapeHtml(card.metadataVariant ?? "\u2014")}</div>
+            </div>
+          `).join("") : '<div class="vo-empty-state">No per-video metrics recorded yet.</div>'}
+        </div>
+      </div>
+      <div class="vo-feedback-list">
+        ${metrics.map((metric) => `
+          <div class="vo-feedback-row">
+            <div class="vo-feedback-row-main">
+              <div class="vo-feedback-row-title">${this.escapeHtml(metric.packageId)}</div>
+              <div class="vo-feedback-row-meta">
+                CTR ${metric.ctr.toFixed(2)}% \xB7 Views ${metric.views24h} \xB7 Engagement ${metric.engagementRate.toFixed(2)}%
+              </div>
+            </div>
+            <div class="vo-feedback-row-tags">
+              ${metric.thumbnailVariant ? `<span class="vo-status-badge vo-status-done">${this.escapeHtml(metric.thumbnailVariant)}</span>` : ""}
+              ${metric.metadataVariant ? `<span class="vo-status-badge vo-status-done">${this.escapeHtml(metric.metadataVariant)}</span>` : ""}
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
+  buildPackageAggregates(metrics) {
+    const byPackage = /* @__PURE__ */ new Map();
+    for (const metric of metrics) {
+      const current = byPackage.get(metric.packageId) ?? {
+        packageId: metric.packageId,
+        views24h: 0,
+        avgCtr: 0,
+        avgEngagementRate: 0,
+        snapshotCount: 0,
+        thumbnailVariant: metric.thumbnailVariant,
+        metadataVariant: metric.metadataVariant,
+        latestAt: metric.createdAt
+      };
+      current.views24h += metric.views24h;
+      current.avgCtr += metric.ctr;
+      current.avgEngagementRate += metric.engagementRate;
+      current.snapshotCount += 1;
+      current.thumbnailVariant = current.thumbnailVariant ?? metric.thumbnailVariant;
+      current.metadataVariant = current.metadataVariant ?? metric.metadataVariant;
+      if (new Date(metric.createdAt).getTime() > new Date(current.latestAt).getTime()) {
+        current.latestAt = metric.createdAt;
+      }
+      byPackage.set(metric.packageId, current);
+    }
+    return Array.from(byPackage.values()).map((entry) => ({
+      ...entry,
+      avgCtr: entry.snapshotCount > 0 ? entry.avgCtr / entry.snapshotCount : 0,
+      avgEngagementRate: entry.snapshotCount > 0 ? entry.avgEngagementRate / entry.snapshotCount : 0
+    })).sort((a, b) => new Date(b.latestAt).getTime() - new Date(a.latestAt).getTime());
+  }
+  buildWindowSummary(metrics, days) {
+    const cutoff = Date.now() - days * 24 * 60 * 60 * 1e3;
+    const filtered = metrics.filter((metric) => new Date(metric.createdAt).getTime() >= cutoff);
+    const totalViews = filtered.reduce((sum, metric) => sum + metric.views24h, 0);
+    const totalCtr = filtered.reduce((sum, metric) => sum + metric.ctr, 0);
+    return {
+      totalViews,
+      avgCtr: filtered.length > 0 ? totalCtr / filtered.length : 0,
+      snapshotCount: filtered.length
+    };
+  }
+  buildThumbnailStatus(metrics, winner) {
+    const variants = this.buildVariantAggregates(metrics);
+    if (variants.length === 0) {
+      return {
+        label: "No test data",
+        detail: "No thumbnail metrics recorded yet.",
+        secondary: "Record metrics before declaring a winner."
+      };
+    }
+    if (winner) {
+      const winnerStats = variants.find((variant) => variant.key === winner);
+      return {
+        label: "Winner available",
+        detail: `${winner} leads at ${winnerStats?.avgCtr.toFixed(2) ?? "0.00"}% CTR.`,
+        secondary: `${variants.length} variant(s) compared.`
+      };
+    }
+    const leader = variants[0];
+    return {
+      label: "Test active",
+      detail: `${leader.key} currently leads at ${leader.avgCtr.toFixed(2)}% CTR.`,
+      secondary: `${variants.length} variant(s) tracked, winner not declared.`
+    };
+  }
+  buildVariantAggregates(metrics) {
+    const variants = /* @__PURE__ */ new Map();
+    for (const metric of metrics) {
+      if (!metric.thumbnailVariant) continue;
+      const current = variants.get(metric.thumbnailVariant) ?? { ctr: 0, views: 0, count: 0 };
+      current.ctr += metric.ctr;
+      current.views += metric.views24h;
+      current.count += 1;
+      variants.set(metric.thumbnailVariant, current);
+    }
+    return Array.from(variants.entries()).map(([key, value]) => ({
+      key,
+      avgCtr: value.count > 0 ? value.ctr / value.count : 0,
+      totalViews: value.views,
+      count: value.count
+    })).sort((a, b) => b.avgCtr - a.avgCtr);
+  }
+  startAutoRefresh() {
+    if (this.refreshInterval) clearInterval(this.refreshInterval);
+    this.refreshInterval = window.setInterval(() => void this.load(), 6e4);
+  }
+  escapeHtml(value) {
+    return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+  }
+  destroy() {
+    if (this.refreshInterval) clearInterval(this.refreshInterval);
+    this.container.innerHTML = "";
+  }
+};
+
+// src/components/VO/AgentConsolePanel.ts
+var AgentConsolePanel = class {
+  container;
+  refreshInterval = null;
+  constructor(container) {
+    this.container = container;
+  }
+  async initialize() {
+    this.renderShell();
+    await this.load();
+    this.startAutoRefresh();
+  }
+  destroy() {
+    if (this.refreshInterval !== null) {
+      window.clearInterval(this.refreshInterval);
+      this.refreshInterval = null;
+    }
+    this.container.innerHTML = "";
+  }
+  renderShell() {
+    this.container.innerHTML = `
+      <div class="vo-agent-panel">
+        <div class="vo-panel-header">
+          <h2>Agent Console</h2>
+          <button class="vo-btn-secondary" id="agent-console-refresh">Refresh</button>
+        </div>
+        <div id="agent-console-status" class="vo-empty-state">
+          <p>Loading agent console...</p>
+        </div>
+      </div>
+    `;
+    const refreshButton = this.container.querySelector("#agent-console-refresh");
+    refreshButton?.addEventListener("click", () => {
+      void this.load();
+    });
+  }
+  startAutoRefresh() {
+    this.refreshInterval = window.setInterval(() => {
+      void this.load();
+    }, 3e4);
+  }
+  async load() {
+    const statusEl = this.container.querySelector("#agent-console-status");
+    if (!statusEl) return;
+    try {
+      const [consoleResponse, costResponse] = await Promise.all([
+        fetch("/agent-console"),
+        fetch("/agent-cost-summary")
+      ]);
+      if (!consoleResponse.ok || !costResponse.ok) {
+        throw new Error(`Failed to load agent console (${consoleResponse.status}/${costResponse.status})`);
+      }
+      const consoleSummary = await consoleResponse.json();
+      const costSummary = await costResponse.json();
+      statusEl.outerHTML = this.renderData(consoleSummary, costSummary);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown error";
+      statusEl.outerHTML = `
+        <div id="agent-console-status" class="vo-empty-state">
+          <p>Unable to load agent console.</p>
+          <p>${this.escapeHtml(message)}</p>
+        </div>
+      `;
+    }
+  }
+  renderData(summary, costSummary) {
+    const currentStep = summary.taskState.steps.find((step) => step.taskId === summary.taskState.currentTaskId);
+    const latestRuns = summary.ledger.runs.slice(0, 4);
+    const latestEvents = summary.ledger.events.slice(0, 5);
+    const expensiveTasks = costSummary.topExpensiveTasks.slice(0, 4);
+    return `
+      <div id="agent-console-status" class="vo-agent-console">
+        <div class="vo-agent-grid">
+          <section class="vo-overview-card">
+            <div class="vo-overview-title">Run Summary</div>
+            <div class="vo-activity-grid">
+              ${this.renderMetric("Active", String(summary.activeRunCount))}
+              ${this.renderMetric("Blocked", String(summary.blockedRunCount))}
+              ${this.renderMetric("Planned", String(summary.plannedRunCount))}
+              ${this.renderMetric("Events", String(summary.ledger.eventCount))}
+            </div>
+          </section>
+
+          <section class="vo-overview-card">
+            <div class="vo-overview-title">Task Graph</div>
+            <div class="vo-activity-grid">
+              ${this.renderMetric("Tasks", String(summary.taskGraph.taskCount))}
+              ${this.renderMetric("Completed", String(summary.taskGraph.completedCount))}
+              ${this.renderMetric("Pending", String(summary.taskGraph.pendingCount))}
+              ${this.renderMetric("Current", currentStep ? this.escapeHtml(currentStep.taskId) : "\u2014")}
+            </div>
+          </section>
+
+          <section class="vo-overview-card">
+            <div class="vo-overview-title">Approval Gates</div>
+            <div class="vo-stats-table">
+              ${this.renderStatRow("Store", summary.approvalGates.approvalStoreStatus)}
+              ${this.renderStatRow("Pending", String(summary.approvalGates.pendingCount))}
+              ${this.renderStatRow("Approved", String(summary.approvalGates.approvedCount))}
+              ${this.renderStatRow("Blocked Kinds", summary.approvalGates.blockedApprovalKinds.join(", ") || "None")}
+            </div>
+          </section>
+
+          <section class="vo-overview-card">
+            <div class="vo-overview-title">Cost Snapshot</div>
+            <div class="vo-stats-table">
+              ${this.renderStatRow("Spent", `$${costSummary.budget.spentUsd.toFixed(4)}`)}
+              ${this.renderStatRow("Remaining", `$${costSummary.budget.remainingUsd.toFixed(2)}`)}
+              ${this.renderStatRow("Budget", costSummary.budget.status)}
+              ${this.renderStatRow("Local Routes", String(costSummary.localRouteCount))}
+            </div>
+          </section>
+        </div>
+
+        <div class="vo-agent-grid vo-agent-grid--detail">
+          <section class="vo-overview-card">
+            <div class="vo-overview-title">Current Task State</div>
+            <div class="vo-stats-table">
+              ${this.renderStatRow("Current Task", summary.taskState.currentTaskId || "\u2014")}
+              ${this.renderStatRow("Last Completed", summary.taskState.lastCompletedTaskId || "\u2014")}
+              ${this.renderStatRow("Executor Selections", String(summary.executorSelectionCount))}
+              ${this.renderStatRow("Persistence", summary.persistence.loadedFromDisk ? "Snapshot" : "Derived")}
+            </div>
+            <p class="vo-agent-next-step">${this.escapeHtml(summary.nextSafeStep)}</p>
+          </section>
+
+          <section class="vo-overview-card">
+            <div class="vo-overview-title">Executor Plan</div>
+            <div class="vo-agent-list">
+              ${summary.executorPlan.steps.map((step) => `
+                <div class="vo-agent-list-item">
+                  <div class="vo-agent-list-header">
+                    <strong>${this.escapeHtml(step.taskId)}</strong>
+                    <span>${this.escapeHtml(step.providerId)}</span>
+                  </div>
+                  <div class="vo-agent-list-meta">${this.escapeHtml(step.executorId)}${step.model ? ` \xB7 ${this.escapeHtml(step.model)}` : ""}</div>
+                  <div class="vo-agent-list-copy">${this.escapeHtml(step.reason)}</div>
+                </div>
+              `).join("")}
+            </div>
+          </section>
+        </div>
+
+        <div class="vo-agent-grid vo-agent-grid--detail">
+          <section class="vo-overview-card">
+            <div class="vo-overview-title">Recent Runs</div>
+            <div class="vo-agent-list">
+              ${latestRuns.map((run) => `
+                <div class="vo-agent-list-item">
+                  <div class="vo-agent-list-header">
+                    <strong>${this.escapeHtml(run.title)}</strong>
+                    <span>${this.escapeHtml(run.status)}</span>
+                  </div>
+                  <div class="vo-agent-list-meta">${this.escapeHtml(run.id)}</div>
+                </div>
+              `).join("") || '<div class="vo-agent-list-item">No runs recorded.</div>'}
+            </div>
+          </section>
+
+          <section class="vo-overview-card">
+            <div class="vo-overview-title">Recent Events</div>
+            <div class="vo-agent-list">
+              ${latestEvents.map((event) => `
+                <div class="vo-agent-list-item">
+                  <div class="vo-agent-list-header">
+                    <strong>${this.escapeHtml(event.type)}</strong>
+                    <span>${this.escapeHtml(event.status)}</span>
+                  </div>
+                  <div class="vo-agent-list-meta">${this.escapeHtml(event.id)}</div>
+                  ${event.summary ? `<div class="vo-agent-list-copy">${this.escapeHtml(event.summary)}</div>` : ""}
+                </div>
+              `).join("") || '<div class="vo-agent-list-item">No events recorded.</div>'}
+            </div>
+          </section>
+
+          <section class="vo-overview-card">
+            <div class="vo-overview-title">Top Costed Tasks</div>
+            <div class="vo-agent-list">
+              ${expensiveTasks.map((task) => `
+                <div class="vo-agent-list-item">
+                  <div class="vo-agent-list-header">
+                    <strong>${this.escapeHtml(task.taskId)}</strong>
+                    <span>$${task.estimatedCostUsd.toFixed(4)}</span>
+                  </div>
+                  <div class="vo-agent-list-meta">${this.escapeHtml(task.providerId)} \xB7 ${this.escapeHtml(task.taskType)}</div>
+                  <div class="vo-agent-list-copy">${this.escapeHtml(task.routingReason)}</div>
+                </div>
+              `).join("") || '<div class="vo-agent-list-item">No cost entries recorded.</div>'}
+            </div>
+          </section>
+        </div>
+
+        <section class="vo-overview-card">
+          <div class="vo-overview-title">Task Detail</div>
+          <div class="vo-agent-task-table">
+            <div class="vo-agent-task-row vo-agent-task-row--header">
+              <span>Task</span>
+              <span>Status</span>
+              <span>Role</span>
+              <span>Depends On</span>
+              <span>Approval</span>
+            </div>
+            ${summary.taskGraph.tasks.map((task) => `
+              <div class="vo-agent-task-row">
+                <span><strong>${this.escapeHtml(task.taskId)}</strong><br>${this.escapeHtml(task.title)}</span>
+                <span>${this.escapeHtml(task.status)}</span>
+                <span>${this.escapeHtml(task.role)}</span>
+                <span>${this.escapeHtml(task.dependsOn.join(", ") || "\u2014")}</span>
+                <span>${task.approvalRequired ? "Required" : "None"}</span>
+              </div>
+            `).join("")}
+          </div>
+        </section>
+      </div>
+    `;
+  }
+  renderMetric(label, value) {
+    return `
+      <div class="vo-activity-stat">
+        <span class="vo-stat-label">${this.escapeHtml(label)}</span>
+        <span class="vo-stat-value">${this.escapeHtml(value)}</span>
+      </div>
+    `;
+  }
+  renderStatRow(label, value) {
+    return `
+      <div class="vo-stat-row">
+        <span class="vo-stat-key">${this.escapeHtml(label)}</span>
+        <span class="vo-stat-value">${this.escapeHtml(value)}</span>
+      </div>
+    `;
+  }
+  escapeHtml(value) {
+    return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
+  }
+};
+
+// src/components/VO/VOShell.ts
+var VOShell = class {
+  container;
+  contextBar;
+  overviewPanel = null;
+  pipelinesPanel = null;
+  accountsPanel = null;
+  contentCreationPanel = null;
+  studioPanel = null;
+  historyPanel = null;
+  approvalQueuePanel = null;
+  thumbnailStudioPanel = null;
+  deadLetterReviewPanel = null;
+  jobProgressPanel = null;
+  metadataGeneratorPanel = null;
+  feedbackLoopPanel = null;
+  agentConsolePanel = null;
+  packageStatusPanel = null;
+  publishingDashboardPanel = null;
+  eventLogPanel = null;
+  studioDashboardPanel = null;
+  auditLogPanel = null;
+  operatorDashboardPanel = null;
+  ctx = getVOContextManager();
+  unsubscribe = null;
+  contentContainer = null;
+  currentTab = "overview";
+  data;
+  constructor(container, data) {
+    this.container = container;
+    this.container.classList.add("vo-shell");
+    this.data = data;
+    const barContainer = document.createElement("div");
+    this.contextBar = new VOContextBar(barContainer, data);
+    this.container.appendChild(barContainer);
+    const tabsContainer = document.createElement("div");
+    tabsContainer.className = "vo-tabs-container";
+    tabsContainer.innerHTML = `
+      <div class="vo-tabs">
+        <button class="vo-tab vo-tab--active" data-tab="overview">Overview</button>
+        <button class="vo-tab" data-tab="pipelines">Pipelines</button>
+        <button class="vo-tab" data-tab="accounts">Accounts</button>
+        <button class="vo-tab" data-tab="content">Content</button>
+        <button class="vo-tab" data-tab="approvals">Approvals</button>
+        <button class="vo-tab" data-tab="thumbnails">Thumbnails</button>
+        <button class="vo-tab" data-tab="jobs">Jobs</button>
+        <button class="vo-tab" data-tab="dead-letter">Dead Letter</button>
+        <button class="vo-tab" data-tab="metadata">Metadata</button>
+        <button class="vo-tab" data-tab="feedback">Feedback</button>
+        <button class="vo-tab" data-tab="agents">Agents</button>
+        <button class="vo-tab" data-tab="packages">Packages</button>
+        <button class="vo-tab" data-tab="publishing">Publishing</button>
+        <button class="vo-tab" data-tab="history">History</button>
+        <button class="vo-tab" data-tab="events">Events</button>
+        <button class="vo-tab" data-tab="dashboard">Dashboard</button>
+        <button class="vo-tab" data-tab="admin">Admin</button>
+      </div>
+    `;
+    this.container.appendChild(tabsContainer);
+    this.contentContainer = document.createElement("div");
+    this.contentContainer.className = "vo-tab-content";
+    this.container.appendChild(this.contentContainer);
+    tabsContainer.querySelectorAll(".vo-tab").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const target = e.target;
+        const tab = target.getAttribute("data-tab");
+        if (tab) {
+          this.switchTab(tab, tabsContainer);
+        }
+      });
+    });
+    this.unsubscribe = this.ctx.subscribe(() => this.renderCurrentTab());
+    this.renderCurrentTab();
+  }
+  switchTab(tabName, tabsContainer) {
+    this.currentTab = tabName;
+    tabsContainer.querySelectorAll(".vo-tab").forEach((b) => b.classList.remove("vo-tab--active"));
+    tabsContainer.querySelector(`[data-tab="${tabName}"]`)?.classList.add("vo-tab--active");
+    this.renderCurrentTab();
+  }
+  renderCurrentTab() {
+    if (!this.contentContainer) return;
+    if (this.overviewPanel) {
+      this.overviewPanel.destroy();
+      this.overviewPanel = null;
+    }
+    if (this.pipelinesPanel) {
+      this.pipelinesPanel.destroy();
+      this.pipelinesPanel = null;
+    }
+    if (this.accountsPanel) {
+      this.accountsPanel.destroy();
+      this.accountsPanel = null;
+    }
+    if (this.contentCreationPanel) {
+      this.contentCreationPanel.destroy();
+      this.contentCreationPanel = null;
+    }
+    if (this.studioPanel) {
+      this.studioPanel.destroy();
+      this.studioPanel = null;
+    }
+    if (this.approvalQueuePanel) {
+      this.approvalQueuePanel.destroy();
+      this.approvalQueuePanel = null;
+    }
+    if (this.thumbnailStudioPanel) {
+      this.thumbnailStudioPanel.destroy();
+      this.thumbnailStudioPanel = null;
+    }
+    if (this.deadLetterReviewPanel) {
+      this.deadLetterReviewPanel.destroy();
+      this.deadLetterReviewPanel = null;
+    }
+    if (this.jobProgressPanel) {
+      this.jobProgressPanel.destroy();
+      this.jobProgressPanel = null;
+    }
+    if (this.metadataGeneratorPanel) {
+      this.metadataGeneratorPanel.destroy();
+      this.metadataGeneratorPanel = null;
+    }
+    if (this.feedbackLoopPanel) {
+      this.feedbackLoopPanel.destroy();
+      this.feedbackLoopPanel = null;
+    }
+    if (this.agentConsolePanel) {
+      this.agentConsolePanel.destroy();
+      this.agentConsolePanel = null;
+    }
+    if (this.packageStatusPanel) {
+      this.packageStatusPanel.destroy();
+      this.packageStatusPanel = null;
+    }
+    if (this.publishingDashboardPanel) {
+      this.publishingDashboardPanel.destroy();
+      this.publishingDashboardPanel = null;
+    }
+    if (this.historyPanel) {
+      this.historyPanel.destroy();
+      this.historyPanel = null;
+    }
+    if (this.eventLogPanel) {
+      this.eventLogPanel.destroy();
+      this.eventLogPanel = null;
+    }
+    if (this.studioDashboardPanel) {
+      this.studioDashboardPanel.destroy();
+      this.studioDashboardPanel = null;
+    }
+    if (this.auditLogPanel) {
+      this.auditLogPanel.destroy();
+      this.auditLogPanel = null;
+    }
+    if (this.operatorDashboardPanel) {
+      this.operatorDashboardPanel.destroy();
+      this.operatorDashboardPanel = null;
+    }
+    const state = this.ctx.getState();
+    switch (this.currentTab) {
+      case "overview":
+        if (state.projectId && state.accountId) {
+          this.overviewPanel = new OverviewPanel(this.contentContainer, {
+            selector: this.data.selector,
+            analytics: this.data.analytics,
+            accountStats: this.data.accountStats,
+            accounts: this.data.accounts
+          });
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project and account to view overview</p>
+            </div>
+          `;
+        }
+        break;
+      case "pipelines":
+        if (state.projectId) {
+          this.pipelinesPanel = new PipelinesPanel(this.contentContainer, {
+            profiles: this.data.pipelineProfiles,
+            contentItems: this.data.contentItems
+          });
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view pipelines</p>
+            </div>
+          `;
+        }
+        break;
+      case "accounts":
+        if (state.projectId) {
+          this.accountsPanel = new AccountsPanel(this.contentContainer, {
+            accounts: this.data.accounts,
+            profiles: this.data.pipelineProfiles,
+            accountStats: this.data.accountStats?.stats
+          });
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view accounts</p>
+            </div>
+          `;
+        }
+        break;
+      case "content":
+        if (state.projectId) {
+          this.studioPanel = new StudioPanel(this.contentContainer, {
+            contentItems: this.data.contentItems
+          });
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view Studio content</p>
+            </div>
+          `;
+        }
+        break;
+      case "approvals":
+        if (state.projectId) {
+          this.approvalQueuePanel = new ApprovalQueuePanel(this.contentContainer, state.projectId);
+          this.approvalQueuePanel.initialize();
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view approval queue</p>
+            </div>
+          `;
+        }
+        break;
+      case "thumbnails":
+        if (state.projectId) {
+          this.thumbnailStudioPanel = new ThumbnailStudioPanel(this.contentContainer, state.projectId);
+          this.thumbnailStudioPanel.initialize();
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view thumbnail studio</p>
+            </div>
+          `;
+        }
+        break;
+      case "jobs":
+        if (state.projectId) {
+          this.jobProgressPanel = new JobProgressPanel(this.contentContainer, state.projectId);
+          this.jobProgressPanel.initialize();
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view job progress</p>
+            </div>
+          `;
+        }
+        break;
+      case "dead-letter":
+        if (state.projectId) {
+          this.deadLetterReviewPanel = new DeadLetterReviewPanel(this.contentContainer, state.projectId);
+          this.deadLetterReviewPanel.initialize();
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to review dead jobs</p>
+            </div>
+          `;
+        }
+        break;
+      case "metadata":
+        if (state.projectId) {
+          this.metadataGeneratorPanel = new MetadataGeneratorPanel(this.contentContainer, state.projectId);
+          this.metadataGeneratorPanel.initialize();
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to generate metadata</p>
+            </div>
+          `;
+        }
+        break;
+      case "feedback":
+        if (state.projectId) {
+          this.feedbackLoopPanel = new FeedbackLoopPanel(this.contentContainer, state.projectId);
+          this.feedbackLoopPanel.initialize();
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view feedback loop</p>
+            </div>
+          `;
+        }
+        break;
+      case "agents":
+        this.agentConsolePanel = new AgentConsolePanel(this.contentContainer);
+        this.agentConsolePanel.initialize();
+        break;
+      case "packages":
+        if (state.projectId) {
+          this.packageStatusPanel = new PackageStatusPanel(this.contentContainer);
+          this.packageStatusPanel.initialize();
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view package status</p>
+            </div>
+          `;
+        }
+        break;
+      case "publishing":
+        if (state.projectId) {
+          this.publishingDashboardPanel = new PublishingDashboardPanel(this.contentContainer, state.projectId);
+          this.publishingDashboardPanel.initialize();
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view publishing dashboard</p>
+            </div>
+          `;
+        }
+        break;
+      case "history":
+        if (state.projectId) {
+          this.historyPanel = new HistoryPanel(this.contentContainer, {
+            contentItems: this.data.contentItems,
+            accounts: this.data.accounts
+          });
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view history</p>
+            </div>
+          `;
+        }
+        break;
+      case "events":
+        if (state.projectId) {
+          this.eventLogPanel = new EventLogPanel(this.contentContainer, state.projectId);
+          this.eventLogPanel.initialize();
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view event log</p>
+            </div>
+          `;
+        }
+        break;
+      case "dashboard":
+        if (state.projectId) {
+          this.studioDashboardPanel = new StudioDashboardPanel(this.contentContainer, state.projectId);
+          this.studioDashboardPanel.initialize();
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view dashboard</p>
+            </div>
+          `;
+        }
+        break;
+      case "admin":
+        if (state.projectId) {
+          const adminContainer = document.createElement("div");
+          adminContainer.className = "vo-admin-tab";
+          this.contentContainer.innerHTML = "";
+          this.contentContainer.appendChild(adminContainer);
+          const dashSection = document.createElement("div");
+          dashSection.className = "vo-admin-section";
+          adminContainer.appendChild(dashSection);
+          const auditSection = document.createElement("div");
+          auditSection.className = "vo-admin-section";
+          adminContainer.appendChild(auditSection);
+          this.operatorDashboardPanel = new OperatorDashboardPanel(dashSection, state.projectId);
+          this.operatorDashboardPanel.initialize();
+          this.auditLogPanel = new AuditLogPanel(auditSection, state.projectId);
+          this.auditLogPanel.initialize();
+        } else {
+          this.contentContainer.innerHTML = `
+            <div class="vo-empty-state">
+              <p>Select a project to view admin panel</p>
+            </div>
+          `;
+        }
+        break;
+    }
+  }
+  destroy() {
+    this.contextBar.destroy();
+    if (this.overviewPanel) {
+      this.overviewPanel.destroy();
+    }
+    if (this.pipelinesPanel) {
+      this.pipelinesPanel.destroy();
+    }
+    if (this.accountsPanel) {
+      this.accountsPanel.destroy();
+    }
+    if (this.contentCreationPanel) {
+      this.contentCreationPanel.destroy();
+    }
+    if (this.studioPanel) {
+      this.studioPanel.destroy();
+    }
+    if (this.approvalQueuePanel) {
+      this.approvalQueuePanel.destroy();
+    }
+    if (this.thumbnailStudioPanel) {
+      this.thumbnailStudioPanel.destroy();
+    }
+    if (this.deadLetterReviewPanel) {
+      this.deadLetterReviewPanel.destroy();
+    }
+    if (this.jobProgressPanel) {
+      this.jobProgressPanel.destroy();
+    }
+    if (this.metadataGeneratorPanel) {
+      this.metadataGeneratorPanel.destroy();
+    }
+    if (this.feedbackLoopPanel) {
+      this.feedbackLoopPanel.destroy();
+    }
+    if (this.agentConsolePanel) {
+      this.agentConsolePanel.destroy();
+    }
+    if (this.packageStatusPanel) {
+      this.packageStatusPanel.destroy();
+    }
+    if (this.publishingDashboardPanel) {
+      this.publishingDashboardPanel.destroy();
+    }
+    if (this.historyPanel) {
+      this.historyPanel.destroy();
+    }
+    if (this.eventLogPanel) {
+      this.eventLogPanel.destroy();
+    }
+    if (this.studioDashboardPanel) {
+      this.studioDashboardPanel.destroy();
+    }
+    if (this.auditLogPanel) {
+      this.auditLogPanel.destroy();
+    }
+    if (this.operatorDashboardPanel) {
+      this.operatorDashboardPanel.destroy();
+    }
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+    this.container.innerHTML = "";
+  }
+};
+
 // src/client.ts
 var REQUEST_TIMEOUT_MS = 1e4;
 async function readBrainCoreStatus(baseUrl) {
@@ -282,6 +5667,24 @@ async function readBrainCoreStbStatus(baseUrl) {
 async function readBrainCoreVideoOrchestratorStatus(baseUrl) {
   return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/status");
 }
+async function readBrainCoreVOStudioProjects(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/projects");
+}
+async function readBrainCoreVOStudioAccounts(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/accounts");
+}
+async function readBrainCoreVOStudioPipelineProfiles(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/pipeline-profiles");
+}
+async function readBrainCoreVOStudioContentItems(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/content-items");
+}
+async function readBrainCoreVOStudioPackage(baseUrl, packageId) {
+  return fetchJson(normalizeBaseUrl(baseUrl), `/video-orchestrator/packages/${encodeURIComponent(packageId)}`);
+}
+async function readBrainCoreVOStudioAnalyticsSummary(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/analytics/summary");
+}
 async function readBrainCoreVideoOrchestratorIntake(baseUrl) {
   return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/intake");
 }
@@ -419,6 +5822,79 @@ async function controlBrainCoreAiModelSelector(baseUrl, action) {
     method: "POST"
   });
 }
+async function requestBrainCoreRestart(baseUrl) {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
+  const url = `${normalizedBaseUrl}/ops/brain-core/restart`;
+  const startTime = performance.now();
+  if (!requestUrlFn) {
+    return {
+      error: "Obsidian requestUrl not initialized",
+      url
+    };
+  }
+  try {
+    const response = await Promise.race([
+      requestUrlFn({
+        url,
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          confirmation: true,
+          requestedBy: "brain-console"
+        }),
+        throw: false
+      }),
+      new Promise(
+        (_, reject) => setTimeout(() => reject(new Error("request timeout")), REQUEST_TIMEOUT_MS)
+      )
+    ]);
+    const responseTimeMs = Math.round(performance.now() - startTime);
+    const parsed = safeParseJson(response.text ?? "{}");
+    if (response.status < 200 || response.status >= 300) {
+      return {
+        error: parsed?.message ?? `HTTP ${response.status}`,
+        status: response.status,
+        detail: response.text ? response.text.slice(0, 240) : void 0,
+        value: parsed,
+        url,
+        responseTimeMs
+      };
+    }
+    return {
+      value: parsed,
+      url,
+      responseTimeMs
+    };
+  } catch (error) {
+    const responseTimeMs = Math.round(performance.now() - startTime);
+    return {
+      error: error instanceof Error ? error.message : "request failed",
+      url,
+      responseTimeMs
+    };
+  }
+}
+async function waitForBrainCoreStatus(baseUrl, timeoutMs = 12e4, pollIntervalMs = 1500) {
+  const deadline = Date.now() + timeoutMs;
+  let lastResult;
+  while (Date.now() < deadline) {
+    lastResult = await fetchJson(normalizeBaseUrl(baseUrl), "/status", {}, 3e3);
+    if (lastResult.value?.ok === true) {
+      return lastResult;
+    }
+    await new Promise((resolve) => {
+      window.setTimeout(resolve, pollIntervalMs);
+    });
+  }
+  return {
+    ...lastResult,
+    error: lastResult?.error ?? "Brain Core did not report ok=true before the restart timeout elapsed.",
+    detail: lastResult?.detail ?? "Brain Core restart verification timed out."
+  };
+}
 async function readBrainCoreMaintenancePreviewDetail(baseUrl, previewId) {
   return fetchJson(normalizeBaseUrl(baseUrl), `/execution/maintenance-previews/${previewId}`);
 }
@@ -426,7 +5902,7 @@ var requestUrlFn = null;
 function setRequestUrl(fn) {
   requestUrlFn = fn;
 }
-async function fetchJson(baseUrl, pathname, options = {}) {
+async function fetchJson(baseUrl, pathname, options = {}, timeoutMs = REQUEST_TIMEOUT_MS) {
   const url = `${baseUrl}${pathname}`;
   const startTime = performance.now();
   if (!requestUrlFn) {
@@ -445,7 +5921,7 @@ async function fetchJson(baseUrl, pathname, options = {}) {
         throw: false
       }),
       new Promise(
-        (_, reject) => setTimeout(() => reject(new Error("request timeout")), REQUEST_TIMEOUT_MS)
+        (_, reject) => setTimeout(() => reject(new Error("request timeout")), timeoutMs)
       )
     ]);
     const responseTimeMs = Math.round(performance.now() - startTime);
@@ -477,7 +5953,7 @@ async function fetchJson(baseUrl, pathname, options = {}) {
     if ((errorMsg.includes("timeout") || errorMsg.includes("connection")) && isLocalTestUrl(baseUrl)) {
       const fallbackUrl = tryGetFallbackLocalUrl(baseUrl);
       if (fallbackUrl && fallbackUrl !== baseUrl) {
-        return fetchJsonWithFallback(fallbackUrl, pathname, responseTimeMs);
+        return fetchJsonWithFallback(fallbackUrl, pathname, responseTimeMs, timeoutMs);
       }
     }
     return {
@@ -494,7 +5970,7 @@ function safeParseJson(text) {
     return void 0;
   }
 }
-async function fetchJsonWithFallback(fallbackUrl, pathname, firstAttemptMs) {
+async function fetchJsonWithFallback(fallbackUrl, pathname, firstAttemptMs, timeoutMs = REQUEST_TIMEOUT_MS) {
   try {
     const response = await Promise.race([
       requestUrlFn({
@@ -504,7 +5980,7 @@ async function fetchJsonWithFallback(fallbackUrl, pathname, firstAttemptMs) {
         throw: false
       }),
       new Promise(
-        (_, reject) => setTimeout(() => reject(new Error("request timeout")), REQUEST_TIMEOUT_MS)
+        (_, reject) => setTimeout(() => reject(new Error("request timeout")), timeoutMs)
       )
     ]);
     if (response.status < 200 || response.status >= 300) {
@@ -786,12 +6262,6 @@ async function readBrainCoreVOAuthStatus(baseUrl) {
 }
 async function readBrainCoreVOJobs(baseUrl) {
   return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/jobs?limit=20");
-}
-async function readBrainCoreVOPostingInstructions(baseUrl, jobId) {
-  return fetchJson(
-    normalizeBaseUrl(baseUrl),
-    `/infra/video-orchestrator/posting-instructions/${encodeURIComponent(jobId)}`
-  );
 }
 function readBrainCoreSystemMetrics(baseUrl) {
   return fetchJson(normalizeBaseUrl(baseUrl), "/system/metrics");
@@ -1247,7 +6717,7 @@ function deriveNextAction(state, level) {
   }
   return "System healthy, all clear";
 }
-function formatRelativeTime(date) {
+function formatRelativeTime2(date) {
   if (!date) return "never";
   const d = typeof date === "string" ? new Date(date) : date;
   const now = Date.now();
@@ -1326,6 +6796,12 @@ async function loadBrainConsoleViewState(settings = DEFAULT_BRAIN_CONSOLE_SETTIN
     readBrainCorePostQaStatus(baseUrl),
     readBrainCoreStbStatus(baseUrl),
     readBrainCoreVideoOrchestratorStatus(baseUrl),
+    readBrainCoreVOStudioProjects(baseUrl),
+    readBrainCoreVOStudioAccounts(baseUrl),
+    readBrainCoreVOStudioPipelineProfiles(baseUrl),
+    readBrainCoreVOStudioContentItems(baseUrl),
+    readBrainCoreVOStudioPackage(baseUrl, "pkg-stb-story-052"),
+    readBrainCoreVOStudioAnalyticsSummary(baseUrl),
     readBrainCoreVideoOrchestratorIntake(baseUrl),
     readBrainCoreVideoOrchestratorAssetPlans(baseUrl),
     readBrainCoreVideoOrchestratorDesignPlans(baseUrl),
@@ -1437,13 +6913,13 @@ async function loadBrainConsoleViewState(settings = DEFAULT_BRAIN_CONSOLE_SETTIN
     readBrainCoreCredentialCatalog(baseUrl),
     // 156
     readBrainCoreAiModelSelectorStatus(baseUrl)
-    // 157
+    // 163
   ]);
   const settledValues = withSafeEndpointPadding(
     results.map((result) => result.status === "fulfilled" ? result.value : { value: void 0, error: result.reason }),
-    158
+    164
   );
-  const [status, capabilities, runtimeReports, videoStatus, videoQueue, localApps, localAppsDashboard, localAppsActionReadiness, localAppsActionEnablementBacklog, localAppsActionStatus, schedulerStatus, schedulerJobs, sessions, repos, approvals, approvalStore, executionPlans, executionReadiness, mindPreviewPolicy, mindPreviews, orchestrators, pipelines, projects, platforms, probotDashboardParity, probotSessionsParity, probotLocalAppsParity, probotSchedulerParity, probotStudioParity, probotExternalAdminParity, probotDecommissionReadiness, probotExternalAdminSafeMetadata, probotFeatureParityMatrix, probotPhaseOutChecklist, postOrchestratorStatus, postOrchestratorOverview, postOrchestratorFlows, postOrchestratorDrafts, postOrchestratorEvents, postOrchestratorDryRun, postOrchestratorReviewQueue, postOrchestratorSchedulePreview, postOrchestratorAnalytics, postOrchestratorPipeline, postOrchestratorReadiness, postOrchestratorPlatformPolicies, postOrchestratorDecommissionReadiness, postOrchestratorOperatorGuidance, postOrchestratorManualExportPackage, postOrchestratorAcceptanceChecklist, postOrchestratorMigrationParity, postOrchestratorRoadmapCheckpoint, postOrchestratorContracts, postOrchestratorIntegrations, postOrchestratorRecovery, postOrchestratorQaStatus, stbStatus, videoOrchestratorStatus, videoOrchestratorIntake, videoAssetPlans, videoDesignPlans, videoVoiceoverPlans, videoVisualPlans, videoAssemblyPlans, videoMetadataPlans, videoPublishingPrepPlans, videoManualExportPackages, videoThumbnailDesignPlans, videoArchiveLoggingPlans, videoDesignProviderBoundaryPlans, videoDesignProviderCredentialIsolationPlans, videoDesignProviderPromptReviewPolicyPlans, videoArtifactSandboxProviderHandoffPlans, videoProviderOutputRedactionPolicyPlans, videoDesignProviderComplianceChecklistPlans, videoDesignProviderEnablementReadinessIndex, videoProviderIntegrationFinalPlanningCheckpoint, videoCredentialStoreImplementationBoundaryPlan, videoPromptReviewUxImplementationPlan, videoProviderAuditPersistenceBoundaryPlan, videoProviderWrapperSecurityReviewPlan, videoProviderImplementationPhaseStartGate, videoProviderImplementationReadinessDashboardSummary, videoProviderImplementationApprovalPacket, videoProviderApprovalPacketConsoleReviewSummary, videoProviderPlanningSurfaceIndex, videoCredentialReferenceScaffold, videoProviderRequestWrapperScaffold, videoProviderWrapperValidationHarness, videoProviderRequestEnvelopeScaffold, videoProviderResponseEnvelopeScaffold, videoProviderScaffoldingIntegrationSummary, videoProviderRequestWrapperInertShell, videoCredentialReferenceValidator, videoProviderResponseRedactionSkeleton, videoProviderAuditEventTypes, videoProviderDisabledOrchestrationFacade, videoProviderCapabilityPolicyEvaluator, videoProviderBlockedActionLedgerTypes, videoProviderDisabledOrchestrationIntegrationSummary, stbVideoMigrationStatus, stbVideoParityMatrix, stbVideoDualRunStatus, stbVideoDualRunEvidence, videoProductionGate, videoRenderExportPolicy, videoControlledDryRunDesign, videoProductionCutoverGate, videoReleaseCandidateReadiness, videoOperatorDecisionQueue, videoControlledExecutionPolicyBoundary, videoControlledExecutionReadinessIndex, videoRoadmapCheckpoint, videoOperatorReviewPacket, videoControlledExecutionApprovalPayloadSchema, videoPreviewCompletionIndex, videoControlledExecutionPreflightChecklist, videoControlledExecutionRiskRegister, videoControlledExecutionPreflightValidatorSchema, videoControlledExecutionPlanStub, videoControlledExecutionApprovalRequestDesign, videoControlledExecutionDisabledGate, videoControlledExecutionSecondApprovalPolicy, videoControlledExecutionOperatorIdentityProtocol, videoControlledExecutionRolePolicy, controlledDualRunRequestDesign, agents, actions, mindStewardReportDetail, agentRuns, agentEvents, agentCostSummary, recoveryItems, localAppsOperationalReadiness, localAppsOperatorSummary, localAppsOrchestratorDef, infraDokploy, infraTunnels, infraDomains, infraNewRelic, infraUmami, infraGoogleAds, infraStripe, infraStudio, voLiveStatus, pipelinesLiveStatus, voAccountsResult, voAuthStatusResult, voJobsResult, systemMetricsResult, stbCredentialsResult, voNormalizeHistoryResult, voManualQueueResult, voWorkerConfigResult, voAccountStatsResult, voReadinessResult, credentialCatalogResult, aiModelSelectorResult] = settledValues;
+  const [status, capabilities, runtimeReports, videoStatus, videoQueue, localApps, localAppsDashboard, localAppsActionReadiness, localAppsActionEnablementBacklog, localAppsActionStatus, schedulerStatus, schedulerJobs, sessions, repos, approvals, approvalStore, executionPlans, executionReadiness, mindPreviewPolicy, mindPreviews, orchestrators, pipelines, projects, platforms, probotDashboardParity, probotSessionsParity, probotLocalAppsParity, probotSchedulerParity, probotStudioParity, probotExternalAdminParity, probotDecommissionReadiness, probotExternalAdminSafeMetadata, probotFeatureParityMatrix, probotPhaseOutChecklist, postOrchestratorStatus, postOrchestratorOverview, postOrchestratorFlows, postOrchestratorDrafts, postOrchestratorEvents, postOrchestratorDryRun, postOrchestratorReviewQueue, postOrchestratorSchedulePreview, postOrchestratorAnalytics, postOrchestratorPipeline, postOrchestratorReadiness, postOrchestratorPlatformPolicies, postOrchestratorDecommissionReadiness, postOrchestratorOperatorGuidance, postOrchestratorManualExportPackage, postOrchestratorAcceptanceChecklist, postOrchestratorMigrationParity, postOrchestratorRoadmapCheckpoint, postOrchestratorContracts, postOrchestratorIntegrations, postOrchestratorRecovery, postOrchestratorQaStatus, stbStatus, videoOrchestratorStatus, voStudioProjectsResult, voStudioAccountsResult, voStudioPipelineProfilesResult, voStudioContentItemsResult, voStudioPackageResult, voStudioAnalyticsResult, videoOrchestratorIntake, videoAssetPlans, videoDesignPlans, videoVoiceoverPlans, videoVisualPlans, videoAssemblyPlans, videoMetadataPlans, videoPublishingPrepPlans, videoManualExportPackages, videoThumbnailDesignPlans, videoArchiveLoggingPlans, videoDesignProviderBoundaryPlans, videoDesignProviderCredentialIsolationPlans, videoDesignProviderPromptReviewPolicyPlans, videoArtifactSandboxProviderHandoffPlans, videoProviderOutputRedactionPolicyPlans, videoDesignProviderComplianceChecklistPlans, videoDesignProviderEnablementReadinessIndex, videoProviderIntegrationFinalPlanningCheckpoint, videoCredentialStoreImplementationBoundaryPlan, videoPromptReviewUxImplementationPlan, videoProviderAuditPersistenceBoundaryPlan, videoProviderWrapperSecurityReviewPlan, videoProviderImplementationPhaseStartGate, videoProviderImplementationReadinessDashboardSummary, videoProviderImplementationApprovalPacket, videoProviderApprovalPacketConsoleReviewSummary, videoProviderPlanningSurfaceIndex, videoCredentialReferenceScaffold, videoProviderRequestWrapperScaffold, videoProviderWrapperValidationHarness, videoProviderRequestEnvelopeScaffold, videoProviderResponseEnvelopeScaffold, videoProviderScaffoldingIntegrationSummary, videoProviderRequestWrapperInertShell, videoCredentialReferenceValidator, videoProviderResponseRedactionSkeleton, videoProviderAuditEventTypes, videoProviderDisabledOrchestrationFacade, videoProviderCapabilityPolicyEvaluator, videoProviderBlockedActionLedgerTypes, videoProviderDisabledOrchestrationIntegrationSummary, stbVideoMigrationStatus, stbVideoParityMatrix, stbVideoDualRunStatus, stbVideoDualRunEvidence, videoProductionGate, videoRenderExportPolicy, videoControlledDryRunDesign, videoProductionCutoverGate, videoReleaseCandidateReadiness, videoOperatorDecisionQueue, videoControlledExecutionPolicyBoundary, videoControlledExecutionReadinessIndex, videoRoadmapCheckpoint, videoOperatorReviewPacket, videoControlledExecutionApprovalPayloadSchema, videoPreviewCompletionIndex, videoControlledExecutionPreflightChecklist, videoControlledExecutionRiskRegister, videoControlledExecutionPreflightValidatorSchema, videoControlledExecutionPlanStub, videoControlledExecutionApprovalRequestDesign, videoControlledExecutionDisabledGate, videoControlledExecutionSecondApprovalPolicy, videoControlledExecutionOperatorIdentityProtocol, videoControlledExecutionRolePolicy, controlledDualRunRequestDesign, agents, actions, mindStewardReportDetail, agentRuns, agentEvents, agentCostSummary, recoveryItems, localAppsOperationalReadiness, localAppsOperatorSummary, localAppsOrchestratorDef, infraDokploy, infraTunnels, infraDomains, infraNewRelic, infraUmami, infraGoogleAds, infraStripe, infraStudio, voLiveStatus, pipelinesLiveStatus, voAccountsResult, voAuthStatusResult, voJobsResult, systemMetricsResult, stbCredentialsResult, voNormalizeHistoryResult, voManualQueueResult, voWorkerConfigResult, voAccountStatsResult, voReadinessResult, credentialCatalogResult, aiModelSelectorResult] = settledValues;
   let approvalDetail;
   const latestApprovalId = approvals.value?.approvals?.[0]?.id;
   if (latestApprovalId) {
@@ -1475,7 +6951,19 @@ async function loadBrainConsoleViewState(settings = DEFAULT_BRAIN_CONSOLE_SETTIN
       });
     }
   });
-  const connectionDiagnostics = await diagnoseBrainCoreConnection(baseUrl);
+  const connectionDiagnostics = status.value?.ok === true ? {
+    configuredUrl: baseUrl,
+    selectedUrl: baseUrl,
+    attempts: [
+      {
+        url: baseUrl,
+        ok: true,
+        status: 200
+      }
+    ],
+    allFailed: false,
+    recommendation: `Connected to ${baseUrl}`
+  } : await diagnoseBrainCoreConnection(baseUrl);
   return {
     status: status.value,
     capabilities: capabilities.value,
@@ -1542,6 +7030,12 @@ async function loadBrainConsoleViewState(settings = DEFAULT_BRAIN_CONSOLE_SETTIN
     postOrchestratorRecovery: postOrchestratorRecovery.value,
     stbStatus: stbStatus.value,
     videoOrchestratorStatus: videoOrchestratorStatus.value,
+    voStudioProjects: voStudioProjectsResult.value,
+    voStudioAccounts: voStudioAccountsResult.value,
+    voStudioPipelineProfiles: voStudioPipelineProfilesResult.value,
+    voStudioContentItems: voStudioContentItemsResult.value,
+    voStudioPackage: voStudioPackageResult.value,
+    voStudioAnalytics: voStudioAnalyticsResult.value,
     videoOrchestratorIntake: videoOrchestratorIntake.value,
     videoAssetPlans: videoAssetPlans.value,
     videoDesignPlans: videoDesignPlans.value,
@@ -1661,14 +7155,13 @@ var SECTION_TABS = [
   { id: "analytics", label: "Analytics", icon: "\u25A3" },
   { id: "stripe", label: "Stripe", icon: "$" },
   { id: "monitoring", label: "Monitoring", icon: "\u25CE" },
-  { id: "studio", label: "Studio", icon: "\u25C8" },
-  { id: "orchestrators", label: "Orchestrators", icon: "\u25B2" },
-  { id: "pipelines", label: "Pipelines", icon: "\u2192" },
+  { id: "orchestrators", label: "Orchestrators", icon: "\u25EB" },
+  { id: "pipelines", label: "Pipelines", icon: "\u25A4" },
+  { id: "video-orchestrator", label: "Video Orchestrator", icon: "\u25C8" },
   { id: "projects", label: "Projects", icon: "\u25C9" },
   { id: "reports", label: "Reports", icon: "\u{1F4CB}" },
   { id: "posts", label: "Posts", icon: "\u2726" },
   { id: "agents", label: "Agents", icon: "\u25C8" },
-  { id: "recovery", label: "Recovery", icon: "\u26A0" },
   { id: "accounts", label: "Accounts", icon: "\u{1F511}" }
 ];
 function metricsSeverityColor(pct) {
@@ -1780,21 +7273,28 @@ function renderSystemMetricsBanner(state) {
       </div>`;
   return `<div class="bc-metrics-banner">${cpuCard}${memCard}${gpuCard}${uptimeCard}${codex5Card}${codex7Card}</div>`;
 }
-function renderBrainConsoleView(container, state, settings, onRefresh) {
+function renderBrainConsoleView(container, state, settings, onRefresh, onBrainCoreRestart) {
   container.empty();
   container.addClass("brain-console");
   try {
     const snapshot = deriveDashboardSnapshot(state, settings.brainCoreUrl);
     const activeSection = state.activeSection ?? "overview";
     const shell = container.createDiv({ cls: "brain-console__shell" });
-    renderCommandBar(shell, state, activeSection, onRefresh);
+    renderCommandBar(shell, state, activeSection, onRefresh, onBrainCoreRestart);
     const metricsBanner = shell.createDiv({ cls: "bc-metrics-wrapper" });
     metricsBanner.innerHTML = renderSystemMetricsBanner(state);
     const scrollArea = shell.createDiv({ cls: "brain-console__scroll-area" });
     if (snapshot.connectionStatus === "offline") {
-      renderOfflineState(scrollArea, state.brainCoreUrl || settings.brainCoreUrl, state.statusError, state.endpointErrors);
+      renderOfflineState(
+        scrollArea,
+        state.brainCoreUrl || settings.brainCoreUrl,
+        state.statusError,
+        state.endpointErrors,
+        onRefresh,
+        onBrainCoreRestart
+      );
     } else {
-      renderActiveSectionContent(scrollArea, activeSection, state, snapshot, settings, onRefresh);
+      renderActiveSectionContent(scrollArea, activeSection, state, snapshot, settings, onRefresh, onBrainCoreRestart);
       renderDiagnosticsPanel(scrollArea, state);
     }
   } catch (error) {
@@ -1811,7 +7311,7 @@ function renderBrainConsoleView(container, state, settings, onRefresh) {
     }
   }
 }
-function renderCommandBar(shell, state, activeSection, onRefresh) {
+function renderCommandBar(shell, state, activeSection, onRefresh, onBrainCoreRestart) {
   const topRow = shell.createDiv({ cls: "bc-cmd-top" });
   const left = topRow.createDiv({ cls: "bc-cmd-left" });
   left.createEl("span", { cls: "bc-cmd-wordmark", text: "Brain Console" });
@@ -1822,9 +7322,31 @@ function renderCommandBar(shell, state, activeSection, onRefresh) {
   right.createEl("span", { cls: "bc-cmd-build", text: window.BRAIN_CONSOLE_BUILD_ID || "unknown" });
   const refreshBtn = right.createEl("button", { cls: "bc-cmd-action" });
   refreshBtn.setAttribute("type", "button");
-  refreshBtn.setAttribute("aria-label", "Manual refresh");
+  refreshBtn.setAttribute("aria-label", onBrainCoreRestart ? "Restart Brain Core" : "Manual refresh");
+  refreshBtn.setAttribute("title", onBrainCoreRestart ? "Restart Brain Core and re-verify the service" : "Manual refresh");
   refreshBtn.textContent = "\u21BB";
-  if (onRefresh) refreshBtn.addEventListener("click", () => onRefresh());
+  if (onBrainCoreRestart) {
+    refreshBtn.addEventListener("click", () => {
+      if (refreshBtn.disabled) return;
+      refreshBtn.disabled = true;
+      refreshBtn.setAttribute("aria-busy", "true");
+      const originalText = refreshBtn.textContent || "\u21BB";
+      refreshBtn.textContent = "\u2026";
+      void (async () => {
+        try {
+          await onBrainCoreRestart();
+        } catch (error) {
+          console.error("Brain Core restart button failed", error);
+        } finally {
+          refreshBtn.disabled = false;
+          refreshBtn.removeAttribute("aria-busy");
+          refreshBtn.textContent = originalText;
+        }
+      })();
+    });
+  } else if (onRefresh) {
+    refreshBtn.addEventListener("click", () => onRefresh());
+  }
   const nav = shell.createDiv({ cls: "bc-cmd-nav" });
   for (const tab of SECTION_TABS) {
     const btn = nav.createEl("button", { cls: "bc-cmd-tab" });
@@ -1835,7 +7357,7 @@ function renderCommandBar(shell, state, activeSection, onRefresh) {
     btn.createEl("span", { cls: "bc-cmd-tab-label", text: tab.label });
   }
 }
-function renderActiveSectionContent(shell, activeSection, state, snapshot, settings, onRefresh) {
+function renderActiveSectionContent(shell, activeSection, state, snapshot, settings, onRefresh, onBrainCoreRestart) {
   const content = shell.createDiv({ cls: "brain-console__section-content" });
   try {
     switch (activeSection) {
@@ -1860,14 +7382,14 @@ function renderActiveSectionContent(shell, activeSection, state, snapshot, setti
       case "monitoring":
         renderMonitoringSection(content, state);
         break;
-      case "studio":
-        renderStudioSection(content, state);
-        break;
       case "orchestrators":
         renderOrchestratorsSection(content, state, snapshot);
         break;
       case "pipelines":
         renderPipelinesSection(content, state, snapshot);
+        break;
+      case "video-orchestrator":
+        renderVideoOrchestratorSection(content, state);
         break;
       case "projects":
         renderProjectsSection(content, state, snapshot);
@@ -1880,9 +7402,6 @@ function renderActiveSectionContent(shell, activeSection, state, snapshot, setti
         break;
       case "agents":
         renderAgentsSection(content, state, snapshot);
-        break;
-      case "recovery":
-        renderRecoverySection(content, state, snapshot);
         break;
       case "accounts":
         renderAccountsSection(content, state, settings);
@@ -1909,14 +7428,8 @@ function renderSectionFallbackCard(sectionId, error) {
 function safeText(value, fallback = "Unavailable") {
   return typeof value === "string" ? value : fallback;
 }
-function safeNumber(value, fallback = 0) {
-  return typeof value === "number" ? value : fallback;
-}
 function safeArray(value) {
   return Array.isArray(value) ? value : [];
-}
-function safeCount(items) {
-  return Array.isArray(items) ? items.length : 0;
 }
 function renderOverviewSection(content, state, snapshot) {
   const kpiRow = content.createDiv({ cls: "bc-kpi-row" });
@@ -2018,10 +7531,6 @@ function renderOverviewSection(content, state, snapshot) {
 function renderAppsSection(content, state, snapshot, settings, onRefresh) {
   const page = content.createDiv({ cls: "brain-console__apps-page" });
   page.appendChild(renderLocalAppsCard(state, settings, onRefresh));
-  const lower = page.createDiv({ cls: "brain-console__apps-lower" });
-  renderCard(lower, "Local App Action Audit", renderLocalAppActionAuditCard(state));
-  renderCard(lower, "Brain Core", renderBrainCoreCard(state));
-  renderCard(lower, "Scheduler", renderSchedulerCard(state));
 }
 function renderSessionsSection(content, state) {
   const grid = content.createDiv({ cls: "brain-console__dashboard-grid" });
@@ -2037,7 +7546,7 @@ function renderSessionsSection(content, state) {
       const row = list.createDiv({ cls: "brain-console__list-row" });
       row.createEl("span", { cls: "brain-console__list-label", text: s.id ?? "unknown" });
       row.createEl("span", { cls: "brain-console__list-value", text: s.status ?? "" });
-      row.createEl("span", { cls: "brain-console__detail", text: s.startedAt ? formatRelativeTime(s.startedAt) : "" });
+      row.createEl("span", { cls: "brain-console__detail", text: s.startedAt ? formatRelativeTime2(s.startedAt) : "" });
     }
     if (sessions.length > 20) {
       sessionsCard.createEl("p", { cls: "brain-console__detail", text: `${sessions.length - 20} more session(s) not shown.` });
@@ -2054,13 +7563,13 @@ function renderSessionsSection(content, state) {
     renderCompactStatGrid(schedulerCard, [
       { label: "Scheduler", value: sched.running ? "Running" : "Stopped" },
       { label: "Jobs", value: String(jobs.length) },
-      { label: "Last run", value: sched.lastRunAt ? formatRelativeTime(sched.lastRunAt) : "never" }
+      { label: "Last run", value: sched.lastRunAt ? formatRelativeTime2(sched.lastRunAt) : "never" }
     ]);
     for (const job of jobs.slice(0, 10)) {
       const row = schedulerCard.createDiv({ cls: "brain-console__list-row" });
       row.createEl("span", { cls: "brain-console__list-label", text: job.id ?? "unknown" });
       row.createEl("span", { cls: "brain-console__list-value", text: job.schedule ?? "" });
-      row.createEl("span", { cls: "brain-console__detail", text: job.lastRunAt ? formatRelativeTime(job.lastRunAt) : "never" });
+      row.createEl("span", { cls: "brain-console__detail", text: job.lastRunAt ? formatRelativeTime2(job.lastRunAt) : "never" });
     }
   }
   renderCard(grid, `Scheduler (${jobs.length} jobs)`, schedulerCard);
@@ -2128,7 +7637,7 @@ function renderInfraSection(content, state) {
       row.createEl("span", { cls: "brain-console__list-label", text: d.name ?? "unknown" });
       row.createEl("span", { cls: "brain-console__list-value", text: d.status ?? "" });
       if (d.expiresAt) {
-        row.createEl("span", { cls: "brain-console__detail", text: `expires ${formatRelativeTime(d.expiresAt)}` });
+        row.createEl("span", { cls: "brain-console__detail", text: `expires ${formatRelativeTime2(d.expiresAt)}` });
       }
     }
     if (domains.length > 20) {
@@ -2185,7 +7694,7 @@ function renderAnalyticsSection(content, state) {
       { label: "% of target", value: ads.percentOfTarget != null ? `${ads.percentOfTarget.toFixed(1)}%` : "n/a" },
       { label: "Day", value: ads.dayOfMonth != null ? `${ads.dayOfMonth}/${ads.daysInMonth}` : "n/a" },
       { label: "Pending mutations", value: String(ads.pendingMutations ?? 0) },
-      { label: "Last sync", value: ads.lastSync ? formatRelativeTime(ads.lastSync) : "never" },
+      { label: "Last sync", value: ads.lastSync ? formatRelativeTime2(ads.lastSync) : "never" },
       { label: "Last metrics", value: ads.lastMetricsDate ?? "n/a" }
     ]);
     if (ads.mutationStatsByStatus) {
@@ -2273,7 +7782,7 @@ function renderMonitoringSection(content, state) {
     const card = document.createElement("div");
     card.addClass("brain-console__card-content");
     card.createEl("p", { text: nr?.error ?? "New Relic not configured." });
-    card.createEl("p", { cls: "brain-console__detail", text: "Set NEW_RELIC_USER_API_KEY and NEW_RELIC_ACCOUNT_ID env vars." });
+    card.createEl("p", { cls: "brain-console__detail", text: "Use ~/.config/newrelic/.env or set NEW_RELIC_USER_API_KEY and NEW_RELIC_ACCOUNT_ID in the process env." });
     renderCard(grid, "New Relic", card);
     return;
   }
@@ -2323,476 +7832,798 @@ function renderMonitoringSection(content, state) {
   }
   renderCard(grid, `Synthetic Monitors (${synthetics.length})`, syntheticsCard);
 }
-function renderVOLiveStatusCards(grid, state) {
-  const vol = state.voLiveStatus;
-  if (!vol) {
-    return;
-  }
-  if (!vol.ok) {
-    const errCard = document.createElement("div");
-    errCard.addClass("brain-console__card-content");
-    errCard.createEl("p", { cls: "brain-console__error-detail", text: vol.error ?? "VO DB unreachable." });
-    errCard.createEl("p", { cls: "brain-console__detail", text: "Brain Core cannot connect to the Video Orchestrator PostgreSQL database." });
-    renderCard(grid, "VO Live DB", errCard);
-    return;
-  }
-  if (vol.queueDepth) {
-    const qCard = document.createElement("div");
-    qCard.addClass("brain-console__card-content");
-    const qd = vol.queueDepth;
-    renderCompactStatGrid(qCard, [
-      { label: "Pending", value: String(qd.pending) },
-      { label: "Running", value: String(qd.running) },
-      { label: "Failed", value: String(qd.failed) },
-      { label: "Dead", value: String(qd.dead ?? 0) },
-      { label: "Active accounts", value: String(vol.activeAccounts ?? 0) }
-    ]);
-    if ((qd.dead ?? 0) > 0) {
-      qCard.createEl("p", { cls: "brain-console__warning", text: `${qd.dead} dead jobs \u2014 run: vo jobs to inspect, vo retry <id> to re-queue` });
-    }
-    if (vol.lastJobAt) {
-      qCard.createEl("p", { cls: "brain-console__detail", text: `Last job: ${formatRelativeTime(vol.lastJobAt)}` });
-    }
-    renderCard(grid, "VO Queue", qCard);
-  }
-  if (vol.accountsByPlatform && Object.keys(vol.accountsByPlatform).length > 0) {
-    const apCard = document.createElement("div");
-    apCard.addClass("brain-console__card-content");
-    const apList = apCard.createDiv({ cls: "brain-console__list" });
-    for (const [platform, count] of Object.entries(vol.accountsByPlatform)) {
-      const row = apList.createDiv({ cls: "brain-console__list-row" });
-      row.createEl("span", { cls: "brain-console__list-label", text: platform });
-      row.createEl("span", { cls: "brain-console__list-value", text: `${count} account${count !== 1 ? "s" : ""}` });
-    }
-    renderCard(grid, "VO Accounts by Platform", apCard);
-  }
-  if (vol.recentPosts && vol.recentPosts.length > 0) {
-    const rpCard = document.createElement("div");
-    rpCard.addClass("brain-console__card-content");
-    const rpList = rpCard.createDiv({ cls: "brain-console__list" });
-    for (const post of vol.recentPosts.slice(0, 3)) {
-      const row = rpList.createDiv({ cls: "brain-console__list-row" });
-      row.createEl("span", { cls: "brain-console__list-label", text: `${post.accountHandle} (${post.platform})` });
-      row.createEl("span", { cls: "brain-console__detail", text: post.title.slice(0, 40) });
-      if (post.postedAt) {
-        row.createEl("span", { cls: "brain-console__list-value", text: formatRelativeTime(post.postedAt) });
-      }
-    }
-    renderCard(grid, "VO Recent Posts", rpCard);
-  }
-  if (vol.analyticsSnapshot) {
-    const asCard = document.createElement("div");
-    asCard.addClass("brain-console__card-content");
-    const snap = vol.analyticsSnapshot;
-    renderCompactStatGrid(asCard, [
-      { label: "Total views (7d)", value: snap.totalViews7d.toLocaleString() },
-      { label: "Avg engagement (7d)", value: `${(snap.avgEngagement7d * 100).toFixed(1)}%` },
-      { label: "Top platform", value: snap.topPlatform || "\u2014" }
-    ]);
-    renderCard(grid, "VO Analytics (7d)", asCard);
-  }
-}
-function renderStudioSection(content, state) {
-  const grid = content.createDiv({ cls: "brain-console__dashboard-grid" });
-  const studio = state.infraStudio;
-  if (!studio || studio.status === "not-configured") {
-    const card = document.createElement("div");
-    card.addClass("brain-console__card-content");
-    card.createEl("p", { text: studio?.error ?? "Studio data not configured." });
-    card.createEl("p", { cls: "brain-console__detail", text: "Viral Flow config expected at ~/.config/viralflow/. Video Orchestrator runtime at runtime/local/video-orchestrator/latest.json." });
-    renderCard(grid, "Studio", card);
-    renderVOLiveStatusCards(grid, state);
-    return;
-  }
-  if (studio.status === "error") {
-    const card = document.createElement("div");
-    card.addClass("brain-console__card-content");
-    card.createEl("p", { cls: "brain-console__error-detail", text: studio.error ?? "Studio error." });
-    renderCard(grid, "Studio", card);
-    renderVOLiveStatusCards(grid, state);
-    return;
-  }
-  const vf = studio.viralFlow;
-  if (vf) {
-    const vfCard = document.createElement("div");
-    vfCard.addClass("brain-console__card-content");
-    renderCompactStatGrid(vfCard, [
-      { label: "Accounts", value: String(vf.accountCount) },
-      { label: "Active topics", value: String(vf.activeTopicCount) },
-      { label: "Scripts", value: String(vf.recentScripts.length) },
-      { label: "Total videos", value: String(vf.performance.totalVideos) },
-      { label: "Total views", value: vf.performance.totalViews.toLocaleString() },
-      { label: "Avg engagement", value: `${(vf.performance.avgEngagementRate * 100).toFixed(1)}%` }
-    ]);
-    if (vf.activeBatch) {
-      const b = vf.activeBatch;
-      const batchDiv = vfCard.createDiv({ cls: "brain-console__list" });
-      batchDiv.createEl("div", { cls: "brain-console__list-label", text: `Active batch: ${b.topic} \u2014 stage: ${b.stage}` });
-      for (const [stageName, stageData] of Object.entries(b.stages)) {
-        const row = batchDiv.createDiv({ cls: "brain-console__list-row" });
-        const icon = stageData.completed ? "\u2713" : stageData.inProgress ? "\u25CF" : "\u25CB";
-        row.createEl("span", { cls: "brain-console__list-label", text: `${icon} ${stageName}` });
-      }
-      if (b.errors.length > 0) {
-        vfCard.createEl("p", { cls: "brain-console__error-detail", text: `Batch errors: ${b.errors.slice(0, 2).join(", ")}` });
-      }
-    }
-    renderCard(grid, "Viral Flow", vfCard);
-    if (vf.accounts.length > 0) {
-      const accCard = document.createElement("div");
-      accCard.addClass("brain-console__card-content");
-      const accList = accCard.createDiv({ cls: "brain-console__list" });
-      for (const a of vf.accounts) {
-        const row = accList.createDiv({ cls: "brain-console__list-row" });
-        row.createEl("span", { cls: "brain-console__list-label", text: `${a.platform}: ${a.name}` });
-        row.createEl("span", { cls: "brain-console__list-value", text: a.status });
-        if (a.lastPost) {
-          row.createEl("span", { cls: "brain-console__detail", text: formatRelativeTime(a.lastPost) });
-        }
-      }
-      renderCard(grid, `Accounts (${vf.accounts.length})`, accCard);
-    }
-    if (vf.recentTopics.length > 0) {
-      const topicsCard = document.createElement("div");
-      topicsCard.addClass("brain-console__card-content");
-      const tList = topicsCard.createDiv({ cls: "brain-console__list" });
-      for (const t of vf.recentTopics.slice(0, 10)) {
-        const row = tList.createDiv({ cls: "brain-console__list-row" });
-        row.createEl("span", { cls: "brain-console__list-label", text: t.title.slice(0, 50) });
-        row.createEl("span", { cls: "brain-console__list-value", text: `${t.trendScore}% trend` });
-      }
-      renderCard(grid, `Recent Topics (${vf.recentTopics.length})`, topicsCard);
-    }
-    if (vf.performance.topVideos.length > 0) {
-      const tvCard = document.createElement("div");
-      tvCard.addClass("brain-console__card-content");
-      const tvList = tvCard.createDiv({ cls: "brain-console__list" });
-      for (const v of vf.performance.topVideos.slice(0, 10)) {
-        const row = tvList.createDiv({ cls: "brain-console__list-row" });
-        row.createEl("span", { cls: "brain-console__list-label", text: v.title.slice(0, 40) });
-        row.createEl("span", { cls: "brain-console__list-value", text: `${v.views.toLocaleString()} views` });
-        row.createEl("span", { cls: "brain-console__detail", text: v.platform });
-      }
-      renderCard(grid, "Top Videos", tvCard);
-    }
-  }
-  const vo = studio.videoOrchestrator;
-  if (vo) {
-    const voCard = document.createElement("div");
-    voCard.addClass("brain-console__card-content");
-    if (vo.error) {
-      voCard.createEl("p", { cls: "brain-console__error-detail", text: vo.error });
-    }
-    renderCompactStatGrid(voCard, [
-      { label: "Database", value: vo.databaseStatus },
-      { label: "Total videos", value: String(vo.totalVideos) },
-      { label: "Completed packages", value: String(vo.completedPackages) },
-      { label: "Completion rate", value: `${vo.completionRate}%` },
-      { label: "Running jobs", value: String(vo.runningJobs) },
-      { label: "Pending jobs", value: String(vo.pendingJobs) },
-      { label: "Failed (7d)", value: String(vo.failedJobs7d) },
-      { label: "Accounts", value: String(vo.totalAccounts) }
-    ]);
-    renderCard(grid, "Video Orchestrator Pipeline", voCard);
-    if (vo.accountSummary && vo.accountSummary.length > 0) {
-      const acctCard = document.createElement("div");
-      acctCard.addClass("brain-console__card-content");
-      const table = acctCard.createEl("table", { cls: "brain-console__compact-table" });
-      const thead = table.createEl("thead");
-      const hrow = thead.createEl("tr");
-      hrow.createEl("th", { text: "Platform" });
-      hrow.createEl("th", { text: "Accounts" });
-      hrow.createEl("th", { text: "Posted today" });
-      const tbody = table.createEl("tbody");
-      for (const entry of vo.accountSummary) {
-        const row = tbody.createEl("tr");
-        row.createEl("td", { text: entry.platform });
-        row.createEl("td", { text: String(entry.count) });
-        row.createEl("td", { text: String(entry.postedToday) });
-      }
-      renderCard(grid, `Accounts by Platform (${vo.accountSummary.length})`, acctCard);
-    }
-  }
-  const rd = state.voReadiness;
-  if (rd?.ok) {
-    const rdCard = document.createElement("div");
-    rdCard.addClass("brain-console__card-content");
-    const statusEmoji = rd.status === "ready" ? "\u{1F7E2}" : rd.status === "partial" ? "\u{1F7E1}" : "\u{1F534}";
-    renderCompactStatGrid(rdCard, [
-      { label: "Status", value: `${statusEmoji} ${rd.status}` },
-      { label: "Readiness", value: `${rd.readinessScore}%` },
-      { label: "Checks passed", value: `${rd.passCount}/${rd.checks.length}` },
-      { label: "Failed", value: String(rd.failCount) },
-      { label: "Warnings", value: String(rd.warnCount) }
-    ]);
-    const checkList = rdCard.createDiv({ cls: "brain-console__list" });
-    for (const check of rd.checks) {
-      const row = checkList.createDiv({ cls: "brain-console__list-row" });
-      const icon = check.status === "pass" ? "\u2713" : check.status === "fail" ? "\u2717" : check.status === "warn" ? "\u26A0" : "?";
-      row.createEl("span", { cls: "brain-console__list-label", text: `${icon} ${check.label}` });
-      const badge = row.createEl("span", { cls: "brain-console__badge", text: check.status });
-      badge.addClass(
-        check.status === "pass" ? "brain-console__badge--ok" : check.status === "fail" ? "brain-console__badge--danger" : check.status === "warn" ? "brain-console__badge--warn" : "brain-console__badge--muted"
-      );
-      if (check.status !== "pass") {
-        rdCard.createEl("p", { cls: "brain-console__detail", text: `${check.label}: ${check.detail}` });
-      }
-    }
-    const rdTitle = `VO System Readiness \u2014 ${rd.readinessScore}% (${rd.status})`;
-    renderCard(grid, rdTitle, rdCard);
-  }
-  renderVOLiveStatusCards(grid, state);
-  const jobs = state.voJobs;
-  if (jobs?.ok && jobs.jobs.length > 0) {
-    const jobsContent = document.createElement("div");
-    jobsContent.addClass("brain-console__card-content");
-    const table = jobsContent.createEl("table", { cls: "brain-console__compact-table" });
-    const thead = table.createEl("thead");
-    const hrow = thead.createEl("tr");
-    hrow.createEl("th", { text: "Type" });
-    hrow.createEl("th", { text: "Platform" });
-    hrow.createEl("th", { text: "Account" });
-    hrow.createEl("th", { text: "Status" });
-    hrow.createEl("th", { text: "Created" });
-    hrow.createEl("th", { text: "" });
-    const tbody = table.createEl("tbody");
-    const instructionsPanel = jobsContent.createDiv({ cls: "brain-console__detail" });
-    for (const job of jobs.jobs.slice(0, 10)) {
-      const row = tbody.createEl("tr");
-      row.createEl("td", { text: job.jobType });
-      row.createEl("td", { text: job.platform ?? "\u2014" });
-      const handleText = job.accountHandle ? job.accountHandle.slice(0, 20) : "\u2014";
-      row.createEl("td", { text: handleText });
-      const statusCell = row.createEl("td");
-      const statusBadge = statusCell.createEl("span", { cls: "brain-console__badge", text: job.jobStatus });
-      if (job.jobStatus === "succeeded") statusBadge.addClass("brain-console__badge--ok");
-      else if (job.jobStatus === "failed" || job.jobStatus === "dead") statusBadge.addClass("brain-console__badge--danger");
-      else if (job.jobStatus === "running") statusBadge.addClass("brain-console__badge--warn");
-      else statusBadge.addClass("brain-console__badge--muted");
-      row.createEl("td", { text: formatRelativeTime(job.createdAt) });
-      const actionCell = row.createEl("td");
-      const isManualPosted = job.pipelineState === "posted" && (job.adapterMode === null || job.adapterMode === "manual");
-      if (isManualPosted) {
-        const link = actionCell.createEl("button", { cls: "brain-console__link-button", text: "View instructions" });
-        link.addEventListener("click", async () => {
-          instructionsPanel.empty();
-          instructionsPanel.setText("Loading posting instructions...");
-          const result = await readBrainCoreVOPostingInstructions(state.brainCoreUrl ?? "", job.jobId);
-          instructionsPanel.empty();
-          if (!result.value?.exists) {
-            instructionsPanel.setText(result.value?.error ?? "Posting instructions are not available for this job.");
-            return;
-          }
-          instructionsPanel.createEl("div", { text: `${result.value.account ?? "Unknown account"} \xB7 ${result.value.platform ?? "unknown platform"}` });
-          instructionsPanel.createEl("pre", { text: result.value.content });
-        });
-      } else {
-        actionCell.createEl("span", { text: "\u2014" });
-      }
-    }
-    renderCard(grid, `VO Recent Jobs (${Math.min(jobs.jobs.length, 10)} of ${jobs.totalCount})`, jobsContent);
-  }
-  const wc = state.voWorkerConfig;
-  if (wc) {
-    const wcCard = document.createElement("div");
-    wcCard.addClass("brain-console__card-content");
-    if (!wc.ok || !wc.config) {
-      wcCard.createEl("p", { cls: "brain-console__error-detail", text: wc.error ?? "Worker config unavailable." });
-    } else {
-      const cfg = wc.config;
-      const statusRows = [
-        { label: "n8n webhook", value: cfg.n8nWebhookConfigured ? cfg.n8nReachable === true ? "reachable" : cfg.n8nReachable === false ? "unreachable" : "configured (untested)" : "not configured", ok: cfg.n8nWebhookConfigured && cfg.n8nReachable !== false },
-        { label: "CF Access", value: cfg.cfAccessConfigured ? "configured" : "missing", ok: cfg.cfAccessConfigured },
-        { label: "YouTube OAuth", value: cfg.youtubeOauthConfigured ? `${cfg.youtubeOauthAccounts.join(", ")}` : "not configured", ok: cfg.youtubeOauthConfigured }
-      ];
-      const statusList = wcCard.createDiv({ cls: "brain-console__list" });
-      for (const s of statusRows) {
-        const row = statusList.createDiv({ cls: "brain-console__list-row" });
-        row.createEl("span", { cls: "brain-console__list-label", text: s.label });
-        const badge = row.createEl("span", { cls: "brain-console__badge", text: s.value });
-        badge.addClass(s.ok ? "brain-console__badge--ok" : "brain-console__badge--danger");
-      }
-      if (wc.manualActionsRequired.length > 0) {
-        wcCard.createEl("p", { cls: "brain-console__detail", text: `${wc.manualActionsRequired.length} manual action${wc.manualActionsRequired.length !== 1 ? "s" : ""} required:` });
-        const actionList = wcCard.createDiv({ cls: "brain-console__list" });
-        for (const action of wc.manualActionsRequired) {
-          actionList.createEl("p", { cls: "brain-console__warning", text: action });
-        }
-      }
-    }
-    const wcTitle = wc.config && wc.manualActionsRequired.length > 0 ? `VO Worker Config (${wc.manualActionsRequired.length} action${wc.manualActionsRequired.length !== 1 ? "s" : ""} needed)` : "VO Worker Config";
-    renderCard(grid, wcTitle, wcCard);
-  }
-  const as = state.voAccountStats;
-  if (as?.ok && as.stats.length > 0) {
-    const asCard = document.createElement("div");
-    asCard.addClass("brain-console__card-content");
-    const asTable = asCard.createEl("table", { cls: "brain-console__compact-table" });
-    const asHead = asTable.createEl("thead").createEl("tr");
-    asHead.createEl("th", { text: "Platform" });
-    asHead.createEl("th", { text: "Account" });
-    asHead.createEl("th", { text: "Posts (30d)" });
-    asHead.createEl("th", { text: "Success" });
-    asHead.createEl("th", { text: "Mode" });
-    asHead.createEl("th", { text: "Last post" });
-    const asBody = asTable.createEl("tbody");
-    for (const stat of as.stats) {
-      const row = asBody.createEl("tr");
-      row.createEl("td", { text: stat.platform });
-      row.createEl("td", { text: stat.accountHandle.slice(0, 22) });
-      row.createEl("td", { text: String(stat.totalJobs30d) });
-      const rateCell = row.createEl("td");
-      if (stat.successRate30d !== null) {
-        const badge = rateCell.createEl("span", { cls: "brain-console__badge", text: `${stat.successRate30d}%` });
-        badge.addClass(stat.successRate30d >= 80 ? "brain-console__badge--ok" : stat.successRate30d >= 50 ? "brain-console__badge--warn" : "brain-console__badge--danger");
-      } else {
-        rateCell.createEl("span", { cls: "brain-console__badge brain-console__badge--muted", text: "\u2014" });
-      }
-      const modeCell = row.createEl("td");
-      if (stat.lastAdapterMode) {
-        const modeBadge = modeCell.createEl("span", { cls: "brain-console__badge", text: stat.lastAdapterMode });
-        modeBadge.addClass(stat.lastAdapterMode === "auto" ? "brain-console__badge--ok" : "brain-console__badge--warn");
-      } else {
-        modeCell.createEl("span", { cls: "brain-console__badge brain-console__badge--muted", text: "no posts" });
-      }
-      row.createEl("td", { text: stat.lastSucceededAt ? formatRelativeTime(stat.lastSucceededAt) : "\u2014" });
-    }
-    renderCard(grid, `VO Account Stats (30d) \u2014 ${as.stats.length} accounts`, asCard);
-  }
-  const nh = state.voNormalizeHistory;
-  if (nh?.ok && nh.jobs.length > 0) {
-    const nhCard = document.createElement("div");
-    nhCard.addClass("brain-console__card-content");
-    const nhTable = nhCard.createEl("table", { cls: "brain-console__compact-table" });
-    const nhHead = nhTable.createEl("thead").createEl("tr");
-    nhHead.createEl("th", { text: "Job" });
-    nhHead.createEl("th", { text: "Status" });
-    nhHead.createEl("th", { text: "Formats" });
-    nhHead.createEl("th", { text: "Files" });
-    nhHead.createEl("th", { text: "Created" });
-    const nhBody = nhTable.createEl("tbody");
-    for (const job of nh.jobs.slice(0, 8)) {
-      const row = nhBody.createEl("tr");
-      row.createEl("td", { text: job.jobId.slice(0, 8) });
-      const sc = row.createEl("td");
-      const sb = sc.createEl("span", { cls: "brain-console__badge", text: job.status });
-      if (job.status === "succeeded") sb.addClass("brain-console__badge--ok");
-      else if (job.status === "failed") sb.addClass("brain-console__badge--danger");
-      else if (job.status === "running") sb.addClass("brain-console__badge--warn");
-      else sb.addClass("brain-console__badge--muted");
-      row.createEl("td", { text: job.formats.length > 0 ? job.formats.join(", ") : "\u2014" });
-      row.createEl("td", { text: String(job.outputFiles.length) });
-      row.createEl("td", { text: formatRelativeTime(job.createdAt) });
-    }
-    renderCard(grid, `VO Normalize History (${Math.min(nh.jobs.length, 8)} of ${nh.totalCount})`, nhCard);
-  } else if (nh && !nh.ok) {
-    const nhErrCard = document.createElement("div");
-    nhErrCard.addClass("brain-console__card-content");
-    nhErrCard.createEl("p", { cls: "brain-console__error-detail", text: nh.error ?? "Normalize history unavailable." });
-    renderCard(grid, "VO Normalize History", nhErrCard);
-  }
-  const mq = state.voManualQueue;
-  if (mq?.ok && mq.jobs.length > 0) {
-    const mqCard = document.createElement("div");
-    mqCard.addClass("brain-console__card-content");
-    const mqTable = mqCard.createEl("table", { cls: "brain-console__compact-table" });
-    const mqHead = mqTable.createEl("thead").createEl("tr");
-    mqHead.createEl("th", { text: "Platform" });
-    mqHead.createEl("th", { text: "Account" });
-    mqHead.createEl("th", { text: "Title" });
-    mqHead.createEl("th", { text: "Instructions" });
-    mqHead.createEl("th", { text: "Created" });
-    const mqBody = mqTable.createEl("tbody");
-    const mqInstructionsPanel = mqCard.createDiv({ cls: "brain-console__detail" });
-    for (const job of mq.jobs.slice(0, 10)) {
-      const row = mqBody.createEl("tr");
-      row.createEl("td", { text: job.platform });
-      row.createEl("td", { text: job.accountHandle.slice(0, 20) });
-      row.createEl("td", { text: job.title.slice(0, 35) });
-      const instrCell = row.createEl("td");
-      if (job.hasInstructions) {
-        const btn = instrCell.createEl("button", { cls: "brain-console__link-button", text: "View" });
-        btn.addEventListener("click", async () => {
-          mqInstructionsPanel.empty();
-          mqInstructionsPanel.setText("Loading posting instructions...");
-          const result = await readBrainCoreVOPostingInstructions(state.brainCoreUrl ?? "", job.jobId);
-          mqInstructionsPanel.empty();
-          if (!result.value?.exists) {
-            mqInstructionsPanel.setText(result.value?.error ?? "Posting instructions not available.");
-            return;
-          }
-          mqInstructionsPanel.createEl("div", { text: `${result.value.account ?? "Unknown"} \xB7 ${result.value.platform ?? "unknown"}` });
-          mqInstructionsPanel.createEl("pre", { text: result.value.content });
-        });
-      } else {
-        instrCell.createEl("span", { cls: "brain-console__badge brain-console__badge--muted", text: "missing" });
-      }
-      row.createEl("td", { text: formatRelativeTime(job.createdAt) });
-    }
-    renderCard(grid, `VO Manual Posting Queue (${Math.min(mq.jobs.length, 10)} of ${mq.totalCount})`, mqCard);
-  }
-}
-function renderLocalAppActionAuditCard(state) {
-  const container = document.createElement("div");
-  container.addClass("brain-console__card-content");
-  const audit = state.localAppsActionStatus?.audit;
-  const recentCount = state.localAppsActionStatus?.recentResults?.length ?? 0;
-  const inFlightCount = state.localAppsActionStatus?.inFlight?.length ?? 0;
-  const managedProcesses = state.localAppsActionStatus?.managedProcesses ?? [];
-  if (!audit) {
-    container.createEl("p", { text: "Local app action audit status is not available yet." });
-    container.createEl("p", { cls: "brain-console__detail", text: "Manual refresh after Brain Core is online to load audit persistence state." });
-    return container;
-  }
-  const status = container.createEl("p");
-  status.createEl("strong", { text: "Audit status: " });
-  status.appendText(audit.status);
-  const rows = [
-    ["Audit path", audit.path],
-    ["Persisted results", String(audit.persistedResultCount ?? 0)],
-    ["Recent results", String(recentCount)],
-    ["In-flight actions", String(inFlightCount)],
-    ["Managed processes", String(managedProcesses.length)],
-    ["Last persisted", audit.lastPersistedAt ? formatRelativeTime(audit.lastPersistedAt) : "never"]
-  ];
-  for (const [label, value] of rows) {
-    const row = container.createEl("p", { cls: "brain-console__detail" });
-    row.createEl("strong", { text: `${label}: ` });
-    row.appendText(value);
-  }
-  if (audit.lastError) {
-    container.createEl("p", { cls: "brain-console__error-detail", text: `Audit warning: ${audit.lastError}` });
-  }
-  if (managedProcesses.length > 0) {
-    const list = container.createDiv({ cls: "brain-console__managed-process-list" });
-    list.createEl("div", { cls: "brain-console__managed-process-list-label", text: "Active Brain Core-managed processes" });
-    for (const process of managedProcesses.slice(0, 5)) {
-      const row = list.createDiv({ cls: "brain-console__managed-process-row" });
-      row.createEl("span", { cls: "brain-console__managed-process-name", text: process.appId });
-      row.createEl("span", { cls: "brain-console__managed-process-meta", text: `pid ${process.pid} \xB7 ${process.commandLabel}` });
-      row.createEl("span", { cls: "brain-console__managed-process-meta", text: formatRelativeTime(process.startedAt) });
-      row.title = `${process.appId} started by Brain Core from ${process.cwdSummary}`;
-    }
-    if (managedProcesses.length > 5) {
-      list.createEl("div", { cls: "brain-console__managed-process-more", text: `${managedProcesses.length - 5} more managed process(es)` });
-    }
-  }
-  container.createEl("p", {
-    cls: "brain-console__detail",
-    text: "Brain Console reads this status from Brain Core. The plugin does not execute shell commands or write audit files."
+function renderVideoOrchestratorSection(content, state) {
+  const container = content.createDiv({ cls: "vo-studio-container" });
+  const voShell = new VOShell(container, {
+    projects: state.voStudioProjects?.items,
+    accounts: state.voStudioAccounts?.items,
+    pipelineProfiles: state.voStudioPipelineProfiles?.items,
+    contentItems: state.voStudioContentItems?.items,
+    selector: state.aiModelSelectorStatus,
+    analytics: state.voStudioAnalytics,
+    accountStats: state.voAccountStats
   });
-  return container;
 }
-function renderOrchestratorsSection(content, state, snapshot) {
-  const grid = content.createDiv({ cls: "brain-console__dashboard-grid" });
-  renderCard(grid, "Orchestrators", renderOrchestratorsCard(state, snapshot));
-  const videoOrch = state.orchestrators?.find((o) => o.id === "video-orchestrator");
-  if (videoOrch) {
-    renderCard(grid, "Video Orchestrator", renderVideoOrchestratorCard(state, snapshot));
+function renderVOContextBar(parent, state) {
+  const project = state.voStudioProjects?.items?.[0];
+  const profile = state.voStudioPipelineProfiles?.items?.find((item) => item.id === project?.defaultPipelineProfileId) ?? state.voStudioPipelineProfiles?.items?.[0];
+  const accountCount = state.voStudioAccounts?.items?.length ?? 0;
+  const targetText = profile?.targetPlatforms?.join(", ") ?? "not configured";
+  const bar = parent.createDiv({ cls: "bc-vo-context-bar" });
+  [
+    ["Project", project?.name ?? "Unavailable"],
+    ["Account", accountCount > 0 ? `${accountCount} configured` : "Unavailable"],
+    ["Platform targets", targetText],
+    ["Pipeline profile", profile?.name ?? "Unavailable"],
+    ["Date range", "7d read-only"]
+  ].forEach(([label, value]) => {
+    const item = bar.createDiv({ cls: "bc-vo-context-item" });
+    item.createEl("span", { cls: "bc-vo-context-label", text: label });
+    item.createEl("span", { cls: "bc-vo-context-value", text: value });
+  });
+}
+function renderVOPipelineProfileCard(state) {
+  const card = document.createElement("div");
+  card.addClass("brain-console__card-content");
+  const profile = state.voStudioPipelineProfiles?.items?.[0];
+  if (!profile) {
+    card.createEl("p", { cls: "brain-console__empty", text: "No pipeline profile available." });
+    return card;
   }
+  const stageMap = card.createDiv({ cls: "bc-vo-stage-map" });
+  for (const stage of profile.enabledStages) {
+    const stageEl = stageMap.createDiv({ cls: `bc-vo-stage bc-vo-stage--${stage.status}` });
+    stageEl.createEl("span", { text: stage.label });
+  }
+  renderCompactStatGrid(card, [
+    { label: "Profile", value: profile.name },
+    { label: "Targets", value: profile.targetPlatforms.join(", ") },
+    { label: "Stages", value: String(profile.enabledStages.length) },
+    { label: "Fallback", value: "manual package" }
+  ]);
+  card.createEl("p", { cls: "brain-console__detail", text: profile.fallbackBehavior });
+  return card;
+}
+function renderVOAccountsRegistryCard(state) {
+  const card = document.createElement("div");
+  card.addClass("brain-console__card-content");
+  const list = card.createDiv({ cls: "brain-console__list" });
+  for (const account of state.voStudioAccounts?.items ?? []) {
+    const row = list.createDiv({ cls: "brain-console__list-row" });
+    row.createEl("span", { cls: "brain-console__list-label", text: `${account.handle} (${account.platform})` });
+    row.createEl("span", { cls: "brain-console__list-value", text: account.adapterStatus });
+    row.createEl("span", { cls: "brain-console__detail", text: `${account.credentialState} \xB7 quota ${account.quotaState}` });
+  }
+  if ((state.voStudioAccounts?.items?.length ?? 0) === 0) {
+    card.createEl("p", { cls: "brain-console__empty", text: "No normalized VO accounts available." });
+  }
+  return card;
+}
+var _orchResearchState = { url: "", focus: "", result: null, error: null, running: false, phase: "idle", startedAt: 0, timerInterval: null };
+var RESEARCH_HISTORY_KEY = "bc-orch-research-history";
+function bcOrchLoadHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(RESEARCH_HISTORY_KEY) ?? "[]");
+  } catch {
+    return [];
+  }
+}
+function bcOrchSaveToHistory(result) {
+  const entries = bcOrchLoadHistory();
+  const entry = {
+    title: result.title || result.url || "Untitled",
+    url: result.url ?? "",
+    savedAt: Date.now(),
+    result
+  };
+  localStorage.setItem(RESEARCH_HISTORY_KEY, JSON.stringify([entry, ...entries].slice(0, 5)));
+}
+function renderOrchestratorsSection(content, state, _snapshot) {
+  const styleId = "bc-orch-styles";
+  if (!document.getElementById(styleId)) {
+    const styleEl = document.createElement("style");
+    styleEl.id = styleId;
+    styleEl.textContent = `
+.bc-orch-section { display: flex; gap: 0; background: #1a1a1a; min-height: 400px; position: relative; }
+.bc-orch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px; width: 100%; transition: width 0.2s ease; box-sizing: border-box; }
+.bc-orch-section--drawer-open .bc-orch-grid { width: 35%; }
+.bc-orch-drawer-container { width: 0; overflow: hidden; transition: width 0.2s ease; background: #242424; border-left: 1px solid #3a3a3a; display: flex; flex-direction: column; }
+.bc-orch-section--drawer-open .bc-orch-drawer-container { width: 65%; }
+.bc-orch-drawer { display: none; flex-direction: column; height: 100%; overflow: hidden; }
+.bc-orch-drawer--active { display: flex; }
+.bc-orch-card { background: #2a2a2a; border: 1px solid #3a3a3a; border-radius: 6px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-family: monospace; transition: border-color 0.15s; }
+.bc-orch-card:hover { border-color: #4a4a4a; }
+.bc-orch-card-header { display: flex; align-items: center; gap: 6px; }
+.bc-orch-card-title { font-size: 11px; font-weight: bold; color: #fff; letter-spacing: 0.5px; }
+.bc-orch-card-stat { font-size: 11px; color: #888; }
+.bc-orch-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 6px; }
+.bc-orch-health { display: flex; gap: 3px; align-items: center; }
+.bc-orch-dot { width: 8px; height: 8px; border-radius: 50%; background: #555; display: inline-block; }
+.bc-orch-dot--running { background: #3b82f6; animation: bc-orch-pulse 1.5s ease-in-out infinite; }
+.bc-orch-dot--done { background: #2ecc71; }
+.bc-orch-dot--partial { background: #e67e22; }
+.bc-orch-dot--error { background: #e74c3c; }
+@keyframes bc-orch-pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
+.bc-orch-open-btn { font-size: 10px; color: #888; background: none; border: 1px solid #3a3a3a; border-radius: 3px; padding: 2px 8px; cursor: pointer; font-family: monospace; }
+.bc-orch-open-btn:hover { color: #fff; border-color: #888; }
+.bc-orch-open-btn--active { color: #3b82f6; border-color: #3b82f6; }
+.bc-orch-drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid #3a3a3a; flex-shrink: 0; }
+.bc-orch-drawer-title { font-size: 12px; font-weight: bold; color: #fff; font-family: monospace; }
+.bc-orch-drawer-close { background: none; border: none; color: #666; cursor: pointer; font-size: 16px; line-height: 1; padding: 0 4px; }
+.bc-orch-drawer-close:hover { color: #fff; }
+.bc-orch-drawer-body { padding: 14px; flex: 1; overflow-y: auto; font-family: monospace; font-size: 11px; color: #888; }
+.bc-orch-split { display: flex; gap: 0; height: 100%; overflow: hidden; }
+.bc-orch-split-left { padding: 14px; border-right: 1px solid #3a3a3a; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; flex-shrink: 0; }
+.bc-orch-split-right { padding: 14px; flex: 1; overflow-y: auto; }
+.bc-orch-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+.bc-orch-input { width: 100%; background: #1a1a1a; border: 1px solid #3a3a3a; border-radius: 3px; color: #fff; font-family: monospace; font-size: 11px; padding: 6px 8px; box-sizing: border-box; resize: vertical; }
+.bc-orch-input:focus { outline: none; border-color: #3b82f6; }
+.bc-orch-btn { font-family: monospace; font-size: 11px; padding: 5px 12px; border-radius: 3px; cursor: pointer; border: 1px solid #3a3a3a; background: #333; color: #fff; }
+.bc-orch-btn:hover { background: #3a3a3a; }
+.bc-orch-btn--primary { background: #1d4ed8; border-color: #2563eb; }
+.bc-orch-btn--primary:hover { background: #2563eb; }
+.bc-orch-btn:disabled { opacity: 0.4; cursor: default; }
+.bc-orch-output-empty { color: #555; font-style: italic; padding: 20px 0; }
+.bc-orch-phase-grid { width: 100%; border-collapse: collapse; font-size: 10px; }
+.bc-orch-phase-grid th { color: #666; font-weight: normal; padding: 4px 6px; text-align: center; border-bottom: 1px solid #3a3a3a; white-space: nowrap; }
+.bc-orch-phase-grid td { padding: 4px 6px; text-align: center; border-bottom: 1px solid #2a2a2a; color: #888; }
+.bc-orch-badge { display: inline-block; background: #333; border: 1px solid #3a3a3a; border-radius: 3px; padding: 2px 6px; font-size: 10px; color: #888; margin: 2px; }
+.bc-orch-result-title { font-size: 13px; color: #fff; font-weight: bold; margin-bottom: 4px; }
+.bc-orch-result-meta { color: #666; font-size: 10px; margin-bottom: 10px; }
+.bc-orch-result-section { margin-bottom: 12px; }
+.bc-orch-result-section-title { font-size: 10px; color: #3b82f6; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.bc-orch-pre { background: #1a1a1a; border: 1px solid #3a3a3a; border-radius: 3px; padding: 8px; max-height: 200px; overflow-y: auto; white-space: pre-wrap; word-break: break-word; font-size: 10px; color: #aaa; line-height: 1.5; }
+.bc-orch-claim { color: #aaa; padding: 2px 0; border-bottom: 1px solid #2a2a2a; }
+.bc-orch-skeleton { background: #333; border-radius: 3px; height: 10px; margin: 4px 0; animation: bc-orch-shimmer 1.5s infinite; }
+@keyframes bc-orch-shimmer { 0%{opacity:0.4;width:20%}50%{opacity:0.8;width:80%}100%{opacity:0.4;width:20%} }
+.bc-orch-section-header { font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 0; border-bottom: 1px solid #2a2a2a; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+    `;
+    document.head.appendChild(styleEl);
+  }
+  const section = content.createDiv({ cls: "bc-orch-section" });
+  const grid = section.createDiv({ cls: "bc-orch-grid" });
+  const drawerContainer = section.createDiv({ cls: "bc-orch-drawer-container" });
+  const DRAWER_KEY = "bc-orch-active-drawer";
+  const openBtns = {};
+  const drawers = {};
+  function openDrawer(id) {
+    localStorage.setItem(DRAWER_KEY, id);
+    section.addClass("bc-orch-section--drawer-open");
+    Object.keys(drawers).forEach((k) => {
+      drawers[k].toggleClass("bc-orch-drawer--active", k === id);
+    });
+    Object.keys(openBtns).forEach((k) => {
+      openBtns[k].toggleClass("bc-orch-open-btn--active", k === id);
+    });
+  }
+  function closeDrawer() {
+    localStorage.removeItem(DRAWER_KEY);
+    section.removeClass("bc-orch-section--drawer-open");
+    Object.keys(drawers).forEach((k) => {
+      drawers[k].removeClass("bc-orch-drawer--active");
+    });
+    Object.keys(openBtns).forEach((k) => {
+      openBtns[k].removeClass("bc-orch-open-btn--active");
+    });
+  }
+  const vol = state.pipelinesLiveStatus?.videoOrchestrator;
+  const biblePipelines = getBiblePipelineSummaries(state);
+  function voStatus() {
+    if (!vol) return "IDLE";
+    if (vol.status === "active") return "RUNNING";
+    if (vol.status === "error") return "ERROR";
+    return "IDLE";
+  }
+  const videoBtn = bcOrchBuildCard(grid, {
+    id: "video",
+    title: "VIDEO ORCHESTRATOR",
+    status: voStatus(),
+    stats: [
+      `Running jobs: ${vol?.queueDepth?.running ?? 0}`,
+      `Active accounts: ${vol?.activeAccounts ?? 0}`
+    ],
+    healthDots: bcOrchHealthDots(voStatus()),
+    onOpen: () => openDrawer("video")
+  });
+  openBtns["video"] = videoBtn;
+  const researchBtn = bcOrchBuildCard(grid, {
+    id: "research",
+    title: "RESEARCH ORCHESTRATOR",
+    status: "IDLE",
+    stats: ["YouTube transcript: ready", "Video analysis: local Brain Core"],
+    healthDots: [null, null, null, null, null],
+    onOpen: () => openDrawer("research")
+  });
+  openBtns["research"] = researchBtn;
+  const bibleBtn = bcOrchBuildCard(grid, {
+    id: "bible",
+    title: "BIBLE RESEARCH",
+    status: "IDLE",
+    stats: [`Pipelines: ${biblePipelines.length}`, `Primary: ${biblePipelines[0]?.name ?? "\u2014"}`],
+    healthDots: [null, null, null, null, null],
+    onOpen: () => openDrawer("bible")
+  });
+  openBtns["bible"] = bibleBtn;
+  const designBtn = bcOrchBuildCard(grid, {
+    id: "design",
+    title: "DESIGN ORCHESTRATOR",
+    status: "IDLE",
+    stats: ["Skills ready: 8", "Last PRD: \u2014"],
+    healthDots: [null, null, null, null, null],
+    onOpen: () => openDrawer("design")
+  });
+  openBtns["design"] = designBtn;
+  drawers["video"] = bcOrchBuildVideoDrawer(drawerContainer, vol, closeDrawer);
+  drawers["research"] = bcOrchBuildResearchDrawer(drawerContainer, closeDrawer);
+  drawers["bible"] = bcOrchBuildBibleDrawer(drawerContainer, state, closeDrawer);
+  drawers["design"] = bcOrchBuildDesignDrawer(drawerContainer, closeDrawer);
+  try {
+    const saved = localStorage.getItem(DRAWER_KEY);
+    if (saved && drawers[saved]) {
+      openDrawer(saved);
+    }
+  } catch {
+  }
+}
+function bcOrchBuildCard(parent, opts) {
+  const card = parent.createDiv({ cls: "bc-orch-card" });
+  const header = card.createDiv({ cls: "bc-orch-card-header" });
+  const dot = header.createEl("span", { cls: "bc-orch-dot" });
+  bcOrchApplyDotStatus(dot, opts.status);
+  header.createEl("span", { cls: "bc-orch-card-title", text: opts.title });
+  card.createEl("div", { cls: "bc-orch-card-stat", text: opts.stats[0] });
+  card.createEl("div", { cls: "bc-orch-card-stat", text: opts.stats[1] });
+  const footer = card.createDiv({ cls: "bc-orch-card-footer" });
+  const health = footer.createDiv({ cls: "bc-orch-health" });
+  opts.healthDots.forEach((s) => {
+    const d = health.createEl("span", { cls: "bc-orch-dot" });
+    bcOrchApplyDotStatus(d, s ?? "IDLE");
+  });
+  const btn = footer.createEl("button", { cls: "bc-orch-open-btn", text: "Open \u2192" });
+  btn.addEventListener("click", opts.onOpen);
+  return btn;
+}
+function bcOrchApplyDotStatus(el, status) {
+  el.removeClass("bc-orch-dot--running");
+  el.removeClass("bc-orch-dot--done");
+  el.removeClass("bc-orch-dot--partial");
+  el.removeClass("bc-orch-dot--error");
+  if (status === "RUNNING") el.addClass("bc-orch-dot--running");
+  else if (status === "DONE") el.addClass("bc-orch-dot--done");
+  else if (status === "PARTIAL") el.addClass("bc-orch-dot--partial");
+  else if (status === "ERROR") el.addClass("bc-orch-dot--error");
+}
+function bcOrchHealthDots(status) {
+  if (status === "RUNNING") return ["DONE", "DONE", "RUNNING", null, null];
+  if (status === "ERROR") return ["DONE", "ERROR", null, null, null];
+  if (status === "PARTIAL") return ["DONE", "PARTIAL", null, null, null];
+  return [null, null, null, null, null];
+}
+function getBiblePipelineSummaries(state) {
+  return (state.pipelines ?? []).filter((pipeline) => {
+    const searchable = [
+      pipeline.id,
+      pipeline.name,
+      pipeline.description,
+      ...pipeline.stages ?? [],
+      pipeline.migration?.sourcePipelineId,
+      pipeline.migration?.targetPipelineId
+    ].filter(Boolean).join(" ").toLowerCase();
+    return searchable.includes("bible") || searchable.includes("says the bible") || searchable.includes("stb");
+  });
+}
+function bcOrchBuildDrawerShell(container, id, title, onClose) {
+  const drawer = container.createDiv({ cls: "bc-orch-drawer" });
+  drawer.dataset["orchId"] = id;
+  const hdr = drawer.createDiv({ cls: "bc-orch-drawer-header" });
+  hdr.createEl("span", { cls: "bc-orch-drawer-title", text: title });
+  const closeBtn = hdr.createEl("button", { cls: "bc-orch-drawer-close", text: "\u2715" });
+  closeBtn.addEventListener("click", onClose);
+  const body = drawer.createDiv({ cls: "bc-orch-drawer-body" });
+  body.style.padding = "0";
+  body.style.overflow = "hidden";
+  body.style.flex = "1";
+  body.style.display = "flex";
+  body.style.flexDirection = "column";
+  return { drawer, body };
+}
+function bcOrchBuildVideoDrawer(container, vol, onClose) {
+  const { drawer, body } = bcOrchBuildDrawerShell(container, "video", "VIDEO ORCHESTRATOR", onClose);
+  const phases = ["\u{1F509} Audio", "\u{1F3AC} Comp", "CC", "\u{1F5BC} Thumb", "\u{1F50D} SEO", "\u{1F4E4} Pub", "\u{1F4CA} Analytics"];
+  const wrap = body.createDiv();
+  wrap.style.padding = "14px";
+  wrap.style.overflowY = "auto";
+  wrap.style.flex = "1";
+  wrap.style.fontFamily = "monospace";
+  wrap.style.fontSize = "11px";
+  const statusLine = wrap.createDiv({ cls: "bc-orch-card-stat" });
+  const voSt = vol?.status ?? "unknown";
+  statusLine.textContent = `Status: ${voSt === "active" ? "RUNNING" : voSt === "error" ? "ERROR" : "IDLE"} \xB7 Running: ${vol?.queueDepth?.running ?? 0} \xB7 Pending: ${vol?.queueDepth?.pending ?? 0} \xB7 Accounts: ${vol?.activeAccounts ?? 0}`;
+  statusLine.style.marginBottom = "12px";
+  const table = wrap.createEl("table", { cls: "bc-orch-phase-grid" });
+  const thead = table.createEl("thead");
+  const headerRow = thead.createEl("tr");
+  phases.forEach((ph) => headerRow.createEl("th", { text: ph }));
+  const tbody = table.createEl("tbody");
+  const dataRow = tbody.createEl("tr");
+  phases.forEach((_ph) => {
+    const td = dataRow.createEl("td");
+    const dot = td.createEl("span", { cls: "bc-orch-dot", text: "" });
+    dot.style.display = "inline-block";
+    void dot;
+  });
+  return drawer;
+}
+function bcOrchBuildResearchDrawer(container, onClose) {
+  const { drawer, body } = bcOrchBuildDrawerShell(container, "research", "RESEARCH ORCHESTRATOR", onClose);
+  const split = body.createDiv({ cls: "bc-orch-split" });
+  const left = split.createDiv({ cls: "bc-orch-split-left" });
+  left.style.width = "25%";
+  left.style.minWidth = "180px";
+  left.createEl("div", { cls: "bc-orch-label", text: "YouTube URL" });
+  const urlInput = left.createEl("input", { cls: "bc-orch-input" });
+  urlInput.type = "text";
+  urlInput.placeholder = "Click to paste\u2026";
+  urlInput.value = _orchResearchState.url;
+  urlInput.addEventListener("input", () => {
+    _orchResearchState.url = urlInput.value;
+  });
+  urlInput.addEventListener("focus", async () => {
+    if (!urlInput.value) {
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text && text.trim()) {
+          urlInput.value = text.trim();
+          _orchResearchState.url = urlInput.value;
+        }
+      } catch {
+      }
+    }
+  });
+  left.createEl("div", { cls: "bc-orch-label", text: "Focus (optional)" });
+  const focusInput = left.createEl("textarea", { cls: "bc-orch-input" });
+  focusInput.rows = 3;
+  focusInput.value = _orchResearchState.focus;
+  focusInput.addEventListener("input", () => {
+    _orchResearchState.focus = focusInput.value;
+  });
+  const modeRow = left.createDiv();
+  modeRow.style.cssText = "display:flex;flex-direction:column;gap:4px;";
+  left.createEl("div", { cls: "bc-orch-label", text: "Mode" });
+  const modeVideoRow = modeRow.createDiv();
+  modeVideoRow.style.cssText = "display:flex;align-items:center;gap:6px;font-size:11px;color:#ccc;cursor:pointer;";
+  const modeVideoCb = modeVideoRow.createEl("input");
+  modeVideoCb.type = "radio";
+  modeVideoCb.name = "bc-orch-mode";
+  modeVideoCb.value = "full";
+  modeVideoCb.checked = true;
+  modeVideoRow.createEl("span", { text: "\u{1F3AC} Video & Transcript" });
+  modeVideoRow.addEventListener("click", () => {
+    modeVideoCb.checked = true;
+  });
+  const modeTranscriptRow = modeRow.createDiv();
+  modeTranscriptRow.style.cssText = "display:flex;align-items:center;gap:6px;font-size:11px;color:#888;cursor:pointer;";
+  const modeTranscriptCb = modeTranscriptRow.createEl("input");
+  modeTranscriptCb.type = "radio";
+  modeTranscriptCb.name = "bc-orch-mode";
+  modeTranscriptCb.value = "transcript";
+  modeTranscriptRow.createEl("span", { text: "\u{1F4DD} Transcript only" });
+  modeTranscriptRow.addEventListener("click", () => {
+    modeTranscriptCb.checked = true;
+  });
+  left.appendChild(modeRow);
+  const processBtn = left.createEl("button", { cls: "bc-orch-btn bc-orch-btn--primary", text: "\u25B6 Process" });
+  processBtn.disabled = _orchResearchState.running;
+  const right = split.createDiv({ cls: "bc-orch-split-right" });
+  const historyBar = right.createDiv();
+  historyBar.style.cssText = "border-bottom:1px solid #2a2a2a;padding-bottom:6px;margin-bottom:10px;";
+  function renderHistoryBar() {
+    historyBar.empty();
+    const entries = bcOrchLoadHistory();
+    if (entries.length === 0) return;
+    const histHeader = historyBar.createDiv();
+    histHeader.style.cssText = "font-size:10px;color:#555;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;";
+    histHeader.textContent = "Recent";
+    const list = historyBar.createDiv();
+    list.style.cssText = "display:flex;flex-direction:column;gap:3px;";
+    entries.forEach((entry) => {
+      const row = list.createDiv();
+      row.style.cssText = "display:flex;align-items:center;gap:8px;padding:4px 6px;border-radius:4px;cursor:pointer;transition:background 0.15s;";
+      row.onmouseenter = () => {
+        row.style.background = "#2a2a2a";
+      };
+      row.onmouseleave = () => {
+        row.style.background = "transparent";
+      };
+      const label = row.createEl("span");
+      label.style.cssText = "flex:1;font-size:11px;color:#aaa;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;";
+      label.textContent = entry.title;
+      const ts = row.createEl("span");
+      ts.style.cssText = "font-size:10px;color:#555;white-space:nowrap;font-family:monospace;";
+      const d = new Date(entry.savedAt);
+      ts.textContent = `${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2, "0")}`;
+      row.addEventListener("click", () => {
+        _orchResearchState.result = entry.result;
+        _orchResearchState.error = null;
+        _orchResearchState.running = false;
+        urlInput.value = entry.url;
+        _orchResearchState.url = entry.url;
+        renderOutput();
+        renderHistoryBar();
+      });
+    });
+  }
+  renderHistoryBar();
+  const outputArea = right.createDiv();
+  function renderOutput() {
+    outputArea.empty();
+    if (_orchResearchState.running) {
+      bcOrchRenderSkeletons(outputArea);
+      return;
+    }
+    if (_orchResearchState.error) {
+      outputArea.createEl("div", { cls: "bc-orch-output-empty", text: _orchResearchState.error });
+      return;
+    }
+    if (_orchResearchState.result) {
+      bcOrchRenderResult(outputArea, _orchResearchState.result);
+      return;
+    }
+    outputArea.createEl("div", { cls: "bc-orch-output-empty", text: "Submit a YouTube URL to analyze" });
+  }
+  renderOutput();
+  processBtn.addEventListener("click", async () => {
+    const url = urlInput.value.trim();
+    if (!url) {
+      _orchResearchState.error = "Please enter a YouTube URL.";
+      _orchResearchState.result = null;
+      renderOutput();
+      return;
+    }
+    _orchResearchState.running = true;
+    _orchResearchState.phase = "call1";
+    _orchResearchState.startedAt = Date.now();
+    _orchResearchState.error = null;
+    _orchResearchState.result = null;
+    processBtn.disabled = true;
+    if (_orchResearchState.timerInterval) {
+      clearInterval(_orchResearchState.timerInterval);
+      _orchResearchState.timerInterval = null;
+    }
+    renderOutput();
+    _orchResearchState.timerInterval = setInterval(() => {
+      if (_orchResearchState.running) {
+        renderOutput();
+      } else {
+        if (_orchResearchState.timerInterval) {
+          clearInterval(_orchResearchState.timerInterval);
+          _orchResearchState.timerInterval = null;
+        }
+      }
+    }, 1e3);
+    try {
+      const resp = await fetch("http://localhost:4877/research/video-analyze", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url, focus: focusInput.value.trim() })
+      });
+      const data = await resp.json();
+      if (!data.ok) {
+        const errField = data.error;
+        const errMsg = typeof errField === "string" ? errField : typeof errField === "object" && errField !== null ? errField.message ?? JSON.stringify(errField) : "Unknown error";
+        _orchResearchState.error = `Error: ${errMsg}`;
+        _orchResearchState.result = null;
+      } else {
+        _orchResearchState.result = data;
+        _orchResearchState.error = null;
+        bcOrchSaveToHistory(data);
+      }
+    } catch (_err) {
+      _orchResearchState.error = "Brain Core offline or request failed.";
+      _orchResearchState.result = null;
+    } finally {
+      _orchResearchState.running = false;
+      _orchResearchState.phase = "done";
+      if (_orchResearchState.timerInterval) {
+        clearInterval(_orchResearchState.timerInterval);
+        _orchResearchState.timerInterval = null;
+      }
+      processBtn.disabled = false;
+      renderHistoryBar();
+      renderOutput();
+    }
+  });
+  return drawer;
+}
+function bcOrchRenderSkeletons(outputArea) {
+  const elapsed = Math.floor((Date.now() - _orchResearchState.startedAt) / 1e3);
+  const mins = Math.floor(elapsed / 60);
+  const secs = elapsed % 60;
+  const elapsedStr = mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
+  const estimatedTotal = 150;
+  const pct = Math.min(95, Math.round(elapsed / estimatedTotal * 100));
+  const phaseLabel = elapsed < 90 ? "Analyzing video structure, chapters & key moments\u2026" : "Transcribing speech\u2026";
+  const statusRow = outputArea.createDiv();
+  statusRow.style.cssText = "display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;";
+  const statusLeft = statusRow.createEl("span");
+  statusLeft.style.cssText = "font-size:11px;color:#3b82f6;";
+  statusLeft.textContent = `\u27F3 ${phaseLabel}`;
+  const statusRight = statusRow.createEl("span");
+  statusRight.style.cssText = "font-size:11px;color:#888;font-family:monospace;";
+  statusRight.textContent = `${elapsedStr} elapsed`;
+  const barWrap = outputArea.createDiv();
+  barWrap.style.cssText = "background:#1a1a1a;border-radius:3px;height:6px;margin-bottom:16px;overflow:hidden;border:1px solid #3a3a3a;";
+  const barFill = barWrap.createDiv();
+  barFill.style.cssText = `height:100%;background:#3b82f6;border-radius:3px;transition:width 1s linear;width:${pct}%;`;
+  const phases = [
+    { label: "STRUCTURE ANALYSIS", active: elapsed < 90, done: elapsed >= 90 },
+    { label: "TRANSCRIPTION", active: elapsed >= 90, done: false },
+    { label: "HUMAN SUMMARY", active: false, done: false },
+    { label: "ACTIONS", active: false, done: false }
+  ];
+  phases.forEach((p) => {
+    const sec = outputArea.createDiv({ cls: "bc-orch-result-section" });
+    const hdr = sec.createDiv({ cls: "bc-orch-section-header" });
+    hdr.createEl("span", { text: p.label });
+    const badge = hdr.createEl("span", { cls: "bc-orch-badge" });
+    if (p.done) {
+      badge.textContent = "\u2713 done";
+      badge.style.color = "#2ecc71";
+      badge.style.borderColor = "#2ecc71";
+    } else if (p.active) {
+      badge.textContent = "\u27F3 running";
+      badge.style.color = "#3b82f6";
+      badge.style.borderColor = "#3b82f6";
+    } else {
+      badge.textContent = "pending";
+    }
+    const skelWrap = sec.createDiv();
+    skelWrap.style.cssText = "background:#1a1a1a;border-radius:3px;height:4px;margin:6px 0;overflow:hidden;";
+    if (p.active) {
+      const skelFill = skelWrap.createDiv();
+      skelFill.style.cssText = "height:100%;background:#3b82f6;opacity:0.5;animation:bc-orch-shimmer 2s infinite;width:60%;";
+    }
+  });
+  const remaining = Math.max(0, estimatedTotal - elapsed);
+  const remMins = Math.floor(remaining / 60);
+  const remSecs = remaining % 60;
+  const remStr = remaining > 5 ? `~${remMins > 0 ? remMins + "m " : ""}${remSecs}s remaining (estimate)` : "Almost done\u2026";
+  const etaEl = outputArea.createEl("div");
+  etaEl.style.cssText = "font-size:10px;color:#555;margin-top:8px;font-style:italic;";
+  etaEl.textContent = remStr;
+}
+function bcOrchFoldableSection(parent, label, defaultOpen, buildContent) {
+  const sec = parent.createDiv({ cls: "bc-orch-result-section" });
+  sec.style.cssText = "border:1px solid #2a2a2a;border-radius:4px;margin-bottom:8px;overflow:hidden;";
+  const hdr = sec.createDiv();
+  hdr.style.cssText = "display:flex;align-items:center;justify-content:space-between;padding:7px 10px;cursor:pointer;background:#1e1e1e;user-select:none;";
+  const hdrLeft = hdr.createDiv();
+  hdrLeft.style.cssText = "display:flex;align-items:center;gap:6px;";
+  const arrow = hdrLeft.createEl("span");
+  arrow.style.cssText = "font-size:9px;color:#555;width:10px;display:inline-block;";
+  arrow.textContent = defaultOpen ? "\u25BC" : "\u25B6";
+  hdrLeft.createEl("span", { cls: "bc-orch-result-section-title", text: label });
+  const copyBtn = hdr.createEl("button");
+  copyBtn.style.cssText = "font-size:10px;color:#555;background:none;border:none;cursor:pointer;padding:2px 5px;border-radius:3px;transition:color 0.15s;";
+  copyBtn.textContent = "copy";
+  copyBtn.setAttribute("type", "button");
+  copyBtn.onmouseenter = () => {
+    copyBtn.style.color = "#aaa";
+  };
+  copyBtn.onmouseleave = () => {
+    copyBtn.style.color = "#555";
+  };
+  const body = sec.createDiv();
+  body.style.cssText = `padding:10px;background:#1a1a1a;${defaultOpen ? "" : "display:none;"}`;
+  const copyText = buildContent(body);
+  copyBtn.addEventListener("click", async (e) => {
+    e.stopPropagation();
+    if (!copyText) return;
+    try {
+      await navigator.clipboard.writeText(copyText);
+      copyBtn.textContent = "\u2713";
+      setTimeout(() => {
+        copyBtn.textContent = "copy";
+      }, 1500);
+    } catch {
+    }
+  });
+  hdr.addEventListener("click", () => {
+    const open = body.style.display !== "none";
+    body.style.display = open ? "none" : "block";
+    arrow.textContent = open ? "\u25B6" : "\u25BC";
+  });
+}
+function bcOrchRenderResult(outputArea, data) {
+  outputArea.createEl("div", { cls: "bc-orch-result-title", text: data.title ?? "Untitled" });
+  const meta = outputArea.createEl("div", { cls: "bc-orch-result-meta" });
+  const durSec = data.duration_seconds;
+  const durStr = durSec ? `${Math.floor(durSec / 60)}m ${durSec % 60}s` : null;
+  meta.textContent = [data.channel ?? null, durStr].filter(Boolean).join(" \xB7 ");
+  const humanSummary = data.human_summary ?? data.humanSummary;
+  if (humanSummary) {
+    bcOrchFoldableSection(outputArea, "HUMAN SUMMARY", true, (body) => {
+      body.createEl("div", { text: humanSummary });
+      return humanSummary;
+    });
+  }
+  const aiSummary = data.ai_summary ?? data.aiSummary;
+  if (aiSummary) {
+    const structured = aiSummary;
+    let copyLines = [];
+    bcOrchFoldableSection(outputArea, "AI SUMMARY", false, (body) => {
+      if (structured.topic) {
+        body.createEl("div", { cls: "bc-orch-claim", text: `Topic: ${structured.topic}` });
+        copyLines.push(`Topic: ${structured.topic}`);
+      }
+      if (structured.speaker) {
+        body.createEl("div", { cls: "bc-orch-claim", text: `Speaker: ${structured.speaker}` });
+        copyLines.push(`Speaker: ${structured.speaker}`);
+      }
+      if (structured.evidence_type) {
+        body.createEl("div", { cls: "bc-orch-claim", text: `Evidence: ${structured.evidence_type} \xB7 Confidence: ${structured.confidence ?? "\u2014"}` });
+        copyLines.push(`Evidence: ${structured.evidence_type} \xB7 Confidence: ${structured.confidence ?? "\u2014"}`);
+      }
+      if (Array.isArray(structured.key_claims)) {
+        const claimsWrap = body.createDiv();
+        claimsWrap.style.marginTop = "6px";
+        claimsWrap.createEl("div", { cls: "bc-orch-label", text: "Key claims" });
+        structured.key_claims.forEach((c) => {
+          claimsWrap.createEl("div", { cls: "bc-orch-claim", text: `\u2022 ${c}` });
+          copyLines.push(`\u2022 ${c}`);
+        });
+      }
+      if (Array.isArray(structured.research_hooks)) {
+        const hooksWrap = body.createDiv();
+        hooksWrap.style.marginTop = "6px";
+        hooksWrap.createEl("div", { cls: "bc-orch-label", text: "Research hooks" });
+        structured.research_hooks.forEach((h) => {
+          hooksWrap.createEl("div", { cls: "bc-orch-claim", text: `\u2192 ${h}` });
+          copyLines.push(`\u2192 ${h}`);
+        });
+      }
+      const keyTs = data.key_timestamps;
+      if (keyTs && Object.keys(keyTs).length > 0) {
+        const tsWrap = body.createDiv();
+        tsWrap.style.marginTop = "6px";
+        tsWrap.createEl("div", { cls: "bc-orch-label", text: "Key timestamps" });
+        Object.entries(keyTs).forEach(([desc, ts]) => {
+          tsWrap.createEl("div", { cls: "bc-orch-claim", text: `[${ts}] ${desc}` });
+          copyLines.push(`[${ts}] ${desc}`);
+        });
+      }
+      return copyLines.join("\n") || null;
+    });
+  }
+  const transcript = data.transcript_excerpt ?? data.transcript;
+  if (transcript) {
+    bcOrchFoldableSection(outputArea, "TRANSCRIPTION", false, (body) => {
+      const pre = body.createEl("pre", { cls: "bc-orch-pre" });
+      pre.style.maxHeight = "none";
+      pre.textContent = transcript;
+      return transcript;
+    });
+  }
+  const usage = data.rate_limit_usage;
+  if (usage) {
+    const usageEl = outputArea.createEl("div", { cls: "bc-orch-result-meta" });
+    usageEl.style.marginTop = "6px";
+    usageEl.textContent = `Quota: ${usage.calls_today} calls today \xB7 ${usage.video_minutes_today} min used \xB7 ${usage.calls_remaining} remaining`;
+  }
+}
+function bcOrchBuildBibleDrawer(container, state, onClose) {
+  const { drawer, body } = bcOrchBuildDrawerShell(container, "bible", "BIBLE RESEARCH", onClose);
+  const split = body.createDiv({ cls: "bc-orch-split" });
+  const left = split.createDiv({ cls: "bc-orch-split-left" });
+  left.style.width = "40%";
+  const pipelines = getBiblePipelineSummaries(state);
+  left.createEl("div", { cls: "bc-orch-section-header" }).createEl("span", { text: "PIPELINES" });
+  if (pipelines.length === 0) {
+    left.createEl("div", { cls: "bc-orch-output-empty", text: "No pipelines configured" });
+  } else {
+    pipelines.forEach((p) => {
+      const row = left.createDiv({ cls: "bc-orch-card-stat" });
+      row.textContent = `\u25B6 ${p.name ?? p.id}`;
+      if (p.health || p.status) {
+        row.title = [p.status, p.health].filter(Boolean).join(" \xB7 ");
+      }
+    });
+  }
+  const addBtn = left.createEl("button", { cls: "bc-orch-btn", text: "+ Add pipeline" });
+  addBtn.style.marginTop = "auto";
+  const right = split.createDiv({ cls: "bc-orch-split-right" });
+  const histHdr = right.createDiv({ cls: "bc-orch-section-header" });
+  histHdr.createEl("span", { text: "DOCUMENT HISTORY" });
+  right.createEl("div", { cls: "bc-orch-output-empty", text: "No history yet" });
+  const newHdr = right.createDiv({ cls: "bc-orch-section-header" });
+  newHdr.style.marginTop = "12px";
+  newHdr.createEl("span", { text: "NEW RESEARCH" });
+  right.createEl("div", { cls: "bc-orch-label", text: "Pipeline" });
+  const pipelineSelect = right.createEl("select", { cls: "bc-orch-input" });
+  pipelineSelect.createEl("option", { text: "\u2014 select pipeline \u2014" });
+  pipelines.forEach((p) => {
+    const opt = pipelineSelect.createEl("option", { text: p.name ?? p.id });
+    opt.value = p.id;
+  });
+  right.createEl("div", { cls: "bc-orch-label", text: "Prompt" });
+  const promptArea = right.createEl("textarea", { cls: "bc-orch-input" });
+  promptArea.rows = 4;
+  const actionRow = right.createDiv();
+  actionRow.style.display = "flex";
+  actionRow.style.gap = "8px";
+  actionRow.style.marginTop = "8px";
+  const runBtn = actionRow.createEl("button", { cls: "bc-orch-btn bc-orch-btn--primary", text: "\u25B6 Run Pipeline" });
+  const stopBtn = actionRow.createEl("button", { cls: "bc-orch-btn", text: "\u23F9 Stop current" });
+  stopBtn.disabled = true;
+  void addBtn;
+  void runBtn;
+  void stopBtn;
+  void promptArea;
+  void pipelineSelect;
+  return drawer;
+}
+function bcOrchBuildDesignDrawer(container, onClose) {
+  const { drawer, body } = bcOrchBuildDrawerShell(container, "design", "DESIGN ORCHESTRATOR", onClose);
+  const split = body.createDiv({ cls: "bc-orch-split" });
+  const left = split.createDiv({ cls: "bc-orch-split-left" });
+  left.style.width = "40%";
+  left.createEl("div", { cls: "bc-orch-section-header" }).createEl("span", { text: "CONVERSATION" });
+  const botBubble = left.createDiv();
+  botBubble.style.background = "#333";
+  botBubble.style.border = "1px solid #3a3a3a";
+  botBubble.style.borderRadius = "6px";
+  botBubble.style.padding = "8px";
+  botBubble.style.fontSize = "11px";
+  botBubble.style.color = "#aaa";
+  botBubble.textContent = "\u{1F916} What are you building?";
+  const inputArea = left.createEl("textarea", { cls: "bc-orch-input" });
+  inputArea.rows = 3;
+  inputArea.placeholder = "Your answer\u2026";
+  const sendBtn = left.createEl("button", { cls: "bc-orch-btn bc-orch-btn--primary", text: "Send \u21B5" });
+  void sendBtn;
+  const right = split.createDiv({ cls: "bc-orch-split-right" });
+  const skillsHdr = right.createDiv({ cls: "bc-orch-section-header" });
+  skillsHdr.createEl("span", { text: "ACTIVE SKILLS" });
+  const badgeRow = right.createDiv();
+  badgeRow.style.marginBottom = "12px";
+  ["/design-system", "/web-design", "/taste-skill"].forEach((s) => {
+    badgeRow.createEl("span", { cls: "bc-orch-badge", text: s });
+  });
+  const prdHdr = right.createDiv({ cls: "bc-orch-section-header" });
+  prdHdr.createEl("span", { text: "PRD" });
+  const fields = [
+    ["Project type", "(pending)"],
+    ["Scenario", "(pending)"],
+    ["Audience", "(pending)"],
+    ["Tone", "(pending)"],
+    ["Goal", "(pending)"]
+  ];
+  fields.forEach(([label, val]) => {
+    const row = right.createDiv();
+    row.style.display = "flex";
+    row.style.gap = "8px";
+    row.style.marginBottom = "4px";
+    row.style.fontSize = "11px";
+    row.createEl("span", { text: label + ":" }).style.color = "#666";
+    row.createEl("span", { text: val }).style.color = "#555";
+  });
+  const exportRow = right.createDiv();
+  exportRow.style.display = "flex";
+  exportRow.style.gap = "8px";
+  exportRow.style.marginTop = "16px";
+  const exportBtn = exportRow.createEl("button", { cls: "bc-orch-btn", text: "\u2197 Export PRD" });
+  const genBtn = exportRow.createEl("button", { cls: "bc-orch-btn bc-orch-btn--primary", text: "\u25B6 Generate DESIGN.md" });
+  exportBtn.disabled = true;
+  genBtn.disabled = true;
+  void inputArea;
+  void exportBtn;
+  void genBtn;
+  return drawer;
 }
 function renderPipelinesSection(content, state, snapshot) {
+  renderVOContextBar(content, state);
   const grid = content.createDiv({ cls: "brain-console__dashboard-grid" });
+  renderCard(grid, "Pipeline Profile", renderVOPipelineProfileCard(state), { wide: true });
   const ps = state.pipelinesLiveStatus;
   if (ps) {
     renderGroupedSummary(grid, "Live Pipeline Status", [
@@ -2830,7 +8661,7 @@ function renderPipelinesSection(content, state, snapshot) {
     for (const account of authStatus.accounts) {
       const row = authList.createDiv({ cls: "brain-console__list-row" });
       const badge = account.authMethod === "oauth2" ? "\u{1F511}" : "\u270F\uFE0F";
-      const readiness = account.authMethod === "oauth2" ? account.oauthReady ? `ready${account.tokenExpiry ? ` \xB7 ${formatRelativeTime(account.tokenExpiry)}` : ""}` : "token missing" : account.authMethod;
+      const readiness = account.authMethod === "oauth2" ? account.oauthReady ? `ready${account.tokenExpiry ? ` \xB7 ${formatRelativeTime2(account.tokenExpiry)}` : ""}` : "token missing" : account.authMethod;
       row.createEl("span", { cls: "brain-console__list-label", text: `${badge} ${account.handle} (${account.platform})` });
       row.createEl("span", { cls: "brain-console__list-value", text: readiness });
     }
@@ -2875,7 +8706,7 @@ function renderVOLivePipelineCard(vo) {
     { label: "Failed", value: String(vo.queueDepth?.failed ?? 0) },
     { label: "Dead", value: String(dead) },
     { label: "Active accounts", value: String(vo.activeAccounts ?? 0) },
-    { label: "Last job", value: vo.lastJobAt ? formatRelativeTime(vo.lastJobAt) : "\u2014" }
+    { label: "Last job", value: vo.lastJobAt ? formatRelativeTime2(vo.lastJobAt) : "\u2014" }
   ]);
   if (dead > 0) {
     el.createEl("div", { cls: "brain-console__warning", text: `${dead} dead jobs \u2014 run: vo jobs to inspect` });
@@ -2903,7 +8734,7 @@ function renderReportsSection(content, state, snapshot, settings, onRefresh) {
   }
 }
 function renderPostOrchestratorSection(content, state, snapshot) {
-  const grid = content.createDiv({ cls: "brain-console__dashboard-grid" });
+  const grid = content.createDiv({ cls: "brain-console__post-section" });
   renderPostGroup(grid, "Status", [
     { title: "Overview", render: renderPostOrchestratorOverviewCard(state) },
     { title: "Post Orchestrator Status", render: renderPostOrchestratorStatusCard(state) },
@@ -2949,13 +8780,30 @@ function renderPostGroup(parent, title, cards) {
   }
 }
 function renderAgentsSection(content, state, snapshot) {
+  const intro = content.createDiv({ cls: "brain-console__section-intro" });
+  intro.createEl("p", {
+    cls: "brain-console__detail",
+    text: "Agent orchestration, task graph, approval gates, and cost tracking."
+  });
+  if (state.agentConsole) {
+    const kpiDiv = content.createDiv({ cls: "bc-kpi-row" });
+    renderCompactStatGrid(kpiDiv, [
+      { label: "Active Runs", value: String(state.agentConsole.activeRunCount ?? 0) },
+      { label: "Blocked Runs", value: String(state.agentConsole.blockedRunCount ?? 0) },
+      { label: "Pending Approvals", value: String(state.agentConsole.approvalPendingCount ?? 0) },
+      {
+        label: "Tasks Done",
+        value: `${state.agentConsole.taskGraph?.completedCount ?? 0}/${state.agentConsole.taskGraph?.taskCount ?? 0}`
+      },
+      { label: "Cost Today", value: formatCostUsd(state.agentCostSummary?.todayEstimatedUsd ?? 0) }
+    ]);
+  }
   const grid = content.createDiv({ cls: "brain-console__dashboard-grid" });
-  renderCard(grid, "Agent View", renderAgentViewLedgerCard(state));
-  renderCard(grid, "Approval Audit Trail", renderApprovalAuditTrailCard(state));
-  renderCard(grid, "Agents (Summary)", renderAgentViewCard(state, snapshot));
-}
-function renderRecoverySection(content, state, snapshot) {
-  const grid = content.createDiv({ cls: "brain-console__dashboard-grid" });
+  renderCard(grid, "Task Graph", renderAgentTaskGraphCard(state));
+  renderCard(grid, "Approval Gates", renderApprovalGatesCard(state));
+  renderCard(grid, "Agent Registry", renderAgentViewCard(state, snapshot));
+  renderCard(grid, "Run History", renderAgentViewLedgerCard(state));
+  renderCard(grid, "Cost Summary", renderAgentCostCard(state));
   renderCard(grid, "Recovery / Blockers", renderRecoveryPanelCard(state));
 }
 function renderReportsSectionIntro(state) {
@@ -3272,6 +9120,25 @@ function renderAiModelSelectorCard(state, settings, onRefresh) {
       if (!provider.healthy) val.style.color = "var(--bc-yellow)";
     }
   }
+  const bedrockModels = selector.providers?.flatMap((provider) => provider.bedrockModels ?? []) ?? [];
+  if (bedrockModels.length > 0) {
+    const enabled = bedrockModels.filter((model) => model.enabled);
+    const accessible = enabled.filter((model) => model.access?.available).length;
+    container.createEl("p", {
+      cls: "brain-console__detail",
+      text: `Bedrock portfolio: ${accessible}/${enabled.length} enabled models access-checked`
+    });
+    const bedrockList = container.createDiv({ cls: "brain-console__list" });
+    for (const model of enabled.slice(0, 5)) {
+      const row = bedrockList.createDiv({ cls: "brain-console__list-row" });
+      row.createEl("span", { cls: "brain-console__list-label", text: model.id ?? model.modelId ?? "unknown-model" });
+      const value = row.createEl("span", { cls: "brain-console__list-value" });
+      const access = model.access?.available ? "OK" : model.access ? "blocked" : "unknown";
+      const price = typeof model.priceInputPer1m === "number" && typeof model.priceOutputPer1m === "number" ? `$${model.priceInputPer1m}/$${model.priceOutputPer1m}/1M` : "price n/a";
+      value.textContent = `${access} | ${price}`;
+      if (access === "blocked") value.style.color = "var(--bc-yellow)";
+    }
+  }
   if (settings) {
     const actions = container.createDiv({ cls: "brain-console__local-app-actions" });
     const brainCoreUrl = settings.brainCoreUrl;
@@ -3302,27 +9169,6 @@ function renderAiModelSelectorCard(state, settings, onRefresh) {
   container.createEl("p", { cls: "brain-console__detail", text: `Last checked: ${new Date(selector.lastChecked).toLocaleTimeString()}` });
   return container;
 }
-function renderSchedulerCard(state) {
-  const container = document.createElement("div");
-  container.className = "brain-console__card-content";
-  const status = state.schedulerStatus?.latestRunStatus ?? "unknown";
-  const metric = container.createEl("div", { cls: "brain-console__metric", text: status });
-  if (status === "failed") metric.style.color = "#ef4444";
-  if (status === "ok") metric.style.color = "#22c55e";
-  container.createEl("p", { cls: "brain-console__detail", text: `${state.schedulerStatus?.latestRunAt ? formatRelativeTime(state.schedulerStatus.latestRunAt) : "never"}` });
-  return container;
-}
-function renderBrainCoreCard(state) {
-  const container = document.createElement("div");
-  container.className = "brain-console__card-content";
-  const online = state.status?.ok === true;
-  const metric = container.createEl("div", { cls: "brain-console__metric", text: online ? "online" : "offline" });
-  if (online) metric.style.color = "#22c55e";
-  else metric.style.color = "#ef4444";
-  container.createEl("p", { cls: "brain-console__detail", text: `v${state.status?.version ?? "?"}` });
-  container.createEl("p", { cls: "brain-console__detail", text: `exec: ${state.executionReadiness?.executionEnabled ? "on" : "off"}` });
-  return container;
-}
 function renderLocalAppsCard(state, settings, onRefresh) {
   const container = document.createElement("div");
   container.className = "brain-console__apps-page";
@@ -3331,6 +9177,7 @@ function renderLocalAppsCard(state, settings, onRefresh) {
   const actionStatus = state.localAppsActionStatus;
   const orchestrator = state.localAppsOrchestrator;
   const onboarding = state.localAppsOnboardingChecklist;
+  const operatorSummary = state.localAppsOperatorSummary;
   const apps = dashboard?.apps ?? (state.localApps ?? []).map((app) => ({
     id: app.id,
     name: app.name,
@@ -3351,6 +9198,7 @@ function renderLocalAppsCard(state, settings, onRefresh) {
     lastCheckedAt: (/* @__PURE__ */ new Date()).toISOString(),
     notes: ""
   }));
+  const visibleApps = apps.filter((app) => app.id !== "mind-steward");
   const header = container.createDiv({ cls: "brain-console__apps-header" });
   renderCardSectionHeading(header, "Local Apps", "Compact operations inventory with controlled Brain Core actions.");
   if (dashboard) {
@@ -3363,17 +9211,17 @@ function renderLocalAppsCard(state, settings, onRefresh) {
     renderMicroStat(strip, "Controls", dashboard.safety.startStopControlsEnabled ? "Enabled" : "Disabled");
   } else {
     const strip = container.createDiv({ cls: "brain-console__apps-summary-strip" });
-    renderMicroStat(strip, "Apps", String(apps.length));
+    renderMicroStat(strip, "Apps", String(visibleApps.length));
     renderMicroStat(strip, "Controls", "Unknown");
   }
-  if (apps.length === 0) {
+  if (visibleApps.length === 0) {
     container.appendChild(renderEmptyState("No local apps available", "Check the canonical inventory source."));
     return container;
   }
   const definitionsById = new Map((orchestrator?.definitions ?? []).map((definition) => [definition.id, definition]));
   const controlsEnabled = dashboard?.actionPolicy.status === "enabled" || readiness?.ready === true || readiness != null && readiness.criteria?.every((c) => c.satisfied || c.id === "audit-logging");
   const list = container.createDiv({ cls: "brain-console__apps-operations-grid" });
-  apps.forEach((app) => {
+  visibleApps.forEach((app) => {
     const definition = definitionsById.get(app.id);
     const pendingAction = localAppPendingActions.get(app.id);
     const item = list.createDiv({ cls: "brain-console__local-app-card brain-console__local-app-card--micro" });
@@ -3402,7 +9250,7 @@ function renderLocalAppsCard(state, settings, onRefresh) {
       const startLabel = isRunning ? "Restart" : "Start";
       const startAction = isRunning ? "restart" : "start";
       const startEnabled = !pendingAction && controlsEnabled && (isRunning ? app.restartSupported : app.startSupported);
-      const startBtn = actions.createEl("button", { text: startLabel, cls: "brain-console__local-app-action" });
+      const startBtn = actions.createEl("button", { text: startLabel, cls: "brain-console__local-app-action brain-console__local-app-action--start" });
       startBtn.addClass(startEnabled ? "is-enabled" : "is-disabled");
       if (pendingAction) startBtn.addClass("is-pending");
       startBtn.disabled = !startEnabled;
@@ -3415,7 +9263,7 @@ function renderLocalAppsCard(state, settings, onRefresh) {
     }
     if (app.stopSupported) {
       const stopEnabled = !pendingAction && controlsEnabled && app.stopSupported;
-      const stopBtn = actions.createEl("button", { text: "Stop", cls: "brain-console__local-app-action" });
+      const stopBtn = actions.createEl("button", { text: "Stop", cls: "brain-console__local-app-action brain-console__local-app-action--stop" });
       stopBtn.addClass(stopEnabled ? "is-enabled" : "is-disabled");
       if (pendingAction) stopBtn.addClass("is-pending");
       stopBtn.disabled = !stopEnabled;
@@ -3434,105 +9282,6 @@ function renderLocalAppsCard(state, settings, onRefresh) {
       });
     }
   });
-  const lower = container.createDiv({ cls: "brain-console__apps-detail-row" });
-  if (dashboard) {
-    const policyCard = lower.createDiv({ cls: "brain-console__local-app-readiness" });
-    policyCard.createEl("div", { cls: "brain-console__section-heading", text: "App Operations Policy" });
-    policyCard.appendChild(renderStatusBadge(dashboard.actionPolicy.status, dashboard.actionPolicy.status === "enabled" ? "ok" : "warn"));
-    renderCompactStatGrid(policyCard, [
-      { label: "Path", value: dashboard.actionPolicy.executionPath },
-      { label: "Confirm", value: dashboard.actionPolicy.requiresConfirmation ? "Required" : "No" },
-      { label: "Shell", value: dashboard.safety.pluginExecutesShell ? "Plugin shell" : "Never" }
-    ]);
-    policyCard.createEl("div", { cls: "brain-console__safety-note", text: "Brain Console posts only canonical app id + start/stop/restart to Brain Core." });
-  }
-  if (readiness) {
-    const readinessCard = lower.createDiv({ cls: "brain-console__local-app-readiness" });
-    readinessCard.appendChild(renderStatusBadge(readiness.ready ? "Ready" : "Not ready", readiness.ready ? "ok" : "warn"));
-    readinessCard.createEl("div", { cls: "brain-console__section-heading", text: "Action Readiness" });
-    renderCompactStatGrid(readinessCard, [
-      { label: "Satisfied", value: String(readiness.satisfiedCount) },
-      { label: "Unsatisfied", value: String(readiness.unsatisfiedCount) }
-    ]);
-    readinessCard.createEl("div", { cls: "brain-console__safety-note", text: readiness.nextSafeStep });
-  }
-  if (onboarding) {
-    const onboardingCard = lower.createDiv({ cls: "brain-console__local-app-readiness" });
-    onboardingCard.createEl("div", { cls: "brain-console__section-heading", text: "Onboarding Standards" });
-    renderCompactStatGrid(onboardingCard, [
-      { label: "Required fields", value: String(onboarding.requiredFields.length) },
-      { label: "Steps", value: String(onboarding.onboardingSteps.length) }
-    ]);
-    onboardingCard.createEl("div", { cls: "brain-console__safety-note", text: onboarding.nextSafeStep });
-  }
-  const operationalReadiness = state.localAppsOperationalReadiness;
-  if (operationalReadiness) {
-    const orCard = lower.createDiv({ cls: "brain-console__local-app-readiness" });
-    orCard.createEl("div", { cls: "brain-console__section-heading", text: "Operational Readiness" });
-    const reachableLabel = operationalReadiness.reachableCount > 0 ? "ok" : "muted";
-    orCard.appendChild(renderStatusBadge(
-      `${operationalReadiness.reachableCount}/${operationalReadiness.appCount} reachable`,
-      reachableLabel
-    ));
-    renderCompactStatGrid(orCard, [
-      { label: "Reachable", value: String(operationalReadiness.reachableCount) },
-      { label: "Unreachable", value: String(operationalReadiness.unreachableCount) },
-      { label: "Not configured", value: String(operationalReadiness.notConfiguredCount) },
-      { label: "Check ms", value: String(operationalReadiness.totalCheckDurationMs) }
-    ]);
-    const reachableItems = operationalReadiness.items.filter((item) => item.status === "reachable");
-    const unreachableItems = operationalReadiness.items.filter((item) => item.status === "unreachable");
-    if (reachableItems.length > 0) {
-      const reachableList = orCard.createDiv({ cls: "brain-console__or-item-list" });
-      reachableList.createEl("div", { cls: "brain-console__or-item-list-label", text: "Reachable" });
-      for (const item of reachableItems) {
-        const line = reachableList.createDiv({ cls: "brain-console__or-item-line brain-console__or-item-line--reachable" });
-        line.createEl("span", { cls: "brain-console__or-item-name", text: item.appName });
-        if (item.durationMs !== void 0) {
-          line.createEl("span", { cls: "brain-console__or-item-duration", text: `${item.durationMs}ms` });
-        }
-      }
-    }
-    if (unreachableItems.length > 0) {
-      const unreachableList = orCard.createDiv({ cls: "brain-console__or-item-list" });
-      unreachableList.createEl("div", { cls: "brain-console__or-item-list-label", text: "Unreachable" });
-      for (const item of unreachableItems) {
-        const line = unreachableList.createDiv({ cls: "brain-console__or-item-line brain-console__or-item-line--unreachable" });
-        line.createEl("span", { cls: "brain-console__or-item-name", text: item.appName });
-        line.createEl("span", { cls: "brain-console__or-item-message", text: item.message });
-      }
-    }
-    const checkedAt = operationalReadiness.generatedAt;
-    orCard.createEl("div", { cls: "brain-console__safety-note", text: `Checked at ${formatIsoTime(checkedAt)} \xB7 read-only health probes only.` });
-  }
-  const operatorSummary = state.localAppsOperatorSummary;
-  if (operatorSummary) {
-    const osCard = lower.createDiv({ cls: "brain-console__local-app-readiness" });
-    osCard.createEl("div", { cls: "brain-console__section-heading", text: "Operator Summary" });
-    const attentionLabel = operatorSummary.attentionCount > 0 ? "warn" : "ok";
-    osCard.appendChild(renderStatusBadge(
-      operatorSummary.attentionCount > 0 ? `${operatorSummary.attentionCount} apps need attention` : "All apps nominal",
-      attentionLabel
-    ));
-    renderCompactStatGrid(osCard, [
-      { label: "Apps", value: String(operatorSummary.appCount) },
-      { label: "Executable actions", value: String(operatorSummary.executableActionCount) },
-      { label: "Disabled actions", value: String(operatorSummary.disabledActionCount) },
-      { label: "Reachable", value: String(operatorSummary.reachableCount) },
-      { label: "Unreachable", value: String(operatorSummary.unreachableCount) },
-      { label: "Not configured", value: String(operatorSummary.notConfiguredCount) }
-    ]);
-    if (operatorSummary.topAttentionItems.length > 0) {
-      const attentionList = osCard.createDiv({ cls: "brain-console__or-item-list" });
-      attentionList.createEl("div", { cls: "brain-console__or-item-list-label", text: "Needs attention" });
-      for (const item of operatorSummary.topAttentionItems) {
-        const line = attentionList.createDiv({ cls: "brain-console__or-item-line brain-console__or-item-line--unreachable" });
-        line.createEl("span", { cls: "brain-console__or-item-name", text: item.appName });
-        line.createEl("span", { cls: "brain-console__or-item-message", text: item.nextRecommendedAction });
-      }
-    }
-    osCard.createEl("div", { cls: "brain-console__safety-note", text: "Read-only operator summary \xB7 no lifecycle actions triggered." });
-  }
   return container;
 }
 function renderMicroStat(parent, label, value) {
@@ -3571,11 +9320,7 @@ async function requestLocalAppActionFromCard(brainCoreUrl, appId, appLabel, acti
     void onRefresh?.();
   }, nextPoll);
 }
-function formatIsoTime(value) {
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? value : date.toLocaleString();
-}
-function renderOfflineState(shell, brainCoreUrl, statusError, endpointErrors) {
+function renderOfflineState(shell, brainCoreUrl, statusError, endpointErrors, onRefresh, onBrainCoreRestart) {
   const offline = shell.createDiv({ cls: "brain-console__offline-panel" });
   offline.createEl("h2", { text: "Connection lost" });
   offline.createEl("p", { text: "Brain Core is not responding. Trying to reach:" });
@@ -3602,26 +9347,21 @@ function renderOfflineState(shell, brainCoreUrl, statusError, endpointErrors) {
   steps.createEl("li", { text: "Verify Brain Core terminal is still running" });
   steps.createEl("li", { text: "Test: curl http://localhost:4877/status" });
   steps.createEl("li", { text: "If still offline, try: Settings \u2192 Brain Core URL \u2192 http://127.0.0.1:4877" });
-  steps.createEl("li", { text: "Click Refresh" });
+  steps.createEl("li", { text: "If Brain Core still responds, use the top-right \u21BB control to request a verified restart" });
   const refreshBtn = offline.createEl("button", { text: "Refresh" });
   refreshBtn.addClass("brain-console__btn-main");
-}
-function renderOrchestratorsCard(state, snapshot) {
-  const card = document.createElement("div");
-  if (!state.orchestrators) {
-    card.textContent = "No data";
-    return card;
+  refreshBtn.setAttribute("type", "button");
+  if (onRefresh) {
+    refreshBtn.addEventListener("click", () => onRefresh());
   }
-  const list = card.createEl("ul");
-  list.createEl("li", { text: `Total: ${snapshot.orchestratorCount}` });
-  list.createEl("li", { text: `Legacy: ${snapshot.legacySystemCount}` });
-  const operationalCount = state.orchestrators.filter((o) => o.lifecycle === "operational").length;
-  const problematicCount = state.orchestrators.filter((o) => ["migrating", "partial"].includes(o.lifecycle ?? "")).length;
-  list.createEl("li", { text: `Operational: ${operationalCount}` });
-  if (problematicCount > 0) {
-    list.createEl("li", { text: `Needs Attention: ${problematicCount}`, cls: "brain-console__list-warning" });
+  if (onBrainCoreRestart) {
+    const restartBtn = offline.createEl("button", { text: "Restart Brain Core" });
+    restartBtn.addClass("brain-console__btn-main");
+    restartBtn.setAttribute("type", "button");
+    restartBtn.addEventListener("click", () => {
+      void onBrainCoreRestart();
+    });
   }
-  return card;
 }
 function renderBrainnOSRoadmapsCard() {
   const card = document.createElement("div");
@@ -3690,50 +9430,39 @@ function renderPlatformsCard(state, snapshot) {
   list.createEl("li", { text: `Local: ${localCount}` });
   return card;
 }
-function renderVideoOrchestratorCard(state, snapshot) {
-  const card = document.createElement("div");
-  if (!state.videoOrchestratorStatus) {
-    card.textContent = "No video status available";
-    return card;
-  }
-  const progress = state.videoOrchestratorStatus.moduleProgress ?? {};
-  const platforms = safeArray(state.videoOrchestratorStatus.supportedPlatforms);
-  const list = card.createEl("ul");
-  list.createEl("li", { text: `Progress: ${safeNumber(progress.percent, 0)}%` });
-  list.createEl("li", { text: `Implemented: ${safeNumber(progress.implemented, 0)}/${safeNumber(progress.total, 0)}` });
-  const partialCount = safeNumber(progress.partial, 0);
-  if (partialCount > 0) {
-    list.createEl("li", { text: `Partial: ${partialCount}` });
-  }
-  const plannedCount = safeNumber(progress.planned, 0);
-  if (plannedCount > 0) {
-    list.createEl("li", { text: `Planned: ${plannedCount}` });
-  }
-  list.createEl("li", { text: `Platforms: ${safeCount(platforms)}` });
-  return card;
+function mapStatusToTone(status) {
+  const statusLower = (status || "").toLowerCase();
+  if (["running", "ok", "completed", "available"].includes(statusLower)) return "ok";
+  if (["blocked", "error", "failed", "rejected"].includes(statusLower)) return "error";
+  if (["pending", "planned", "waiting_approval"].includes(statusLower)) return "warn";
+  return "neutral";
+}
+function formatCostUsd(cents) {
+  const dollars = (cents / 100).toFixed(2);
+  return dollars === "0.00" ? "-" : `$${dollars}`;
 }
 function renderAgentViewCard(state, snapshot) {
   const card = document.createElement("div");
-  const list = card.createEl("ul");
-  const consoleSummary = state.agentConsole;
-  if (consoleSummary) {
-    list.createEl("li", { text: `Active runs: ${consoleSummary.activeRunCount}` });
-    list.createEl("li", { text: `Planned runs: ${consoleSummary.plannedRunCount}` });
-    list.createEl("li", { text: `Blocked runs: ${consoleSummary.blockedRunCount}` });
-    list.createEl("li", { text: `Executor selections: ${consoleSummary.executorSelectionCount}` });
-    list.createEl("li", { text: `Pending approvals: ${consoleSummary.approvalPendingCount}` });
-    list.createEl("li", { text: `Next: ${consoleSummary.nextSafeStep}` });
-  } else {
-    list.createEl("li", { text: `Total agents: ${snapshot.agentCount}` });
-    list.createEl("li", { text: `External executors: ${snapshot.externalExecutorCount}` });
-    if (snapshot.plannedAgentCount > 0) {
-      list.createEl("li", { text: `Planned: ${snapshot.plannedAgentCount}` });
-    }
-    if (snapshot.mindStewardAgentSummary) {
-      list.createEl("li", { text: `Mind Steward: ${snapshot.mindStewardAgentSummary.health}` });
-    }
+  if (!state.agents || state.agents.length === 0) {
+    card.createEl("div", { cls: "brain-console__list-note", text: "No agents available." });
+    return card;
   }
-  list.createEl("li", { text: "Agent runtime is read-only (planned)", cls: "brain-console__list-note" });
+  renderCompactStatGrid(card, [
+    { label: "Total Agents", value: String(state.agents.length) },
+    { label: "Available", value: String(state.agents.filter((a) => a.status === "available").length) },
+    { label: "Planned", value: String(state.agents.filter((a) => a.status === "planned").length) }
+  ]);
+  const list = card.createEl("ul", { cls: "brain-console__list" });
+  for (const agent of state.agents.slice(0, 10)) {
+    const li = list.createEl("li");
+    const healthDot = li.createEl("span", { cls: "brain-console__stat-label" });
+    healthDot.textContent = agent.health === "ok" ? "\u25CF " : agent.health === "warning" ? "\u25D0 " : "\u25CB ";
+    li.createEl("strong", { text: agent.name });
+    li.appendText(` (${agent.role})`);
+    const statusBadge = li.createEl("span", { cls: "bc-badge" });
+    statusBadge.textContent = agent.status;
+    statusBadge.classList.add(`bc-badge--${mapStatusToTone(agent.status)}`);
+  }
   return card;
 }
 function renderApprovalDetailCard(detail) {
@@ -3781,87 +9510,33 @@ function renderMaintenancePreviewDetailCard(detail) {
 }
 function renderAgentViewLedgerCard(state) {
   const el = document.createElement("div");
-  const note = el.createEl("div", { cls: "brain-console__list-note" });
-  note.textContent = "\u25CF Read-only ledger \xB7 Approval-gated \xB7 Execution disabled";
-  const counts = el.createDiv({ cls: "brain-console__row" });
-  counts.createEl("dt", { text: "Total Runs" });
-  counts.createEl("dd", { text: `${state.agentRuns?.length ?? 0}` });
-  if (state.agentRuns && state.agentRuns.length > 0) {
-    const blocked = state.agentRuns.filter((r) => r.status === "blocked").length;
-    const completed = state.agentRuns.filter((r) => r.status === "completed").length;
-    if (blocked > 0) {
-      const blockedRow = el.createDiv({ cls: "brain-console__row" });
-      blockedRow.createEl("dt", { text: "Blocked" });
-      blockedRow.createEl("dd", { text: `${blocked}`, cls: "brain-console__list-warning" });
-    }
-    if (completed > 0) {
-      const completedRow = el.createDiv({ cls: "brain-console__row" });
-      completedRow.createEl("dt", { text: "Completed" });
-      completedRow.createEl("dd", { text: `${completed}`, cls: "brain-console__list-item-highlight" });
-    }
-  }
-  if (state.agentRuns && state.agentRuns.length > 0) {
-    el.createEl("hr");
-    el.createEl("strong", { text: "Latest Runs (read-only):" });
-    const list = el.createEl("ul", { cls: "brain-console__list" });
-    const maxRuns = Math.min(5, state.agentRuns.length);
-    for (let i = 0; i < maxRuns; i++) {
-      const run = state.agentRuns[i];
-      const li = list.createEl("li");
-      const title = li.createEl("strong", { text: run.title });
-      li.appendText(` (${run.agentId})`);
-      const details = li.createEl("div", { cls: "brain-console__list-note" });
-      const parts = [];
-      parts.push(run.status);
-      if (run.ageMinutes !== void 0) parts.push(`${run.ageMinutes}m old`);
-      if (run.targetId) parts.push(`\u2192 ${run.targetId}`);
-      details.textContent = parts.join(" \xB7 ");
-      if (run.blockers.length > 0) {
-        const blocker = li.createEl("div", { cls: "brain-console__list-warning", text: `\u26A0 ${run.blockers[0]}` });
-      }
-      const safety = li.createEl("div", { cls: "brain-console__list-note" });
-      const chips = [];
-      if (!run.safety.writesToMind) chips.push("no Mind write");
-      if (!run.safety.executesShell) chips.push("no shell");
-      if (!run.safety.mutatesRuntime) chips.push("no runtime mutation");
-      if (!run.safety.executionEnabled) chips.push("execution disabled");
-      if (run.safety.requiresApproval) chips.push("approval required");
-      safety.textContent = chips.join(" \xB7 ");
-    }
-  } else {
+  if (!state.agentRuns || state.agentRuns.length === 0) {
     el.createEl("div", { cls: "brain-console__list-note", text: "No agent runs available yet." });
-  }
-  const footer = el.createEl("div", { cls: "brain-console__list-note" });
-  footer.innerHTML = "<em>Agent runtime is not autonomous. This view is a read-only ledger derived from approvals, reports, and status scans.</em>";
-  return el;
-}
-function renderApprovalAuditTrailCard(state) {
-  const el = document.createElement("div");
-  if (!state.agentEvents || state.agentEvents.length === 0) {
-    el.createEl("div", { cls: "brain-console__list-note", text: "No approval audit events available yet." });
     return el;
   }
+  renderCompactStatGrid(el, [
+    { label: "Total Runs", value: String(state.agentRuns.length) },
+    { label: "Blocked", value: String(state.agentRuns.filter((r) => r.status === "blocked").length) },
+    { label: "Completed", value: String(state.agentRuns.filter((r) => r.status === "completed").length) }
+  ]);
   const list = el.createEl("ul", { cls: "brain-console__list" });
-  const maxEvents = Math.min(8, state.agentEvents.length);
-  for (let i = 0; i < maxEvents; i++) {
-    const event = state.agentEvents[i];
+  const maxRuns = Math.min(8, state.agentRuns.length);
+  for (let i = 0; i < maxRuns; i++) {
+    const run = state.agentRuns[i];
     const li = list.createEl("li");
-    const typeSpan = li.createEl("span", { cls: "brain-console__list-item-highlight" });
-    typeSpan.textContent = event.type.toUpperCase();
-    if (event.severity === "error") {
-      li.classList.add("brain-console__list-error");
-    } else if (event.severity === "warning") {
-      li.classList.add("brain-console__list-warning");
-    }
-    const meta = li.createEl("div", { cls: "brain-console__list-note" });
+    const badge = li.createEl("span", { cls: "bc-badge" });
+    badge.textContent = run.status.toUpperCase();
+    badge.classList.add(`bc-badge--${mapStatusToTone(run.status)}`);
+    li.createEl("strong", { text: run.title });
+    li.appendText(` (${run.agentId})`);
+    const details = li.createEl("div", { cls: "brain-console__list-note" });
     const parts = [];
-    if (event.createdAt) {
-      const timeStr = formatRelativeTime(new Date(event.createdAt));
-      parts.push(timeStr);
+    if (run.ageMinutes !== void 0) parts.push(`${run.ageMinutes}m old`);
+    if (run.targetId) parts.push(`\u2192 ${run.targetId}`);
+    if (parts.length > 0) details.textContent = parts.join(" \xB7 ");
+    if (run.blockers.length > 0) {
+      const blockerSpan = li.createEl("div", { cls: "brain-console__list-error", text: `\u26A0 ${run.blockers[0]}` });
     }
-    if (event.relatedApprovalId) parts.push(`#${event.relatedApprovalId}`);
-    if (event.summary) parts.push(event.summary);
-    meta.textContent = parts.join(" \xB7 ");
   }
   return el;
 }
@@ -3911,6 +9586,104 @@ function renderRecoveryPanelCard(state) {
     if (!item.safety.canAutoFix) safetyChips.push("no auto-fix");
     if (!item.safety.writesToMind) safetyChips.push("no Mind write");
     safetyDiv.textContent = safetyChips.join(" \xB7 ");
+  }
+  return el;
+}
+function renderAgentTaskGraphCard(state) {
+  const el = document.createElement("div");
+  const taskGraph = state.agentConsole?.taskGraph;
+  if (!taskGraph || !taskGraph.tasks || taskGraph.tasks.length === 0) {
+    el.createEl("div", { cls: "brain-console__list-note", text: "No task graph available." });
+    return el;
+  }
+  renderCompactStatGrid(el, [
+    { label: "Total Tasks", value: String(taskGraph.taskCount ?? 0) },
+    { label: "Done", value: String(taskGraph.completedCount ?? 0) },
+    { label: "Blocked", value: String(taskGraph.blockedCount ?? 0) },
+    { label: "Pending", value: String(taskGraph.pendingCount ?? 0) }
+  ]);
+  const list = el.createEl("ul", { cls: "brain-console__list" });
+  const maxTasks = Math.min(8, taskGraph.tasks.length);
+  for (let i = 0; i < maxTasks; i++) {
+    const task = taskGraph.tasks[i];
+    const li = list.createEl("li");
+    const badge = li.createEl("span", { cls: "bc-badge" });
+    badge.textContent = task.status.toUpperCase();
+    badge.classList.add(`bc-badge--${mapStatusToTone(task.status)}`);
+    li.createEl("strong", { text: task.title });
+    li.appendText(` (${task.taskId})`);
+    if (task.approvalRequired) {
+      li.appendText(" [approval]");
+    }
+    if (task.dependsOn && task.dependsOn.length > 0) {
+      const depDiv = li.createEl("div", { cls: "brain-console__list-note", text: `depends on: ${task.dependsOn.join(", ")}` });
+    }
+  }
+  if (taskGraph.nextSafeStep) {
+    el.createEl("div", { cls: "brain-console__list-note", text: `\u2192 Next: ${taskGraph.nextSafeStep}` });
+  }
+  return el;
+}
+function renderApprovalGatesCard(state) {
+  const el = document.createElement("div");
+  const gates = state.agentConsole?.approvalGates;
+  if (!gates) {
+    el.createEl("div", { cls: "brain-console__list-note", text: "No approval gate data available." });
+    return el;
+  }
+  renderCompactStatGrid(el, [
+    { label: "Pending", value: String(gates.pendingCount ?? 0) },
+    { label: "Approved", value: String(gates.approvedCount ?? 0) },
+    { label: "Rejected", value: String(gates.rejectedCount ?? 0) },
+    { label: "Expired", value: String(gates.expiredCount ?? 0) }
+  ]);
+  if (gates.supportedApprovalKinds && gates.supportedApprovalKinds.length > 0) {
+    el.createEl("strong", { text: "Supported kinds:" });
+    const kindList = el.createEl("ul", { cls: "brain-console__list" });
+    for (const kind of gates.supportedApprovalKinds) {
+      kindList.createEl("li", { text: kind });
+    }
+  }
+  if (gates.blockedApprovalKinds && gates.blockedApprovalKinds.length > 0) {
+    el.createEl("strong", { text: "Blocked kinds:" });
+    const blockedList = el.createEl("ul", { cls: "brain-console__list" });
+    for (const kind of gates.blockedApprovalKinds) {
+      const li = blockedList.createEl("li", { text: kind });
+      li.classList.add("brain-console__list-error");
+    }
+  }
+  return el;
+}
+function renderAgentCostCard(state) {
+  const el = document.createElement("div");
+  const cost = state.agentCostSummary;
+  if (!cost) {
+    el.createEl("div", { cls: "brain-console__list-note", text: "No cost data available." });
+    return el;
+  }
+  const budgetDiv = el.createDiv();
+  const budgetBadge = budgetDiv.createEl("span", { cls: "bc-badge" });
+  budgetBadge.textContent = cost.budget?.status?.toUpperCase() ?? "UNKNOWN";
+  budgetBadge.classList.add(`bc-badge--${mapStatusToTone(cost.budget?.status ?? "unknown")}`);
+  if (cost.budget) {
+    renderCompactStatGrid(el, [
+      { label: "Today", value: formatCostUsd(cost.todayEstimatedUsd) },
+      { label: "Week", value: formatCostUsd(cost.weekEstimatedUsd) },
+      { label: "Month", value: formatCostUsd(cost.monthEstimatedUsd) },
+      { label: "Total", value: formatCostUsd(cost.totalEstimatedUsd) }
+    ]);
+    el.createEl("strong", { text: "Budget Status:" });
+    const budgetList = el.createEl("ul", { cls: "brain-console__list" });
+    budgetList.createEl("li", { text: `Spent: ${formatCostUsd(cost.budget.spentUsd)}` });
+    budgetList.createEl("li", { text: `Threshold: ${formatCostUsd(cost.budget.thresholdUsd)}` });
+    budgetList.createEl("li", { text: `Remaining: ${formatCostUsd(cost.budget.remainingUsd)}` });
+  }
+  if (cost.topExpensiveTasks && cost.topExpensiveTasks.length > 0) {
+    el.createEl("strong", { text: "Top Expenses:" });
+    const topList = el.createEl("ul", { cls: "brain-console__list" });
+    for (const task of cost.topExpensiveTasks.slice(0, 3)) {
+      topList.createEl("li", { text: `${task.taskId}: ${formatCostUsd(task.estimatedCostUsd)}` });
+    }
   }
   return el;
 }
@@ -4640,6 +10413,9 @@ function renderAccountsSection(content, state, settings) {
   const catalog = state.credentialCatalog;
   const header = content.createDiv({ cls: "bc-accounts-header" });
   header.createEl("h2", { cls: "bc-accounts-title", text: "Accounts & Credentials" });
+  renderVOContextBar(content, state);
+  const voGrid = content.createDiv({ cls: "brain-console__dashboard-grid" });
+  renderCard(voGrid, "VO Account Registry", renderVOAccountsRegistryCard(state), { wide: true });
   if (!catalog) {
     content.createEl("p", { cls: "brain-console__empty", text: "Credential catalog unavailable \u2014 Brain Core must be online." });
     return;
@@ -5124,7 +10900,7 @@ function renderProjectPlatformCard(parent, platform, projectId, brainCoreUrl) {
 
 // src/main.ts
 var VIEW_TYPE = "brain-console-view";
-var BRAIN_CONSOLE_BUILD_ID = "v2.15";
+var BRAIN_CONSOLE_BUILD_ID = "v2.18";
 var BrainConsolePlugin = class extends import_obsidian2.Plugin {
   settings = DEFAULT_BRAIN_CONSOLE_SETTINGS;
   async onload() {
@@ -5194,6 +10970,8 @@ var BrainConsolePlugin = class extends import_obsidian2.Plugin {
     }
   }
 };
+var REPO_ROOT = "/Users/Office/Repos/stevewesthoek/brain";
+var BRAIN_CORE_RESTART_HELPER = "/Users/Office/Repos/stevewesthoek/brain/projects/brain-core/scripts/dev/restart-brain-core.mjs";
 var BrainConsoleSettingTab = class extends import_obsidian2.PluginSettingTab {
   constructor(app, plugin) {
     super(app, plugin);
@@ -5224,7 +11002,6 @@ var BrainConsoleView = class extends import_obsidian2.ItemView {
   activeSection = "overview";
   cachedState = null;
   isRefreshing = false;
-  heartbeatInterval = null;
   constructor(leaf, plugin) {
     super(leaf);
     this.plugin = plugin;
@@ -5242,7 +11019,7 @@ var BrainConsoleView = class extends import_obsidian2.ItemView {
     const header = state.createDiv({ cls: "brain-console__header" });
     header.createEl("h2", { text: "Brain Console" });
     header.createEl("span", { cls: "brain-console__build-marker", text: `build ${BRAIN_CONSOLE_BUILD_ID}` });
-    state.createDiv({ cls: "brain-console__status-line", text: "Manual refresh + Brain Core allowlisted local app actions \xB7 plugin never executes shell" });
+    state.createDiv({ cls: "brain-console__status-line", text: "Manual refresh + Brain Core restart verification + allowlisted local app actions \xB7 plugin never executes shell" });
     state.createDiv({ cls: "brain-console__install-check", text: "If build marker above is not visible, the installed plugin bundle may be stale." });
     const actions = state.createDiv({ cls: "brain-console__actions" });
     const refreshButton = actions.createEl("button", { text: "Manual refresh", cls: "brain-console__refresh-btn" });
@@ -5286,39 +11063,125 @@ var BrainConsoleView = class extends import_obsidian2.ItemView {
     }
   }
   startHeartbeat() {
-    if (this.heartbeatInterval !== null) return;
-    this.heartbeatInterval = this.registerInterval(
-      window.setInterval(async () => {
-        if (this.isRefreshing) return;
-        if (this.activeSection === "accounts") {
-          const settings = await this.plugin.getSettings();
-          this.cachedState = await loadBrainConsoleViewState(settings);
-          return;
-        }
-        await this.fullRefresh();
-      }, 3e3)
-    );
   }
   /** Full refresh: reload all Brain Core data and re-render */
   async fullRefresh() {
     const settings = await this.plugin.getSettings();
-    this.cachedState = await loadBrainConsoleViewState(settings);
-    this.rerenderWithCachedState();
+    try {
+      this.cachedState = await loadBrainConsoleViewState(settings);
+      this.rerenderWithCachedState();
+    } catch (error) {
+      console.error("Brain Console refresh failed", error);
+      if (!this.cachedState) {
+        throw error;
+      }
+    }
   }
   /** Re-render using cached state (instant tab switch) */
   rerenderWithCachedState() {
     if (!this.cachedState) return;
     const settings = this.plugin.settings;
     this.cachedState.activeSection = this.activeSection;
-    renderBrainConsoleView(this.contentEl, this.cachedState, settings, () => {
-      void this.fullRefresh();
-    });
+    const scrollArea = this.contentEl.querySelector(".brain-console__scroll-area");
+    const savedScrollTop = scrollArea?.scrollTop ?? 0;
+    renderBrainConsoleView(
+      this.contentEl,
+      this.cachedState,
+      settings,
+      () => {
+        void this.fullRefresh();
+      },
+      () => this.restartBrainCore()
+    );
+    if (savedScrollTop > 0) {
+      const newScrollArea = this.contentEl.querySelector(".brain-console__scroll-area");
+      if (newScrollArea) newScrollArea.scrollTop = savedScrollTop;
+    }
   }
   async refresh() {
     try {
       await this.fullRefresh();
     } catch (error) {
       this.renderOpenFallback(error);
+    }
+  }
+  async restartBrainCore() {
+    if (this.isRefreshing) return;
+    this.isRefreshing = true;
+    try {
+      const settings = await this.plugin.getSettings();
+      const normalizedBaseUrl = normalizeBrainCoreUrl(settings.brainCoreUrl).value;
+      new import_obsidian2.Notice("Brain Core restart requested. Waiting for stop, port-free, and restart verification...");
+      const request = await requestBrainCoreRestart(normalizedBaseUrl);
+      if (request.error || !request.value) {
+        const fallback = await this.restartBrainCoreLocally(normalizedBaseUrl, request.detail ?? request.error);
+        if (!fallback.ok) {
+          new import_obsidian2.Notice(`Brain Core restart failed: ${fallback.error}`);
+          return;
+        }
+        await this.plugin.reopenConsoleFresh();
+        await this.fullRefresh();
+        new import_obsidian2.Notice("Brain Core restart verified: service is back online.");
+        return;
+      }
+      if (!request.value.accepted) {
+        new import_obsidian2.Notice(`Brain Core restart was not accepted: ${request.value.message}`);
+        return;
+      }
+      const verified = await waitForBrainCoreStatus(normalizedBaseUrl);
+      if (verified.error || !verified.value?.ok) {
+        const message = verified.error ?? verified.detail ?? "Brain Core did not return an ok status.";
+        new import_obsidian2.Notice(`Brain Core restart did not verify: ${message}`);
+        return;
+      }
+      new import_obsidian2.Notice("Brain Core restart verified: service is back online.");
+      await this.recoverConsoleAfterRestart(normalizedBaseUrl);
+    } catch (error) {
+      console.error("Brain Core restart failed", error);
+      new import_obsidian2.Notice(`Brain Core restart failed: ${error instanceof Error ? error.message : String(error)}`);
+    } finally {
+      this.isRefreshing = false;
+    }
+  }
+  async recoverConsoleAfterRestart(baseUrl) {
+    const recoveryAttempts = 3;
+    for (let attempt = 1; attempt <= recoveryAttempts; attempt += 1) {
+      await this.plugin.reopenConsoleFresh();
+      try {
+        await this.fullRefresh();
+        const currentStatus = await waitForBrainCoreStatus(baseUrl, 15e3, 1e3);
+        if (!currentStatus.error && currentStatus.value?.ok) {
+          return;
+        }
+      } catch (error) {
+        console.error(`Brain Console recovery refresh attempt ${attempt} failed`, error);
+      }
+    }
+    throw new Error("Brain Console did not recover after verified Brain Core restart.");
+  }
+  async restartBrainCoreLocally(baseUrl, reason) {
+    try {
+      const requireFn = globalThis.require ?? (0, eval)("require");
+      const { execFile } = requireFn("child_process");
+      const { promisify } = requireFn("util");
+      const execFileAsync = promisify(execFile);
+      const processEnv = globalThis.process?.env ?? {};
+      const result = await execFileAsync("/opt/homebrew/bin/node", [BRAIN_CORE_RESTART_HELPER, "restart"], {
+        cwd: REPO_ROOT,
+        env: {
+          ...processEnv,
+          BRAIN_CORE_HOST: normalizeBrainCoreUrl(baseUrl).value.replace(/^https?:\/\//, "").split(":")[0] ?? "127.0.0.1",
+          BRAIN_CORE_PORT: "4877"
+        },
+        maxBuffer: 10 * 1024 * 1024,
+        timeout: 18e4
+      });
+      console.log("Brain Core local restart output", result.stdout);
+      return { ok: true };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error("Brain Core local restart failed", reason, error);
+      return { ok: false, error: message };
     }
   }
   renderOpenFallback(error) {
@@ -5339,10 +11202,6 @@ var BrainConsoleView = class extends import_obsidian2.ItemView {
     });
   }
   async onClose() {
-    if (this.heartbeatInterval !== null) {
-      clearInterval(this.heartbeatInterval);
-      this.heartbeatInterval = null;
-    }
   }
 };
 function sanitizeSettings(data) {

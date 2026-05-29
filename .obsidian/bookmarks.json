@@ -1,0 +1,65 @@
+{
+  "items": [
+    {
+      "type": "group",
+      "ctime": 1779551441801,
+      "items": [
+        {
+          "type": "file",
+          "ctime": 1779553028090,
+          "path": "home.md",
+          "subpath": "#^-"
+        },
+        {
+          "type": "file",
+          "ctime": 1779553028090,
+          "path": "kanban.md",
+          "subpath": "#^-"
+        },
+        {
+          "type": "group",
+          "ctime": 1779551441801,
+          "items": [],
+          "title": "capture"
+        },
+        {
+          "type": "group",
+          "ctime": 1779553028090,
+          "items": [],
+          "title": "live"
+        },
+        {
+          "type": "group",
+          "ctime": 1779553028090,
+          "items": [],
+          "title": "live"
+        },
+        {
+          "type": "group",
+          "ctime": 1779552872498,
+          "items": [],
+          "title": "sources"
+        },
+        {
+          "type": "group",
+          "ctime": 1779553028090,
+          "items": [],
+          "title": "wiki"
+        },
+        {
+          "type": "group",
+          "ctime": 1779553028090,
+          "items": [],
+          "title": "router"
+        },
+        {
+          "type": "group",
+          "ctime": 1779553028090,
+          "items": [],
+          "title": "archive"
+        }
+      ],
+      "title": "sortspec"
+    }
+  ]
+}
