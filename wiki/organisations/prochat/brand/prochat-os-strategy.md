@@ -460,21 +460,48 @@ Automation of approvals (always-approve workflows) is out of scope for the first
 
 Goal: create one end-to-end internal MP4 export using validated assets before automating through Step Functions.
 
+Status: **I-1 complete, I-2 active**
+
 Workflow:
 
 ```text
-I-1: Manual assembly (narration + transcoded video → final MP4)
-I-2: Automate assembly through Step Functions
+I-1: Manual assembly validation (narration + transcoded video → final MP4)  ✅ COMPLETE
+I-2: Automate assembly through Step Functions + MediaConvert  🟡 ACTIVE
 I-3: Replace placeholder with generated clips
 I-4: Add thumbnail generation
 I-5: Generate real internal content (Says The Bible or ProChat)
 ```
 
-Exit criteria:
+Exit criteria I-1:
 
 ```text
-One internal 60-second video can be manually assembled from validated assets and exported to S3.
-Later: automated end-to-end generation through Step Functions.
+One internal 60-second MP4 created from validated assets and exported to S3.
+Audio and video are synchronized.
+Workflow contract validated before moving to AWS automation.
+```
+
+Exit criteria I-1 met:
+
+```text
+✅ jobs/test-001/exports/test-001-final.mp4 exists and is playable
+✅ Duration: 64.033333 seconds
+✅ Audio/video synchronized
+✅ Validation used local ffmpeg as temporary shortcut (not production path)
+```
+
+Exit criteria I-2:
+
+```text
+Final assembly automated through Step Functions after approval.
+MediaConvert is the canonical execution engine.
+```
+
+Important distinction:
+
+```text
+I-1 used local ffmpeg as validation shortcut to prove the concept works end-to-end.
+I-2 moves to AWS MediaConvert as the canonical production execution path.
+AWS owns media execution; Step Functions owns orchestration.
 ```
 
 ### Phase 5 — Video Generation with Automation

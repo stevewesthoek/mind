@@ -59,7 +59,11 @@ Current implementation progress:
 ✅ G. Define canonical job metadata schema
 ✅ F/G Bridge. Step Functions writes canonical metadata/status.json
 ✅ H. Define approval checkpoint contract
-🟡 I. Generate one complete 60-second internal video
+✅ I-1. Manual final video assembly (validation)
+🟡 I-2. Automate final assembly through Step Functions
+⬜ I-3. Replace placeholder with generated clips
+⬜ I-4. Add thumbnail generation
+⬜ I-5. Generate real internal content
 ```
 
 Current phase:
@@ -69,7 +73,7 @@ Phase 1 — Infrastructure Validation: COMPLETE
 Phase 2 — Metadata Contract: COMPLETE
 Phase 2 bridge — Canonical status writer: COMPLETE
 Phase 3 — Approval Checkpoint: COMPLETE
-Phase 4 — Internal Video Assembly: ACTIVE
+Phase 4 — Internal Video Assembly: ACTIVE (I-1 complete, I-2 active)
 ```
 
 Canonical metadata files:
@@ -82,18 +86,22 @@ metadata/assets.json
 metadata/cost.json
 ```
 
-Approval validation result:
+I-1 validation result:
 
 ```text
-jobs/test-001/metadata/approvals.json written with script.status = pending
-Human manually approved by setting script.status = approved
-Workflow resumed after approval
+jobs/test-001/exports/test-001-final.mp4 created
+Duration: 64.033333 seconds
+Method: ffmpeg combine (validation shortcut only)
+Production path: AWS MediaConvert (canonical for I-2)
 ```
 
 Current active implementation target:
 
 ```text
-I. Generate one complete 60-second internal video (manual assembly first)
+I-2. Automate final assembly through Step Functions
+- Move from local ffmpeg to AWS MediaConvert
+- Step Functions orchestrates after approval
+- MediaConvert is the canonical production execution path
 ```
 
 ### Phase 3 — Approval Checkpoint
@@ -155,34 +163,59 @@ jobs/test-001/metadata/approvals.json — script.status = approved
 jobs/test-001/exports/test-001-final.mp4 — final 60-second video
 ```
 
-#### I-1: Manual Final Video Assembly
+#### I-1: Manual Final Video Assembly ✅ COMPLETE
 
 **Goal:** Combine narration + transcoded video into final MP4 manually to prove the concept.
 
-**Process:**
-1. Use existing narration.mp3 as audio track
-2. Use existing sample-transcoded.mp4 as visual track
-3. Combine audio and video using MediaConvert or local FFmpeg
-4. Keep simple: no burned-in captions yet (optional enhancement)
-5. Output: `jobs/test-001/exports/test-001-final.mp4`
+**Validation method:**
+- Used local ffmpeg to combine audio + video as a temporary validation shortcut
+- Did not use MediaConvert for this step (test/validation only)
+- Output: `jobs/test-001/exports/test-001-final.mp4`
 
-**Validation:**
-- Final MP4 exists and is playable
-- Audio and video are synchronized
-- Duration is approximately 60 seconds
+**Result:**
+- Final MP4 created and uploaded to S3
+- Duration: 64.033333 seconds
+- Audio and video properly synchronized
+- Confirmed playable
 
-**Why manual first?** Validates the full pipeline end-to-end before automating. Proves the contract works. Allows easy iteration.
+**Important distinction:**
+- Local ffmpeg was used as a temporary shortcut to validate the concept end-to-end
+- Local ffmpeg is NOT the canonical production path
+- This proves the workflow contract works before AWS automation
+- Allows iteration without waiting for Step Functions/MediaConvert setup
 
-#### I-2: Automate Assembly Through Step Functions
+**Exit criteria met:**
+✅ One internal 60-second video created from validated assets
+✅ Audio and video synchronized
+✅ Final export uploaded to S3
+✅ Workflow contract validated
 
-Integrate final assembly step into Step Functions after approval.
+#### I-2: Automate Assembly Through Step Functions 🟡 ACTIVE
 
-Workflow after approval:
-1. Check approvals.json for script.status = approved
-2. Retrieve narration.mp3 and sample-transcoded.mp4
-3. Run MediaConvert final assembly job
-4. Write test-001-final.mp4 to exports/
-5. Update status.json with status = complete
+**Goal:** Move final assembly into AWS canonical execution layer via Step Functions.
+
+**Why MediaConvert instead of local ffmpeg?**
+- AWS is the canonical execution layer (per strategy: AWS owns media execution)
+- Step Functions orchestrates the workflow
+- MediaConvert scales to production
+- Integrates with metadata and approval workflow
+- Better cost tracking and observability
+- Eliminates local dependencies
+
+**Workflow after approval:**
+1. Lambda monitors approvals.json for script.status = approved
+2. Lambda retrieves narration.mp3 and sample-transcoded.mp4 from S3
+3. Lambda triggers MediaConvert job with audio + video inputs
+4. MediaConvert combines audio and video
+5. MediaConvert writes test-001-final.mp4 to exports/
+6. Lambda updates status.json with status = awaiting_next_phase
+7. Job ready for I-3 (clip replacement) or next phase
+
+**Canonical execution order:**
+- ProChat OS: approvals logic, workflow state, metadata
+- AWS Step Functions: orchestration and state machine
+- AWS MediaConvert: audio/video assembly
+- AWS S3: storage
 
 #### I-3: Replace Placeholder with Generated Clips
 
