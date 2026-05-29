@@ -878,6 +878,7 @@ Minimal ASL skeleton:
         "ContentType": "application/json",
         "Body.$": "States.JsonToString($.statusDocument)"
       },
+      "ResultPath": null,
       "Next": "WaitForSkeletonTest"
     },
     "WaitForSkeletonTest": {
