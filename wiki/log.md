@@ -21,3 +21,27 @@ No automated entries yet. Model-router write/apply remains blocked until explici
 <!-- mind-compile-loop run: 2026-05-23 | processed=1 skipped=0 total=1 -->
 
 - 2026-05-23 — compile-suggest — **Mind OS live deployment verification** (new project page, confidence=0.95, src=chatgpt) → propose move `capture/inbox/2026-05-16-mind-os-live-deployment-verification.md` → `live/projects/mind-os-live-deployment-verification.md` — created 2026-05-16T21:34:29.106Z
+
+<!-- mind-compile-loop run: 2026-05-24 | processed=1 skipped=0 total=1 -->
+
+- 2026-05-24 — compile-suggest — **Mind OS live deployment verification** (new project page, confidence=0.95, src=chatgpt) → propose move `capture/inbox/2026-05-16-mind-os-live-deployment-verification.md` → `live/projects/mind-os-live-deployment-verification.md` — created 2026-05-16T21:34:29.106Z
+
+<!-- mind-compile-loop run: 2026-05-25 | processed=1 skipped=0 total=1 -->
+
+- 2026-05-25 — compile-suggest — **Mind OS live deployment verification** (new project page, confidence=0.95, src=chatgpt) → propose move `capture/inbox/2026-05-16-mind-os-live-deployment-verification.md` → `live/projects/mind-os-live-deployment-verification.md` — created 2026-05-16T21:34:29.106Z
+
+<!-- mind-compile-loop run: 2026-05-26 | processed=1 skipped=0 total=1 -->
+
+- 2026-05-26 — compile-suggest — **Mind OS live deployment verification** (new project page, confidence=0.95, src=chatgpt) → propose move `capture/inbox/2026-05-16-mind-os-live-deployment-verification.md` → `live/projects/mind-os-live-deployment-verification.md` — created 2026-05-16T21:34:29.106Z
+
+<!-- mind-compile-loop run: 2026-05-27 | processed=1 skipped=0 total=1 -->
+
+- 2026-05-27 — compile-suggest — **Mind OS live deployment verification** (new project page, confidence=0.95, src=chatgpt) → propose move `capture/inbox/2026-05-16-mind-os-live-deployment-verification.md` → `live/projects/mind-os-live-deployment-verification.md` — created 2026-05-16T21:34:29.106Z
+
+<!-- mind-compile-loop run: 2026-05-28 | processed=1 skipped=0 total=1 -->
+
+- 2026-05-28 — compile-suggest — **Mind OS live deployment verification** (new project page, confidence=0.95, src=chatgpt) → propose move `capture/inbox/2026-05-16-mind-os-live-deployment-verification.md` → `live/projects/mind-os-live-deployment-verification.md` — created 2026-05-16T21:34:29.106Z
+
+<!-- mind-compile-loop run: 2026-05-29 | processed=1 skipped=0 total=1 -->
+
+- 2026-05-29 — compile-suggest — **Mind OS live deployment verification** (new project page, confidence=0.95, src=chatgpt) → propose move `capture/inbox/2026-05-16-mind-os-live-deployment-verification.md` → `live/projects/mind-os-live-deployment-verification.md` — created 2026-05-16T21:34:29.106Z
