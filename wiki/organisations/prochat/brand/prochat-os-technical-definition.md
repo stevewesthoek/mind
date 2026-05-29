@@ -223,7 +223,11 @@ Examples:
 
 Modules should connect back to the same ProChat OS runtime.
 
-For the Video Orchestrator, ProChat OS owns workflow definitions, approvals, logs, templates, metadata, publishing state, retry actions, and asset references. AWS owns media generation, rendering, storage, transcoding, and long-running execution. The canonical video strategy lives in `prochat-os-strategy.md`.
+For the Video Orchestrator, ProChat OS owns job creation, template selection, approval gates, prompt history, asset metadata, workflow status, logs, retry commands, publishing checklists, module visibility in the console, and asset references. AWS owns media generation, rendering, storage, transcoding, and long-running execution.
+
+Video Orchestrator v1 supports only one internal workflow: topic to 60-second script, 5 scene prompts, human approval, Polly voiceover, generated clips, captions, thumbnail, final render, and exported MP4. V1 does not include local video generation, local FFmpeg as the production path, autonomous publishing, multi-account scheduling, a full editor UX, a customer-facing SaaS dashboard, many templates, or many model providers.
+
+The canonical video strategy, service boundaries, cost controls, S3 layout, roadmap, and implementation sequence live in `prochat-os-strategy.md`.
 
 ## Runtime shape
 

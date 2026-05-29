@@ -36,11 +36,32 @@ ProChat OS owns:
 
 AWS owns:
 
-- generation
-- rendering
-- storage
-- transcoding
-- long-running media execution
+- S3 asset storage and job folders
+- Bedrock script, prompt, image, and video generation
+- Polly narration
+- Transcribe captions and transcripts
+- MediaConvert render, transcode, and export
+- Step Functions orchestration state machine
+- Lambda glue tasks only
+- optional CloudFront delivery later
+- generation, rendering, storage, transcoding, and long-running media execution
+
+V1 boundary:
+
+```text
+Topic
+→ 60-second script
+→ 5 scene prompts
+→ human approval
+→ Polly voiceover
+→ generated clips
+→ captions
+→ thumbnail
+→ final render
+→ exported MP4
+```
+
+V1 has no publishing automation, account management, customer SaaS dashboard, full editor UX, local video generation, or local FFmpeg production path.
 
 ## Future visibility
 

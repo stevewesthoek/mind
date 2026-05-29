@@ -258,11 +258,13 @@ ProChat OS owns workflows.
 AWS owns media execution.
 ```
 
-The canonical Video Orchestrator strategy, roadmap, implementation plan, and architecture diagram live in:
+The canonical Video Orchestrator strategy, roadmap, implementation plan, cost controls, S3 layout, and architecture diagram live in:
 
 ```text
 prochat-os-strategy.md
 ```
+
+V1 is narrow: one internal workflow, one exported MP4, no publishing automation, no account management, no customer-facing SaaS dashboard, and no local video-generation production path.
 
 Exit criteria:
 

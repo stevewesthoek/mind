@@ -240,6 +240,30 @@ AWS owns:
 - CloudFront
 - generation, rendering, storage, transcoding, and long-running media execution
 
+Exact AWS service responsibilities:
+
+- S3 stores assets and job folders.
+- Bedrock generates scripts, prompts, images, and video clips.
+- Polly generates narration.
+- Transcribe generates captions and transcripts.
+- MediaConvert renders, transcodes, and exports MP4 outputs.
+- Step Functions owns the AWS-side orchestration state machine.
+- Lambda performs glue tasks only.
+- CloudFront is optional delivery later, only when signed delivery is needed.
+
+Exact ProChat OS responsibilities:
+
+- job creation
+- template selection
+- approval gates
+- prompt history
+- asset metadata
+- workflow status
+- logs
+- retry commands
+- publishing checklist
+- module visibility in the console
+
 Reason for this decision:
 
 - faster time-to-market
@@ -416,6 +440,27 @@ First internal users:
 - Says The Bible
 - ProChat content
 
+Do not build for external customers before the internal workflow produces repeatable videos.
+
+MVP boundary:
+
+The first MVP supports only:
+
+```text
+Topic
+→ 60-second script
+→ 5 scene prompts
+→ human approval
+→ Polly voiceover
+→ generated clips
+→ captions
+→ thumbnail
+→ final render
+→ exported MP4
+```
+
+V1 does not support multiple workflows, many channels, account management, scheduling, or publishing automation.
+
 First MVP workflow:
 
 ```text
@@ -428,8 +473,20 @@ Topic
 → captions
 → thumbnail
 → final render
-→ export
+→ exported MP4
 ```
+
+First implementation sequence:
+
+A. Create private S3 dev bucket  
+B. Test Bedrock text generation  
+C. Test Polly text-to-speech into S3  
+D. Test Transcribe captions from audio  
+E. Test MediaConvert on one sample clip  
+F. Create first Step Functions skeleton  
+G. Add ProChat OS job metadata  
+H. Add approval checkpoint  
+I. Generate one complete 60-second internal video
 
 Implementation principles:
 
@@ -441,6 +498,33 @@ Implementation principles:
 - Do not add platform posting until export quality is proven.
 - Do not optimize for many accounts or many templates in the first version.
 - Do not build a separate Video Studio product.
+
+Cost-control and storage rules:
+
+- Every job has a max budget.
+- Every job has max retries.
+- Every generated clip has max duration.
+- Failed generations are tracked.
+- Raw assets get lifecycle rules.
+- Dev bucket and production bucket must be separate.
+- No public S3 access.
+- CloudFront and signed URLs are used only when needed.
+
+First S3 dev bucket structure:
+
+```text
+prochat-video-dev/
+  jobs/
+    {jobId}/
+      input/
+      scripts/
+      audio/
+      video-raw/
+      captions/
+      thumbnails/
+      exports/
+      logs/
+```
 
 Suggested module shape:
 
@@ -477,16 +561,25 @@ First data model concepts:
 
 Non-goals for the first implementation:
 
+- local video generation
+- local FFmpeg as the core production path
+- autonomous publishing
+- multi-account social scheduling
+- full video editor UX
+- HeyGen clone
+- Runway clone
+- long-form cinematic video studio
+- customer-facing SaaS dashboard
+- many templates
+- many model providers
 - multi-tenant video SaaS
 - separate Video Studio platform
 - every social platform
 - direct publishing APIs
 - local GPU model hosting
-- local rendering pipeline
 - advanced editor UI
 - talking-head avatar studio
 - perfect character consistency
-- long-form cinematic video control
 
 ## Business model
 

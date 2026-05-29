@@ -190,6 +190,8 @@ Organic content should show ProChat OS running workflows such as:
 
 Video content should validate and showcase ProChat OS. It should not reposition ProChat as a media company or a Runway, HeyGen, CapCut, or Adobe competitor.
 
+The first Video Orchestrator users are Says The Bible and ProChat. Do not sell or package the module for external customers until the internal AWS-backed workflow repeatedly produces usable 60-second exported MP4 videos with controlled cost and human approval.
+
 ## Outreach phase
 
 The first outreach phase is validation, not final sales.
