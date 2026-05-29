@@ -103,16 +103,39 @@ Implementation progress:
 ✅ C. Test Polly text-to-speech into S3
 ✅ D. Test Transcribe captions from audio
 ✅ E. Test MediaConvert on one sample clip
-⬜ F. Create first Step Functions skeleton
+✅ F. Create first Step Functions skeleton
 ⬜ G. Add ProChat OS job metadata
 ⬜ H. Add approval checkpoint
 ⬜ I. Generate one complete 60-second internal video
 ```
 
+Current phase:
+
+```text
+Phase 1 — Infrastructure Validation: COMPLETE
+```
+
+Validated Step Functions outputs:
+
+```text
+metadata/status-started.json
+metadata/status-completed.json
+```
+
 Current next task:
 
 ```text
-Create first Step Functions skeleton for the AWS-backed Video Orchestrator proof.
+G. Canonical Job Metadata Schema
+```
+
+Required output:
+
+```text
+metadata/job.json
+metadata/status.json
+metadata/approvals.json
+metadata/assets.json
+metadata/cost.json
 ```
 
 - No production video jobs are started from Brain Core yet.

@@ -55,19 +55,41 @@ Current implementation progress:
 ✅ C. Test Polly text-to-speech into S3
 ✅ D. Test Transcribe captions from audio
 ✅ E. Test MediaConvert on one sample clip
-⬜ F. Create first Step Functions skeleton
+✅ F. Create first Step Functions skeleton
 ⬜ G. Add ProChat OS job metadata
 ⬜ H. Add approval checkpoint
 ⬜ I. Generate one complete 60-second internal video
 ```
 
+Current phase:
+
+```text
+Phase 1 — Infrastructure Validation: COMPLETE
+```
+
 Current next task:
 
 ```text
-Create first Step Functions skeleton for the AWS-backed Video Orchestrator proof.
+G. Canonical Job Metadata Schema
 ```
 
-Do not move to ProChat OS job metadata, approval checkpoints, or complete 60-second generation until the Step Functions skeleton is completed, validated, and committed.
+Required output:
+
+```text
+metadata/job.json
+metadata/status.json
+metadata/approvals.json
+metadata/assets.json
+metadata/cost.json
+```
+
+Goal:
+
+```text
+One source of truth per job.
+```
+
+Do not move to approval checkpoints or complete 60-second generation until canonical job metadata is completed, validated, and committed.
 
 ## Phase 0 — Strategy and definition
 

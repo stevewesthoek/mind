@@ -447,7 +447,13 @@ Do not build fantasy enterprise architecture.
 
 Only support one workflow initially.
 
-First internal users:
+Primary objective:
+
+```text
+Validate ProChat OS through real internal workflows before supporting external users.
+```
+
+Initial internal content users:
 
 - Says The Bible
 - ProChat content
@@ -495,21 +501,61 @@ First implementation sequence:
 ✅ C. Test Polly text-to-speech into S3  
 ✅ D. Test Transcribe captions from audio  
 ✅ E. Test MediaConvert on one sample clip  
-⬜ F. Create first Step Functions skeleton  
+✅ F. Create first Step Functions skeleton  
 ⬜ G. Add ProChat OS job metadata  
 ⬜ H. Add approval checkpoint  
 ⬜ I. Generate one complete 60-second internal video
 
+Infrastructure validation status:
+
+```text
+COMPLETE
+```
+
+Validated outputs:
+
+```text
+metadata/status-started.json
+metadata/status-completed.json
+scripts/generated script output
+scripts/usage tracking output
+audio/narration.mp3
+captions/transcript.json
+exports/sample-transcoded.mp4
+```
+
+The validated architecture is:
+
+```text
+ProChat OS
+→ starts workflow
+Step Functions
+→ orchestrates workflow
+S3
+→ stores workflow state and media assets
+```
+
 Current next implementation task:
 
 ```text
-Create the first Step Functions skeleton for the AWS-backed Video Orchestrator.
+G. Canonical Job Metadata Schema
 ```
 
 Expected output:
 
 ```text
-A minimal Step Functions state machine that represents the completed A–E proof steps as orchestration states and can be expanded later with ProChat OS job metadata, approvals, retries, and final render flow.
+Replace ad-hoc metadata with canonical per-job metadata files:
+metadata/job.json
+metadata/status.json
+metadata/approvals.json
+metadata/assets.json
+metadata/cost.json
+```
+
+Goal:
+
+```text
+One source of truth per job.
 ```
 
 Implementation principles:
