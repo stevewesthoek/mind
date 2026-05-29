@@ -558,6 +558,268 @@ Goal:
 One source of truth per job.
 ```
 
+These metadata files are the contract between ProChat OS and AWS execution. ProChat OS should read and write workflow intent, approvals, status, asset references, and cost metadata through these files. AWS execution should update execution state and generated asset references through the same contract.
+
+Canonical S3 metadata structure:
+
+```text
+jobs/
+  {jobId}/
+    metadata/
+      job.json
+      status.json
+      approvals.json
+      assets.json
+      cost.json
+    input/
+    scripts/
+    audio/
+    video-raw/
+    captions/
+    thumbnails/
+    exports/
+    logs/
+```
+
+### metadata/job.json
+
+Purpose: static job definition.
+
+```json
+{
+  "jobId": "vo-20260529-001",
+  "templateId": "short-internal-video",
+  "title": "Example ProChat OS Short",
+  "topic": "How ProChat OS turns messy inputs into structured workflows",
+  "owner": "prochat",
+  "internalUseCase": "ProChat content",
+  "targetDurationSeconds": 60,
+  "targetPlatforms": ["youtube-shorts"],
+  "createdAt": "2026-05-29T12:00:00Z",
+  "updatedAt": "2026-05-29T12:00:00Z",
+  "environment": "dev",
+  "statusFile": "metadata/status.json",
+  "assetsFile": "metadata/assets.json",
+  "approvalsFile": "metadata/approvals.json",
+  "costFile": "metadata/cost.json"
+}
+```
+
+### metadata/status.json
+
+Purpose: current workflow state.
+
+Allowed statuses:
+
+```text
+draft
+script_generated
+awaiting_script_approval
+narration_generated
+captions_generated
+video_processed
+awaiting_final_approval
+exported
+failed
+cancelled
+```
+
+```json
+{
+  "jobId": "vo-20260529-001",
+  "status": "script_generated",
+  "currentStep": "bedrock_script_generation",
+  "completedSteps": [
+    "s3_job_folder_created",
+    "bedrock_script_generation"
+  ],
+  "failedStep": null,
+  "lastError": null,
+  "startedAt": "2026-05-29T12:00:00Z",
+  "completedAt": null,
+  "updatedAt": "2026-05-29T12:03:00Z",
+  "stepFunctionsExecutionArn": "arn:aws:states:eu-west-1:123456789012:execution:video-orchestrator-dev:vo-20260529-001",
+  "retryCount": 0
+}
+```
+
+### metadata/approvals.json
+
+Purpose: human approval gates.
+
+Allowed approval statuses:
+
+```text
+not_required
+pending
+approved
+rejected
+```
+
+```json
+{
+  "jobId": "vo-20260529-001",
+  "approvals": {
+    "script": {
+      "status": "pending",
+      "approvedBy": null,
+      "approvedAt": null,
+      "notes": null
+    },
+    "scenes": {
+      "status": "pending",
+      "approvedBy": null,
+      "approvedAt": null,
+      "notes": null
+    },
+    "final": {
+      "status": "not_required",
+      "approvedBy": null,
+      "approvedAt": null,
+      "notes": null
+    }
+  }
+}
+```
+
+### metadata/assets.json
+
+Purpose: track all generated and uploaded assets.
+
+Each asset must include `assetId`, `type`, `s3Uri`, `contentType`, `sizeBytes`, `createdAt`, `provider`, and `step`. `checksum` is optional.
+
+```json
+{
+  "jobId": "vo-20260529-001",
+  "inputs": [
+    {
+      "assetId": "asset-input-topic-001",
+      "type": "topic",
+      "s3Uri": "s3://prochat-video-dev/jobs/vo-20260529-001/input/topic.json",
+      "contentType": "application/json",
+      "sizeBytes": 512,
+      "createdAt": "2026-05-29T12:00:00Z",
+      "provider": "prochat-os",
+      "step": "job_created",
+      "checksum": null
+    }
+  ],
+  "scripts": [
+    {
+      "assetId": "asset-script-001",
+      "type": "script",
+      "s3Uri": "s3://prochat-video-dev/jobs/vo-20260529-001/scripts/script.json",
+      "contentType": "application/json",
+      "sizeBytes": 4096,
+      "createdAt": "2026-05-29T12:03:00Z",
+      "provider": "bedrock",
+      "step": "bedrock_script_generation",
+      "checksum": null
+    }
+  ],
+  "audio": [
+    {
+      "assetId": "asset-audio-001",
+      "type": "narration",
+      "s3Uri": "s3://prochat-video-dev/jobs/vo-20260529-001/audio/narration.mp3",
+      "contentType": "audio/mpeg",
+      "sizeBytes": 980000,
+      "createdAt": "2026-05-29T12:08:00Z",
+      "provider": "polly",
+      "step": "polly_narration",
+      "checksum": null
+    }
+  ],
+  "videoRaw": [],
+  "captions": [
+    {
+      "assetId": "asset-captions-001",
+      "type": "transcript",
+      "s3Uri": "s3://prochat-video-dev/jobs/vo-20260529-001/captions/transcript.json",
+      "contentType": "application/json",
+      "sizeBytes": 12000,
+      "createdAt": "2026-05-29T12:12:00Z",
+      "provider": "transcribe",
+      "step": "transcribe_captions",
+      "checksum": null
+    }
+  ],
+  "thumbnails": [],
+  "exports": [
+    {
+      "assetId": "asset-export-001",
+      "type": "mp4",
+      "s3Uri": "s3://prochat-video-dev/jobs/vo-20260529-001/exports/sample-transcoded.mp4",
+      "contentType": "video/mp4",
+      "sizeBytes": 8500000,
+      "createdAt": "2026-05-29T12:20:00Z",
+      "provider": "mediaconvert",
+      "step": "mediaconvert_export",
+      "checksum": null
+    }
+  ],
+  "logs": []
+}
+```
+
+### metadata/cost.json
+
+Purpose: track budget and estimated cost. Cost tracking can be approximate in v1.
+
+```json
+{
+  "jobId": "vo-20260529-001",
+  "budgetLimitUsd": 5.0,
+  "estimatedCostUsd": 1.25,
+  "actualCostUsd": null,
+  "currency": "USD",
+  "costItems": [
+    {
+      "service": "bedrock",
+      "step": "bedrock_script_generation",
+      "usageUnit": "tokens",
+      "usageAmount": 1800,
+      "estimatedUsd": 0.05
+    },
+    {
+      "service": "polly",
+      "step": "polly_narration",
+      "usageUnit": "characters",
+      "usageAmount": 900,
+      "estimatedUsd": 0.02
+    },
+    {
+      "service": "transcribe",
+      "step": "transcribe_captions",
+      "usageUnit": "audio_seconds",
+      "usageAmount": 60,
+      "estimatedUsd": 0.03
+    },
+    {
+      "service": "mediaconvert",
+      "step": "mediaconvert_export",
+      "usageUnit": "output_minutes",
+      "usageAmount": 1,
+      "estimatedUsd": 0.15
+    }
+  ],
+  "retryCostUsd": 0.0,
+  "updatedAt": "2026-05-29T12:20:00Z"
+}
+```
+
+G completion criteria:
+
+```text
+The schema examples above define the contract all future code must use.
+```
+
+First real implementation target after G:
+
+```text
+Step Functions writes and updates metadata/status.json instead of metadata/status-started.json and metadata/status-completed.json.
+```
+
 Implementation principles:
 
 - Start with one workflow definition.

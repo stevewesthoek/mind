@@ -14,7 +14,7 @@ ProChat OS owns workflows.
 AWS owns media execution.
 ```
 
-The canonical Video Orchestrator strategy, roadmap, implementation plan, cost controls, S3 layout, service boundaries, and architecture diagram live in:
+The canonical Video Orchestrator strategy, roadmap, implementation plan, cost controls, S3 layout, service boundaries, metadata contract, and architecture diagram live in:
 
 ```text
 wiki/organisations/prochat/brand/prochat-os-strategy.md
@@ -39,7 +39,13 @@ Topic
 → exported MP4
 ```
 
-First internal users:
+Primary objective:
+
+```text
+Validate ProChat OS through real internal workflows before supporting external users.
+```
+
+Initial internal content users:
 
 - Says The Bible
 - ProChat
@@ -73,6 +79,20 @@ AWS owns:
 - Lambda glue tasks only
 - CloudFront optional signed delivery later
 
+## Metadata contract
+
+Canonical per-job metadata files:
+
+```text
+metadata/job.json
+metadata/status.json
+metadata/approvals.json
+metadata/assets.json
+metadata/cost.json
+```
+
+These files are the contract between ProChat OS and AWS execution.
+
 ## Cost and storage guardrails
 
 - every job has a max budget
@@ -104,7 +124,7 @@ Implementation progress:
 ✅ D. Test Transcribe captions from audio
 ✅ E. Test MediaConvert on one sample clip
 ✅ F. Create first Step Functions skeleton
-⬜ G. Add ProChat OS job metadata
+✅ G. Define canonical job metadata schema
 ⬜ H. Add approval checkpoint
 ⬜ I. Generate one complete 60-second internal video
 ```
@@ -113,29 +133,13 @@ Current phase:
 
 ```text
 Phase 1 — Infrastructure Validation: COMPLETE
+Phase 2 — Metadata Contract: COMPLETE
 ```
 
-Validated Step Functions outputs:
+Current next implementation target:
 
 ```text
-metadata/status-started.json
-metadata/status-completed.json
-```
-
-Current next task:
-
-```text
-G. Canonical Job Metadata Schema
-```
-
-Required output:
-
-```text
-metadata/job.json
-metadata/status.json
-metadata/approvals.json
-metadata/assets.json
-metadata/cost.json
+Step Functions writes and updates metadata/status.json instead of metadata/status-started.json and metadata/status-completed.json.
 ```
 
 - No production video jobs are started from Brain Core yet.

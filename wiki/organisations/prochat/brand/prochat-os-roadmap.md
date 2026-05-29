@@ -56,7 +56,7 @@ Current implementation progress:
 ✅ D. Test Transcribe captions from audio
 ✅ E. Test MediaConvert on one sample clip
 ✅ F. Create first Step Functions skeleton
-⬜ G. Add ProChat OS job metadata
+✅ G. Define canonical job metadata schema
 ⬜ H. Add approval checkpoint
 ⬜ I. Generate one complete 60-second internal video
 ```
@@ -65,15 +65,10 @@ Current phase:
 
 ```text
 Phase 1 — Infrastructure Validation: COMPLETE
+Phase 2 — Metadata Contract: COMPLETE
 ```
 
-Current next task:
-
-```text
-G. Canonical Job Metadata Schema
-```
-
-Required output:
+Canonical metadata files:
 
 ```text
 metadata/job.json
@@ -89,7 +84,13 @@ Goal:
 One source of truth per job.
 ```
 
-Do not move to approval checkpoints or complete 60-second generation until canonical job metadata is completed, validated, and committed.
+Current next implementation target:
+
+```text
+Step Functions writes and updates metadata/status.json instead of metadata/status-started.json and metadata/status-completed.json.
+```
+
+Do not move to approval checkpoints or complete 60-second generation until Step Functions uses canonical metadata/status.json and the change is validated and committed.
 
 ## Phase 0 — Strategy and definition
 
