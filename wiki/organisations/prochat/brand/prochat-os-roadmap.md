@@ -240,7 +240,7 @@ Content demos:
 - Git commits to X posts
 - research to video outline
 - messy notes to content plan
-- YouTube video orchestration
+- AWS-backed Video Orchestrator module demos
 - local app building
 - business memory workflows
 
@@ -251,11 +251,25 @@ Channels:
 - build-in-public
 - automated social workflows
 
+Video principle:
+
+```text
+ProChat OS owns workflows.
+AWS owns media execution.
+```
+
+The canonical Video Orchestrator strategy, roadmap, implementation plan, and architecture diagram live in:
+
+```text
+prochat-os-strategy.md
+```
+
 Exit criteria:
 
 - content shows ProChat OS operating real workflows
 - inbound audience understands the product without law-firm framing
 - organic demos create leads for managed/custom installs
+- video demos validate ProChat OS instead of becoming a separate media product
 
 ## Phase 8 — Shared ProChat Cloud modules
 
@@ -273,7 +287,7 @@ Isolate private context.
 Good shared candidates:
 
 - content generation
-- video planning
+- AWS-backed video execution
 - public monitoring checks
 - template generation
 - license checks
@@ -286,6 +300,7 @@ Avoid sharing too early:
 - credentials
 - autonomous actions
 - sensitive workflows
+- generated media state that belongs in S3 or the execution backend
 
 Exit criteria:
 

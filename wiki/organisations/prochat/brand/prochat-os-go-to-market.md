@@ -185,8 +185,10 @@ Organic content should show ProChat OS running workflows such as:
 - Git commits to X posts
 - product updates to content drafts
 - messy notes to content calendar
-- video orchestration
+- AWS-backed Video Orchestrator module demos
 - local app building
+
+Video content should validate and showcase ProChat OS. It should not reposition ProChat as a media company or a Runway, HeyGen, CapCut, or Adobe competitor.
 
 ## Outreach phase
 

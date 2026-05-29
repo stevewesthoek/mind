@@ -215,13 +215,15 @@ Examples:
 - law-firm intake workflow
 - accounting intake workflow
 - content engine
-- video orchestrator
+- AWS-backed Video Orchestrator
 - monitoring workflow
 - local app builder
 - social posting workflow
 - CRM connector
 
 Modules should connect back to the same ProChat OS runtime.
+
+For the Video Orchestrator, ProChat OS owns workflow definitions, approvals, logs, templates, metadata, publishing state, retry actions, and asset references. AWS owns media generation, rendering, storage, transcoding, and long-running execution. The canonical video strategy lives in `prochat-os-strategy.md`.
 
 ## Runtime shape
 

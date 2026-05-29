@@ -2,7 +2,7 @@
 
 **Status:** canonical strategy  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-05-24  
+**Last updated:** 2026-05-28  
 **Source history:** `prochat-os-strategy-draft.md`
 
 ## Strategic decision
@@ -56,6 +56,8 @@ ProChat OS is not:
 - a single SaaS tool
 - a fixed SaaS kit
 - MikeOSS
+- a media company
+- a Runway, HeyGen, CapCut, or Adobe competitor
 - the model router alone
 - the memory store alone
 - the Brain Console alone
@@ -150,7 +152,7 @@ Primary channels:
 
 ## Website positioning
 
-The ProChat website should not be primarily about law firms, accountants, MikeOSS, or legacy kits.
+The ProChat website should not be primarily about law firms, accountants, MikeOSS, video generation, or legacy kits.
 
 The website should focus on ProChat OS as a business-agnostic Agentic Workflow OS.
 
@@ -189,6 +191,303 @@ The full technical definition lives in:
 prochat-os-technical-definition.md
 ```
 
+## Canonical Video Orchestrator direction
+
+The Video Orchestrator is a ProChat OS module, not a separate platform.
+
+Canonical direction:
+
+```text
+ProChat OS owns workflows.
+AWS owns media execution.
+```
+
+Architecture:
+
+```text
+ProChat OS
+  ↓
+Video Orchestrator Module
+  ↓
+AWS Execution Layer
+```
+
+ProChat OS owns:
+
+- workflow definitions
+- job creation
+- templates
+- prompt history
+- asset metadata
+- human approvals
+- logs
+- retry actions
+- publishing checklists
+- future publishing integrations
+- references to generated assets
+
+AWS owns:
+
+- Bedrock
+- Polly
+- Transcribe
+- Nova Reel
+- Nova Canvas
+- MediaConvert
+- S3
+- Step Functions
+- Lambda
+- CloudFront
+- generation, rendering, storage, transcoding, and long-running media execution
+
+Reason for this decision:
+
+- faster time-to-market
+- less infrastructure maintenance
+- better scaling
+- better observability
+- better retry/recovery
+- better asset management
+- better async processing
+- better use of available AWS credits
+
+The old local-first direction is no longer canonical for video. Local AI can still be used later for drafts, cheap text tasks, experiments, or privacy-sensitive workflows, but the first production video pipeline should use AWS as the execution backend.
+
+## Video Orchestrator purpose
+
+ProChat OS is not a media company.
+
+The Video Orchestrator exists to:
+
+1. generate content for ProChat
+2. generate content for Says The Bible
+3. validate the workflow runtime
+4. showcase ProChat OS through real workflows
+5. eventually become a paid ProChat OS module
+
+The purpose is not to compete with Runway, HeyGen, CapCut, Adobe, or full creative-studio tools.
+
+The first promise should be:
+
+```text
+Generate short social videos with script, scenes, narration, captions, thumbnail, and platform-ready exports.
+```
+
+The first promise should not be:
+
+```text
+Fully automated high-end YouTube studio.
+```
+
+## Video Orchestrator audit summary
+
+Audit findings from the current repo state:
+
+- No large standalone Video Studio strategy file was found in the canonical ProChat brand docs.
+- The existing roadmap mentions video orchestration as an organic content example and video planning as a future shared module.
+- The live video note treats Brain Core as the owner of runtime video status, which risks implying a separate local orchestration runtime.
+- The technical definition already supports optional modules, shared computation, human approvals, logs, and model/provider routing.
+- The docs need one clear rule to avoid drift: ProChat OS owns workflow state; AWS owns media execution.
+
+Conflicting or outdated assumptions to remove:
+
+- local-first video generation as the main production path
+- local rendering as the first implementation path
+- local asset management as the durable media store
+- any separate Video Studio platform outside ProChat OS
+- any second orchestration runtime for video jobs
+- any roadmap that treats video generation as the main company product
+
+## Video Orchestrator roadmap
+
+This is the only canonical video roadmap.
+
+### Phase 1 — Foundation
+
+Goal: prove the AWS execution layer works before building product UI.
+
+Tasks:
+
+- prepare AWS account and permissions
+- create S3 asset storage structure
+- validate Bedrock access
+- validate Polly narration
+- validate Transcribe captions
+- validate MediaConvert rendering/transcoding
+- validate basic Step Functions orchestration
+
+Exit criteria:
+
+```text
+A developer can run one controlled AWS-backed media test and inspect outputs in S3.
+```
+
+### Phase 2 — First Workflow
+
+Goal: create the first approved content workflow without full video generation complexity.
+
+Workflow:
+
+```text
+Topic
+→ Script
+→ Scene prompts
+→ Human approval
+→ Voiceover
+→ Asset storage
+```
+
+Exit criteria:
+
+```text
+A ProChat or Says The Bible topic becomes an approved script, scene plan, voiceover, and stored assets.
+```
+
+### Phase 3 — Video Generation
+
+Goal: generate complete short-form video assets.
+
+Workflow:
+
+```text
+Topic
+→ Script
+→ Scenes
+→ Voice
+→ Generated clips
+→ Captions
+→ Thumbnail
+→ Export
+```
+
+Exit criteria:
+
+```text
+One short video can be generated, rendered, stored, and exported from one workflow definition.
+```
+
+### Phase 4 — ProChat OS Integration
+
+Goal: make the workflow visible and controllable through ProChat OS.
+
+Tasks:
+
+- job console
+- workflow management
+- logs
+- asset browser
+- approval screens
+- retry actions
+- publishing checklist state
+
+Exit criteria:
+
+```text
+A user can create, review, approve, monitor, retry, and inspect a video job from ProChat OS.
+```
+
+### Phase 5 — Publishing Layer
+
+Goal: prepare platform-specific publishing workflows.
+
+Targets:
+
+- YouTube Shorts
+- TikTok
+- Reels
+- metadata generation
+- publishing checklists first
+- API publishing integrations later
+
+Exit criteria:
+
+```text
+A finished video has platform-ready assets, captions, titles, descriptions, and checklist state.
+```
+
+## Video Orchestrator implementation plan
+
+Do not build fantasy enterprise architecture.
+
+Only support one workflow initially.
+
+First internal users:
+
+- Says The Bible
+- ProChat content
+
+First MVP workflow:
+
+```text
+Topic
+→ 60 second script
+→ 5 scene prompts
+→ human approval
+→ Polly narration
+→ 5 generated clips
+→ captions
+→ thumbnail
+→ final render
+→ export
+```
+
+Implementation principles:
+
+- Start with one workflow definition.
+- Store durable media in S3, not in Mind.
+- Store metadata, prompts, approvals, and asset references in ProChat OS.
+- Use AWS for slow async media tasks.
+- Keep the ProChat OS UI focused on job state, approvals, logs, retries, and assets.
+- Do not add platform posting until export quality is proven.
+- Do not optimize for many accounts or many templates in the first version.
+- Do not build a separate Video Studio product.
+
+Suggested module shape:
+
+```text
+modules/video-orchestrator/
+  workflows/
+    short-social-video.workflow.json
+  templates/
+    youtube-short.json
+    tiktok.json
+    reels.json
+  providers/
+    aws-bedrock
+    aws-polly
+    aws-transcribe
+    aws-mediaconvert
+  approvals/
+    script-approval
+    scene-approval
+    final-video-approval
+```
+
+First data model concepts:
+
+- video job
+- script draft
+- scene plan
+- prompt history
+- approval state
+- asset reference
+- render profile
+- export package
+- publishing checklist
+
+Non-goals for the first implementation:
+
+- multi-tenant video SaaS
+- separate Video Studio platform
+- every social platform
+- direct publishing APIs
+- local GPU model hosting
+- local rendering pipeline
+- advanced editor UI
+- talking-head avatar studio
+- perfect character consistency
+- long-form cinematic video control
+
 ## Business model
 
 ProChat OS can be offered as:
@@ -211,6 +510,7 @@ ProChat OS can be offered as:
 4. **Modular workflow blocks**
    - customers may start with one workflow outcome
    - more modules can be added over time
+   - the Video Orchestrator may become a paid module after it proves value internally
 
 ## Productized service model
 
@@ -251,6 +551,13 @@ Human approval is required first.
 Automation increases only after trust.
 ```
 
+For video specifically:
+
+```text
+Share media execution where safe.
+Isolate private workflow context, credentials, approvals, and customer memory.
+```
+
 ## Go-to-market summary
 
 ### Public brand
@@ -267,7 +574,7 @@ Accountants, if law-firm outreach underperforms or accounting workflows prove cl
 
 ### Organic wedge
 
-Creators, SaaS builders, influencers, and developers through automated/organic social and YouTube channels.
+Creators, SaaS builders, influencers, and developers through automated/organic social and YouTube channels. The Video Orchestrator should help generate this content and demonstrate ProChat OS, but it should not become the main public product identity.
 
 Full go-to-market details live in:
 
@@ -312,6 +619,8 @@ ProChat OS is the Agentic Workflow OS for turning messy business inputs into str
 
 It is installed as a private workflow runtime, connected to the customer's existing tools, and expanded through modular agents and workflows.
 
+The Video Orchestrator is a ProChat OS module: ProChat OS owns workflows, approvals, logs, templates, metadata, publishing state, and asset references; AWS owns media generation, rendering, storage, transcoding, and long-running execution.
+
 The free version is available for personal/non-commercial use. Commercial and managed use requires a ProChat license or managed plan.
 ```
 
@@ -321,9 +630,9 @@ These do not block the strategy:
 
 - exact first law-firm workflow
 - exact first pricing
-- exact first AWS deployment architecture
+- exact first AWS account and permission layout
 - exact landing page copy
-- exact v1 implementation plan
+- exact v1 implementation plan for the core runtime
 - exact demo script and outreach sequence
 
 Those belong in roadmap, implementation, offer, and outreach docs.
