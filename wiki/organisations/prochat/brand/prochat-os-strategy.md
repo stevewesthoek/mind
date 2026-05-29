@@ -456,30 +456,51 @@ Automation of approvals (always-approve workflows) is out of scope for the first
 - Future approval UIs can read/write the same metadata file.
 - Easy to extend with more approval gates later.
 
-### Phase 3 — Video Generation with Approval
+### Phase 4 — Internal Video Assembly
 
-Goal: generate complete short-form video assets.
+Goal: create one end-to-end internal MP4 export using validated assets before automating through Step Functions.
 
 Workflow:
 
 ```text
-Topic
-→ Script
-→ Scenes
-→ Voice
-→ Generated clips
-→ Captions
-→ Thumbnail
-→ Export
+I-1: Manual assembly (narration + transcoded video → final MP4)
+I-2: Automate assembly through Step Functions
+I-3: Replace placeholder with generated clips
+I-4: Add thumbnail generation
+I-5: Generate real internal content (Says The Bible or ProChat)
 ```
 
 Exit criteria:
 
 ```text
-One short video can be generated, rendered, stored, and exported from one workflow definition.
+One internal 60-second video can be manually assembled from validated assets and exported to S3.
+Later: automated end-to-end generation through Step Functions.
 ```
 
-### Phase 4 — ProChat OS Integration
+### Phase 5 — Video Generation with Automation
+
+Goal: automate video generation through the complete workflow.
+
+Workflow:
+
+```text
+Topic
+→ Script (Bedrock)
+→ Scenes (Nova Canvas prompts)
+→ Voice (Polly)
+→ Generated clips (Nova Reel)
+→ Captions (Transcribe)
+→ Thumbnail (Nova Canvas)
+→ Export (MediaConvert)
+```
+
+Exit criteria:
+
+```text
+One short video can be automatically generated, rendered, stored, and exported from one workflow definition.
+```
+
+### Phase 6 — ProChat OS Integration
 
 Goal: make the workflow visible and controllable through ProChat OS.
 

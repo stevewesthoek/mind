@@ -189,8 +189,8 @@ Implementation progress:
 ✅ F. Create first Step Functions skeleton
 ✅ G. Define canonical job metadata schema
 ✅ F/G Bridge. Step Functions writes canonical metadata/status.json
-🟡 H. Define approval checkpoint contract
-⬜ I. Generate one complete 60-second internal video
+✅ H. Define approval checkpoint contract
+🟡 I. Generate one complete 60-second internal video
 ```
 
 Current phase:
@@ -199,20 +199,87 @@ Current phase:
 Phase 1 — Infrastructure Validation: COMPLETE
 Phase 2 — Metadata Contract: COMPLETE
 Phase 2 bridge — Canonical status writer: COMPLETE
-Phase 3 — Approval Checkpoint: ACTIVE (design phase)
+Phase 3 — Approval Checkpoint: COMPLETE
+Phase 4 — Internal Video Assembly: ACTIVE
 ```
 
-Bridge validation result:
+Approval validation result:
 
 ```text
-jobs/test-001/metadata/status.json exists and status is exported.
+jobs/test-001/metadata/approvals.json written with script.status = pending
+Human manually approved by setting script.status = approved
+Workflow resumed after approval
 ```
 
 Current active implementation target:
 
 ```text
-H. Define approval checkpoint contract (manual file-based in v1)
+I. Generate one complete 60-second internal video (manual assembly first)
 ```
+
+### Phase 4 — Internal Video Assembly
+
+**Goal:** Create one end-to-end internal MP4 export using already-validated assets, before automating through Step Functions.
+
+Available test-001 assets:
+
+```text
+jobs/test-001/scripts/script.md
+jobs/test-001/audio/narration.mp3
+jobs/test-001/captions/transcript.json
+jobs/test-001/video-raw/sample.mp4
+jobs/test-001/exports/sample-transcoded.mp4
+jobs/test-001/metadata/approvals.json (script.status = approved)
+```
+
+Required output:
+
+```text
+jobs/test-001/exports/test-001-final.mp4
+```
+
+### I-1: Manual Final Video Assembly
+
+**Goal:** Combine validated assets (narration + transcoded video) into one final MP4.
+
+**Inputs:**
+- `jobs/test-001/audio/narration.mp3` — approved narration
+- `jobs/test-001/exports/sample-transcoded.mp4` — transcoded visual placeholder
+
+**Process:**
+1. Use existing narration.mp3 as audio track
+2. Use existing sample-transcoded.mp4 as visual track
+3. Combine audio and video into final MP4
+4. Keep simple: no burned-in captions yet (can add later if easy)
+5. Output: `jobs/test-001/exports/test-001-final.mp4`
+
+**Validation:**
+- Confirm final MP4 exists in S3
+- Confirm audio and video are synchronized
+- Confirm playback is valid
+
+### I-2: Automate Assembly Through Step Functions
+
+Integrate final assembly step into Step Functions orchestration after approval.
+
+Step Functions should:
+1. Check approvals.json for script.status = approved
+2. Retrieve narration and transcoded video
+3. Run MediaConvert job for final assembly
+4. Write test-001-final.mp4 to exports/
+5. Update status.json with status = complete
+
+### I-3: Replace Placeholder with Generated Clips
+
+Replace sample-transcoded.mp4 with real generated video clips from Bedrock/Nova Reel.
+
+### I-4: Add Thumbnail Generation
+
+Generate and store preview thumbnail using Nova Canvas or MediaConvert snapshot.
+
+### I-5: Generate Real Internal Content
+
+Replace test-001 with real Says The Bible or ProChat short video.
 
 - No production video jobs are started from Brain Core yet.
 - No upload, render, or publish mutation endpoint exists yet.
