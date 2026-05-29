@@ -95,6 +95,26 @@ AWS owns:
 
 ## Current status
 
+Implementation progress:
+
+```text
+✅ A. Create private S3 dev bucket
+✅ B. Test Bedrock text generation
+✅ C. Test Polly text-to-speech into S3
+✅ D. Test Transcribe captions from audio
+✅ E. Test MediaConvert on one sample clip
+⬜ F. Create first Step Functions skeleton
+⬜ G. Add ProChat OS job metadata
+⬜ H. Add approval checkpoint
+⬜ I. Generate one complete 60-second internal video
+```
+
+Current next task:
+
+```text
+Create first Step Functions skeleton for the AWS-backed Video Orchestrator proof.
+```
+
 - No production video jobs are started from Brain Core yet.
 - No upload, render, or publish mutation endpoint exists yet.
 - Runtime video state should stay in the execution backend and ProChat OS metadata, not duplicated into Mind.

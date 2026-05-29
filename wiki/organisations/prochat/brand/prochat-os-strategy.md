@@ -490,15 +490,27 @@ Topic
 
 First implementation sequence:
 
-A. Create private S3 dev bucket  
-B. Test Bedrock text generation  
-C. Test Polly text-to-speech into S3  
-D. Test Transcribe captions from audio  
-E. Test MediaConvert on one sample clip  
-F. Create first Step Functions skeleton  
-G. Add ProChat OS job metadata  
-H. Add approval checkpoint  
-I. Generate one complete 60-second internal video
+✅ A. Create private S3 dev bucket  
+✅ B. Test Bedrock text generation  
+✅ C. Test Polly text-to-speech into S3  
+✅ D. Test Transcribe captions from audio  
+✅ E. Test MediaConvert on one sample clip  
+⬜ F. Create first Step Functions skeleton  
+⬜ G. Add ProChat OS job metadata  
+⬜ H. Add approval checkpoint  
+⬜ I. Generate one complete 60-second internal video
+
+Current next implementation task:
+
+```text
+Create the first Step Functions skeleton for the AWS-backed Video Orchestrator.
+```
+
+Expected output:
+
+```text
+A minimal Step Functions state machine that represents the completed A–E proof steps as orchestration states and can be expanded later with ProChat OS job metadata, approvals, retries, and final render flow.
+```
 
 Implementation principles:
 

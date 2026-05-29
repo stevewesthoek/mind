@@ -47,13 +47,27 @@ The active engineering lane is the AWS-backed Video Orchestrator proof because i
 
 This does not change the business positioning: ProChat OS is the product; Video Orchestrator is a module.
 
+Current implementation progress:
+
+```text
+✅ A. Create private S3 dev bucket
+✅ B. Test Bedrock text generation
+✅ C. Test Polly text-to-speech into S3
+✅ D. Test Transcribe captions from audio
+✅ E. Test MediaConvert on one sample clip
+⬜ F. Create first Step Functions skeleton
+⬜ G. Add ProChat OS job metadata
+⬜ H. Add approval checkpoint
+⬜ I. Generate one complete 60-second internal video
+```
+
 Current next task:
 
 ```text
-Create private S3 dev bucket and first job-folder structure for the AWS-backed Video Orchestrator proof.
+Create first Step Functions skeleton for the AWS-backed Video Orchestrator proof.
 ```
 
-Do not move to Bedrock, Polly, Transcribe, MediaConvert, Step Functions, approvals, or rendering until the S3 storage proof is completed, validated, and committed.
+Do not move to ProChat OS job metadata, approval checkpoints, or complete 60-second generation until the Step Functions skeleton is completed, validated, and committed.
 
 ## Phase 0 — Strategy and definition
 
