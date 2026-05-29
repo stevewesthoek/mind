@@ -2,7 +2,7 @@
 
 **Status:** canonical technical definition  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-05-24
+**Last updated:** 2026-05-29
 
 ## Definition
 

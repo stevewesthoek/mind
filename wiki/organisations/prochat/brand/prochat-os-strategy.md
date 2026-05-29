@@ -2,7 +2,7 @@
 
 **Status:** canonical strategy  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-05-28  
+**Last updated:** 2026-05-29  
 **Source history:** `prochat-os-strategy-draft.md`
 
 ## Strategic decision
@@ -533,9 +533,7 @@ modules/video-orchestrator/
   workflows/
     short-social-video.workflow.json
   templates/
-    youtube-short.json
-    tiktok.json
-    reels.json
+    short-internal-video.json
   providers/
     aws-bedrock
     aws-polly

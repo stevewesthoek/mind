@@ -2,7 +2,7 @@
 
 **Status:** canonical roadmap  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-05-24
+**Last updated:** 2026-05-29
 
 ## Roadmap principle
 
@@ -265,6 +265,26 @@ prochat-os-strategy.md
 ```
 
 V1 is narrow: one internal workflow, one exported MP4, no publishing automation, no account management, no customer-facing SaaS dashboard, and no local video-generation production path.
+
+V1 workflow:
+
+```text
+Topic
+→ 60-second script
+→ 5 scene prompts
+→ human approval
+→ Polly voiceover
+→ generated clips
+→ captions
+→ thumbnail
+→ final render
+→ exported MP4
+```
+
+First internal users:
+
+- Says The Bible
+- ProChat
 
 Exit criteria:
 

@@ -14,7 +14,7 @@ ProChat OS owns workflows.
 AWS owns media execution.
 ```
 
-The canonical Video Orchestrator strategy, roadmap, implementation plan, and architecture diagram live in:
+The canonical Video Orchestrator strategy, roadmap, implementation plan, cost controls, S3 layout, service boundaries, and architecture diagram live in:
 
 ```text
 wiki/organisations/prochat/brand/prochat-os-strategy.md
@@ -22,31 +22,9 @@ wiki/organisations/prochat/brand/prochat-os-strategy.md
 
 This note should stay sparse and should not store render logs, queue dumps, upload credentials, generated media state, or copied asset files.
 
-## Ownership boundaries
+## V1 boundary
 
-ProChat OS owns:
-
-- job status
-- workflow references
-- approvals
-- logs
-- retry actions
-- asset references
-- publishing checklist state
-
-AWS owns:
-
-- S3 asset storage and job folders
-- Bedrock script, prompt, image, and video generation
-- Polly narration
-- Transcribe captions and transcripts
-- MediaConvert render, transcode, and export
-- Step Functions orchestration state machine
-- Lambda glue tasks only
-- optional CloudFront delivery later
-- generation, rendering, storage, transcoding, and long-running media execution
-
-V1 boundary:
+The first MVP supports only:
 
 ```text
 Topic
@@ -61,7 +39,50 @@ Topic
 → exported MP4
 ```
 
-V1 has no publishing automation, account management, customer SaaS dashboard, full editor UX, local video generation, or local FFmpeg production path.
+First internal users:
+
+- Says The Bible
+- ProChat
+
+Do not build for external customers before the internal workflow produces repeatable videos.
+
+## Ownership boundaries
+
+ProChat OS owns:
+
+- job creation
+- template selection
+- approval gates
+- prompt history
+- asset metadata
+- workflow status
+- logs
+- retry commands
+- publishing checklist
+- module visibility in the console
+- asset references
+
+AWS owns:
+
+- S3 asset storage and job folders
+- Bedrock script, prompt, image, and video generation
+- Polly narration
+- Transcribe captions and transcripts
+- MediaConvert render, transcode, and export
+- Step Functions orchestration state machine
+- Lambda glue tasks only
+- CloudFront optional signed delivery later
+
+## Cost and storage guardrails
+
+- every job has a max budget
+- every job has max retries
+- every generated clip has max duration
+- failed generations are tracked
+- raw assets get lifecycle rules
+- dev bucket and production bucket stay separate
+- no public S3 access
+- CloudFront and signed URLs are used only when needed
 
 ## Future visibility
 
@@ -85,3 +106,5 @@ V1 has no publishing automation, account management, customer SaaS dashboard, fu
 - Do not use this page as a queue database.
 - Do not store generated media files in Mind unless they are deliberate durable sources.
 - Do not create a separate Video Studio product from this note.
+- Do not use local video generation or local FFmpeg as the core production path for v1.
+- Do not add account management, scheduling, autonomous publishing, or a customer-facing SaaS dashboard in v1.

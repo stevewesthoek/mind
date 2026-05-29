@@ -2,7 +2,7 @@
 
 **Status:** canonical go-to-market direction  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-05-24
+**Last updated:** 2026-05-29
 
 ## GTM principle
 
@@ -189,6 +189,8 @@ Organic content should show ProChat OS running workflows such as:
 - local app building
 
 Video content should validate and showcase ProChat OS. It should not reposition ProChat as a media company or a Runway, HeyGen, CapCut, or Adobe competitor.
+
+The AWS-backed Video Orchestrator must prove repeatable internal output for Says The Bible and ProChat before any customer-facing productization. V1 is a narrow internal workflow that produces one exported MP4; it does not include account management, scheduling, autonomous publishing, or a customer-facing SaaS dashboard.
 
 The first Video Orchestrator users are Says The Bible and ProChat. Do not sell or package the module for external customers until the internal AWS-backed workflow repeatedly produces usable 60-second exported MP4 videos with controlled cost and human approval.
 
