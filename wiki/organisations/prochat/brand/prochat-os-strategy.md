@@ -816,13 +816,19 @@ The schema examples above define the contract all future code must use.
 
 ## F/G bridge — Step Functions writes canonical status metadata
 
-The first real implementation target after the metadata contract is:
+Status:
 
 ```text
-Step Functions writes and updates metadata/status.json instead of metadata/status-started.json and metadata/status-completed.json.
+COMPLETE
 ```
 
-This proves the schema is not only documentation.
+Validation result:
+
+```text
+jobs/test-001/metadata/status.json exists and status is exported.
+```
+
+The bridge proved the schema is not only documentation: Step Functions writes and updates `metadata/status.json` instead of `metadata/status-started.json` and `metadata/status-completed.json`.
 
 Scope boundaries for the bridge:
 
@@ -944,7 +950,11 @@ Confirm status.json is overwritten from draft to exported.
 Confirm status-started.json and status-completed.json are no longer the target files.
 ```
 
-After the bridge is validated, H approval checkpoint becomes the next task.
+Next task:
+
+```text
+H. Approval checkpoint
+```
 
 Implementation principles:
 

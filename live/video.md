@@ -125,7 +125,7 @@ Implementation progress:
 ✅ E. Test MediaConvert on one sample clip
 ✅ F. Create first Step Functions skeleton
 ✅ G. Define canonical job metadata schema
-⬜ F/G Bridge. Step Functions writes canonical metadata/status.json
+✅ F/G Bridge. Step Functions writes canonical metadata/status.json
 ⬜ H. Add approval checkpoint
 ⬜ I. Generate one complete 60-second internal video
 ```
@@ -135,19 +135,19 @@ Current phase:
 ```text
 Phase 1 — Infrastructure Validation: COMPLETE
 Phase 2 — Metadata Contract: COMPLETE
-Phase 2 bridge — Canonical status writer: ACTIVE
+Phase 2 bridge — Canonical status writer: COMPLETE
+```
+
+Bridge validation result:
+
+```text
+jobs/test-001/metadata/status.json exists and status is exported.
 ```
 
 Current active implementation target:
 
 ```text
-Step Functions writes and updates metadata/status.json instead of metadata/status-started.json and metadata/status-completed.json.
-```
-
-Validation target:
-
-```text
-jobs/test-001/metadata/status.json
+H. Add approval checkpoint
 ```
 
 - No production video jobs are started from Brain Core yet.
