@@ -113,6 +113,69 @@ These files are the contract between ProChat OS and AWS execution.
 - links to AWS-backed asset references
 - links to durable workflow notes when human action is required
 
+## Approval checkpoint (H)
+
+The first approval gate is script approval.
+
+### Approval files
+
+**metadata/approvals.json** — canonical approval checkpoint state
+
+Required shape:
+
+```json
+{
+  "jobId": "test-001",
+  "approvals": {
+    "script": {
+      "status": "pending",
+      "approvedBy": null,
+      "approvedAt": null,
+      "notes": null
+    },
+    "scenes": {
+      "status": "not_required",
+      "approvedBy": null,
+      "approvedAt": null,
+      "notes": null
+    },
+    "final": {
+      "status": "not_required",
+      "approvedBy": null,
+      "approvedAt": null,
+      "notes": null
+    }
+  }
+}
+```
+
+### Workflow contract
+
+1. Step Functions generates script from topic via Bedrock.
+2. Step Functions writes `metadata/status.json` with `status = "awaiting_script_approval"`.
+3. Step Functions writes `metadata/approvals.json` with `approvals.script.status = "pending"`.
+4. Workflow stops and waits for human approval.
+5. Human reviews script (stored in `metadata/job.json`).
+6. Human updates `metadata/approvals.json` with `approvals.script.status = "approved"` and optional `approvedBy`, `approvedAt`, `notes`.
+7. Later execution resumes and continues to scene generation, rendering, etc.
+
+### Manual approval path (v1)
+
+In v1, approval is manual file-based:
+
+1. Human SSH or Lambda console into dev environment.
+2. Human reads `metadata/job.json` and the generated script.
+3. Human edits `metadata/approvals.json` script approval fields.
+4. Human sets `approvals.script.status = "approved"` and optionally adds `approvedBy`, `approvedAt`, `notes`.
+5. Human triggers next Lambda function or workflow step manually.
+6. Workflow resumes.
+
+### Future approval paths
+
+- UI approval form in ProChat Console (ProChat OS owns approval UI)
+- API approval endpoint (ProChat OS owns approval logic)
+- webhook approval from external systems
+
 ## Current status
 
 Implementation progress:
@@ -126,7 +189,7 @@ Implementation progress:
 ✅ F. Create first Step Functions skeleton
 ✅ G. Define canonical job metadata schema
 ✅ F/G Bridge. Step Functions writes canonical metadata/status.json
-⬜ H. Add approval checkpoint
+🟡 H. Define approval checkpoint contract
 ⬜ I. Generate one complete 60-second internal video
 ```
 
@@ -136,6 +199,7 @@ Current phase:
 Phase 1 — Infrastructure Validation: COMPLETE
 Phase 2 — Metadata Contract: COMPLETE
 Phase 2 bridge — Canonical status writer: COMPLETE
+Phase 3 — Approval Checkpoint: ACTIVE (design phase)
 ```
 
 Bridge validation result:
@@ -147,7 +211,7 @@ jobs/test-001/metadata/status.json exists and status is exported.
 Current active implementation target:
 
 ```text
-H. Add approval checkpoint
+H. Define approval checkpoint contract (manual file-based in v1)
 ```
 
 - No production video jobs are started from Brain Core yet.

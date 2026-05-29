@@ -379,7 +379,84 @@ Exit criteria:
 A ProChat or Says The Bible topic becomes an approved script, scene plan, voiceover, and stored assets.
 ```
 
-### Phase 3 — Video Generation
+## Approval checkpoint strategy
+
+The first approval gate is script approval.
+
+ProChat OS owns the approval decision and approval gate. AWS executes media generation and stops at each gate until approval.
+
+### Approval contract
+
+**metadata/approvals.json** defines the approval checkpoint state for each job.
+
+```json
+{
+  "jobId": "job-id",
+  "approvals": {
+    "script": {
+      "status": "pending|approved|rejected",
+      "approvedBy": "user-id or null",
+      "approvedAt": "2026-05-29T12:00:00Z or null",
+      "notes": "approval notes or null"
+    },
+    "scenes": {
+      "status": "not_required|pending|approved|rejected",
+      "approvedBy": null,
+      "approvedAt": null,
+      "notes": null
+    },
+    "final": {
+      "status": "not_required|pending|approved|rejected",
+      "approvedBy": null,
+      "approvedAt": null,
+      "notes": null
+    }
+  }
+}
+```
+
+### Step Functions behavior at approval gates
+
+1. Step Functions generates script from topic using Bedrock.
+2. Step Functions writes script to metadata/job.json.
+3. Step Functions writes approvals.json with script.status = "pending".
+4. Step Functions writes status.json with status = "awaiting_script_approval".
+5. Step Functions stops execution.
+6. Human approves by editing metadata/approvals.json.
+7. Human sets script.status = "approved" and optionally adds approvedBy, approvedAt, notes.
+8. Later Lambda invocation or Step Functions resume trigger continues to next phase.
+9. If script.status = "rejected", workflow stops and notifies.
+
+### Human approval workflow (v1)
+
+In v1, approval is manual:
+
+1. Developer/human reviews job folder.
+2. Human reads generated script in metadata/job.json.
+3. Human edits metadata/approvals.json directly.
+4. Human sets script.status to "approved" or "rejected".
+5. Human optionally adds approvedBy and notes.
+6. Human triggers next workflow step via Lambda console or workflow resume.
+
+### Future approval workflows
+
+- ProChat OS UI approval form (ProChat OS owns approval UI)
+- Approval API endpoint (ProChat OS owns approval logic)
+- Webhook approval integration (ProChat OS owns webhook logic)
+- Slack approval bot (ProChat OS owns bot)
+
+Automation of approvals (always-approve workflows) is out of scope for the first approval gate.
+
+### Reason for this design
+
+- Clear separation of concerns: ProChat OS owns decisions, AWS owns execution.
+- Gates are explicit and testable without UI.
+- Manual approval in v1 validates the workflow before automating.
+- Approval state is durable and audit-able in S3.
+- Future approval UIs can read/write the same metadata file.
+- Easy to extend with more approval gates later.
+
+### Phase 3 — Video Generation with Approval
 
 Goal: generate complete short-form video assets.
 

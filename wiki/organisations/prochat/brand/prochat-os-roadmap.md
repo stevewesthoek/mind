@@ -58,7 +58,7 @@ Current implementation progress:
 ✅ F. Create first Step Functions skeleton
 ✅ G. Define canonical job metadata schema
 ✅ F/G Bridge. Step Functions writes canonical metadata/status.json
-⬜ H. Add approval checkpoint
+🟡 H. Define approval checkpoint contract
 ⬜ I. Generate one complete 60-second internal video
 ```
 
@@ -68,6 +68,7 @@ Current phase:
 Phase 1 — Infrastructure Validation: COMPLETE
 Phase 2 — Metadata Contract: COMPLETE
 Phase 2 bridge — Canonical status writer: COMPLETE
+Phase 3 — Approval Checkpoint: ACTIVE (design phase)
 ```
 
 Canonical metadata files:
@@ -89,10 +90,44 @@ jobs/test-001/metadata/status.json exists and status is exported.
 Current active implementation target:
 
 ```text
-H. Add approval checkpoint
+H. Define approval checkpoint contract (manual file-based approval in v1)
 ```
 
-Do not move to complete 60-second generation until approval checkpoint behavior is defined, validated, and committed.
+### Phase 3 — Approval Checkpoint
+
+#### H. Define approval checkpoint contract
+
+**Goal:** Define the script approval gate and manual approval workflow.
+
+**Scope:**
+- Script approval is the first approval gate.
+- Step Functions stops after generating script and writing approvals.json.
+- Workflow state is "awaiting_script_approval".
+- Manual approval means human edits approvals.json file.
+- No UI approval, no API approval, no automation in v1.
+- No calls to Polly/Transcribe/MediaConvert yet.
+
+**Requirement:** 
+- metadata/approvals.json writes `script.status = "pending"` after generation.
+- metadata/status.json writes `status = "awaiting_script_approval"`.
+- Step Functions workflow stops and waits for approval.
+- Future workflow resumes when script.status becomes "approved".
+
+**Approval path (manual):**
+1. Step Functions generates script and writes approvals.json.
+2. Human reviews script in metadata/job.json.
+3. Human edits metadata/approvals.json by setting script.status to "approved".
+4. Later invocation resumes workflow.
+
+**Output:**
+- Updated prochat-os-strategy.md with approval gate description
+- Updated prochat-os-roadmap.md with Phase 3 details
+- Updated live/video.md with approval checkpoint spec
+- Commitment to implement this in Phase 3 without building UI
+
+**Validation:** Human can review script, edit approvals.json, and trigger resume without UI.
+
+Do not move to complete 60-second generation until approval checkpoint contract is tested with one end-to-end flow.
 
 ## Phase 0 — Strategy and definition
 
