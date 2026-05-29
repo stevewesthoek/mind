@@ -302,12 +302,12 @@ These automations run in the n8n Brain Bridge pipeline:
 - **`00-start-here.md`** — Compact orientation for human and AI sessions.
 - **`00-current-context.md`** — Current priorities and context without loading the whole vault.
 - **`00-memory-map.md`** — Retrieval map that tells AI where to search/read for each kind of request.
-- **`home.md` / `HOME.md`** — Dashboard. Start here daily. See focus, blockers, inbox, quick links.
+- **`home.md` / `home.md`** — Dashboard. Start here daily. See focus, blockers, inbox, quick links.
 - **`live/machine.md`** — Sparse Brain Core machine status entry point; links to runtime API instead of storing runtime truth.
 - **`live/sessions.md`** — Sparse AI session visibility surface; does not store transcripts or terminal logs.
 - **`live/video.md`** — Sparse Video Orchestrator visibility surface; does not store render logs or queue dumps.
 - **`live/business.md`** — Sparse business operating surface; points to current work without duplicating task/project databases.
-- **`kanban.md` / `KANBAN.md`** — Obsidian Canvas. Your working board (To Do → Doing → Done).
+- **`kanban.md` / `kanban.md`** — Obsidian Canvas. Your working board (To Do → Doing → Done).
 - **`CLAUDE.md`** — Claude Code compatibility instructions; points Claude to the universal AI entrypoint.
 
 ---

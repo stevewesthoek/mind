@@ -33,8 +33,8 @@ Use `mind` for Steve-specific context and durable knowledge.
 Do not rename or replace these root files unless explicitly asked:
 
 ```text
-HOME.md
-KANBAN.md
+home.md
+kanban.md
 TODAY.md
 ```
 
@@ -51,7 +51,7 @@ Do not break existing automations:
 - Save-to-Mind targets `capture/inbox/` — do not change this path.
 - Failed captures belong in `capture/failed/`.
 - auto-router/model-router may inspect inbox notes, but write/apply remains blocked unless explicitly approved.
-- kanban-syncer syncs task surfaces with `KANBAN.md`.
+- kanban-syncer syncs task surfaces with `kanban.md`.
 - Obsidian uses this repo as a vault.
 
 Do not write into `archive/old/` — those are read-only legacy backups.
@@ -171,7 +171,7 @@ Avoid destructive changes unless explicitly confirmed:
 - renaming folders
 - bulk edits
 - changing automation-sensitive frontmatter
-- rewriting `KANBAN.md`
+- rewriting `kanban.md`
 
 ## Definition Of A Good AI Session
 

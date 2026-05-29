@@ -192,7 +192,7 @@ archive
 Root files stay at the top through bookmarks or the Obsidian dashboard:
 
 ```text
-HOME.md
+home.md
 TODAY.md
 ```
 
@@ -285,7 +285,7 @@ capture/failed/        no files older than 3 days without retry/review
 
 - Do not move/delete old numbered folders until the new structure is validated.
 - Do not break Save-to-Mind.
-- Do not rewrite `KANBAN.md` during this migration unless explicitly planned.
+- Do not rewrite `kanban.md` during this migration unless explicitly planned.
 - Do not store secrets in mind.
 - Do not duplicate machine runtime state in mind; Brain Core remains machine truth.
 - Prefer generated summaries and indexes over many tiny notes.
@@ -305,14 +305,14 @@ After live migration:
 - [ ] New Save-to-Mind capture lands in `capture/inbox/`.
 - [ ] Failed capture lands in `capture/failed/`.
 - [ ] Router processes a capture into `wiki/` or `live/`.
-- [ ] `HOME.md` points to the new surfaces.
+- [ ] `home.md` points to the new surfaces.
 - [ ] Scheduler loop reports are visible through Brain Core or linked reports.
 
 ## Definition of Done
 
 The migration is complete when:
 
-- Daily use starts from `HOME.md` and `TODAY.md`.
+- Daily use starts from `home.md` and `TODAY.md`.
 - New captures land in `capture/inbox/`.
 - The model router maintains `router/`, `live/`, `wiki/`, and `sources/`.
 - Old numbered folders are archived or legacy-only.

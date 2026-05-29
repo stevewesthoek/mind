@@ -16,7 +16,7 @@ The model-router implementation lives in `brain`. This vault contains the router
 The user should open Obsidian and work from a small, clean set of surfaces:
 
 ```text
-HOME.md
+home.md
 TODAY.md
 router/
 capture/
@@ -32,7 +32,7 @@ The model router handles classification, routing, cleanup, compilation, deduplic
 
 ```text
 mind/
-  HOME.md
+  home.md
   TODAY.md
   README.md
   AGENTS.md
@@ -142,7 +142,7 @@ Use clean folder names and order them in Obsidian with a manual sorting/custom-s
 
 Do not use numeric prefixes just to force folder order.
 
-If manual sorting is unavailable, `HOME.md` remains the true dashboard and navigation entry point.
+If manual sorting is unavailable, `home.md` remains the true dashboard and navigation entry point.
 
 ## Save-to-Mind Direction
 
@@ -224,7 +224,7 @@ This applies to:
 - The vault uses clean unnumbered folders.
 - Save-to-Mind writes to `capture/inbox/`.
 - Failed captures are recoverable in `capture/failed/`.
-- Daily work happens from `HOME.md`, `TODAY.md`, and `live/`.
+- Daily work happens from `home.md`, `TODAY.md`, and `live/`.
 - Long-term knowledge is compiled into `wiki/`.
 - Raw evidence is kept in `sources/`.
 - Old numbered folders are eventually archived.

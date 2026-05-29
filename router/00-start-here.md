@@ -43,11 +43,11 @@ archive/   Old, completed, or legacy material (archive/old/ for legacy numbered 
 Steve usually works from:
 
 ```text
-HOME.md
-KANBAN.md
+home.md
+kanban.md
 ```
 
-Agents should not rewrite `KANBAN.md` unless explicitly asked and should preserve automation-sensitive frontmatter in task files.
+Agents should not rewrite `kanban.md` unless explicitly asked and should preserve automation-sensitive frontmatter in task files.
 
 ## AI Memory Interface
 

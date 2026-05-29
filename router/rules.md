@@ -19,7 +19,7 @@
 - Do not duplicate machine runtime truth in markdown.
 - Do not store Brain Core runtime reports or approval audit logs in `mind`.
 - Do not move or delete old numbered folders until the migration validation checklist is complete.
-- Do not rewrite `KANBAN.md` during this migration unless explicitly planned.
+- Do not rewrite `kanban.md` during this migration unless explicitly planned.
 - Do not create broad shell-execution instructions in Obsidian notes.
 
 ## Size rules

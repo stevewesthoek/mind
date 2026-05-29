@@ -12,4 +12,4 @@ Migration note: this file starts empty on purpose. Legacy task material remains 
 
 ## Waiting / Review
 
-- Existing `KANBAN.md` remains unchanged during this migration slice.
+- Existing `kanban.md` remains unchanged during this migration slice.

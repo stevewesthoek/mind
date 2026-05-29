@@ -68,8 +68,8 @@ They should:
 ### Personal / Knowledge System
 
 - `README.md` documents the vault and automations.
-- `HOME.md` is the human daily dashboard.
-- `KANBAN.md` is the working board.
+- `home.md` is the human daily dashboard.
+- `kanban.md` is the working board.
 - `live/tasks.md` is the current tasks summary.
 
 ### Organisations

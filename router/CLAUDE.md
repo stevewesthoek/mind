@@ -18,7 +18,7 @@ Do not load the whole vault. Use `00-memory-map.md`, then search/read only relev
 
 **Repository:** Personal Obsidian knowledge vault (Save to Mind system)  
 **Type:** PARA-based personal knowledge management and AI-readable memory  
-**Entry point:** `AGENTS.md` for agents, `HOME.md` for Steve, `README.md` for full system guide
+**Entry point:** `AGENTS.md` for agents, `home.md` for Steve, `README.md` for full system guide
 
 ## Structure
 

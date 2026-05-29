@@ -50,7 +50,7 @@ Created:
 Purpose:
 
 - Daily focus surface for the Mind OS cockpit.
-- Links to `HOME.md`, `live/dashboard.md`, `live/tasks.md`, `live/projects.md`, `live/workflows.md`, and `capture/inbox/README.md`.
+- Links to `home.md`, `live/dashboard.md`, `live/tasks.md`, `live/projects.md`, `live/workflows.md`, and `capture/inbox/README.md`.
 
 ### New router contract
 
@@ -96,7 +96,7 @@ Created:
 Purpose:
 
 - Sparse current operating layer.
-- Does not replace `KANBAN.md` yet.
+- Does not replace `kanban.md` yet.
 - Does not duplicate machine runtime truth; Brain Core should provide runtime state later.
 
 ### New wiki structure
@@ -153,13 +153,13 @@ Purpose:
 
 Updated:
 
-- `HOME.md`
+- `home.md`
 - `README.md`
 
 Changes:
 
-- `HOME.md` now links to new Mind OS surfaces while preserving the legacy dashboard and `KANBAN.md` links.
-- `HOME.md` capture status now says public webhook `/mind-inbox` writes to `capture/inbox/`, with the legacy `01-inbox/` retained for historical reference.
+- `home.md` now links to new Mind OS surfaces while preserving the legacy dashboard and `kanban.md` links.
+- `home.md` capture status now says public webhook `/mind-inbox` writes to `capture/inbox/`, with the legacy `01-inbox/` retained for historical reference.
 - `README.md` stale troubleshooting endpoint was corrected from `/brain-inbox` to `/mind-inbox`.
 
 ## Matching Brain handoff
@@ -185,7 +185,7 @@ BuildFlow verification completed:
 
 Security scan target files included:
 
-- `HOME.md`
+- `home.md`
 - `README.md`
 - `TODAY.md`
 - all `router/*.md`
@@ -213,7 +213,7 @@ Do not assume those are part of this migration. Do not stage or commit them unle
 Migration-related changed/new paths from this slice:
 
 ```text
-HOME.md
+home.md
 README.md
 TODAY.md
 router/
@@ -225,7 +225,7 @@ archive/
 MIND-OS-HANDOFF-2026-05-16.md
 ```
 
-Note: `home.md` appeared in `git diff --name-only` even though the read/update target was `HOME.md`. Be careful on case-sensitive/case-insensitive filesystem behavior. Inspect before staging.
+Note: `home.md` appeared in `git diff --name-only` even though the read/update target was `home.md`. Be careful on case-sensitive/case-insensitive filesystem behavior. Inspect before staging.
 
 ## Continuation update — 2026-05-16
 
@@ -273,7 +273,7 @@ live/machine.md
 Updated:
 
 ```text
-HOME.md
+home.md
 README.md
 ```
 
@@ -304,7 +304,7 @@ Safety preserved:
 - No legacy numbered folder was archived.
 - No legacy numbered folder was deleted.
 - No old PARA content was compiled into `live/`, `wiki/`, or `sources/`.
-- `KANBAN.md` was not edited.
+- `kanban.md` was not edited.
 - No additional live Save-to-Mind webhook test was performed in this slice.
 - No capture was written to `capture/inbox/` by live n8n in this slice.
 - No live model-router job processed the vault.
@@ -361,7 +361,7 @@ Do not commit until the user asks.
 If asked to commit, stage explicit paths only. Suggested `mind` migration paths:
 
 ```text
-HOME.md
+home.md
 README.md
 TODAY.md
 MIND-OS-HANDOFF-2026-05-16.md
@@ -548,7 +548,7 @@ live/business.md
 Updated pages:
 
 ```text
-HOME.md
+home.md
 README.md
 live/dashboard.md
 ```

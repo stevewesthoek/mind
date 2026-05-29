@@ -35,7 +35,7 @@ For each line, decide:
 
 That is the only maintenance task this system asks of you.
 
-**Your working board: `KANBAN.md`**
+**Your working board: `kanban.md`**
 
 This is your daily driver. Open it to see what is to-do, in-progress, and done. Tasks on the Kanban are managed by you — add, move, and complete them as you work.
 
@@ -50,7 +50,7 @@ This is your daily driver. Open it to see what is to-do, in-progress, and done. 
 | Active tasks | `live/tasks.md` |
 | Active projects | `live/projects/` |
 | Committed decisions | `live/decisions.md` |
-| Your working board | `KANBAN.md` |
+| Your working board | `kanban.md` |
 | Business & org knowledge | `wiki/organisations/` (ProChat, Arkware, Yeshua Academy) |
 | Personal areas (faith, family, health) | `wiki/areas/` |
 | Apologetics research | `sources/research/apologetics/` |

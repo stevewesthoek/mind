@@ -20,7 +20,7 @@ Critical boundaries:
   - 06-resources/
   - 07-templates/
   - 08-archive/
-- Do not rewrite KANBAN.md.
+- Do not rewrite kanban.md.
 - Do not change task frontmatter in 04-tasks/.
 - Do not delete anything.
 - Do not move anything.
