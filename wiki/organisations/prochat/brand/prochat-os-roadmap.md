@@ -76,8 +76,15 @@ Phase 3 — Approval Checkpoint: COMPLETE
 Phase 4 — Internal Video Assembly: COMPLETE
   I-1: Manual assembly (ffmpeg validation)
   I-2: AWS Step Functions automation (LIVE)
-Phase 5 — Placeholder Replacement: ACTIVE
-  I-3: Nova Reel integration (NEXT)
+Phase 5 — Placeholder Replacement: ACTIVE (BLOCKED)
+  I-3.1: Manual generated clip proof (BLOCKED on Nova Reel availability)
+```
+
+Blocker:
+```text
+Bedrock Nova Reel (video generation API) not available in eu-north-1
+No alternative AWS video generation services accessible in current account/region
+I-3 cannot proceed until service is enabled
 ```
 
 Canonical metadata files:
