@@ -279,13 +279,121 @@ jobs/test-001/exports/test-001-final.mp4
 - AWS MediaConvert is the canonical execution engine for final assembly
 - Local ffmpeg was validation only, not production
 
-**Step Functions workflow after approval:**
-1. Lambda checks approvals.json for script.status = approved
-2. Lambda retrieves narration.mp3 and sample-transcoded.mp4 from S3
-3. Lambda triggers MediaConvert job with audio/video inputs
-4. MediaConvert writes final output: test-001-final.mp4
-5. Lambda updates status.json with status = complete
-6. Lambda marks job ready for next phase
+**Implementation requirements:**
+
+#### Step Functions State Machine Extension
+
+**Entry point:** After approvals.json indicates script.status=approved
+
+**Workflow states:**
+
+1. **CheckApproval**
+   - Read metadata/approvals.json from S3
+   - Check: approvals.script.status == "approved"
+   - If not approved: end workflow (wait for approval)
+   - If approved: proceed
+
+2. **UpdateStatusAssembling**
+   - Update metadata/status.json with status = "assembling"
+   - Timestamp: current UTC time
+
+3. **TriggerMediaConvert**
+   - Create MediaConvert job with:
+     - **Video input:** jobs/test-001/exports/sample-transcoded.mp4
+     - **Audio input:** jobs/test-001/audio/narration.mp3
+     - **Output:** jobs/test-001/exports/test-001-final.mp4
+     - **Settings:** MP4 output, H.264 video, AAC audio, 64.033 seconds duration
+   - Store job ID in workflow context
+
+4. **WaitForMediaConvert**
+   - Poll MediaConvert job status
+   - Wait for job to complete (state == "COMPLETE")
+   - If failed: retry or handle error
+
+5. **UpdateStatusComplete**
+   - Update metadata/status.json with status = "complete"
+   - Add assemblyCompletedAt: current UTC time
+   - Add mediaConvertJobId: job ID from state
+
+6. **Success**
+   - Verify test-001-final.mp4 exists in S3
+   - Return success state
+
+#### Lambda Handler Responsibilities
+
+Lambda should:
+- Read approvals.json to verify approval
+- Construct MediaConvert job payload
+- Monitor job completion
+- Update metadata files
+- Handle errors with retry logic
+
+#### MediaConvert Job Template
+
+```json
+{
+  "Name": "test-001-final-assembly",
+  "Settings": {
+    "TimecodeConfig": {
+      "Source": "ZEROBASED"
+    },
+    "Inputs": [
+      {
+        "FileInput": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/sample-transcoded.mp4",
+        "AudioSelectors": {
+          "Audio Selector 1": {
+            "DefaultSelection": "NOT_DEFAULT"
+          }
+        },
+        "VideoSelector": {
+          "Rotate": "DEGREE_0"
+        }
+      },
+      {
+        "FileInput": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/audio/narration.mp3"
+      }
+    ],
+    "OutputGroups": [
+      {
+        "Name": "File Group",
+        "Outputs": [
+          {
+            "Filename": "test-001-final.mp4",
+            "VideoDescription": {
+              "CodecSettings": {
+                "H264Settings": {
+                  "MaxBitrate": 5000000,
+                  "FramerateDenominator": 1,
+                  "FramerateNumerator": 30,
+                  "RateControlMode": "VBR"
+                }
+              }
+            },
+            "AudioDescriptions": [
+              {
+                "CodecSettings": {
+                  "AacSettings": {
+                    "Bitrate": 128000,
+                    "SampleRate": 48000,
+                    "Channels": 2
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "OutputGroupSettings": {
+          "Type": "FILE_GROUP_SETTINGS",
+          "FileGroupSettings": {
+            "Destination": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/"
+          }
+        }
+      }
+    ]
+  },
+  "Queue": "default"
+}
+```
 
 **Why MediaConvert instead of local ffmpeg?**
 - AWS-native, no local dependencies
@@ -293,6 +401,91 @@ jobs/test-001/exports/test-001-final.mp4
 - Integrates with Step Functions state machine
 - Consistent with AWS-owns-execution boundary
 - Better observability and cost tracking
+- Supports complex video workflows later
+
+#### Metadata Contract
+
+**metadata/status.json updates during I-2:**
+
+```json
+{
+  "jobId": "test-001",
+  "status": "assembling",
+  "phase": "i-2",
+  "assemblyStartedAt": "2026-05-30T12:00:00Z",
+  "assemblyCompletedAt": null,
+  "mediaConvertJobId": null
+}
+```
+
+After MediaConvert completes:
+
+```json
+{
+  "jobId": "test-001",
+  "status": "complete",
+  "phase": "i-2",
+  "assemblyStartedAt": "2026-05-30T12:00:00Z",
+  "assemblyCompletedAt": "2026-05-30T12:05:00Z",
+  "mediaConvertJobId": "1234567890abcdef1234567890abcdef"
+}
+```
+
+#### Validation Criteria
+
+✅ Step Functions monitors approvals.json
+✅ MediaConvert job created with correct inputs
+✅ test-001-final.mp4 written to exports/
+✅ status.json updated with assembling → complete
+✅ Output MP4 is playable and matches I-1 output duration
+
+#### I-2 Manual Execution Proof (before Step Functions automation)
+
+To validate I-2 implementation before integrating with Step Functions:
+
+**1. Verify approval state:**
+```bash
+# Confirm script.status = approved in metadata/approvals.json
+aws s3 cp s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/metadata/approvals.json - | jq '.approvals.script.status'
+# Expected output: "approved"
+```
+
+**2. Submit MediaConvert job manually:**
+```bash
+# Create job from template above, store job ID
+aws mediaconvert create-job \
+  --endpoint-url https://abcdef1234567.mediaconvert.eu-north-1.amazonaws.com \
+  --region eu-north-1 \
+  --role arn:aws:iam::909439522876:role/video-orchestrator-role \
+  --settings file://mediaconvert-job-template.json
+
+# Capture job ID: 1234567890abcdef1234567890abcdef
+```
+
+**3. Monitor job completion:**
+```bash
+aws mediaconvert get-job --id 1234567890abcdef1234567890abcdef
+
+# Wait for: "Status": "COMPLETE"
+```
+
+**4. Update status.json to complete:**
+```bash
+# Write metadata/status.json with status = complete
+aws s3 cp metadata/status.json s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/metadata/status.json
+```
+
+**5. Verify output:**
+```bash
+# Confirm test-001-final.mp4 exists
+aws s3 ls s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/
+
+# Download and verify
+aws s3 cp s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/test-001-final.mp4 local-final.mp4
+ffprobe local-final.mp4
+```
+
+**Proof of completion:** When MediaConvert output matches I-1 output (duration ~64 seconds, both audio and video present), I-2 is ready for Step Functions integration.
 
 ### I-3: Replace Placeholder with Generated Clips ⬜ FUTURE
 

@@ -494,6 +494,32 @@ Exit criteria I-2:
 ```text
 Final assembly automated through Step Functions after approval.
 MediaConvert is the canonical execution engine.
+test-001-final.mp4 generated via MediaConvert (not local ffmpeg).
+Proof: output matches I-1 validation (duration ~64s, H.264 + AAC, playable).
+```
+
+Implementation approach for I-2:
+
+```text
+Extend existing Step Functions skeleton with:
+
+1. CheckApproval — Verify approvals.json script.status == approved
+2. UpdateStatusAssembling — Set status = "assembling"
+3. TriggerMediaConvert — Create MediaConvert job (video + audio inputs)
+4. WaitForMediaConvert — Poll job until complete
+5. UpdateStatusComplete — Set status = "complete", record timestamps/jobId
+6. Success — Verify output exists
+
+MediaConvert inputs:
+- Video: jobs/test-001/exports/sample-transcoded.mp4
+- Audio: jobs/test-001/audio/narration.mp3
+
+MediaConvert output:
+- jobs/test-001/exports/test-001-final.mp4
+
+Metadata updates:
+- metadata/status.json: status field transitions assembling → complete
+- metadata/status.json: add assemblyStartedAt, assemblyCompletedAt, mediaConvertJobId
 ```
 
 Important distinction:
@@ -502,6 +528,7 @@ Important distinction:
 I-1 used local ffmpeg as validation shortcut to prove the concept works end-to-end.
 I-2 moves to AWS MediaConvert as the canonical production execution path.
 AWS owns media execution; Step Functions owns orchestration.
+Local ffmpeg was testing only. MediaConvert is the durable production path.
 ```
 
 ### Phase 5 — Video Generation with Automation

@@ -192,30 +192,116 @@ jobs/test-001/exports/test-001-final.mp4 — final 60-second video
 
 #### I-2: Automate Assembly Through Step Functions 🟡 ACTIVE
 
-**Goal:** Move final assembly into AWS canonical execution layer via Step Functions.
+**Goal:** Move final assembly into AWS canonical execution layer via Step Functions after approval.
+
+**Scope:**
+- Extend existing Step Functions state machine
+- Add approval check → MediaConvert orchestration → completion
+- No Step Functions redesign, only extend current skeleton
+- No Lambda redesign beyond assembly step
+- Strictly limited to MediaConvert orchestration
+
+**Implementation specification:**
+
+**Step Functions state machine additions:**
+
+1. **CheckApproval state**
+   - Read approvals.json from S3
+   - Verify approvals.script.status == "approved"
+   - If not approved: end (workflow paused)
+   - If approved: proceed to next state
+
+2. **UpdateStatusAssembling state**
+   - Update metadata/status.json: status = "assembling"
+   - Timestamp: assemblyStartedAt = now
+
+3. **TriggerMediaConvert state**
+   - Lambda invokes MediaConvert CreateJob
+   - Inputs: jobs/test-001/exports/sample-transcoded.mp4 + jobs/test-001/audio/narration.mp3
+   - Output: jobs/test-001/exports/test-001-final.mp4
+   - Returns: MediaConvert job ID
+
+4. **WaitForMediaConvert state**
+   - Poll MediaConvert job status
+   - Wait for Status == "COMPLETE"
+   - Retry on transient failures
+
+5. **UpdateStatusComplete state**
+   - Update metadata/status.json: status = "complete"
+   - Add: assemblyCompletedAt = now
+   - Add: mediaConvertJobId = job ID
+
+6. **Success state**
+   - Verify test-001-final.mp4 exists
+   - Return workflow success
 
 **Why MediaConvert instead of local ffmpeg?**
 - AWS is the canonical execution layer (per strategy: AWS owns media execution)
 - Step Functions orchestrates the workflow
-- MediaConvert scales to production
+- MediaConvert scales to production workloads
 - Integrates with metadata and approval workflow
 - Better cost tracking and observability
 - Eliminates local dependencies
+- Proven by I-1 validation
 
-**Workflow after approval:**
-1. Lambda monitors approvals.json for script.status = approved
-2. Lambda retrieves narration.mp3 and sample-transcoded.mp4 from S3
-3. Lambda triggers MediaConvert job with audio + video inputs
-4. MediaConvert combines audio and video
-5. MediaConvert writes test-001-final.mp4 to exports/
-6. Lambda updates status.json with status = awaiting_next_phase
-7. Job ready for I-3 (clip replacement) or next phase
+**Metadata contract updates:**
 
-**Canonical execution order:**
-- ProChat OS: approvals logic, workflow state, metadata
-- AWS Step Functions: orchestration and state machine
-- AWS MediaConvert: audio/video assembly
-- AWS S3: storage
+metadata/status.json during I-2:
+```
+"status": "assembling" (while MediaConvert runs)
+"status": "complete" (when done)
+"assemblyStartedAt": timestamp
+"assemblyCompletedAt": timestamp
+"mediaConvertJobId": job ID
+```
+
+**Validation criteria:**
+
+- Step Functions detects approval state
+- MediaConvert job created with correct inputs
+- test-001-final.mp4 written to exports/
+- status.json updated: assembling → complete
+- Output MP4 is playable and matches I-1 duration (~64 seconds)
+
+**Proof of completion required:**
+
+MediaConvert output must be identical or better than I-1 manual output:
+- Duration: 64.033333 seconds ± 0.1 seconds
+- Video codec: H.264
+- Audio codec: AAC
+- Channels: 2 (stereo)
+- Sample rate: 48000 Hz
+- Fully playable without errors
+
+**Execution path for manual testing:**
+
+Before full Step Functions integration, validate with manual execution:
+```bash
+# 1. Verify approval
+aws s3 cp s3://.../jobs/test-001/metadata/approvals.json - | jq '.approvals.script.status'
+
+# 2. Submit MediaConvert job (see live/video.md for template)
+aws mediaconvert create-job --settings file://template.json
+
+# 3. Monitor completion
+aws mediaconvert get-job --id <jobId>
+
+# 4. Update status.json
+aws s3 cp metadata/status.json s3://.../jobs/test-001/metadata/
+
+# 5. Verify output
+ffprobe test-001-final.mp4
+```
+
+**Not in scope for I-2:**
+- UI approval form
+- API approval endpoint
+- Complex video transformations
+- Multi-track audio
+- Burned-in captions
+- Thumbnail generation
+- Real content generation
+- Publishing integration
 
 #### I-3: Replace Placeholder with Generated Clips
 
