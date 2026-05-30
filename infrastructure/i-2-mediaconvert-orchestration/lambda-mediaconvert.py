@@ -110,9 +110,9 @@ def lambda_handler(event, context):
             ]
         }
 
-        # Submit job (do not pass JobTemplate if not using one)
+        # Submit job (do not pass Queue or JobTemplate parameters)
+        # MediaConvert will use the account default queue
         response = mediaconvert_client.create_job(
-            Queue='default',
             UserMetadata={
                 'jobId': job_id,
                 'phase': 'i-2'
