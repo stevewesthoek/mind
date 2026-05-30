@@ -89,8 +89,9 @@ def lambda_handler(event, context):
                             },
                             'AudioDescriptions': [
                                 {
-                                    'Codec': 'AAC',
+                                    'AudioSourceName': 'Audio Selector 1',
                                     'CodecSettings': {
+                                        'Codec': 'AAC',
                                         'AacSettings': {
                                             'Bitrate': 128000,
                                             'CodingMode': 'CODING_MODE_2_0',
