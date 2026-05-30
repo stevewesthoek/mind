@@ -191,8 +191,8 @@ Implementation progress:
 ✅ F/G Bridge. Step Functions writes canonical metadata/status.json
 ✅ H. Define approval checkpoint contract
 ✅ I-1. Manual final video assembly (validation only)
-🟡 I-2. Automate final assembly through Step Functions
-⬜ I-3. Replace placeholder with generated clips
+✅ I-2. Automate final assembly through Step Functions (implementation complete)
+🟡 I-3. Replace placeholder with generated clips
 ⬜ I-4. Add thumbnail generation
 ⬜ I-5. Generate real internal content
 ```
@@ -204,29 +204,42 @@ Phase 1 — Infrastructure Validation: COMPLETE
 Phase 2 — Metadata Contract: COMPLETE
 Phase 2 bridge — Canonical status writer: COMPLETE
 Phase 3 — Approval Checkpoint: COMPLETE
-Phase 4 — Internal Video Assembly: ACTIVE
+Phase 4 — Internal Video Assembly: COMPLETE
   I-1 Manual assembly: COMPLETE
-  I-2 Step Functions automation: ACTIVE
+  I-2 Step Functions automation: COMPLETE
+Phase 5 — Placeholder Replacement: NEXT
+  I-3 Replace with generated clips: READY
 ```
 
-I-1 validation result:
+I-2 implementation result:
 
 ```text
-jobs/test-001/exports/test-001-final.mp4 created and uploaded to S3
-Duration: 64.033333 seconds
-Method: ffmpeg combine (narration.mp3 + sample-transcoded.mp4)
-Validation only: local ffmpeg used as temporary shortcut to prove concept
-Production path: AWS MediaConvert (canonical for I-2)
+Step Functions State Machine: Deployed with 6 states
+Lambda Functions: 5 functions deployed
+  - video-orchestrator-check-approval
+  - video-orchestrator-update-status
+  - video-orchestrator-mediaconvert
+  - video-orchestrator-wait-mediaconvert
+  - video-orchestrator-verify-output
+
+Workflow automation:
+1. CheckApproval → verify approvals.json script.status = approved
+2. UpdateStatusAssembling → set status = assembling
+3. TriggerMediaConvert → submit job (sample-transcoded.mp4 + narration.mp3)
+4. WaitForMediaConvert → poll until completion
+5. UpdateStatusComplete → set status = complete
+6. VerifyOutput → confirm test-001-final.mp4 exists
+
+Documentation: infrastructure/i-2-mediaconvert-orchestration/IMPLEMENTATION_GUIDE.md
 ```
 
 Current active implementation target:
 
 ```text
-I-2. Automate final assembly through Step Functions
-- Check approvals.json for script.status = approved
-- Retrieve narration and transcoded video
-- Trigger MediaConvert job for final assembly
-- Write output to jobs/test-001/exports/test-001-final.mp4
+I-3. Replace placeholder with generated clips
+- Next: Move from sample-transcoded.mp4 to real generated video
+- Use Bedrock Nova Reel for video generation
+- Integrate into same Step Functions workflow
 ```
 
 ### Phase 4 — Internal Video Assembly
@@ -271,7 +284,7 @@ jobs/test-001/exports/test-001-final.mp4
 ✅ Confirmed audio and video are properly synchronized
 ✅ Confirmed final export is playable
 
-### I-2: Automate Assembly Through Step Functions 🟡 ACTIVE
+### I-2: Automate Assembly Through Step Functions ✅ IMPLEMENTED
 
 **Goal:** Move final assembly into AWS execution layer via Step Functions after approval.
 

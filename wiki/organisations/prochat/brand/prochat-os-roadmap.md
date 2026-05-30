@@ -60,8 +60,8 @@ Current implementation progress:
 ✅ F/G Bridge. Step Functions writes canonical metadata/status.json
 ✅ H. Define approval checkpoint contract
 ✅ I-1. Manual final video assembly (validation)
-🟡 I-2. Automate final assembly through Step Functions
-⬜ I-3. Replace placeholder with generated clips
+✅ I-2. Automate final assembly through Step Functions (implementation)
+🟡 I-3. Replace placeholder with generated clips
 ⬜ I-4. Add thumbnail generation
 ⬜ I-5. Generate real internal content
 ```
@@ -73,7 +73,8 @@ Phase 1 — Infrastructure Validation: COMPLETE
 Phase 2 — Metadata Contract: COMPLETE
 Phase 2 bridge — Canonical status writer: COMPLETE
 Phase 3 — Approval Checkpoint: COMPLETE
-Phase 4 — Internal Video Assembly: ACTIVE (I-1 complete, I-2 active)
+Phase 4 — Internal Video Assembly: COMPLETE
+Phase 5 — Placeholder Replacement: ACTIVE
 ```
 
 Canonical metadata files:
@@ -86,22 +87,36 @@ metadata/assets.json
 metadata/cost.json
 ```
 
-I-1 validation result:
+I-2 implementation result:
 
 ```text
-jobs/test-001/exports/test-001-final.mp4 created
-Duration: 64.033333 seconds
-Method: ffmpeg combine (validation shortcut only)
-Production path: AWS MediaConvert (canonical for I-2)
+Step Functions state machine deployed with:
+1. CheckApproval — Verify script.status = approved
+2. UpdateStatusAssembling — Set status = "assembling"
+3. TriggerMediaConvert — Submit MediaConvert job
+4. WaitForMediaConvert — Poll until complete
+5. UpdateStatusComplete — Set status = "complete"
+6. VerifyOutput — Confirm output exists
+
+Lambda functions deployed:
+- video-orchestrator-check-approval
+- video-orchestrator-update-status
+- video-orchestrator-mediaconvert
+- video-orchestrator-wait-mediaconvert
+- video-orchestrator-verify-output
+
+Automation flow:
+Approval → assembling → MediaConvert job → polling → complete → verification
+
+Documentation: infrastructure/i-2-mediaconvert-orchestration/IMPLEMENTATION_GUIDE.md
 ```
 
 Current active implementation target:
 
 ```text
-I-2. Automate final assembly through Step Functions
-- Move from local ffmpeg to AWS MediaConvert
-- Step Functions orchestrates after approval
-- MediaConvert is the canonical production execution path
+I-3. Replace placeholder with generated clips
+- Move from sample-transcoded.mp4 to real generated video
+- Use Bedrock Nova Reel in Step Functions workflow
 ```
 
 ### Phase 3 — Approval Checkpoint

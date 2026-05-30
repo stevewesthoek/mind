@@ -1,0 +1,158 @@
+{
+  "Comment": "Video Orchestrator I-2: MediaConvert Final Assembly Orchestration",
+  "StartAt": "CheckApprovalState",
+  "States": {
+    "CheckApprovalState": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:video-orchestrator-check-approval",
+      "Next": "ApprovalDecision",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "ApprovalCheckFailed"
+        }
+      ]
+    },
+    "ApprovalDecision": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.approved",
+          "BooleanEquals": true,
+          "Next": "UpdateStatusAssembling"
+        }
+      ],
+      "Default": "WaitingForApproval"
+    },
+    "WaitingForApproval": {
+      "Type": "Pass",
+      "Result": {
+        "status": "awaiting_script_approval",
+        "message": "Script approval required before proceeding to assembly"
+      },
+      "End": true
+    },
+    "UpdateStatusAssembling": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:video-orchestrator-update-status",
+      "Parameters": {
+        "jobId.$": "$.jobId",
+        "status": "assembling",
+        "assemblyStartedAt.$": "$$.State.EnteredTime"
+      },
+      "Next": "TriggerMediaConvertJob",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "StatusUpdateFailed"
+        }
+      ]
+    },
+    "TriggerMediaConvertJob": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:video-orchestrator-mediaconvert",
+      "Parameters": {
+        "jobId.$": "$.jobId",
+        "videoInput": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/sample-transcoded.mp4",
+        "audioInput": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/audio/narration.mp3",
+        "outputPath": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/",
+        "outputFilename": "test-001-final.mp4"
+      },
+      "Next": "WaitForMediaConvertCompletion",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "MediaConvertJobFailed"
+        }
+      ]
+    },
+    "WaitForMediaConvertCompletion": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:video-orchestrator-wait-mediaconvert",
+      "Parameters": {
+        "mediaConvertJobId.$": "$.mediaConvertJobId",
+        "jobId.$": "$.jobId",
+        "maxAttempts": 120,
+        "delaySeconds": 5
+      },
+      "Next": "MediaConvertCompleted",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "MediaConvertWaitFailed"
+        }
+      ]
+    },
+    "MediaConvertCompleted": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:video-orchestrator-update-status",
+      "Parameters": {
+        "jobId.$": "$.jobId",
+        "status": "complete",
+        "assemblyCompletedAt.$": "$$.State.EnteredTime",
+        "mediaConvertJobId.$": "$.mediaConvertJobId"
+      },
+      "Next": "VerifyOutput",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "FinalStatusUpdateFailed"
+        }
+      ]
+    },
+    "VerifyOutput": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:video-orchestrator-verify-output",
+      "Parameters": {
+        "jobId.$": "$.jobId",
+        "outputPath": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/test-001-final.mp4"
+      },
+      "Next": "AssemblySuccess",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "OutputVerificationFailed"
+        }
+      ]
+    },
+    "AssemblySuccess": {
+      "Type": "Pass",
+      "Result": {
+        "status": "complete",
+        "phase": "i-2",
+        "message": "Final assembly completed successfully"
+      },
+      "End": true
+    },
+    "ApprovalCheckFailed": {
+      "Type": "Fail",
+      "Error": "ApprovalCheckError",
+      "Cause": "Failed to check approval status"
+    },
+    "StatusUpdateFailed": {
+      "Type": "Fail",
+      "Error": "StatusUpdateError",
+      "Cause": "Failed to update status to assembling"
+    },
+    "MediaConvertJobFailed": {
+      "Type": "Fail",
+      "Error": "MediaConvertJobError",
+      "Cause": "Failed to trigger MediaConvert job"
+    },
+    "MediaConvertWaitFailed": {
+      "Type": "Fail",
+      "Error": "MediaConvertWaitError",
+      "Cause": "MediaConvert job did not complete successfully"
+    },
+    "FinalStatusUpdateFailed": {
+      "Type": "Fail",
+      "Error": "FinalStatusUpdateError",
+      "Cause": "Failed to update final status to complete"
+    },
+    "OutputVerificationFailed": {
+      "Type": "Fail",
+      "Error": "OutputVerificationError",
+      "Cause": "Output file verification failed"
+    }
+  }
+}
