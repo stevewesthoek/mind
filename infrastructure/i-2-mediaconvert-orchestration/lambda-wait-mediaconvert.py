@@ -3,10 +3,21 @@ Lambda: Wait for MediaConvert Completion
 Polls MediaConvert job status until completion or failure.
 """
 import json
+import os
 import boto3
 import time
 
-mediaconvert_client = boto3.client('mediaconvert', endpoint_url='https://abcdef1234567.mediaconvert.eu-north-1.amazonaws.com')
+# Read MediaConvert endpoint from environment
+MEDIACONVERT_ENDPOINT = os.environ.get('MEDIACONVERT_ENDPOINT')
+if not MEDIACONVERT_ENDPOINT:
+    raise RuntimeError(
+        'MEDIACONVERT_ENDPOINT environment variable not set. '
+        'Set via: aws lambda update-function-configuration '
+        '--function-name video-orchestrator-wait-mediaconvert '
+        '--environment Variables={MEDIACONVERT_ENDPOINT=...}'
+    )
+
+mediaconvert_client = boto3.client('mediaconvert', endpoint_url=MEDIACONVERT_ENDPOINT)
 
 
 def lambda_handler(event, context):
