@@ -57,15 +57,11 @@ def lambda_handler(event, context):
                     'FileInput': video_input,
                     'AudioSelectors': {
                         'Audio Selector 1': {
-                            'DefaultSelection': 'NOT_DEFAULT'
+                            'DefaultSelection': 'DEFAULT',
+                            'ExternalAudioFileInput': audio_input
                         }
                     },
-                    'VideoSelector': {
-                        'Rotate': 'DEGREE_0'
-                    }
-                },
-                {
-                    'FileInput': audio_input
+                    'VideoSelector': {}
                 }
             ],
             'OutputGroups': [
@@ -76,14 +72,13 @@ def lambda_handler(event, context):
                             'NameModifier': '-final',
                             'VideoDescription': {
                                 'CodecSettings': {
+                                    'Codec': 'H_264',
                                     'H264Settings': {
                                         'RateControlMode': 'QVBR',
                                         'MaxBitrate': 5000000,
                                         'QvbrSettings': {
                                             'QvbrQualityLevel': 7
-                                        },
-                                        'FramerateDenominator': 1,
-                                        'FramerateNumerator': 30
+                                        }
                                     }
                                 }
                             },
@@ -122,7 +117,7 @@ def lambda_handler(event, context):
                 'jobId': job_id,
                 'phase': 'i-2'
             },
-            Role='arn:aws:iam::909439522876:role/video-orchestrator-role',
+            Role='arn:aws:iam::909439522876:role/service-role/MediaConvert_Default_Role',
             Settings=job_settings
         )
 
