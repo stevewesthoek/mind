@@ -36,9 +36,26 @@ def lambda_handler(event, context):
         # Read current status.json
         try:
             response = s3_client.get_object(Bucket=BUCKET, Key=status_key)
-            status_data = json.loads(response['Body'].read().decode('utf-8'))
+            body_content = response['Body'].read().decode('utf-8')
+
+            # Robustly handle double-encoded JSON (escaped string from previous writes)
+            status_data = json.loads(body_content)
+            if isinstance(status_data, str):
+                # If result is still a string, decode it again
+                status_data = json.loads(status_data)
+
+            # Ensure status_data is a dict; if not, initialize
+            if not isinstance(status_data, dict):
+                status_data = {'jobId': job_id, 'status': 'pending'}
+
         except s3_client.exceptions.NoSuchKey:
             # Initialize if doesn't exist
+            status_data = {
+                'jobId': job_id,
+                'status': 'pending'
+            }
+        except (json.JSONDecodeError, ValueError):
+            # Initialize if JSON is invalid
             status_data = {
                 'jobId': job_id,
                 'status': 'pending'
