@@ -33,6 +33,10 @@ def lambda_handler(event, context):
 
     try:
         # MediaConvert job settings
+        # Extract base name from output filename to use with NameModifier
+        # MediaConvert uses NameModifier to append to input name, not direct Filename
+        name_modifier = output_filename.replace('.mp4', '')
+
         job_settings = {
             'TimecodeConfig': {
                 'Source': 'ZEROBASED'
@@ -58,7 +62,7 @@ def lambda_handler(event, context):
                     'Name': 'File Group',
                     'Outputs': [
                         {
-                            'Filename': output_filename,
+                            'NameModifier': '-final',
                             'VideoDescription': {
                                 'CodecSettings': {
                                     'H264Settings': {
@@ -75,11 +79,14 @@ def lambda_handler(event, context):
                                         'AacSettings': {
                                             'Bitrate': 128000,
                                             'SampleRate': 48000,
-                                            'Channels': 2
+                                            'CodingMode': 'CODING_MODE_2_0'
                                         }
                                     }
                                 }
-                            ]
+                            ],
+                            'ContainerSettings': {
+                                'Container': 'MP4'
+                            }
                         }
                     ],
                     'OutputGroupSettings': {
@@ -92,9 +99,8 @@ def lambda_handler(event, context):
             ]
         }
 
-        # Submit job
+        # Submit job (do not pass JobTemplate if not using one)
         response = mediaconvert_client.create_job(
-            JobTemplate=None,
             Queue='default',
             UserMetadata={
                 'jobId': job_id,
