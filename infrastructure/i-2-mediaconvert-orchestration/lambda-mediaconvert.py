@@ -77,20 +77,24 @@ def lambda_handler(event, context):
                             'VideoDescription': {
                                 'CodecSettings': {
                                     'H264Settings': {
+                                        'RateControlMode': 'QVBR',
                                         'MaxBitrate': 5000000,
+                                        'QvbrSettings': {
+                                            'QvbrQualityLevel': 7
+                                        },
                                         'FramerateDenominator': 1,
-                                        'FramerateNumerator': 30,
-                                        'RateControlMode': 'VBR'
+                                        'FramerateNumerator': 30
                                     }
                                 }
                             },
                             'AudioDescriptions': [
                                 {
+                                    'Codec': 'AAC',
                                     'CodecSettings': {
                                         'AacSettings': {
                                             'Bitrate': 128000,
-                                            'SampleRate': 48000,
-                                            'CodingMode': 'CODING_MODE_2_0'
+                                            'CodingMode': 'CODING_MODE_2_0',
+                                            'SampleRate': 48000
                                         }
                                     }
                                 }
