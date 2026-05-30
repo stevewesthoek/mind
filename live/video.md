@@ -191,7 +191,7 @@ Implementation progress:
 ✅ F/G Bridge. Step Functions writes canonical metadata/status.json
 ✅ H. Define approval checkpoint contract
 ✅ I-1. Manual final video assembly (validation only)
-✅ I-2. Automate final assembly through Step Functions (implementation complete)
+✅ I-2. Automate final assembly through Step Functions (COMPLETE)
 🟡 I-3. Replace placeholder with generated clips
 ⬜ I-4. Add thumbnail generation
 ⬜ I-5. Generate real internal content
@@ -205,30 +205,48 @@ Phase 2 — Metadata Contract: COMPLETE
 Phase 2 bridge — Canonical status writer: COMPLETE
 Phase 3 — Approval Checkpoint: COMPLETE
 Phase 4 — Internal Video Assembly: COMPLETE
-  I-1 Manual assembly: COMPLETE
-  I-2 Step Functions automation: COMPLETE
-Phase 5 — Placeholder Replacement: NEXT
-  I-3 Replace with generated clips: READY
+  I-1 Manual assembly: COMPLETE (ffmpeg validation only)
+  I-2 Step Functions automation: COMPLETE (AWS production path)
+Phase 5 — Placeholder Replacement: ACTIVE
+  I-3 Replace with generated clips: READY (next implementation)
 ```
 
 I-2 implementation result:
 
 ```text
-Step Functions State Machine: Deployed with 6 states
-Lambda Functions: 5 functions deployed
-  - video-orchestrator-check-approval
-  - video-orchestrator-update-status
-  - video-orchestrator-mediaconvert
-  - video-orchestrator-wait-mediaconvert
-  - video-orchestrator-verify-output
+✅ Step Functions State Machine: Deployed
+   Name: video-orchestrator-i2-assembly
+   States: 13 (8 execution + 5 error handling)
 
-Workflow automation:
-1. CheckApproval → verify approvals.json script.status = approved
-2. UpdateStatusAssembling → set status = assembling
-3. TriggerMediaConvert → submit job (sample-transcoded.mp4 + narration.mp3)
-4. WaitForMediaConvert → poll until completion
-5. UpdateStatusComplete → set status = complete
-6. VerifyOutput → confirm test-001-final.mp4 exists
+✅ Lambda Functions: 5 functions deployed
+   - video-orchestrator-check-approval
+   - video-orchestrator-update-status
+   - video-orchestrator-mediaconvert
+   - video-orchestrator-wait-mediaconvert
+   - video-orchestrator-verify-output
+
+✅ Workflow automation proven:
+   1. CheckApproval → verify approvals.json script.status = approved
+   2. UpdateStatusAssembling → set status = "assembling"
+   3. TriggerMediaConvert → submit job (sample-transcoded.mp4 + narration.mp3)
+   4. WaitForMediaConvert → poll MediaConvert job for completion
+   5. UpdateStatusComplete → set status = "complete" + mediaConvertJobId
+   6. VerifyOutput → confirm output file exists
+
+✅ Validation proof (test-001-i2-codec-fixed execution):
+   - MediaConvert job created: 1780183306480-uqpvlo
+   - Output written: s3://.../jobs/test-001/exports/sample-transcoded-final.mp4
+   - metadata/status.json shows: "status": "complete"
+   - mediaConvertJobId stored: "1780183306480-uqpvlo"
+
+⚠️  KNOWN CAVEAT - Output naming:
+   - Expected canonical: test-001-final.mp4
+   - Actual automated output: sample-transcoded-final.mp4
+   - Reason: MediaConvert uses input filename + NameModifier ("-final")
+   - Status: Not a blocker; rename task deferred to I-3+ cleanup phase
+   - Resolution options:
+     * Add S3 copy/rename Lambda post-step
+     * Adjust MediaConvert destination strategy for future jobs
 
 Documentation: infrastructure/i-2-mediaconvert-orchestration/IMPLEMENTATION_GUIDE.md
 ```
@@ -236,10 +254,12 @@ Documentation: infrastructure/i-2-mediaconvert-orchestration/IMPLEMENTATION_GUID
 Current active implementation target:
 
 ```text
-I-3. Replace placeholder with generated clips
-- Next: Move from sample-transcoded.mp4 to real generated video
-- Use Bedrock Nova Reel for video generation
-- Integrate into same Step Functions workflow
+I-3. Replace placeholder with generated clips (NEXT)
+   - Move from sample-transcoded.mp4 to Bedrock Nova Reel output
+   - Integrate Nova Reel step into Step Functions workflow
+   - Keep same MediaConvert final assembly orchestration
+   - Same output path + naming caveat applies
+   - Cleanup deferred: normalize final export naming
 ```
 
 ### Phase 4 — Internal Video Assembly
