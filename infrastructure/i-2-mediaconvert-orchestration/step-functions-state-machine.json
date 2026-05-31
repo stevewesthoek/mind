@@ -111,7 +111,6 @@
         "jobId.$": "$.jobId",
         "outputPath": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/",
         "actualOutputKey.$": "$.actualOutputKey",
-        "expectedOutputKey.$": "$.expectedOutputKey",
         "mediaConvertJobId.$": "$.mediaConvertJobId"
       },
       "Next": "AssemblySuccess",
