@@ -105,7 +105,8 @@
       "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:video-orchestrator-verify-output",
       "Parameters": {
         "jobId.$": "$.jobId",
-        "outputPath": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/test-001-final.mp4"
+        "outputPath": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/",
+        "expectedOutputKey.$": "$.expectedOutputKey"
       },
       "Next": "AssemblySuccess",
       "Catch": [

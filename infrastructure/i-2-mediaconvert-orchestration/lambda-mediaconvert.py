@@ -130,11 +130,19 @@ def lambda_handler(event, context):
 
         mediaconvert_job_id = response['Job']['Id']
 
+        # Compute expected output filename based on input basename + NameModifier
+        # MediaConvert uses input filename + NameModifier to create output
+        input_basename = video_input_path.split('/')[-1].replace('.mp4', '')
+        expected_output_filename = f'{input_basename}-final.mp4'
+        expected_output_key = f'{output_path.rstrip("/")}/{expected_output_filename}'
+
         return {
             'jobId': job_id,
             'mediaConvertJobId': mediaconvert_job_id,
             'status': response['Job']['Status'],
-            'created': True
+            'created': True,
+            'expectedOutputFilename': expected_output_filename,
+            'expectedOutputKey': expected_output_key
         }
 
     except Exception as e:
