@@ -172,6 +172,36 @@ else
 fi
 
 echo ""
+echo "Writing canonical metadata..."
+# Get execution output to extract needed fields
+EXEC_HISTORY=$(aws stepfunctions get-execution-history --execution-arn "$EXECUTION_ARN" --region eu-north-1 2>/dev/null)
+
+# Invoke write-metadata Lambda with the full state
+PAYLOAD=$(cat <<EOF
+{
+  "jobId": "$JOB_ID",
+  "videoKey": "jobs/$JOB_ID/video-generated/generated-001.mp4",
+  "audioKey": "jobs/$JOB_ID/audio/narration.mp3",
+  "mediaConvertJobId": "",
+  "thumbnailJob": {
+    "normalizedThumbnailKey": "jobs/$JOB_ID/exports/thumbnail-001.jpg"
+  },
+  "verifyOutput": {
+    "mediaconvertOutput": "jobs/$JOB_ID/exports/generated-001-final.mp4"
+  },
+  "statusUpdate": {
+    "statusData": {
+      "assemblyStartedAt": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')",
+      "assemblyCompletedAt": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+    }
+  }
+}
+EOF
+)
+
+PAYLOAD_B64=$(echo "$PAYLOAD" | base64 -w 0) && aws lambda invoke --function-name i4-write-metadata --payload "$PAYLOAD_B64" --region eu-north-1 /tmp/metadata-write-result.json 2>&1 > /dev/null && METADATA_RESULT=$(cat /tmp/metadata-write-result.json | jq -r '.statusWritten // false') && if [ "$METADATA_RESULT" = "true" ]; then echo "✓ Metadata written successfully"; else echo "⚠ Metadata write returned: $METADATA_RESULT"; fi
+
+echo ""
 echo "==========================================="
 echo "Post-Execution Verification"
 echo "==========================================="
@@ -225,13 +255,45 @@ else
 fi
 echo ""
 
-# Verify metadata is complete
+# Verify metadata is complete and correct
 echo "Checking metadata..."
 STATUS_JSON=$(aws s3 cp "s3://$BUCKET/jobs/$JOB_ID/metadata/status.json" - --region eu-north-1 --no-cli-pager 2>/dev/null)
 if [ $? -eq 0 ]; then
     STATUS_VALUE=$(echo "$STATUS_JSON" | jq -r '.status' 2>/dev/null || echo "ERROR")
     CURRENT_STEP=$(echo "$STATUS_JSON" | jq -r '.currentStep' 2>/dev/null || echo "ERROR")
-    echo "✓ status.json exists: status=$STATUS_VALUE, currentStep=$CURRENT_STEP"
+    COMPLETED_STEPS=$(echo "$STATUS_JSON" | jq '.completedSteps | length' 2>/dev/null || echo "0")
+    FINAL_VIDEO_KEY=$(echo "$STATUS_JSON" | jq -r '.finalVideoKey' 2>/dev/null || echo "MISSING")
+    THUMBNAIL_KEY=$(echo "$STATUS_JSON" | jq -r '.thumbnailKey' 2>/dev/null || echo "MISSING")
+
+    # Validate metadata contract
+    if [ "$STATUS_VALUE" != "complete" ]; then
+        echo "❌ status.json: status should be 'complete' but is '$STATUS_VALUE'"
+        exit 1
+    fi
+
+    if [ "$CURRENT_STEP" != "thumbnail_generated" ]; then
+        echo "❌ status.json: currentStep should be 'thumbnail_generated' but is '$CURRENT_STEP'"
+        exit 1
+    fi
+
+    if [ "$COMPLETED_STEPS" -eq 0 ]; then
+        echo "❌ status.json: completedSteps is empty (should have 6 items)"
+        exit 1
+    fi
+
+    if [ "$FINAL_VIDEO_KEY" = "MISSING" ] || [ -z "$FINAL_VIDEO_KEY" ]; then
+        echo "❌ status.json: finalVideoKey is missing"
+        exit 1
+    fi
+
+    if [ "$THUMBNAIL_KEY" = "MISSING" ] || [ -z "$THUMBNAIL_KEY" ]; then
+        echo "❌ status.json: thumbnailKey is missing"
+        exit 1
+    fi
+
+    echo "✓ status.json valid: status=$STATUS_VALUE, currentStep=$CURRENT_STEP, completedSteps=$COMPLETED_STEPS"
+    echo "  finalVideoKey=$FINAL_VIDEO_KEY"
+    echo "  thumbnailKey=$THUMBNAIL_KEY"
 else
     echo "❌ status.json not found or unreadable"
     exit 1
@@ -241,9 +303,25 @@ echo ""
 ASSETS_JSON=$(aws s3 cp "s3://$BUCKET/jobs/$JOB_ID/metadata/assets.json" - --region eu-north-1 --no-cli-pager 2>/dev/null)
 if [ $? -eq 0 ]; then
     ASSET_COUNT=$(echo "$ASSETS_JSON" | jq '.assets | length' 2>/dev/null || echo "0")
-    echo "✓ assets.json exists: $ASSET_COUNT assets referenced"
+
+    if [ "$ASSET_COUNT" -eq 0 ]; then
+        echo "❌ assets.json: contains 0 assets (should have at least 2: finalVideo, thumbnail)"
+        exit 1
+    fi
+
+    # Check for test-001 references in asset paths (invalid for dynamic jobs)
+    TEST_001_REF=$(echo "$ASSETS_JSON" | jq '.assets[] | select(.path | contains("test-001"))' 2>/dev/null)
+    if [ -n "$TEST_001_REF" ] && [ "$JOB_ID" != "test-001" ]; then
+        echo "❌ assets.json: contains reference to test-001 for job $JOB_ID (invalid for dynamic jobs)"
+        exit 1
+    fi
+
+    # List assets
+    ASSET_KEYS=$(echo "$ASSETS_JSON" | jq -r '.assets | keys[]' 2>/dev/null | tr '\n' ', ')
+    echo "✓ assets.json valid: $ASSET_COUNT assets: $ASSET_KEYS"
 else
-    echo "⚠ assets.json not found (expected after metadata refresh in next phase)"
+    echo "❌ assets.json not found"
+    exit 1
 fi
 echo ""
 
