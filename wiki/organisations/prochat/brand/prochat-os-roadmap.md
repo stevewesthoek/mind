@@ -62,7 +62,7 @@ Current implementation progress:
 ✅ I-1. Manual final video assembly (validation)
 ✅ I-2. Automate final assembly through Step Functions (COMPLETE)
 ✅ I-3.1. Manual generated clip proof (Nova Reel cross-region)
-🟡 I-3.2. Integrate generated clip into MediaConvert
+✅ I-3.2. Integrate generated clip into MediaConvert (COMPLETE)
 ⬜ I-4. Add thumbnail generation
 ⬜ I-5. Generate real internal content
 ```
@@ -77,16 +77,26 @@ Phase 3 — Approval Checkpoint: COMPLETE
 Phase 4 — Internal Video Assembly: COMPLETE
   I-1: Manual assembly (ffmpeg validation)
   I-2: AWS Step Functions automation (LIVE)
-Phase 5 — Placeholder Replacement: ACTIVE
+Phase 5 — Placeholder Replacement: COMPLETE
   I-3.1: Manual generated clip proof (COMPLETE)
-  I-3.2: Integrate into MediaConvert (READY)
+  I-3.2: Integrate into MediaConvert (COMPLETE)
+Phase 6 — Thumbnail and Polish: READY
+  I-4: Add thumbnail generation (next)
 ```
 
-Cross-region execution model:
+Generated clip assembly workflow (I-3 complete):
 ```text
-Video generation region: us-east-1 (Nova Reel available)
-Canonical storage: eu-north-1 (workflow bucket)
-Workflow: Bedrock output → S3 copy → MediaConvert input
+✅ Nova Reel generates video in us-east-1
+✅ Copied to canonical eu-north-1 bucket (video-generated/)
+✅ Step Functions uses generated-001.mp4 as video input
+✅ MediaConvert assembles with narration.mp3
+✅ Output: generated-001-final.mp4 in exports/
+✅ Metadata stored with mediaConvertJobId and status
+
+Execution proof: test-001-i3-final-proof-4 (COMPLETE)
+MediaConvert Job ID: 1780237282541-8af0jq
+Assembly time: 7 seconds
+Output verified: generated-001-final.mp4 exists in S3
 ```
 
 Canonical metadata files:
@@ -126,11 +136,12 @@ Documentation: infrastructure/i-2-mediaconvert-orchestration/IMPLEMENTATION_GUID
 Current active implementation target:
 
 ```text
-I-3.2. Integrate generated clip into MediaConvert
-- Update video input from sample-transcoded.mp4 to video-generated/generated-001.mp4
-- Re-deploy lambda-mediaconvert to AWS
-- Test end-to-end workflow with generated clip
-- Verify output file created
+I-4. Add thumbnail generation
+- Extract frame from generated video at 3-second mark
+- Resize to 1280x720 or smaller for web preview
+- Store as jobs/test-001/thumbnails/generated-001-preview.jpg
+- Update metadata/assets.json with thumbnail reference
+- No UI or publishing yet - assembly proof only
 ```
 
 ### Phase 3 — Approval Checkpoint

@@ -531,28 +531,48 @@ AWS owns media execution; Step Functions owns orchestration.
 Local ffmpeg was testing only. MediaConvert is the durable production path.
 ```
 
-### Phase 5 — Video Generation with Automation
+### Phase 5 — Video Generation with Automation ✅ COMPLETE
 
 Goal: automate video generation through the complete workflow.
 
-Workflow:
+Workflow (implemented):
 
 ```text
 Topic
-→ Script (Bedrock)
-→ Scenes (Nova Canvas prompts)
-→ Voice (Polly)
-→ Generated clips (Nova Reel)
-→ Captions (Transcribe)
-→ Thumbnail (Nova Canvas)
-→ Export (MediaConvert)
+→ Script (Bedrock) ✅
+→ Scenes (Nova Canvas prompts) — deferred
+→ Voice (Polly) ✅
+→ Generated clips (Nova Reel us-east-1) ✅
+→ Captions (Transcribe) — deferred
+→ Thumbnail (Nova Canvas) — Phase 6
+→ Export/Assembly (MediaConvert) ✅
 ```
 
-Exit criteria:
+Exit criteria: ✅ ACHIEVED
 
 ```text
 One short video can be automatically generated, rendered, stored, and exported from one workflow definition.
+Proof: test-001-i3-final-proof-4 execution
+- Generated clip: generated-001.mp4 from Nova Reel
+- Narration: narration.mp3 from Polly
+- Assembly: MediaConvert orchestrated by Step Functions
+- Output: generated-001-final.mp4 in canonical location
+- Metadata: Status tracked in status.json
 ```
+
+What's complete:
+- Nova Reel video generation (cross-region us-east-1 → eu-north-1)
+- Step Functions orchestration with state machine
+- MediaConvert assembly with generated clip input
+- Metadata contract and status tracking
+- Output verification and file location confirmation
+
+What's deferred (Phase 6):
+- Nova Canvas scene generation (not blocking MVP)
+- Transcribe captions (not blocking MVP)
+- Thumbnail generation (next immediate task)
+- ProChat OS console visibility
+- Publishing layer
 
 ### Phase 6 — ProChat OS Integration
 

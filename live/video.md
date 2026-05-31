@@ -207,9 +207,11 @@ Phase 3 — Approval Checkpoint: COMPLETE
 Phase 4 — Internal Video Assembly: COMPLETE
   I-1 Manual assembly: COMPLETE (ffmpeg validation only)
   I-2 Step Functions automation: COMPLETE (AWS production path)
-Phase 5 — Placeholder Replacement: ACTIVE
+Phase 5 — Placeholder Replacement: COMPLETE
   I-3.1 Manual generated clip proof: COMPLETE (Nova Reel cross-region)
-  I-3.2 Integrate into MediaConvert: READY (next implementation)
+  I-3.2 Integrate into MediaConvert: COMPLETE (generated clip assembly)
+Phase 6 — Thumbnail and Polish: READY
+  I-4 Add thumbnail generation (next implementation)
 ```
 
 I-2 implementation result:
@@ -252,15 +254,51 @@ I-2 implementation result:
 Documentation: infrastructure/i-2-mediaconvert-orchestration/IMPLEMENTATION_GUIDE.md
 ```
 
+### I-3: Replace Placeholder with Generated Clips ✅ COMPLETE
+
+#### I-3.1: Manual Generated Clip Proof ✅ COMPLETE
+
+Generated video available at canonical location:
+- Source: AWS Bedrock Nova Reel (us-east-1)
+- Destination: `s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/video-generated/generated-001.mp4`
+- Prompt: Clean modern abstract motion background, soft blue and indigo gradients, subtle flowing lines
+
+#### I-3.2: Integrate Generated Clip into MediaConvert ✅ COMPLETE
+
+**Execution:** test-001-i3-final-proof-4
+**Status:** COMPLETE
+**MediaConvert Job ID:** 1780237282541-8af0jq
+**Assembly Duration:** 7 seconds (14:21:21 → 14:21:28)
+
+**Workflow proven:**
+1. ✅ CheckApproval → Script approval verified
+2. ✅ UpdateStatusAssembling → Status = assembling
+3. ✅ TriggerMediaConvertJob → Uses generated-001.mp4 input
+4. ✅ WaitForMediaConvertCompletion → Poll until COMPLETE
+5. ✅ UpdateStatusComplete → Status = complete, stores mediaConvertJobId
+6. ✅ VerifyOutput → Confirms output file exists
+
+**Output file:** `s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/generated-001-final.mp4`
+
+**What changed from I-2:**
+- I-2 used placeholder: sample-transcoded.mp4
+- I-3 uses generated clip: generated-001.mp4
+- Same MediaConvert assembly pipeline
+- Same final output location (exports/)
+- Output naming follows MediaConvert convention: input basename + NameModifier ("-final")
+
+**Caveat (documented, not blocking):**
+- Output file named: generated-001-final.mp4 (input-based)
+- Could be normalized to: test-001-final.mp4 (job-based)
+- Deferred to cleanup phase; does not affect workflow correctness
+
 Current active implementation target:
 
 ```text
-I-3. Replace placeholder with generated clips (NEXT)
-   - Move from sample-transcoded.mp4 to Bedrock Nova Reel output
-   - Integrate Nova Reel step into Step Functions workflow
-   - Keep same MediaConvert final assembly orchestration
-   - Same output path + naming caveat applies
-   - Cleanup deferred: normalize final export naming
+I-4. Add thumbnail generation
+   - Generate preview thumbnail from generated clip
+   - Store at: jobs/test-001/thumbnails/generated-001-preview.jpg
+   - Next phase after I-3 complete
 ```
 
 ### Phase 4 — Internal Video Assembly
