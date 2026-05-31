@@ -4,15 +4,15 @@ Verbeter mij als ik fout zit maar ik concludeer de volgende 2 punten uit onze be
 - De waterdoop red van de slavernij van de zonden
 - Wij hebben geen zekerheid in onze eeuwige redding
 
-Ik heb ook deze video bekeken https://youtu.be/q49IetMeviU?is=DYOcAFlwXsqCZXUx en naar aanleiding van jouw standpunten en die van de video, heb ik de volgende vragen.
+Ik heb ook deze video bekeken https://youtu.be/q49IetMeviU?is=DYOcAFlwXsqCZXUx en heb naar aanleiding van jouw standpunten wat vragen:
 
 1. Geeft geloof in Jezus garantie op eeuwig leven, of blijft de gelovige onder mogelijke verdoemenis? — *Johannes 5:24; Johannes 10:27-29; 1 Johannes 5:11-13*
 
 2. Geeft rechtvaardiging door geloof vrede met God, of blijft die vrede onzeker? — *Romeinen 5:1; Romeinen 3:21-26; Romeinen 4:5; Romeinen 8:1*
 
-3. Kan iemand die God voorbestemd heeft toch niet verheerlijkt worden? Kunnen wij Gods werk dwarsbomen? — *Romeinen 8:29-30; Filippenzen 1:6; Judas 24-25*
+3. Kan iemand die God voorbestemd heeft tòch niet verheerlijkt worden? Kunnen wij Gods werk dwarsbomen? — *Romeinen 8:29-30; Filippenzen 1:6; Judas 24-25*
 
-4. Is onze redding verankerd in Gods verkiezing vóór de grondlegging van de wereld, of in ons volhouden zodat wij kunnen roemen? — *Efeziërs 1:4-5; Efeziërs 2:8-10; 2 Timotheüs 1:9; Romeinen 9:15-20*
+4. Is onze redding verankerd in Gods verkiezing vóór de grondlegging van de wereld, of in ons volhouden zodat wij kunnen roemen? Zijn de handelingen dopen en handoplegging werken? — *Efeziërs 1:4-5; Efeziërs 2:8-10; 2 Timotheüs 1:9; Romeinen 9:15-20*
 
 5. Kan de Geest van de belofte — het onderpand van onze erfenis — ontvangen of verloren worden door werken? — *Efeziërs 1:13-14*
 
@@ -93,7 +93,7 @@ Toen ik gedoopt werd wist ik niets van de Bijbel. Ik kende Jezus niet. Ik had ee
 
 Dit geloof heeft mij gered. Niet Marks handenoplegging noch de doop. God heeft mij voorbestemd voor Zijn koninkrijk. Mijn schuld is erkent, de prijs betaald, de belofte aanvaard, mijn leven gegarandeerd.
 
-De doop en de handen oplegging is niet minder belangrijk. Maar ook niet meer en zeker niet beslissend. Als het wel beslissend was treden we onmiddelijk in religieus terrein. Want dan moeten we vragen beantwoorden als hoeveel water, wie kan handen opleggen en wat moeten we precies bidden. Dit is de bron van religie.
+De doop en handoplegging zijn niet onbelangrijk, maar ze zijn niet beslissend en ook niet reddend. Want als deze wel beslissend zouden zijn betreden we onmiddelijk religieus terrein. Want wie mag dan dopen of de handoplegging doen, hoeveel water is genoeg en wie mag bidden en wat moet er precies gezegd worden? Dit is de bron van religie.
 
 ## Over Wilson
 
@@ -103,6 +103,6 @@ Ik heb geen twijfel dat Wilson een Christen is. Maar gezien jij een andere overt
 
 ## Mijn conclusie
 
-De OT-schaduwen en NT-versen worden heel letterlijk geïnterpreteerd. Hierdoor wordt er een beeld geschetst dat mijns inziens moeilijk niet verzoenen is met de rest van de Bijbel.
+De OT-schaduwen en de NT-versen worden in de video heel letterlijk geïnterpreteerd. Hierdoor wordt er een beeld geschetst dat mijns inziens lastig te verzoenen is met de rest van de Bijbel. Naar mijn oordeel is dat een eisegetische lezing: de betekenis wordt dan in de tekst gelegd, in plaats van uit de tekst gehaald.
 
-Het dogmatisch toepassen van OT schaduwen als blauwdruk op het NT is volgens mij niet iets wat Johannes de doper of Jezus' discipelen hebben gedaan. Een schaduw is slechts imperfect symbool dat wijst naar Jezus — ze geven geen extra werken naast geloof in Jezus, en worden in het NT niet gebruikt als waarschuwingen dat wedergeboorte verloren kan gaan.
+Het Evangelie is het goed nieuws omdat het een belofte is van eeuwig leven met God. Het is geen mysterie wat we moeten ontrafelen maar een borgtocht die reeds betaald is om door ons te aanvaarden. De boodschap is simpel en de aanvaarding ervan gemakkelijk.
