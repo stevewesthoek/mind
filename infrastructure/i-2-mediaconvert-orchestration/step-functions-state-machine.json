@@ -5,6 +5,7 @@
     "CheckApprovalState": {
       "Type": "Task",
       "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:video-orchestrator-check-approval",
+      "ResultPath": "$.approvalResult",
       "Next": "ApprovalDecision",
       "Catch": [
         {
@@ -17,7 +18,7 @@
       "Type": "Choice",
       "Choices": [
         {
-          "Variable": "$.approved",
+          "Variable": "$.approvalResult.approved",
           "BooleanEquals": true,
           "Next": "UpdateStatusAssembling"
         }
@@ -40,6 +41,7 @@
         "status": "assembling",
         "assemblyStartedAt.$": "$$.State.EnteredTime"
       },
+      "ResultPath": "$.statusUpdate",
       "Next": "TriggerMediaConvertJob",
       "Catch": [
         {
@@ -54,10 +56,10 @@
       "TimeoutSeconds": 60,
       "Parameters": {
         "jobId.$": "$.jobId",
-        "videoInput": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/sample-transcoded.mp4",
-        "audioInput": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/audio/narration.mp3",
-        "outputPath": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/",
-        "outputFilename": "test-001-final.mp4"
+        "videoInput.$": "States.Format('s3://prochat-video-dev-909439522876-eu-north-1-an/{}', $.videoKey)",
+        "audioInput.$": "States.Format('s3://prochat-video-dev-909439522876-eu-north-1-an/{}', $.audioKey)",
+        "outputPath.$": "States.Format('s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/{}/exports/', $.jobId)",
+        "outputFilename.$": "States.Format('{}-final.mp4', $.jobId)"
       },
       "Next": "WaitForMediaConvertCompletion",
       "Catch": [
@@ -109,7 +111,7 @@
       "TimeoutSeconds": 60,
       "Parameters": {
         "jobId.$": "$.jobId",
-        "outputPath": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/",
+        "outputPath.$": "States.Format('s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/{}/exports/', $.jobId)",
         "actualOutputKey.$": "$.actualOutputKey",
         "mediaConvertJobId.$": "$.mediaConvertJobId"
       },
