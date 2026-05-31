@@ -228,6 +228,45 @@ aws s3 cp s3://$BUCKET/jobs/test-001/metadata/assets.json - --region eu-north-1 
 
 **Pass/Fail:** ☐ PASS ☐ FAIL
 
+### C.3 Verify Dynamic Job Metadata (New in I-5 Cleanup)
+
+```bash
+# Test with a recent dynamic job (prochat-os-010 or prochat-os-011)
+BUCKET="prochat-video-dev-909439522876-eu-north-1-an"
+JOB_ID="prochat-os-010"
+
+# Check status.json for dynamic job
+aws s3 cp s3://$BUCKET/jobs/$JOB_ID/metadata/status.json - --region eu-north-1 | jq '.'
+
+# Verify dynamic job metadata
+# - jobId matches input ($JOB_ID)
+# - status == "complete"
+# - currentStep == "thumbnail_generated"
+# - completedSteps has 6+ items
+# - finalVideoKey contains "prochat-os-010"
+# - thumbnailKey contains "prochat-os-010"
+
+# Check assets.json for dynamic job
+aws s3 cp s3://$BUCKET/jobs/$JOB_ID/metadata/assets.json - --region eu-north-1 | jq '.assets | keys'
+
+# Verify asset paths reference dynamic jobId, not test-001
+aws s3 cp s3://$BUCKET/jobs/$JOB_ID/metadata/assets.json - --region eu-north-1 | jq '.assets[] | select(.path | contains("test-001"))'
+
+# Expected: Empty (no test-001 references for dynamic jobs)
+```
+
+**Checklist:**
+- [ ] status.json currentStep == "thumbnail_generated"
+- [ ] status.json completedSteps has 6+ items
+- [ ] status.json finalVideoKey references correct jobId (not test-001)
+- [ ] status.json thumbnailKey references correct jobId (not test-001)
+- [ ] assets.json has 4+ assets
+- [ ] All asset paths start with `jobs/{jobId}/`, never test-001
+- [ ] finalVideo asset exists in S3
+- [ ] thumbnail asset exists in S3
+
+**Pass/Fail:** ☐ PASS ☐ FAIL
+
 ---
 
 ## Part D: Step Functions Execution Test (4 minutes)

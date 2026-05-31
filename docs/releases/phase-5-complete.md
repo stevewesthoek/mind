@@ -261,6 +261,48 @@ jobs/{jobId}/
 
 ---
 
+## 4.1 Metadata Validation (Dynamic Job Support)
+
+### Canonical Metadata Writer
+
+**Lambda Function:** `i4-write-metadata`  
+**Trigger:** After workflow completion (called via proof script)  
+**Purpose:** Write canonical status.json and assets.json for all dynamic jobs
+
+### Validation Rules
+
+#### status.json Contract
+- ✅ status must equal "complete"
+- ✅ currentStep must equal "thumbnail_generated"
+- ✅ completedSteps must be non-empty array (≥6 items)
+- ✅ mediaConvertJobId must be present
+- ✅ thumbnailKey must reference `jobs/{jobId}/exports/thumbnail-001.jpg`
+- ✅ finalVideoKey must reference `jobs/{jobId}/exports/generated-001-final.mp4`
+- ✅ assemblyStartedAt and assemblyCompletedAt must be ISO timestamps
+
+#### assets.json Contract
+- ✅ Must contain at least 2 assets: finalVideo and thumbnail
+- ✅ All asset paths must start with `jobs/{jobId}/`
+- ✅ Must NOT reference test-001 (unless jobId is test-001)
+- ✅ finalVideo asset must exist in S3
+- ✅ thumbnail asset must exist in S3
+- ✅ All asset types must be valid (video-assembled, thumbnail-preview, audio-narration, script-markdown, video-generated)
+
+#### approvals.json Contract
+- ✅ script.status must equal "approved" before workflow starts
+- ✅ approvalResult must contain jobId matching workflow input
+
+### Validation Test Cases
+
+Proven with dynamic job IDs:
+- prochat-os-010: ✅ All metadata valid, 5 assets, no test-001 refs
+- prochat-os-011: ✅ All metadata valid, 5 assets, no test-001 refs
+
+**Fixture Preservation:**
+- test-001: ✅ Unchanged, remains as reference fixture
+
+---
+
 ## 5. Video Generation Flow
 
 ### End-to-End Workflow
