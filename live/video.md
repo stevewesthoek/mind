@@ -210,8 +210,9 @@ Phase 4 — Internal Video Assembly: COMPLETE
 Phase 5 — Placeholder Replacement: COMPLETE
   I-3.1 Manual generated clip proof: COMPLETE (Nova Reel cross-region)
   I-3.2 Integrate into MediaConvert: COMPLETE (generated clip assembly)
-Phase 6 — Thumbnail and Polish: READY
-  I-4 Add thumbnail generation (next implementation)
+Phase 6 — Thumbnail and Polish: ACTIVE
+  I-4.1 Manual thumbnail proof: COMPLETE (frame extraction)
+  I-4.2 Integrate into Step Functions: READY (next implementation)
 ```
 
 I-2 implementation result:
@@ -292,13 +293,44 @@ Generated video available at canonical location:
 - Could be normalized to: test-001-final.mp4 (job-based)
 - Deferred to cleanup phase; does not affect workflow correctness
 
+### I-4: Add Thumbnail Generation 🟡 ACTIVE
+
+#### I-4.1: Manual Thumbnail Proof ✅ COMPLETE
+
+**Method:** Frame extraction (proven, uses existing artifacts)
+- Source: generated-001-final.mp4 (from I-3 assembly)
+- Frame: 3-second mark
+- Resolution: 1280x720 (YouTube-ready)
+- Format: PNG
+- Location: `s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/thumbnails/thumbnail-001.png`
+- Size: 360267 bytes
+
+**Why frame extraction over Bedrock image generation?**
+- ✅ Proven: Video already exists from I-3
+- ✅ Fast: Single ffmpeg command
+- ✅ No API blocker: Bedrock Nova Canvas API contract unclear
+- ✅ Reusable: Same approach for all future generated videos
+- ⚠️ Tradeoff: Thumbnail is content from video, not generative design
+
+**Blockers avoided:**
+- Nova Canvas validation errors on invoke-model
+- No image generation models in eu-north-1
+- API payload contract undocumented
+
+#### I-4.2: Integrate Thumbnail into Step Functions (Next)
+- Add Lambda to extract thumbnail after MediaConvert completes
+- Update state machine to call thumbnail Lambda
+- Store thumbnail reference in metadata/assets.json
+- Do not add UI or publishing yet
+
 Current active implementation target:
 
 ```text
-I-4. Add thumbnail generation
-   - Generate preview thumbnail from generated clip
-   - Store at: jobs/test-001/thumbnails/generated-001-preview.jpg
-   - Next phase after I-3 complete
+I-4.2. Integrate thumbnail extraction into Step Functions
+   - After MediaConvert assembly completes
+   - Extract frame at 3-second mark
+   - Store in thumbnails/ directory
+   - Update metadata with thumbnail reference
 ```
 
 ### Phase 4 — Internal Video Assembly
