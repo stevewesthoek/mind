@@ -128,7 +128,7 @@
       "TimeoutSeconds": 120,
       "Parameters": {
         "jobId.$": "$.jobId",
-        "videoKey.$": "$.videoKey",
+        "videoKey.$": "$.verifyOutput.mediaconvertOutput",
         "bucket": "prochat-video-dev-909439522876-eu-north-1-an",
         "roleArn": "arn:aws:iam::909439522876:role/service-role/MediaConvert_Default_Role"
       },
@@ -142,9 +142,14 @@
       ]
     },
     "WaitForThumbnail": {
+      "Type": "Wait",
+      "Seconds": 10,
+      "Next": "CheckThumbnailProgress"
+    },
+    "CheckThumbnailProgress": {
       "Type": "Task",
       "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:i4-frame-capture-wait-thumbnail-mediaconvert",
-      "TimeoutSeconds": 300,
+      "TimeoutSeconds": 60,
       "Parameters": {
         "jobId.$": "$.jobId",
         "thumbnailJobId.$": "$.thumbnailJob.thumbnailJobId",

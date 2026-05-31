@@ -34,29 +34,69 @@ def lambda_handler(event, context):
         raise ValueError(f'Missing required fields: jobId, videoKey, bucket')
 
     print(f'Creating frame capture job for: {job_id}')
-    print(f'Input video: s3://{bucket}/{video_key}')
+
+    # Handle both full S3 paths (from verifyOutput) and relative paths (from testing)
+    if video_key.startswith('s3://'):
+        video_input = video_key
+        print(f'Input video: {video_input}')
+    else:
+        video_input = f's3://{bucket}/{video_key}'
+        print(f'Input video: {video_input}')
 
     # Get MediaConvert endpoint
     endpoints = mediaconvert_client.describe_endpoints()
     endpoint_url = endpoints['Endpoints'][0]['Url']
     print(f'MediaConvert endpoint: {endpoint_url}')
 
-    # Get working role from environment or event
-    role_arn = os.getenv('MEDIACONVERT_ROLE') or event.get('roleArn')
+    # Get working role from environment (should be set via Lambda env vars)
+    role_arn = os.getenv('MEDIACONVERT_ROLE')
     if not role_arn:
-        raise ValueError('MEDIACONVERT_ROLE environment variable or roleArn not provided')
+        # Fallback: use the role from event (for step functions compatibility)
+        role_arn = event.get('roleArn', 'arn:aws:iam::909439522876:role/service-role/MediaConvert_Default_Role')
 
-    # Thumbnail output directory: jobs/{jobId}/thumbnails/
-    thumbnail_output_prefix = f'jobs/{job_id}/thumbnails/'
+    print(f'Using role: {role_arn}')
 
-    # Frame capture job settings
+    # Thumbnail output directory: jobs/{jobId}/exports/ (same writable prefix as video assembly)
+    # Frame naming will be: {input}-frame.{sequence}.jpg
+    thumbnail_output_prefix = f'jobs/{job_id}/exports/'
+
+    # Frame capture job settings (MediaConvert requires at least one full video output)
     job_settings = {
         'Inputs': [
             {
-                'FileInput': f's3://{bucket}/{video_key}'
+                'FileInput': video_input
             }
         ],
         'OutputGroups': [
+            {
+                'Name': 'Dummy Video',
+                'OutputGroupSettings': {
+                    'Type': 'FILE_GROUP_SETTINGS',
+                    'FileGroupSettings': {
+                        'Destination': f's3://{bucket}/{thumbnail_output_prefix}'
+                    }
+                },
+                'Outputs': [
+                    {
+                        'NameModifier': '-dummy',
+                        'ContainerSettings': {
+                            'Container': 'MP4'
+                        },
+                        'VideoDescription': {
+                            'CodecSettings': {
+                                'Codec': 'H_264',
+                                'H264Settings': {
+                                    'RateControlMode': 'QVBR',
+                                    'MaxBitrate': 5000000,
+                                    'QvbrSettings': {
+                                        'QvbrQualityLevel': 7
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
             {
                 'Name': 'Frame Captures',
                 'OutputGroupSettings': {
@@ -113,7 +153,7 @@ def lambda_handler(event, context):
             'thumbnailJobStatus': status,
             'thumbnailOutputPrefix': thumbnail_output_prefix,
             'preferredFrame': f'{thumbnail_output_prefix}*.0000002.jpg',
-            'normalizedThumbnailKey': f'jobs/{job_id}/thumbnails/thumbnail-001.jpg',
+            'normalizedThumbnailKey': f'jobs/{job_id}/exports/thumbnail-001.jpg',
             'status': 'frame_capture_triggered'
         }
 
