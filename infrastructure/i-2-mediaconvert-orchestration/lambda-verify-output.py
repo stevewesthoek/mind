@@ -27,9 +27,16 @@ def lambda_handler(event, context):
     output_dir = event.get('outputPath')
     actual_output_key = event.get('actualOutputKey')
     expected_output_key = event.get('expectedOutputKey')
+    mediaconvert_job_id = event.get('mediaConvertJobId')
 
     if not job_id or not output_dir:
         raise ValueError('jobId and outputPath are required')
+
+    # Neither actualOutputKey nor expectedOutputKey can be empty if both are provided
+    # But one or both can be None/missing, and we fall back to S3 list
+    if not actual_output_key and not expected_output_key:
+        # Both missing is OK - will use S3 list fallback
+        pass
 
     try:
         # Parse S3 destination directory
@@ -104,6 +111,7 @@ def lambda_handler(event, context):
 
             return {
                 'jobId': job_id,
+                'mediaConvertJobId': mediaconvert_job_id,
                 'mediaconvertOutput': f's3://{bucket}/{source_key}',
                 'exists': True,
                 'fileSize': file_size,
