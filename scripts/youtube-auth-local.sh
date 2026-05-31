@@ -3,21 +3,46 @@
 # Generates local token file for YouTube Data API v3
 # Usage: scripts/youtube-auth-local.sh
 #
-# Prerequisites:
-# 1. Google Cloud project with YouTube Data API v3 enabled
-# 2. OAuth 2.0 Desktop Client created in Cloud Console
-# 3. client_secret.json downloaded and placed at ~/.youtube_client_secret.json
+# Credentials location: ~/.config/youtube/.env (central credentials store)
+# Token output: ~/.youtube_tokens.json (auto-generated, gitignored)
 #
-# Output:
-# - ~/.youtube_tokens.json (gitignored, contains access and refresh tokens)
+# Prerequisites:
+# 1. Central credentials config at ~/.config/youtube/.env
+# 2. YOUTUBE_CLIENT_ID and YOUTUBE_CLIENT_SECRET set in config
+# 3. YouTube Data API v3 enabled in Google Cloud project
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CLIENT_SECRET_FILE="${HOME}/.youtube_client_secret.json"
-TOKEN_FILE="${HOME}/.youtube_tokens.json"
 
-REDIRECT_URI="http://localhost:8888"
+# Load central YouTube credentials
+CONFIG_FILE="${HOME}/.config/youtube/.env"
+if [ ! -f "$CONFIG_FILE" ]; then
+    echo "ERROR: Central credentials config not found: $CONFIG_FILE"
+    echo ""
+    echo "Create the config file with your credentials:"
+    echo "  mkdir -p ~/.config/youtube"
+    echo "  cat > ~/.config/youtube/.env << 'EOF'"
+    echo "  YOUTUBE_CLIENT_ID=\"<your-client-id>\""
+    echo "  YOUTUBE_CLIENT_SECRET=\"<your-client-secret>\""
+    echo "  YOUTUBE_REDIRECT_URI=\"http://localhost:8888\""
+    echo "  EOF"
+    echo ""
+    exit 1
+fi
+
+source "$CONFIG_FILE"
+
+# Validate credentials from config
+if [ -z "$YOUTUBE_CLIENT_ID" ] || [ -z "$YOUTUBE_CLIENT_SECRET" ]; then
+    echo "ERROR: YOUTUBE_CLIENT_ID or YOUTUBE_CLIENT_SECRET not set in $CONFIG_FILE"
+    exit 1
+fi
+
+TOKEN_FILE="${YOUTUBE_TOKEN_FILE:-${HOME}/.youtube_tokens.json}"
+REDIRECT_URI="${YOUTUBE_REDIRECT_URI:-http://localhost:8888}"
+CLIENT_ID="$YOUTUBE_CLIENT_ID"
+CLIENT_SECRET="$YOUTUBE_CLIENT_SECRET"
 LOCAL_PORT=8888
 
 # Color output
@@ -30,34 +55,10 @@ echo "==========================================="
 echo "YouTube OAuth Local Authentication Setup"
 echo "==========================================="
 echo ""
+echo "Using credentials from: $CONFIG_FILE"
+echo ""
 
-# Check if client_secret.json exists
-if [ ! -f "$CLIENT_SECRET_FILE" ]; then
-    echo -e "${RED}❌ ERROR: $CLIENT_SECRET_FILE not found${NC}"
-    echo ""
-    echo "Setup required:"
-    echo "1. Go to https://console.cloud.google.com"
-    echo "2. Create/select your project"
-    echo "3. Enable YouTube Data API v3"
-    echo "4. Go to APIs & Services → Credentials"
-    echo "5. Create OAuth 2.0 Client ID (Desktop application)"
-    echo "6. Download the JSON file"
-    echo "7. Save to: $CLIENT_SECRET_FILE"
-    echo ""
-    exit 1
-fi
-
-# Extract OAuth credentials from client_secret.json
-CLIENT_ID=$(jq -r '.installed.client_id' "$CLIENT_SECRET_FILE")
-CLIENT_SECRET=$(jq -r '.installed.client_secret' "$CLIENT_SECRET_FILE")
-
-if [ -z "$CLIENT_ID" ] || [ -z "$CLIENT_SECRET" ]; then
-    echo -e "${RED}❌ ERROR: Could not extract client_id or client_secret${NC}"
-    echo "Verify $CLIENT_SECRET_FILE is a valid OAuth 2.0 Desktop Client JSON"
-    exit 1
-fi
-
-echo "Using client_id: ${CLIENT_ID:0:20}..."
+echo "Client ID: ${CLIENT_ID:0:30}..."
 echo ""
 
 # Define scopes

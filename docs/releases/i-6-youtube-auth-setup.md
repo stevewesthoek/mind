@@ -84,15 +84,24 @@ https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth
 
 ### Local Development OAuth Flow
 
+**Credentials Setup:**
+
+**Credentials file:** `~/.config/youtube/.env` (central location, single source of truth)
+
+All scripts automatically load credentials from this central location. See `docs/credentials-youtube.md` for setup instructions.
+
 **Token Lifecycle:**
 
 1. **Initial Setup** (one-time, manual)
+   - Create central credentials file: `~/.config/youtube/.env`
+   - Add: `YOUTUBE_CLIENT_ID`, `YOUTUBE_CLIENT_SECRET`, `YOUTUBE_REDIRECT_URI`
    - User runs: `scripts/youtube-auth-local.sh`
+   - Script reads credentials from central location
    - Script opens browser to Google OAuth consent screen
    - User clicks "Allow"
    - Google redirects to localhost with auth code
    - Script exchanges auth code for tokens
-   - Tokens stored in `~/.youtube_tokens.json` (gitignored)
+   - Tokens stored in `~/.youtube_tokens.json` (gitignored, auto-generated)
 
 2. **Token Refresh** (automatic)
    - Access token: 1 hour validity
@@ -173,12 +182,15 @@ def get_youtube_access_token():
 
 | Aspect | Local Dev | AWS Lambda |
 |--------|-----------|-----------|
-| **Token Storage** | `~/.youtube_tokens.json` | AWS Secrets Manager |
+| **Credentials Config** | `~/.config/youtube/.env` (central) | AWS Secrets Manager (I-6.2c+) |
+| **Token Storage** | `~/.youtube_tokens.json` (auto-generated) | AWS Secrets Manager (I-6.2c+) |
 | **Client Type** | OAuth Desktop Client | Service Account or OAuth |
 | **Token Flow** | Browser + localhost | Automatic via Secrets Manager |
 | **Setup** | Manual (one-time) | Automated (no manual steps) |
 | **Refresh** | Automatic if present | Automatic on each call |
 | **Scopes** | Both readonly + upload | Depends on service account role |
+
+**Central Credentials Location:** All local scripts read from `~/.config/youtube/.env` (see `docs/credentials-youtube.md` for details)
 
 ---
 
