@@ -59,6 +59,18 @@ def read_publish_json(bucket, job_id):
         raise Exception(f"Failed to read publish.json: {str(e)}")
 
 
+def read_channel_config(bucket, channel_id):
+    """Read channel configuration from S3."""
+    try:
+        response = s3_client.get_object(
+            Bucket=bucket,
+            Key=f'channels/{channel_id}/channel.json'
+        )
+        return json.loads(response['Body'].read().decode('utf-8'))
+    except ClientError as e:
+        raise Exception(f"Failed to read channel config {channel_id}: {str(e)}")
+
+
 def write_publish_json(bucket, job_id, publish_json):
     """Write publish.json to S3."""
     try:
@@ -102,6 +114,16 @@ def handler(event, context):
 
         # Read current publish.json
         publish_json = read_publish_json(BUCKET, job_id)
+
+        # Read channel config for context logging
+        channel_id = publish_json.get('channelId', 'says-the-bible')
+        try:
+            channel_config = read_channel_config(BUCKET, channel_id)
+            display_name = channel_config.get('displayName', channel_id)
+            print(f"Channel: {display_name} ({channel_id})")
+        except Exception as e:
+            print(f"Warning: Could not load channel config: {str(e)}")
+            display_name = channel_id
 
         # Initialize platforms.youtube if not present
         if 'platforms' not in publish_json:

@@ -1,4 +1,10 @@
-# 10 vragen om samen bijbels te toetsen
+Hey broer,
+
+Verbeter mij als ik fout zit maar ik concludeer de volgende 2 punten uit onze berichtenwisseling:
+- De waterdoop red van de slavernij van de zonden
+- Wij hebben geen zekerheid over in de eeuwige redding
+
+Ik heb ook deze video bekeken https://youtu.be/q49IetMeviU?is=DYOcAFlwXsqCZXUx en naar aanleiding van jouw standpunten en die van de video, heb ik de volgende vragen.
 
 1. Geeft geloof in Jezus garantie op eeuwig leven, of blijft de gelovige onder mogelijke verdoemenis? — *Johannes 5:24; Johannes 10:27-29; 1 Johannes 5:11-13*
 
@@ -22,17 +28,17 @@
 
 ## Samenvattende vraag
 
+Als de prijs al door Jezus betaald is en wij net als Hem op kunnen staan uit de dood net zoals Hij heeft gedaan
 Als iemand werkelijk wedergeboren is, gerechtvaardigd, verzegeld met de Heilige Geest, gekend door Christus, en bewaard door de Vader — waar leert de Bijbel dat zo iemand alsnog verloren kan gaan? — *Johannes 5:24; Johannes 10:27-29; Romeinen 5:1; Romeinen 8:29-30; Efeziërs 1:13-14; Filippenzen 1:6; 1 Petrus 1:5; Judas 24-25*
+
 
 ---
 
-## Mijn reactie
+## Mijn conclusie
 
-Hey broer, ik heb de video bekeken en ik heb een andere overtuiging.
+De OT-schaduwen en NT-versen worden heel letterlijk geïnterpreteerd. Hierdoor wordt er een beeld geschetst dat mijns inziens moeilijk niet verzoenen is met de rest van de Bijbel.
 
-De OT-schaduwen en NT-versen worden heel letterlijk geïnterpreteerd. Er wordt een beeld geschetst dat in sterk contrast staat met de hiervoor genoemde versen. Ik kan dit beeld persoonlijk niet verzoenen met de boodschap van de video.
-
-Mijn conclusie: de OT schaduwen zouden niet dogmatisch als blauwdruk op het NT toegepast moeten worden. Het zijn slechts voorbeelden die wijzen naar Jezus — ze geven geen extra werken naast geloof in Jezus, en worden in het NT niet gebruikt als waarschuwingen dat wedergeboorte verloren kan gaan.
+Het dogmatisch toepassen van OT schaduwen als blauwdruk op het NT is volgens mij niet iets wat Johannes de doper of Jezus' discipelen hebben gedaan. Een schaduw is slechts imperfect symbool dat wijst naar Jezus — ze geven geen extra werken naast geloof in Jezus, en worden in het NT niet gebruikt als waarschuwingen dat wedergeboorte verloren kan gaan.
 
 ## Over de schaduwen
 

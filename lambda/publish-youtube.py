@@ -23,6 +23,7 @@ import json
 import os
 import time
 import urllib3
+import urllib.parse
 import boto3
 from botocore.exceptions import ClientError
 
@@ -49,6 +50,18 @@ def read_publish_json(bucket, job_id):
         return json.loads(response['Body'].read().decode('utf-8'))
     except ClientError as e:
         raise Exception(f"Failed to read publish.json: {str(e)}")
+
+
+def read_channel_config(bucket, channel_id):
+    """Read channel configuration from S3."""
+    try:
+        response = s3_client.get_object(
+            Bucket=bucket,
+            Key=f'channels/{channel_id}/channel.json'
+        )
+        return json.loads(response['Body'].read().decode('utf-8'))
+    except ClientError as e:
+        raise Exception(f"Failed to read channel config {channel_id}: {str(e)}")
 
 
 def read_secret(secret_name):
@@ -89,7 +102,7 @@ def refresh_token_if_needed(token_data):
         if not refresh_token or not client_id or not client_secret:
             raise Exception("Cannot refresh token: missing credentials")
 
-        body = urllib3.util.urlencode({
+        body = urllib.parse.urlencode({
             'client_id': client_id,
             'client_secret': client_secret,
             'refresh_token': refresh_token,
@@ -215,6 +228,35 @@ def handler(event, context):
         print("Reading publish.json from S3...")
         publish_json = read_publish_json(BUCKET, job_id)
 
+        # Step 1b: Get channel ID and load channel config
+        channel_id = publish_json.get('channelId', 'says-the-bible')
+        print(f"Channel: {channel_id}")
+
+        channel_config = read_channel_config(BUCKET, channel_id)
+        yt_config = channel_config.get('platforms', {}).get('youtube', {})
+
+        if not yt_config.get('enabled'):
+            raise Exception(f"YouTube publishing not enabled for channel: {channel_id}")
+
+        # Extract YouTube secret from channel config
+        secret_name = yt_config.get('secretName')
+        if not secret_name:
+            raise Exception(f"No YouTube secret configured for channel: {channel_id}")
+
+        # Validate privacy status is allowed
+        default_privacy = yt_config.get('defaultPrivacyStatus', 'private')
+        allowed_statuses = yt_config.get('allowedPrivacyStatuses', ['private'])
+
+        if privacy_status not in allowed_statuses:
+            raise Exception(f"Privacy status not allowed: {privacy_status}")
+
+        if not channel_config.get('publishing', {}).get('allowPublic', True) is False:
+            raise Exception("Channel does not allow public videos")
+
+        print(f"Channel config loaded: {channel_config.get('displayName')}")
+        print(f"Privacy status: {privacy_status} (allowed: {','.join(allowed_statuses)})")
+        print(f"YouTube secret: {secret_name}")
+
         # Step 2: Check idempotency
         existing_video_id = publish_json.get('platforms', {}).get('youtube', {}).get('videoId')
         existing_status = publish_json.get('platforms', {}).get('youtube', {}).get('status')
@@ -229,9 +271,9 @@ def handler(event, context):
                 'uploadedAt': publish_json.get('platforms', {}).get('youtube', {}).get('publishedAt')
             }
 
-        # Step 3: Read OAuth token
-        print("Reading OAuth token from Secrets Manager...")
-        token_data = read_secret(SECRET_NAME)
+        # Step 3: Read OAuth token using channel's secret
+        print(f"Reading OAuth token from Secrets Manager...")
+        token_data = read_secret(secret_name)
 
         # Step 4: Refresh token if needed
         token_data = refresh_token_if_needed(token_data)

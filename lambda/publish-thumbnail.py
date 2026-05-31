@@ -20,6 +20,7 @@ Output:
 import json
 import os
 import urllib3
+import urllib.parse
 import boto3
 from botocore.exceptions import ClientError
 
@@ -54,6 +55,18 @@ def download_from_s3(bucket, key):
         raise Exception(f"Failed to download {key}: {str(e)}")
 
 
+def read_channel_config(bucket, channel_id):
+    """Read channel configuration from S3."""
+    try:
+        response = s3_client.get_object(
+            Bucket=bucket,
+            Key=f'channels/{channel_id}/channel.json'
+        )
+        return json.loads(response['Body'].read().decode('utf-8'))
+    except ClientError as e:
+        raise Exception(f"Failed to read channel config {channel_id}: {str(e)}")
+
+
 def refresh_token_if_needed(token_data):
     """Refresh OAuth token if expiring soon."""
     import time
@@ -76,7 +89,7 @@ def refresh_token_if_needed(token_data):
         if not refresh_token or not client_id or not client_secret:
             raise Exception("Cannot refresh token: missing credentials")
 
-        body = urllib3.util.urlencode({
+        body = urllib.parse.urlencode({
             'client_id': client_id,
             'client_secret': client_secret,
             'refresh_token': refresh_token,
@@ -167,9 +180,28 @@ def handler(event, context):
 
         print(f"Publishing thumbnail for video: {video_id}")
 
-        # Step 1: Read OAuth token
+        # Step 1: Read publish.json to get channel ID
+        response = s3_client.get_object(
+            Bucket=BUCKET,
+            Key=f'jobs/{job_id}/metadata/publish.json'
+        )
+        publish_json = json.loads(response['Body'].read().decode('utf-8'))
+        channel_id = publish_json.get('channelId', 'says-the-bible')
+
+        # Step 1b: Load channel config
+        channel_config = read_channel_config(BUCKET, channel_id)
+        yt_config = channel_config.get('platforms', {}).get('youtube', {})
+        secret_name = yt_config.get('secretName')
+
+        if not secret_name:
+            raise Exception(f"No YouTube secret configured for channel: {channel_id}")
+
+        print(f"Channel: {channel_id}")
+        print(f"YouTube secret: {secret_name}")
+
+        # Step 2: Read OAuth token using channel's secret
         print("Reading OAuth token...")
-        token_data = read_secret(SECRET_NAME)
+        token_data = read_secret(secret_name)
 
         # Step 2: Refresh token if needed
         token_data = refresh_token_if_needed(token_data)
