@@ -49,11 +49,15 @@ def lambda_handler(event, context):
         name_modifier = output_filename.replace('.mp4', '')
 
         # I-3: Use generated clip instead of placeholder
-        # Source: s3://.../jobs/test-001/video-generated/generated-001.mp4
-        # Fallback to sample-transcoded.mp4 if generated clip not available
+        # Placeholder: s3://.../jobs/test-001/exports/sample-transcoded.mp4
+        # Generated:   s3://.../jobs/test-001/video-generated/generated-001.mp4
         video_input_path = video_input
         if 'sample-transcoded' in video_input:
-            video_input_path = video_input.replace('sample-transcoded.mp4', 'video-generated/generated-001.mp4')
+            # Replace entire exports path with video-generated path
+            video_input_path = video_input.replace(
+                'exports/sample-transcoded.mp4',
+                'video-generated/generated-001.mp4'
+            )
 
         job_settings = {
             'TimecodeConfig': {
