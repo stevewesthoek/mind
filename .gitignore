@@ -23,3 +23,20 @@ daily/*.md
 
 # Obsidian plugin caches
 .obsidian/cache/
+
+# YouTube OAuth credentials (NEVER COMMIT)
+.youtube_tokens.json
+.youtube_client_secret.json
+youtube_tokens.json
+client_secret*.json
+token*.json
+
+# AWS credentials
+.aws/
+.aws-*
+
+# OAuth and secrets
+oauth_token*
+*credentials*
+*.secret
+.env.local
