@@ -94,6 +94,7 @@
         "assemblyCompletedAt.$": "$$.State.EnteredTime",
         "mediaConvertJobId.$": "$.mediaConvertJobId"
       },
+      "ResultPath": "$.statusUpdate",
       "Next": "VerifyOutput",
       "Catch": [
         {
@@ -109,8 +110,8 @@
       "Parameters": {
         "jobId.$": "$.jobId",
         "outputPath": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/",
-        "expectedOutputKey.$": "$.expectedOutputKey",
-        "actualOutputKey.$": "$.actualOutputKey"
+        "actualOutputKey.$": "$.actualOutputKey",
+        "expectedOutputKey.$": "$.expectedOutputKey"
       },
       "Next": "AssemblySuccess",
       "Catch": [
