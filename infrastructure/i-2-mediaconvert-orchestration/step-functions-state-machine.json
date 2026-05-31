@@ -190,11 +190,27 @@
         "normalizedThumbnailKey.$": "$.thumbnailJob.normalizedThumbnailKey"
       },
       "ResultPath": "$.selectedThumbnail",
-      "Next": "AssemblySuccess",
+      "Next": "CreatePublishContract",
       "Catch": [
         {
           "ErrorEquals": ["States.ALL"],
           "Next": "ThumbnailSelectionFailed"
+        }
+      ]
+    },
+    "CreatePublishContract": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:i6-create-publish-contract",
+      "TimeoutSeconds": 60,
+      "Parameters": {
+        "jobId.$": "$.jobId"
+      },
+      "ResultPath": "$.publishContract",
+      "Next": "AssemblySuccess",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "PublishContractCreationFailed"
         }
       ]
     },
@@ -251,6 +267,11 @@
       "Type": "Fail",
       "Error": "ThumbnailSelectionError",
       "Cause": "Failed to select and normalize thumbnail frame"
+    },
+    "PublishContractCreationFailed": {
+      "Type": "Fail",
+      "Error": "PublishContractCreationError",
+      "Cause": "Failed to create publishing contract (publish.json)"
     }
   }
 }
