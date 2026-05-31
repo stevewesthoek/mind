@@ -51,6 +51,7 @@
     "TriggerMediaConvertJob": {
       "Type": "Task",
       "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:video-orchestrator-mediaconvert",
+      "TimeoutSeconds": 60,
       "Parameters": {
         "jobId.$": "$.jobId",
         "videoInput": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/sample-transcoded.mp4",
@@ -69,6 +70,7 @@
     "WaitForMediaConvertCompletion": {
       "Type": "Task",
       "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:video-orchestrator-wait-mediaconvert",
+      "TimeoutSeconds": 720,
       "Parameters": {
         "mediaConvertJobId.$": "$.mediaConvertJobId",
         "jobId.$": "$.jobId",
@@ -103,6 +105,7 @@
     "VerifyOutput": {
       "Type": "Task",
       "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:video-orchestrator-verify-output",
+      "TimeoutSeconds": 60,
       "Parameters": {
         "jobId.$": "$.jobId",
         "outputPath": "s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/exports/",

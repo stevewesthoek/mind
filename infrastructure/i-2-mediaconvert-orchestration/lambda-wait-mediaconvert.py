@@ -93,12 +93,24 @@ def lambda_handler(event, context):
                     'completed': True,
                     'attempts': attempt + 1,
                     'actualOutputKey': actual_output_key,
-                    'outputGroupDetails': bool(output_group_details)
+                    'outputGroupDetails': bool(output_group_details),
+                    'errorCode': job.get('ErrorCode'),
+                    'errorMessage': job.get('ErrorMessage')
                 }
 
+            elif status == 'ERROR':
+                error_code = job.get('ErrorCode', 'UNKNOWN')
+                error_msg = job.get('ErrorMessage', 'No error message provided')
+                raise Exception(
+                    f'MediaConvert job ERROR: Code={error_code}, Message={error_msg}'
+                )
+
             elif status == 'FAILED':
+                error_code = job.get('ErrorCode', 'UNKNOWN')
                 error_msg = job.get('ErrorMessage', 'Unknown error')
-                raise Exception(f'MediaConvert job failed: {error_msg}')
+                raise Exception(
+                    f'MediaConvert job failed: Code={error_code}, Message={error_msg}'
+                )
 
             elif status in ['CANCELED', 'CANCELING']:
                 raise Exception(f'MediaConvert job was canceled: {status}')

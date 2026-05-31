@@ -59,6 +59,13 @@ def lambda_handler(event, context):
                 'video-generated/generated-001.mp4'
             )
 
+        # CRITICAL: Validate path never has double nesting
+        if '/exports/video-generated/' in video_input_path:
+            raise ValueError(
+                f'CRITICAL: Invalid path construction detected: {video_input_path}. '
+                'Path must be video-generated/ not exports/video-generated/'
+            )
+
         job_settings = {
             'TimecodeConfig': {
                 'Source': 'ZEROBASED'
