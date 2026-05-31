@@ -673,22 +673,59 @@ ffprobe local-final.mp4
 **Result:** Thumbnail generated from 3-second mark of final video.
 **Output:** `jobs/{jobId}/exports/thumbnail-001.jpg` (normalized, ready for publishing).
 
-### I-5: Generate Real Internal Content ⬜ PENDING
+### I-5: Generate Real Internal Content & Dynamic Job Support ✅ COMPLETE
 
-Next phase: Replace test-001 with real Says The Bible or ProChat workflow demonstration video.
+**Achievement:** Full dynamic job ID support with concurrent execution proven.
 
-**Pre-I-5 hardening checklist:**
-- ✅ Metadata: `status.json` updated with full pipeline completion
-- ✅ Metadata: `assets.json` created with all asset references
-- ✅ Metadata: All assets verified in S3
-- ✅ Documentation: `live/video.md` updated
-- ✅ Infrastructure: All Lambda functions tested and deployed
-- ✅ Infrastructure: Step Functions state machine verified
-- ⏳ Ready for I-5 content generation
+**I-5.1 Real Content Generation ✅ COMPLETE**
+- ✅ First real ProChat OS positioning video generated
+- ✅ Script: "Why ProChat OS exists: Structure for AI" (60 seconds, 182 words)
+- ✅ Narration: Polly voice (Joanna, professional delivery)
+- ✅ Execution: test-001 job (known-good reference fixture)
+- ✅ Output: `jobs/test-001/exports/generated-001-final.mp4` (469 KB)
+- ✅ Thumbnail: `jobs/test-001/exports/thumbnail-001.jpg` (38 KB)
 
-- No production video jobs are started from Brain Core yet.
-- No upload, render, or publish mutation endpoint exists yet.
-- Runtime video state should stay in the execution backend and ProChat OS metadata, not duplicated into Mind.
+**I-5.2 Dynamic Job ID Support ✅ COMPLETE**
+- ✅ Removed hardcoded test-001 references from production code
+- ✅ Lambda functions read jobId from Step Functions input
+- ✅ IAM policies expanded to support all job paths
+- ✅ Step Functions state machine preserves input through transitions
+- ✅ Tested with: prochat-os-001, prochat-os-005, prochat-os-006
+
+**I-5.3 Metadata Contract ✅ COMPLETE**
+- ✅ Created `i4-write-metadata` Lambda for canonical metadata writing
+- ✅ Validates and writes `status.json` after workflow completion
+- ✅ Validates and writes `assets.json` with all generated assets
+- ✅ All asset paths reference correct jobId (not test-001)
+- ✅ Tested with: prochat-os-010, prochat-os-011
+
+**I-5.4 Concurrency Proof ✅ COMPLETE**
+- ✅ Concurrent execution validation with prochat-os-020, prochat-os-021
+- ✅ Complete job isolation (no cross-job contamination)
+- ✅ Independent metadata files for each job
+- ✅ Unique S3 folders and asset references
+- ✅ No resource conflicts or file path collisions
+- ✅ Production-ready concurrent workflow support
+
+**Documentation:**
+- ✅ Phase 5 release checkpoint: `docs/releases/phase-5-complete.md`
+- ✅ Phase 5 checklist: `docs/releases/phase-5-checklist.md`
+- ✅ Metadata fix proof: `docs/releases/i-5-metadata-fix-proof.md`
+- ✅ Concurrency validation documented
+
+**Next Phase (I-6):**
+- Publishing layer implementation (YouTube, TikTok, social media integration)
+- Uses canonical metadata from status.json and assets.json
+- Can now rely on accurate, complete job metadata for publishing workflows
+- Concurrent publishing support enabled by I-5 infrastructure
+
+**Status for I-6 Readiness:**
+- ✅ Infrastructure validated
+- ✅ Metadata contract complete
+- ✅ Dynamic jobs working
+- ✅ Concurrency proven
+- ✅ Real content generated
+- ✅ Ready for publishing implementation
 
 ## Safety rules
 

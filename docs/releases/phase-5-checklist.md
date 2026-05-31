@@ -267,6 +267,36 @@ aws s3 cp s3://$BUCKET/jobs/$JOB_ID/metadata/assets.json - --region eu-north-1 |
 
 **Pass/Fail:** ☐ PASS ☐ FAIL
 
+### C.4 Verify Concurrent Job Execution (Bonus Proof)
+
+```bash
+# This test validates that multiple jobs can run concurrently without contamination
+# (Only run this test if interested in concurrency validation beyond basic functionality)
+
+BUCKET="prochat-video-dev-909439522876-eu-north-1-an"
+
+# Check concurrent job metadata (prochat-os-020, prochat-os-021)
+for JOB_ID in prochat-os-020 prochat-os-021; do
+  echo "Checking $JOB_ID..."
+  
+  # Verify status.json has correct jobId
+  aws s3 cp s3://$BUCKET/jobs/$JOB_ID/metadata/status.json - --region eu-north-1 | jq ".jobId"
+  
+  # Verify no cross-job contamination
+  aws s3 cp s3://$BUCKET/jobs/$JOB_ID/metadata/assets.json - --region eu-north-1 | jq '.assets[] | .path' | grep -i "test-001" && echo "FAIL: Found test-001 ref" || echo "PASS: No test-001 refs"
+done
+```
+
+**Checklist:**
+- [ ] prochat-os-020 jobId correctly set in status.json
+- [ ] prochat-os-021 jobId correctly set in status.json
+- [ ] No cross-job file path collisions detected
+- [ ] Each job has independent metadata files
+- [ ] Each job has separate S3 folders (no shared assets)
+- [ ] test-001 fixture remains unchanged
+
+**Pass/Fail:** ☐ PASS ☐ FAIL (optional, bonus test)
+
 ---
 
 ## Part D: Step Functions Execution Test (4 minutes)
