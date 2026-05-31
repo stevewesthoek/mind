@@ -7,6 +7,12 @@ status: scaffold
 
 This page is the human-facing place for Video Orchestrator visibility.
 
+Canonical implementation lives in Brain:
+
+```text
+/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/
+```
+
 Canonical strategy:
 
 ```text
@@ -255,7 +261,7 @@ I-2 implementation result:
      * Add S3 copy/rename Lambda post-step
      * Adjust MediaConvert destination strategy for future jobs
 
-Documentation: infrastructure/i-2-mediaconvert-orchestration/IMPLEMENTATION_GUIDE.md
+Documentation: /Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/cloud/infrastructure/i-2-mediaconvert-orchestration/IMPLEMENTATION_GUIDE.md
 ```
 
 ### I-3: Replace Placeholder with Generated Clips ✅ COMPLETE
@@ -372,12 +378,12 @@ Generated video available at canonical location:
 Available test-001 assets:
 
 ```text
-jobs/test-001/scripts/script.md
-jobs/test-001/audio/narration.mp3
-jobs/test-001/captions/transcript.json
-jobs/test-001/video-raw/sample.mp4
-jobs/test-001/exports/sample-transcoded.mp4
-jobs/test-001/metadata/approvals.json (script.status = approved)
+/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/cloud/jobs/test-001/scripts/script.md
+/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/cloud/jobs/test-001/audio/narration.mp3
+/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/cloud/jobs/test-001/captions/transcript.json
+/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/cloud/jobs/test-001/video-raw/sample.mp4
+/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/cloud/jobs/test-001/exports/sample-transcoded.mp4
+/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/cloud/jobs/test-001/metadata/approvals.json (script.status = approved)
 ```
 
 Required output:

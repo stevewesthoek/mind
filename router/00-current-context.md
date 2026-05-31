@@ -34,6 +34,12 @@ archive/          Completed, old, or legacy material
 archive/old/      Legacy numbered PARA folders (read-only backup)
 ```
 
+The cloud video orchestrator implementation is now in the Brain repo at:
+
+```text
+/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/
+```
+
 ## Current Architecture Decision
 
 Research lives inside this repo under:

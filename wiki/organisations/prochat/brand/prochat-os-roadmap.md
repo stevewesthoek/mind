@@ -130,7 +130,7 @@ Lambda functions deployed:
 Automation flow:
 Approval → assembling → MediaConvert job → polling → complete → verification
 
-Documentation: infrastructure/i-2-mediaconvert-orchestration/IMPLEMENTATION_GUIDE.md
+Documentation: /Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/cloud/infrastructure/i-2-mediaconvert-orchestration/IMPLEMENTATION_GUIDE.md
 ```
 
 Current active implementation target:
@@ -189,7 +189,7 @@ Do not move to complete 60-second generation until approval checkpoint contract 
 **Available test-001 assets:**
 
 ```text
-jobs/test-001/scripts/script.md — approved script
+/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/cloud/jobs/test-001/scripts/script.md — approved script
 jobs/test-001/audio/narration.mp3 — approved narration
 jobs/test-001/captions/transcript.json — transcript
 jobs/test-001/video-raw/sample.mp4 — raw video

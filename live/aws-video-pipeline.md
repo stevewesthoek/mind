@@ -7,6 +7,12 @@ status: active
 
 This page is the human-facing dashboard for the AWS-based video generation and publishing pipeline.
 
+Canonical implementation lives in Brain:
+
+```text
+/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/
+```
+
 ## 🚀 Pipeline Status
 
 **Overall Status:** ✅ READY
@@ -99,12 +105,12 @@ Approval: Required
 
 1. **Create Topic** — Start a new video topic contract
    ```bash
-   scripts/create-video-topic.sh <jobId> <channelId>
+   /Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/cloud/scripts/create-video-topic.sh <jobId> <channelId>
    ```
 
 2. **Validate Configuration** — Check content intelligence setup
    ```bash
-   scripts/validate-content-intelligence.sh
+   /Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/cloud/scripts/validate-content-intelligence.sh
    ```
 
 3. **Generate Video** — Trigger generation pipeline
@@ -286,7 +292,7 @@ Topic Contract (topic.json)
 
 ```bash
 # 1. Create topic contract
-scripts/create-video-topic.sh prochat-topic-001 prochat
+/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/cloud/scripts/create-video-topic.sh prochat-topic-001 prochat
 
 # 2. Review/update topic.json with title, angle, audience
 aws s3 cp s3://BUCKET/jobs/prochat-topic-001/metadata/topic.json - | jq .
@@ -390,4 +396,3 @@ The publishing UI should eventually:
 **Status:** Active  
 **Say the Bible Videos Published:** 2  
 **ProChat Videos Published:** 0 (awaiting OAuth)
-

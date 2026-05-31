@@ -36,6 +36,7 @@ wiki/      Compiled durable knowledge (organisations, areas, faith, business, et
 sources/   Raw evidence and research notes (research/notes/bible, apologetics, etc.)
 router/    Model-router contract, rules, and maintenance definitions
 archive/   Old, completed, or legacy material (archive/old/ for legacy numbered folders)
+brain/     AI-system project context lives in the Brain repo, including the video orchestrator
 ```
 
 ## Daily Human Interface
@@ -68,6 +69,12 @@ Research lives in:
 
 ```text
 sources/research/
+```
+
+The cloud video orchestrator implementation and release docs have moved to:
+
+```text
+/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/
 ```
 
 Research is not the same as strategy. Research can be uncertain, exploratory, or source-heavy. Strategy is committed and canonical (lives in `wiki/organisations/`).
