@@ -2,7 +2,7 @@ Hey broer,
 
 Verbeter mij als ik fout zit maar ik concludeer de volgende 2 punten uit onze berichtenwisseling:
 - De waterdoop red van de slavernij van de zonden
-- Wij hebben geen zekerheid over in de eeuwige redding
+- Wij hebben geen zekerheid in onze eeuwige redding
 
 Ik heb ook deze video bekeken https://youtu.be/q49IetMeviU?is=DYOcAFlwXsqCZXUx en naar aanleiding van jouw standpunten en die van de video, heb ik de volgende vragen.
 
@@ -28,17 +28,12 @@ Ik heb ook deze video bekeken https://youtu.be/q49IetMeviU?is=DYOcAFlwXsqCZXUx e
 
 ## Samenvattende vraag
 
-Als de prijs al door Jezus betaald is en wij net als Hem op kunnen staan uit de dood net zoals Hij heeft gedaan
 Als iemand werkelijk wedergeboren is, gerechtvaardigd, verzegeld met de Heilige Geest, gekend door Christus, en bewaard door de Vader — waar leert de Bijbel dat zo iemand alsnog verloren kan gaan? — *Johannes 5:24; Johannes 10:27-29; Romeinen 5:1; Romeinen 8:29-30; Efeziërs 1:13-14; Filippenzen 1:6; 1 Petrus 1:5; Judas 24-25*
 
 
 ---
 
-## Mijn conclusie
 
-De OT-schaduwen en NT-versen worden heel letterlijk geïnterpreteerd. Hierdoor wordt er een beeld geschetst dat mijns inziens moeilijk niet verzoenen is met de rest van de Bijbel.
-
-Het dogmatisch toepassen van OT schaduwen als blauwdruk op het NT is volgens mij niet iets wat Johannes de doper of Jezus' discipelen hebben gedaan. Een schaduw is slechts imperfect symbool dat wijst naar Jezus — ze geven geen extra werken naast geloof in Jezus, en worden in het NT niet gebruikt als waarschuwingen dat wedergeboorte verloren kan gaan.
 
 ## Over de schaduwen
 
@@ -48,7 +43,7 @@ Als jij zegt "dat we niet over het eeuwige leven gaan", dan zet dit de deur open
 
 ## Wat zet vrij van de slavernij van de zonde?
 
-Dit is de kernvraag. De Bijbel is mijns inziens glashelder en simpel in plaats van mysterieus en ingewikkeld:
+De Bijbel is mijns inziens kraakhelder en simpel in plaats van mysterieus en ingewikkeld:
 
 **Jezus zelf zet vrij:**
 > "Als dan de Zoon u vrijgemaakt heeft, zult u werkelijk vrij zijn." — *Johannes 8:36*
@@ -92,31 +87,22 @@ Hebreeën 10:14 bevestigt:
 
 Eén offer. Voor altijd volmaakt. Terwijl heiliging doorgaat. Dat is de balans: juridisch volmaakt door Christus, praktisch geheiligd door de Geest.
 
-## Mijn ervaring
+## Mijn getuigenis
 
-Toen ik gedoopt werd wist ik niets van de Bijbel. Ik kende Jezus niet. Ik moest mijn hele New Age-denken vernieuwen. Maar één ding wist ik: Hij is de waarheid!
+Toen ik gedoopt werd wist ik niets van de Bijbel. Ik kende Jezus niet. Ik had een New Age-denken. Maar één ding wist ik: Hij is de waarheid!
 
-Dit geloof heeft mij gered. Niet Marks handenoplegging. Niet de doop. God heeft mij voorbestemd voor Zijn koninkrijk. Mijn schuld is bekend, de prijs betaald, de belofte aanvaard, mijn hoop gegarandeerd.
+Dit geloof heeft mij gered. Niet Marks handenoplegging noch de doop. God heeft mij voorbestemd voor Zijn koninkrijk. Mijn schuld is erkent, de prijs betaald, de belofte aanvaard, mijn leven gegarandeerd.
 
-De doop noch de handen oplegging is niet minder belangrijk. Maar ook niet meer en zeker niet beslissend. Als het wel beslissend was treden we acuut in religieus terrein. Want dan moeten we vragen beantwoorden als, hoeveel water, wie kan handen opleggen en wat moeten we precies bidden. Dit is de bron van religie.
+De doop en de handen oplegging is niet minder belangrijk. Maar ook niet meer en zeker niet beslissend. Als het wel beslissend was treden we onmiddelijk in religieus terrein. Want dan moeten we vragen beantwoorden als hoeveel water, wie kan handen opleggen en wat moeten we precies bidden. Dit is de bron van religie.
 
 ## Over Wilson
 
-Wilson is voorbestemd en tot bekering gekomen als je het mij vraagt. Mocht hij vandaag overlijden, dan kan ik niet uit de Bijbel afleiden dat God niet genadig is naar hem. De doop zet hem niet vrij — het bloed van Jezus doet dat en we aanvaren dat met geloof. *1 Johannes 1:7, Mateus 26:28*.
+Wilson is voorbestemd en tot bekering gekomen als je het mij vraagt. Mocht hij vandaag overlijden, dan kan ik niet uit de Bijbel afleiden dat God niet genadig is naar hem. De doop zet hem niet vrij — het bloed van Jezus doet dat als we geloven. Het is werkelijk zo simpel. *1 Johannes 1:7, Mateus 26:28*.
 
 Ik heb geen twijfel dat Wilson een Christen is. Maar gezien jij een andere overtuiging hebt, pas ik mij aan. *Romeinen 14, Filippenzen 2:3-4*. Ik pak daarom het gesprek met hem op om meer over de doop te spreken.
 
-## Conclusie
+## Mijn conclusie
 
-Als wij onze wedergeboorte kunnen verliezen, dan:
+De OT-schaduwen en NT-versen worden heel letterlijk geïnterpreteerd. Hierdoor wordt er een beeld geschetst dat mijns inziens moeilijk niet verzoenen is met de rest van de Bijbel.
 
-- Is Gods kracht onvoldoende.
-- Kunnen wij met werken Gods glorie afnemen.
-- Moeten wij bepalen welke werken onze garantie verliezen — en openen we de deur naar religie, niet geloof.
-- Kunnen wij het ook verdienen, erover opscheppen en het doorgeven.
-
-Dat is wat 40.000 denominaties produceert plus valse religie en aanbidding van zelf.
-
-God heeft een plan. Bekend vanaf de grondvesting van de aarde. Van het begin weet Hij het einde. Alles is voor Zijn glorie — van het verharden van Farao's hart tot de voorbestemming van jouw wedergeboorte. Er is niets wat jij of ik hieraan kan doen.
-
-Slavernij aan de zonde wordt niet gebroken door een programma van uitvoering of een ritueel van handelen. Het is reeds gebroken door Christus. Door Zijn bloed. Door Zijn kruis. Door Zijn Geest. Geeft leven en zekerheid. Word aanvaard door geloof. Dat is het evangelie.
+Het dogmatisch toepassen van OT schaduwen als blauwdruk op het NT is volgens mij niet iets wat Johannes de doper of Jezus' discipelen hebben gedaan. Een schaduw is slechts imperfect symbool dat wijst naar Jezus — ze geven geen extra werken naast geloof in Jezus, en worden in het NT niet gebruikt als waarschuwingen dat wedergeboorte verloren kan gaan.
