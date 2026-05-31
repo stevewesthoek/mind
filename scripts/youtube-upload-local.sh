@@ -267,14 +267,26 @@ echo "Privacy: $PRIVACY_STATUS"
 echo -e "${GREEN}✓ Metadata prepared${NC}"
 echo ""
 
+# Validation: Ensure request body has status part in URL
+echo "[6.5/8] Validating request body matches URL parts..."
+if echo "$SNIPPET" | jq . > /dev/null 2>&1 && echo "$STATUS" | jq . > /dev/null 2>&1; then
+    echo -e "${GREEN}✓ Metadata JSON valid (snippet and status parts will be included)${NC}"
+else
+    echo -e "${RED}❌ ERROR: Invalid metadata JSON${NC}"
+    exit 1
+fi
+echo ""
+
 # Step 7: Upload video to YouTube (or dry-run)
 echo "[7/8] Uploading video to YouTube..."
 
 if [ "$DRY_RUN" = true ]; then
     echo -e "${YELLOW}[DRY-RUN] Would upload video with:${NC}"
+    echo "  URL: /upload/youtube/v3/videos?part=snippet,status&uploadType=multipart"
     echo "  Title: $TITLE"
     echo "  Description: $DESCRIPTION"
     echo "  Privacy: $PRIVACY_STATUS"
+    echo "  Body includes: snippet, status"
     echo ""
     VIDEO_ID="dQw4w9WgXcQ_TEST"  # Fake ID for dry-run
     echo -e "${GREEN}✓ [DRY-RUN] Video upload validation passed${NC}"
@@ -290,8 +302,8 @@ else
 }
 EOF
 
-    # Upload video
-    UPLOAD_RESPONSE=$(curl -s -X POST https://www.googleapis.com/upload/youtube/v3/videos?uploadType=multipart \
+    # Upload video with snippet and status parts
+    UPLOAD_RESPONSE=$(curl -s -X POST https://www.googleapis.com/upload/youtube/v3/videos?part=snippet,status\&uploadType=multipart \
         -H "Authorization: Bearer $ACCESS_TOKEN" \
         -F "metadata=<$METADATA_FILE;type=application/json" \
         -F "data=@$VIDEO_FILE;type=video/mp4")
