@@ -11,22 +11,21 @@ s3_client = boto3.client('s3')
 def lambda_handler(event, context):
     """
     Verify output file exists and is accessible.
-    Uses expectedOutputKey from MediaConvert Lambda if available.
-    Falls back to checking multiple possible output names if expectedOutputKey missing.
+    Primary: Use actualOutputKey from wait-mediaconvert if available.
+    Secondary: Use expectedOutputKey from mediaconvert Lambda.
+    Tertiary: List S3 and find newest *-final.mp4 in exports directory.
 
-    Expected input (from MediaConvert Lambda):
+    Expected input (from Step Functions):
     {
       "jobId": "test-001",
       "outputPath": "s3://bucket/path/dir/",
-      "expectedOutputKey": "s3://bucket/path/dir/generated-001-final.mp4"  (optional)
+      "expectedOutputKey": "s3://bucket/path/dir/generated-001-final.mp4",  (optional, from mediaconvert)
+      "actualOutputKey": "s3://bucket/path/dir/generated-001-final.mp4"     (optional, from wait-mediaconvert)
     }
-
-    Fallback checks:
-    - expectedOutputKey if provided
-    - generated-001-final.mp4, sample-transcoded-final.mp4
     """
     job_id = event.get('jobId')
     output_dir = event.get('outputPath')
+    actual_output_key = event.get('actualOutputKey')
     expected_output_key = event.get('expectedOutputKey')
 
     if not job_id or not output_dir:
@@ -46,11 +45,14 @@ def lambda_handler(event, context):
         # Determine which output file to verify
         source_key = None
 
-        if expected_output_key:
-            # expectedOutputKey from MediaConvert Lambda (e.g., s3://bucket/path/generated-001-final.mp4)
+        # Priority 1: Use actualOutputKey from wait-mediaconvert (most reliable)
+        if actual_output_key:
+            source_key = actual_output_key.replace(f's3://{bucket}/', '')
+        # Priority 2: Use expectedOutputKey from mediaconvert Lambda
+        elif expected_output_key:
             source_key = expected_output_key.replace(f's3://{bucket}/', '')
+        # Priority 3: Check multiple possible output names
         else:
-            # Fallback: check multiple possible output names
             possible_outputs = [
                 f'{dest_prefix}/generated-001-final.mp4',
                 f'{dest_prefix}/sample-transcoded-final.mp4'
@@ -64,10 +66,33 @@ def lambda_handler(event, context):
                 except s3_client.exceptions.NoSuchKey:
                     pass
 
-            if not source_key:
-                raise Exception(
-                    f'MediaConvert output not found in any expected location: {possible_outputs}'
+        # Priority 4: List S3 and find newest *-final.mp4 in exports directory
+        if not source_key:
+            try:
+                response = s3_client.list_objects_v2(
+                    Bucket=bucket,
+                    Prefix=dest_prefix,
+                    MaxKeys=1000
                 )
+
+                if 'Contents' in response:
+                    # Find all *-final.mp4 files, sort by LastModified (newest first)
+                    final_files = [
+                        obj for obj in response['Contents']
+                        if obj['Key'].endswith('-final.mp4')
+                    ]
+                    if final_files:
+                        # Sort by LastModified descending, take newest
+                        final_files.sort(key=lambda x: x['LastModified'], reverse=True)
+                        source_key = final_files[0]['Key']
+            except Exception as list_err:
+                pass
+
+        if not source_key:
+            raise Exception(
+                f'MediaConvert output not found. Checked: actualOutputKey={actual_output_key}, '
+                f'expectedOutputKey={expected_output_key}, prefix={dest_prefix}'
+            )
 
         # Verify source output exists and is not empty
         try:
@@ -84,7 +109,9 @@ def lambda_handler(event, context):
                 'fileSize': file_size,
                 'lastModified': response['LastModified'].isoformat(),
                 'contentType': response.get('ContentType', 'video/mp4'),
-                'verified': True
+                'verified': True,
+                'usedActualOutputKey': bool(actual_output_key),
+                'usedExpectedOutputKey': bool(expected_output_key and not actual_output_key)
             }
 
         except s3_client.exceptions.NoSuchKey:

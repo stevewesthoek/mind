@@ -49,12 +49,51 @@ def lambda_handler(event, context):
             status = job['Status']
 
             if status == 'COMPLETE':
+                # Extract actual output information from MediaConvert job response
+                output_group_details = None
+                output_files = []
+
+                # Try to get actual output path from OutputGroupDetails
+                if 'OutputGroupDetails' in job:
+                    output_group_details = job['OutputGroupDetails']
+                    if output_group_details and len(output_group_details) > 0:
+                        output_files = output_group_details[0].get('OutputDetails', [])
+
+                # Derive actual output key from job settings and output details
+                actual_output_key = None
+                if output_files and len(output_files) > 0:
+                    # MediaConvert provides the actual output file path
+                    actual_output_key = output_files[0].get('OutputFile')
+
+                # If no explicit output file, construct from job settings
+                if not actual_output_key and 'Settings' in job:
+                    settings = job['Settings']
+                    if 'OutputGroups' in settings and len(settings['OutputGroups']) > 0:
+                        output_group = settings['OutputGroups'][0]
+                        if 'OutputGroupSettings' in output_group:
+                            og_settings = output_group['OutputGroupSettings']
+                            if 'FileGroupSettings' in og_settings:
+                                destination = og_settings['FileGroupSettings'].get('Destination', '')
+                                # Destination is directory; construct filename
+                                if 'Outputs' in output_group and len(output_group['Outputs']) > 0:
+                                    output_obj = output_group['Outputs'][0]
+                                    name_modifier = output_obj.get('NameModifier', '')
+                                    # Get input name from Settings.Inputs
+                                    if 'Inputs' in settings and len(settings['Inputs']) > 0:
+                                        input_obj = settings['Inputs'][0]
+                                        input_file = input_obj.get('FileInput', '')
+                                        input_basename = input_file.split('/')[-1].replace('.mp4', '')
+                                        output_filename = f'{input_basename}{name_modifier}.mp4'
+                                        actual_output_key = f'{destination}{output_filename}'
+
                 return {
                     'jobId': job_id,
                     'mediaConvertJobId': mediaconvert_job_id,
                     'status': status,
                     'completed': True,
-                    'attempts': attempt + 1
+                    'attempts': attempt + 1,
+                    'actualOutputKey': actual_output_key,
+                    'outputGroupDetails': bool(output_group_details)
                 }
 
             elif status == 'FAILED':
