@@ -61,7 +61,8 @@ Current implementation progress:
 ✅ H. Define approval checkpoint contract
 ✅ I-1. Manual final video assembly (validation)
 ✅ I-2. Automate final assembly through Step Functions (COMPLETE)
-🟡 I-3. Replace placeholder with generated clips
+✅ I-3.1. Manual generated clip proof (Nova Reel cross-region)
+🟡 I-3.2. Integrate generated clip into MediaConvert
 ⬜ I-4. Add thumbnail generation
 ⬜ I-5. Generate real internal content
 ```
@@ -76,15 +77,16 @@ Phase 3 — Approval Checkpoint: COMPLETE
 Phase 4 — Internal Video Assembly: COMPLETE
   I-1: Manual assembly (ffmpeg validation)
   I-2: AWS Step Functions automation (LIVE)
-Phase 5 — Placeholder Replacement: ACTIVE (BLOCKED)
-  I-3.1: Manual generated clip proof (BLOCKED on Nova Reel availability)
+Phase 5 — Placeholder Replacement: ACTIVE
+  I-3.1: Manual generated clip proof (COMPLETE)
+  I-3.2: Integrate into MediaConvert (READY)
 ```
 
-Blocker:
+Cross-region execution model:
 ```text
-Bedrock Nova Reel (video generation API) not available in eu-north-1
-No alternative AWS video generation services accessible in current account/region
-I-3 cannot proceed until service is enabled
+Video generation region: us-east-1 (Nova Reel available)
+Canonical storage: eu-north-1 (workflow bucket)
+Workflow: Bedrock output → S3 copy → MediaConvert input
 ```
 
 Canonical metadata files:
@@ -124,9 +126,11 @@ Documentation: infrastructure/i-2-mediaconvert-orchestration/IMPLEMENTATION_GUID
 Current active implementation target:
 
 ```text
-I-3. Replace placeholder with generated clips
-- Move from sample-transcoded.mp4 to real generated video
-- Use Bedrock Nova Reel in Step Functions workflow
+I-3.2. Integrate generated clip into MediaConvert
+- Update video input from sample-transcoded.mp4 to video-generated/generated-001.mp4
+- Re-deploy lambda-mediaconvert to AWS
+- Test end-to-end workflow with generated clip
+- Verify output file created
 ```
 
 ### Phase 3 — Approval Checkpoint

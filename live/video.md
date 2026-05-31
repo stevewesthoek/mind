@@ -208,7 +208,8 @@ Phase 4 — Internal Video Assembly: COMPLETE
   I-1 Manual assembly: COMPLETE (ffmpeg validation only)
   I-2 Step Functions automation: COMPLETE (AWS production path)
 Phase 5 — Placeholder Replacement: ACTIVE
-  I-3 Replace with generated clips: READY (next implementation)
+  I-3.1 Manual generated clip proof: COMPLETE (Nova Reel cross-region)
+  I-3.2 Integrate into MediaConvert: READY (next implementation)
 ```
 
 I-2 implementation result:
@@ -522,41 +523,47 @@ ffprobe local-final.mp4
 
 ### I-3: Replace Placeholder with Generated Clips 🟡 ACTIVE
 
-#### I-3.1: Manual Generated Clip Proof ⬜ BLOCKED
+#### I-3.1: Manual Generated Clip Proof ✅ COMPLETE
 
 **Objective:** Generate one short AI video clip and store in S3.
 
-**Target:** 
-- Generate clip from prompt
-- Store at: `jobs/test-001/video-generated/generated-001.mp4`
-- Update `metadata/assets.json` with reference
-- Validate clip is playable
+**Method:**
+- Used AWS Bedrock Nova Reel in us-east-1 (video generation available in this region)
+- Prompt: "Clean modern abstract motion background, soft blue and indigo gradients, subtle flowing lines, calm professional SaaS technology atmosphere, no text, no people, no logos."
+- Generated output: `output.mp4` from Bedrock async job
 
-**Prompt:** "Clean modern abstract motion background, soft blue and indigo gradients, subtle flowing lines, calm professional SaaS technology atmosphere, no text, no people, no logos."
+**Cross-region execution:**
+- Generation region: **us-east-1** (where Nova Reel models are available)
+- Canonical storage: **eu-north-1** (where workflow bucket lives)
+- Output workflow: us-east-1 Bedrock output → copied to eu-north-1 S3 → MediaConvert input
 
-**Blocker:** Bedrock Nova Reel (video generation API) not available in eu-north-1.
+**Result:**
+✅ Video generated in us-east-1 Bedrock: `s3://bedrock-video-generation-us-east-1-rix1i5/39xbaiwu5i3c/output.mp4`
+✅ Video copied to canonical location: `s3://prochat-video-dev-909439522876-eu-north-1-an/jobs/test-001/video-generated/generated-001.mp4`
+✅ Video is playable and ready for MediaConvert input
 
-**Status check performed:**
-```bash
-aws bedrock list-foundation-models --region eu-north-1
-# Result: No video generation models found
-# Available: Nova Pro, Nova Lite, Claude models (text only)
-# Missing: Nova Reel, video-capable Bedrock APIs
-```
+**Metadata update:**
+- Added to `metadata/assets.json` with source and generation metadata
+- Path: `jobs/test-001/video-generated/generated-001.mp4`
+- Type: `generated-clip`
 
-**Account/Service Limitations:**
-- **Region:** eu-north-1 (only region available for this project)
-- **Missing service:** Bedrock Video Generation (Nova Reel)
-- **Alternative AWS video services:** MediaLive requires additional permissions, Rekognition Video not available in region
-- **Impact:** Cannot proceed with real AI video generation until service availability changes
+#### I-3.2: Integrate Generated Clip into MediaConvert ⬜ READY
 
-**Workaround options:**
-1. Request service enable in AWS account (external, requires AWS support)
-2. Switch to us-east-1 or us-west-2 if available (breaks region consistency)
-3. Use placeholder video from existing assets (architectural approach, not generation)
-4. Defer I-3 implementation until Bedrock video available in eu-north-1
+**Objective:** Update MediaConvert assembly to use generated-001.mp4 instead of sample-transcoded.mp4.
 
-**Current decision:** Document blocker, do not fake completion. I-3 waits for service availability.
+**Change required:**
+- Lambda: `video-orchestrator-mediaconvert`
+- Field: VideoInput parameter
+- Current: `s3://.../jobs/test-001/exports/sample-transcoded.mp4`
+- New: `s3://.../jobs/test-001/video-generated/generated-001.mp4`
+
+**Implementation:**
+1. Update lambda-mediaconvert.py with new input path
+2. Re-deploy function to AWS
+3. Test end-to-end workflow with generated clip
+4. Verify output in jobs/test-001/exports/
+
+**Important:** Do not change the output naming caveat yet. MediaConvert will still output `sample-transcoded-final.mp4` (input-based naming) unless we adjust the destination strategy in I-3+ cleanup phase.
 
 ### I-4: Add Thumbnail Generation ⬜ FUTURE
 

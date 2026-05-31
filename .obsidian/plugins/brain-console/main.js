@@ -1866,446 +1866,6 @@ var HistoryPanel = class {
   }
 };
 
-// src/components/VO/StudioPanel.ts
-var STUDIO_TABS = [
-  { id: "brief", label: "Brief" },
-  { id: "script", label: "Script" },
-  { id: "media", label: "Media" },
-  { id: "captions", label: "Captions" },
-  { id: "thumbnails", label: "Thumbnails" },
-  { id: "seo", label: "SEO" },
-  { id: "preview", label: "Preview" }
-];
-var StudioPanel = class {
-  container;
-  contentItems = [];
-  ctx = getVOContextManager();
-  unsubscribe = null;
-  selectedItemId = null;
-  activeTab = "brief";
-  loading = false;
-  constructor(container, data) {
-    this.container = container;
-    this.contentItems = data.contentItems || [];
-    this.unsubscribe = this.ctx.subscribe(() => this.render());
-    this.render();
-    this.fetchContentItems();
-  }
-  async fetchContentItems() {
-    const state = this.ctx.getState();
-    if (!state.projectId) return;
-    this.loading = true;
-    this.render();
-    try {
-      const res = await fetch(
-        `http://localhost:4877/api/video-orchestrator/content-items?projectId=${encodeURIComponent(state.projectId)}`
-      );
-      if (res.ok) {
-        const data = await res.json();
-        if (data.items && data.items.length > 0) {
-          this.contentItems = data.items;
-          if (!this.selectedItemId) {
-            this.selectedItemId = data.items[0].id;
-          }
-        }
-      }
-    } catch {
-    } finally {
-      this.loading = false;
-      this.render();
-    }
-  }
-  render() {
-    const state = this.ctx.getState();
-    const projectItems = this.contentItems.filter((i) => i.projectId === state.projectId);
-    const selectedItem = projectItems.find((i) => i.id === this.selectedItemId) ?? projectItems[0] ?? null;
-    if (this.loading) {
-      this.container.innerHTML = `
-        <div class="vo-studio-panel">
-          <div class="vo-empty-state"><p>Loading content items...</p></div>
-        </div>
-      `;
-      return;
-    }
-    if (projectItems.length === 0) {
-      this.container.innerHTML = `
-        <div class="vo-studio-panel">
-          <div class="vo-empty-state"><p>No content items found for this project</p></div>
-        </div>
-      `;
-      return;
-    }
-    this.container.innerHTML = `
-      <div class="vo-studio-panel">
-        ${this.renderItemSelector(projectItems, selectedItem)}
-        ${selectedItem ? this.renderStudioTabs(selectedItem) : ""}
-        ${selectedItem ? this.renderTabContent(selectedItem) : ""}
-      </div>
-    `;
-    this.attachEventListeners();
-  }
-  renderItemSelector(items, selected) {
-    return `
-      <div class="vo-studio-item-selector">
-        <label class="vo-filter-label">Content Item</label>
-        <select class="vo-filter-select vo-studio-item-select">
-          ${items.map((item) => `
-            <option value="${item.id}" ${selected?.id === item.id ? "selected" : ""}>${item.title}</option>
-          `).join("")}
-        </select>
-        <span class="vo-studio-item-status ${this.getStatusClass(selected?.status ?? "")}">
-          ${selected?.status ?? ""}
-        </span>
-      </div>
-    `;
-  }
-  renderStudioTabs(item) {
-    return `
-      <div class="vo-studio-tab-row">
-        ${STUDIO_TABS.map((tab) => `
-          <button
-            class="vo-studio-tab ${this.activeTab === tab.id ? "vo-studio-tab--active" : ""}"
-            data-tab="${tab.id}"
-          >${tab.label}</button>
-        `).join("")}
-      </div>
-    `;
-  }
-  renderTabContent(item) {
-    switch (this.activeTab) {
-      case "brief":
-        return this.renderBriefTab(item);
-      case "script":
-        return this.renderScriptTab(item);
-      case "media":
-        return this.renderMediaTab(item);
-      case "captions":
-        return this.renderCaptionsTab(item);
-      case "thumbnails":
-        return this.renderThumbnailsTab(item);
-      case "seo":
-        return this.renderSeoTab(item);
-      case "preview":
-        return this.renderPreviewTab(item);
-      default:
-        return "";
-    }
-  }
-  renderBriefTab(item) {
-    const brief = `Title: ${item.title}
-
-Source: ${item.canonicalSource}
-
-Slug: ${item.sourceSlug}
-
-Pipeline Profile: ${item.pipelineProfileId}
-
-Status: ${item.status}`;
-    return `
-      <div class="vo-studio-tab-content">
-        <div class="vo-studio-card">
-          <div class="vo-studio-card-header">Brief</div>
-          <div class="vo-studio-card-body">
-            <div class="vo-studio-readonly-label">Project Brief</div>
-            <textarea class="vo-studio-textarea" readonly>${brief}</textarea>
-          </div>
-        </div>
-        <div class="vo-studio-card">
-          <div class="vo-studio-card-header">Metadata</div>
-          <div class="vo-studio-card-body">
-            <div class="vo-studio-meta-grid">
-              <div class="vo-studio-meta-item">
-                <span class="vo-studio-meta-key">ID</span>
-                <span class="vo-studio-meta-value vo-monospace">${item.id}</span>
-              </div>
-              <div class="vo-studio-meta-item">
-                <span class="vo-studio-meta-key">Package ID</span>
-                <span class="vo-studio-meta-value vo-monospace">${item.packageId || "\u2013"}</span>
-              </div>
-              <div class="vo-studio-meta-item">
-                <span class="vo-studio-meta-key">Platform Targets</span>
-                <span class="vo-studio-meta-value">${item.platformTargets.length} target(s)</span>
-              </div>
-              <div class="vo-studio-meta-item">
-                <span class="vo-studio-meta-key">Artifacts</span>
-                <span class="vo-studio-meta-value">${item.artifactVariants.length} variant(s)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  renderScriptTab(item) {
-    const scriptArtifact = item.artifactVariants.find((v) => v.kind === "video");
-    const scriptContent = scriptArtifact ? `[Script artifact found \u2014 formatId: ${scriptArtifact.formatId}]
-
-Status: ${scriptArtifact.status}
-Platform: ${scriptArtifact.platform}
-
-[Script content would appear here when fully generated]` : `No script artifact found for this content item.
-
-This content item has ${item.artifactVariants.length} artifact variant(s) of kinds: ${[...new Set(item.artifactVariants.map((v) => v.kind))].join(", ") || "none"}`;
-    return `
-      <div class="vo-studio-tab-content">
-        <div class="vo-studio-card">
-          <div class="vo-studio-card-header">
-            Script
-            ${scriptArtifact ? `<span class="vo-studio-badge vo-studio-badge--${scriptArtifact.status}">${scriptArtifact.status}</span>` : ""}
-          </div>
-          <div class="vo-studio-card-body">
-            <div class="vo-studio-readonly-label">Script Text (read-only)</div>
-            <textarea class="vo-studio-textarea vo-studio-textarea--tall" readonly>${scriptContent}</textarea>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  renderMediaTab(item) {
-    const videoVariants = item.artifactVariants.filter((v) => v.kind === "video");
-    return `
-      <div class="vo-studio-tab-content">
-        <div class="vo-studio-card">
-          <div class="vo-studio-card-header">Media Files</div>
-          <div class="vo-studio-card-body">
-            ${videoVariants.length === 0 ? `
-              <div class="vo-studio-media-empty">
-                <div class="vo-studio-media-placeholder">
-                  <span class="vo-studio-media-icon">\u25B6</span>
-                  <span class="vo-studio-media-label">No media files generated yet</span>
-                </div>
-              </div>
-            ` : videoVariants.map((v) => `
-              <div class="vo-studio-media-item">
-                <div class="vo-studio-media-preview">
-                  <div class="vo-studio-media-thumb">
-                    <span class="vo-studio-media-icon">\u25B6</span>
-                  </div>
-                </div>
-                <div class="vo-studio-media-info">
-                  <div class="vo-studio-media-title">${v.formatId}</div>
-                  <div class="vo-studio-media-meta">${v.platform} \xB7 <span class="vo-studio-badge vo-studio-badge--${v.status}">${v.status}</span></div>
-                </div>
-              </div>
-            `).join("")}
-          </div>
-        </div>
-        <div class="vo-studio-card">
-          <div class="vo-studio-card-header">Source Info</div>
-          <div class="vo-studio-card-body">
-            <div class="vo-studio-meta-grid">
-              <div class="vo-studio-meta-item">
-                <span class="vo-studio-meta-key">Canonical Source</span>
-                <span class="vo-studio-meta-value vo-monospace">${item.canonicalSource}</span>
-              </div>
-              <div class="vo-studio-meta-item">
-                <span class="vo-studio-meta-key">Source Slug</span>
-                <span class="vo-studio-meta-value vo-monospace">${item.sourceSlug}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  renderCaptionsTab(item) {
-    const captionVariants = item.artifactVariants.filter((v) => v.kind === "captions");
-    const srtPreview = captionVariants.length > 0 ? `1
-00:00:00,000 --> 00:00:03,000
-[Captions artifact found: ${captionVariants[0].formatId}]
-
-2
-00:00:03,000 --> 00:00:06,000
-Status: ${captionVariants[0].status}
-
-[Full SRT content would load here]` : `[No captions artifact found for this content item]
-
-Available artifact kinds: ${[...new Set(item.artifactVariants.map((v) => v.kind))].join(", ") || "none"}`;
-    return `
-      <div class="vo-studio-tab-content">
-        <div class="vo-studio-card">
-          <div class="vo-studio-card-header">
-            Captions (SRT)
-            ${captionVariants.length > 0 ? `<span class="vo-studio-badge vo-studio-badge--${captionVariants[0].status}">${captionVariants[0].status}</span>` : ""}
-          </div>
-          <div class="vo-studio-card-body">
-            <div class="vo-studio-readonly-label">SRT Preview (read-only)</div>
-            <textarea class="vo-studio-textarea vo-studio-textarea--tall vo-monospace-textarea" readonly>${srtPreview}</textarea>
-            ${captionVariants.length > 1 ? `
-              <div class="vo-studio-caption-variants">
-                ${captionVariants.map((v) => `
-                  <span class="vo-studio-badge vo-studio-badge--${v.status}">${v.platform}: ${v.formatId}</span>
-                `).join("")}
-              </div>
-            ` : ""}
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  renderThumbnailsTab(item) {
-    const thumbVariants = item.artifactVariants.filter((v) => v.kind === "thumbnail");
-    return `
-      <div class="vo-studio-tab-content">
-        <div class="vo-studio-card">
-          <div class="vo-studio-card-header">Thumbnails</div>
-          <div class="vo-studio-card-body">
-            ${thumbVariants.length === 0 ? `
-              <div class="vo-studio-thumb-empty">
-                <span class="vo-studio-media-icon">\u25FB</span>
-                <span class="vo-studio-media-label">No thumbnails generated yet</span>
-              </div>
-            ` : `
-              <div class="vo-studio-thumb-carousel">
-                ${thumbVariants.map((v, idx) => `
-                  <div class="vo-studio-thumb-card">
-                    <div class="vo-studio-thumb-preview">
-                      <span class="vo-studio-thumb-index">#${idx + 1}</span>
-                    </div>
-                    <div class="vo-studio-thumb-label">${v.formatId}</div>
-                    <div class="vo-studio-thumb-meta">${v.platform}</div>
-                    <span class="vo-studio-badge vo-studio-badge--${v.status}">${v.status}</span>
-                  </div>
-                `).join("")}
-              </div>
-            `}
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  renderSeoTab(item) {
-    const metadataVariants = item.artifactVariants.filter((v) => v.kind === "metadata");
-    const targets = item.platformTargets;
-    return `
-      <div class="vo-studio-tab-content">
-        <div class="vo-studio-card">
-          <div class="vo-studio-card-header">SEO Metadata</div>
-          <div class="vo-studio-card-body">
-            <div class="vo-studio-seo-form">
-              <div class="vo-studio-seo-field">
-                <label class="vo-studio-seo-label">Title</label>
-                <div class="vo-studio-seo-value">${item.title}</div>
-              </div>
-              <div class="vo-studio-seo-field">
-                <label class="vo-studio-seo-label">Canonical Source</label>
-                <div class="vo-studio-seo-value vo-monospace">${item.canonicalSource}</div>
-              </div>
-              <div class="vo-studio-seo-field">
-                <label class="vo-studio-seo-label">Platform Targets</label>
-                <div class="vo-studio-seo-value">
-                  ${targets.length > 0 ? targets.map((t) => `
-                    <span class="vo-studio-badge vo-studio-badge--${t.status}">${t.platform}</span>
-                  `).join(" ") : '<span class="vo-muted">None</span>'}
-                </div>
-              </div>
-              ${metadataVariants.length > 0 ? `
-                <div class="vo-studio-seo-field">
-                  <label class="vo-studio-seo-label">Metadata Artifacts</label>
-                  <div class="vo-studio-seo-value">
-                    ${metadataVariants.map((v) => `
-                      <div class="vo-studio-meta-item">
-                        <span class="vo-studio-meta-key">${v.platform}</span>
-                        <span class="vo-studio-meta-value">${v.formatId} \xB7 <span class="vo-studio-badge vo-studio-badge--${v.status}">${v.status}</span></span>
-                      </div>
-                    `).join("")}
-                  </div>
-                </div>
-              ` : ""}
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  renderPreviewTab(item) {
-    const videoArtifact = item.artifactVariants.find((v) => v.kind === "video");
-    const captionArtifact = item.artifactVariants.find((v) => v.kind === "captions");
-    const thumbArtifact = item.artifactVariants.find((v) => v.kind === "thumbnail");
-    return `
-      <div class="vo-studio-tab-content">
-        <div class="vo-studio-card">
-          <div class="vo-studio-card-header">Preview</div>
-          <div class="vo-studio-card-body">
-            <div class="vo-studio-preview-player">
-              <div class="vo-studio-preview-viewport">
-                <div class="vo-studio-preview-placeholder">
-                  <span class="vo-studio-preview-icon">\u25B6</span>
-                  <span class="vo-studio-preview-label">${videoArtifact ? `Video: ${videoArtifact.formatId}` : "No video artifact ready"}</span>
-                </div>
-                ${captionArtifact ? `
-                  <div class="vo-studio-preview-captions">
-                    <span class="vo-studio-caption-overlay">[Captions: ${captionArtifact.formatId}]</span>
-                  </div>
-                ` : ""}
-              </div>
-              <div class="vo-studio-preview-controls">
-                <div class="vo-studio-preview-progress">
-                  <div class="vo-studio-preview-bar"></div>
-                </div>
-                <div class="vo-studio-preview-meta">
-                  <span class="vo-muted">${item.title}</span>
-                  <span class="vo-studio-badge vo-studio-badge--${item.status}">${item.status}</span>
-                </div>
-              </div>
-            </div>
-            <div class="vo-studio-preview-artifacts">
-              <div class="vo-studio-artifact-row">
-                <span class="vo-studio-artifact-label">Video</span>
-                <span class="vo-studio-badge ${videoArtifact ? `vo-studio-badge--${videoArtifact.status}` : "vo-studio-badge--missing"}">${videoArtifact ? videoArtifact.status : "not generated"}</span>
-              </div>
-              <div class="vo-studio-artifact-row">
-                <span class="vo-studio-artifact-label">Captions</span>
-                <span class="vo-studio-badge ${captionArtifact ? `vo-studio-badge--${captionArtifact.status}` : "vo-studio-badge--missing"}">${captionArtifact ? captionArtifact.status : "not generated"}</span>
-              </div>
-              <div class="vo-studio-artifact-row">
-                <span class="vo-studio-artifact-label">Thumbnail</span>
-                <span class="vo-studio-badge ${thumbArtifact ? `vo-studio-badge--${thumbArtifact.status}` : "vo-studio-badge--missing"}">${thumbArtifact ? thumbArtifact.status : "not generated"}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  getStatusClass(status) {
-    switch (status) {
-      case "draft":
-        return "vo-studio-status--draft";
-      case "package-preview":
-        return "vo-studio-status--preview";
-      case "blocked":
-        return "vo-studio-status--blocked";
-      default:
-        return "";
-    }
-  }
-  attachEventListeners() {
-    const itemSelect = this.container.querySelector(".vo-studio-item-select");
-    if (itemSelect) {
-      itemSelect.addEventListener("change", (e) => {
-        this.selectedItemId = e.target.value;
-        this.render();
-      });
-    }
-    this.container.querySelectorAll(".vo-studio-tab").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const tab = e.currentTarget.getAttribute("data-tab");
-        if (tab) {
-          this.activeTab = tab;
-          this.render();
-        }
-      });
-    });
-  }
-  destroy() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-    this.container.innerHTML = "";
-  }
-};
-
 // src/components/VO/ApprovalQueuePanel.ts
 var BASE_URL2 = "http://localhost:4877";
 function formatRelativeTime(iso) {
@@ -2783,319 +2343,8 @@ var ApprovalQueuePanel = class {
   }
 };
 
-// src/components/VO/ThumbnailStudioPanel.ts
-var BASE_URL3 = "http://localhost:4877";
-var DEFAULT_TEMPLATES = [
-  {
-    id: "bold-text",
-    label: "Bold Text",
-    description: "High-contrast headline treatment for primary YouTube thumbnails."
-  },
-  {
-    id: "minimal-curiosity",
-    label: "Minimal Curiosity",
-    description: "Cleaner curiosity framing with lighter copy density."
-  }
-];
-var ThumbnailStudioPanel = class {
-  container;
-  projectId;
-  approvals = [];
-  selectedApprovalId = null;
-  selectedVariantId = null;
-  headlineDraft = "";
-  isLoading = false;
-  isSubmitting = false;
-  constructor(container, projectId) {
-    this.container = container;
-    this.projectId = projectId;
-  }
-  async initialize() {
-    await this.loadApprovals();
-  }
-  async loadApprovals() {
-    if (this.isLoading) return;
-    this.isLoading = true;
-    this.render();
-    try {
-      const qs = this.projectId ? `?projectId=${encodeURIComponent(this.projectId)}` : "";
-      const res = await fetch(`${BASE_URL3}/api/video-orchestrator/approvals${qs}`);
-      const data = await res.json();
-      this.approvals = Array.isArray(data.approvals) ? data.approvals.filter((a) => a.type === "thumbnail") : [];
-      const pending = this.getPendingApprovals();
-      if (pending.length === 0) {
-        this.selectedApprovalId = null;
-        this.selectedVariantId = null;
-        this.headlineDraft = "";
-      } else if (!this.selectedApprovalId || !pending.some((a) => a.id === this.selectedApprovalId)) {
-        this.selectApproval(pending[0].id);
-      } else {
-        this.syncVariantSelection();
-      }
-    } catch {
-      this.approvals = [];
-    } finally {
-      this.isLoading = false;
-      this.render();
-    }
-  }
-  getPendingApprovals() {
-    return this.approvals.filter((a) => a.status === "pending");
-  }
-  getSelectedApproval() {
-    return this.getPendingApprovals().find((a) => a.id === this.selectedApprovalId) ?? null;
-  }
-  extractVariants(approval) {
-    if (!approval) return [];
-    const payload = approval.requestPayload ?? {};
-    const rawVariants = Array.isArray(payload.variants) ? payload.variants : [];
-    if (rawVariants.length > 0) {
-      return rawVariants.map((variant, index) => ({
-        id: String(variant.id ?? `variant-${index + 1}`),
-        label: String(variant.label ?? variant.name ?? `Variant ${index + 1}`),
-        templateId: String(variant.templateId ?? variant.template ?? DEFAULT_TEMPLATES[index % DEFAULT_TEMPLATES.length]?.id ?? "custom"),
-        previewUrl: typeof variant.previewUrl === "string" ? variant.previewUrl : void 0,
-        headlineText: String(variant.headlineText ?? variant.headline ?? variant.label ?? `Variant ${index + 1}`),
-        active: Boolean(variant.active)
-      }));
-    }
-    return [
-      {
-        id: "variant-a",
-        label: "Variant A",
-        templateId: "bold-text",
-        headlineText: "Default A headline",
-        active: true
-      },
-      {
-        id: "variant-b",
-        label: "Variant B",
-        templateId: "minimal-curiosity",
-        headlineText: "Default B headline"
-      }
-    ];
-  }
-  syncVariantSelection() {
-    const approval = this.getSelectedApproval();
-    const variants = this.extractVariants(approval);
-    if (variants.length === 0) {
-      this.selectedVariantId = null;
-      this.headlineDraft = "";
-      return;
-    }
-    const selected = variants.find((variant) => variant.id === this.selectedVariantId);
-    if (selected) {
-      if (!this.headlineDraft) {
-        this.headlineDraft = selected.headlineText;
-      }
-      return;
-    }
-    const fallback = variants.find((variant) => variant.active) ?? variants[0];
-    this.selectedVariantId = fallback.id;
-    this.headlineDraft = fallback.headlineText;
-  }
-  selectApproval(approvalId) {
-    this.selectedApprovalId = approvalId;
-    this.selectedVariantId = null;
-    this.headlineDraft = "";
-    this.syncVariantSelection();
-    this.render();
-  }
-  selectVariant(variantId) {
-    this.selectedVariantId = variantId;
-    const selected = this.extractVariants(this.getSelectedApproval()).find((variant) => variant.id === variantId);
-    if (selected) {
-      this.headlineDraft = selected.headlineText;
-    }
-    this.render();
-  }
-  render() {
-    const pending = this.getPendingApprovals();
-    const selectedApproval = this.getSelectedApproval();
-    const variants = this.extractVariants(selectedApproval);
-    const selectedVariant = variants.find((variant) => variant.id === this.selectedVariantId) ?? null;
-    const activeTemplateId = selectedVariant?.templateId ?? DEFAULT_TEMPLATES[0].id;
-    if (this.isLoading && this.approvals.length === 0) {
-      this.container.innerHTML = '<div class="vo-empty-state"><p>Loading thumbnail approvals...</p></div>';
-      return;
-    }
-    if (pending.length === 0) {
-      this.container.innerHTML = `
-        <div class="vo-thumbnail-studio">
-          <div class="vo-panel-header">
-            <h3>Thumbnail Studio</h3>
-          </div>
-          <div class="vo-empty-state">
-            <p>No pending thumbnail approvals for this project.</p>
-          </div>
-        </div>
-      `;
-      return;
-    }
-    this.container.innerHTML = `
-      <div class="vo-thumbnail-studio">
-        <div class="vo-panel-header">
-          <h3>Thumbnail Studio</h3>
-          <button class="brain-console__link-button" id="vo-thumb-refresh"${this.isSubmitting ? " disabled" : ""}>Refresh</button>
-        </div>
-        <div class="vo-thumbnail-studio__layout">
-          <section class="vo-thumbnail-studio__column vo-thumbnail-studio__column--queue">
-            <div class="vo-thumbnail-studio__card">
-              <div class="vo-thumbnail-studio__card-header">Approval Queue</div>
-              <div class="vo-thumbnail-studio__queue">
-                ${pending.map((approval) => `
-                  <button
-                    class="vo-thumbnail-studio__queue-item${approval.id === this.selectedApprovalId ? " is-selected" : ""}"
-                    data-approval-id="${approval.id}"
-                    type="button"
-                  >
-                    <span class="vo-thumbnail-studio__queue-title">${this.escapeHtml(approval.id)}</span>
-                    <span class="vo-thumbnail-studio__queue-meta">${this.escapeHtml(this.formatRelativeTime(approval.createdAt))}</span>
-                  </button>
-                `).join("")}
-              </div>
-            </div>
-            <div class="vo-thumbnail-studio__card">
-              <div class="vo-thumbnail-studio__card-header">Template Library</div>
-              <div class="vo-thumbnail-studio__templates">
-                ${DEFAULT_TEMPLATES.map((template) => `
-                  <div class="vo-thumbnail-studio__template${template.id === activeTemplateId ? " is-active" : ""}">
-                    <div class="vo-thumbnail-studio__template-name">${this.escapeHtml(template.label)}</div>
-                    <div class="vo-thumbnail-studio__template-desc">${this.escapeHtml(template.description)}</div>
-                  </div>
-                `).join("")}
-              </div>
-            </div>
-          </section>
-          <section class="vo-thumbnail-studio__column vo-thumbnail-studio__column--preview">
-            <div class="vo-thumbnail-studio__card">
-              <div class="vo-thumbnail-studio__card-header">Preview Surface</div>
-              <div class="vo-thumbnail-studio__preview-surface">
-                <div class="vo-thumbnail-studio__preview-frame">
-                  ${selectedVariant?.previewUrl ? `<img src="${this.escapeAttr(selectedVariant.previewUrl)}" alt="${this.escapeAttr(selectedVariant.label)} preview" />` : `<div class="vo-thumbnail-studio__preview-placeholder">${this.escapeHtml(selectedVariant?.label ?? "Variant")}</div>`}
-                  <div class="vo-thumbnail-studio__preview-headline">${this.escapeHtml(this.headlineDraft || selectedVariant?.headlineText || "")}</div>
-                </div>
-                <div class="vo-thumbnail-studio__preview-meta">
-                  <div><strong>Variant:</strong> ${this.escapeHtml(selectedVariant?.label ?? "None")}</div>
-                  <div><strong>Template:</strong> ${this.escapeHtml(activeTemplateId)}</div>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section class="vo-thumbnail-studio__column vo-thumbnail-studio__column--controls">
-            <div class="vo-thumbnail-studio__card">
-              <div class="vo-thumbnail-studio__card-header">Variant Selector</div>
-              <div class="vo-thumbnail-studio__variants">
-                ${variants.map((variant) => `
-                  <button
-                    class="vo-thumbnail-studio__variant${variant.id === this.selectedVariantId ? " is-selected" : ""}"
-                    type="button"
-                    data-variant-id="${variant.id}"
-                  >
-                    <span class="vo-thumbnail-studio__variant-label">${this.escapeHtml(variant.label)}</span>
-                    <span class="vo-thumbnail-studio__variant-meta">${this.escapeHtml(variant.templateId)}</span>
-                  </button>
-                `).join("")}
-              </div>
-            </div>
-            <div class="vo-thumbnail-studio__card">
-              <div class="vo-thumbnail-studio__card-header">Headline Edit</div>
-              <div class="vo-thumbnail-studio__form">
-                <label class="vo-form-group">
-                  <span class="vo-form-label">Manual Headline</span>
-                  <input id="vo-thumb-headline" class="vo-form-input" type="text" value="${this.escapeAttr(this.headlineDraft)}" ${this.isSubmitting ? "disabled" : ""} />
-                </label>
-                <div class="vo-form-actions">
-                  <button class="vo-button vo-button-primary" id="vo-thumb-approve" ${!selectedApproval || !selectedVariant || this.isSubmitting ? "disabled" : ""}>${this.isSubmitting ? "Saving..." : "Approve Variant"}</button>
-                  <button class="vo-button" id="vo-thumb-reject" ${!selectedApproval || this.isSubmitting ? "disabled" : ""}>Reject</button>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-    `;
-    this.attachListeners();
-  }
-  attachListeners() {
-    this.container.querySelector("#vo-thumb-refresh")?.addEventListener("click", () => {
-      void this.loadApprovals();
-    });
-    this.container.querySelectorAll("[data-approval-id]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const approvalId = button.getAttribute("data-approval-id");
-        if (approvalId) {
-          this.selectApproval(approvalId);
-        }
-      });
-    });
-    this.container.querySelectorAll("[data-variant-id]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const variantId = button.getAttribute("data-variant-id");
-        if (variantId) {
-          this.selectVariant(variantId);
-        }
-      });
-    });
-    this.container.querySelector("#vo-thumb-headline")?.addEventListener("input", (event) => {
-      this.headlineDraft = event.target.value;
-      const preview = this.container.querySelector(".vo-thumbnail-studio__preview-headline");
-      if (preview) {
-        preview.textContent = this.headlineDraft;
-      }
-    });
-    this.container.querySelector("#vo-thumb-approve")?.addEventListener("click", () => {
-      void this.submitDecision(true);
-    });
-    this.container.querySelector("#vo-thumb-reject")?.addEventListener("click", () => {
-      void this.submitDecision(false);
-    });
-  }
-  async submitDecision(approved) {
-    const approval = this.getSelectedApproval();
-    if (!approval) return;
-    this.isSubmitting = true;
-    this.render();
-    try {
-      await fetch(`${BASE_URL3}/api/video-orchestrator/approvals/${approval.id}/decision`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          approved,
-          note: JSON.stringify({
-            selectedVariantId: this.selectedVariantId,
-            manualHeadline: this.headlineDraft.trim() || void 0
-          })
-        })
-      });
-      await this.loadApprovals();
-    } finally {
-      this.isSubmitting = false;
-      this.render();
-    }
-  }
-  formatRelativeTime(iso) {
-    const ms = Date.now() - new Date(iso).getTime();
-    const minutes = Math.floor(ms / 6e4);
-    if (minutes < 2) return "just now";
-    if (minutes < 60) return `${minutes}m ago`;
-    const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours}h ago`;
-    return `${Math.floor(hours / 24)}d ago`;
-  }
-  escapeHtml(value) {
-    return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
-  }
-  escapeAttr(value) {
-    return this.escapeHtml(value).replaceAll("'", "&#39;");
-  }
-  destroy() {
-    this.container.innerHTML = "";
-  }
-};
-
 // src/components/VO/DeadLetterReviewPanel.ts
-var BASE_URL4 = "http://localhost:4877";
+var BASE_URL3 = "http://localhost:4877";
 function formatDate(value) {
   if (!value) return "\u2014";
   try {
@@ -3138,7 +2387,7 @@ var DeadLetterReviewPanel = class {
     if (this.isLoading) return;
     this.isLoading = true;
     try {
-      const url = `${BASE_URL4}/api/infra/video-orchestrator/jobs?projectId=${encodeURIComponent(this.projectId)}&status=dead&limit=50`;
+      const url = `${BASE_URL3}/api/infra/video-orchestrator/jobs?projectId=${encodeURIComponent(this.projectId)}&status=dead&limit=50`;
       const res = await fetch(url);
       const data = await res.json();
       this.jobs = Array.isArray(data.jobs) ? data.jobs : [];
@@ -4274,7 +3523,7 @@ var OperatorDashboardPanel = class {
 };
 
 // src/components/VO/JobProgressPanel.ts
-var BASE_URL5 = "http://localhost:4877";
+var BASE_URL4 = "http://localhost:4877";
 function formatDate2(value) {
   try {
     return new Date(value).toLocaleString();
@@ -4349,7 +3598,7 @@ var JobProgressPanel = class {
     }
     try {
       const qs = this.projectId ? `?projectId=${encodeURIComponent(this.projectId)}` : "";
-      const res = await fetch(`${BASE_URL5}/api/infra/video-orchestrator/jobs${qs}`);
+      const res = await fetch(`${BASE_URL4}/api/infra/video-orchestrator/jobs${qs}`);
       const data = await res.json();
       this.jobs = Array.isArray(data.jobs) ? data.jobs : [];
       this.renderJobs();
@@ -4416,335 +3665,6 @@ var JobProgressPanel = class {
       window.clearInterval(this.refreshInterval);
       this.refreshInterval = null;
     }
-    this.container.innerHTML = "";
-  }
-};
-
-// src/components/VO/MetadataGeneratorPanel.ts
-var BASE_URL6 = "http://localhost:4877";
-var MetadataGeneratorPanel = class {
-  container;
-  projectId;
-  contentItemId = "";
-  templateId = "";
-  lastResult = null;
-  isSubmitting = false;
-  constructor(container, projectId) {
-    this.container = container;
-    this.projectId = projectId;
-  }
-  async initialize() {
-    this.render();
-  }
-  render() {
-    this.container.innerHTML = `
-      <div class="vo-metadata-generator">
-        <div class="vo-panel-header">
-          <h3>Metadata Generator</h3>
-        </div>
-        <div class="vo-metadata-generator__form">
-          <label class="vo-form-group">
-            <span class="vo-form-label">Content Item ID</span>
-            <input id="vo-meta-content-item" class="vo-form-input" type="text" value="${this.escapeHtml(this.contentItemId)}" placeholder="content-..." ${this.isSubmitting ? "disabled" : ""} />
-          </label>
-          <label class="vo-form-group">
-            <span class="vo-form-label">Template ID</span>
-            <input id="vo-meta-template-id" class="vo-form-input" type="text" value="${this.escapeHtml(this.templateId)}" placeholder="optional" ${this.isSubmitting ? "disabled" : ""} />
-          </label>
-          <div class="vo-form-actions">
-            <button class="vo-button vo-button-primary" id="vo-meta-generate" ${this.isSubmitting ? "disabled" : ""}>${this.isSubmitting ? "Generating..." : "Generate Metadata"}</button>
-          </div>
-        </div>
-        ${this.renderResult()}
-      </div>
-    `;
-    this.container.querySelector("#vo-meta-generate")?.addEventListener("click", () => {
-      void this.handleGenerate();
-    });
-    this.container.querySelector("#vo-meta-content-item")?.addEventListener("input", (event) => {
-      this.contentItemId = event.target.value;
-    });
-    this.container.querySelector("#vo-meta-template-id")?.addEventListener("input", (event) => {
-      this.templateId = event.target.value;
-    });
-  }
-  renderResult() {
-    if (!this.lastResult) return "";
-    if (!this.lastResult.ok) {
-      return `<div class="vo-form-error">${this.escapeHtml(this.lastResult.error ?? "Metadata generation failed")}</div>`;
-    }
-    const meta = this.lastResult.preview?.metadata;
-    if (!meta) return "";
-    return `
-      <div class="vo-metadata-generator__preview">
-        <div class="vo-metadata-generator__section-title">Preview</div>
-        <div><strong>Title:</strong> ${this.escapeHtml(meta.youtubeTitle ?? "")}</div>
-        <div><strong>Description:</strong> ${this.escapeHtml(meta.youtubeDescription ?? "")}</div>
-        <div><strong>Tags:</strong> ${this.escapeHtml((meta.youtubeTags ?? []).join(", "))}</div>
-        <div><strong>Captions:</strong></div>
-        <div class="vo-metadata-generator__mono">${this.escapeHtml(meta.tiktokCaption ?? "")}</div>
-        <div class="vo-metadata-generator__mono">${this.escapeHtml(meta.instagramCaption ?? "")}</div>
-        <div><strong>Hashtags:</strong> ${this.escapeHtml((meta.hashtags ?? []).join(" "))}</div>
-        <div><strong>Source:</strong> ${this.escapeHtml(meta.source ?? "fallback")}</div>
-      </div>
-    `;
-  }
-  async handleGenerate() {
-    const contentItemInput = this.container.querySelector("#vo-meta-content-item");
-    const templateInput = this.container.querySelector("#vo-meta-template-id");
-    this.contentItemId = contentItemInput?.value ?? this.contentItemId;
-    this.templateId = templateInput?.value ?? this.templateId;
-    if (!this.projectId || !this.contentItemId.trim()) {
-      this.lastResult = { ok: false, error: "projectId and contentItemId are required" };
-      this.render();
-      return;
-    }
-    this.isSubmitting = true;
-    this.render();
-    try {
-      const res = await fetch(`${BASE_URL6}/api/video-orchestrator/metadata/generate`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          projectId: this.projectId,
-          contentItemId: this.contentItemId,
-          templateId: this.templateId || void 0
-        })
-      });
-      this.lastResult = await res.json();
-    } catch (error) {
-      this.lastResult = { ok: false, error: error instanceof Error ? error.message : "Request failed" };
-    } finally {
-      this.isSubmitting = false;
-      this.render();
-    }
-  }
-  escapeHtml(value) {
-    return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
-  }
-  destroy() {
-    this.container.innerHTML = "";
-  }
-};
-
-// src/components/VO/FeedbackLoopPanel.ts
-var BASE_URL7 = "http://localhost:4877";
-var FeedbackLoopPanel = class {
-  container;
-  projectId;
-  summary = null;
-  refreshInterval = null;
-  constructor(container, projectId) {
-    this.container = container;
-    this.projectId = projectId;
-  }
-  async initialize() {
-    this.render();
-    await this.load();
-    this.startAutoRefresh();
-  }
-  render() {
-    this.container.innerHTML = `
-      <div class="vo-feedback-loop">
-        <div class="vo-panel-header">
-          <h3>Feedback Loop</h3>
-          <button class="vo-btn-secondary" id="feedback-refresh">Refresh</button>
-        </div>
-        <div id="feedback-summary" class="vo-feedback-summary">
-          <div class="vo-empty-state">Loading feedback...</div>
-        </div>
-      </div>
-    `;
-    this.container.querySelector("#feedback-refresh")?.addEventListener("click", () => {
-      void this.load();
-    });
-  }
-  async load() {
-    try {
-      const res = await fetch(`${BASE_URL7}/api/video-orchestrator/analytics/feedback?projectId=${encodeURIComponent(this.projectId)}`);
-      this.summary = await res.json();
-      this.renderSummary();
-    } catch {
-      const el = this.container.querySelector("#feedback-summary");
-      if (el) el.innerHTML = '<div class="vo-empty-state">Failed to load feedback.</div>';
-    }
-  }
-  renderSummary() {
-    const el = this.container.querySelector("#feedback-summary");
-    if (!el || !this.summary) return;
-    const { outcomes, metrics, recommendation } = this.summary;
-    const packageCards = this.buildPackageAggregates(metrics);
-    const summary7d = this.buildWindowSummary(metrics, 7);
-    const summary30d = this.buildWindowSummary(metrics, 30);
-    const thumbnailStatus = this.buildThumbnailStatus(metrics, recommendation.bestThumbnailVariant);
-    el.innerHTML = `
-      <div class="vo-feedback-card">
-        <div class="vo-feedback-label">Recommendation</div>
-        <div class="vo-feedback-value">${this.escapeHtml(recommendation.note)}</div>
-        <div class="vo-feedback-subvalue">Thumbnail: ${this.escapeHtml(recommendation.bestThumbnailVariant ?? "\u2014")}</div>
-        <div class="vo-feedback-subvalue">Metadata: ${this.escapeHtml(recommendation.bestMetadataVariant ?? "\u2014")}</div>
-      </div>
-      <div class="vo-feedback-grid">
-        <div class="vo-feedback-card">
-          <div class="vo-feedback-label">Outcomes</div>
-          <div class="vo-feedback-value">${outcomes.length}</div>
-          <div class="vo-feedback-subvalue">Publish success/failure records</div>
-        </div>
-        <div class="vo-feedback-card">
-          <div class="vo-feedback-label">Metrics</div>
-          <div class="vo-feedback-value">${metrics.length}</div>
-          <div class="vo-feedback-subvalue">24h performance snapshots</div>
-        </div>
-      </div>
-      <div class="vo-feedback-grid vo-feedback-grid--triple">
-        <div class="vo-feedback-card">
-          <div class="vo-feedback-label">Channel Summary \xB7 7d</div>
-          <div class="vo-feedback-value">${summary7d.totalViews}</div>
-          <div class="vo-feedback-subvalue">Views</div>
-          <div class="vo-feedback-subvalue">Avg CTR ${summary7d.avgCtr.toFixed(2)}% \xB7 ${summary7d.snapshotCount} snapshot(s)</div>
-        </div>
-        <div class="vo-feedback-card">
-          <div class="vo-feedback-label">Channel Summary \xB7 30d</div>
-          <div class="vo-feedback-value">${summary30d.totalViews}</div>
-          <div class="vo-feedback-subvalue">Views</div>
-          <div class="vo-feedback-subvalue">Avg CTR ${summary30d.avgCtr.toFixed(2)}% \xB7 ${summary30d.snapshotCount} snapshot(s)</div>
-        </div>
-        <div class="vo-feedback-card">
-          <div class="vo-feedback-label">Thumbnail A/B Status</div>
-          <div class="vo-feedback-value">${this.escapeHtml(thumbnailStatus.label)}</div>
-          <div class="vo-feedback-subvalue">${this.escapeHtml(thumbnailStatus.detail)}</div>
-          <div class="vo-feedback-subvalue">${this.escapeHtml(thumbnailStatus.secondary)}</div>
-        </div>
-      </div>
-      <div class="vo-feedback-card vo-feedback-card--manual">
-        <div class="vo-feedback-label">YouTube Test & Compare</div>
-        <div class="vo-feedback-value">Manual in YouTube Studio</div>
-        <div class="vo-feedback-subvalue">No public developer API is currently wired for starting or reading thumbnail experiments.</div>
-        <div class="vo-feedback-subvalue">Operator flow: open YouTube Studio on desktop, use Thumbnail \u2192 Test & compare, upload up to 3 thumbnails, then review Reach analytics.</div>
-      </div>
-      <div class="vo-feedback-section">
-        <div class="vo-feedback-section-title">Per-Video Performance</div>
-        <div class="vo-feedback-video-grid">
-          ${packageCards.length > 0 ? packageCards.map((card) => `
-            <div class="vo-feedback-card vo-feedback-card--video">
-              <div class="vo-feedback-label">${this.escapeHtml(card.packageId)}</div>
-              <div class="vo-feedback-value">${card.views24h}</div>
-              <div class="vo-feedback-subvalue">Views \xB7 Avg CTR ${card.avgCtr.toFixed(2)}%</div>
-              <div class="vo-feedback-subvalue">Engagement ${card.avgEngagementRate.toFixed(2)}% \xB7 ${card.snapshotCount} snapshot(s)</div>
-              <div class="vo-feedback-subvalue">Thumbnail ${this.escapeHtml(card.thumbnailVariant ?? "\u2014")} \xB7 Metadata ${this.escapeHtml(card.metadataVariant ?? "\u2014")}</div>
-            </div>
-          `).join("") : '<div class="vo-empty-state">No per-video metrics recorded yet.</div>'}
-        </div>
-      </div>
-      <div class="vo-feedback-list">
-        ${metrics.map((metric) => `
-          <div class="vo-feedback-row">
-            <div class="vo-feedback-row-main">
-              <div class="vo-feedback-row-title">${this.escapeHtml(metric.packageId)}</div>
-              <div class="vo-feedback-row-meta">
-                CTR ${metric.ctr.toFixed(2)}% \xB7 Views ${metric.views24h} \xB7 Engagement ${metric.engagementRate.toFixed(2)}%
-              </div>
-            </div>
-            <div class="vo-feedback-row-tags">
-              ${metric.thumbnailVariant ? `<span class="vo-status-badge vo-status-done">${this.escapeHtml(metric.thumbnailVariant)}</span>` : ""}
-              ${metric.metadataVariant ? `<span class="vo-status-badge vo-status-done">${this.escapeHtml(metric.metadataVariant)}</span>` : ""}
-            </div>
-          </div>
-        `).join("")}
-      </div>
-    `;
-  }
-  buildPackageAggregates(metrics) {
-    const byPackage = /* @__PURE__ */ new Map();
-    for (const metric of metrics) {
-      const current = byPackage.get(metric.packageId) ?? {
-        packageId: metric.packageId,
-        views24h: 0,
-        avgCtr: 0,
-        avgEngagementRate: 0,
-        snapshotCount: 0,
-        thumbnailVariant: metric.thumbnailVariant,
-        metadataVariant: metric.metadataVariant,
-        latestAt: metric.createdAt
-      };
-      current.views24h += metric.views24h;
-      current.avgCtr += metric.ctr;
-      current.avgEngagementRate += metric.engagementRate;
-      current.snapshotCount += 1;
-      current.thumbnailVariant = current.thumbnailVariant ?? metric.thumbnailVariant;
-      current.metadataVariant = current.metadataVariant ?? metric.metadataVariant;
-      if (new Date(metric.createdAt).getTime() > new Date(current.latestAt).getTime()) {
-        current.latestAt = metric.createdAt;
-      }
-      byPackage.set(metric.packageId, current);
-    }
-    return Array.from(byPackage.values()).map((entry) => ({
-      ...entry,
-      avgCtr: entry.snapshotCount > 0 ? entry.avgCtr / entry.snapshotCount : 0,
-      avgEngagementRate: entry.snapshotCount > 0 ? entry.avgEngagementRate / entry.snapshotCount : 0
-    })).sort((a, b) => new Date(b.latestAt).getTime() - new Date(a.latestAt).getTime());
-  }
-  buildWindowSummary(metrics, days) {
-    const cutoff = Date.now() - days * 24 * 60 * 60 * 1e3;
-    const filtered = metrics.filter((metric) => new Date(metric.createdAt).getTime() >= cutoff);
-    const totalViews = filtered.reduce((sum, metric) => sum + metric.views24h, 0);
-    const totalCtr = filtered.reduce((sum, metric) => sum + metric.ctr, 0);
-    return {
-      totalViews,
-      avgCtr: filtered.length > 0 ? totalCtr / filtered.length : 0,
-      snapshotCount: filtered.length
-    };
-  }
-  buildThumbnailStatus(metrics, winner) {
-    const variants = this.buildVariantAggregates(metrics);
-    if (variants.length === 0) {
-      return {
-        label: "No test data",
-        detail: "No thumbnail metrics recorded yet.",
-        secondary: "Record metrics before declaring a winner."
-      };
-    }
-    if (winner) {
-      const winnerStats = variants.find((variant) => variant.key === winner);
-      return {
-        label: "Winner available",
-        detail: `${winner} leads at ${winnerStats?.avgCtr.toFixed(2) ?? "0.00"}% CTR.`,
-        secondary: `${variants.length} variant(s) compared.`
-      };
-    }
-    const leader = variants[0];
-    return {
-      label: "Test active",
-      detail: `${leader.key} currently leads at ${leader.avgCtr.toFixed(2)}% CTR.`,
-      secondary: `${variants.length} variant(s) tracked, winner not declared.`
-    };
-  }
-  buildVariantAggregates(metrics) {
-    const variants = /* @__PURE__ */ new Map();
-    for (const metric of metrics) {
-      if (!metric.thumbnailVariant) continue;
-      const current = variants.get(metric.thumbnailVariant) ?? { ctr: 0, views: 0, count: 0 };
-      current.ctr += metric.ctr;
-      current.views += metric.views24h;
-      current.count += 1;
-      variants.set(metric.thumbnailVariant, current);
-    }
-    return Array.from(variants.entries()).map(([key, value]) => ({
-      key,
-      avgCtr: value.count > 0 ? value.ctr / value.count : 0,
-      totalViews: value.views,
-      count: value.count
-    })).sort((a, b) => b.avgCtr - a.avgCtr);
-  }
-  startAutoRefresh() {
-    if (this.refreshInterval) clearInterval(this.refreshInterval);
-    this.refreshInterval = window.setInterval(() => void this.load(), 6e4);
-  }
-  escapeHtml(value) {
-    return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
-  }
-  destroy() {
-    if (this.refreshInterval) clearInterval(this.refreshInterval);
     this.container.innerHTML = "";
   }
 };
@@ -4993,15 +3913,10 @@ var VOShell = class {
   overviewPanel = null;
   pipelinesPanel = null;
   accountsPanel = null;
-  contentCreationPanel = null;
-  studioPanel = null;
   historyPanel = null;
   approvalQueuePanel = null;
-  thumbnailStudioPanel = null;
   deadLetterReviewPanel = null;
   jobProgressPanel = null;
-  metadataGeneratorPanel = null;
-  feedbackLoopPanel = null;
   agentConsolePanel = null;
   packageStatusPanel = null;
   publishingDashboardPanel = null;
@@ -5028,13 +3943,9 @@ var VOShell = class {
         <button class="vo-tab vo-tab--active" data-tab="overview">Overview</button>
         <button class="vo-tab" data-tab="pipelines">Pipelines</button>
         <button class="vo-tab" data-tab="accounts">Accounts</button>
-        <button class="vo-tab" data-tab="content">Content</button>
         <button class="vo-tab" data-tab="approvals">Approvals</button>
-        <button class="vo-tab" data-tab="thumbnails">Thumbnails</button>
         <button class="vo-tab" data-tab="jobs">Jobs</button>
         <button class="vo-tab" data-tab="dead-letter">Dead Letter</button>
-        <button class="vo-tab" data-tab="metadata">Metadata</button>
-        <button class="vo-tab" data-tab="feedback">Feedback</button>
         <button class="vo-tab" data-tab="agents">Agents</button>
         <button class="vo-tab" data-tab="packages">Packages</button>
         <button class="vo-tab" data-tab="publishing">Publishing</button>
@@ -5080,21 +3991,9 @@ var VOShell = class {
       this.accountsPanel.destroy();
       this.accountsPanel = null;
     }
-    if (this.contentCreationPanel) {
-      this.contentCreationPanel.destroy();
-      this.contentCreationPanel = null;
-    }
-    if (this.studioPanel) {
-      this.studioPanel.destroy();
-      this.studioPanel = null;
-    }
     if (this.approvalQueuePanel) {
       this.approvalQueuePanel.destroy();
       this.approvalQueuePanel = null;
-    }
-    if (this.thumbnailStudioPanel) {
-      this.thumbnailStudioPanel.destroy();
-      this.thumbnailStudioPanel = null;
     }
     if (this.deadLetterReviewPanel) {
       this.deadLetterReviewPanel.destroy();
@@ -5103,14 +4002,6 @@ var VOShell = class {
     if (this.jobProgressPanel) {
       this.jobProgressPanel.destroy();
       this.jobProgressPanel = null;
-    }
-    if (this.metadataGeneratorPanel) {
-      this.metadataGeneratorPanel.destroy();
-      this.metadataGeneratorPanel = null;
-    }
-    if (this.feedbackLoopPanel) {
-      this.feedbackLoopPanel.destroy();
-      this.feedbackLoopPanel = null;
     }
     if (this.agentConsolePanel) {
       this.agentConsolePanel.destroy();
@@ -5191,19 +4082,6 @@ var VOShell = class {
           `;
         }
         break;
-      case "content":
-        if (state.projectId) {
-          this.studioPanel = new StudioPanel(this.contentContainer, {
-            contentItems: this.data.contentItems
-          });
-        } else {
-          this.contentContainer.innerHTML = `
-            <div class="vo-empty-state">
-              <p>Select a project to view Studio content</p>
-            </div>
-          `;
-        }
-        break;
       case "approvals":
         if (state.projectId) {
           this.approvalQueuePanel = new ApprovalQueuePanel(this.contentContainer, state.projectId);
@@ -5212,18 +4090,6 @@ var VOShell = class {
           this.contentContainer.innerHTML = `
             <div class="vo-empty-state">
               <p>Select a project to view approval queue</p>
-            </div>
-          `;
-        }
-        break;
-      case "thumbnails":
-        if (state.projectId) {
-          this.thumbnailStudioPanel = new ThumbnailStudioPanel(this.contentContainer, state.projectId);
-          this.thumbnailStudioPanel.initialize();
-        } else {
-          this.contentContainer.innerHTML = `
-            <div class="vo-empty-state">
-              <p>Select a project to view thumbnail studio</p>
             </div>
           `;
         }
@@ -5248,30 +4114,6 @@ var VOShell = class {
           this.contentContainer.innerHTML = `
             <div class="vo-empty-state">
               <p>Select a project to review dead jobs</p>
-            </div>
-          `;
-        }
-        break;
-      case "metadata":
-        if (state.projectId) {
-          this.metadataGeneratorPanel = new MetadataGeneratorPanel(this.contentContainer, state.projectId);
-          this.metadataGeneratorPanel.initialize();
-        } else {
-          this.contentContainer.innerHTML = `
-            <div class="vo-empty-state">
-              <p>Select a project to generate metadata</p>
-            </div>
-          `;
-        }
-        break;
-      case "feedback":
-        if (state.projectId) {
-          this.feedbackLoopPanel = new FeedbackLoopPanel(this.contentContainer, state.projectId);
-          this.feedbackLoopPanel.initialize();
-        } else {
-          this.contentContainer.innerHTML = `
-            <div class="vo-empty-state">
-              <p>Select a project to view feedback loop</p>
             </div>
           `;
         }
@@ -5379,29 +4221,14 @@ var VOShell = class {
     if (this.accountsPanel) {
       this.accountsPanel.destroy();
     }
-    if (this.contentCreationPanel) {
-      this.contentCreationPanel.destroy();
-    }
-    if (this.studioPanel) {
-      this.studioPanel.destroy();
-    }
     if (this.approvalQueuePanel) {
       this.approvalQueuePanel.destroy();
-    }
-    if (this.thumbnailStudioPanel) {
-      this.thumbnailStudioPanel.destroy();
     }
     if (this.deadLetterReviewPanel) {
       this.deadLetterReviewPanel.destroy();
     }
     if (this.jobProgressPanel) {
       this.jobProgressPanel.destroy();
-    }
-    if (this.metadataGeneratorPanel) {
-      this.metadataGeneratorPanel.destroy();
-    }
-    if (this.feedbackLoopPanel) {
-      this.feedbackLoopPanel.destroy();
     }
     if (this.agentConsolePanel) {
       this.agentConsolePanel.destroy();
@@ -7214,6 +6041,11 @@ function renderSystemMetricsBanner(state) {
   const gpuColor = gpuPct === null ? "var(--text-muted)" : metricsSeverityColor(gpuPct);
   const c5 = m.codex.fiveHour;
   const c7 = m.codex.sevenDay;
+  const gm = m.gemini;
+  const ca = m.claudeApi;
+  const claudeCostPercent = (cost, maxMonthCost = 1e3) => {
+    return Math.min(100, Math.round(cost / maxMonthCost * 100));
+  };
   const cpuCard = `<div class="bc-mc">
     <div class="bc-mc-label">CPU LOAD</div>
     <div class="bc-mc-value">${m.loadAvg1.toFixed(2)} core</div>
@@ -7271,7 +6103,59 @@ function renderSystemMetricsBanner(state) {
         <div class="bc-mc-value" style="color:var(--text-muted);font-size:14px">\u2013</div>
         <div class="bc-mc-sub">No data yet</div>
       </div>`;
-  return `<div class="bc-metrics-banner">${cpuCard}${memCard}${gpuCard}${uptimeCard}${codex5Card}${codex7Card}</div>`;
+  const geminiCard = gm ? `<div class="bc-mc">
+        <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+          <div class="bc-mc-label">GEMINI \xB7 FREE</div>
+          <div class="bc-mc-badge">RESETS IN ${formatMetricsCountdown(gm.resetsAt)}</div>
+        </div>
+        <div class="bc-mc-value" style="color:${metricsCodexColor(gm.remainingPercent)}">${gm.remainingPercent}%</div>
+        <div class="bc-mc-sub">${gm.callsRemaining}/${gm.callsToday} calls \xB7 ${formatMetricsResetExact(gm.resetsAt)}</div>
+        <div class="bc-bar"><div class="bc-bar-fill" style="width:${gm.remainingPercent}%;background:${metricsCodexColor(gm.remainingPercent)}"></div></div>
+      </div>` : `<div class="bc-mc">
+        <div class="bc-mc-label">GEMINI \xB7 FREE</div>
+        <div class="bc-mc-value" style="color:var(--text-muted);font-size:14px">\u2013</div>
+        <div class="bc-mc-sub">No data yet</div>
+      </div>`;
+  const claudeHaikuCard = ca ? `<div class="bc-mc">
+        <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+          <div class="bc-mc-label">CLAUDE \xB7 HAIKU</div>
+          <div class="bc-mc-badge">RESETS IN ${ca.daysUntilReset}d</div>
+        </div>
+        <div class="bc-mc-value" style="color:${metricsCodexColor(claudeCostPercent(ca.haiku.costUsd))}">$${ca.haiku.costUsd.toFixed(2)}</div>
+        <div class="bc-mc-sub">${ca.haiku.inputTokens.toLocaleString()} in \xB7 ${ca.haiku.outputTokens.toLocaleString()} out \xB7 ${ca.haiku.callCount} calls</div>
+        <div class="bc-bar"><div class="bc-bar-fill" style="width:${claudeCostPercent(ca.haiku.costUsd)}%;background:${metricsCodexColor(claudeCostPercent(ca.haiku.costUsd))}"></div></div>
+      </div>` : `<div class="bc-mc">
+        <div class="bc-mc-label">CLAUDE \xB7 HAIKU</div>
+        <div class="bc-mc-value" style="color:var(--text-muted);font-size:14px">\u2013</div>
+        <div class="bc-mc-sub">No data yet</div>
+      </div>`;
+  const claudeSonnetCard = ca ? `<div class="bc-mc">
+        <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+          <div class="bc-mc-label">CLAUDE \xB7 SONNET</div>
+          <div class="bc-mc-badge">RESETS IN ${ca.daysUntilReset}d</div>
+        </div>
+        <div class="bc-mc-value" style="color:${metricsCodexColor(claudeCostPercent(ca.sonnet.costUsd))}">$${ca.sonnet.costUsd.toFixed(2)}</div>
+        <div class="bc-mc-sub">${ca.sonnet.inputTokens.toLocaleString()} in \xB7 ${ca.sonnet.outputTokens.toLocaleString()} out \xB7 ${ca.sonnet.callCount} calls</div>
+        <div class="bc-bar"><div class="bc-bar-fill" style="width:${claudeCostPercent(ca.sonnet.costUsd)}%;background:${metricsCodexColor(claudeCostPercent(ca.sonnet.costUsd))}"></div></div>
+      </div>` : `<div class="bc-mc">
+        <div class="bc-mc-label">CLAUDE \xB7 SONNET</div>
+        <div class="bc-mc-value" style="color:var(--text-muted);font-size:14px">\u2013</div>
+        <div class="bc-mc-sub">No data yet</div>
+      </div>`;
+  const claudeOpusCard = ca ? `<div class="bc-mc">
+        <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+          <div class="bc-mc-label">CLAUDE \xB7 OPUS</div>
+          <div class="bc-mc-badge">RESETS IN ${ca.daysUntilReset}d</div>
+        </div>
+        <div class="bc-mc-value" style="color:${metricsCodexColor(claudeCostPercent(ca.opus.costUsd))}">$${ca.opus.costUsd.toFixed(2)}</div>
+        <div class="bc-mc-sub">${ca.opus.inputTokens.toLocaleString()} in \xB7 ${ca.opus.outputTokens.toLocaleString()} out \xB7 ${ca.opus.callCount} calls</div>
+        <div class="bc-bar"><div class="bc-bar-fill" style="width:${claudeCostPercent(ca.opus.costUsd)}%;background:${metricsCodexColor(claudeCostPercent(ca.opus.costUsd))}"></div></div>
+      </div>` : `<div class="bc-mc">
+        <div class="bc-mc-label">CLAUDE \xB7 OPUS</div>
+        <div class="bc-mc-value" style="color:var(--text-muted);font-size:14px">\u2013</div>
+        <div class="bc-mc-sub">No data yet</div>
+      </div>`;
+  return `<div class="bc-metrics-banner">${cpuCard}${memCard}${gpuCard}${uptimeCard}${codex5Card}${codex7Card}${geminiCard}${claudeHaikuCard}${claudeSonnetCard}${claudeOpusCard}</div>`;
 }
 function renderBrainConsoleView(container, state, settings, onRefresh, onBrainCoreRestart) {
   container.empty();
