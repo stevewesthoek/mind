@@ -317,21 +317,37 @@ Generated video available at canonical location:
 - No image generation models in eu-north-1
 - API payload contract undocumented
 
-#### I-4.2: Integrate Thumbnail into Step Functions (Next)
-- Add Lambda to extract thumbnail after MediaConvert completes
-- Update state machine to call thumbnail Lambda
-- Store thumbnail reference in metadata/assets.json
-- Do not add UI or publishing yet
+#### I-4.2: Integrate Thumbnail into Step Functions ⏸️ BLOCKED
 
-Current active implementation target:
+**Status:** Implementation complete but blocked on ffmpeg availability in AWS Lambda.
 
-```text
-I-4.2. Integrate thumbnail extraction into Step Functions
-   - After MediaConvert assembly completes
-   - Extract frame at 3-second mark
-   - Store in thumbnails/ directory
-   - Update metadata with thumbnail reference
-```
+**Blocker:** AWS Lambda base image (Python 3.11) does not include ffmpeg
+- Code written: `lambda-extract-thumbnail.py` (uses subprocess to call ffmpeg)
+- Deployment prepared: `infrastructure/i-4-thumbnail-generation/DEPLOYMENT.md`
+- Cannot proceed to AWS deployment until blocker resolved
+
+**Resolution required:**
+1. Create Lambda layer containing static ffmpeg binary
+   - Target: Amazon Linux 2 x86_64
+   - Location: `/opt/python/bin/ffmpeg` in Lambda environment
+   - Build instructions: `infrastructure/lambda-layers/ffmpeg/BUILD.md`
+   - Recommended approach: Download pre-compiled ffmpeg, package as layer
+
+2. Once layer is created:
+   - Deploy video-orchestrator-extract-thumbnail Lambda
+   - Attach ffmpeg layer
+   - Test direct invocation with thumbnail payload
+   - Integrate thumbnail Lambda into Step Functions state machine
+
+**Current task status:**
+- ✅ Frame extraction approach proven locally
+- ✅ Lambda function code written and tested locally
+- ✅ Deployment strategy documented
+- ⏳ Awaiting Lambda layer creation (blocker)
+- ⏳ AWS Lambda deployment (blocked)
+- ⏳ Step Functions integration (blocked)
+
+**Next step:** Build ffmpeg Lambda layer per instructions in `infrastructure/lambda-layers/ffmpeg/BUILD.md`
 
 ### Phase 4 — Internal Video Assembly
 
