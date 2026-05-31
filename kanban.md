@@ -39,6 +39,10 @@ kanban-plugin: board
 - [ ] YA finance app
 - [ ] Marriage certificate
 - [ ] Apply for passport
+- [ ] Make video for Yosef
+- [ ] Prepare Lambda meeting
+- [ ] Prepare Passport meeting
+- [ ] Sen reaction Free
 
 ## Done
 
