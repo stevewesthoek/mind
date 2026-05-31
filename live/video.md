@@ -192,8 +192,8 @@ Implementation progress:
 ✅ H. Define approval checkpoint contract
 ✅ I-1. Manual final video assembly (validation only)
 ✅ I-2. Automate final assembly through Step Functions (COMPLETE)
-🟡 I-3. Replace placeholder with generated clips
-⬜ I-4. Add thumbnail generation
+✅ I-3. Replace placeholder with generated clips
+✅ I-4. Add thumbnail generation
 ⬜ I-5. Generate real internal content
 ```
 
@@ -210,9 +210,12 @@ Phase 4 — Internal Video Assembly: COMPLETE
 Phase 5 — Placeholder Replacement: COMPLETE
   I-3.1 Manual generated clip proof: COMPLETE (Nova Reel cross-region)
   I-3.2 Integrate into MediaConvert: COMPLETE (generated clip assembly)
-Phase 6 — Thumbnail and Polish: ACTIVE
+Phase 6 — Thumbnail and Polish: COMPLETE
   I-4.1 Manual thumbnail proof: COMPLETE (frame extraction)
-  I-4.2 Integrate into Step Functions: READY (next implementation)
+  I-4.2 Integrate into Step Functions: COMPLETE (MediaConvert native frame capture)
+Phase 7 — Publishing and Distribution: PENDING
+  I-5 Real content generation
+  I-6 Publishing (YouTube/social media)
 ```
 
 I-2 implementation result:
@@ -317,37 +320,50 @@ Generated video available at canonical location:
 - No image generation models in eu-north-1
 - API payload contract undocumented
 
-#### I-4.2: Integrate Thumbnail into Step Functions ⏸️ BLOCKED
+#### I-4.2: Integrate Thumbnail into Step Functions ✅ COMPLETE
 
-**Status:** Implementation complete but blocked on ffmpeg availability in AWS Lambda.
+**Status:** MediaConvert native frame capture integrated into Step Functions workflow.
 
-**Blocker:** AWS Lambda base image (Python 3.11) does not include ffmpeg
-- Code written: `lambda-extract-thumbnail.py` (uses subprocess to call ffmpeg)
-- Deployment prepared: `infrastructure/i-4-thumbnail-generation/DEPLOYMENT.md`
-- Cannot proceed to AWS deployment until blocker resolved
+**Solution:** Replaced ffmpeg Lambda layer approach with MediaConvert native frame capture capability.
+- **Blocker resolution:** MediaConvert has built-in frame capture codec (FRAME_CAPTURE + RAW container)
+- **No Lambda layer required:** Uses standard boto3 MediaConvert API
+- **Approach:** MediaConvert creates 4 JPEG frames at 1 FPS from final video
+- **Frame selection:** Frame 2 (3-second mark) automatically selected and normalized
 
-**Resolution required:**
-1. Create Lambda layer containing static ffmpeg binary
-   - Target: Amazon Linux 2 x86_64
-   - Location: `/opt/python/bin/ffmpeg` in Lambda environment
-   - Build instructions: `infrastructure/lambda-layers/ffmpeg/BUILD.md`
-   - Recommended approach: Download pre-compiled ffmpeg, package as layer
+**Implementation details:**
+- Lambda functions deployed: 3
+  - `i4-frame-capture-thumbnail-mediaconvert` — Trigger frame capture job
+  - `i4-frame-capture-wait-thumbnail-mediaconvert` — Poll until completion
+  - `i4-frame-capture-select-thumbnail` — Copy frame 2 to normalized path
+- IAM role: `prochat-i4-thumbnail-lambda` with S3 and MediaConvert permissions
+- MediaConvert constraint: Requires at least one full video output group (uses dummy H.264)
+- Output location: `jobs/{jobId}/exports/` (proven writable with MediaConvert role)
 
-2. Once layer is created:
-   - Deploy video-orchestrator-extract-thumbnail Lambda
-   - Attach ffmpeg layer
-   - Test direct invocation with thumbnail payload
-   - Integrate thumbnail Lambda into Step Functions state machine
+**Step Functions integration:**
+- Added states: GenerateThumbnail → WaitForThumbnail → CheckThumbnailProgress (loop) → SelectThumbnailFrame
+- Wait state: 10-second intervals for polling (prevents rapid API calls)
+- Output: Normalized thumbnail at `jobs/{jobId}/exports/thumbnail-001.jpg`
+
+**Preflight validation (I-4.2 proof):**
+- ✅ 4 JPEG frames generated at 1280x720 resolution
+- ✅ Frame 2 (3-second mark) extracted: 76,874 bytes
+- ✅ Quality verified: 8-bit sRGB JPEG
+- ✅ Normalized to: `thumbnail-001.jpg`
+
+**Full end-to-end proof (I-4.2 final):**
+- ✅ Execution: i4-thumbnail-proof-exports-1780241084
+- ✅ Status: SUCCEEDED
+- ✅ Final video: `jobs/test-001/exports/generated-001-final.mp4` (verified)
+- ✅ Thumbnail: `jobs/test-001/exports/thumbnail-001.jpg` (37,960 bytes, verified)
 
 **Current task status:**
-- ✅ Frame extraction approach proven locally
-- ✅ Lambda function code written and tested locally
-- ✅ Deployment strategy documented
-- ⏳ Awaiting Lambda layer creation (blocker)
-- ⏳ AWS Lambda deployment (blocked)
-- ⏳ Step Functions integration (blocked)
-
-**Next step:** Build ffmpeg Lambda layer per instructions in `infrastructure/lambda-layers/ffmpeg/BUILD.md`
+- ✅ Frame capture approach proven (MediaConvert native)
+- ✅ Lambda functions deployed to AWS
+- ✅ IAM role configured with proper permissions
+- ✅ Step Functions state machine updated
+- ✅ Preflight test passed
+- ✅ End-to-end workflow tested and verified
+- ✅ Ready for production deployment
 
 ### Phase 4 — Internal Video Assembly
 
@@ -651,13 +667,24 @@ ffprobe local-final.mp4
 
 **Important:** Do not change the output naming caveat yet. MediaConvert will still output `sample-transcoded-final.mp4` (input-based naming) unless we adjust the destination strategy in I-3+ cleanup phase.
 
-### I-4: Add Thumbnail Generation ⬜ FUTURE
+### I-4: Add Thumbnail Generation ✅ COMPLETE
 
-Generate and store preview thumbnail using Nova Canvas or MediaConvert snapshot.
+**Method:** MediaConvert native frame capture.
+**Result:** Thumbnail generated from 3-second mark of final video.
+**Output:** `jobs/{jobId}/exports/thumbnail-001.jpg` (normalized, ready for publishing).
 
-### I-5: Generate Real Internal Content ⬜ FUTURE
+### I-5: Generate Real Internal Content ⬜ PENDING
 
-Replace test-001 with real Says The Bible or ProChat workflow demonstration video.
+Next phase: Replace test-001 with real Says The Bible or ProChat workflow demonstration video.
+
+**Pre-I-5 hardening checklist:**
+- ✅ Metadata: `status.json` updated with full pipeline completion
+- ✅ Metadata: `assets.json` created with all asset references
+- ✅ Metadata: All assets verified in S3
+- ✅ Documentation: `live/video.md` updated
+- ✅ Infrastructure: All Lambda functions tested and deployed
+- ✅ Infrastructure: Step Functions state machine verified
+- ⏳ Ready for I-5 content generation
 
 - No production video jobs are started from Brain Core yet.
 - No upload, render, or publish mutation endpoint exists yet.

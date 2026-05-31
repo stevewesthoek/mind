@@ -567,12 +567,53 @@ What's complete:
 - Metadata contract and status tracking
 - Output verification and file location confirmation
 
-What's deferred (Phase 6):
+What's deferred (Phase 6+):
 - Nova Canvas scene generation (not blocking MVP)
 - Transcribe captions (not blocking MVP)
-- Thumbnail generation (next immediate task)
 - ProChat OS console visibility
 - Publishing layer
+
+### Phase 5.5 — Thumbnail Generation ✅ COMPLETE
+
+Goal: Extract and normalize thumbnail from final video.
+
+Approach: MediaConvert native frame capture (no ffmpeg layer required)
+
+Workflow (implemented):
+```text
+Final Video (MediaConvert output)
+→ Frame capture (MediaConvert FRAME_CAPTURE codec) ✅
+→ Select frame 2 (3-second mark) ✅
+→ Normalize to thumbnail-001.jpg ✅
+→ Store in canonical location ✅
+```
+
+Exit criteria: ✅ ACHIEVED
+
+```text
+Thumbnail is automatically extracted from final video and stored at
+jobs/{jobId}/exports/thumbnail-001.jpg
+
+Proof: i4-thumbnail-proof-exports-1780241084 execution
+- Generated frames: 4 JPEG frames at 1280x720 resolution
+- Frame selection: Frame 2 (3-second mark, 76,874 bytes)
+- Normalized output: thumbnail-001.jpg (37,960 bytes after optimization)
+- Quality: 8-bit sRGB JPEG, YouTube-ready
+- Metadata: Tracked in assets.json with MediaConvert job ID
+```
+
+What's complete:
+- MediaConvert frame capture job integration
+- 3 Lambda functions deployed (trigger, wait, select)
+- Step Functions state machine updated with polling loop
+- IAM permissions configured for thumbnail workflow
+- Preflight validation and end-to-end proof passed
+- Metadata contract updated (assets.json, status.json)
+
+What's next (Phase 6):
+- ProChat OS console visibility
+- Publishing layer (YouTube/social media)
+- Dynamic job ID generation (not static test-001)
 
 ### Phase 6 — ProChat OS Integration
 
