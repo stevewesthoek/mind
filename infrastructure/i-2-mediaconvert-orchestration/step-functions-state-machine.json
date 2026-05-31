@@ -113,11 +113,81 @@
         "actualOutputKey.$": "$.actualOutputKey",
         "mediaConvertJobId.$": "$.mediaConvertJobId"
       },
-      "Next": "AssemblySuccess",
+      "ResultPath": "$.verifyOutput",
+      "Next": "GenerateThumbnail",
       "Catch": [
         {
           "ErrorEquals": ["States.ALL"],
           "Next": "OutputVerificationFailed"
+        }
+      ]
+    },
+    "GenerateThumbnail": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:i4-frame-capture-thumbnail-mediaconvert",
+      "TimeoutSeconds": 120,
+      "Parameters": {
+        "jobId.$": "$.jobId",
+        "videoKey.$": "$.videoKey",
+        "bucket": "prochat-video-dev-909439522876-eu-north-1-an",
+        "roleArn": "arn:aws:iam::909439522876:role/service-role/MediaConvert_Default_Role"
+      },
+      "ResultPath": "$.thumbnailJob",
+      "Next": "WaitForThumbnail",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "ThumbnailGenerationFailed"
+        }
+      ]
+    },
+    "WaitForThumbnail": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:i4-frame-capture-wait-thumbnail-mediaconvert",
+      "TimeoutSeconds": 300,
+      "Parameters": {
+        "jobId.$": "$.jobId",
+        "thumbnailJobId.$": "$.thumbnailJob.thumbnailJobId",
+        "thumbnailOutputPrefix.$": "$.thumbnailJob.thumbnailOutputPrefix",
+        "normalizedThumbnailKey.$": "$.thumbnailJob.normalizedThumbnailKey",
+        "bucket": "prochat-video-dev-909439522876-eu-north-1-an"
+      },
+      "ResultPath": "$.waitThumbnail",
+      "Next": "CheckThumbnailStatus",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "ThumbnailWaitFailed"
+        }
+      ]
+    },
+    "CheckThumbnailStatus": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.waitThumbnail.completed",
+          "BooleanEquals": true,
+          "Next": "SelectThumbnailFrame"
+        }
+      ],
+      "Default": "WaitForThumbnail"
+    },
+    "SelectThumbnailFrame": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:eu-north-1:909439522876:function:i4-frame-capture-select-thumbnail",
+      "TimeoutSeconds": 60,
+      "Parameters": {
+        "jobId.$": "$.jobId",
+        "bucket": "prochat-video-dev-909439522876-eu-north-1-an",
+        "thumbnailOutputPrefix.$": "$.thumbnailJob.thumbnailOutputPrefix",
+        "normalizedThumbnailKey.$": "$.thumbnailJob.normalizedThumbnailKey"
+      },
+      "ResultPath": "$.selectedThumbnail",
+      "Next": "AssemblySuccess",
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "Next": "ThumbnailSelectionFailed"
         }
       ]
     },
@@ -159,6 +229,21 @@
       "Type": "Fail",
       "Error": "OutputVerificationError",
       "Cause": "Output file verification failed"
+    },
+    "ThumbnailGenerationFailed": {
+      "Type": "Fail",
+      "Error": "ThumbnailGenerationError",
+      "Cause": "Failed to create thumbnail frame capture job"
+    },
+    "ThumbnailWaitFailed": {
+      "Type": "Fail",
+      "Error": "ThumbnailWaitError",
+      "Cause": "Thumbnail frame capture job did not complete successfully"
+    },
+    "ThumbnailSelectionFailed": {
+      "Type": "Fail",
+      "Error": "ThumbnailSelectionError",
+      "Cause": "Failed to select and normalize thumbnail frame"
     }
   }
 }
