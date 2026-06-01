@@ -395,6 +395,935 @@ var VOContextBar = class {
   }
 };
 
+// src/client.ts
+var REQUEST_TIMEOUT_MS = 1e4;
+async function readBrainCoreStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/status");
+}
+async function readBrainCoreCapabilities(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/capabilities");
+}
+async function readBrainCoreRuntimeReports(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/runtime/reports");
+}
+async function readBrainCoreSchedulerStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/scheduler/status");
+}
+async function readBrainCoreSchedulerJobs(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/scheduler/jobs");
+}
+async function readBrainCoreSessions(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/sessions");
+}
+async function readBrainCoreRepos(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/repos");
+}
+async function readBrainCoreApprovals(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/approvals");
+}
+async function readBrainCoreApprovalStore(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/approvals/store");
+}
+async function readBrainCoreExecutionPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/execution/plans");
+}
+async function readBrainCoreExecutionReadiness(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/execution/readiness");
+}
+async function readBrainCoreMindPreviewPolicy(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/execution/mind-preview-policy");
+}
+async function readBrainCoreMindPreviews(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/execution/mind-previews");
+}
+async function readBrainCoreVideoStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video/status");
+}
+async function readBrainCoreVideoQueue(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video/queue");
+}
+async function readBrainCoreLocalApps(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps");
+}
+async function readBrainCoreLocalAppsDashboard(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/dashboard");
+}
+async function readBrainCoreLocalAppsActionReadiness(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/action-readiness");
+}
+async function readBrainCoreLocalAppsOrchestrator(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/orchestrator");
+}
+async function readBrainCoreLocalAppsActionEnablementBacklog(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/action-enablement-backlog");
+}
+async function readBrainCoreLocalAppsOperationalReadiness(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/operational-readiness");
+}
+async function readBrainCoreLocalAppsOperatorSummary(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/operator-summary");
+}
+async function requestBrainCoreLocalAppAction(baseUrl, appId, action) {
+  const url = `${normalizeBaseUrl(baseUrl)}/local-apps/${encodeURIComponent(appId)}/${encodeURIComponent(action)}`;
+  const startTime = performance.now();
+  if (!requestUrlFn) {
+    return {
+      error: "Obsidian requestUrl not initialized",
+      url
+    };
+  }
+  try {
+    const response = await Promise.race([
+      requestUrlFn({
+        url,
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({ requestedBy: "brain-console", confirmation: true }),
+        throw: false
+      }),
+      new Promise(
+        (_, reject) => setTimeout(() => reject(new Error("request timeout")), REQUEST_TIMEOUT_MS)
+      )
+    ]);
+    const responseTimeMs = Math.round(performance.now() - startTime);
+    const parsed = safeParseJson(response.text ?? "{}");
+    if (response.status < 200 || response.status >= 300) {
+      return {
+        error: parsed?.message ?? `HTTP ${response.status}`,
+        status: response.status,
+        detail: parsed?.error ?? (response.text ? response.text.slice(0, 240) : void 0),
+        value: parsed,
+        url,
+        responseTimeMs
+      };
+    }
+    return {
+      status: response.status,
+      value: parsed ?? JSON.parse(response.text ?? "{}"),
+      url,
+      responseTimeMs
+    };
+  } catch (err) {
+    const responseTimeMs = Math.round(performance.now() - startTime);
+    return {
+      error: err instanceof Error ? err.message : String(err),
+      url,
+      responseTimeMs
+    };
+  }
+}
+async function readBrainCoreOrchestrators(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/orchestrators");
+}
+async function readBrainCorePipelines(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/pipelines");
+}
+async function readBrainCoreProjects(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/projects");
+}
+async function readBrainCorePlatforms(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/platforms");
+}
+async function readBrainCorePostOrchestratorStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/status");
+}
+async function readBrainCorePostOrchestratorFlows(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/flows");
+}
+async function readBrainCorePostOrchestratorDrafts(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/drafts");
+}
+async function readBrainCorePostOrchestratorEvents(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/events");
+}
+async function readBrainCorePostOrchestratorContracts(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/contracts");
+}
+async function readBrainCorePostOrchestratorIntegrations(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/integrations");
+}
+async function readBrainCorePostOrchestratorRecovery(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/recovery");
+}
+async function readBrainCorePostOrchestratorDryRun(baseUrl, eventId) {
+  return fetchJson(normalizeBaseUrl(baseUrl), `/post-orchestrator/dry-run/${encodeURIComponent(eventId)}`);
+}
+async function readBrainCorePostDraftReviewQueue(baseUrl, eventId) {
+  return fetchJson(normalizeBaseUrl(baseUrl), `/post-orchestrator/review-queue/${encodeURIComponent(eventId)}`);
+}
+async function requestBrainCorePostDraftReviewApproval(baseUrl, reviewItemId) {
+  return fetchJson(
+    normalizeBaseUrl(baseUrl),
+    `/post-orchestrator/review-queue/${encodeURIComponent(reviewItemId)}/request-approval`,
+    { method: "POST" }
+  );
+}
+async function readBrainCorePostSchedulePreviewQueue(baseUrl, eventId) {
+  return fetchJson(
+    normalizeBaseUrl(baseUrl),
+    `/post-orchestrator/schedule-preview/${encodeURIComponent(eventId)}`
+  );
+}
+async function requestBrainCorePostSchedulePreviewApproval(baseUrl, schedulePreviewItemId) {
+  return fetchJson(
+    normalizeBaseUrl(baseUrl),
+    `/post-orchestrator/schedule-preview/${encodeURIComponent(schedulePreviewItemId)}/request-approval`,
+    { method: "POST" }
+  );
+}
+async function readBrainCorePostAnalyticsFixtures(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/analytics");
+}
+async function readBrainCorePostPipelineSummary(baseUrl, eventId) {
+  return fetchJson(
+    normalizeBaseUrl(baseUrl),
+    `/post-orchestrator/pipeline/${encodeURIComponent(eventId)}`
+  );
+}
+async function readBrainCorePostReadinessScore(baseUrl, eventId) {
+  return fetchJson(
+    normalizeBaseUrl(baseUrl),
+    `/post-orchestrator/readiness/${encodeURIComponent(eventId)}`
+  );
+}
+async function readBrainCorePostPlatformPolicies(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/platform-policies");
+}
+async function readBrainCorePostDecommissionReadiness(baseUrl) {
+  return fetchJson(
+    normalizeBaseUrl(baseUrl),
+    "/post-orchestrator/decommission-readiness"
+  );
+}
+async function readBrainCorePostOperatorGuidance(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/operator-guidance");
+}
+async function readBrainCorePostManualExportPackage(baseUrl, eventId) {
+  return fetchJson(
+    normalizeBaseUrl(baseUrl),
+    `/post-orchestrator/manual-export/${encodeURIComponent(eventId)}`
+  );
+}
+async function readBrainCorePostAcceptanceChecklist(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/acceptance-checklist");
+}
+async function readBrainCorePostMigrationParityReport(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/migration-parity");
+}
+async function readBrainCorePostRoadmapCheckpoint(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/roadmap-checkpoint");
+}
+async function readBrainCorePostOrchestratorOverview(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/overview");
+}
+async function readBrainCorePostQaStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/qa-status");
+}
+async function readBrainCoreStbStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/stb/status");
+}
+async function readBrainCoreVideoOrchestratorStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/status");
+}
+async function readBrainCoreVOStudioProjects(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/projects");
+}
+async function readBrainCoreVOStudioAccounts(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/accounts");
+}
+async function readBrainCoreVOStudioPipelineProfiles(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/pipeline-profiles");
+}
+async function readBrainCoreVOStudioContentItems(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/content-items");
+}
+async function readBrainCoreVOStudioPackage(baseUrl, packageId) {
+  return fetchJson(normalizeBaseUrl(baseUrl), `/video-orchestrator/packages/${encodeURIComponent(packageId)}`);
+}
+async function readBrainCoreVOStudioAnalyticsSummary(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/analytics/summary");
+}
+async function readBrainCoreVideoOrchestratorIntake(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/intake");
+}
+async function readBrainCoreVideoOrchestratorAssetPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/asset-plan");
+}
+async function readBrainCoreVideoOrchestratorDesignPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/design-plan");
+}
+async function readBrainCoreVideoOrchestratorVoiceoverPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/voiceover-plan");
+}
+async function readBrainCoreVideoOrchestratorVisualsPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/visuals-plan");
+}
+async function readBrainCoreVideoOrchestratorAssemblyPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/assembly-plan");
+}
+async function readBrainCoreVideoOrchestratorMetadataPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/metadata-plan");
+}
+async function readBrainCoreVideoOrchestratorPublishingPrepPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/publishing-prep");
+}
+async function readBrainCoreVideoOrchestratorManualExportPackages(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/manual-export-package");
+}
+async function readBrainCoreStbVideoMigrationStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/stb-video-migration/status");
+}
+async function readBrainCoreStbVideoParityMatrix(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/stb-video/parity-matrix");
+}
+async function readBrainCoreStbVideoDualRunStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/stb-video/dual-run-status");
+}
+async function readBrainCoreStbVideoDualRunEvidence(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/stb-video/dual-run-evidence");
+}
+async function readBrainCoreVideoProductionGate(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/production-gate");
+}
+async function readBrainCoreVideoRenderExportPolicy(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/render-export-policy");
+}
+async function readBrainCoreVideoControlledDryRunDesign(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-dry-run-design");
+}
+async function readBrainCoreVideoProductionCutoverGate(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/production-cutover-gate");
+}
+async function readBrainCoreVideoReleaseCandidateReadiness(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/release-candidate-readiness");
+}
+async function readBrainCoreVideoOperatorDecisionQueue(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/operator-decision-queue");
+}
+async function readBrainCoreVideoControlledExecutionPolicyBoundary(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-policy-boundary");
+}
+async function readBrainCoreVideoControlledExecutionReadinessIndex(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-readiness-index");
+}
+async function readBrainCoreVideoRoadmapCheckpoint(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/roadmap-checkpoint");
+}
+async function readBrainCoreVideoOperatorReviewPacket(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/operator-review-packet");
+}
+async function readBrainCoreVideoPreviewCompletionIndex(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/preview-completion-index");
+}
+async function readBrainCoreVideoControlledExecutionPreflightChecklist(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-preflight-checklist");
+}
+async function readBrainCoreVideoControlledExecutionRiskRegister(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-risk-register");
+}
+async function readBrainCoreVideoControlledExecutionApprovalPayloadSchema(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-approval-payload-schema");
+}
+async function readBrainCoreVideoControlledExecutionPreflightValidatorSchema(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-preflight-validator-schema");
+}
+async function readBrainCoreVideoControlledExecutionPlanStub(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-plan-stub");
+}
+async function readBrainCoreVideoControlledExecutionApprovalRequestDesign(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-approval-request-design");
+}
+async function readBrainCoreVideoControlledExecutionDisabledGate(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-disabled-gate");
+}
+async function readBrainCoreVideoControlledExecutionSecondApprovalPolicy(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-second-approval-policy");
+}
+async function readBrainCoreVideoControlledExecutionOperatorIdentityProtocol(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-operator-identity-protocol");
+}
+async function readBrainCoreVideoControlledExecutionRolePolicy(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-role-policy");
+}
+async function readBrainCoreControlledDualRunRequestDesign(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/stb-video/controlled-dual-run-request");
+}
+async function readBrainCoreAgents(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/agents");
+}
+async function readBrainCoreActions(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/actions");
+}
+async function readBrainCoreAgentRuns(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/agent-runs");
+}
+async function readBrainCoreAgentEvents(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/agent-events");
+}
+async function readBrainCoreAgentCostSummary(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/agent-cost-summary");
+}
+async function readBrainCoreRecoveryItems(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/recovery");
+}
+async function readBrainCoreApprovalDetail(baseUrl, approvalId) {
+  return fetchJson(normalizeBaseUrl(baseUrl), `/approvals/${approvalId}`);
+}
+async function readBrainCoreMindStewardReportDetail(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/runtime/reports/mind-steward");
+}
+async function readBrainCoreAiModelSelectorStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/ai-model-selector");
+}
+async function controlBrainCoreAiModelSelector(baseUrl, action) {
+  return fetchJson(normalizeBaseUrl(baseUrl), `/ai-model-selector/control?action=${action}`, {
+    method: "POST"
+  });
+}
+async function requestBrainCoreRestart(baseUrl) {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
+  const url = `${normalizedBaseUrl}/ops/brain-core/restart`;
+  const startTime = performance.now();
+  if (!requestUrlFn) {
+    return {
+      error: "Obsidian requestUrl not initialized",
+      url
+    };
+  }
+  try {
+    const response = await Promise.race([
+      requestUrlFn({
+        url,
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          confirmation: true,
+          requestedBy: "brain-console"
+        }),
+        throw: false
+      }),
+      new Promise(
+        (_, reject) => setTimeout(() => reject(new Error("request timeout")), REQUEST_TIMEOUT_MS)
+      )
+    ]);
+    const responseTimeMs = Math.round(performance.now() - startTime);
+    const parsed = safeParseJson(response.text ?? "{}");
+    if (response.status < 200 || response.status >= 300) {
+      return {
+        error: parsed?.message ?? `HTTP ${response.status}`,
+        status: response.status,
+        detail: response.text ? response.text.slice(0, 240) : void 0,
+        value: parsed,
+        url,
+        responseTimeMs
+      };
+    }
+    return {
+      value: parsed,
+      url,
+      responseTimeMs
+    };
+  } catch (error) {
+    const responseTimeMs = Math.round(performance.now() - startTime);
+    return {
+      error: error instanceof Error ? error.message : "request failed",
+      url,
+      responseTimeMs
+    };
+  }
+}
+async function waitForBrainCoreStatus(baseUrl, timeoutMs = 12e4, pollIntervalMs = 1500) {
+  const deadline = Date.now() + timeoutMs;
+  let lastResult;
+  while (Date.now() < deadline) {
+    lastResult = await fetchJson(normalizeBaseUrl(baseUrl), "/status", {}, 3e3);
+    if (lastResult.value?.ok === true) {
+      return lastResult;
+    }
+    await new Promise((resolve) => {
+      window.setTimeout(resolve, pollIntervalMs);
+    });
+  }
+  return {
+    ...lastResult,
+    error: lastResult?.error ?? "Brain Core did not report ok=true before the restart timeout elapsed.",
+    detail: lastResult?.detail ?? "Brain Core restart verification timed out."
+  };
+}
+async function readBrainCoreMaintenancePreviewDetail(baseUrl, previewId) {
+  return fetchJson(normalizeBaseUrl(baseUrl), `/execution/maintenance-previews/${previewId}`);
+}
+var requestUrlFn = null;
+function setRequestUrl(fn) {
+  requestUrlFn = fn;
+}
+async function fetchJson(baseUrl, pathname, options = {}, timeoutMs = REQUEST_TIMEOUT_MS) {
+  const url = `${baseUrl}${pathname}`;
+  const startTime = performance.now();
+  if (!requestUrlFn) {
+    return {
+      error: "Obsidian requestUrl not initialized",
+      url
+    };
+  }
+  try {
+    const response = await Promise.race([
+      requestUrlFn({
+        url,
+        method: options.method ?? "GET",
+        headers: { accept: "application/json" },
+        ...options.body ? { body: options.body } : {},
+        throw: false
+      }),
+      new Promise(
+        (_, reject) => setTimeout(() => reject(new Error("request timeout")), timeoutMs)
+      )
+    ]);
+    const responseTimeMs = Math.round(performance.now() - startTime);
+    if (response.status < 200 || response.status >= 300) {
+      const detail = response.text ? response.text.slice(0, 200) : void 0;
+      return {
+        error: `HTTP ${response.status}`,
+        status: response.status,
+        detail,
+        url,
+        responseTimeMs
+      };
+    }
+    let parsed;
+    try {
+      parsed = JSON.parse(response.text);
+    } catch {
+      return {
+        error: "invalid JSON response",
+        detail: response.text?.slice(0, 100),
+        url,
+        responseTimeMs
+      };
+    }
+    return { value: parsed, url, responseTimeMs };
+  } catch (error) {
+    const responseTimeMs = Math.round(performance.now() - startTime);
+    const errorMsg = error instanceof Error ? error.message : "request failed";
+    if ((errorMsg.includes("timeout") || errorMsg.includes("connection")) && isLocalTestUrl(baseUrl)) {
+      const fallbackUrl = tryGetFallbackLocalUrl(baseUrl);
+      if (fallbackUrl && fallbackUrl !== baseUrl) {
+        return fetchJsonWithFallback(fallbackUrl, pathname, responseTimeMs, timeoutMs);
+      }
+    }
+    return {
+      error: errorMsg,
+      url,
+      responseTimeMs
+    };
+  }
+}
+function safeParseJson(text) {
+  try {
+    return JSON.parse(text);
+  } catch {
+    return void 0;
+  }
+}
+async function fetchJsonWithFallback(fallbackUrl, pathname, firstAttemptMs, timeoutMs = REQUEST_TIMEOUT_MS) {
+  try {
+    const response = await Promise.race([
+      requestUrlFn({
+        url: `${fallbackUrl}${pathname}`,
+        method: "GET",
+        headers: { accept: "application/json" },
+        throw: false
+      }),
+      new Promise(
+        (_, reject) => setTimeout(() => reject(new Error("request timeout")), timeoutMs)
+      )
+    ]);
+    if (response.status < 200 || response.status >= 300) {
+      return { error: `HTTP ${response.status}`, url: `${fallbackUrl}${pathname}` };
+    }
+    const parsed = JSON.parse(response.text);
+    return {
+      value: parsed,
+      url: `${fallbackUrl}${pathname} (fallback)`
+    };
+  } catch (error) {
+    return {
+      error: error instanceof Error ? error.message : "fallback request failed",
+      url: `${fallbackUrl}${pathname}`
+    };
+  }
+}
+async function diagnoseBrainCoreConnection(configuredUrl) {
+  const attempts = [];
+  let selectedUrl = configuredUrl;
+  let selectedOk = false;
+  const urlsToTry = /* @__PURE__ */ new Set();
+  if (configuredUrl) urlsToTry.add(configuredUrl);
+  urlsToTry.add("http://127.0.0.1:4877");
+  urlsToTry.add("http://localhost:4877");
+  for (const url of urlsToTry) {
+    const result = await testBrainCoreUrl(url);
+    attempts.push(result);
+    if (result.ok && !selectedOk) {
+      selectedUrl = url;
+      selectedOk = true;
+    }
+  }
+  const allFailed = !selectedOk;
+  let recommendation = "";
+  if (allFailed) {
+    recommendation = "Brain Core is unreachable. Check if Brain Core is running on port 4877.";
+  } else if (selectedUrl !== configuredUrl) {
+    recommendation = `Using fallback URL: ${selectedUrl}`;
+  } else {
+    recommendation = `Connected to ${selectedUrl}`;
+  }
+  return {
+    configuredUrl,
+    selectedUrl,
+    attempts,
+    allFailed,
+    recommendation
+  };
+}
+async function testBrainCoreUrl(url) {
+  if (!requestUrlFn) {
+    return {
+      url,
+      ok: false,
+      error: "Obsidian requestUrl not initialized"
+    };
+  }
+  const testUrl = `${url}/status`;
+  const startTime = performance.now();
+  try {
+    const response = await Promise.race([
+      requestUrlFn({
+        url: testUrl,
+        method: "GET",
+        headers: { accept: "application/json" },
+        throw: false
+      }),
+      new Promise(
+        (_, reject) => setTimeout(() => reject(new Error("timeout")), 3e3)
+      )
+    ]);
+    const responseTimeMs = Math.round(performance.now() - startTime);
+    if (response.status === 200) {
+      return {
+        url,
+        ok: true,
+        status: response.status,
+        responseTimeMs
+      };
+    } else {
+      return {
+        url,
+        ok: false,
+        status: response.status,
+        error: `HTTP ${response.status}`,
+        responseTimeMs
+      };
+    }
+  } catch (error) {
+    const responseTimeMs = Math.round(performance.now() - startTime);
+    return {
+      url,
+      ok: false,
+      error: error instanceof Error ? error.message : "unknown error",
+      responseTimeMs
+    };
+  }
+}
+function isLocalTestUrl(url) {
+  return url.includes("localhost:4877") || url.includes("127.0.0.1:4877") || url.includes("localhost:4878") || url.includes("127.0.0.1:4878");
+}
+function tryGetFallbackLocalUrl(baseUrl) {
+  if (baseUrl.includes("localhost:")) {
+    return baseUrl.replace("localhost:", "127.0.0.1:");
+  }
+  if (baseUrl.includes("127.0.0.1:")) {
+    return baseUrl.replace("127.0.0.1:", "localhost:");
+  }
+  return null;
+}
+function normalizeBaseUrl(rawValue) {
+  return rawValue.replace(/\/+$/g, "");
+}
+async function readBrainCoreVideoOrchestratorThumbnailDesignPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/thumbnail-design");
+}
+async function readBrainCoreVideoOrchestratorArchiveLoggingPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/archive-logging-plan");
+}
+async function readBrainCoreVideoOrchestratorDesignProviderBoundaryPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/design-provider-boundary-plan");
+}
+async function readBrainCoreVideoOrchestratorDesignProviderCredentialIsolationPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/design-provider-credential-isolation-plan");
+}
+async function readBrainCoreVideoOrchestratorDesignProviderPromptReviewPolicyPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/design-provider-prompt-review-policy-plan");
+}
+async function readBrainCoreVideoOrchestratorArtifactSandboxProviderHandoffPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/artifact-sandbox-provider-handoff-plan");
+}
+async function readBrainCoreVideoOrchestratorProviderOutputRedactionPolicyPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-output-redaction-policy-plan");
+}
+async function readBrainCoreVideoOrchestratorDesignProviderComplianceChecklistPlans(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/design-provider-compliance-checklist-plan");
+}
+async function readBrainCoreVideoOrchestratorDesignProviderEnablementReadinessIndex(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/design-provider-enablement-readiness-index");
+}
+async function readBrainCoreVideoOrchestratorProviderIntegrationFinalPlanningCheckpoint(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-integration-final-planning-checkpoint");
+}
+async function readBrainCoreVideoOrchestratorCredentialStoreImplementationBoundaryPlan(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/credential-store-implementation-boundary-plan");
+}
+async function readBrainCoreVideoOrchestratorPromptReviewUxImplementationPlan(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/prompt-review-ux-implementation-plan");
+}
+async function readBrainCoreVideoOrchestratorProviderAuditPersistenceBoundaryPlan(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-audit-persistence-boundary-plan");
+}
+async function readBrainCoreVideoOrchestratorProviderWrapperSecurityReviewPlan(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-wrapper-security-review-plan");
+}
+async function readBrainCoreVideoOrchestratorProviderImplementationPhaseStartGate(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-implementation-phase-start-gate");
+}
+async function readBrainCoreVideoOrchestratorProviderImplementationReadinessDashboardSummary(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-implementation-readiness-dashboard-summary");
+}
+async function readBrainCoreVideoOrchestratorProviderImplementationApprovalPacket(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-implementation-approval-packet");
+}
+async function readBrainCoreVideoOrchestratorProviderApprovalPacketConsoleReviewSummary(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-approval-packet-console-review-summary");
+}
+async function readBrainCoreVideoOrchestratorProviderPlanningSurfaceIndex(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-planning-surface-index");
+}
+async function readBrainCoreVideoOrchestratorProviderRequestWrapperScaffold(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-request-wrapper-scaffold");
+}
+async function readBrainCoreVideoOrchestratorProviderWrapperValidationHarness(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-wrapper-validation-harness");
+}
+async function readBrainCoreVideoOrchestratorCredentialReferenceScaffold(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/credential-reference-scaffold");
+}
+async function readBrainCoreVideoOrchestratorProviderRequestEnvelopeScaffold(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-request-envelope-scaffold");
+}
+async function readBrainCoreVideoOrchestratorProviderResponseEnvelopeScaffold(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-response-envelope-scaffold");
+}
+async function readBrainCoreVideoOrchestratorProviderScaffoldingIntegrationSummary(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-scaffolding-integration-summary");
+}
+async function readBrainCoreVideoOrchestratorProviderRequestWrapperInertShell(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-request-wrapper-inert-shell");
+}
+async function readBrainCoreVideoOrchestratorCredentialReferenceValidator(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/credential-reference-validator");
+}
+async function readBrainCoreVideoOrchestratorProviderResponseRedactionSkeleton(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-response-redaction-skeleton");
+}
+async function readBrainCoreVideoOrchestratorProviderAuditEventTypes(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-audit-event-types");
+}
+async function readBrainCoreVideoOrchestratorProviderDisabledOrchestrationFacade(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-disabled-orchestration-facade");
+}
+async function readBrainCoreVideoOrchestratorProviderCapabilityPolicyEvaluator(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-capability-policy-evaluator");
+}
+async function readBrainCoreVideoOrchestratorProviderBlockedActionLedgerTypes(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-blocked-action-ledger-types");
+}
+async function readBrainCoreVideoOrchestratorProviderDisabledOrchestrationIntegrationSummary(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-disabled-orchestration-integration-summary");
+}
+async function readBrainCoreProBotSessionsParity(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/sessions-parity");
+}
+async function readBrainCoreProBotLocalAppsParity(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/local-apps-parity");
+}
+async function readBrainCoreProBotSchedulerParity(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/scheduler-parity");
+}
+async function readBrainCoreProBotStudioParity(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/studio-parity");
+}
+async function readBrainCoreProBotExternalAdminParity(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/external-admin-parity");
+}
+async function readBrainCoreProBotDecommissionReadiness(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/decommission-readiness");
+}
+async function readBrainCoreProBotExternalAdminSafeMetadata(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/external-admin-safe-metadata");
+}
+async function readBrainCoreProBotFeatureParityMatrix(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/feature-parity-matrix");
+}
+async function readBrainCoreProBotPhaseOutChecklist(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/phase-out-checklist");
+}
+async function readBrainCoreLocalAppsActionsStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/actions/status");
+}
+async function readBrainCoreInfraDokploy(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/dokploy");
+}
+async function readBrainCoreInfraTunnels(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/tunnels");
+}
+async function readBrainCoreInfraDomains(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/domains");
+}
+async function readBrainCoreInfraNewRelic(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/monitoring");
+}
+async function readBrainCoreInfraUmami(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/analytics");
+}
+async function readBrainCoreInfraGoogleAds(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/google-ads");
+}
+async function readBrainCoreInfraStripe(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/stripe");
+}
+async function readBrainCoreInfraStudio(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/studio");
+}
+async function readBrainCoreInfraVOStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/status");
+}
+async function readBrainCoreInfraPipelinesStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/pipelines/status");
+}
+async function readBrainCoreVOAccounts(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/accounts");
+}
+async function readBrainCoreVOAuthStatus(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/auth-status");
+}
+async function readBrainCoreVOJobs(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/jobs?limit=20");
+}
+function readBrainCoreSystemMetrics(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/system/metrics");
+}
+function readBrainCoreCredentials(baseUrl, projectId) {
+  return fetchJson(normalizeBaseUrl(baseUrl), `/credentials/${encodeURIComponent(projectId)}`);
+}
+function readBrainCoreCredentialCatalog(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/credentials/catalog");
+}
+async function setInfraPlistCredential(baseUrl, key, value) {
+  const url = `${normalizeBaseUrl(baseUrl)}/credentials/infra/set?key=${encodeURIComponent(key)}&value=${encodeURIComponent(value)}`;
+  try {
+    const res = await fetch(url, { method: "POST" });
+    return await res.json();
+  } catch (err) {
+    return { ok: false, key, error: err instanceof Error ? err.message : "fetch_failed" };
+  }
+}
+async function getYouTubeOAuthUrl(baseUrl, account) {
+  const url = `${normalizeBaseUrl(baseUrl)}/credentials/infra/youtube/auth-url?account=${encodeURIComponent(account)}`;
+  try {
+    const res = await fetch(url, { method: "POST" });
+    return await res.json();
+  } catch (err) {
+    return { ok: false, account, error: err instanceof Error ? err.message : "fetch_failed" };
+  }
+}
+async function exchangeYouTubeOAuthCode(baseUrl, account, code) {
+  const url = `${normalizeBaseUrl(baseUrl)}/credentials/infra/youtube/auth-exchange?account=${encodeURIComponent(account)}&code=${encodeURIComponent(code)}`;
+  try {
+    const res = await fetch(url, { method: "POST" });
+    return await res.json();
+  } catch (err) {
+    return { ok: false, account, error: err instanceof Error ? err.message : "fetch_failed" };
+  }
+}
+async function openBrowserUrl(baseUrl, target) {
+  const url = `${normalizeBaseUrl(baseUrl)}/open-url?url=${encodeURIComponent(target)}`;
+  try {
+    const res = await fetch(url, { method: "POST" });
+    return await res.json();
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : "fetch_failed" };
+  }
+}
+async function registerBrainCoreProject(baseUrl, entry) {
+  const params = new URLSearchParams({
+    projectId: entry.projectId,
+    displayName: entry.displayName,
+    repoPath: entry.repoPath,
+    envFileName: entry.envFileName,
+    platforms: entry.platforms.join(",")
+  });
+  try {
+    const res = await fetch(`${normalizeBaseUrl(baseUrl)}/credentials/projects/register?${params.toString()}`, { method: "POST" });
+    return await res.json();
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : "fetch_failed" };
+  }
+}
+async function setBrainCoreCredential(baseUrl, projectId, key, value) {
+  const url = `${normalizeBaseUrl(baseUrl)}/credentials/${encodeURIComponent(projectId)}/set?key=${encodeURIComponent(key)}&value=${encodeURIComponent(value)}`;
+  try {
+    const res = await fetch(url, { method: "POST" });
+    return await res.json();
+  } catch (err) {
+    return { ok: false, projectId, key, error: err instanceof Error ? err.message : "fetch_failed" };
+  }
+}
+async function revokeBrainCoreCredential(baseUrl, projectId, key) {
+  const url = `${normalizeBaseUrl(baseUrl)}/credentials/${encodeURIComponent(projectId)}/revoke?key=${encodeURIComponent(key)}`;
+  try {
+    const res = await fetch(url, { method: "POST" });
+    return await res.json();
+  } catch (err) {
+    return { ok: false, projectId, key, error: err instanceof Error ? err.message : "fetch_failed" };
+  }
+}
+async function readBrainCoreVONormalizeHistory(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/normalize-history?limit=10");
+}
+async function readBrainCoreVOManualQueue(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/manual-queue?limit=10");
+}
+async function readBrainCoreVOWorkerConfig(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/worker-config");
+}
+async function readBrainCoreVOAccountStats(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/accounts-stats");
+}
+async function readBrainCoreVOReadiness(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/readiness");
+}
+async function readBrainCoreAwsVideoPipelineStatus(baseUrl) {
+  return fetchJson(
+    normalizeBaseUrl(baseUrl),
+    "/api/video-orchestrator/topic-intelligence/status"
+  );
+}
+
 // src/components/Design/shadcn-components.ts
 function Badge(props) {
   const { count, status = "ok", className = "" } = props;
@@ -407,7 +1336,6 @@ function StatusPill(props) {
 }
 
 // src/components/VO/OverviewPanel.ts
-var BASE_URL = "http://localhost:4877";
 var REFRESH_INTERVAL_MS = 3e4;
 var OverviewPanel = class {
   container;
@@ -416,16 +1344,18 @@ var OverviewPanel = class {
   accountStats;
   accounts = [];
   voStatus;
+  brainCoreUrl;
   ctx = getVOContextManager();
   unsubscribe = null;
   refreshTimer = null;
   loading = false;
-  constructor(container, data) {
+  constructor(container, data, brainCoreUrl = "http://localhost:4877") {
     this.container = container;
     this.selector = data.selector;
     this.analytics = data.analytics;
     this.accountStats = data.accountStats;
     this.accounts = data.accounts || [];
+    this.brainCoreUrl = brainCoreUrl;
     this.unsubscribe = this.ctx.subscribe(() => this.render());
     this.render();
     this.fetchLiveData();
@@ -435,14 +1365,14 @@ var OverviewPanel = class {
     this.loading = true;
     try {
       const [statusRes, analyticsRes] = await Promise.allSettled([
-        fetch(`${BASE_URL}/api/video-orchestrator/topic-intelligence/status`).then((r) => r.json()),
-        fetch(`${BASE_URL}/api/video-orchestrator/analytics/summary`).then((r) => r.json())
+        readBrainCoreAwsVideoPipelineStatus(this.brainCoreUrl),
+        readBrainCoreVOStudioAnalyticsSummary(this.brainCoreUrl)
       ]);
-      if (statusRes.status === "fulfilled") {
-        this.voStatus = statusRes.value;
+      if (statusRes.status === "fulfilled" && statusRes.value?.value?.ok) {
+        this.voStatus = statusRes.value.value.data;
       }
-      if (analyticsRes.status === "fulfilled") {
-        this.analytics = analyticsRes.value;
+      if (analyticsRes.status === "fulfilled" && analyticsRes.value?.value?.ok) {
+        this.analytics = analyticsRes.value.value;
       }
     } catch {
     } finally {
@@ -1867,7 +2797,7 @@ var HistoryPanel = class {
 };
 
 // src/components/VO/ApprovalQueuePanel.ts
-var BASE_URL2 = "http://localhost:4877";
+var BASE_URL = "http://localhost:4877";
 function formatRelativeTime(iso) {
   const ms = Date.now() - new Date(iso).getTime();
   const minutes = Math.floor(ms / 6e4);
@@ -1933,7 +2863,7 @@ var ApprovalQueuePanel = class {
     if (body) body.innerHTML = '<p class="brain-console__detail">Loading...</p>';
     try {
       const qs = this.projectId ? `?projectId=${encodeURIComponent(this.projectId)}` : "";
-      const res = await fetch(`${BASE_URL2}/api/video-orchestrator/approvals${qs}`);
+      const res = await fetch(`${BASE_URL}/api/video-orchestrator/approvals${qs}`);
       const data = await res.json();
       this.approvals = Array.isArray(data.approvals) ? data.approvals : [];
       this.selectedIds = /* @__PURE__ */ new Set();
@@ -2316,7 +3246,7 @@ var ApprovalQueuePanel = class {
   }
   async bulkDecide(ids, approved) {
     try {
-      const res = await fetch(`${BASE_URL2}/api/video-orchestrator/approvals/bulk-decide`, {
+      const res = await fetch(`${BASE_URL}/api/video-orchestrator/approvals/bulk-decide`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ approvalIds: ids, approved })
@@ -2330,7 +3260,7 @@ var ApprovalQueuePanel = class {
   async singleDecide(approvalId, approved, note) {
     const action = approved ? "approve" : "reject";
     try {
-      await fetch(`${BASE_URL2}/api/video-orchestrator/approvals/${encodeURIComponent(approvalId)}/${action}`, {
+      await fetch(`${BASE_URL}/api/video-orchestrator/approvals/${encodeURIComponent(approvalId)}/${action}`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ note })
@@ -2344,7 +3274,7 @@ var ApprovalQueuePanel = class {
 };
 
 // src/components/VO/DeadLetterReviewPanel.ts
-var BASE_URL3 = "http://localhost:4877";
+var BASE_URL2 = "http://localhost:4877";
 function formatDate(value) {
   if (!value) return "\u2014";
   try {
@@ -2387,7 +3317,7 @@ var DeadLetterReviewPanel = class {
     if (this.isLoading) return;
     this.isLoading = true;
     try {
-      const url = `${BASE_URL3}/api/infra/video-orchestrator/jobs?projectId=${encodeURIComponent(this.projectId)}&status=dead&limit=50`;
+      const url = `${BASE_URL2}/api/infra/video-orchestrator/jobs?projectId=${encodeURIComponent(this.projectId)}&status=dead&limit=50`;
       const res = await fetch(url);
       const data = await res.json();
       this.jobs = Array.isArray(data.jobs) ? data.jobs : [];
@@ -3523,7 +4453,7 @@ var OperatorDashboardPanel = class {
 };
 
 // src/components/VO/JobProgressPanel.ts
-var BASE_URL4 = "http://localhost:4877";
+var BASE_URL3 = "http://localhost:4877";
 function formatDate2(value) {
   try {
     return new Date(value).toLocaleString();
@@ -3598,7 +4528,7 @@ var JobProgressPanel = class {
     }
     try {
       const qs = this.projectId ? `?projectId=${encodeURIComponent(this.projectId)}` : "";
-      const res = await fetch(`${BASE_URL4}/api/infra/video-orchestrator/jobs${qs}`);
+      const res = await fetch(`${BASE_URL3}/api/infra/video-orchestrator/jobs${qs}`);
       const data = await res.json();
       this.jobs = Array.isArray(data.jobs) ? data.jobs : [];
       this.renderJobs();
@@ -3928,11 +4858,13 @@ var VOShell = class {
   unsubscribe = null;
   contentContainer = null;
   currentTab = "overview";
+  brainCoreUrl;
   data;
-  constructor(container, data) {
+  constructor(container, data, brainCoreUrl = "http://localhost:4877") {
     this.container = container;
     this.container.classList.add("vo-shell");
     this.data = data;
+    this.brainCoreUrl = brainCoreUrl;
     const barContainer = document.createElement("div");
     this.contextBar = new VOContextBar(barContainer, data);
     this.container.appendChild(barContainer);
@@ -4039,12 +4971,16 @@ var VOShell = class {
     switch (this.currentTab) {
       case "overview":
         if (state.projectId && state.accountId) {
-          this.overviewPanel = new OverviewPanel(this.contentContainer, {
-            selector: this.data.selector,
-            analytics: this.data.analytics,
-            accountStats: this.data.accountStats,
-            accounts: this.data.accounts
-          });
+          this.overviewPanel = new OverviewPanel(
+            this.contentContainer,
+            {
+              selector: this.data.selector,
+              analytics: this.data.analytics,
+              accountStats: this.data.accountStats,
+              accounts: this.data.accounts
+            },
+            this.brainCoreUrl
+          );
         } else {
           this.contentContainer.innerHTML = `
             <div class="vo-empty-state">
@@ -4261,935 +5197,6 @@ var VOShell = class {
   }
 };
 
-// src/client.ts
-var REQUEST_TIMEOUT_MS = 1e4;
-async function readBrainCoreStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/status");
-}
-async function readBrainCoreCapabilities(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/capabilities");
-}
-async function readBrainCoreRuntimeReports(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/runtime/reports");
-}
-async function readBrainCoreSchedulerStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/scheduler/status");
-}
-async function readBrainCoreSchedulerJobs(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/scheduler/jobs");
-}
-async function readBrainCoreSessions(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/sessions");
-}
-async function readBrainCoreRepos(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/repos");
-}
-async function readBrainCoreApprovals(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/approvals");
-}
-async function readBrainCoreApprovalStore(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/approvals/store");
-}
-async function readBrainCoreExecutionPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/execution/plans");
-}
-async function readBrainCoreExecutionReadiness(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/execution/readiness");
-}
-async function readBrainCoreMindPreviewPolicy(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/execution/mind-preview-policy");
-}
-async function readBrainCoreMindPreviews(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/execution/mind-previews");
-}
-async function readBrainCoreVideoStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video/status");
-}
-async function readBrainCoreVideoQueue(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video/queue");
-}
-async function readBrainCoreLocalApps(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps");
-}
-async function readBrainCoreLocalAppsDashboard(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/dashboard");
-}
-async function readBrainCoreLocalAppsActionReadiness(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/action-readiness");
-}
-async function readBrainCoreLocalAppsOrchestrator(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/orchestrator");
-}
-async function readBrainCoreLocalAppsActionEnablementBacklog(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/action-enablement-backlog");
-}
-async function readBrainCoreLocalAppsOperationalReadiness(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/operational-readiness");
-}
-async function readBrainCoreLocalAppsOperatorSummary(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/operator-summary");
-}
-async function requestBrainCoreLocalAppAction(baseUrl, appId, action) {
-  const url = `${normalizeBaseUrl(baseUrl)}/local-apps/${encodeURIComponent(appId)}/${encodeURIComponent(action)}`;
-  const startTime = performance.now();
-  if (!requestUrlFn) {
-    return {
-      error: "Obsidian requestUrl not initialized",
-      url
-    };
-  }
-  try {
-    const response = await Promise.race([
-      requestUrlFn({
-        url,
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json"
-        },
-        body: JSON.stringify({ requestedBy: "brain-console", confirmation: true }),
-        throw: false
-      }),
-      new Promise(
-        (_, reject) => setTimeout(() => reject(new Error("request timeout")), REQUEST_TIMEOUT_MS)
-      )
-    ]);
-    const responseTimeMs = Math.round(performance.now() - startTime);
-    const parsed = safeParseJson(response.text ?? "{}");
-    if (response.status < 200 || response.status >= 300) {
-      return {
-        error: parsed?.message ?? `HTTP ${response.status}`,
-        status: response.status,
-        detail: parsed?.error ?? (response.text ? response.text.slice(0, 240) : void 0),
-        value: parsed,
-        url,
-        responseTimeMs
-      };
-    }
-    return {
-      status: response.status,
-      value: parsed ?? JSON.parse(response.text ?? "{}"),
-      url,
-      responseTimeMs
-    };
-  } catch (err) {
-    const responseTimeMs = Math.round(performance.now() - startTime);
-    return {
-      error: err instanceof Error ? err.message : String(err),
-      url,
-      responseTimeMs
-    };
-  }
-}
-async function readBrainCoreOrchestrators(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/orchestrators");
-}
-async function readBrainCorePipelines(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/pipelines");
-}
-async function readBrainCoreProjects(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/projects");
-}
-async function readBrainCorePlatforms(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/platforms");
-}
-async function readBrainCorePostOrchestratorStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/status");
-}
-async function readBrainCorePostOrchestratorFlows(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/flows");
-}
-async function readBrainCorePostOrchestratorDrafts(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/drafts");
-}
-async function readBrainCorePostOrchestratorEvents(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/events");
-}
-async function readBrainCorePostOrchestratorContracts(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/contracts");
-}
-async function readBrainCorePostOrchestratorIntegrations(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/integrations");
-}
-async function readBrainCorePostOrchestratorRecovery(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/recovery");
-}
-async function readBrainCorePostOrchestratorDryRun(baseUrl, eventId) {
-  return fetchJson(normalizeBaseUrl(baseUrl), `/post-orchestrator/dry-run/${encodeURIComponent(eventId)}`);
-}
-async function readBrainCorePostDraftReviewQueue(baseUrl, eventId) {
-  return fetchJson(normalizeBaseUrl(baseUrl), `/post-orchestrator/review-queue/${encodeURIComponent(eventId)}`);
-}
-async function requestBrainCorePostDraftReviewApproval(baseUrl, reviewItemId) {
-  return fetchJson(
-    normalizeBaseUrl(baseUrl),
-    `/post-orchestrator/review-queue/${encodeURIComponent(reviewItemId)}/request-approval`,
-    { method: "POST" }
-  );
-}
-async function readBrainCorePostSchedulePreviewQueue(baseUrl, eventId) {
-  return fetchJson(
-    normalizeBaseUrl(baseUrl),
-    `/post-orchestrator/schedule-preview/${encodeURIComponent(eventId)}`
-  );
-}
-async function requestBrainCorePostSchedulePreviewApproval(baseUrl, schedulePreviewItemId) {
-  return fetchJson(
-    normalizeBaseUrl(baseUrl),
-    `/post-orchestrator/schedule-preview/${encodeURIComponent(schedulePreviewItemId)}/request-approval`,
-    { method: "POST" }
-  );
-}
-async function readBrainCorePostAnalyticsFixtures(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/analytics");
-}
-async function readBrainCorePostPipelineSummary(baseUrl, eventId) {
-  return fetchJson(
-    normalizeBaseUrl(baseUrl),
-    `/post-orchestrator/pipeline/${encodeURIComponent(eventId)}`
-  );
-}
-async function readBrainCorePostReadinessScore(baseUrl, eventId) {
-  return fetchJson(
-    normalizeBaseUrl(baseUrl),
-    `/post-orchestrator/readiness/${encodeURIComponent(eventId)}`
-  );
-}
-async function readBrainCorePostPlatformPolicies(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/platform-policies");
-}
-async function readBrainCorePostDecommissionReadiness(baseUrl) {
-  return fetchJson(
-    normalizeBaseUrl(baseUrl),
-    "/post-orchestrator/decommission-readiness"
-  );
-}
-async function readBrainCorePostOperatorGuidance(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/operator-guidance");
-}
-async function readBrainCorePostManualExportPackage(baseUrl, eventId) {
-  return fetchJson(
-    normalizeBaseUrl(baseUrl),
-    `/post-orchestrator/manual-export/${encodeURIComponent(eventId)}`
-  );
-}
-async function readBrainCorePostAcceptanceChecklist(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/acceptance-checklist");
-}
-async function readBrainCorePostMigrationParityReport(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/migration-parity");
-}
-async function readBrainCorePostRoadmapCheckpoint(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/roadmap-checkpoint");
-}
-async function readBrainCorePostOrchestratorOverview(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/overview");
-}
-async function readBrainCorePostQaStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/post-orchestrator/qa-status");
-}
-async function readBrainCoreStbStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/stb/status");
-}
-async function readBrainCoreVideoOrchestratorStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/status");
-}
-async function readBrainCoreVOStudioProjects(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/projects");
-}
-async function readBrainCoreVOStudioAccounts(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/accounts");
-}
-async function readBrainCoreVOStudioPipelineProfiles(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/pipeline-profiles");
-}
-async function readBrainCoreVOStudioContentItems(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/content-items");
-}
-async function readBrainCoreVOStudioPackage(baseUrl, packageId) {
-  return fetchJson(normalizeBaseUrl(baseUrl), `/video-orchestrator/packages/${encodeURIComponent(packageId)}`);
-}
-async function readBrainCoreVOStudioAnalyticsSummary(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/analytics/summary");
-}
-async function readBrainCoreVideoOrchestratorIntake(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/intake");
-}
-async function readBrainCoreVideoOrchestratorAssetPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/asset-plan");
-}
-async function readBrainCoreVideoOrchestratorDesignPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/design-plan");
-}
-async function readBrainCoreVideoOrchestratorVoiceoverPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/voiceover-plan");
-}
-async function readBrainCoreVideoOrchestratorVisualsPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/visuals-plan");
-}
-async function readBrainCoreVideoOrchestratorAssemblyPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/assembly-plan");
-}
-async function readBrainCoreVideoOrchestratorMetadataPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/metadata-plan");
-}
-async function readBrainCoreVideoOrchestratorPublishingPrepPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/publishing-prep");
-}
-async function readBrainCoreVideoOrchestratorManualExportPackages(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/manual-export-package");
-}
-async function readBrainCoreStbVideoMigrationStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/stb-video-migration/status");
-}
-async function readBrainCoreStbVideoParityMatrix(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/stb-video/parity-matrix");
-}
-async function readBrainCoreStbVideoDualRunStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/stb-video/dual-run-status");
-}
-async function readBrainCoreStbVideoDualRunEvidence(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/stb-video/dual-run-evidence");
-}
-async function readBrainCoreVideoProductionGate(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/production-gate");
-}
-async function readBrainCoreVideoRenderExportPolicy(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/render-export-policy");
-}
-async function readBrainCoreVideoControlledDryRunDesign(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-dry-run-design");
-}
-async function readBrainCoreVideoProductionCutoverGate(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/production-cutover-gate");
-}
-async function readBrainCoreVideoReleaseCandidateReadiness(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/release-candidate-readiness");
-}
-async function readBrainCoreVideoOperatorDecisionQueue(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/operator-decision-queue");
-}
-async function readBrainCoreVideoControlledExecutionPolicyBoundary(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-policy-boundary");
-}
-async function readBrainCoreVideoControlledExecutionReadinessIndex(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-readiness-index");
-}
-async function readBrainCoreVideoRoadmapCheckpoint(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/roadmap-checkpoint");
-}
-async function readBrainCoreVideoOperatorReviewPacket(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/operator-review-packet");
-}
-async function readBrainCoreVideoPreviewCompletionIndex(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/preview-completion-index");
-}
-async function readBrainCoreVideoControlledExecutionPreflightChecklist(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-preflight-checklist");
-}
-async function readBrainCoreVideoControlledExecutionRiskRegister(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-risk-register");
-}
-async function readBrainCoreVideoControlledExecutionApprovalPayloadSchema(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-approval-payload-schema");
-}
-async function readBrainCoreVideoControlledExecutionPreflightValidatorSchema(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-preflight-validator-schema");
-}
-async function readBrainCoreVideoControlledExecutionPlanStub(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-plan-stub");
-}
-async function readBrainCoreVideoControlledExecutionApprovalRequestDesign(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-approval-request-design");
-}
-async function readBrainCoreVideoControlledExecutionDisabledGate(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-disabled-gate");
-}
-async function readBrainCoreVideoControlledExecutionSecondApprovalPolicy(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-second-approval-policy");
-}
-async function readBrainCoreVideoControlledExecutionOperatorIdentityProtocol(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-operator-identity-protocol");
-}
-async function readBrainCoreVideoControlledExecutionRolePolicy(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/controlled-execution-role-policy");
-}
-async function readBrainCoreControlledDualRunRequestDesign(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/stb-video/controlled-dual-run-request");
-}
-async function readBrainCoreAgents(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/agents");
-}
-async function readBrainCoreActions(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/actions");
-}
-async function readBrainCoreAgentRuns(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/agent-runs");
-}
-async function readBrainCoreAgentEvents(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/agent-events");
-}
-async function readBrainCoreAgentCostSummary(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/agent-cost-summary");
-}
-async function readBrainCoreRecoveryItems(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/recovery");
-}
-async function readBrainCoreApprovalDetail(baseUrl, approvalId) {
-  return fetchJson(normalizeBaseUrl(baseUrl), `/approvals/${approvalId}`);
-}
-async function readBrainCoreMindStewardReportDetail(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/runtime/reports/mind-steward");
-}
-async function readBrainCoreAiModelSelectorStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/ai-model-selector");
-}
-async function controlBrainCoreAiModelSelector(baseUrl, action) {
-  return fetchJson(normalizeBaseUrl(baseUrl), `/ai-model-selector/control?action=${action}`, {
-    method: "POST"
-  });
-}
-async function requestBrainCoreRestart(baseUrl) {
-  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
-  const url = `${normalizedBaseUrl}/ops/brain-core/restart`;
-  const startTime = performance.now();
-  if (!requestUrlFn) {
-    return {
-      error: "Obsidian requestUrl not initialized",
-      url
-    };
-  }
-  try {
-    const response = await Promise.race([
-      requestUrlFn({
-        url,
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json"
-        },
-        body: JSON.stringify({
-          confirmation: true,
-          requestedBy: "brain-console"
-        }),
-        throw: false
-      }),
-      new Promise(
-        (_, reject) => setTimeout(() => reject(new Error("request timeout")), REQUEST_TIMEOUT_MS)
-      )
-    ]);
-    const responseTimeMs = Math.round(performance.now() - startTime);
-    const parsed = safeParseJson(response.text ?? "{}");
-    if (response.status < 200 || response.status >= 300) {
-      return {
-        error: parsed?.message ?? `HTTP ${response.status}`,
-        status: response.status,
-        detail: response.text ? response.text.slice(0, 240) : void 0,
-        value: parsed,
-        url,
-        responseTimeMs
-      };
-    }
-    return {
-      value: parsed,
-      url,
-      responseTimeMs
-    };
-  } catch (error) {
-    const responseTimeMs = Math.round(performance.now() - startTime);
-    return {
-      error: error instanceof Error ? error.message : "request failed",
-      url,
-      responseTimeMs
-    };
-  }
-}
-async function waitForBrainCoreStatus(baseUrl, timeoutMs = 12e4, pollIntervalMs = 1500) {
-  const deadline = Date.now() + timeoutMs;
-  let lastResult;
-  while (Date.now() < deadline) {
-    lastResult = await fetchJson(normalizeBaseUrl(baseUrl), "/status", {}, 3e3);
-    if (lastResult.value?.ok === true) {
-      return lastResult;
-    }
-    await new Promise((resolve) => {
-      window.setTimeout(resolve, pollIntervalMs);
-    });
-  }
-  return {
-    ...lastResult,
-    error: lastResult?.error ?? "Brain Core did not report ok=true before the restart timeout elapsed.",
-    detail: lastResult?.detail ?? "Brain Core restart verification timed out."
-  };
-}
-async function readBrainCoreMaintenancePreviewDetail(baseUrl, previewId) {
-  return fetchJson(normalizeBaseUrl(baseUrl), `/execution/maintenance-previews/${previewId}`);
-}
-var requestUrlFn = null;
-function setRequestUrl(fn) {
-  requestUrlFn = fn;
-}
-async function fetchJson(baseUrl, pathname, options = {}, timeoutMs = REQUEST_TIMEOUT_MS) {
-  const url = `${baseUrl}${pathname}`;
-  const startTime = performance.now();
-  if (!requestUrlFn) {
-    return {
-      error: "Obsidian requestUrl not initialized",
-      url
-    };
-  }
-  try {
-    const response = await Promise.race([
-      requestUrlFn({
-        url,
-        method: options.method ?? "GET",
-        headers: { accept: "application/json" },
-        ...options.body ? { body: options.body } : {},
-        throw: false
-      }),
-      new Promise(
-        (_, reject) => setTimeout(() => reject(new Error("request timeout")), timeoutMs)
-      )
-    ]);
-    const responseTimeMs = Math.round(performance.now() - startTime);
-    if (response.status < 200 || response.status >= 300) {
-      const detail = response.text ? response.text.slice(0, 200) : void 0;
-      return {
-        error: `HTTP ${response.status}`,
-        status: response.status,
-        detail,
-        url,
-        responseTimeMs
-      };
-    }
-    let parsed;
-    try {
-      parsed = JSON.parse(response.text);
-    } catch {
-      return {
-        error: "invalid JSON response",
-        detail: response.text?.slice(0, 100),
-        url,
-        responseTimeMs
-      };
-    }
-    return { value: parsed, url, responseTimeMs };
-  } catch (error) {
-    const responseTimeMs = Math.round(performance.now() - startTime);
-    const errorMsg = error instanceof Error ? error.message : "request failed";
-    if ((errorMsg.includes("timeout") || errorMsg.includes("connection")) && isLocalTestUrl(baseUrl)) {
-      const fallbackUrl = tryGetFallbackLocalUrl(baseUrl);
-      if (fallbackUrl && fallbackUrl !== baseUrl) {
-        return fetchJsonWithFallback(fallbackUrl, pathname, responseTimeMs, timeoutMs);
-      }
-    }
-    return {
-      error: errorMsg,
-      url,
-      responseTimeMs
-    };
-  }
-}
-function safeParseJson(text) {
-  try {
-    return JSON.parse(text);
-  } catch {
-    return void 0;
-  }
-}
-async function fetchJsonWithFallback(fallbackUrl, pathname, firstAttemptMs, timeoutMs = REQUEST_TIMEOUT_MS) {
-  try {
-    const response = await Promise.race([
-      requestUrlFn({
-        url: `${fallbackUrl}${pathname}`,
-        method: "GET",
-        headers: { accept: "application/json" },
-        throw: false
-      }),
-      new Promise(
-        (_, reject) => setTimeout(() => reject(new Error("request timeout")), timeoutMs)
-      )
-    ]);
-    if (response.status < 200 || response.status >= 300) {
-      return { error: `HTTP ${response.status}`, url: `${fallbackUrl}${pathname}` };
-    }
-    const parsed = JSON.parse(response.text);
-    return {
-      value: parsed,
-      url: `${fallbackUrl}${pathname} (fallback)`
-    };
-  } catch (error) {
-    return {
-      error: error instanceof Error ? error.message : "fallback request failed",
-      url: `${fallbackUrl}${pathname}`
-    };
-  }
-}
-async function diagnoseBrainCoreConnection(configuredUrl) {
-  const attempts = [];
-  let selectedUrl = configuredUrl;
-  let selectedOk = false;
-  const urlsToTry = /* @__PURE__ */ new Set();
-  if (configuredUrl) urlsToTry.add(configuredUrl);
-  urlsToTry.add("http://127.0.0.1:4877");
-  urlsToTry.add("http://localhost:4877");
-  for (const url of urlsToTry) {
-    const result = await testBrainCoreUrl(url);
-    attempts.push(result);
-    if (result.ok && !selectedOk) {
-      selectedUrl = url;
-      selectedOk = true;
-    }
-  }
-  const allFailed = !selectedOk;
-  let recommendation = "";
-  if (allFailed) {
-    recommendation = "Brain Core is unreachable. Check if Brain Core is running on port 4877.";
-  } else if (selectedUrl !== configuredUrl) {
-    recommendation = `Using fallback URL: ${selectedUrl}`;
-  } else {
-    recommendation = `Connected to ${selectedUrl}`;
-  }
-  return {
-    configuredUrl,
-    selectedUrl,
-    attempts,
-    allFailed,
-    recommendation
-  };
-}
-async function testBrainCoreUrl(url) {
-  if (!requestUrlFn) {
-    return {
-      url,
-      ok: false,
-      error: "Obsidian requestUrl not initialized"
-    };
-  }
-  const testUrl = `${url}/status`;
-  const startTime = performance.now();
-  try {
-    const response = await Promise.race([
-      requestUrlFn({
-        url: testUrl,
-        method: "GET",
-        headers: { accept: "application/json" },
-        throw: false
-      }),
-      new Promise(
-        (_, reject) => setTimeout(() => reject(new Error("timeout")), 3e3)
-      )
-    ]);
-    const responseTimeMs = Math.round(performance.now() - startTime);
-    if (response.status === 200) {
-      return {
-        url,
-        ok: true,
-        status: response.status,
-        responseTimeMs
-      };
-    } else {
-      return {
-        url,
-        ok: false,
-        status: response.status,
-        error: `HTTP ${response.status}`,
-        responseTimeMs
-      };
-    }
-  } catch (error) {
-    const responseTimeMs = Math.round(performance.now() - startTime);
-    return {
-      url,
-      ok: false,
-      error: error instanceof Error ? error.message : "unknown error",
-      responseTimeMs
-    };
-  }
-}
-function isLocalTestUrl(url) {
-  return url.includes("localhost:4877") || url.includes("127.0.0.1:4877") || url.includes("localhost:4878") || url.includes("127.0.0.1:4878");
-}
-function tryGetFallbackLocalUrl(baseUrl) {
-  if (baseUrl.includes("localhost:")) {
-    return baseUrl.replace("localhost:", "127.0.0.1:");
-  }
-  if (baseUrl.includes("127.0.0.1:")) {
-    return baseUrl.replace("127.0.0.1:", "localhost:");
-  }
-  return null;
-}
-function normalizeBaseUrl(rawValue) {
-  return rawValue.replace(/\/+$/g, "");
-}
-async function readBrainCoreVideoOrchestratorThumbnailDesignPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/thumbnail-design");
-}
-async function readBrainCoreVideoOrchestratorArchiveLoggingPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/archive-logging-plan");
-}
-async function readBrainCoreVideoOrchestratorDesignProviderBoundaryPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/design-provider-boundary-plan");
-}
-async function readBrainCoreVideoOrchestratorDesignProviderCredentialIsolationPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/design-provider-credential-isolation-plan");
-}
-async function readBrainCoreVideoOrchestratorDesignProviderPromptReviewPolicyPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/design-provider-prompt-review-policy-plan");
-}
-async function readBrainCoreVideoOrchestratorArtifactSandboxProviderHandoffPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/artifact-sandbox-provider-handoff-plan");
-}
-async function readBrainCoreVideoOrchestratorProviderOutputRedactionPolicyPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-output-redaction-policy-plan");
-}
-async function readBrainCoreVideoOrchestratorDesignProviderComplianceChecklistPlans(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/design-provider-compliance-checklist-plan");
-}
-async function readBrainCoreVideoOrchestratorDesignProviderEnablementReadinessIndex(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/design-provider-enablement-readiness-index");
-}
-async function readBrainCoreVideoOrchestratorProviderIntegrationFinalPlanningCheckpoint(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-integration-final-planning-checkpoint");
-}
-async function readBrainCoreVideoOrchestratorCredentialStoreImplementationBoundaryPlan(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/credential-store-implementation-boundary-plan");
-}
-async function readBrainCoreVideoOrchestratorPromptReviewUxImplementationPlan(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/prompt-review-ux-implementation-plan");
-}
-async function readBrainCoreVideoOrchestratorProviderAuditPersistenceBoundaryPlan(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-audit-persistence-boundary-plan");
-}
-async function readBrainCoreVideoOrchestratorProviderWrapperSecurityReviewPlan(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-wrapper-security-review-plan");
-}
-async function readBrainCoreVideoOrchestratorProviderImplementationPhaseStartGate(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-implementation-phase-start-gate");
-}
-async function readBrainCoreVideoOrchestratorProviderImplementationReadinessDashboardSummary(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-implementation-readiness-dashboard-summary");
-}
-async function readBrainCoreVideoOrchestratorProviderImplementationApprovalPacket(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-implementation-approval-packet");
-}
-async function readBrainCoreVideoOrchestratorProviderApprovalPacketConsoleReviewSummary(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-approval-packet-console-review-summary");
-}
-async function readBrainCoreVideoOrchestratorProviderPlanningSurfaceIndex(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-planning-surface-index");
-}
-async function readBrainCoreVideoOrchestratorProviderRequestWrapperScaffold(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-request-wrapper-scaffold");
-}
-async function readBrainCoreVideoOrchestratorProviderWrapperValidationHarness(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-wrapper-validation-harness");
-}
-async function readBrainCoreVideoOrchestratorCredentialReferenceScaffold(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/credential-reference-scaffold");
-}
-async function readBrainCoreVideoOrchestratorProviderRequestEnvelopeScaffold(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-request-envelope-scaffold");
-}
-async function readBrainCoreVideoOrchestratorProviderResponseEnvelopeScaffold(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-response-envelope-scaffold");
-}
-async function readBrainCoreVideoOrchestratorProviderScaffoldingIntegrationSummary(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-scaffolding-integration-summary");
-}
-async function readBrainCoreVideoOrchestratorProviderRequestWrapperInertShell(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-request-wrapper-inert-shell");
-}
-async function readBrainCoreVideoOrchestratorCredentialReferenceValidator(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/credential-reference-validator");
-}
-async function readBrainCoreVideoOrchestratorProviderResponseRedactionSkeleton(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-response-redaction-skeleton");
-}
-async function readBrainCoreVideoOrchestratorProviderAuditEventTypes(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-audit-event-types");
-}
-async function readBrainCoreVideoOrchestratorProviderDisabledOrchestrationFacade(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-disabled-orchestration-facade");
-}
-async function readBrainCoreVideoOrchestratorProviderCapabilityPolicyEvaluator(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-capability-policy-evaluator");
-}
-async function readBrainCoreVideoOrchestratorProviderBlockedActionLedgerTypes(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-blocked-action-ledger-types");
-}
-async function readBrainCoreVideoOrchestratorProviderDisabledOrchestrationIntegrationSummary(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/provider-disabled-orchestration-integration-summary");
-}
-async function readBrainCoreProBotSessionsParity(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/sessions-parity");
-}
-async function readBrainCoreProBotLocalAppsParity(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/local-apps-parity");
-}
-async function readBrainCoreProBotSchedulerParity(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/scheduler-parity");
-}
-async function readBrainCoreProBotStudioParity(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/studio-parity");
-}
-async function readBrainCoreProBotExternalAdminParity(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/external-admin-parity");
-}
-async function readBrainCoreProBotDecommissionReadiness(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/decommission-readiness");
-}
-async function readBrainCoreProBotExternalAdminSafeMetadata(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/external-admin-safe-metadata");
-}
-async function readBrainCoreProBotFeatureParityMatrix(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/feature-parity-matrix");
-}
-async function readBrainCoreProBotPhaseOutChecklist(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/probot/phase-out-checklist");
-}
-async function readBrainCoreLocalAppsActionsStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/local-apps/actions/status");
-}
-async function readBrainCoreInfraDokploy(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/dokploy");
-}
-async function readBrainCoreInfraTunnels(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/tunnels");
-}
-async function readBrainCoreInfraDomains(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/domains");
-}
-async function readBrainCoreInfraNewRelic(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/monitoring");
-}
-async function readBrainCoreInfraUmami(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/analytics");
-}
-async function readBrainCoreInfraGoogleAds(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/google-ads");
-}
-async function readBrainCoreInfraStripe(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/stripe");
-}
-async function readBrainCoreInfraStudio(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/studio");
-}
-async function readBrainCoreInfraVOStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/status");
-}
-async function readBrainCoreInfraPipelinesStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/pipelines/status");
-}
-async function readBrainCoreVOAccounts(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/accounts");
-}
-async function readBrainCoreVOAuthStatus(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/auth-status");
-}
-async function readBrainCoreVOJobs(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/jobs?limit=20");
-}
-function readBrainCoreSystemMetrics(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/system/metrics");
-}
-function readBrainCoreCredentials(baseUrl, projectId) {
-  return fetchJson(normalizeBaseUrl(baseUrl), `/credentials/${encodeURIComponent(projectId)}`);
-}
-function readBrainCoreCredentialCatalog(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/credentials/catalog");
-}
-async function setInfraPlistCredential(baseUrl, key, value) {
-  const url = `${normalizeBaseUrl(baseUrl)}/credentials/infra/set?key=${encodeURIComponent(key)}&value=${encodeURIComponent(value)}`;
-  try {
-    const res = await fetch(url, { method: "POST" });
-    return await res.json();
-  } catch (err) {
-    return { ok: false, key, error: err instanceof Error ? err.message : "fetch_failed" };
-  }
-}
-async function getYouTubeOAuthUrl(baseUrl, account) {
-  const url = `${normalizeBaseUrl(baseUrl)}/credentials/infra/youtube/auth-url?account=${encodeURIComponent(account)}`;
-  try {
-    const res = await fetch(url, { method: "POST" });
-    return await res.json();
-  } catch (err) {
-    return { ok: false, account, error: err instanceof Error ? err.message : "fetch_failed" };
-  }
-}
-async function exchangeYouTubeOAuthCode(baseUrl, account, code) {
-  const url = `${normalizeBaseUrl(baseUrl)}/credentials/infra/youtube/auth-exchange?account=${encodeURIComponent(account)}&code=${encodeURIComponent(code)}`;
-  try {
-    const res = await fetch(url, { method: "POST" });
-    return await res.json();
-  } catch (err) {
-    return { ok: false, account, error: err instanceof Error ? err.message : "fetch_failed" };
-  }
-}
-async function openBrowserUrl(baseUrl, target) {
-  const url = `${normalizeBaseUrl(baseUrl)}/open-url?url=${encodeURIComponent(target)}`;
-  try {
-    const res = await fetch(url, { method: "POST" });
-    return await res.json();
-  } catch (err) {
-    return { ok: false, error: err instanceof Error ? err.message : "fetch_failed" };
-  }
-}
-async function registerBrainCoreProject(baseUrl, entry) {
-  const params = new URLSearchParams({
-    projectId: entry.projectId,
-    displayName: entry.displayName,
-    repoPath: entry.repoPath,
-    envFileName: entry.envFileName,
-    platforms: entry.platforms.join(",")
-  });
-  try {
-    const res = await fetch(`${normalizeBaseUrl(baseUrl)}/credentials/projects/register?${params.toString()}`, { method: "POST" });
-    return await res.json();
-  } catch (err) {
-    return { ok: false, error: err instanceof Error ? err.message : "fetch_failed" };
-  }
-}
-async function setBrainCoreCredential(baseUrl, projectId, key, value) {
-  const url = `${normalizeBaseUrl(baseUrl)}/credentials/${encodeURIComponent(projectId)}/set?key=${encodeURIComponent(key)}&value=${encodeURIComponent(value)}`;
-  try {
-    const res = await fetch(url, { method: "POST" });
-    return await res.json();
-  } catch (err) {
-    return { ok: false, projectId, key, error: err instanceof Error ? err.message : "fetch_failed" };
-  }
-}
-async function revokeBrainCoreCredential(baseUrl, projectId, key) {
-  const url = `${normalizeBaseUrl(baseUrl)}/credentials/${encodeURIComponent(projectId)}/revoke?key=${encodeURIComponent(key)}`;
-  try {
-    const res = await fetch(url, { method: "POST" });
-    return await res.json();
-  } catch (err) {
-    return { ok: false, projectId, key, error: err instanceof Error ? err.message : "fetch_failed" };
-  }
-}
-async function readBrainCoreVONormalizeHistory(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/normalize-history?limit=10");
-}
-async function readBrainCoreVOManualQueue(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/manual-queue?limit=10");
-}
-async function readBrainCoreVOWorkerConfig(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/worker-config");
-}
-async function readBrainCoreVOAccountStats(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/accounts-stats");
-}
-async function readBrainCoreVOReadiness(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/readiness");
-}
-async function readBrainCoreAwsVideoPipelineStatus(baseUrl) {
-  return fetchJson(
-    normalizeBaseUrl(baseUrl),
-    "/api/video-orchestrator/topic-intelligence/status"
-  );
-}
-
 // src/components/VO/AwsVideoPipelinePanel.ts
 var REFRESH_INTERVAL_MS2 = 3e4;
 var AwsVideoPipelinePanel = class {
@@ -5211,10 +5218,12 @@ var AwsVideoPipelinePanel = class {
     this.error = void 0;
     try {
       const result = await readBrainCoreAwsVideoPipelineStatus(this.baseUrl);
-      if (result.ok && result.data) {
-        this.data = result.data;
+      if (result.error) {
+        this.error = result.error;
+      } else if (result.value?.ok && result.value.data) {
+        this.data = result.value.data;
       } else {
-        this.error = result.error || "Failed to fetch pipeline status";
+        this.error = "Failed to fetch pipeline status";
       }
     } catch (err) {
       this.error = err instanceof Error ? err.message : "Fetch failed";
@@ -6505,7 +6514,7 @@ function renderActiveSectionContent(shell, activeSection, state, snapshot, setti
         renderPipelinesSection(content, state, snapshot);
         break;
       case "video-orchestrator":
-        renderVideoOrchestratorSection(content, state);
+        renderVideoOrchestratorSection(content, state, settings);
         break;
       case "projects":
         renderProjectsSection(content, state, snapshot);
@@ -6951,17 +6960,22 @@ function renderMonitoringSection(content, state) {
   }
   renderCard(grid, `Synthetic Monitors (${synthetics.length})`, syntheticsCard);
 }
-function renderVideoOrchestratorSection(content, state) {
+function renderVideoOrchestratorSection(content, state, settings) {
   const container = content.createDiv({ cls: "vo-studio-container" });
-  const voShell = new VOShell(container, {
-    projects: state.voStudioProjects?.items,
-    accounts: state.voStudioAccounts?.items,
-    pipelineProfiles: state.voStudioPipelineProfiles?.items,
-    contentItems: state.voStudioContentItems?.items,
-    selector: state.aiModelSelectorStatus,
-    analytics: state.voStudioAnalytics,
-    accountStats: state.voAccountStats
-  });
+  const brainCoreUrl = settings?.brainCoreUrl ?? "http://localhost:4877";
+  const voShell = new VOShell(
+    container,
+    {
+      projects: state.voStudioProjects?.items,
+      accounts: state.voStudioAccounts?.items,
+      pipelineProfiles: state.voStudioPipelineProfiles?.items,
+      contentItems: state.voStudioContentItems?.items,
+      selector: state.aiModelSelectorStatus,
+      analytics: state.voStudioAnalytics,
+      accountStats: state.voAccountStats
+    },
+    brainCoreUrl
+  );
 }
 function renderVOContextBar(parent, state) {
   const project = state.voStudioProjects?.items?.[0];
