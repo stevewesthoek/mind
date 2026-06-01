@@ -207,11 +207,21 @@ If documents conflict, update the lower-level document to match the higher-level
 
 The Video Orchestrator is a ProChat OS module, not a separate platform.
 
+There are two separate Video Orchestrator execution lanes:
+
+```text
+Local Video Orchestrator = local development, readiness, fixtures, operator review, and Brain Console visibility.
+Cloud Video Orchestrator = AWS-backed media generation, rendering, storage, and async execution.
+```
+
+They may share workflow concepts, metadata contracts, approval gates, templates, Brain Core visibility, and Brain Console dashboard surfaces. They must not be described as the same implementation.
+
 Canonical direction:
 
 ```text
 ProChat OS owns workflows.
-AWS owns media execution.
+Local Video Orchestrator owns local readiness and control surfaces.
+Cloud Video Orchestrator owns AWS-backed media execution.
 ```
 
 Architecture:
@@ -220,8 +230,10 @@ Architecture:
 ProChat OS
   ↓
 Video Orchestrator Module
-  ↓
-AWS Execution Layer
+  ├─ Local Video Orchestrator lane
+  │   └─ local readiness, fixtures, dry-runs, Brain Core surfaces, Brain Console visibility
+  └─ Cloud Video Orchestrator lane
+      └─ AWS execution layer
 ```
 
 ProChat OS owns:
@@ -287,7 +299,7 @@ Reason for this decision:
 - better async processing
 - better use of available AWS credits
 
-The old local-first direction is no longer canonical for video. Local AI can still be used later for drafts, cheap text tasks, experiments, or privacy-sensitive workflows, but the first production video pipeline should use AWS as the execution backend.
+Local-first production media execution is not the canonical production path for the first video pipeline. The Local Video Orchestrator remains a canonical separate lane for local development, readiness, fixtures, dry-runs, operator review, and Brain Console visibility. The Cloud Video Orchestrator is the canonical AWS-backed lane for production-oriented media generation, rendering, storage, and async execution.
 
 ## Video Orchestrator purpose
 
@@ -323,7 +335,7 @@ Audit findings from the current repo state:
 - The existing roadmap mentions video orchestration as an organic content example and video planning as a future shared module.
 - The live video note treats Brain Core as the owner of runtime video status, which risks implying a separate local orchestration runtime.
 - The technical definition already supports optional modules, shared computation, human approvals, logs, and model/provider routing.
-- The docs need one clear rule to avoid drift: ProChat OS owns workflow state; AWS owns media execution.
+- The docs need one clear rule to avoid drift: ProChat OS owns workflow state; AWS owns cloud media execution.
 
 Conflicting or outdated assumptions to remove:
 
@@ -1408,3 +1420,35 @@ These do not block the strategy:
 - exact demo script and outreach sequence
 
 Those belong in roadmap, implementation, offer, and outreach docs.
+
+## Cross-repo and Video Orchestrator boundary note
+
+The canonical cross-repo constitution lives in:
+
+```text
+wiki/system/repo-boundaries.md
+```
+
+For ProChat OS work, use this rule:
+
+```text
+Strategy lives in mind.
+Execution lives in brain.
+API truth lives in Brain Core.
+UI truth lives in Brain Console.
+```
+
+The Video Orchestrator has two distinct execution lanes:
+
+```text
+Local Video Orchestrator
+Cloud Video Orchestrator
+```
+
+They share ProChat OS workflow concepts, approval concepts, metadata concepts, and Brain Console visibility, but they must not be mixed as one implementation.
+
+The Local Video Orchestrator is for local development, fixtures, dry-runs, readiness checks, local runtime reports, operator review, and Brain Console visibility. Local tooling may validate concepts and workflow contracts, but local shortcuts are not automatically the production media execution path.
+
+The Cloud Video Orchestrator is the AWS-backed execution path for media generation, rendering, storage, transcoding, and long-running orchestration. This is the current production-oriented path for the AWS-backed Video Orchestrator proof.
+
+Both lanes may appear in Brain Console, but every surface should identify whether it represents local capability, cloud capability, or shared metadata/status.
