@@ -3911,10 +3911,15 @@ var ScriptDraftsPanel = class {
   container;
   scriptsPayload;
   error;
+  refreshCallback;
+  brainCoreUrl;
+  activeDialog = null;
   constructor(container, data = {}) {
     this.container = container;
     this.scriptsPayload = data.scripts;
     this.error = data.error;
+    this.refreshCallback = typeof data.refresh === "function" ? data.refresh : null;
+    this.brainCoreUrl = typeof data.brainCoreUrl === "string" && data.brainCoreUrl.trim() ? data.brainCoreUrl.trim() : DEFAULT_BRAIN_CONSOLE_SETTINGS.brainCoreUrl;
   }
   initialize() {
     this.render();
@@ -3928,15 +3933,27 @@ var ScriptDraftsPanel = class {
     header.innerHTML = `
       <div>
         <h3>Script Drafts</h3>
-        <div class="vo-script-drafts__subtitle">Read-only Brain Core script review surface. Approval actions are not wired yet.</div>
+        <div class="vo-script-drafts__subtitle">Read-only Brain Core script review surface. Actions stay explicit and route through Brain Core only.</div>
       </div>
     `;
     shell.appendChild(header);
-    if (this.error || !this.scriptsPayload) {
+    if (this.error) {
       const errorEl = document.createElement("div");
       errorEl.className = "vo-empty-state vo-script-drafts__error";
       errorEl.textContent = "Brain Core script endpoint unavailable.";
       shell.appendChild(errorEl);
+      const errorDetail = document.createElement("div");
+      errorDetail.className = "brain-console__error-detail";
+      errorDetail.textContent = this.formatSafeError(this.error);
+      shell.appendChild(errorDetail);
+      this.container.appendChild(shell);
+      return;
+    }
+    if (this.error || !this.scriptsPayload) {
+      const empty = document.createElement("div");
+      empty.className = "vo-empty-state";
+      empty.textContent = "No script drafts found.";
+      shell.appendChild(empty);
       this.container.appendChild(shell);
       return;
     }
@@ -3965,16 +3982,36 @@ var ScriptDraftsPanel = class {
       const sections = Array.isArray(draft.sections) ? draft.sections : [];
       const preview = this.buildPreview(draft, sections);
       const approval = item.approval ?? draft.approval ?? item.approvalStatus ?? draft.approvalStatus ?? {};
+      const approvalStatus = this.normalizeApprovalStatus(approval, item, draft, channelId);
+      const published = this.isPublished(item, draft);
+      const locked = published || approvalStatus === "approved";
       return {
         jobId: String(item.jobId ?? draft.jobId ?? item.id ?? draft.id ?? `script-draft-${index + 1}`),
         channelId,
         topicTitle: String(item.topicTitle ?? item.title ?? draft.topicTitle ?? draft.title ?? "Untitled script"),
         scriptStatus: String(draft.status ?? item.status ?? "unknown"),
-        approvalStatus: typeof approval === "string" ? approval : String(approval.status ?? approval.state ?? (channelId === "says-the-bible" ? "theology_review_required" : "approval_required")),
+        approvalStatus,
+        approvalStatusRaw: typeof approval === "string" ? approval : String(approval.status ?? approval.state ?? approval.label ?? approval.decision ?? ""),
         wordCount: Number(draft.metadata?.wordCount ?? draft.wordCount ?? item.wordCount ?? 0),
-        scriptPreview: preview
+        scriptPreview: preview,
+        warningText: channelId === "says-the-bible" ? "Theology review required before approval." : "",
+        locked,
+        lockedReason: published ? "Script already uploaded or published." : approvalStatus === "approved" ? "Script already approved." : "",
+        canApprove: !locked && approvalStatus !== "approved",
+        canRequestChanges: !published && approvalStatus !== "approved"
       };
     });
+  }
+  normalizeApprovalStatus(approval, item, draft, channelId) {
+    const rawValue = String(typeof approval === "string" ? approval : approval?.status ?? approval?.state ?? approval?.label ?? approval?.decision ?? approval?.result ?? item.approvalStatus ?? draft.approvalStatus ?? "").trim().toLowerCase();
+    const normalized = rawValue.replace(/[\s-]+/g, "_");
+    if (normalized === "approved" || normalized.includes("approved")) return "approved";
+    if (normalized === "changes_requested" || normalized.includes("changes_requested") || normalized.includes("request_changes") || normalized.includes("needs_changes") || normalized.includes("change_requested")) return "changes_requested";
+    if (normalized === "pending" || normalized.includes("pending") || normalized.includes("approval_required") || normalized.includes("review_required") || normalized.includes("theology_review_required")) return "pending";
+    if (item.approved === true || draft.approved === true) return "approved";
+    if (item.changesRequested === true || draft.changesRequested === true) return "changes_requested";
+    if (channelId === "says-the-bible") return "pending";
+    return "pending";
   }
   resolveChannelId(item, draft) {
     const explicit = item.channelId ?? draft.channelId;
@@ -3991,6 +4028,22 @@ var ScriptDraftsPanel = class {
     }
     return sections.map((section) => section.narration ?? section.sampleNarration ?? section.text ?? "").filter(Boolean).join(" ").trim();
   }
+  isPublished(item, draft) {
+    const states = [
+      item.status,
+      draft.status,
+      item.publishStatus,
+      draft.publishStatus,
+      item.deliveryStatus,
+      draft.deliveryStatus,
+      item.uploadStatus,
+      draft.uploadStatus,
+      item.pipelineState,
+      draft.pipelineState
+    ].map((value) => String(value ?? "").toLowerCase());
+    if (item.published === true || draft.published === true || item.uploaded === true || draft.uploaded === true) return true;
+    return states.some((value) => value.includes("published") || value.includes("uploaded"));
+  }
   renderDraftCard(draft) {
     const card = document.createElement("article");
     card.className = "vo-script-draft-card";
@@ -4005,22 +4058,239 @@ var ScriptDraftsPanel = class {
       </div>
       <div class="vo-script-draft-card__stats">
         <div><span>Script</span><strong>${this.escapeHtml(draft.scriptStatus)}</strong></div>
-        <div><span>Approval</span><strong>${this.escapeHtml(draft.approvalStatus)}</strong></div>
+        <div><span>Approval</span><strong class="vo-script-draft-card__status vo-script-draft-card__status--${this.escapeHtml(draft.approvalStatus)}">${this.escapeHtml(draft.approvalStatus)}</strong></div>
         <div><span>Words</span><strong>${draft.wordCount > 0 ? String(draft.wordCount) : "Not reported"}</strong></div>
       </div>
+      ${draft.warningText ? `<div class="vo-script-draft-card__warning">${this.escapeHtml(draft.warningText)}</div>` : ""}
+      ${draft.lockedReason ? `<div class="vo-script-draft-card__locked">${this.escapeHtml(draft.lockedReason)}</div>` : ""}
       <pre class="vo-script-draft-card__preview">${this.escapeHtml(draft.scriptPreview || "No script preview available.")}</pre>
       <div class="vo-script-draft-card__actions">
-        <button class="vo-button vo-button-secondary" disabled>Review - not wired yet</button>
-        <button class="vo-button vo-button-secondary" disabled>Approve - not wired yet</button>
-        <button class="vo-button vo-button-secondary" disabled>Request changes - not wired yet</button>
+        <button class="vo-button vo-button-secondary" type="button" data-script-action="review">Review</button>
+        <button class="vo-button vo-button-secondary" type="button" data-script-action="approve">Approve</button>
+        <button class="vo-button vo-button-secondary" type="button" data-script-action="request-changes">Request changes</button>
       </div>
     `;
+    const reviewBtn = card.querySelector('[data-script-action="review"]');
+    const approveBtn = card.querySelector('[data-script-action="approve"]');
+    const requestBtn = card.querySelector('[data-script-action="request-changes"]');
+    if (reviewBtn) {
+      reviewBtn.addEventListener("click", () => {
+        this.openPreviewDialog(draft);
+      });
+    }
+    if (approveBtn) {
+      approveBtn.disabled = !draft.canApprove;
+      if (!draft.canApprove) {
+        approveBtn.title = draft.lockedReason || "Approval is not available for this script.";
+      }
+      approveBtn.addEventListener("click", () => {
+        if (approveBtn.disabled) return;
+        void this.openApproveDialog(draft, approveBtn);
+      });
+    }
+    if (requestBtn) {
+      requestBtn.disabled = !draft.canRequestChanges;
+      if (!draft.canRequestChanges) {
+        requestBtn.title = draft.lockedReason || "Request changes is not available for this script.";
+      }
+      requestBtn.addEventListener("click", () => {
+        if (requestBtn.disabled) return;
+        void this.openRequestChangesDialog(draft, requestBtn);
+      });
+    }
     return card;
+  }
+  openDialog(options) {
+    const { title, subtitle, bodyClass, contentRenderer, actionsRenderer } = options;
+    this.closeActiveDialog();
+    const dialog = document.createElement("div");
+    dialog.className = "vo-script-modal__overlay";
+    const panel = dialog.createDiv({ cls: "vo-script-modal" });
+    const header = panel.createDiv({ cls: "vo-script-modal__header" });
+    const heading = header.createDiv({ cls: "vo-script-modal__heading" });
+    heading.createEl("h4", { text: title });
+    if (subtitle) {
+      heading.createEl("div", { cls: "vo-script-modal__subtitle", text: subtitle });
+    }
+    const body = panel.createDiv({ cls: `vo-script-modal__body${bodyClass ? ` ${bodyClass}` : ""}` });
+    contentRenderer(body);
+    const actions = panel.createDiv({ cls: "vo-script-modal__actions" });
+    const close = () => {
+      dialog.remove();
+      if (this.activeDialog === dialog) {
+        this.activeDialog = null;
+      }
+    };
+    actionsRenderer(actions, close);
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) {
+        close();
+      }
+    });
+    document.body.appendChild(dialog);
+    this.activeDialog = dialog;
+  }
+  openPreviewDialog(draft) {
+    this.openDialog({
+      title: draft.topicTitle,
+      subtitle: `${draft.jobId} · ${draft.channelId} · read-only preview`,
+      bodyClass: "vo-script-modal__body--preview",
+      contentRenderer: (content) => {
+        if (draft.warningText) {
+          content.createEl("div", { cls: "vo-script-modal__warning", text: draft.warningText });
+        }
+        content.createEl("div", { cls: "vo-script-modal__meta", text: `Script status: ${draft.scriptStatus} · Approval: ${draft.approvalStatus} · Words: ${draft.wordCount > 0 ? String(draft.wordCount) : "Not reported"}` });
+        const preview = content.createEl("pre", { cls: "vo-script-modal__preview" });
+        preview.textContent = draft.scriptPreview || "No script preview available.";
+      },
+      actionsRenderer: (actions, close) => {
+        const closeBtn = actions.createEl("button", { cls: "vo-button vo-button-secondary", text: "Close", type: "button" });
+        closeBtn.addEventListener("click", close);
+      }
+    });
+  }
+  openApproveDialog(draft, button) {
+    this.openDecisionDialog({
+      draft,
+      title: `Approve ${draft.topicTitle}?`,
+      subtitle: `${draft.jobId} · approvedBy: Steve`,
+      confirmLabel: "Approve",
+      noteLabel: "Optional approval notes",
+      notePlaceholder: "Add notes for the approval record.",
+      notesRequired: false,
+      button,
+      onConfirm: async (notes) => {
+        const result = await approveVideoScript(this.brainCoreUrl, draft.jobId, "Steve", notes || void 0);
+        if (result.error) {
+          throw new Error(result.detail ? `${result.error}: ${result.detail}` : result.error);
+        }
+        if (result.value?.ok === false) {
+          throw new Error(result.value.message ?? "Brain Core rejected the approval request.");
+        }
+      }
+    });
+  }
+  openRequestChangesDialog(draft, button) {
+    this.openDecisionDialog({
+      draft,
+      title: `Request changes for ${draft.topicTitle}`,
+      subtitle: `${draft.jobId} · requestedBy: Steve`,
+      confirmLabel: "Request changes",
+      noteLabel: "Required change notes",
+      notePlaceholder: "Explain the requested changes.",
+      notesRequired: true,
+      button,
+      onConfirm: async (notes) => {
+        const result = await requestVideoScriptChanges(this.brainCoreUrl, draft.jobId, "Steve", notes);
+        if (result.error) {
+          throw new Error(result.detail ? `${result.error}: ${result.detail}` : result.error);
+        }
+        if (result.value?.ok === false) {
+          throw new Error(result.value.message ?? "Brain Core rejected the request-changes action.");
+        }
+      }
+    });
+  }
+  openDecisionDialog(options) {
+    const { draft, title, subtitle, confirmLabel, noteLabel, notePlaceholder, notesRequired, button, onConfirm } = options;
+    this.closeActiveDialog();
+    const dialog = document.createElement("div");
+    dialog.className = "vo-script-modal__overlay";
+    const panel = dialog.createDiv({ cls: "vo-script-modal" });
+    const header = panel.createDiv({ cls: "vo-script-modal__header" });
+    const heading = header.createDiv({ cls: "vo-script-modal__heading" });
+    heading.createEl("h4", { text: title });
+    heading.createEl("div", { cls: "vo-script-modal__subtitle", text: subtitle });
+    if (draft.warningText) {
+      header.createEl("div", { cls: "vo-script-modal__warning", text: draft.warningText });
+    }
+    const body = panel.createDiv({ cls: "vo-script-modal__body" });
+    body.createEl("p", {
+      cls: "vo-script-modal__description",
+      text: notesRequired ? "Approval cannot continue without notes." : "Optional notes will be attached to the approval record."
+    });
+    const field = body.createDiv({ cls: "vo-script-modal__field" });
+    field.createEl("label", { text: noteLabel });
+    const textarea = field.createEl("textarea", { cls: "vo-script-modal__textarea" });
+    textarea.placeholder = notePlaceholder;
+    textarea.rows = 5;
+    const status = body.createDiv({ cls: "vo-script-modal__status" });
+    status.textContent = "";
+    const actions = panel.createDiv({ cls: "vo-script-modal__actions" });
+    const close = () => {
+      dialog.remove();
+      if (this.activeDialog === dialog) {
+        this.activeDialog = null;
+      }
+    };
+    const cancelBtn = actions.createEl("button", { cls: "vo-button vo-button-secondary", text: "Cancel", type: "button" });
+    const confirmBtn = actions.createEl("button", { cls: "vo-button vo-button-primary", text: confirmLabel, type: "button" });
+    const updateState = () => {
+      const hasNotes = textarea.value.trim().length > 0;
+      confirmBtn.disabled = notesRequired ? !hasNotes : false;
+      status.textContent = notesRequired && !hasNotes ? "Notes are required before continuing." : "";
+    };
+    textarea.addEventListener("input", updateState);
+    updateState();
+    cancelBtn.addEventListener("click", close);
+    confirmBtn.addEventListener("click", async () => {
+      const notes = textarea.value.trim();
+      if (notesRequired && !notes) {
+        status.textContent = "Notes are required before continuing.";
+        return;
+      }
+      confirmBtn.disabled = true;
+      cancelBtn.disabled = true;
+      textarea.disabled = true;
+      status.textContent = "Submitting to Brain Core...";
+      try {
+        await onConfirm(notes);
+        close();
+        if (this.refreshCallback) {
+          try {
+            await this.refreshCallback();
+          } catch (refreshError) {
+            console.error("Brain Console script refresh after action failed", refreshError);
+          }
+        }
+      } catch (error) {
+        confirmBtn.disabled = false;
+        cancelBtn.disabled = false;
+        textarea.disabled = false;
+        status.textContent = this.formatSafeError(error);
+      }
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) {
+        close();
+      }
+    });
+    document.body.appendChild(dialog);
+    this.activeDialog = dialog;
+  }
+  formatSafeError(error) {
+    if (error && typeof error === "object") {
+      const maybeMessage = error.message ?? error.error ?? error.detail;
+      if (typeof maybeMessage === "string" && maybeMessage.trim()) {
+        return maybeMessage.trim().slice(0, 240);
+      }
+    }
+    if (typeof error === "string") {
+      return error.slice(0, 240);
+    }
+    return "Brain Core request failed.";
+  }
+  closeActiveDialog() {
+    if (this.activeDialog) {
+      this.activeDialog.remove();
+      this.activeDialog = null;
+    }
   }
   escapeHtml(value) {
     return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
   }
   destroy() {
+    this.closeActiveDialog();
     this.container.innerHTML = "";
   }
 };
@@ -4053,6 +4323,8 @@ var VOShell = class {
     this.container = container;
     this.container.classList.add("vo-shell");
     this.data = data;
+    this.brainCoreUrl = typeof data.brainCoreUrl === "string" ? data.brainCoreUrl : DEFAULT_BRAIN_CONSOLE_SETTINGS.brainCoreUrl;
+    this.refreshCallback = typeof data.onRefresh === "function" ? data.onRefresh : null;
     const barContainer = document.createElement("div");
     this.contextBar = new VOContextBar(barContainer, data);
     this.container.appendChild(barContainer);
@@ -4210,7 +4482,9 @@ var VOShell = class {
       case "scripts":
         this.scriptDraftsPanel = new ScriptDraftsPanel(this.contentContainer, {
           scripts: this.data.scriptDrafts,
-          error: this.data.scriptDraftsError
+          error: this.data.scriptDraftsError,
+          brainCoreUrl: this.brainCoreUrl,
+          refresh: this.refreshCallback
         });
         this.scriptDraftsPanel.initialize();
         break;
@@ -4632,6 +4906,20 @@ async function readBrainCoreVideoOrchestratorStatus(baseUrl) {
 async function readBrainCoreVideoOrchestratorScripts(baseUrl) {
   return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/script");
 }
+async function approveVideoScript(baseUrl, jobId, approvedBy, notes) {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
+  return postJson(normalizedBaseUrl, `/api/video-orchestrator/scripts/${encodeURIComponent(jobId)}/approve`, {
+    approvedBy,
+    ...(notes ? { notes } : {})
+  });
+}
+async function requestVideoScriptChanges(baseUrl, jobId, requestedBy, notes) {
+  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
+  return postJson(normalizedBaseUrl, `/api/video-orchestrator/scripts/${encodeURIComponent(jobId)}/request-changes`, {
+    requestedBy,
+    notes
+  });
+}
 async function readBrainCoreVOStudioProjects(baseUrl) {
   return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/projects");
 }
@@ -4921,6 +5209,59 @@ async function fetchJson(baseUrl, pathname, options = {}, timeoutMs = REQUEST_TI
         return fetchJsonWithFallback(fallbackUrl, pathname, responseTimeMs, timeoutMs);
       }
     }
+    return {
+      error: errorMsg,
+      url,
+      responseTimeMs
+    };
+  }
+}
+async function postJson(baseUrl, pathname, body, timeoutMs = REQUEST_TIMEOUT_MS) {
+  const url = `${baseUrl}${pathname}`;
+  const startTime = performance.now();
+  if (!requestUrlFn) {
+    return {
+      error: "Obsidian requestUrl not initialized",
+      url
+    };
+  }
+  try {
+    const response = await Promise.race([
+      requestUrlFn({
+        url,
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(body ?? {}),
+        throw: false
+      }),
+      new Promise(
+        (_, reject) => setTimeout(() => reject(new Error("request timeout")), timeoutMs)
+      )
+    ]);
+    const responseTimeMs = Math.round(performance.now() - startTime);
+    const parsed = safeParseJson(response.text ?? "{}");
+    if (response.status < 200 || response.status >= 300) {
+      return {
+        error: parsed?.message ?? `HTTP ${response.status}`,
+        status: response.status,
+        detail: parsed?.error ?? (response.text ? response.text.slice(0, 240) : void 0),
+        value: parsed,
+        url,
+        responseTimeMs
+      };
+    }
+    return {
+      status: response.status,
+      value: parsed ?? {},
+      url,
+      responseTimeMs
+    };
+  } catch (error) {
+    const responseTimeMs = Math.round(performance.now() - startTime);
+    const errorMsg = error instanceof Error ? error.message : "request failed";
     return {
       error: errorMsg,
       url,
@@ -6414,7 +6755,7 @@ function renderActiveSectionContent(shell, activeSection, state, snapshot, setti
         renderPipelinesSection(content, state, snapshot);
         break;
       case "video-orchestrator":
-        renderVideoOrchestratorSection(content, state);
+        renderVideoOrchestratorSection(content, state, onRefresh);
         break;
       case "projects":
         renderProjectsSection(content, state, snapshot);
@@ -6857,7 +7198,7 @@ function renderMonitoringSection(content, state) {
   }
   renderCard(grid, `Synthetic Monitors (${synthetics.length})`, syntheticsCard);
 }
-function renderVideoOrchestratorSection(content, state) {
+function renderVideoOrchestratorSection(content, state, onRefresh) {
   const container = content.createDiv({ cls: "vo-studio-container" });
   const voShell = new VOShell(container, {
     projects: state.voStudioProjects?.items,
@@ -6866,6 +7207,8 @@ function renderVideoOrchestratorSection(content, state) {
     contentItems: state.voStudioContentItems?.items,
     scriptDrafts: state.videoOrchestratorScripts,
     scriptDraftsError: state.videoOrchestratorScriptsError,
+    brainCoreUrl: state.brainCoreUrl,
+    onRefresh,
     selector: state.aiModelSelectorStatus,
     analytics: state.voStudioAnalytics,
     accountStats: state.voAccountStats
@@ -10115,9 +10458,7 @@ var BrainConsoleView = class extends import_obsidian2.ItemView {
       this.contentEl,
       this.cachedState,
       settings,
-      () => {
-        void this.fullRefresh();
-      },
+      () => this.fullRefresh(),
       () => this.restartBrainCore()
     );
     if (savedScrollTop > 0) {
