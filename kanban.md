@@ -15,6 +15,7 @@ kanban-plugin: board
 	  - [ ] Review whether additional observability/log retention would be useful — track routing performance
 - [ ] 
 
+
 ## To Do
 
 - [ ] Product: Model Router
@@ -31,6 +32,8 @@ kanban-plugin: board
 - [ ] Fix the curtains
 - [ ] Buy paint & filler & brushes
 - [ ] Clean garage floor
+- [ ] Unlimited TV sub
+
 
 ## Doing
 
@@ -41,11 +44,14 @@ kanban-plugin: board
 - [ ] Apply for passport
 - [ ] Prepare Lambda meeting
 - [ ] Prepare Passport meeting
+- [ ] how  can we see soccer on our TV in 4K
+- [ ] Figure out new direction Vila Solidaria
+- [ ] Make a digital product for FGWA
+
 
 ## Done
 
 **Complete**
-
 - [x] Send reaction Freek ✅ 2026-06-01
 - [x] Make video for Yosef ✅ 2026-06-01
 - [x] Setup STB Facebook app ⏫ ✅ 2026-05-28
@@ -75,8 +81,10 @@ kanban-plugin: board
 - [x] add obsidian to phone ✅ 2026-04-18
 
 
+
+
 %% kanban:settings
 ```
-{"tag-colors": [{"tagKey": "#p1", "color": "#fff", "backgroundColor": "#c0392b"}, {"tagKey": "#p2", "color": "#fff", "backgroundColor": "#e67e22"}, {"tagKey": "#p3", "color": "#000", "backgroundColor": "#f1c40f"}, {"tagKey": "#p4", "color": "#000", "backgroundColor": "#2ecc71"}, {"tagKey": "#p5", "color": "#fff", "backgroundColor": "#95a5a6"}, {"tagKey": "#you", "color": "#fff", "backgroundColor": "#2980b9"}, {"tagKey": "#ai", "color": "#fff", "backgroundColor": "#8e44ad"}], "date-format": "YYYY-MM-DD", "time-format": "HH:mm", "link-date-to-daily-note": true}
+{"tag-colors":[{"tagKey":"#p1","color":"#fff","backgroundColor":"#c0392b"},{"tagKey":"#p2","color":"#fff","backgroundColor":"#e67e22"},{"tagKey":"#p3","color":"#000","backgroundColor":"#f1c40f"},{"tagKey":"#p4","color":"#000","backgroundColor":"#2ecc71"},{"tagKey":"#p5","color":"#fff","backgroundColor":"#95a5a6"},{"tagKey":"#you","color":"#fff","backgroundColor":"#2980b9"},{"tagKey":"#ai","color":"#fff","backgroundColor":"#8e44ad"}],"date-format":"YYYY-MM-DD","time-format":"HH:mm","link-date-to-daily-note":true,"kanban-plugin":"board"}
 ```
 %%
