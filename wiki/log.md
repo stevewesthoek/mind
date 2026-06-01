@@ -53,3 +53,7 @@ No automated entries yet. Model-router write/apply remains blocked until explici
 <!-- mind-compile-loop run: 2026-05-31 | processed=1 skipped=0 total=1 -->
 
 - 2026-05-31 — compile-suggest — **Mind OS live deployment verification** (new project page, confidence=0.95, src=chatgpt) → propose move `capture/inbox/2026-05-16-mind-os-live-deployment-verification.md` → `live/projects/mind-os-live-deployment-verification.md` — created 2026-05-16T21:34:29.106Z
+
+<!-- mind-compile-loop run: 2026-06-01 | processed=1 skipped=0 total=1 -->
+
+- 2026-06-01 — compile-suggest — **Mind OS live deployment verification** (new project page, confidence=0.95, src=chatgpt) → propose move `capture/inbox/2026-05-16-mind-os-live-deployment-verification.md` → `live/projects/mind-os-live-deployment-verification.md` — created 2026-05-16T21:34:29.106Z
