@@ -1323,6 +1323,13 @@ async function readBrainCoreAwsVideoPipelineStatus(baseUrl) {
     "/api/video-orchestrator/topic-intelligence/status"
   );
 }
+async function createBrainCoreVideoJobFromPrompt(baseUrl, input) {
+  return fetchJson(
+    normalizeBaseUrl(baseUrl),
+    "/api/video-orchestrator/jobs/create-from-prompt",
+    { method: "POST", body: JSON.stringify(input) }
+  );
+}
 
 // src/components/Design/shadcn-components.ts
 function Badge(props) {
@@ -5197,6 +5204,225 @@ var VOShell = class {
   }
 };
 
+// src/components/VO/PromptDraftForm.ts
+var MIN_PROMPT_LENGTH = 10;
+var MAX_PROMPT_LENGTH = 500;
+var PromptDraftForm = class {
+  container;
+  baseUrl;
+  channels = [];
+  selectedChannelId = "";
+  prompt = "";
+  isSubmitting = false;
+  lastResult = null;
+  onRefresh = null;
+  constructor(container, channels = [], baseUrl = "http://localhost:4877") {
+    this.container = container;
+    this.channels = channels;
+    this.baseUrl = baseUrl;
+    if (channels.length > 0) {
+      this.selectedChannelId = channels[0].channelId;
+    }
+    this.render();
+    this.attachEventListeners();
+  }
+  setRefreshCallback(callback) {
+    this.onRefresh = callback;
+  }
+  getChannelLabel(channelId) {
+    const channel = this.channels.find((c) => c.channelId === channelId);
+    return channel?.displayName ?? channelId;
+  }
+  getSafetyMessage(channelId) {
+    const label = this.getChannelLabel(channelId).toLowerCase();
+    if (label.includes("bible") || label.includes("says-the-bible")) {
+      return "Theology review required before generation.";
+    }
+    if (label.includes("prochat") || label.includes("pro-chat")) {
+      return "Approval required before generation.";
+    }
+    return "Approval required before generation.";
+  }
+  isPromptValid() {
+    const length = this.prompt.trim().length;
+    return length >= MIN_PROMPT_LENGTH && length <= MAX_PROMPT_LENGTH;
+  }
+  render() {
+    const safetyMsg = this.selectedChannelId ? this.getSafetyMessage(this.selectedChannelId) : "";
+    const isValid = this.isPromptValid();
+    this.container.innerHTML = `
+      <div class="prompt-draft-form">
+        <div class="prompt-draft-form__header">
+          <h3 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 600;">Create Draft Video</h3>
+        </div>
+
+        <div class="prompt-draft-form__content">
+          <label class="prompt-draft-form__group">
+            <span class="prompt-draft-form__label">Channel</span>
+            <select id="prompt-draft-channel" class="prompt-draft-form__select" ${this.isSubmitting ? "disabled" : ""}>
+              ${this.channels.map((ch) => `
+                <option value="${this.escapeHtml(ch.channelId)}" ${ch.channelId === this.selectedChannelId ? "selected" : ""}>
+                  ${this.escapeHtml(ch.displayName)}
+                </option>
+              `).join("")}
+            </select>
+          </label>
+
+          <label class="prompt-draft-form__group">
+            <span class="prompt-draft-form__label">Prompt</span>
+            <textarea
+              id="prompt-draft-textarea"
+              class="prompt-draft-form__textarea"
+              placeholder="Describe the video content (10-500 characters)..."
+              ${this.isSubmitting ? "disabled" : ""}
+            >${this.escapeHtml(this.prompt)}</textarea>
+            <div class="prompt-draft-form__char-count">
+              ${this.prompt.length} / ${MAX_PROMPT_LENGTH} characters
+            </div>
+          </label>
+
+          ${safetyMsg ? `
+            <div class="prompt-draft-form__safety-note">
+              <strong>\u26A0\uFE0F Important:</strong> ${this.escapeHtml(safetyMsg)}
+            </div>
+          ` : ""}
+
+          <div class="prompt-draft-form__actions">
+            <button
+              id="prompt-draft-submit"
+              class="prompt-draft-form__button prompt-draft-form__button--primary"
+              ${!isValid || this.isSubmitting || this.channels.length === 0 ? "disabled" : ""}
+            >
+              ${this.isSubmitting ? "Creating..." : "Create Draft"}
+            </button>
+          </div>
+        </div>
+
+        ${this.renderResult()}
+      </div>
+    `;
+  }
+  renderResult() {
+    if (!this.lastResult) return "";
+    const { result, error } = this.lastResult;
+    if (error) {
+      return `
+        <div class="prompt-draft-form__error">
+          <strong>Error:</strong> ${this.escapeHtml(error)}
+        </div>
+      `;
+    }
+    if (result && !result.ok) {
+      return `
+        <div class="prompt-draft-form__error">
+          <strong>Error:</strong> ${this.escapeHtml(result.message)}
+        </div>
+      `;
+    }
+    if (result && result.ok) {
+      return `
+        <div class="prompt-draft-form__success">
+          <div class="prompt-draft-form__success-title">\u2713 Draft Created Successfully</div>
+          <div class="prompt-draft-form__result-item">
+            <span class="prompt-draft-form__result-label">Job ID:</span>
+            <code class="prompt-draft-form__result-value">${this.escapeHtml(result.jobId)}</code>
+          </div>
+          <div class="prompt-draft-form__result-item">
+            <span class="prompt-draft-form__result-label">Topic ID:</span>
+            <code class="prompt-draft-form__result-value">${this.escapeHtml(result.topicId)}</code>
+          </div>
+          <div class="prompt-draft-form__result-item">
+            <span class="prompt-draft-form__result-label">Status:</span>
+            <span class="prompt-draft-form__result-value">${this.escapeHtml(result.scriptStatus)} (${this.escapeHtml(result.approvalStatus)})</span>
+          </div>
+          <div class="prompt-draft-form__result-item">
+            <span class="prompt-draft-form__result-label">Next Step:</span>
+            <span class="prompt-draft-form__result-value" style="font-weight: 600; color: #2563eb;">
+              ${this.escapeHtml(result.nextStep.replace(/_/g, " "))}
+            </span>
+          </div>
+        </div>
+      `;
+    }
+    return "";
+  }
+  attachEventListeners() {
+    const channelSelect = this.container.querySelector("#prompt-draft-channel");
+    const textarea = this.container.querySelector("#prompt-draft-textarea");
+    const submitBtn = this.container.querySelector("#prompt-draft-submit");
+    if (channelSelect) {
+      channelSelect.addEventListener("change", (e) => {
+        this.selectedChannelId = e.target.value;
+        this.render();
+        this.attachEventListeners();
+      });
+    }
+    if (textarea) {
+      textarea.addEventListener("input", (e) => {
+        this.prompt = e.target.value;
+        this.render();
+        this.attachEventListeners();
+      });
+    }
+    if (submitBtn) {
+      submitBtn.addEventListener("click", () => {
+        void this.handleSubmit();
+      });
+    }
+  }
+  async handleSubmit() {
+    if (!this.isPromptValid() || !this.selectedChannelId) {
+      this.lastResult = { error: "Invalid prompt or channel not selected" };
+      this.render();
+      return;
+    }
+    this.isSubmitting = true;
+    this.render();
+    try {
+      const request = {
+        channelId: this.selectedChannelId,
+        prompt: this.prompt.trim(),
+        requestedBy: "brain-console"
+      };
+      const response = await createBrainCoreVideoJobFromPrompt(this.baseUrl, request);
+      if (response.error) {
+        this.lastResult = { error: response.error };
+      } else if (response.value) {
+        this.lastResult = { result: response.value };
+        if (this.onRefresh) {
+          setTimeout(() => {
+            this.onRefresh?.();
+          }, 1500);
+        }
+      } else {
+        this.lastResult = { error: "Unknown response from server" };
+      }
+    } catch (err) {
+      this.lastResult = {
+        error: err instanceof Error ? err.message : "Request failed"
+      };
+    } finally {
+      this.isSubmitting = false;
+      this.render();
+      this.attachEventListeners();
+    }
+  }
+  escapeHtml(text) {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    };
+    return text.replace(/[&<>"']/g, (m) => map[m]);
+  }
+  destroy() {
+    this.container.innerHTML = "";
+    this.onRefresh = null;
+  }
+};
+
 // src/components/VO/AwsVideoPipelinePanel.ts
 var REFRESH_INTERVAL_MS2 = 3e4;
 var AwsVideoPipelinePanel = class {
@@ -5206,6 +5432,7 @@ var AwsVideoPipelinePanel = class {
   refreshTimer = null;
   loading = false;
   error;
+  promptDraftForm = null;
   constructor(container, baseUrl = "http://localhost:4877") {
     this.container = container;
     this.baseUrl = baseUrl;
@@ -5237,6 +5464,10 @@ var AwsVideoPipelinePanel = class {
       clearInterval(this.refreshTimer);
       this.refreshTimer = null;
     }
+    if (this.promptDraftForm) {
+      this.promptDraftForm.destroy();
+      this.promptDraftForm = null;
+    }
   }
   render() {
     this.container.innerHTML = `
@@ -5244,11 +5475,13 @@ var AwsVideoPipelinePanel = class {
         ${this.renderRefreshIndicator()}
         ${this.renderConnectionStatus()}
         ${this.renderPipelineHealth()}
+        ${this.renderPromptDraftFormSection()}
         ${this.renderChannelCards()}
         ${this.renderTopicBacklog()}
         ${this.renderErrors()}
       </div>
     `;
+    this.attachPromptDraftForm();
   }
   renderRefreshIndicator() {
     return `
@@ -5409,6 +5642,35 @@ var AwsVideoPipelinePanel = class {
         </div>
       </div>
     `;
+  }
+  renderPromptDraftFormSection() {
+    if (!this.data?.channels || this.data.channels.length === 0) {
+      return "";
+    }
+    return `
+      <div class="aws-video-prompt-draft-section" style="
+        margin-top: 24px;
+        padding: 16px;
+        background: var(--background-secondary);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+      ">
+        <div id="aws-video-prompt-draft-form" style="width: 100%;"></div>
+      </div>
+    `;
+  }
+  attachPromptDraftForm() {
+    const formContainer = this.container.querySelector("#aws-video-prompt-draft-form");
+    if (!formContainer || !this.data?.channels) {
+      return;
+    }
+    if (this.promptDraftForm) {
+      this.promptDraftForm.destroy();
+    }
+    this.promptDraftForm = new PromptDraftForm(formContainer, this.data.channels, this.baseUrl);
+    this.promptDraftForm.setRefreshCallback(() => {
+      void this.fetchLiveData();
+    });
   }
   renderErrors() {
     if (!this.error) return "";
