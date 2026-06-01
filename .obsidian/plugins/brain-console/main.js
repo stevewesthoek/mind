@@ -3906,6 +3906,125 @@ var AgentConsolePanel = class {
   }
 };
 
+// src/components/VO/ScriptDraftsPanel.ts
+var ScriptDraftsPanel = class {
+  container;
+  scriptsPayload;
+  error;
+  constructor(container, data = {}) {
+    this.container = container;
+    this.scriptsPayload = data.scripts;
+    this.error = data.error;
+  }
+  initialize() {
+    this.render();
+  }
+  render() {
+    this.container.innerHTML = "";
+    const shell = document.createElement("div");
+    shell.className = "vo-script-drafts";
+    const header = document.createElement("div");
+    header.className = "vo-panel-header";
+    header.innerHTML = `
+      <div>
+        <h3>Script Drafts</h3>
+        <div class="vo-script-drafts__subtitle">Read-only Brain Core script review surface. Approval actions are not wired yet.</div>
+      </div>
+    `;
+    shell.appendChild(header);
+    if (this.error || !this.scriptsPayload) {
+      const errorEl = document.createElement("div");
+      errorEl.className = "vo-empty-state vo-script-drafts__error";
+      errorEl.textContent = "Brain Core script endpoint unavailable.";
+      shell.appendChild(errorEl);
+      this.container.appendChild(shell);
+      return;
+    }
+    const drafts = this.normalizeDrafts(this.scriptsPayload);
+    if (drafts.length === 0) {
+      const empty = document.createElement("div");
+      empty.className = "vo-empty-state";
+      empty.textContent = "No script drafts found.";
+      shell.appendChild(empty);
+      this.container.appendChild(shell);
+      return;
+    }
+    const list = document.createElement("div");
+    list.className = "vo-script-drafts__list";
+    for (const draft of drafts) {
+      list.appendChild(this.renderDraftCard(draft));
+    }
+    shell.appendChild(list);
+    this.container.appendChild(shell);
+  }
+  normalizeDrafts(payload) {
+    const candidates = Array.isArray(payload?.scripts) ? payload.scripts : Array.isArray(payload?.drafts) ? payload.drafts : Array.isArray(payload?.plans) ? payload.plans : Array.isArray(payload?.data?.scripts) ? payload.data.scripts : [];
+    return candidates.map((item, index) => {
+      const draft = item.draft ?? item.script ?? item;
+      const channelId = this.resolveChannelId(item, draft);
+      const sections = Array.isArray(draft.sections) ? draft.sections : [];
+      const preview = this.buildPreview(draft, sections);
+      const approval = item.approval ?? draft.approval ?? item.approvalStatus ?? draft.approvalStatus ?? {};
+      return {
+        jobId: String(item.jobId ?? draft.jobId ?? item.id ?? draft.id ?? `script-draft-${index + 1}`),
+        channelId,
+        topicTitle: String(item.topicTitle ?? item.title ?? draft.topicTitle ?? draft.title ?? "Untitled script"),
+        scriptStatus: String(draft.status ?? item.status ?? "unknown"),
+        approvalStatus: typeof approval === "string" ? approval : String(approval.status ?? approval.state ?? (channelId === "says-the-bible" ? "theology_review_required" : "approval_required")),
+        wordCount: Number(draft.metadata?.wordCount ?? draft.wordCount ?? item.wordCount ?? 0),
+        scriptPreview: preview
+      };
+    });
+  }
+  resolveChannelId(item, draft) {
+    const explicit = item.channelId ?? draft.channelId;
+    if (explicit) return String(explicit);
+    const projectId = String(item.projectId ?? draft.projectId ?? "");
+    if (projectId.includes("says-the-bible") || projectId.includes("stb")) return "says-the-bible";
+    if (projectId.includes("prochat")) return "prochat";
+    return projectId || "unknown";
+  }
+  buildPreview(draft, sections) {
+    const direct = draft.preview ?? draft.scriptPreview ?? draft.content ?? draft.markdown ?? draft.text;
+    if (typeof direct === "string" && direct.trim()) {
+      return direct.trim();
+    }
+    return sections.map((section) => section.narration ?? section.sampleNarration ?? section.text ?? "").filter(Boolean).join(" ").trim();
+  }
+  renderDraftCard(draft) {
+    const card = document.createElement("article");
+    card.className = "vo-script-draft-card";
+    const reviewBadge = draft.channelId === "says-the-bible" ? "Theology review required" : draft.channelId === "prochat" ? "Standard approval required" : "Approval required";
+    card.innerHTML = `
+      <div class="vo-script-draft-card__header">
+        <div>
+          <h4>${this.escapeHtml(draft.topicTitle)}</h4>
+          <div class="vo-script-draft-card__meta">${this.escapeHtml(draft.jobId)} | ${this.escapeHtml(draft.channelId)}</div>
+        </div>
+        <span class="vo-script-draft-card__badge">${this.escapeHtml(reviewBadge)}</span>
+      </div>
+      <div class="vo-script-draft-card__stats">
+        <div><span>Script</span><strong>${this.escapeHtml(draft.scriptStatus)}</strong></div>
+        <div><span>Approval</span><strong>${this.escapeHtml(draft.approvalStatus)}</strong></div>
+        <div><span>Words</span><strong>${draft.wordCount > 0 ? String(draft.wordCount) : "Not reported"}</strong></div>
+      </div>
+      <pre class="vo-script-draft-card__preview">${this.escapeHtml(draft.scriptPreview || "No script preview available.")}</pre>
+      <div class="vo-script-draft-card__actions">
+        <button class="vo-button vo-button-secondary" disabled>Review - not wired yet</button>
+        <button class="vo-button vo-button-secondary" disabled>Approve - not wired yet</button>
+        <button class="vo-button vo-button-secondary" disabled>Request changes - not wired yet</button>
+      </div>
+    `;
+    return card;
+  }
+  escapeHtml(value) {
+    return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+  }
+  destroy() {
+    this.container.innerHTML = "";
+  }
+};
+
 // src/components/VO/VOShell.ts
 var VOShell = class {
   container;
@@ -3914,6 +4033,7 @@ var VOShell = class {
   pipelinesPanel = null;
   accountsPanel = null;
   historyPanel = null;
+  scriptDraftsPanel = null;
   approvalQueuePanel = null;
   deadLetterReviewPanel = null;
   jobProgressPanel = null;
@@ -3943,6 +4063,7 @@ var VOShell = class {
         <button class="vo-tab vo-tab--active" data-tab="overview">Overview</button>
         <button class="vo-tab" data-tab="pipelines">Pipelines</button>
         <button class="vo-tab" data-tab="accounts">Accounts</button>
+        <button class="vo-tab" data-tab="scripts">Scripts</button>
         <button class="vo-tab" data-tab="approvals">Approvals</button>
         <button class="vo-tab" data-tab="jobs">Jobs</button>
         <button class="vo-tab" data-tab="dead-letter">Dead Letter</button>
@@ -3994,6 +4115,10 @@ var VOShell = class {
     if (this.approvalQueuePanel) {
       this.approvalQueuePanel.destroy();
       this.approvalQueuePanel = null;
+    }
+    if (this.scriptDraftsPanel) {
+      this.scriptDraftsPanel.destroy();
+      this.scriptDraftsPanel = null;
     }
     if (this.deadLetterReviewPanel) {
       this.deadLetterReviewPanel.destroy();
@@ -4081,6 +4206,13 @@ var VOShell = class {
             </div>
           `;
         }
+        break;
+      case "scripts":
+        this.scriptDraftsPanel = new ScriptDraftsPanel(this.contentContainer, {
+          scripts: this.data.scriptDrafts,
+          error: this.data.scriptDraftsError
+        });
+        this.scriptDraftsPanel.initialize();
         break;
       case "approvals":
         if (state.projectId) {
@@ -4223,6 +4355,9 @@ var VOShell = class {
     }
     if (this.approvalQueuePanel) {
       this.approvalQueuePanel.destroy();
+    }
+    if (this.scriptDraftsPanel) {
+      this.scriptDraftsPanel.destroy();
     }
     if (this.deadLetterReviewPanel) {
       this.deadLetterReviewPanel.destroy();
@@ -4493,6 +4628,9 @@ async function readBrainCoreStbStatus(baseUrl) {
 }
 async function readBrainCoreVideoOrchestratorStatus(baseUrl) {
   return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/status");
+}
+async function readBrainCoreVideoOrchestratorScripts(baseUrl) {
+  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/script");
 }
 async function readBrainCoreVOStudioProjects(baseUrl) {
   return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/projects");
@@ -5623,6 +5761,7 @@ async function loadBrainConsoleViewState(settings = DEFAULT_BRAIN_CONSOLE_SETTIN
     readBrainCorePostQaStatus(baseUrl),
     readBrainCoreStbStatus(baseUrl),
     readBrainCoreVideoOrchestratorStatus(baseUrl),
+    readBrainCoreVideoOrchestratorScripts(baseUrl),
     readBrainCoreVOStudioProjects(baseUrl),
     readBrainCoreVOStudioAccounts(baseUrl),
     readBrainCoreVOStudioPipelineProfiles(baseUrl),
@@ -5744,9 +5883,9 @@ async function loadBrainConsoleViewState(settings = DEFAULT_BRAIN_CONSOLE_SETTIN
   ]);
   const settledValues = withSafeEndpointPadding(
     results.map((result) => result.status === "fulfilled" ? result.value : { value: void 0, error: result.reason }),
-    164
+    165
   );
-  const [status, capabilities, runtimeReports, videoStatus, videoQueue, localApps, localAppsDashboard, localAppsActionReadiness, localAppsActionEnablementBacklog, localAppsActionStatus, schedulerStatus, schedulerJobs, sessions, repos, approvals, approvalStore, executionPlans, executionReadiness, mindPreviewPolicy, mindPreviews, orchestrators, pipelines, projects, platforms, probotDashboardParity, probotSessionsParity, probotLocalAppsParity, probotSchedulerParity, probotStudioParity, probotExternalAdminParity, probotDecommissionReadiness, probotExternalAdminSafeMetadata, probotFeatureParityMatrix, probotPhaseOutChecklist, postOrchestratorStatus, postOrchestratorOverview, postOrchestratorFlows, postOrchestratorDrafts, postOrchestratorEvents, postOrchestratorDryRun, postOrchestratorReviewQueue, postOrchestratorSchedulePreview, postOrchestratorAnalytics, postOrchestratorPipeline, postOrchestratorReadiness, postOrchestratorPlatformPolicies, postOrchestratorDecommissionReadiness, postOrchestratorOperatorGuidance, postOrchestratorManualExportPackage, postOrchestratorAcceptanceChecklist, postOrchestratorMigrationParity, postOrchestratorRoadmapCheckpoint, postOrchestratorContracts, postOrchestratorIntegrations, postOrchestratorRecovery, postOrchestratorQaStatus, stbStatus, videoOrchestratorStatus, voStudioProjectsResult, voStudioAccountsResult, voStudioPipelineProfilesResult, voStudioContentItemsResult, voStudioPackageResult, voStudioAnalyticsResult, videoOrchestratorIntake, videoAssetPlans, videoDesignPlans, videoVoiceoverPlans, videoVisualPlans, videoAssemblyPlans, videoMetadataPlans, videoPublishingPrepPlans, videoManualExportPackages, videoThumbnailDesignPlans, videoArchiveLoggingPlans, videoDesignProviderBoundaryPlans, videoDesignProviderCredentialIsolationPlans, videoDesignProviderPromptReviewPolicyPlans, videoArtifactSandboxProviderHandoffPlans, videoProviderOutputRedactionPolicyPlans, videoDesignProviderComplianceChecklistPlans, videoDesignProviderEnablementReadinessIndex, videoProviderIntegrationFinalPlanningCheckpoint, videoCredentialStoreImplementationBoundaryPlan, videoPromptReviewUxImplementationPlan, videoProviderAuditPersistenceBoundaryPlan, videoProviderWrapperSecurityReviewPlan, videoProviderImplementationPhaseStartGate, videoProviderImplementationReadinessDashboardSummary, videoProviderImplementationApprovalPacket, videoProviderApprovalPacketConsoleReviewSummary, videoProviderPlanningSurfaceIndex, videoCredentialReferenceScaffold, videoProviderRequestWrapperScaffold, videoProviderWrapperValidationHarness, videoProviderRequestEnvelopeScaffold, videoProviderResponseEnvelopeScaffold, videoProviderScaffoldingIntegrationSummary, videoProviderRequestWrapperInertShell, videoCredentialReferenceValidator, videoProviderResponseRedactionSkeleton, videoProviderAuditEventTypes, videoProviderDisabledOrchestrationFacade, videoProviderCapabilityPolicyEvaluator, videoProviderBlockedActionLedgerTypes, videoProviderDisabledOrchestrationIntegrationSummary, stbVideoMigrationStatus, stbVideoParityMatrix, stbVideoDualRunStatus, stbVideoDualRunEvidence, videoProductionGate, videoRenderExportPolicy, videoControlledDryRunDesign, videoProductionCutoverGate, videoReleaseCandidateReadiness, videoOperatorDecisionQueue, videoControlledExecutionPolicyBoundary, videoControlledExecutionReadinessIndex, videoRoadmapCheckpoint, videoOperatorReviewPacket, videoControlledExecutionApprovalPayloadSchema, videoPreviewCompletionIndex, videoControlledExecutionPreflightChecklist, videoControlledExecutionRiskRegister, videoControlledExecutionPreflightValidatorSchema, videoControlledExecutionPlanStub, videoControlledExecutionApprovalRequestDesign, videoControlledExecutionDisabledGate, videoControlledExecutionSecondApprovalPolicy, videoControlledExecutionOperatorIdentityProtocol, videoControlledExecutionRolePolicy, controlledDualRunRequestDesign, agents, actions, mindStewardReportDetail, agentRuns, agentEvents, agentCostSummary, recoveryItems, localAppsOperationalReadiness, localAppsOperatorSummary, localAppsOrchestratorDef, infraDokploy, infraTunnels, infraDomains, infraNewRelic, infraUmami, infraGoogleAds, infraStripe, infraStudio, voLiveStatus, pipelinesLiveStatus, voAccountsResult, voAuthStatusResult, voJobsResult, systemMetricsResult, stbCredentialsResult, voNormalizeHistoryResult, voManualQueueResult, voWorkerConfigResult, voAccountStatsResult, voReadinessResult, credentialCatalogResult, aiModelSelectorResult] = settledValues;
+  const [status, capabilities, runtimeReports, videoStatus, videoQueue, localApps, localAppsDashboard, localAppsActionReadiness, localAppsActionEnablementBacklog, localAppsActionStatus, schedulerStatus, schedulerJobs, sessions, repos, approvals, approvalStore, executionPlans, executionReadiness, mindPreviewPolicy, mindPreviews, orchestrators, pipelines, projects, platforms, probotDashboardParity, probotSessionsParity, probotLocalAppsParity, probotSchedulerParity, probotStudioParity, probotExternalAdminParity, probotDecommissionReadiness, probotExternalAdminSafeMetadata, probotFeatureParityMatrix, probotPhaseOutChecklist, postOrchestratorStatus, postOrchestratorOverview, postOrchestratorFlows, postOrchestratorDrafts, postOrchestratorEvents, postOrchestratorDryRun, postOrchestratorReviewQueue, postOrchestratorSchedulePreview, postOrchestratorAnalytics, postOrchestratorPipeline, postOrchestratorReadiness, postOrchestratorPlatformPolicies, postOrchestratorDecommissionReadiness, postOrchestratorOperatorGuidance, postOrchestratorManualExportPackage, postOrchestratorAcceptanceChecklist, postOrchestratorMigrationParity, postOrchestratorRoadmapCheckpoint, postOrchestratorContracts, postOrchestratorIntegrations, postOrchestratorRecovery, postOrchestratorQaStatus, stbStatus, videoOrchestratorStatus, videoOrchestratorScriptsResult, voStudioProjectsResult, voStudioAccountsResult, voStudioPipelineProfilesResult, voStudioContentItemsResult, voStudioPackageResult, voStudioAnalyticsResult, videoOrchestratorIntake, videoAssetPlans, videoDesignPlans, videoVoiceoverPlans, videoVisualPlans, videoAssemblyPlans, videoMetadataPlans, videoPublishingPrepPlans, videoManualExportPackages, videoThumbnailDesignPlans, videoArchiveLoggingPlans, videoDesignProviderBoundaryPlans, videoDesignProviderCredentialIsolationPlans, videoDesignProviderPromptReviewPolicyPlans, videoArtifactSandboxProviderHandoffPlans, videoProviderOutputRedactionPolicyPlans, videoDesignProviderComplianceChecklistPlans, videoDesignProviderEnablementReadinessIndex, videoProviderIntegrationFinalPlanningCheckpoint, videoCredentialStoreImplementationBoundaryPlan, videoPromptReviewUxImplementationPlan, videoProviderAuditPersistenceBoundaryPlan, videoProviderWrapperSecurityReviewPlan, videoProviderImplementationPhaseStartGate, videoProviderImplementationReadinessDashboardSummary, videoProviderImplementationApprovalPacket, videoProviderApprovalPacketConsoleReviewSummary, videoProviderPlanningSurfaceIndex, videoCredentialReferenceScaffold, videoProviderRequestWrapperScaffold, videoProviderWrapperValidationHarness, videoProviderRequestEnvelopeScaffold, videoProviderResponseEnvelopeScaffold, videoProviderScaffoldingIntegrationSummary, videoProviderRequestWrapperInertShell, videoCredentialReferenceValidator, videoProviderResponseRedactionSkeleton, videoProviderAuditEventTypes, videoProviderDisabledOrchestrationFacade, videoProviderCapabilityPolicyEvaluator, videoProviderBlockedActionLedgerTypes, videoProviderDisabledOrchestrationIntegrationSummary, stbVideoMigrationStatus, stbVideoParityMatrix, stbVideoDualRunStatus, stbVideoDualRunEvidence, videoProductionGate, videoRenderExportPolicy, videoControlledDryRunDesign, videoProductionCutoverGate, videoReleaseCandidateReadiness, videoOperatorDecisionQueue, videoControlledExecutionPolicyBoundary, videoControlledExecutionReadinessIndex, videoRoadmapCheckpoint, videoOperatorReviewPacket, videoControlledExecutionApprovalPayloadSchema, videoPreviewCompletionIndex, videoControlledExecutionPreflightChecklist, videoControlledExecutionRiskRegister, videoControlledExecutionPreflightValidatorSchema, videoControlledExecutionPlanStub, videoControlledExecutionApprovalRequestDesign, videoControlledExecutionDisabledGate, videoControlledExecutionSecondApprovalPolicy, videoControlledExecutionOperatorIdentityProtocol, videoControlledExecutionRolePolicy, controlledDualRunRequestDesign, agents, actions, mindStewardReportDetail, agentRuns, agentEvents, agentCostSummary, recoveryItems, localAppsOperationalReadiness, localAppsOperatorSummary, localAppsOrchestratorDef, infraDokploy, infraTunnels, infraDomains, infraNewRelic, infraUmami, infraGoogleAds, infraStripe, infraStudio, voLiveStatus, pipelinesLiveStatus, voAccountsResult, voAuthStatusResult, voJobsResult, systemMetricsResult, stbCredentialsResult, voNormalizeHistoryResult, voManualQueueResult, voWorkerConfigResult, voAccountStatsResult, voReadinessResult, credentialCatalogResult, aiModelSelectorResult] = settledValues;
   let approvalDetail;
   const latestApprovalId = approvals.value?.approvals?.[0]?.id;
   if (latestApprovalId) {
@@ -5857,6 +5996,8 @@ async function loadBrainConsoleViewState(settings = DEFAULT_BRAIN_CONSOLE_SETTIN
     postOrchestratorRecovery: postOrchestratorRecovery.value,
     stbStatus: stbStatus.value,
     videoOrchestratorStatus: videoOrchestratorStatus.value,
+    videoOrchestratorScripts: videoOrchestratorScriptsResult.value,
+    videoOrchestratorScriptsError: videoOrchestratorScriptsResult.error,
     voStudioProjects: voStudioProjectsResult.value,
     voStudioAccounts: voStudioAccountsResult.value,
     voStudioPipelineProfiles: voStudioPipelineProfilesResult.value,
@@ -6723,6 +6864,8 @@ function renderVideoOrchestratorSection(content, state) {
     accounts: state.voStudioAccounts?.items,
     pipelineProfiles: state.voStudioPipelineProfiles?.items,
     contentItems: state.voStudioContentItems?.items,
+    scriptDrafts: state.videoOrchestratorScripts,
+    scriptDraftsError: state.videoOrchestratorScriptsError,
     selector: state.aiModelSelectorStatus,
     analytics: state.voStudioAnalytics,
     accountStats: state.voAccountStats

@@ -3637,6 +3637,125 @@ body.theme-light .brain-console {
   gap: 16px;
 }
 
+/* I-7.6 Script Draft Approval Preview */
+.vo-script-drafts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+}
+
+.vo-script-drafts__subtitle {
+  color: var(--bc-fg-subtle);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.vo-script-drafts__error {
+  border-color: color-mix(in srgb, var(--bc-red) 35%, var(--bc-border));
+}
+
+.vo-script-drafts__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 12px;
+}
+
+.vo-script-draft-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: var(--bc-pad);
+  background: var(--bc-card);
+  border: 1px solid var(--bc-border);
+  border-radius: var(--bc-radius);
+}
+
+.vo-script-draft-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.vo-script-draft-card__header h4 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.25;
+  color: var(--bc-fg);
+}
+
+.vo-script-draft-card__meta {
+  margin-top: 4px;
+  color: var(--bc-fg-subtle);
+  font-family: var(--font-monospace);
+  font-size: 10px;
+  overflow-wrap: anywhere;
+}
+
+.vo-script-draft-card__badge {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border: 1px solid var(--bc-border);
+  border-radius: var(--bc-radius-pill);
+  color: var(--bc-yellow);
+  background: color-mix(in srgb, var(--bc-yellow) 12%, transparent);
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.vo-script-draft-card__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.vo-script-draft-card__stats div {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--bc-border);
+  border-radius: var(--bc-radius-sm);
+  background: color-mix(in srgb, var(--bc-bg) 50%, transparent);
+}
+
+.vo-script-draft-card__stats span {
+  display: block;
+  color: var(--bc-fg-subtle);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.vo-script-draft-card__stats strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--bc-fg);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.vo-script-draft-card__preview {
+  max-height: 180px;
+  margin: 0;
+  padding: 10px;
+  overflow: auto;
+  white-space: pre-wrap;
+  border: 1px solid var(--bc-border);
+  border-radius: var(--bc-radius-sm);
+  background: color-mix(in srgb, var(--bc-bg) 65%, transparent);
+  color: var(--bc-fg);
+  font-family: var(--font-monospace);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.vo-script-draft-card__actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
 .vo-form-section {
   display: flex;
   flex-direction: column;
