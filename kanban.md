@@ -39,15 +39,15 @@ kanban-plugin: board
 - [ ] YA finance app
 - [ ] Marriage certificate
 - [ ] Apply for passport
-- [ ] Make video for Yosef
 - [ ] Prepare Lambda meeting
 - [ ] Prepare Passport meeting
-- [ ] Sen reaction Free
 
 ## Done
 
 **Complete**
 
+- [x] Send reaction Freek ✅ 2026-06-01
+- [x] Make video for Yosef ✅ 2026-06-01
 - [x] Setup STB Facebook app ⏫ ✅ 2026-05-28
 - [x] Portuguese criminal record ✅ 2026-05-27
 - [x] Make the Gospel/Atheism paper ✅ 2026-05-27
