@@ -435,7 +435,7 @@ var OverviewPanel = class {
     this.loading = true;
     try {
       const [statusRes, analyticsRes] = await Promise.allSettled([
-        fetch(`${BASE_URL}/api/infra/video-orchestrator/status`).then((r) => r.json()),
+        fetch(`${BASE_URL}/api/video-orchestrator/topic-intelligence/status`).then((r) => r.json()),
         fetch(`${BASE_URL}/api/video-orchestrator/analytics/summary`).then((r) => r.json())
       ]);
       if (statusRes.status === "fulfilled") {
@@ -3906,395 +3906,6 @@ var AgentConsolePanel = class {
   }
 };
 
-// src/components/VO/ScriptDraftsPanel.ts
-var ScriptDraftsPanel = class {
-  container;
-  scriptsPayload;
-  error;
-  refreshCallback;
-  brainCoreUrl;
-  activeDialog = null;
-  constructor(container, data = {}) {
-    this.container = container;
-    this.scriptsPayload = data.scripts;
-    this.error = data.error;
-    this.refreshCallback = typeof data.refresh === "function" ? data.refresh : null;
-    this.brainCoreUrl = typeof data.brainCoreUrl === "string" && data.brainCoreUrl.trim() ? data.brainCoreUrl.trim() : DEFAULT_BRAIN_CONSOLE_SETTINGS.brainCoreUrl;
-  }
-  initialize() {
-    this.render();
-  }
-  render() {
-    this.container.innerHTML = "";
-    const shell = document.createElement("div");
-    shell.className = "vo-script-drafts";
-    const header = document.createElement("div");
-    header.className = "vo-panel-header";
-    header.innerHTML = `
-      <div>
-        <h3>Script Drafts</h3>
-        <div class="vo-script-drafts__subtitle">Read-only Brain Core script review surface. Actions stay explicit and route through Brain Core only.</div>
-      </div>
-    `;
-    shell.appendChild(header);
-    if (this.error) {
-      const errorEl = document.createElement("div");
-      errorEl.className = "vo-empty-state vo-script-drafts__error";
-      errorEl.textContent = "Brain Core script endpoint unavailable.";
-      shell.appendChild(errorEl);
-      const errorDetail = document.createElement("div");
-      errorDetail.className = "brain-console__error-detail";
-      errorDetail.textContent = this.formatSafeError(this.error);
-      shell.appendChild(errorDetail);
-      this.container.appendChild(shell);
-      return;
-    }
-    if (this.error || !this.scriptsPayload) {
-      const empty = document.createElement("div");
-      empty.className = "vo-empty-state";
-      empty.textContent = "No script drafts found.";
-      shell.appendChild(empty);
-      this.container.appendChild(shell);
-      return;
-    }
-    const drafts = this.normalizeDrafts(this.scriptsPayload);
-    if (drafts.length === 0) {
-      const empty = document.createElement("div");
-      empty.className = "vo-empty-state";
-      empty.textContent = "No script drafts found.";
-      shell.appendChild(empty);
-      this.container.appendChild(shell);
-      return;
-    }
-    const list = document.createElement("div");
-    list.className = "vo-script-drafts__list";
-    for (const draft of drafts) {
-      list.appendChild(this.renderDraftCard(draft));
-    }
-    shell.appendChild(list);
-    this.container.appendChild(shell);
-  }
-  normalizeDrafts(payload) {
-    const candidates = Array.isArray(payload?.scripts) ? payload.scripts : Array.isArray(payload?.drafts) ? payload.drafts : Array.isArray(payload?.plans) ? payload.plans : Array.isArray(payload?.data?.scripts) ? payload.data.scripts : [];
-    return candidates.map((item, index) => {
-      const draft = item.draft ?? item.script ?? item;
-      const channelId = this.resolveChannelId(item, draft);
-      const sections = Array.isArray(draft.sections) ? draft.sections : [];
-      const preview = this.buildPreview(draft, sections);
-      const approval = item.approval ?? draft.approval ?? item.approvalStatus ?? draft.approvalStatus ?? {};
-      const approvalStatus = this.normalizeApprovalStatus(approval, item, draft, channelId);
-      const published = this.isPublished(item, draft);
-      const locked = published || approvalStatus === "approved";
-      return {
-        jobId: String(item.jobId ?? draft.jobId ?? item.id ?? draft.id ?? `script-draft-${index + 1}`),
-        channelId,
-        topicTitle: String(item.topicTitle ?? item.title ?? draft.topicTitle ?? draft.title ?? "Untitled script"),
-        scriptStatus: String(draft.status ?? item.status ?? "unknown"),
-        approvalStatus,
-        approvalStatusRaw: typeof approval === "string" ? approval : String(approval.status ?? approval.state ?? approval.label ?? approval.decision ?? ""),
-        wordCount: Number(draft.metadata?.wordCount ?? draft.wordCount ?? item.wordCount ?? 0),
-        scriptPreview: preview,
-        warningText: channelId === "says-the-bible" ? "Theology review required before approval." : "",
-        locked,
-        lockedReason: published ? "Script already uploaded or published." : approvalStatus === "approved" ? "Script already approved." : "",
-        canApprove: !locked && approvalStatus !== "approved",
-        canRequestChanges: !published && approvalStatus !== "approved"
-      };
-    });
-  }
-  normalizeApprovalStatus(approval, item, draft, channelId) {
-    const rawValue = String(typeof approval === "string" ? approval : approval?.status ?? approval?.state ?? approval?.label ?? approval?.decision ?? approval?.result ?? item.approvalStatus ?? draft.approvalStatus ?? "").trim().toLowerCase();
-    const normalized = rawValue.replace(/[\s-]+/g, "_");
-    if (normalized === "approved" || normalized.includes("approved")) return "approved";
-    if (normalized === "changes_requested" || normalized.includes("changes_requested") || normalized.includes("request_changes") || normalized.includes("needs_changes") || normalized.includes("change_requested")) return "changes_requested";
-    if (normalized === "pending" || normalized.includes("pending") || normalized.includes("approval_required") || normalized.includes("review_required") || normalized.includes("theology_review_required")) return "pending";
-    if (item.approved === true || draft.approved === true) return "approved";
-    if (item.changesRequested === true || draft.changesRequested === true) return "changes_requested";
-    if (channelId === "says-the-bible") return "pending";
-    return "pending";
-  }
-  resolveChannelId(item, draft) {
-    const explicit = item.channelId ?? draft.channelId;
-    if (explicit) return String(explicit);
-    const projectId = String(item.projectId ?? draft.projectId ?? "");
-    if (projectId.includes("says-the-bible") || projectId.includes("stb")) return "says-the-bible";
-    if (projectId.includes("prochat")) return "prochat";
-    return projectId || "unknown";
-  }
-  buildPreview(draft, sections) {
-    const direct = draft.preview ?? draft.scriptPreview ?? draft.content ?? draft.markdown ?? draft.text;
-    if (typeof direct === "string" && direct.trim()) {
-      return direct.trim();
-    }
-    return sections.map((section) => section.narration ?? section.sampleNarration ?? section.text ?? "").filter(Boolean).join(" ").trim();
-  }
-  isPublished(item, draft) {
-    const states = [
-      item.status,
-      draft.status,
-      item.publishStatus,
-      draft.publishStatus,
-      item.deliveryStatus,
-      draft.deliveryStatus,
-      item.uploadStatus,
-      draft.uploadStatus,
-      item.pipelineState,
-      draft.pipelineState
-    ].map((value) => String(value ?? "").toLowerCase());
-    if (item.published === true || draft.published === true || item.uploaded === true || draft.uploaded === true) return true;
-    return states.some((value) => value.includes("published") || value.includes("uploaded"));
-  }
-  renderDraftCard(draft) {
-    const card = document.createElement("article");
-    card.className = "vo-script-draft-card";
-    const reviewBadge = draft.channelId === "says-the-bible" ? "Theology review required" : draft.channelId === "prochat" ? "Standard approval required" : "Approval required";
-    card.innerHTML = `
-      <div class="vo-script-draft-card__header">
-        <div>
-          <h4>${this.escapeHtml(draft.topicTitle)}</h4>
-          <div class="vo-script-draft-card__meta">${this.escapeHtml(draft.jobId)} | ${this.escapeHtml(draft.channelId)}</div>
-        </div>
-        <span class="vo-script-draft-card__badge">${this.escapeHtml(reviewBadge)}</span>
-      </div>
-      <div class="vo-script-draft-card__stats">
-        <div><span>Script</span><strong>${this.escapeHtml(draft.scriptStatus)}</strong></div>
-        <div><span>Approval</span><strong class="vo-script-draft-card__status vo-script-draft-card__status--${this.escapeHtml(draft.approvalStatus)}">${this.escapeHtml(draft.approvalStatus)}</strong></div>
-        <div><span>Words</span><strong>${draft.wordCount > 0 ? String(draft.wordCount) : "Not reported"}</strong></div>
-      </div>
-      ${draft.warningText ? `<div class="vo-script-draft-card__warning">${this.escapeHtml(draft.warningText)}</div>` : ""}
-      ${draft.lockedReason ? `<div class="vo-script-draft-card__locked">${this.escapeHtml(draft.lockedReason)}</div>` : ""}
-      <pre class="vo-script-draft-card__preview">${this.escapeHtml(draft.scriptPreview || "No script preview available.")}</pre>
-      <div class="vo-script-draft-card__actions">
-        <button class="vo-button vo-button-secondary" type="button" data-script-action="review">Review</button>
-        <button class="vo-button vo-button-secondary" type="button" data-script-action="approve">Approve</button>
-        <button class="vo-button vo-button-secondary" type="button" data-script-action="request-changes">Request changes</button>
-      </div>
-    `;
-    const reviewBtn = card.querySelector('[data-script-action="review"]');
-    const approveBtn = card.querySelector('[data-script-action="approve"]');
-    const requestBtn = card.querySelector('[data-script-action="request-changes"]');
-    if (reviewBtn) {
-      reviewBtn.addEventListener("click", () => {
-        this.openPreviewDialog(draft);
-      });
-    }
-    if (approveBtn) {
-      approveBtn.disabled = !draft.canApprove;
-      if (!draft.canApprove) {
-        approveBtn.title = draft.lockedReason || "Approval is not available for this script.";
-      }
-      approveBtn.addEventListener("click", () => {
-        if (approveBtn.disabled) return;
-        void this.openApproveDialog(draft, approveBtn);
-      });
-    }
-    if (requestBtn) {
-      requestBtn.disabled = !draft.canRequestChanges;
-      if (!draft.canRequestChanges) {
-        requestBtn.title = draft.lockedReason || "Request changes is not available for this script.";
-      }
-      requestBtn.addEventListener("click", () => {
-        if (requestBtn.disabled) return;
-        void this.openRequestChangesDialog(draft, requestBtn);
-      });
-    }
-    return card;
-  }
-  openDialog(options) {
-    const { title, subtitle, bodyClass, contentRenderer, actionsRenderer } = options;
-    this.closeActiveDialog();
-    const dialog = document.createElement("div");
-    dialog.className = "vo-script-modal__overlay";
-    const panel = dialog.createDiv({ cls: "vo-script-modal" });
-    const header = panel.createDiv({ cls: "vo-script-modal__header" });
-    const heading = header.createDiv({ cls: "vo-script-modal__heading" });
-    heading.createEl("h4", { text: title });
-    if (subtitle) {
-      heading.createEl("div", { cls: "vo-script-modal__subtitle", text: subtitle });
-    }
-    const body = panel.createDiv({ cls: `vo-script-modal__body${bodyClass ? ` ${bodyClass}` : ""}` });
-    contentRenderer(body);
-    const actions = panel.createDiv({ cls: "vo-script-modal__actions" });
-    const close = () => {
-      dialog.remove();
-      if (this.activeDialog === dialog) {
-        this.activeDialog = null;
-      }
-    };
-    actionsRenderer(actions, close);
-    dialog.addEventListener("click", (event) => {
-      if (event.target === dialog) {
-        close();
-      }
-    });
-    document.body.appendChild(dialog);
-    this.activeDialog = dialog;
-  }
-  openPreviewDialog(draft) {
-    this.openDialog({
-      title: draft.topicTitle,
-      subtitle: `${draft.jobId} · ${draft.channelId} · read-only preview`,
-      bodyClass: "vo-script-modal__body--preview",
-      contentRenderer: (content) => {
-        if (draft.warningText) {
-          content.createEl("div", { cls: "vo-script-modal__warning", text: draft.warningText });
-        }
-        content.createEl("div", { cls: "vo-script-modal__meta", text: `Script status: ${draft.scriptStatus} · Approval: ${draft.approvalStatus} · Words: ${draft.wordCount > 0 ? String(draft.wordCount) : "Not reported"}` });
-        const preview = content.createEl("pre", { cls: "vo-script-modal__preview" });
-        preview.textContent = draft.scriptPreview || "No script preview available.";
-      },
-      actionsRenderer: (actions, close) => {
-        const closeBtn = actions.createEl("button", { cls: "vo-button vo-button-secondary", text: "Close", type: "button" });
-        closeBtn.addEventListener("click", close);
-      }
-    });
-  }
-  openApproveDialog(draft, button) {
-    this.openDecisionDialog({
-      draft,
-      title: `Approve ${draft.topicTitle}?`,
-      subtitle: `${draft.jobId} · approvedBy: Steve`,
-      confirmLabel: "Approve",
-      noteLabel: "Optional approval notes",
-      notePlaceholder: "Add notes for the approval record.",
-      notesRequired: false,
-      button,
-      onConfirm: async (notes) => {
-        const result = await approveVideoScript(this.brainCoreUrl, draft.jobId, "Steve", notes || void 0);
-        if (result.error) {
-          throw new Error(result.detail ? `${result.error}: ${result.detail}` : result.error);
-        }
-        if (result.value?.ok === false) {
-          throw new Error(result.value.message ?? "Brain Core rejected the approval request.");
-        }
-      }
-    });
-  }
-  openRequestChangesDialog(draft, button) {
-    this.openDecisionDialog({
-      draft,
-      title: `Request changes for ${draft.topicTitle}`,
-      subtitle: `${draft.jobId} · requestedBy: Steve`,
-      confirmLabel: "Request changes",
-      noteLabel: "Required change notes",
-      notePlaceholder: "Explain the requested changes.",
-      notesRequired: true,
-      button,
-      onConfirm: async (notes) => {
-        const result = await requestVideoScriptChanges(this.brainCoreUrl, draft.jobId, "Steve", notes);
-        if (result.error) {
-          throw new Error(result.detail ? `${result.error}: ${result.detail}` : result.error);
-        }
-        if (result.value?.ok === false) {
-          throw new Error(result.value.message ?? "Brain Core rejected the request-changes action.");
-        }
-      }
-    });
-  }
-  openDecisionDialog(options) {
-    const { draft, title, subtitle, confirmLabel, noteLabel, notePlaceholder, notesRequired, button, onConfirm } = options;
-    this.closeActiveDialog();
-    const dialog = document.createElement("div");
-    dialog.className = "vo-script-modal__overlay";
-    const panel = dialog.createDiv({ cls: "vo-script-modal" });
-    const header = panel.createDiv({ cls: "vo-script-modal__header" });
-    const heading = header.createDiv({ cls: "vo-script-modal__heading" });
-    heading.createEl("h4", { text: title });
-    heading.createEl("div", { cls: "vo-script-modal__subtitle", text: subtitle });
-    if (draft.warningText) {
-      header.createEl("div", { cls: "vo-script-modal__warning", text: draft.warningText });
-    }
-    const body = panel.createDiv({ cls: "vo-script-modal__body" });
-    body.createEl("p", {
-      cls: "vo-script-modal__description",
-      text: notesRequired ? "Approval cannot continue without notes." : "Optional notes will be attached to the approval record."
-    });
-    const field = body.createDiv({ cls: "vo-script-modal__field" });
-    field.createEl("label", { text: noteLabel });
-    const textarea = field.createEl("textarea", { cls: "vo-script-modal__textarea" });
-    textarea.placeholder = notePlaceholder;
-    textarea.rows = 5;
-    const status = body.createDiv({ cls: "vo-script-modal__status" });
-    status.textContent = "";
-    const actions = panel.createDiv({ cls: "vo-script-modal__actions" });
-    const close = () => {
-      dialog.remove();
-      if (this.activeDialog === dialog) {
-        this.activeDialog = null;
-      }
-    };
-    const cancelBtn = actions.createEl("button", { cls: "vo-button vo-button-secondary", text: "Cancel", type: "button" });
-    const confirmBtn = actions.createEl("button", { cls: "vo-button vo-button-primary", text: confirmLabel, type: "button" });
-    const updateState = () => {
-      const hasNotes = textarea.value.trim().length > 0;
-      confirmBtn.disabled = notesRequired ? !hasNotes : false;
-      status.textContent = notesRequired && !hasNotes ? "Notes are required before continuing." : "";
-    };
-    textarea.addEventListener("input", updateState);
-    updateState();
-    cancelBtn.addEventListener("click", close);
-    confirmBtn.addEventListener("click", async () => {
-      const notes = textarea.value.trim();
-      if (notesRequired && !notes) {
-        status.textContent = "Notes are required before continuing.";
-        return;
-      }
-      confirmBtn.disabled = true;
-      cancelBtn.disabled = true;
-      textarea.disabled = true;
-      status.textContent = "Submitting to Brain Core...";
-      try {
-        await onConfirm(notes);
-        close();
-        if (this.refreshCallback) {
-          try {
-            await this.refreshCallback();
-          } catch (refreshError) {
-            console.error("Brain Console script refresh after action failed", refreshError);
-          }
-        }
-      } catch (error) {
-        confirmBtn.disabled = false;
-        cancelBtn.disabled = false;
-        textarea.disabled = false;
-        status.textContent = this.formatSafeError(error);
-      }
-    });
-    dialog.addEventListener("click", (event) => {
-      if (event.target === dialog) {
-        close();
-      }
-    });
-    document.body.appendChild(dialog);
-    this.activeDialog = dialog;
-  }
-  formatSafeError(error) {
-    if (error && typeof error === "object") {
-      const maybeMessage = error.message ?? error.error ?? error.detail;
-      if (typeof maybeMessage === "string" && maybeMessage.trim()) {
-        return maybeMessage.trim().slice(0, 240);
-      }
-    }
-    if (typeof error === "string") {
-      return error.slice(0, 240);
-    }
-    return "Brain Core request failed.";
-  }
-  closeActiveDialog() {
-    if (this.activeDialog) {
-      this.activeDialog.remove();
-      this.activeDialog = null;
-    }
-  }
-  escapeHtml(value) {
-    return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
-  }
-  destroy() {
-    this.closeActiveDialog();
-    this.container.innerHTML = "";
-  }
-};
-
 // src/components/VO/VOShell.ts
 var VOShell = class {
   container;
@@ -4303,7 +3914,6 @@ var VOShell = class {
   pipelinesPanel = null;
   accountsPanel = null;
   historyPanel = null;
-  scriptDraftsPanel = null;
   approvalQueuePanel = null;
   deadLetterReviewPanel = null;
   jobProgressPanel = null;
@@ -4323,8 +3933,6 @@ var VOShell = class {
     this.container = container;
     this.container.classList.add("vo-shell");
     this.data = data;
-    this.brainCoreUrl = typeof data.brainCoreUrl === "string" ? data.brainCoreUrl : DEFAULT_BRAIN_CONSOLE_SETTINGS.brainCoreUrl;
-    this.refreshCallback = typeof data.onRefresh === "function" ? data.onRefresh : null;
     const barContainer = document.createElement("div");
     this.contextBar = new VOContextBar(barContainer, data);
     this.container.appendChild(barContainer);
@@ -4335,7 +3943,6 @@ var VOShell = class {
         <button class="vo-tab vo-tab--active" data-tab="overview">Overview</button>
         <button class="vo-tab" data-tab="pipelines">Pipelines</button>
         <button class="vo-tab" data-tab="accounts">Accounts</button>
-        <button class="vo-tab" data-tab="scripts">Scripts</button>
         <button class="vo-tab" data-tab="approvals">Approvals</button>
         <button class="vo-tab" data-tab="jobs">Jobs</button>
         <button class="vo-tab" data-tab="dead-letter">Dead Letter</button>
@@ -4387,10 +3994,6 @@ var VOShell = class {
     if (this.approvalQueuePanel) {
       this.approvalQueuePanel.destroy();
       this.approvalQueuePanel = null;
-    }
-    if (this.scriptDraftsPanel) {
-      this.scriptDraftsPanel.destroy();
-      this.scriptDraftsPanel = null;
     }
     if (this.deadLetterReviewPanel) {
       this.deadLetterReviewPanel.destroy();
@@ -4478,15 +4081,6 @@ var VOShell = class {
             </div>
           `;
         }
-        break;
-      case "scripts":
-        this.scriptDraftsPanel = new ScriptDraftsPanel(this.contentContainer, {
-          scripts: this.data.scriptDrafts,
-          error: this.data.scriptDraftsError,
-          brainCoreUrl: this.brainCoreUrl,
-          refresh: this.refreshCallback
-        });
-        this.scriptDraftsPanel.initialize();
         break;
       case "approvals":
         if (state.projectId) {
@@ -4629,9 +4223,6 @@ var VOShell = class {
     }
     if (this.approvalQueuePanel) {
       this.approvalQueuePanel.destroy();
-    }
-    if (this.scriptDraftsPanel) {
-      this.scriptDraftsPanel.destroy();
     }
     if (this.deadLetterReviewPanel) {
       this.deadLetterReviewPanel.destroy();
@@ -4902,23 +4493,6 @@ async function readBrainCoreStbStatus(baseUrl) {
 }
 async function readBrainCoreVideoOrchestratorStatus(baseUrl) {
   return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/status");
-}
-async function readBrainCoreVideoOrchestratorScripts(baseUrl) {
-  return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/script");
-}
-async function approveVideoScript(baseUrl, jobId, approvedBy, notes) {
-  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
-  return postJson(normalizedBaseUrl, `/api/video-orchestrator/scripts/${encodeURIComponent(jobId)}/approve`, {
-    approvedBy,
-    ...(notes ? { notes } : {})
-  });
-}
-async function requestVideoScriptChanges(baseUrl, jobId, requestedBy, notes) {
-  const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
-  return postJson(normalizedBaseUrl, `/api/video-orchestrator/scripts/${encodeURIComponent(jobId)}/request-changes`, {
-    requestedBy,
-    notes
-  });
 }
 async function readBrainCoreVOStudioProjects(baseUrl) {
   return fetchJson(normalizeBaseUrl(baseUrl), "/video-orchestrator/projects");
@@ -5209,59 +4783,6 @@ async function fetchJson(baseUrl, pathname, options = {}, timeoutMs = REQUEST_TI
         return fetchJsonWithFallback(fallbackUrl, pathname, responseTimeMs, timeoutMs);
       }
     }
-    return {
-      error: errorMsg,
-      url,
-      responseTimeMs
-    };
-  }
-}
-async function postJson(baseUrl, pathname, body, timeoutMs = REQUEST_TIMEOUT_MS) {
-  const url = `${baseUrl}${pathname}`;
-  const startTime = performance.now();
-  if (!requestUrlFn) {
-    return {
-      error: "Obsidian requestUrl not initialized",
-      url
-    };
-  }
-  try {
-    const response = await Promise.race([
-      requestUrlFn({
-        url,
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json"
-        },
-        body: JSON.stringify(body ?? {}),
-        throw: false
-      }),
-      new Promise(
-        (_, reject) => setTimeout(() => reject(new Error("request timeout")), timeoutMs)
-      )
-    ]);
-    const responseTimeMs = Math.round(performance.now() - startTime);
-    const parsed = safeParseJson(response.text ?? "{}");
-    if (response.status < 200 || response.status >= 300) {
-      return {
-        error: parsed?.message ?? `HTTP ${response.status}`,
-        status: response.status,
-        detail: parsed?.error ?? (response.text ? response.text.slice(0, 240) : void 0),
-        value: parsed,
-        url,
-        responseTimeMs
-      };
-    }
-    return {
-      status: response.status,
-      value: parsed ?? {},
-      url,
-      responseTimeMs
-    };
-  } catch (error) {
-    const responseTimeMs = Math.round(performance.now() - startTime);
-    const errorMsg = error instanceof Error ? error.message : "request failed";
     return {
       error: errorMsg,
       url,
@@ -5662,6 +5183,251 @@ async function readBrainCoreVOAccountStats(baseUrl) {
 async function readBrainCoreVOReadiness(baseUrl) {
   return fetchJson(normalizeBaseUrl(baseUrl), "/infra/video-orchestrator/readiness");
 }
+async function readBrainCoreAwsVideoPipelineStatus(baseUrl) {
+  return fetchJson(
+    normalizeBaseUrl(baseUrl),
+    "/api/video-orchestrator/topic-intelligence/status"
+  );
+}
+
+// src/components/VO/AwsVideoPipelinePanel.ts
+var REFRESH_INTERVAL_MS2 = 3e4;
+var AwsVideoPipelinePanel = class {
+  container;
+  baseUrl;
+  data;
+  refreshTimer = null;
+  loading = false;
+  error;
+  constructor(container, baseUrl = "http://localhost:4877") {
+    this.container = container;
+    this.baseUrl = baseUrl;
+    this.render();
+    this.fetchLiveData();
+    this.refreshTimer = setInterval(() => this.fetchLiveData(), REFRESH_INTERVAL_MS2);
+  }
+  async fetchLiveData() {
+    this.loading = true;
+    this.error = void 0;
+    try {
+      const result = await readBrainCoreAwsVideoPipelineStatus(this.baseUrl);
+      if (result.ok && result.data) {
+        this.data = result.data;
+      } else {
+        this.error = result.error || "Failed to fetch pipeline status";
+      }
+    } catch (err) {
+      this.error = err instanceof Error ? err.message : "Fetch failed";
+    } finally {
+      this.loading = false;
+      this.render();
+    }
+  }
+  destroy() {
+    if (this.refreshTimer) {
+      clearInterval(this.refreshTimer);
+      this.refreshTimer = null;
+    }
+  }
+  render() {
+    this.container.innerHTML = `
+      <div class="aws-video-pipeline-panel">
+        ${this.renderRefreshIndicator()}
+        ${this.renderConnectionStatus()}
+        ${this.renderPipelineHealth()}
+        ${this.renderChannelCards()}
+        ${this.renderTopicBacklog()}
+        ${this.renderErrors()}
+      </div>
+    `;
+  }
+  renderRefreshIndicator() {
+    return `
+      <div class="aws-video-refresh-bar">
+        <span class="aws-video-refresh-label">
+          ${this.loading ? "Refreshing..." : "Auto-refreshes every 30s"}
+        </span>
+        <span class="aws-video-refresh-dot ${this.loading ? "aws-refresh-dot--active" : ""}"></span>
+      </div>
+    `;
+  }
+  renderConnectionStatus() {
+    if (!this.data) {
+      return '<div class="aws-video-connection-warning">Loading pipeline data...</div>';
+    }
+    const pipelineReady = this.data.pipelineReady ?? false;
+    const status = pipelineReady ? "online" : "degraded";
+    const statusPill = pipelineReady ? "ok" : "warning";
+    return `
+      <div class="aws-video-connection-status">
+        <h3 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 600;">Brain Core Connection</h3>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: ${pipelineReady ? "#10b981" : "#f59e0b"};"></span>
+          <span style="font-size: 13px; font-weight: 500;">${status === "online" ? "Connected" : "Degraded"}</span>
+          ${StatusPill({ status: statusPill, label: pipelineReady ? "Ready" : "Check Health" })}
+        </div>
+      </div>
+    `;
+  }
+  renderPipelineHealth() {
+    if (!this.data) return "";
+    const genStatus = this.data.generationStatus ?? "ready";
+    const pubStatus = this.data.publishingStatus ?? "ready";
+    const genPill = genStatus === "ready" ? "ok" : genStatus === "in-progress" ? "warning" : "error";
+    const pubPill = pubStatus === "ready" ? "ok" : pubStatus === "in-progress" ? "warning" : "error";
+    return `
+      <div class="aws-video-health-card">
+        <h3 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 600;">Pipeline Status</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="aws-video-status-item">
+            <span style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Generation</span>
+            ${StatusPill({ status: genPill, label: genStatus })}
+          </div>
+          <div class="aws-video-status-item">
+            <span style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Publishing</span>
+            ${StatusPill({ status: pubPill, label: pubStatus })}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  renderChannelCards() {
+    if (!this.data?.channels || this.data.channels.length === 0) {
+      return '<div class="aws-video-no-channels">No channels configured</div>';
+    }
+    return `
+      <div class="aws-video-channels-section">
+        <h3 style="margin: 16px 0 12px 0; font-size: 14px; font-weight: 600;">Channels</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+          ${this.data.channels.map((ch) => this.renderChannelCard(ch)).join("")}
+        </div>
+      </div>
+    `;
+  }
+  renderChannelCard(channel) {
+    const youtubeStatus = channel.youtubeEnabled ? "enabled" : "disabled";
+    const youtubeColor = channel.youtubeEnabled ? "#ef4444" : "#9ca3af";
+    const pubStatus = channel.publishingStatus === "ready" ? "ok" : "warning";
+    return `
+      <div class="aws-video-channel-card" style="
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 12px;
+        background: var(--background-elevated);
+      ">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+          <div>
+            <div style="font-size: 13px; font-weight: 600; margin-bottom: 4px;">${this.escapeHtml(channel.displayName)}</div>
+            <div style="font-size: 11px; color: var(--text-muted);">${this.escapeHtml(channel.channelId)}</div>
+          </div>
+          ${StatusPill({ status: pubStatus, label: channel.publishingStatus })}
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: ${youtubeColor};"></span>
+            <span>YouTube ${youtubeStatus}</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted);">
+            ${channel.totalTopics} topic${channel.totalTopics !== 1 ? "s" : ""} in backlog
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  renderTopicBacklog() {
+    if (!this.data?.channels || this.data.channels.length === 0) {
+      return "";
+    }
+    return `
+      <div class="aws-video-topics-section" style="margin-top: 24px;">
+        <h3 style="margin: 0 0 16px 0; font-size: 14px; font-weight: 600;">Topic Candidates (Ranked)</h3>
+        ${this.data.channels.map((ch) => this.renderChannelTopics(ch)).join("")}
+      </div>
+    `;
+  }
+  renderChannelTopics(channel) {
+    if (!channel.topCandidates || channel.topCandidates.length === 0) {
+      return `
+        <div style="margin-bottom: 20px; padding: 12px; background: var(--background-secondary); border-radius: 6px; border-left: 3px solid var(--text-muted);">
+          <div style="font-weight: 500; font-size: 13px; margin-bottom: 4px;">${this.escapeHtml(channel.displayName)}</div>
+          <div style="font-size: 12px; color: var(--text-muted);">No candidate topics yet</div>
+        </div>
+      `;
+    }
+    return `
+      <div style="margin-bottom: 20px;">
+        <div style="font-weight: 500; font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+          ${this.escapeHtml(channel.displayName)}
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          ${channel.topCandidates.slice(0, 5).map((topic, idx) => this.renderTopicItem(topic, idx + 1)).join("")}
+        </div>
+      </div>
+    `;
+  }
+  renderTopicItem(topic, rank) {
+    const scoreColor = topic.score >= 85 ? "#10b981" : topic.score >= 70 ? "#3b82f6" : "#f59e0b";
+    const statusBadgeClass = topic.status === "candidate" ? "badge-candidate" : "badge-status";
+    return `
+      <div style="
+        padding: 10px 12px;
+        background: var(--background-secondary);
+        border-radius: 6px;
+        border-left: 3px solid ${scoreColor};
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+      ">
+        <div style="flex: 1; min-width: 0;">
+          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 4px;">
+            <span style="font-weight: 600; font-size: 12px; color: var(--text-muted);">#${rank}</span>
+            <span style="font-size: 12px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              ${this.escapeHtml(topic.title)}
+            </span>
+          </div>
+          ${topic.reasoning && topic.reasoning.length > 0 ? `
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 6px;">
+              ${topic.reasoning.slice(0, 2).map((r) => `\u2022 ${this.escapeHtml(r)}`).join("<br>")}
+            </div>
+          ` : ""}
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-end; white-space: nowrap;">
+          <span style="font-weight: 600; font-size: 13px; color: ${scoreColor};">${topic.score}</span>
+          <span style="font-size: 10px; padding: 2px 6px; background: var(--background-elevated); border-radius: 3px; text-transform: capitalize;">
+            ${topic.status}
+          </span>
+        </div>
+      </div>
+    `;
+  }
+  renderErrors() {
+    if (!this.error) return "";
+    return `
+      <div class="aws-video-error-banner" style="
+        margin-top: 16px;
+        padding: 12px;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 6px;
+        color: #ef4444;
+        font-size: 12px;
+      ">
+        <strong>Error:</strong> ${this.escapeHtml(this.error)}
+      </div>
+    `;
+  }
+  escapeHtml(text) {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    };
+    return text.replace(/[&<>"']/g, (m) => map[m]);
+  }
+};
 
 // src/dashboard.ts
 function deriveDashboardSnapshot(state, brainCoreUrl) {
@@ -6102,7 +5868,6 @@ async function loadBrainConsoleViewState(settings = DEFAULT_BRAIN_CONSOLE_SETTIN
     readBrainCorePostQaStatus(baseUrl),
     readBrainCoreStbStatus(baseUrl),
     readBrainCoreVideoOrchestratorStatus(baseUrl),
-    readBrainCoreVideoOrchestratorScripts(baseUrl),
     readBrainCoreVOStudioProjects(baseUrl),
     readBrainCoreVOStudioAccounts(baseUrl),
     readBrainCoreVOStudioPipelineProfiles(baseUrl),
@@ -6224,9 +5989,9 @@ async function loadBrainConsoleViewState(settings = DEFAULT_BRAIN_CONSOLE_SETTIN
   ]);
   const settledValues = withSafeEndpointPadding(
     results.map((result) => result.status === "fulfilled" ? result.value : { value: void 0, error: result.reason }),
-    165
+    164
   );
-  const [status, capabilities, runtimeReports, videoStatus, videoQueue, localApps, localAppsDashboard, localAppsActionReadiness, localAppsActionEnablementBacklog, localAppsActionStatus, schedulerStatus, schedulerJobs, sessions, repos, approvals, approvalStore, executionPlans, executionReadiness, mindPreviewPolicy, mindPreviews, orchestrators, pipelines, projects, platforms, probotDashboardParity, probotSessionsParity, probotLocalAppsParity, probotSchedulerParity, probotStudioParity, probotExternalAdminParity, probotDecommissionReadiness, probotExternalAdminSafeMetadata, probotFeatureParityMatrix, probotPhaseOutChecklist, postOrchestratorStatus, postOrchestratorOverview, postOrchestratorFlows, postOrchestratorDrafts, postOrchestratorEvents, postOrchestratorDryRun, postOrchestratorReviewQueue, postOrchestratorSchedulePreview, postOrchestratorAnalytics, postOrchestratorPipeline, postOrchestratorReadiness, postOrchestratorPlatformPolicies, postOrchestratorDecommissionReadiness, postOrchestratorOperatorGuidance, postOrchestratorManualExportPackage, postOrchestratorAcceptanceChecklist, postOrchestratorMigrationParity, postOrchestratorRoadmapCheckpoint, postOrchestratorContracts, postOrchestratorIntegrations, postOrchestratorRecovery, postOrchestratorQaStatus, stbStatus, videoOrchestratorStatus, videoOrchestratorScriptsResult, voStudioProjectsResult, voStudioAccountsResult, voStudioPipelineProfilesResult, voStudioContentItemsResult, voStudioPackageResult, voStudioAnalyticsResult, videoOrchestratorIntake, videoAssetPlans, videoDesignPlans, videoVoiceoverPlans, videoVisualPlans, videoAssemblyPlans, videoMetadataPlans, videoPublishingPrepPlans, videoManualExportPackages, videoThumbnailDesignPlans, videoArchiveLoggingPlans, videoDesignProviderBoundaryPlans, videoDesignProviderCredentialIsolationPlans, videoDesignProviderPromptReviewPolicyPlans, videoArtifactSandboxProviderHandoffPlans, videoProviderOutputRedactionPolicyPlans, videoDesignProviderComplianceChecklistPlans, videoDesignProviderEnablementReadinessIndex, videoProviderIntegrationFinalPlanningCheckpoint, videoCredentialStoreImplementationBoundaryPlan, videoPromptReviewUxImplementationPlan, videoProviderAuditPersistenceBoundaryPlan, videoProviderWrapperSecurityReviewPlan, videoProviderImplementationPhaseStartGate, videoProviderImplementationReadinessDashboardSummary, videoProviderImplementationApprovalPacket, videoProviderApprovalPacketConsoleReviewSummary, videoProviderPlanningSurfaceIndex, videoCredentialReferenceScaffold, videoProviderRequestWrapperScaffold, videoProviderWrapperValidationHarness, videoProviderRequestEnvelopeScaffold, videoProviderResponseEnvelopeScaffold, videoProviderScaffoldingIntegrationSummary, videoProviderRequestWrapperInertShell, videoCredentialReferenceValidator, videoProviderResponseRedactionSkeleton, videoProviderAuditEventTypes, videoProviderDisabledOrchestrationFacade, videoProviderCapabilityPolicyEvaluator, videoProviderBlockedActionLedgerTypes, videoProviderDisabledOrchestrationIntegrationSummary, stbVideoMigrationStatus, stbVideoParityMatrix, stbVideoDualRunStatus, stbVideoDualRunEvidence, videoProductionGate, videoRenderExportPolicy, videoControlledDryRunDesign, videoProductionCutoverGate, videoReleaseCandidateReadiness, videoOperatorDecisionQueue, videoControlledExecutionPolicyBoundary, videoControlledExecutionReadinessIndex, videoRoadmapCheckpoint, videoOperatorReviewPacket, videoControlledExecutionApprovalPayloadSchema, videoPreviewCompletionIndex, videoControlledExecutionPreflightChecklist, videoControlledExecutionRiskRegister, videoControlledExecutionPreflightValidatorSchema, videoControlledExecutionPlanStub, videoControlledExecutionApprovalRequestDesign, videoControlledExecutionDisabledGate, videoControlledExecutionSecondApprovalPolicy, videoControlledExecutionOperatorIdentityProtocol, videoControlledExecutionRolePolicy, controlledDualRunRequestDesign, agents, actions, mindStewardReportDetail, agentRuns, agentEvents, agentCostSummary, recoveryItems, localAppsOperationalReadiness, localAppsOperatorSummary, localAppsOrchestratorDef, infraDokploy, infraTunnels, infraDomains, infraNewRelic, infraUmami, infraGoogleAds, infraStripe, infraStudio, voLiveStatus, pipelinesLiveStatus, voAccountsResult, voAuthStatusResult, voJobsResult, systemMetricsResult, stbCredentialsResult, voNormalizeHistoryResult, voManualQueueResult, voWorkerConfigResult, voAccountStatsResult, voReadinessResult, credentialCatalogResult, aiModelSelectorResult] = settledValues;
+  const [status, capabilities, runtimeReports, videoStatus, videoQueue, localApps, localAppsDashboard, localAppsActionReadiness, localAppsActionEnablementBacklog, localAppsActionStatus, schedulerStatus, schedulerJobs, sessions, repos, approvals, approvalStore, executionPlans, executionReadiness, mindPreviewPolicy, mindPreviews, orchestrators, pipelines, projects, platforms, probotDashboardParity, probotSessionsParity, probotLocalAppsParity, probotSchedulerParity, probotStudioParity, probotExternalAdminParity, probotDecommissionReadiness, probotExternalAdminSafeMetadata, probotFeatureParityMatrix, probotPhaseOutChecklist, postOrchestratorStatus, postOrchestratorOverview, postOrchestratorFlows, postOrchestratorDrafts, postOrchestratorEvents, postOrchestratorDryRun, postOrchestratorReviewQueue, postOrchestratorSchedulePreview, postOrchestratorAnalytics, postOrchestratorPipeline, postOrchestratorReadiness, postOrchestratorPlatformPolicies, postOrchestratorDecommissionReadiness, postOrchestratorOperatorGuidance, postOrchestratorManualExportPackage, postOrchestratorAcceptanceChecklist, postOrchestratorMigrationParity, postOrchestratorRoadmapCheckpoint, postOrchestratorContracts, postOrchestratorIntegrations, postOrchestratorRecovery, postOrchestratorQaStatus, stbStatus, videoOrchestratorStatus, voStudioProjectsResult, voStudioAccountsResult, voStudioPipelineProfilesResult, voStudioContentItemsResult, voStudioPackageResult, voStudioAnalyticsResult, videoOrchestratorIntake, videoAssetPlans, videoDesignPlans, videoVoiceoverPlans, videoVisualPlans, videoAssemblyPlans, videoMetadataPlans, videoPublishingPrepPlans, videoManualExportPackages, videoThumbnailDesignPlans, videoArchiveLoggingPlans, videoDesignProviderBoundaryPlans, videoDesignProviderCredentialIsolationPlans, videoDesignProviderPromptReviewPolicyPlans, videoArtifactSandboxProviderHandoffPlans, videoProviderOutputRedactionPolicyPlans, videoDesignProviderComplianceChecklistPlans, videoDesignProviderEnablementReadinessIndex, videoProviderIntegrationFinalPlanningCheckpoint, videoCredentialStoreImplementationBoundaryPlan, videoPromptReviewUxImplementationPlan, videoProviderAuditPersistenceBoundaryPlan, videoProviderWrapperSecurityReviewPlan, videoProviderImplementationPhaseStartGate, videoProviderImplementationReadinessDashboardSummary, videoProviderImplementationApprovalPacket, videoProviderApprovalPacketConsoleReviewSummary, videoProviderPlanningSurfaceIndex, videoCredentialReferenceScaffold, videoProviderRequestWrapperScaffold, videoProviderWrapperValidationHarness, videoProviderRequestEnvelopeScaffold, videoProviderResponseEnvelopeScaffold, videoProviderScaffoldingIntegrationSummary, videoProviderRequestWrapperInertShell, videoCredentialReferenceValidator, videoProviderResponseRedactionSkeleton, videoProviderAuditEventTypes, videoProviderDisabledOrchestrationFacade, videoProviderCapabilityPolicyEvaluator, videoProviderBlockedActionLedgerTypes, videoProviderDisabledOrchestrationIntegrationSummary, stbVideoMigrationStatus, stbVideoParityMatrix, stbVideoDualRunStatus, stbVideoDualRunEvidence, videoProductionGate, videoRenderExportPolicy, videoControlledDryRunDesign, videoProductionCutoverGate, videoReleaseCandidateReadiness, videoOperatorDecisionQueue, videoControlledExecutionPolicyBoundary, videoControlledExecutionReadinessIndex, videoRoadmapCheckpoint, videoOperatorReviewPacket, videoControlledExecutionApprovalPayloadSchema, videoPreviewCompletionIndex, videoControlledExecutionPreflightChecklist, videoControlledExecutionRiskRegister, videoControlledExecutionPreflightValidatorSchema, videoControlledExecutionPlanStub, videoControlledExecutionApprovalRequestDesign, videoControlledExecutionDisabledGate, videoControlledExecutionSecondApprovalPolicy, videoControlledExecutionOperatorIdentityProtocol, videoControlledExecutionRolePolicy, controlledDualRunRequestDesign, agents, actions, mindStewardReportDetail, agentRuns, agentEvents, agentCostSummary, recoveryItems, localAppsOperationalReadiness, localAppsOperatorSummary, localAppsOrchestratorDef, infraDokploy, infraTunnels, infraDomains, infraNewRelic, infraUmami, infraGoogleAds, infraStripe, infraStudio, voLiveStatus, pipelinesLiveStatus, voAccountsResult, voAuthStatusResult, voJobsResult, systemMetricsResult, stbCredentialsResult, voNormalizeHistoryResult, voManualQueueResult, voWorkerConfigResult, voAccountStatsResult, voReadinessResult, credentialCatalogResult, aiModelSelectorResult] = settledValues;
   let approvalDetail;
   const latestApprovalId = approvals.value?.approvals?.[0]?.id;
   if (latestApprovalId) {
@@ -6337,8 +6102,6 @@ async function loadBrainConsoleViewState(settings = DEFAULT_BRAIN_CONSOLE_SETTIN
     postOrchestratorRecovery: postOrchestratorRecovery.value,
     stbStatus: stbStatus.value,
     videoOrchestratorStatus: videoOrchestratorStatus.value,
-    videoOrchestratorScripts: videoOrchestratorScriptsResult.value,
-    videoOrchestratorScriptsError: videoOrchestratorScriptsResult.error,
     voStudioProjects: voStudioProjectsResult.value,
     voStudioAccounts: voStudioAccountsResult.value,
     voStudioPipelineProfiles: voStudioPipelineProfilesResult.value,
@@ -6471,7 +6234,8 @@ var SECTION_TABS = [
   { id: "reports", label: "Reports", icon: "\u{1F4CB}" },
   { id: "posts", label: "Posts", icon: "\u2726" },
   { id: "agents", label: "Agents", icon: "\u25C8" },
-  { id: "accounts", label: "Accounts", icon: "\u{1F511}" }
+  { id: "accounts", label: "Accounts", icon: "\u{1F511}" },
+  { id: "aws-video", label: "AWS Video", icon: "\u{1F3AC}" }
 ];
 function metricsSeverityColor(pct) {
   if (pct < 50) return "#22c55e";
@@ -6523,7 +6287,6 @@ function renderSystemMetricsBanner(state) {
   const gpuColor = gpuPct === null ? "var(--text-muted)" : metricsSeverityColor(gpuPct);
   const c5 = m.codex.fiveHour;
   const c7 = m.codex.sevenDay;
-  const gm = m.gemini;
   const ca = m.claudeApi;
   const claudeCostPercent = (cost, maxMonthCost = 1e3) => {
     return Math.min(100, Math.round(cost / maxMonthCost * 100));
@@ -6585,19 +6348,6 @@ function renderSystemMetricsBanner(state) {
         <div class="bc-mc-value" style="color:var(--text-muted);font-size:14px">\u2013</div>
         <div class="bc-mc-sub">No data yet</div>
       </div>`;
-  const geminiCard = gm ? `<div class="bc-mc">
-        <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
-          <div class="bc-mc-label">GEMINI \xB7 FREE</div>
-          <div class="bc-mc-badge">RESETS IN ${formatMetricsCountdown(gm.resetsAt)}</div>
-        </div>
-        <div class="bc-mc-value" style="color:${metricsCodexColor(gm.remainingPercent)}">${gm.remainingPercent}%</div>
-        <div class="bc-mc-sub">${gm.callsRemaining}/${gm.callsToday} calls \xB7 ${formatMetricsResetExact(gm.resetsAt)}</div>
-        <div class="bc-bar"><div class="bc-bar-fill" style="width:${gm.remainingPercent}%;background:${metricsCodexColor(gm.remainingPercent)}"></div></div>
-      </div>` : `<div class="bc-mc">
-        <div class="bc-mc-label">GEMINI \xB7 FREE</div>
-        <div class="bc-mc-value" style="color:var(--text-muted);font-size:14px">\u2013</div>
-        <div class="bc-mc-sub">No data yet</div>
-      </div>`;
   const claudeHaikuCard = ca ? `<div class="bc-mc">
         <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
           <div class="bc-mc-label">CLAUDE \xB7 HAIKU</div>
@@ -6637,7 +6387,7 @@ function renderSystemMetricsBanner(state) {
         <div class="bc-mc-value" style="color:var(--text-muted);font-size:14px">\u2013</div>
         <div class="bc-mc-sub">No data yet</div>
       </div>`;
-  return `<div class="bc-metrics-banner">${cpuCard}${memCard}${gpuCard}${uptimeCard}${codex5Card}${codex7Card}${geminiCard}${claudeHaikuCard}${claudeSonnetCard}${claudeOpusCard}</div>`;
+  return `<div class="bc-metrics-banner">${cpuCard}${memCard}${gpuCard}${uptimeCard}${codex5Card}${codex7Card}${claudeHaikuCard}${claudeSonnetCard}${claudeOpusCard}</div>`;
 }
 function renderBrainConsoleView(container, state, settings, onRefresh, onBrainCoreRestart) {
   container.empty();
@@ -6755,7 +6505,7 @@ function renderActiveSectionContent(shell, activeSection, state, snapshot, setti
         renderPipelinesSection(content, state, snapshot);
         break;
       case "video-orchestrator":
-        renderVideoOrchestratorSection(content, state, onRefresh);
+        renderVideoOrchestratorSection(content, state);
         break;
       case "projects":
         renderProjectsSection(content, state, snapshot);
@@ -6771,6 +6521,9 @@ function renderActiveSectionContent(shell, activeSection, state, snapshot, setti
         break;
       case "accounts":
         renderAccountsSection(content, state, settings);
+        break;
+      case "aws-video":
+        renderAwsVideoPipelineSection(content, settings);
         break;
     }
   } catch (error) {
@@ -7198,17 +6951,13 @@ function renderMonitoringSection(content, state) {
   }
   renderCard(grid, `Synthetic Monitors (${synthetics.length})`, syntheticsCard);
 }
-function renderVideoOrchestratorSection(content, state, onRefresh) {
+function renderVideoOrchestratorSection(content, state) {
   const container = content.createDiv({ cls: "vo-studio-container" });
   const voShell = new VOShell(container, {
     projects: state.voStudioProjects?.items,
     accounts: state.voStudioAccounts?.items,
     pipelineProfiles: state.voStudioPipelineProfiles?.items,
     contentItems: state.voStudioContentItems?.items,
-    scriptDrafts: state.videoOrchestratorScripts,
-    scriptDraftsError: state.videoOrchestratorScriptsError,
-    brainCoreUrl: state.brainCoreUrl,
-    onRefresh,
     selector: state.aiModelSelectorStatus,
     analytics: state.voStudioAnalytics,
     accountStats: state.voAccountStats
@@ -10267,6 +10016,15 @@ function renderProjectPlatformCard(parent, platform, projectId, brainCoreUrl) {
     });
   }
 }
+function renderAwsVideoPipelineSection(content, settings) {
+  const brainCoreUrl = settings.brainCoreUrl ?? "http://localhost:4877";
+  const header = content.createDiv({ cls: "bc-aws-video-header" });
+  header.createEl("h2", { cls: "bc-aws-video-title", text: "AWS Video Pipeline" });
+  header.createEl("p", { cls: "bc-aws-video-subtitle", text: "Topic Intelligence & Channel Status" });
+  const panelContainer = content.createDiv({ cls: "bc-aws-video-panel-container" });
+  const panel = new AwsVideoPipelinePanel(panelContainer, brainCoreUrl);
+  content.addEventListener("beforeunload", () => panel.destroy());
+}
 
 // src/main.ts
 var VIEW_TYPE = "brain-console-view";
@@ -10458,7 +10216,9 @@ var BrainConsoleView = class extends import_obsidian2.ItemView {
       this.contentEl,
       this.cachedState,
       settings,
-      () => this.fullRefresh(),
+      () => {
+        void this.fullRefresh();
+      },
       () => this.restartBrainCore()
     );
     if (savedScrollTop > 0) {
