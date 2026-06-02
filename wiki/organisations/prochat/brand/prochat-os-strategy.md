@@ -58,7 +58,7 @@ ProChat OS is not:
 - MikeOSS
 - a media company
 - a Runway, HeyGen, CapCut, or Adobe competitor
-- the model router alone
+- the AI Model Selector alone
 - the memory store alone
 - the Brain Console alone
 
@@ -179,9 +179,9 @@ Core components:
 1. workflow runtime / API
 2. memory and context store
 3. input/output connectors
-4. model router / AI selector
+4. AI Model Selector / AI selector
 5. approval and event log
-6. control console
+6. control console, implemented as Brain Console Web in the `brain` repo
 7. CLI for install, update, configuration, and support
 8. optional workflow modules
 
