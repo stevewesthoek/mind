@@ -128,8 +128,8 @@ messy client matter inputs
 MikeOSS is the first tangible legal wedge.
 
 ```text
-MikeOSS = legal document AI workspace
-ProChat OS = Agentic Workflow OS around and beyond it
+MikeOSS = legal document workspace demo
+ProChat OS = managed workflow system that prepares useful legal admin outputs around and beyond the document workspace
 ```
 
 MikeOSS helps start the conversation because law firms can understand document AI quickly.
@@ -365,3 +365,38 @@ Turn messy client intake into a summary, missing-information checklist, task lis
 ```
 
 The customer buys the outcome. ProChat internally delivers that outcome using modules, skills, workflows, schedules, approvals, and evaluation loops.
+
+
+
+
+## Vertical module positioning
+
+ProChat OS has one business-agnostic core brand and multiple niche-specific workflow offers.
+
+Core website promise:
+
+```text
+Messy business information in. Useful work out.
+```
+
+Niche pages should translate that same promise into specific buyer pain.
+
+Examples:
+
+- legal page: spend less time sorting client documents and intake information
+- accounting page: spend less time chasing missing receipts, forms, and documents
+- agency page: qualify inbound leads and prepare follow-up faster
+- consultant page: turn messy client notes and CV/profile information into client-ready drafts
+- content page: turn notes, transcripts, and product updates into content drafts and publishing tasks
+
+Niche pages should show:
+
+- the painful before state
+- the useful after state
+- the output ProChat prepares
+- the human review point
+- the pilot or discovery CTA
+
+Niche pages should not describe module manifests, skills, schedules, environment setup, or internal architecture.
+
+Internal delivery can use the module architecture in `prochat-os-modules.md`.

@@ -949,3 +949,101 @@ Buyer-facing roadmap output should focus on:
 - managed setup where wanted
 
 Technical roadmap output may use internal terms such as runtime, skills, schedules, connectors, Devbox, Nix, CLI, and module manifest when the audience is implementation or support.
+
+
+
+
+## Niche module validation phase
+
+This phase converts discovery into a repeatable module pattern.
+
+Goal:
+
+```text
+validate one niche workflow, package it as a reusable ProChat OS module, and prove it can be sold without changing the core ProChat OS positioning
+```
+
+First candidate module:
+
+```text
+legal intake module
+```
+
+Alternative/comparison modules:
+
+- accounting document intake
+- agency lead intake
+- consultant proposal/profile preparation
+- content operations
+
+Tasks:
+
+1. Define the buyer problem in plain language.
+2. Collect or create safe sample inputs.
+3. Define expected ready-to-review outputs.
+4. Create module manifest draft.
+5. Define narrow skills.
+6. Define workflow sequence.
+7. Define approval checkpoints.
+8. Define optional schedules for recurring work.
+9. Define evaluation criteria.
+10. Run on safe/fake data.
+11. Show before/after demo to prospects.
+12. Iterate from reviewer feedback.
+
+Exit criteria:
+
+- one niche module has a clear before/after demo
+- output is useful enough for human review
+- buyer understands the value without architecture explanation
+- module can be described as a repeatable paid pilot
+- lessons are documented for the next niche module
+
+## Reproducible environment task
+
+This is an engineering/support task, not a marketing promise.
+
+Goal:
+
+```text
+make ProChat OS and modules easier to run consistently across demo, local, CI, managed, and commercial environments
+```
+
+Candidate approaches:
+
+- Devbox
+- Nix
+- containers
+- documented managed-server baseline
+
+Initial task:
+
+```text
+Create a minimal environment definition for the first module/demo path and document the supported command path.
+```
+
+Acceptance criteria:
+
+- dependencies are explicit
+- setup drift is reduced
+- future support is easier
+- public website still focuses on outcomes, not installation mechanics
+
+## Module evaluation task
+
+Each sellable module should include a simple evaluation loop.
+
+Evaluation should answer:
+
+- did this save time?
+- was the output accurate enough for review?
+- what did the reviewer edit?
+- what information was missing?
+- what prompt/context/example needs improvement?
+
+Acceptance criteria:
+
+- every module has sample inputs
+- every module has expected outputs
+- every module has a reviewer checklist
+- pilot feedback can be captured and turned into module improvements
