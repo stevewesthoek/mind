@@ -6,13 +6,21 @@
 
 ## Definition
 
-ProChat OS is an installable Agentic Workflow OS: a private workflow runtime that connects messy inputs to business tools through memory, connectors, model routing, workflow agents, approvals, logs, and a control console.
+### Buyer-facing definition
+
+ProChat OS helps businesses get repetitive information work done faster by turning messy emails, PDFs, forms, notes, folders, attachments, reports, and API data into ready-to-review summaries, checklists, tasks, reports, status updates, and draft replies.
 
 Customer-facing explanation:
 
 ```text
-We install a private workflow runtime on your server. It connects to selected inputs like email, files, forms, folders, APIs, or webhooks. It stores your business context, runs configurable agents, asks for approval when needed, and sends structured outputs to the tools you already use.
+ProChat sets up and manages the workflow system for you. Your team can send work to it by email, forms, file drops, manual upload, or API calls, and receive structured outputs back for review.
 ```
+
+### Internal technical definition
+
+Internally, ProChat OS is an Agentic Workflow OS and managed workflow runtime that connects inputs, skills, workflows, schedules, approvals, logs, optional modules, and business outputs.
+
+The internal technical definition should not be used as primary marketing copy.
 
 ## What a client installs
 
@@ -341,3 +349,81 @@ Do not start by building:
 - how much Brain Console is needed in v1?
 - how to package the public GitHub version?
 - how to handle commercial-license checks?
+
+
+
+
+## Module packaging direction
+
+The canonical module architecture lives in:
+
+```text
+prochat-os-modules.md
+```
+
+Technical principle:
+
+```text
+module = skills + workflows + schedules + examples + evaluation criteria + optional connectors
+```
+
+Each module should eventually include:
+
+- manifest file
+- skill definitions
+- workflow definitions
+- schedule definitions where useful
+- safe sample data
+- evaluation checklist
+- onboarding notes
+- support/runbook notes
+
+Future module CLI ideas:
+
+```bash
+prochat module list
+prochat module add legal-intake
+prochat module test legal-intake
+prochat module schedules list
+prochat module evaluate legal-intake
+```
+
+These are roadmap ideas, not current public promises.
+
+## Reproducible environment direction
+
+ProChat OS should eventually include a reproducible environment definition for engineering, commercial self-hosting, and managed deployments.
+
+Candidate approaches:
+
+- Devbox
+- Nix
+- containers
+- documented managed-server baseline
+
+Goal:
+
+```text
+same dependency versions across local, CI, demo, and managed/customer environments
+```
+
+This is an implementation and support concern. Public marketing should continue to say that ProChat sets up and manages the workflow system for the customer.
+
+## Evaluation and feedback loop
+
+Workflow quality must improve through review.
+
+The technical system should eventually store:
+
+- generated output
+- approval/rejection state
+- reviewer notes
+- edit history where practical
+- evaluation result
+- module/version reference
+
+Improvement loop:
+
+```text
+run workflow → review output → capture feedback → refine skill/context/examples → rerun → compare improvement
+```

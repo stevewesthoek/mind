@@ -19,40 +19,43 @@ Do not make the main ProChat website about lawyers, accountants, MikeOSS, or old
 
 ## Public website positioning
 
-The website should position ProChat OS as:
+The website should position ProChat OS around buyer outcomes:
 
 ```text
-Agentic workflows between your messy inputs and your business tools.
+Messy business information in. Useful work out.
 ```
 
 Supporting explanation:
 
 ```text
-ProChat OS connects to the way your business already works. It takes messy input from many places, understands it, structures it, and sends useful output where it needs to go.
+ProChat OS helps businesses get repetitive admin, document, intake, reporting, and follow-up work done faster by turning messy information into ready-to-review outputs.
 ```
 
 The website should explain:
 
-- ProChat OS is an Agentic Workflow OS
-- it runs as a private workflow runtime
-- it connects to existing inputs and tools
-- it turns messy information into structured work
-- it supports human approval first
-- it can be managed, hosted, or installed on customer infrastructure
-- the console is a command center, not the whole product
+- what messy information comes in
+- what useful output comes back
+- how the customer saves admin time
+- how follow-up becomes faster
+- how fewer details are missed
+- how humans review important outputs first
+- how ProChat sets up and manages the workflow system for the customer
+
+The website should not lead with technical implementation details such as runtime, memory, connectors, model routing, CLI, or installation.
 
 ## Public messaging rules
 
 Use:
 
-- Agentic Workflow OS
-- agentic workflows
-- private workflow runtime
-- messy inputs to structured outputs
-- business tools integration
-- 24/7 agentic employee
-- human approval first
-- managed ProChat OS
+- save admin time
+- respond faster
+- fewer missed follow-ups
+- clearer handoffs
+- messy information in, useful work out
+- summaries, checklists, reports, tasks, status updates, and draft replies
+- ready-to-review outputs
+- human review first
+- managed for you
 
 Avoid leading with:
 
@@ -63,17 +66,24 @@ Avoid leading with:
 - dashboard as the product
 - fully autonomous claims
 - lawyer/accountant-only positioning
+- installable
+- runtime
+- memory
+- connectors
+- model routing
+- CLI
+- architecture
 
 ## Primary website promise
 
 ```text
-ProChat OS turns messy business inputs into structured work through agentic workflows that run 24/7.
+Get repetitive business work done faster without the manual copy-paste.
 ```
 
 ## Secondary promise
 
 ```text
-You keep working the way you work. ProChat OS sits in the middle, remembers context, structures information, asks for approval, and sends useful output to the tools you already use.
+Send messy emails, PDFs, forms, notes, folders, or API data in. Get summaries, checklists, tasks, reports, status updates, and draft replies back for human review.
 ```
 
 ## First direct outreach niche
@@ -101,7 +111,7 @@ Do not sell legal advice.
 Sell admin/document workflow support:
 
 ```text
-ProChat OS gives your firm a 24/7 agentic employee that turns messy client emails, PDFs, notes, forms, and attachments into structured intake summaries, missing-information checklists, task lists, and draft follow-ups — with human approval first.
+ProChat helps your firm spend less time sorting client emails, PDFs, notes, forms, and attachments by preparing intake summaries, missing-information checklists, task lists, and draft follow-ups — with lawyer review before anything is used.
 ```
 
 ### Law-firm demo angle
@@ -298,3 +308,60 @@ first niche + first workflow + first managed pilot promise
 ```
 
 Then finalize landing page copy, demo script, offer, pricing, and implementation scope.
+
+
+
+
+## Niche module GTM model
+
+ProChat OS has one business-agnostic brand and multiple niche-specific offers.
+
+Public website:
+
+```text
+ProChat OS = messy business information in, useful work out.
+```
+
+Niche pages:
+
+```text
+specific painful workflow → specific ready-to-review output → pilot call
+```
+
+Each niche page should show:
+
+- the painful workflow
+- what comes in
+- what comes out
+- who reviews it
+- what time/admin pain is reduced
+- what the first pilot looks like
+
+Niche modules may include:
+
+- legal intake
+- accounting document intake
+- agency lead intake
+- consultant proposal/profile preparation
+- content operations
+- internal reporting
+
+The main website should not become niche-only. Niche pages and outreach assets can be specific.
+
+## Module offer language
+
+Do not sell modules as architecture.
+
+Bad:
+
+```text
+Install a workflow runtime with skills and schedules.
+```
+
+Good:
+
+```text
+Turn messy client intake into a summary, missing-information checklist, task list, and draft follow-up for review.
+```
+
+The customer buys the outcome. ProChat internally delivers that outcome using modules, skills, workflows, schedules, approvals, and evaluation loops.

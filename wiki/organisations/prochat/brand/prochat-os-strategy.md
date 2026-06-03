@@ -39,15 +39,29 @@ ProChat OS is the middle layer between messy business inputs and the tools a bus
 
 ## What ProChat OS is
 
-ProChat OS is an installable Agentic Workflow OS that gives businesses, solo builders, and workflow-driven operators a private agentic employee for memory, automation, local apps, content, operations, and execution.
+### Buyer-facing definition
 
-It connects messy inputs to business tools through configurable workflows, memory, model routing, agents, approvals, logs, connectors, and a control console.
+ProChat OS helps businesses get repetitive admin, document, intake, reporting, and follow-up work done faster by turning messy information into ready-to-review outputs.
 
-Core description:
+Short version:
 
 ```text
-ProChat OS turns messy information from emails, files, forms, notes, APIs, and folders into structured outputs, tasks, reports, drafts, updates, and actions.
+Messy business information in. Useful work out.
 ```
+
+What it does for buyers:
+
+- turns scattered emails, PDFs, forms, notes, folders, attachments, reports, and API data into useful work
+- prepares summaries, missing-information checklists, task lists, status updates, reports, draft replies, and review notes
+- keeps humans in control before important outputs are sent, changed, or treated as final
+- can be used through simple entry points such as email, forms, file drops, manual upload, or API calls
+- is set up and managed by ProChat for customers who do not want to manage infrastructure
+
+### Internal technical definition
+
+Internally, ProChat OS is still an Agentic Workflow OS and managed workflow runtime. That technical language belongs in technical docs, implementation plans, and engineering discussions.
+
+Public marketing should not lead with installable/runtime/memory/router/connector language. Buyers care about outcomes: less admin work, faster follow-up, clearer handoffs, fewer missed details, and ready-to-review outputs.
 
 ## What ProChat OS is not
 
@@ -200,9 +214,10 @@ Use this hierarchy to prevent strategy drift:
 
 1. `prochat-os-strategy.md` defines the business direction and non-goals.
 2. `prochat-os-roadmap.md` defines phase order, active execution lane, and progress tracking rules.
-3. `prochat-os-technical-definition.md` defines the installable runtime and module boundaries.
-4. `prochat-os-go-to-market.md` defines public positioning, outreach wedges, and validation rules.
-5. Live notes such as `live/video.md` are visibility surfaces only, not strategy sources.
+3. `prochat-os-technical-definition.md` defines the internal runtime, deployment, and module boundaries.
+4. `prochat-os-modules.md` defines the module, skill, schedule, and evaluation architecture.
+5. `prochat-os-go-to-market.md` defines public positioning, outreach wedges, and validation rules.
+6. Live notes such as `live/video.md` are visibility surfaces only, not strategy sources.
 
 If documents conflict, update the lower-level document to match the higher-level canonical source.
 
@@ -1455,3 +1470,170 @@ The Local Video Orchestrator is for local development, fixtures, dry-runs, readi
 The Cloud Video Orchestrator is the AWS-backed execution path for media generation, rendering, storage, transcoding, and long-running orchestration. This is the current production-oriented path for the AWS-backed Video Orchestrator proof.
 
 Both lanes may appear in Brain Console, but every surface should identify whether it represents local capability, cloud capability, or shared metadata/status.
+
+
+
+
+## Niche-agnostic core and vertical modules
+
+ProChat OS must remain niche-agnostic at the core and niche-specific at the module layer.
+
+Core ProChat OS:
+
+```text
+messy information → ready-to-review output → human approval → repeatable workflow
+```
+
+The core should be reusable across many business types. It should not be built only for law firms, accountants, creators, or SaaS builders.
+
+Vertical modules package the core for a specific market and workflow. Each module should make one niche problem easier to understand, sell, demo, and implement.
+
+Examples:
+
+- legal intake module
+- accounting document intake module
+- agency lead intake module
+- consultant proposal/profile module
+- content operations module
+- real estate inquiry/follow-up module
+- internal report module
+
+Each vertical module should include:
+
+- a clear buyer problem
+- expected input examples
+- expected output examples
+- skills
+- workflows
+- schedules where useful
+- approval checkpoints
+- test data
+- evaluation criteria
+- onboarding notes
+
+The website can remain business-agnostic while dedicated landing pages and outreach assets speak to specific niches.
+
+## Module and skill architecture
+
+A ProChat OS module is a packaged workflow block.
+
+A module contains:
+
+```text
+skills + workflows + schedules + examples + evaluation criteria + optional connectors
+```
+
+A skill is a narrow, inspectable ability used by a workflow. Skills should not be overloaded.
+
+Each skill should define:
+
+- name
+- purpose
+- input schema or expected input
+- output schema or expected output
+- examples of good outputs
+- context/reference files
+- approval needs
+- safe test data
+- sandbox or execution context
+
+Each workflow should define:
+
+- trigger or entry point
+- required skills
+- expected output
+- approval checkpoints
+- logging requirements
+- evaluation criteria
+
+Each schedule should define:
+
+- when it runs
+- which workflow it runs
+- what input it uses
+- whether approval is required
+- what happens after approval
+
+Design principle:
+
+```text
+One module should solve one recognizable business problem for one niche or workflow family.
+```
+
+Avoid giving an agent too many unrelated skills. More skills can reduce reliability because the workflow may choose the wrong tool or produce unfocused output.
+
+## Scheduling and recurring workflows
+
+Recurring work is a core ProChat OS opportunity.
+
+ProChat OS should support scheduled workflows such as:
+
+- daily intake summary
+- weekly missing-information report
+- monthly client document checklist
+- daily lead follow-up draft
+- weekly internal status report
+- scheduled content workflow
+
+Scheduled workflows must still respect approval checkpoints.
+
+Public buyer language:
+
+```text
+Recurring work can be prepared automatically, but your team can still review important outputs before they are used.
+```
+
+Internal technical language:
+
+```text
+Modules may define cron-like schedules that trigger workflows and route outputs into approval queues, reports, email drafts, tasks, or status updates.
+```
+
+## Feedback and evaluation loop
+
+ProChat OS modules must improve through review.
+
+Every module should define how output quality is evaluated.
+
+Evaluation can include:
+
+- was the summary accurate?
+- did the checklist catch missing information?
+- was the draft reply useful?
+- did the task list match the actual next steps?
+- how much manual time was saved?
+- what did the reviewer edit?
+- what should be changed in the examples, instructions, or skill definition?
+
+The product should eventually support storing generated outputs, reviewer notes, approval/rejection state, and iteration history.
+
+This creates a repeatable improvement loop:
+
+```text
+run workflow → review output → capture feedback → refine skill/context/examples → rerun → compare improvement
+```
+
+## Reproducible environment and deployment story
+
+For engineering and self-hosted/commercial deployments, ProChat OS should have a reproducible environment definition.
+
+Candidate options:
+
+- Devbox
+- Nix
+- containers
+- documented managed-server baseline
+
+The goal is not to lead marketing with installation details. The goal is to reduce support overhead and make deployments predictable.
+
+Public buyer wording:
+
+```text
+ProChat sets up and manages the workflow system for you. Your team can send work to it by email, forms, file drops, manual upload, or API calls.
+```
+
+Technical implementation wording:
+
+```text
+ProChat OS should eventually include a reproducible environment file and setup path so local, cloud, and managed deployments use the same dependency versions.
+```
