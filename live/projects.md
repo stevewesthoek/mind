@@ -1,14 +1,11 @@
 # Live Projects
 
-Current projects should be summarized here by the model router.
-
-Migration note: legacy project material remains in the existing numbered structure until model-router compilation and validation are complete.
+Current projects should be summarized here by the Mind Steward.
 
 ## Active projects
 
-- Mind OS migration
-- Brain Core and Obsidian cockpit migration
-- Model router foundation
+- Mind Steward local capture classification
+- Brain Core and Obsidian cockpit
 - Fala local learning cockpit integration
 
 ## Rules

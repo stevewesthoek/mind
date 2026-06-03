@@ -50,11 +50,10 @@ Do not break existing automations:
 
 - Save-to-Mind targets `capture/inbox/` — do not change this path.
 - Failed captures belong in `capture/failed/`.
-- auto-router/model-router may inspect inbox notes, but write/apply remains blocked unless explicitly approved.
-- kanban-syncer syncs task surfaces with `kanban.md`.
+- Mind Steward classifies captures locally and may append review suggestions; broader write/apply remains blocked unless explicitly approved.
 - Obsidian uses this repo as a vault.
 
-Do not write into `archive/old/` — those are read-only legacy backups.
+Do not write into `archive/old/` — those are read-only backups.
 
 Never commit secrets, OAuth tokens, API keys, cookies, private keys, service account files, `.env` values, or credentials.
 
@@ -77,8 +76,8 @@ Do not do this:
 - Do not claim to know Steve's context without checking `mind`.
 - Do not load the whole repo into context.
 - Do not duplicate canonical strategy into random folders.
-- Do not put tasks outside `04-tasks/`.
-- Do not put research conclusions directly into `02-strategy/` unless they are committed decisions.
+- Do not put tasks outside `live/tasks.md`.
+- Do not put research conclusions directly into `wiki/organisations/` unless they are committed decisions.
 
 ## Where New Information Goes
 
@@ -92,7 +91,7 @@ Use these defaults:
 | Compiled durable knowledge | `wiki/` |
 | Raw evidence and source material | `sources/` |
 | Completed, old, or historical material | `archive/` |
-| Legacy material (read-only) | `archive/old/` |
+| Archived reference material | `archive/old/` |
 
 ## Research Rules
 
@@ -154,7 +153,7 @@ The user should be able to speak naturally. When they say things like:
 
 route automatically using this file plus `00-memory-map.md`.
 
-When uncertain, prefer a safe draft in `01-inbox/` or `06-resources/research/inbox/` rather than corrupting strategy, tasks, or projects.
+When uncertain, prefer a safe draft in `capture/inbox/` or `sources/research/` rather than corrupting strategy, tasks, or projects.
 
 ## Write Policy For Agents
 

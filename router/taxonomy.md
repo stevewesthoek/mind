@@ -9,7 +9,7 @@
 - `source` — raw evidence, transcript, article, file, or reference.
 - `wiki` — compiled durable knowledge.
 - `workflow` — repeatable operating process.
-- `archive` — old, completed, superseded, or legacy material.
+- `archive` — completed, inactive, or superseded material.
 
 ## Domains
 

@@ -5,7 +5,7 @@
 ## 🧠 Brain Console Plugin Dashboard (Primary)
 
 Open the **Obsidian Brain Console plugin** in the right sidebar. It displays:
-- Status strip with 6 pills (Brain Core, Model Router, Scheduler, Save-to-Mind, Approvals, Maintenance)
+- Status strip with 6 pills (Brain Core, Mind Steward, Scheduler, Save-to-Mind, Approvals, Maintenance)
 - 6 core cards: Wiki Health, Maintenance Previews, Approvals, Scheduler Status, Brain Core readiness, Next Safe Action
 - Action buttons: Refresh, Request Dry Run, View Latest, Open Mind, Wiki Log
 - Recent activity panel
@@ -38,9 +38,8 @@ Machine and scheduler state is exposed through **Brain Console plugin cards**, n
 - `/approvals` → Approvals card
 - `/execution/readiness` → Next safe action card
 
-## Migration Status
+## Status
 
-- New structure scaffolded beside legacy numbered folders
-- Brain Console plugin is now the primary Obsidian interface
-- Legacy folders remain for reference only
-- Archive phase remains blocked until explicit cleanup plan
+- Brain Console plugin is the primary Obsidian interface.
+- Mind Steward classifies captures locally and writes review suggestions.
+- Archive maintenance requires an explicit cleanup plan.

@@ -7,7 +7,7 @@ confidence: 0
 signal_quality: 0
 title: "Mind OS failure buffer verification"
 created: 2026-05-16T21:55:13.534Z
-failure_stage: gemini-classify
+failure_stage: mind-steward-classify
 error_summary: "Forced failure-buffer verification"
 ---
 

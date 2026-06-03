@@ -1,6 +1,6 @@
 # Router Maintenance
 
-The model router implementation lives in `brain`. This file defines the vault maintenance contract.
+The Mind Steward implementation lives in `brain`. This file defines the vault maintenance contract.
 
 ## Compile loop
 

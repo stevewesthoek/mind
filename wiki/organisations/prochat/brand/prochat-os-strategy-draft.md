@@ -2024,7 +2024,7 @@ prochat-connectors
   - input connectors: email, folder, webhook, forms, API, CLI
   - output connectors: email draft, report, task, CRM update, file, webhook
 
-prochat-model-router
+prochat-ai-model-selector
   - model/provider selection
   - local vs cloud model routing
   - cost/latency/quality controls
@@ -2050,7 +2050,7 @@ Core components:
 - workflow runtime
 - memory/context store
 - connector interface
-- model router / AI selector
+- AI Model Selector / AI selector
 - approval and event log
 - control console, even if minimal
 - CLI/API for setup and operation
@@ -2074,7 +2074,7 @@ Optional modules are installable blocks on top of the core:
 
 ProChat OS is not:
 
-- only the model router
+- only the AI Model Selector
 - only the AI model selector
 - only the memory repo
 - only the Brain Console dashboard
@@ -2131,7 +2131,7 @@ API service
 scheduler / worker
 memory database / document store
 object/file storage
-model router
+AI Model Selector
 connector workers
 control console
 CLI
@@ -2146,7 +2146,7 @@ customer-owned or ProChat-managed AWS server
   ├─ ProChat Core API
   ├─ ProChat Memory DB
   ├─ ProChat Connector workers
-  ├─ ProChat Model Router
+  ├─ ProChat AI Model Selector
   ├─ ProChat Console
   ├─ optional MikeOSS instance
   └─ optional workflow modules
@@ -2179,7 +2179,7 @@ Need to decide:
 
 - Is `prochat-core` one monolith first or multiple services?
 - Which database powers memory/context first?
-- Is the model router required in v1, or can v1 use one configured provider?
+- Is the AI Model Selector required in v1, or can v1 use one configured provider?
 - Is Brain Console required in v1, or can the first control surface be CLI + simple status page?
 - What is the first connector: email inbox, folder upload, webhook, or form?
 - What is the first output connector: email draft, report, task list, or CRM-ready JSON?
@@ -2255,7 +2255,7 @@ ProChat OS consists of these core installable parts:
 1. workflow runtime / API
 2. memory and context store
 3. input/output connectors
-4. model router / AI selector
+4. AI Model Selector / AI selector
 5. approval and event log
 6. control console
 7. CLI for install, update, configuration, and support
@@ -2265,7 +2265,7 @@ ProChat OS consists of these core installable parts:
 
 ProChat OS is not:
 
-- the model router alone
+- the AI Model Selector alone
 - the memory store alone
 - Brain Console alone
 - MikeOSS alone

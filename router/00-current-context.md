@@ -29,9 +29,9 @@ capture/daily/    Daily scratch/notes
 live/             Active work surfaces (tasks, projects, decisions, workflows)
 wiki/             Compiled durable knowledge
 sources/          Raw evidence, research notes, source material
-router/           Model-router contract and rules
-archive/          Completed, old, or legacy material
-archive/old/      Legacy numbered PARA folders (read-only backup)
+router/           Mind Steward contract and rules
+archive/          Completed or inactive material
+archive/old/      Read-only backups
 ```
 
 The cloud video orchestrator implementation is now in the Brain repo at:

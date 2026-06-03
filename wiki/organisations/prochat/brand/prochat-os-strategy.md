@@ -14,11 +14,14 @@ ProChat is no longer primarily positioned around fixed SaaS kits, WaaSKit, or a 
 The company direction is now:
 
 ```text
-Agentic workflows.
+Managed AI workflows.
 Modular automation.
-Private workflow runtimes.
-Managed ProChat OS installations.
+Niche-specific workflow modules.
+Business information turned into ready-to-review outputs.
+Human approval before important action.
 ```
+
+Internal technical language may still describe ProChat OS as a workflow runtime, but public strategy and buyer-facing messaging should focus on outcomes: less admin work, faster follow-up, clearer handoffs, and fewer missed details.
 
 ## Category
 

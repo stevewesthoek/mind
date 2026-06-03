@@ -34,8 +34,8 @@ capture/   Raw incoming captures (inbox/, daily/, failed/)
 live/      Active work surfaces (tasks, projects, decisions, workflows)
 wiki/      Compiled durable knowledge (organisations, areas, faith, business, etc.)
 sources/   Raw evidence and research notes (research/notes/bible, apologetics, etc.)
-router/    Model-router contract, rules, and maintenance definitions
-archive/   Old, completed, or legacy material (archive/old/ for legacy numbered folders)
+router/    Mind Steward contract, rules, and maintenance definitions
+archive/   Completed or inactive material
 brain/     AI-system project context lives in the Brain repo, including the video orchestrator
 ```
 
@@ -116,18 +116,6 @@ Use safe defaults:
 
 Ask before moving, deleting, renaming, bulk editing, or changing automation-sensitive files.
 
-## Legacy Material
+## Archive
 
-Old numbered PARA folders have been archived to:
-
-```text
-archive/old/legacy-01-inbox/
-archive/old/legacy-02-strategy/
-archive/old/legacy-03-projects/
-archive/old/legacy-05-areas/
-archive/old/legacy-06-resources/
-archive/old/legacy-07-templates/
-archive/old/legacy-08-archive/
-```
-
-These are read-only backups. Do not write new content there.
+Archived reference material is read-only unless Steve explicitly asks for archive maintenance. Do not write new content into `archive/old/`.

@@ -19,6 +19,6 @@ See also:
 - [[ai]]
 - [[tools]]
 
-## Migration note
+## Mind Steward
 
-Legacy numbered folders are not moved in the first migration slice. The model router should compile useful long-term material into this wiki after a dry run and validation.
+Mind Steward compiles reviewed durable knowledge into this wiki after capture classification and human review.

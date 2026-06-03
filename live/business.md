@@ -26,10 +26,10 @@ It should point to current business work without becoming a duplicate project da
 
 ## Current Phase 2 status
 
-- Business work still primarily lives in existing task/project structures.
-- Model-router automation is not yet allowed to rewrite or archive legacy numbered folders.
+- Business work is summarized in `live/projects.md` and `live/tasks.md`.
+- Mind Steward is not allowed to rewrite or archive material without an approved apply path.
 - Business runtime reports remain Brain-owned; keep report output and runtime logs out of Mind notes.
-- Future router phases may compile durable business knowledge into `wiki/business.md` and current work into `live/projects.md` / `live/tasks.md`.
+- Mind Steward may suggest durable business knowledge for `wiki/business.md` and current work for `live/projects.md` / `live/tasks.md`.
 
 ## Related pages
 

@@ -11,14 +11,14 @@
 - Compiled knowledge in `wiki/` and `live/` links back to sources or captures when useful.
 - `wiki/index.md` is the content catalog.
 - `wiki/log.md` is the append-only knowledge-maintenance ledger for ingests, compilations, lint passes, important queries, and accepted updates.
-- Legacy numbered folders are read-only references during migration.
+- Archive-old material is read-only unless Steve explicitly asks for archive maintenance.
 
 ## Safety rules
 
 - Do not store secrets, tokens, credentials, private keys, or live passwords in `mind`.
 - Do not duplicate machine runtime truth in markdown.
 - Do not store Brain Core runtime reports or approval audit logs in `mind`.
-- Do not move or delete old numbered folders until the migration validation checklist is complete.
+- Do not move or delete archived reference material without explicit approval.
 - Do not rewrite `kanban.md` during this migration unless explicitly planned.
 - Do not create broad shell-execution instructions in Obsidian notes.
 

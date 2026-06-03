@@ -116,7 +116,6 @@ R2_ACCESS_KEY_ID=<r2-access-key>
 R2_SECRET_ACCESS_KEY=<r2-secret-key>
 R2_BUCKET_NAME=mike-demo
 ANTHROPIC_API_KEY=<optional>
-GEMINI_API_KEY=<optional>
 OPENAI_API_KEY=<optional>
 RESEND_API_KEY=<optional>
 USER_API_KEYS_ENCRYPTION_SECRET=<long-random-secret>

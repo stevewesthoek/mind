@@ -19,7 +19,7 @@ Use this before answering Steve-specific questions.
 |---|---|---|
 | Current priorities | `00-current-context.md`, `home.md`, `kanban.md` | `live/tasks.md`, `live/projects.md` |
 | How the vault works | `AGENTS.md`, `00-start-here.md`, `README.md` | `CLAUDE.md` |
-| Strategy or decisions | `wiki/organisations/`, `live/decisions.md` | `archive/old/legacy-02-strategy/` |
+| Strategy or decisions | `wiki/organisations/`, `live/decisions.md` | `archive/` |
 | Active projects | `live/projects.md` | `live/tasks.md` |
 | Tasks or execution | `live/tasks.md`, `kanban.md` | `live/projects.md` |
 | Long-term responsibilities | `wiki/areas/` | `wiki/` |

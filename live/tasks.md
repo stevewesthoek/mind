@@ -1,15 +1,12 @@
 # Live Tasks
 
-Current tasks should be summarized here by the model router.
-
-Migration note: this file starts empty on purpose. Legacy task material remains in the existing numbered structure until it can be compiled safely.
+Current tasks should be summarized here by the Mind Steward.
 
 ## Active
 
-- [ ] Validate new Mind OS scaffold.
-- [ ] Update Save-to-Mind workflow target after scaffold validation.
-- [ ] Build model-router dry run in `brain`.
+- [ ] Review `wiki/log.md` for Mind Steward capture suggestions.
+- [ ] Verify Save-to-Mind captures are classified locally.
 
 ## Waiting / Review
 
-- Existing `kanban.md` remains unchanged during this migration slice.
+- Existing `kanban.md` remains the daily board.

@@ -1,35 +1,22 @@
 # Router Map
 
-This map tells the model router where to look and where to write.
+This map tells Mind Steward where to look and where to write proposals.
 
-## New operating structure
+## Operating Structure
 
-- `capture/inbox/` — successful new captures waiting for classification, routing, or compilation.
+- `capture/inbox/` — successful Save-to-Mind captures waiting for local classification or review.
 - `capture/daily/` — daily scratch capture when needed.
-- `capture/failed/` — raw recoverable captures that failed classification or writing.
+- `capture/failed/` — recoverable captures that failed writing or classification.
 - `live/tasks.md` — current tasks.
 - `live/projects.md` — current projects.
 - `live/workflows.md` — workflow launch and tracking surface.
 - `live/decisions.md` — current committed decisions.
 - `wiki/` — compiled durable memory.
-  - `wiki/log.md` — append-only maintenance ledger.
+- `wiki/log.md` — append-only review ledger.
 - `sources/` — raw evidence and source material.
-- `archive/` — completed, old, or legacy material.
+- `archive/` — completed or inactive material.
 
-## Legacy reference structure
-
-During migration, the router may read these folders but must not move/delete them until validation is complete:
-
-- `01-inbox/`
-- `02-strategy/`
-- `03-projects/`
-- `04-tasks/`
-- `05-areas/`
-- `06-resources/`
-- `07-templates/`
-- `08-archive/`
-
-## Search order
+## Search Order
 
 1. `router/current.md`
 2. `live/`
@@ -37,4 +24,11 @@ During migration, the router may read these folders but must not move/delete the
 4. Domain files in `wiki/`
 5. `sources/index.md`
 6. `wiki/log.md`
-7. Legacy numbered folders when needed
+
+## Write Policy
+
+Mind Steward classification writes only to capture files in `capture/inbox/`.
+
+Mind Steward review suggestions append to `wiki/log.md`.
+
+All promotion into `live/`, `wiki/`, `sources/`, or `archive/` is review-first.

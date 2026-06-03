@@ -10,13 +10,13 @@ This is your personal knowledge system. Most of it runs automatically. This file
 
 ## What happens automatically (you do nothing)
 
-**Every night, the system runs three jobs:**
+**Save-to-Mind runs when you use it. Mind Steward runs every night.**
 
-1. **New captures land in your inbox** — Anything you save via "Save to Mind" (from any device, any AI session) is automatically classified and dropped into `capture/inbox/`. You do not need to file it yourself.
+1. **New captures land in your inbox** — Anything you save via "Save to Mind" is written immediately to GitHub under `capture/inbox/`. You do not need to file it yourself.
 
-2. **The compile loop reads your inbox** — Every morning, each new capture has been read, classified, and a proposed action has been written to `wiki/log.md`. The file is never moved automatically. You review and decide.
+2. **Mind Steward classifies locally overnight** — The nightly scheduler syncs missing inbox captures to this computer, then Mind Steward classifies new captures with a local model through the AI Model Selector and writes proposed actions to `wiki/log.md`. The file is never moved automatically. You review and decide.
 
-3. **Memory context is refreshed** — All AI sessions (Claude, Codex, Gemini) are updated with your latest memory index overnight. When you start a session the next day, all three AIs already know what was saved.
+3. **Memory context is refreshed** — AI sessions read the refreshed memory context overnight. When you start a session the next day, the active AI has the latest saved context.
 
 ---
 
@@ -58,7 +58,7 @@ This is your daily driver. Open it to see what is to-do, in-progress, and done. 
 | Theology | `sources/research/theology/` |
 | Marketing & business research | `sources/research/marketing/` · `sources/research/business/` |
 | Books and people | `sources/research/books/` · `sources/research/people/` |
-| Completed / legacy material | `archive/` |
+| Completed or inactive material | `archive/` |
 
 ---
 
@@ -67,9 +67,13 @@ This is your daily driver. Open it to see what is to-do, in-progress, and done. 
 ```
 You save something (voice, text, AI session)
         ↓
-n8n webhook → Gemini classifies it → lands in capture/inbox/
+n8n webhook → GitHub capture/inbox/
         ↓
-Nightly: compile loop reads inbox → proposes where it belongs → appends to wiki/log.md
+Nightly local scheduler syncs missing inbox captures to this computer
+        ↓
+Mind Steward → AI Model Selector with local_only=true → local Ollama classification
+        ↓
+Compile loop reads inbox → proposes where it belongs → appends to wiki/log.md
         ↓
 You review wiki/log.md → accept (move it) or reject (delete line)
         ↓

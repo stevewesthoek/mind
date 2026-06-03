@@ -116,9 +116,9 @@ Output connectors may include:
 - dashboard card
 - approval request
 
-### 4. Model router / AI selector
+### 4. AI Model Selector
 
-The model router chooses how AI work is executed.
+The AI Model Selector chooses how AI work is executed.
 
 It may choose by:
 
@@ -130,7 +130,7 @@ It may choose by:
 - local vs cloud execution
 - model availability
 
-The model router is a subsystem, not ProChat OS by itself.
+The AI Model Selector is a subsystem, not ProChat OS by itself.
 
 V1 can start with one configured provider if needed. Routing can mature later.
 
@@ -238,7 +238,7 @@ API service
 scheduler / worker
 memory database / document store
 object/file storage
-model router
+AI Model Selector
 connector workers
 control console
 CLI
@@ -254,7 +254,7 @@ customer-owned or ProChat-managed server
   ├─ ProChat Core API
   ├─ ProChat Memory DB
   ├─ ProChat Connector workers
-  ├─ ProChat Model Router
+  ├─ ProChat AI Model Selector
   ├─ ProChat Approval/Event Log
   ├─ ProChat Console
   ├─ ProChat CLI
