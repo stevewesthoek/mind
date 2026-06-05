@@ -1,254 +1,211 @@
 # ProChat OS Modules
 
-**Status:** canonical module architecture draft  
+**Status:** canonical module architecture  
 **Owner:** Steve Westhoek  
 **Last updated:** 2026-06-03
 
 ## Purpose
 
-ProChat OS is niche-agnostic at the core and niche-specific at the module layer.
-
-Core pattern:
+ProChat OS is built from two module types:
 
 ```text
-messy information → ready-to-review output → human approval → repeatable workflow
+Work Memory modules
+Workflow modules
 ```
 
-Modules package that pattern for a specific workflow or niche.
+Work Memory modules store reusable knowledge.
 
-## Module definition
+Workflow modules turn repeated situations into useful outputs.
 
-A ProChat OS module is a packaged workflow block containing:
+Together they create the product pattern:
 
+```text
+messy input + reusable work knowledge → ready-to-review output
+```
+
+## Work Memory module
+
+A Work Memory module organizes the knowledge that makes outputs sound and feel right for a person, team, or company.
+
+A Work Memory module may include:
+
+- style guide
+- preferred tone
+- examples of good work
+- examples to avoid
+- procedures
+- templates
+- decisions
+- client/project context
+- common answers
+- objections and responses
+- recurring formats
+- review feedback
+- index files
+
+Examples:
+
+- founder/owner memory
+- sales memory
+- support memory
+- marketing voice memory
+- operations/reporting memory
+- team memory
+- company memory
+
+A Work Memory module is useful when people keep explaining the same context or rewriting outputs into the same preferred style.
+
+## Workflow module
+
+A workflow module turns a repeated work situation into a specific output.
+
+A workflow module may include:
+
+- problem statement
+- input examples
+- output examples
+- required Work Memory
+- workflow steps
 - skills
-- workflows
-- schedules
-- examples
-- evaluation criteria
-- optional connectors
-- onboarding notes
-- safe test data
-
-A module should solve one recognizable problem.
-
-Bad:
-
-```text
-general AI assistant for all business work
-```
-
-Good:
-
-```text
-legal client intake summary and missing-information checklist
-```
-
-## Manifest principle
-
-Each module should eventually have a manifest that declares:
-
-- module name
-- niche or workflow family
-- buyer problem
-- entry points
-- outputs
-- approval requirements
-- skills
-- workflows
-- schedules
-- optional connectors
-- example files
+- schedules where useful
+- approval checkpoints
 - evaluation criteria
 
-Example modules:
+Examples:
 
-- legal intake
-- accounting document intake
-- agency lead intake
-- consultant proposal/profile preparation
-- content operations
-- internal reporting
+- lead follow-up
+- support reply
+- client intake summary
+- document summary and checklist
+- sales proposal draft
+- weekly status report
+- content preparation
+- delegation instructions
 
-## Skill specification
+A workflow module is useful when the same type of work repeats often enough to make automation valuable.
 
-A skill is a narrow, inspectable ability used by a workflow.
+## Module pairing
 
-Each skill should define:
+The best product comes from pairing Work Memory with workflow modules.
+
+Examples:
+
+```text
+sales memory + lead follow-up workflow → better follow-up drafts
+support memory + support reply workflow → more consistent customer answers
+founder memory + delegation workflow → clearer tasks for the team
+marketing voice memory + content workflow → more on-brand drafts
+operations memory + reporting workflow → faster weekly updates
+```
+
+## Module manifest
+
+Each module should eventually have a small manifest.
+
+Work Memory manifest fields:
 
 - name
+- scope: personal, team, department, company
+- owner
 - purpose
-- expected input
-- expected output
-- examples of good output
-- context/reference files
-- constraints
-- approval requirements
-- safe test data
-- execution context or sandbox
+- included knowledge types
+- indexes
+- allowed workflows
+- review/update rules
 
-Rules:
+Workflow manifest fields:
+
+- name
+- buyer problem
+- input types
+- expected outputs
+- required Work Memory
+- steps
+- approval requirements
+- schedule if recurring
+- evaluation criteria
+
+## Skills
+
+A skill is a small reusable ability used inside a workflow module.
+
+Examples:
+
+- summarize notes
+- extract missing information
+- draft follow-up email
+- classify support request
+- convert notes to tasks
+- prepare report outline
+- apply brand voice
+
+Skill rules:
 
 - one skill should do one job
-- avoid broad multi-purpose skills
-- include examples to reduce vague output
-- test each skill in isolation before using it in a workflow
-- do not overload one workflow with too many skills
+- inputs and outputs should be clear
+- examples should be included
+- skills should be testable in isolation
+- skills should not hide business-critical decisions from reviewers
 
-## Workflow specification
+## Schedules
 
-A workflow coordinates skills into a useful business output.
+Schedules are useful for recurring work.
 
-Each workflow should define:
+Examples:
 
-- trigger or entry point
-- required skills
-- required context
-- output format
-- approval checkpoints
-- logging requirements
-- success criteria
-- failure/retry behavior
+- daily lead follow-up draft
+- daily support summary
+- weekly status report
+- weekly missing-information list
+- monthly client document checklist
+- monthly content planning draft
 
-## Schedule specification
+Schedules should prepare work for review unless the workflow is low-risk and explicitly approved for automation.
 
-Schedules are used for recurring work.
+## Evaluation
 
-Each schedule should define:
-
-- name
-- frequency
-- workflow
-- input source
-- output destination
-- approval behavior
-- failure behavior
-
-Public buyer explanation:
-
-```text
-Recurring work can be prepared automatically, while important outputs remain ready for human review.
-```
-
-## Testing and evaluation
-
-Every module needs evaluation criteria.
+Every module needs evaluation.
 
 Evaluation questions:
 
-- Is the output accurate?
-- Is the output useful?
-- What did the reviewer correct?
-- What information was missing?
-- Did the workflow save time?
-- Did the draft reduce effort?
-- Did the checklist catch the right missing information?
+- Was the output useful?
+- Was the output accurate?
+- Did it match the desired style?
+- What did the reviewer edit?
+- What context was missing?
+- Did it save time?
+- Should the memory, examples, rules, or workflow change?
 
 Evaluation loop:
 
 ```text
-run workflow → review output → capture feedback → refine examples/context/skills → rerun → compare improvement
+run → review → capture feedback → improve module → run better next time
 ```
 
-A module is not ready to sell repeatedly until it produces useful output on safe test data and at least one real pilot workflow.
+## First modules to build
 
-## Niche examples
+Priority order:
 
-### Legal intake module
+1. Founder/owner memory
+2. Sales follow-up memory and workflow
+3. Support reply memory and workflow
+4. Marketing voice memory and content workflow
+5. Operations/reporting memory and workflow
 
-Problem:
+Legal and accounting can still be built as niche workflow modules, but they are not required for the core product to be understandable or sellable.
+
+## Public language rule
+
+Do not sell modules, memory, manifests, skills, schedules, or architecture.
+
+Sell the outcome:
 
 ```text
-Client emails, PDFs, notes, and attachments take too long to organize before review.
-```
-
-Outputs:
-
-- intake summary
-- missing-information checklist
-- matter task list
-- draft follow-up email
-- structured matter notes
-
-Trust rules:
-
-- admin/document support only
-- no automatic legal advice
-- lawyer review first
-- fake or approved sample data for demos
-
-### Accounting document intake module
-
-Problem:
-
-```text
-Clients send receipts, PDFs, forms, and emails in messy ways, creating repetitive follow-up and missing-document work.
-```
-
-Outputs:
-
-- client document summary
-- missing-document checklist
-- draft follow-up email
-- monthly task list
-- review notes
-
-### Agency lead intake module
-
-Problem:
-
-```text
-Inbound leads arrive through email, forms, LinkedIn, calls, and notes, then require manual qualification and follow-up.
-```
-
-Outputs:
-
-- lead summary
-- qualification notes
-- missing questions
-- draft reply
-- CRM-ready fields
-- next task
-
-## Packaging and deployment notes
-
-Do not lead public marketing with technical packaging.
-
-Internal implementation should move toward reproducible and supportable module installation.
-
-Future technical goals:
-
-- module manifest file
-- safe sample data
-- isolated test runner
-- module install command
-- reproducible environment definition, such as Devbox, Nix, or containers
-- support bundle with redacted logs
-- evaluation records
-
-Possible future CLI shape:
-
-```bash
-prochat module list
-prochat module add legal-intake
-prochat module test legal-intake
-prochat module schedules list
-prochat module evaluate legal-intake
-```
-
-These commands are roadmap ideas, not current public promises.
-
-## Commercial principle
-
-The customer buys an outcome, not the module architecture.
-
-Public offer language:
-
-```text
-We help your team turn one repetitive information process into a faster, ready-to-review workflow.
+We help your team stop rewriting, re-explaining, and redoing the same work.
 ```
 
 Internal delivery language:
 
 ```text
-We configure the relevant ProChat OS module, skills, schedules, approval checkpoints, and evaluation loop.
+We build the Work Memory and workflow module that produce the buyer's desired output.
 ```

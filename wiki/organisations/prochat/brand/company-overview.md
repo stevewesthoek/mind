@@ -1,134 +1,76 @@
-v2.0 - 2026-03-13
-
 # ProChat Company Overview
 
-Founder: Steve Westhoek  
-Brand: ProChat
+**Status:** canonical overview  
+**Owner:** Steve Westhoek  
+**Last updated:** 2026-06-05
 
----
+## What ProChat does
 
-# 1. What ProChat Is
+ProChat builds ProChat OS: a managed AI work system for businesses.
 
-ProChat is an ecosystem of tools and systems designed to help non-technical founders build production-ready SaaS.
+ProChat OS helps teams turn messy information and reusable company knowledge into useful outputs they can review and use.
 
-The company focuses on digital products and developer tooling, not services.
+Short version:
 
-ProChat helps founders move from idea to operational SaaS using structured systems instead of improvisation.
+```text
+Messy work in. Useful work out.
+```
 
-Core principle:
+## What customers get
 
-Structure ships SaaS.
+Customers get practical help with repeated knowledge work such as:
 
----
+- drafting replies
+- preparing proposals
+- summarizing notes
+- turning documents into checklists
+- creating task lists
+- preparing reports
+- answering support questions
+- turning founder or team knowledge into reusable output patterns
 
-# 2. Business Model
+## Why it matters
 
-ProChat primarily sells digital products and software tools.
+Most teams already have AI tools, but they still spend time explaining context, rewriting output, searching old examples, and repeating the same manual work.
 
-Most products are:
+ProChat makes that work reusable.
 
-• one-time purchase  
-• unlimited use  
-• lifetime updates
+## How ProChat delivers value
 
-One product will be a subscription SaaS:
+ProChat combines:
 
-ProChat OS
+```text
+Work Memory + Workflow Modules + Review Loop
+```
 
----
+- Work Memory organizes the examples, style, rules, and context that make outputs useful.
+- Workflow Modules turn repeated work situations into ready-to-review outputs.
+- The Review Loop improves results from human feedback.
 
-# 3. Product Ecosystem
+## First commercial direction
 
-ProChat currently consists of three layers.
+Start small.
 
-### Framework Layer
+Make one person or one team faster first.
 
-Conceptual systems for building SaaS correctly.
+Best first buyers:
 
-Example:
+- founders and owners
+- sales teams
+- support teams
+- marketing teams
+- operations teams
+- consultants and agencies
+- local service businesses
 
-• SaaS Structure Framework (lead magnet)
+## Public promise
 
----
+```text
+Stop rewriting, re-explaining, and redoing the same work.
+```
 
-### Builder Layer (Digital Products)
+## Brand rule
 
-Tools founders use to build SaaS.
+ProChat does not sell technical architecture first.
 
-Products include:
-
-• ProKit  
-• SaaSKit  
-• UXKit (roadmap)  
-• WaaSKit (roadmap)
-
-These are one-time purchase products.
-
----
-
-### Platform Layer
-
-A source-available platform product with paid commercial licensing and managed hosting.
-
-ProChat OS
-
-ProChat OS is the structured operating layer for AI-powered SaaS builders. It connects private memory, AI agents, workflow automation, local runtimes, project context, cloud deployments, and operational visibility into one coherent system.
-
-Functions may include:
-
-• private memory and project context  
-• AI agent/session operations  
-• workflow automation  
-• local runtime control  
-• API and system status overview  
-• subscription and infrastructure visibility  
-• CLI-driven install, update, deploy, and support workflows  
-• optional managed single-tenant hosting
-
-ProChat OS is the long-term flagship product.
-
----
-
-# 4. Founder Role
-
-ProChat is a founder-led company.
-
-Steve Westhoek designs the systems, builds the products, and publishes the knowledge behind them.
-
-The founder provides:
-
-• expertise  
-• system thinking  
-• architectural design
-
-The company provides:
-
-• tools  
-• frameworks  
-• software products
-
----
-
-# 5. Business Philosophy
-
-ProChat focuses on selling products, not time.
-
-The company intentionally avoids service work as a core offering.
-
-Consulting or done-for-you work may occur only in exceptional cases but is not advertised.
-
----
-
-# 6. Long-Term Vision
-
-The long-term vision of ProChat is to create a complete ecosystem for SaaS builders.
-
-The ecosystem will include:
-
-• frameworks  
-• guides  
-• development kits  
-• SaaS tools  
-• operational dashboards
-
-The goal is to make building and maintaining SaaS simpler, safer, and more structured.
+ProChat sells time saved, clearer handoffs, faster drafts, reusable knowledge, and review-ready work.

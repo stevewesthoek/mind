@@ -2,428 +2,247 @@
 
 **Status:** canonical technical definition  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-05-29
+**Last updated:** 2026-06-03
 
-## Definition
+## Product definition
 
-### Buyer-facing definition
-
-ProChat OS helps businesses get repetitive information work done faster by turning messy emails, PDFs, forms, notes, folders, attachments, reports, and API data into ready-to-review summaries, checklists, tasks, reports, status updates, and draft replies.
-
-Customer-facing explanation:
+ProChat OS is a managed AI work system that combines three layers:
 
 ```text
-ProChat sets up and manages the workflow system for you. Your team can send work to it by email, forms, file drops, manual upload, or API calls, and receive structured outputs back for review.
+Work Memory + Workflow Modules + Review Loop
 ```
 
-### Internal technical definition
+The system turns messy business input and reusable company knowledge into useful outputs that people can review and use.
 
-Internally, ProChat OS is an Agentic Workflow OS and managed workflow runtime that connects inputs, skills, workflows, schedules, approvals, logs, optional modules, and business outputs.
-
-The internal technical definition should not be used as primary marketing copy.
-
-## What a client installs
-
-A customer does not install Steve's private `mind` or `brain` repositories.
-
-A customer installs a sanitized ProChat OS instance that creates their own:
-
-- memory
-- workflows
-- credentials
-- connectors
-- logs
-- approvals
-- optional modules
-
-Target product structure:
-
-```text
-prochat-os/
-  core/              workflow runtime and API
-  memory/            customer memory/context store
-  connectors/        input/output integrations
-  router/            model selector and provider routing
-  console/           command center and approvals
-  cli/               install, configure, update, support commands
-  modules/           optional workflow blocks
-```
-
-## Core components
-
-### 1. Workflow runtime
-
-The workflow runtime is the heart of ProChat OS.
-
-It runs workflows such as:
+## Core flow
 
 ```text
 input arrives
-→ classify input
-→ retrieve context
-→ call model/router
-→ create structured output
-→ request approval if needed
-→ send result to output connector
-→ log event
+→ select relevant Work Memory
+→ run the workflow module
+→ prepare output
+→ ask for review where needed
+→ capture feedback
+→ improve examples, rules, and memory
 ```
 
-Responsibilities:
+## Layer 1 — Work Memory
 
-- run workflow definitions
-- schedule jobs
-- execute worker tasks
-- coordinate agents
-- manage retries/failures
-- emit events
-- expose internal API endpoints
+Work Memory stores the reusable context that makes AI output useful for a person, team, or business.
 
-### 2. Memory and context store
+Work Memory can include:
 
-The memory layer stores customer-specific context.
-
-Examples:
-
-- people
-- clients
-- projects
-- matters/cases
-- documents
-- decisions
-- preferences
-- instructions
+- writing style
+- tone of voice
+- good examples
+- bad examples
+- decision rules
 - procedures
-- workflow history
+- templates
+- client context
+- project context
+- product/service context
+- common questions and answers
+- objections and responses
+- approved phrases
+- recurring report formats
+- reviewer feedback
 
-The `mind` repo is the prototype pattern, not the customer product.
+Implementation options:
 
-### 3. Connectors
+- markdown files
+- indexed documents
+- structured metadata
+- vector search where useful
+- database records where useful
+- repo-backed storage where useful
 
-Connectors make ProChat OS more than a chatbot.
-
-Input connectors may include:
-
-- email
-- watched folder
-- file upload
-- form
-- webhook
-- CLI
-- API
-- Drive/Dropbox later
-- CRM later
-
-Output connectors may include:
-
-- email draft
-- report
-- task list
-- CRM-ready fields
-- file
-- webhook
-- dashboard card
-- approval request
-
-### 4. AI Model Selector
-
-The AI Model Selector chooses how AI work is executed.
-
-It may choose by:
-
-- cost
-- speed
-- privacy
-- task type
-- quality requirement
-- local vs cloud execution
-- model availability
-
-The AI Model Selector is a subsystem, not ProChat OS by itself.
-
-V1 can start with one configured provider if needed. Routing can mature later.
-
-### 5. Approval and event log
-
-ProChat OS should be safe by default.
-
-Approval model:
+Design rule:
 
 ```text
-human approval first
-→ semi-automation after trust
-→ full automation only for approved low-risk workflows
+Work Memory must be inspectable, editable, portable, and model-agnostic.
 ```
 
-The event log records:
+## Layer 2 — Workflow Modules
 
-- input received
-- workflow started
-- model/tool used
-- output generated
-- approval requested
-- approval/rejection
-- output sent
-- errors/retries
+A workflow module turns a repeated situation into a specific output.
 
-Logs must avoid secrets and sensitive content where possible.
+A module defines:
 
-### 6. Control console
-
-The console is the command center, not the product itself.
-
-It shows:
-
-- workflows
-- inputs
-- outputs
-- approvals
-- agents
-- memory status
-- connector status
-- logs
-- errors
-- configuration where needed
-
-The console makes the runtime visible and controllable.
-
-### 7. CLI
-
-The CLI is used for:
-
-- install
-- setup
-- status
-- health checks
-- updates
-- support bundles
-- backup/restore helpers
-- connector configuration
-- managed-service connection
-
-Possible command shape:
-
-```bash
-prochat doctor
-prochat install
-prochat status
-prochat workflows list
-prochat connectors list
-prochat support-bundle
-prochat update
-```
-
-### 8. Optional modules
-
-Modules are workflow blocks on top of the core.
+- buyer problem
+- input types
+- expected output
+- needed Work Memory
+- workflow steps
+- approval checkpoints
+- examples
+- evaluation criteria
 
 Examples:
 
-- MikeOSS legal document workspace
-- document workflow agent
-- law-firm intake workflow
-- accounting intake workflow
-- content engine
-- AWS-backed Video Orchestrator
-- monitoring workflow
-- local app builder
-- social posting workflow
-- CRM connector
+- sales follow-up module
+- support reply module
+- founder delegation module
+- document summary module
+- proposal draft module
+- status report module
+- content preparation module
 
-Modules should connect back to the same ProChat OS runtime.
-
-For the Video Orchestrator, ProChat OS owns job creation, template selection, approval gates, prompt history, asset metadata, workflow status, logs, retry commands, publishing checklists, module visibility in the console, and asset references. AWS owns media generation, rendering, storage, transcoding, and long-running execution.
-
-Video Orchestrator v1 supports only one internal workflow: topic to 60-second script, 5 scene prompts, human approval, Polly voiceover, generated clips, captions, thumbnail, final render, and exported MP4. V1 does not include local video generation, local FFmpeg as the production path, autonomous publishing, multi-account scheduling, a full editor UX, a customer-facing SaaS dashboard, many templates, or many model providers.
-
-The canonical video strategy, service boundaries, cost controls, S3 layout, roadmap, and implementation sequence live in `prochat-os-strategy.md`.
-
-## Runtime shape
-
-A working instance runs as:
+Design rule:
 
 ```text
-API service
-scheduler / worker
-memory database / document store
-object/file storage
-AI Model Selector
-connector workers
-control console
-CLI
-optional modules
+A module should solve one recognizable repeated work problem.
 ```
 
-## Deployment shape
+## Layer 3 — Review Loop
 
-For a managed customer instance:
+The review loop improves output quality.
 
-```text
-customer-owned or ProChat-managed server
-  ├─ ProChat Core API
-  ├─ ProChat Memory DB
-  ├─ ProChat Connector workers
-  ├─ ProChat AI Model Selector
-  ├─ ProChat Approval/Event Log
-  ├─ ProChat Console
-  ├─ ProChat CLI
-  └─ optional modules
-```
+It captures:
 
-For the first law-firm wedge:
-
-```text
-customer/demo server
-  ├─ MikeOSS legal document workspace
-  ├─ ProChat OS workflow runtime
-  ├─ ProChat OS memory/context
-  ├─ ProChat OS connectors
-  └─ ProChat OS console/approvals
-```
-
-## Current private repo mapping
-
-Current internal pattern:
-
-```text
-mind repo
-  → prototype of memory/context layer
-
-brain repo
-  → prototype of system rules, skills, workflows, model routing, runbooks, runtime docs, and operational logic
-
-Brain Console
-  → prototype of command center / dashboard / control plane
-
-ProBot / Brain Core concepts
-  → prototype of API, session, status, approval, integration, and remote-client layers
-```
-
-Productization requires extracting these patterns into a sanitized installable product.
-
-## Security principles
-
-- customer owns credentials
-- customer controls infrastructure where possible
-- use least-privilege connectors
-- prefer OAuth or scoped app permissions over raw broad credentials
-- use human approval by default
-- support bundles must redact secrets
-- logs must not expose sensitive data unnecessarily
-- isolate private customer context
-- share only generic computation where safe
-
-## V1 minimal install
-
-The smallest useful ProChat OS v1 should include:
-
-- core workflow API
-- worker/scheduler
-- memory database
-- one input connector, likely email/folder/webhook
-- one output connector, likely report/email draft/task list
-- event log
-- human approval queue
-- simple console or status page
-- CLI install/status/support commands
-- one model provider
-- optional MikeOSS instance for law-firm demo
-
-## Technical non-goals for v1
-
-Do not start by building:
-
-- full multi-tenant SaaS
-- every connector
-- perfect model routing
-- deep CRM integrations
-- autonomous unsupervised actions
-- broad shell access
-- complex dashboard-first UX
-
-## Open implementation decisions
-
-- one monolith first or multiple services?
-- which database first?
-- email, folder, webhook, or form as first input connector?
-- report, email draft, task list, or CRM-ready JSON as first output?
-- how much Brain Console is needed in v1?
-- how to package the public GitHub version?
-- how to handle commercial-license checks?
-
-
-
-
-## Module packaging direction
-
-The canonical module architecture lives in:
-
-```text
-prochat-os-modules.md
-```
-
-Technical principle:
-
-```text
-module = skills + workflows + schedules + examples + evaluation criteria + optional connectors
-```
-
-Each module should eventually include:
-
-- manifest file
-- skill definitions
-- workflow definitions
-- schedule definitions where useful
-- safe sample data
-- evaluation checklist
-- onboarding notes
-- support/runbook notes
-
-Future module CLI ideas:
-
-```bash
-prochat module list
-prochat module add legal-intake
-prochat module test legal-intake
-prochat module schedules list
-prochat module evaluate legal-intake
-```
-
-These are roadmap ideas, not current public promises.
-
-## Reproducible environment direction
-
-ProChat OS should eventually include a reproducible environment definition for engineering, commercial self-hosting, and managed deployments.
-
-Candidate approaches:
-
-- Devbox
-- Nix
-- containers
-- documented managed-server baseline
-
-Goal:
-
-```text
-same dependency versions across local, CI, demo, and managed/customer environments
-```
-
-This is an implementation and support concern. Public marketing should continue to say that ProChat sets up and manages the workflow system for the customer.
-
-## Evaluation and feedback loop
-
-Workflow quality must improve through review.
-
-The technical system should eventually store:
-
-- generated output
-- approval/rejection state
-- reviewer notes
-- edit history where practical
-- evaluation result
-- module/version reference
+- output generated
+- reviewer edits
+- approval or rejection
+- missing context
+- useful examples
+- repeated corrections
+- time saved estimate
 
 Improvement loop:
 
 ```text
-run workflow → review output → capture feedback → refine skill/context/examples → rerun → compare improvement
+run → review → capture feedback → update memory/examples/rules → run better next time
 ```
+
+## Customer delivery
+
+Default delivery is managed by ProChat.
+
+The customer can send work through simple entry points:
+
+- email
+- form
+- file drop
+- manual upload
+- shared folder
+- API call
+
+The customer receives outputs such as:
+
+- summary
+- checklist
+- draft reply
+- proposal draft
+- support answer
+- report
+- task list
+- status update
+
+## Technical components
+
+The implementation can include:
+
+- workflow runner
+- worker/scheduler
+- input handlers
+- output handlers
+- Work Memory store
+- index builder
+- retrieval layer
+- model/provider execution layer
+- approval state
+- event log
+- review feedback store
+- optional console
+- optional support CLI
+- optional module registry
+
+These are implementation components, not public marketing terms.
+
+## Storage principles
+
+Work Memory should be:
+
+- portable
+- readable
+- versionable
+- exportable
+- easy to inspect
+- separated by person/team/company scope
+- safe to update through review
+
+Suggested scopes:
+
+```text
+personal memory
+team memory
+department memory
+company memory
+```
+
+Promotion path:
+
+```text
+personal useful pattern → team-approved pattern → department/company memory
+```
+
+## Indexing principles
+
+AI should not search every document blindly.
+
+Every Work Memory should include indexes or summaries that help the system find the right context quickly.
+
+Useful indexes:
+
+- people index
+- clients index
+- projects index
+- examples index
+- procedures index
+- decisions index
+- tone/style index
+- recurring outputs index
+
+## Safety principles
+
+Important outputs stay review-first by default.
+
+Automation levels:
+
+```text
+review only → assisted sending → approved low-risk automation
+```
+
+Do not impersonate employees without clear approval.
+
+Do not market the system as replacing people.
+
+The system prepares work. People remain responsible for review and use.
+
+## Reproducible setup
+
+The technical environment should become repeatable across demo, managed, and customer-specific deployments.
+
+Candidate tools:
+
+- containers
+- Devbox
+- Nix
+- documented managed-server baseline
+
+This is a support and implementation concern, not buyer-facing positioning.
+
+## Future CLI direction
+
+A future CLI may support:
+
+```bash
+prochat memory index
+prochat memory validate
+prochat module list
+prochat module run sales-followup
+prochat module evaluate sales-followup
+prochat support bundle
+```
+
+These commands are roadmap ideas, not current public promises.

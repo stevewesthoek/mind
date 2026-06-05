@@ -1,141 +1,72 @@
-v 1.0 - 2026-03-13
-
 # ProChat Category Definition
 
-Version 1.0
+**Status:** canonical category definition  
+**Owner:** Steve Westhoek  
+**Last updated:** 2026-06-05
 
----
+## Category
 
-# The Category
+ProChat OS operates in the category:
 
-ProChat defines a new category:
+```text
+Managed AI Work Systems
+```
 
-Structured SaaS Building
+## Category problem
 
-The category exists because building SaaS has fundamentally changed.
+AI tools can answer questions, but businesses still have to do the work around AI manually.
 
-AI removed the coding barrier.
+Teams still:
 
-It did not remove system complexity.
+- explain the same context repeatedly
+- paste examples into prompts
+- rewrite outputs into the right style
+- turn notes into tasks
+- create reports manually
+- draft follow-ups from scratch
+- search old work for context
+- lose knowledge when people leave
 
-Today founders can generate code quickly, but most products still fail during real usage.
+## Category promise
 
-The missing element is structure.
+A managed AI work system turns repeated knowledge work into reusable, review-ready outputs.
 
-Structured SaaS Building focuses on:
+## ProChat OS position
 
-• architecture clarity  
-• infrastructure stability  
-• controlled system design  
-• production readiness
+ProChat OS sits between messy business input and useful business output.
 
-This is the category ProChat operates in.
+It uses reusable company knowledge, examples, style, and review feedback to prepare work that is closer to how the business actually works.
 
----
+## Core category pattern
 
-# The Enemy
+```text
+messy input + reusable work knowledge → ready-to-review output
+```
 
-Every category needs a clear enemy.
+## Differentiation
 
-The enemy of Structured SaaS Building is:
+ProChat OS is different from:
 
-Improvised SaaS
+- chatbots, because it prepares repeated work outputs instead of only answering questions
+- automation tools, because it uses business knowledge and examples, not just if-this-then-that steps
+- generic AI tools, because it can reuse a company's context, style, and feedback over time
+- dashboards, because the value is the prepared work, not the interface
 
-Improvised SaaS happens when founders:
+## Buyer-friendly category language
 
-• generate random code with AI  
-• assemble tools without architecture  
-• launch before defining system boundaries  
-• rebuild repeatedly after failures
+Use:
 
-Improvised SaaS leads to:
+```text
+AI that helps your team prepare repeated work faster.
+```
 
-• fragile infrastructure  
-• technical debt  
-• rebuild cycles  
-• abandoned projects
+Avoid leading with:
 
-ProChat exists to eliminate Improvised SaaS.
+```text
+operating system
+work brain
+knowledge graph
+agentic runtime
+```
 
----
-
-# The Philosophy
-
-Structured SaaS Building follows a simple philosophy.
-
-Clarity before code.
-
-Structure before features.
-
-Production before scale.
-
-The correct order is:
-
-1. Validate the idea  
-2. Define the system structure  
-3. Build the product  
-4. Operate the system
-
-When founders reverse this order, failure rates increase.
-
-ProChat tools reinforce the correct order.
-
----
-
-# The System Stack
-
-Structured SaaS Building includes three layers.
-
-Frameworks  
-Conceptual thinking about SaaS architecture.
-
-Kits  
-Implementation tools that provide structured foundations.
-
-Platforms  
-Operational tools that monitor and maintain SaaS systems.
-
-ProChat builds products across all three layers.
-
----
-
-# The Builder Identity
-
-Structured SaaS Building is designed for a new type of founder.
-
-Not traditional developers.
-
-Not venture-backed startups.
-
-Instead:
-
-Independent SaaS builders.
-
-They want:
-
-• autonomy  
-• ownership  
-• low capital requirements  
-• controlled systems
-
-They use modern tools and AI assistance, but they still need system discipline.
-
-ProChat provides that discipline.
-
----
-
-# The Long-Term Vision
-
-As the number of independent SaaS builders grows, the need for structured systems will grow with it.
-
-ProChat aims to become the platform where these builders learn, build, and operate their SaaS products.
-
-The ecosystem will continue expanding through:
-
-• frameworks  
-• kits  
-• operational SaaS tools
-
-All built around the same idea:
-
-Structure ships SaaS.
+Those concepts may help internally, but they do not help most buyers understand the outcome.

@@ -1,49 +1,102 @@
-v2.0 - 2026-03-13
-
 # ProChat Content Strategy
 
----
+**Status:** canonical content strategy  
+**Owner:** Steve Westhoek  
+**Last updated:** 2026-06-05
 
-# Purpose
+## Content goal
 
-Content introduces founders to the ProChat ecosystem and builds trust before selling products.
+Content should make one idea obvious:
 
----
+```text
+AI becomes more useful when it can reuse your business knowledge, examples, style, and feedback.
+```
 
-# Primary Channels
+## Main content pillars
 
-• Twitter / X  
-• LinkedIn  
-• Reddit  
-• YouTube (future)
+### 1. Repeated work
 
----
+Show examples of work people repeat every week:
 
-# Entry Funnel
+- follow-up emails
+- proposals
+- reports
+- support replies
+- task instructions
+- content drafts
+- meeting summaries
 
-All traffic flows through a single link:
+### 2. Before and after
 
-prochat.tools/go
+Show the transformation:
 
-This link routes visitors to the main entry page.
+```text
+messy notes/examples/context → review-ready output
+```
 
-The entry page introduces the SaaS Structure Framework and captures email addresses.
+### 3. Owner/founder leverage
 
----
+Show how owners can stop being the bottleneck for context, decisions, tone, and delegation.
 
-# Content Types
+### 4. Team consistency
 
-ProChat content focuses on:
+Show how sales, support, marketing, and operations can produce more consistent work from shared examples and review feedback.
 
-• SaaS architecture  
-• system thinking  
-• infrastructure decisions  
-• builder frameworks
+### 5. Human review
 
----
+Show that ProChat prepares work. People stay in control.
 
-# Content Philosophy
+## Content formats
 
-Content must teach structure and systems, not superficial tactics.
+- short before/after demos
+- Loom walkthroughs
+- local business examples
+- role-specific landing page examples
+- LinkedIn posts
+- short YouTube demos
+- outreach assets
+- simple checklists
 
-The goal is to attract founders who value thoughtful engineering.
+## Content rule
+
+Do not create content about architecture first.
+
+Do not lead with:
+
+- Work Memory
+- operating systems
+- modules
+- graphs
+- agents
+- model routing
+- infrastructure
+
+Lead with:
+
+- the painful repeated task
+- the messy input
+- the useful output
+- the time saved
+- the review step
+
+## Best demo themes
+
+1. Founder notes to client reply and task instructions
+2. Sales call notes to follow-up and proposal draft
+3. Support ticket to reply and escalation note
+4. Marketing examples to on-brand content draft
+5. Operations notes to status report and action list
+
+## Content CTA
+
+Primary CTA:
+
+```text
+Show us one repeated task your team still does by hand.
+```
+
+Secondary CTA:
+
+```text
+We will show what a review-ready version could look like.
+```

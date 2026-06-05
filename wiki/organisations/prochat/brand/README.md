@@ -1,34 +1,49 @@
-# ProChat Brand
+# ProChat Brand Strategy
 
-Core ProChat strategy and brand truth.
+**Status:** canonical brand index  
+**Owner:** Steve Westhoek  
+**Last updated:** 2026-06-05
 
-## Files
+## Core idea
 
-- `prochat-os-strategy.md` — canonical ProChat OS business strategy
-- `prochat-os-roadmap.md` — canonical phase order and progress-control document
-- `prochat-os-technical-definition.md` — canonical technical product definition
-- `prochat-os-go-to-market.md` — canonical GTM direction
-- `../../../system/repo-boundaries.md` — canonical cross-repo constitution for Mind, Brain, Brain Core, and Brain Console
-- `company-overview.md`
-- `positioning.md`
-- `messaging-framework.md`
-- `offer-architecture.md`
-- `customer-profiles.md`
-- `content-strategy.md`
-- `narrative.md`
-- `category-definition.md`
-- `brand-ruleset.md`
+```text
+ProChat OS helps businesses turn messy work into useful outputs their team can review and use.
+```
 
-## Rule
+## Canonical documents
 
-If the question is strategic, positioning-related, or brand-related, start here.
+- `prochat-os-strategy.md` — business strategy and product definition
+- `prochat-os-technical-definition.md` — internal product architecture
+- `prochat-os-modules.md` — Work Memory and workflow module architecture
+- `prochat-os-go-to-market.md` — offer, wedges, outreach, and sales language
+- `prochat-os-roadmap.md` — phased execution path
+- `company-overview.md` — concise company overview
+- `category-definition.md` — category and positioning
+- `customer-profiles.md` — target buyers and first wedges
+- `narrative.md` — story and belief system
+- `content-strategy.md` — content direction
+- `brand-ruleset.md` — copy rules and voice
 
-The canonical ProChat OS strategy is:
+## Public marketing rule
 
-- `prochat-os-strategy.md`
+Do not explain the architecture first.
 
-The canonical cross-repo boundary document is:
+Sell the outcome:
 
-- `../../../system/repo-boundaries.md`
+```text
+less rewriting, less re-explaining, faster drafts, clearer handoffs, reusable knowledge
+```
 
-Do not duplicate ProChat OS strategy in `brain`. Brain-side ProChat OS documents must be execution-facing and must refer back to the Mind strategy.
+Avoid leading public pages with:
+
+- Work Memory
+- modules
+- operating system
+- knowledge graph
+- infinite brain
+- runtime
+- connectors
+- model routing
+- installation
+
+Use those terms only in internal docs when needed.

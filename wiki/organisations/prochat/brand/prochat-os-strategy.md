@@ -2,1638 +2,306 @@
 
 **Status:** canonical strategy  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-05-29  
-**Source history:** `prochat-os-strategy-draft.md`
+**Last updated:** 2026-06-03
 
-## Strategic decision
+## One-sentence strategy
 
-ProChat OS is the flagship product of ProChat.
+ProChat OS helps businesses turn messy information and reusable company knowledge into ready-to-review work.
 
-ProChat is no longer primarily positioned around fixed SaaS kits, WaaSKit, or a narrow non-technical-founder SaaS education path. Those products remain real, but they are now legacy products and no longer define the company direction.
-
-The company direction is now:
+## Short definition
 
 ```text
-Managed AI workflows.
-Modular automation.
-Niche-specific workflow modules.
-Business information turned into ready-to-review outputs.
-Human approval before important action.
-```
-
-Internal technical language may still describe ProChat OS as a workflow runtime, but public strategy and buyer-facing messaging should focus on outcomes: less admin work, faster follow-up, clearer handoffs, and fewer missed details.
-
-## Category
-
-ProChat OS operates in the category:
-
-```text
-Agentic Workflow OS
-```
-
-Plain-language explanation:
-
-```text
-ProChat OS is the middle layer between messy business inputs and the tools a business already uses.
+Messy work in. Useful work out.
 ```
 
 ## What ProChat OS is
 
-### Buyer-facing definition
+ProChat OS is a managed AI work system for businesses.
 
-ProChat OS helps businesses get repetitive admin, document, intake, reporting, and follow-up work done faster by turning messy information into ready-to-review outputs.
+It helps teams use their own information, examples, decisions, style, and recurring work patterns to prepare useful outputs faster.
 
-Short version:
+A customer gives ProChat messy business input such as:
 
-```text
-Messy business information in. Useful work out.
-```
+- emails
+- PDFs
+- notes
+- forms
+- folders
+- reports
+- support requests
+- sales conversations
+- internal documents
+- API or tool data
 
-What it does for buyers:
+ProChat uses the customer's reusable work knowledge to prepare outputs such as:
 
-- turns scattered emails, PDFs, forms, notes, folders, attachments, reports, and API data into useful work
-- prepares summaries, missing-information checklists, task lists, status updates, reports, draft replies, and review notes
-- keeps humans in control before important outputs are sent, changed, or treated as final
-- can be used through simple entry points such as email, forms, file drops, manual upload, or API calls
-- is set up and managed by ProChat for customers who do not want to manage infrastructure
+- summaries
+- checklists
+- reports
+- draft replies
+- task lists
+- next steps
+- proposal drafts
+- support replies
+- client notes
+- status updates
 
-### Internal technical definition
+Humans review important outputs before they are sent, changed, or treated as final.
 
-Internally, ProChat OS is still an Agentic Workflow OS and managed workflow runtime. That technical language belongs in technical docs, implementation plans, and engineering discussions.
-
-Public marketing should not lead with installable/runtime/memory/router/connector language. Buyers care about outcomes: less admin work, faster follow-up, clearer handoffs, fewer missed details, and ready-to-review outputs.
-
-## What ProChat OS is not
-
-ProChat OS is not:
-
-- a chatbot
-- a dashboard only
-- a generic AI wrapper
-- a single SaaS tool
-- a fixed SaaS kit
-- MikeOSS
-- a media company
-- a Runway, HeyGen, CapCut, or Adobe competitor
-- the AI Model Selector alone
-- the memory store alone
-- the Brain Console alone
-
-Those can be components, modules, or wedges. ProChat OS is the runtime system that coordinates them.
-
-## Core product promise
+## The core product pattern
 
 ```text
-Agentic workflows that work for you 24/7.
+messy input + work memory → useful output → human review → improvement loop
 ```
 
-Supporting promise:
+This is the foundation of ProChat OS.
 
-```text
-You keep working the way you work. ProChat OS sits in the middle and structures the mess.
-```
+## Work Memory
 
-## Main problem
+Work Memory is the reusable knowledge that makes AI useful for a specific person, team, or business.
 
-Modern AI tools are powerful, but most work still happens manually around them.
+It can include:
 
-The customer still has to:
+- company voice
+- employee writing style
+- good past examples
+- common answers
+- decision rules
+- standard procedures
+- project context
+- client context
+- preferred formats
+- recurring reports
+- approved templates
+- known objections
+- review feedback
 
-- copy information into chat windows
-- write prompts repeatedly
-- move outputs to other tools
-- reformat information
-- create tasks manually
-- update CRM or business systems manually
-- remember context manually
-- restart the process for every task
+Work Memory is not sold as a technical concept. It is the internal product layer that makes outputs better.
 
-This is not scalable.
-
-## Enemy
-
-The enemy is:
-
-```text
-manual AI glue work
-```
-
-Manual AI glue work means using AI as an isolated assistant instead of an integrated workflow layer.
-
-ProChat OS turns AI from a passive chat tool into a connected agentic workflow system.
-
-## Audience
-
-### Primary public audience
-
-The ProChat website is business-agnostic.
-
-It should target:
-
-- small businesses
-- local businesses
-- solo builders
-- personal developers
-- workflow-driven operators
-- creators and influencers
-- SaaS builders
-- businesses that want AI/agentic automation without stitching tools together manually
-
-### Direct outreach audience
-
-The first direct-sales niche is:
+Public buyer explanation:
 
 ```text
-law firms
+We organize the knowledge, examples, and preferences your team already uses, so AI can prepare work that is closer to how your business actually works.
 ```
 
-Law firms are a go-to-market wedge, not the entire ProChat strategy.
+## Workflow modules
 
-### Secondary direct outreach niche
-
-```text
-accountants
-```
-
-Accountants are the second local comparison niche if law-firm response is weak or if accounting workflows prove easier to sell.
-
-### Organic channel audience
-
-Creators, SaaS builders, influencers, and personal developers should be reached through organic content channels, not direct local sales.
-
-Primary channels:
-
-- YouTube
-- Facebook channels/pages/groups
-- automated or semi-automated social content
-
-## Website positioning
-
-The ProChat website should not be primarily about law firms, accountants, MikeOSS, video generation, or legacy kits.
-
-The website should focus on ProChat OS as a business-agnostic Agentic Workflow OS.
-
-Website framing:
-
-```text
-ProChat OS connects to the way your business already works.
-It takes messy input from many places, understands it, structures it, and sends useful output where it needs to go.
-The dashboard is only the command center.
-```
-
-Homepage direction:
-
-```text
-Agentic workflows between your messy inputs and your business tools.
-```
-
-## Technical foundation
-
-The product is technically an installable private workflow runtime.
-
-Core components:
-
-1. workflow runtime / API
-2. memory and context store
-3. input/output connectors
-4. AI Model Selector / AI selector
-5. approval and event log
-6. control console, implemented as Brain Console Web in the `brain` repo
-7. CLI for install, update, configuration, and support
-8. optional workflow modules
-
-The full technical definition lives in:
-
-```text
-prochat-os-technical-definition.md
-```
-
-## Canonical document hierarchy
-
-Use this hierarchy to prevent strategy drift:
-
-1. `prochat-os-strategy.md` defines the business direction and non-goals.
-2. `prochat-os-roadmap.md` defines phase order, active execution lane, and progress tracking rules.
-3. `prochat-os-technical-definition.md` defines the internal runtime, deployment, and module boundaries.
-4. `prochat-os-modules.md` defines the module, skill, schedule, and evaluation architecture.
-5. `prochat-os-go-to-market.md` defines public positioning, outreach wedges, and validation rules.
-6. Live notes such as `live/video.md` are visibility surfaces only, not strategy sources.
-
-If documents conflict, update the lower-level document to match the higher-level canonical source.
-
-## Canonical Video Orchestrator direction
-
-The Video Orchestrator is a ProChat OS module, not a separate platform.
-
-There are two separate Video Orchestrator execution lanes:
-
-```text
-Local Video Orchestrator = local development, readiness, fixtures, operator review, and Brain Console visibility.
-Cloud Video Orchestrator = AWS-backed media generation, rendering, storage, and async execution.
-```
-
-They may share workflow concepts, metadata contracts, approval gates, templates, Brain Core visibility, and Brain Console dashboard surfaces. They must not be described as the same implementation.
-
-Canonical direction:
-
-```text
-ProChat OS owns workflows.
-Local Video Orchestrator owns local readiness and control surfaces.
-Cloud Video Orchestrator owns AWS-backed media execution.
-```
-
-Architecture:
-
-```text
-ProChat OS
-  ↓
-Video Orchestrator Module
-  ├─ Local Video Orchestrator lane
-  │   └─ local readiness, fixtures, dry-runs, Brain Core surfaces, Brain Console visibility
-  └─ Cloud Video Orchestrator lane
-      └─ AWS execution layer
-```
-
-ProChat OS owns:
-
-- workflow definitions
-- job creation
-- templates
-- prompt history
-- asset metadata
-- human approvals
-- logs
-- retry actions
-- publishing checklists
-- future publishing integrations
-- references to generated assets
-
-AWS owns:
-
-- Bedrock
-- Polly
-- Transcribe
-- Nova Reel
-- Nova Canvas
-- MediaConvert
-- S3
-- Step Functions
-- Lambda
-- CloudFront
-- generation, rendering, storage, transcoding, and long-running media execution
-
-Exact AWS service responsibilities:
-
-- S3 stores assets and job folders.
-- Bedrock generates scripts, prompts, images, and video clips.
-- Polly generates narration.
-- Transcribe generates captions and transcripts.
-- MediaConvert renders, transcodes, and exports MP4 outputs.
-- Step Functions owns the AWS-side orchestration state machine.
-- Lambda performs glue tasks only.
-- CloudFront is optional delivery later, only when signed delivery is needed.
-
-Exact ProChat OS responsibilities:
-
-- job creation
-- template selection
-- approval gates
-- prompt history
-- asset metadata
-- workflow status
-- logs
-- retry commands
-- publishing checklist
-- module visibility in the console
-
-Reason for this decision:
-
-- faster time-to-market
-- less infrastructure maintenance
-- better scaling
-- better observability
-- better retry/recovery
-- better asset management
-- better async processing
-- better use of available AWS credits
-
-Local-first production media execution is not the canonical production path for the first video pipeline. The Local Video Orchestrator remains a canonical separate lane for local development, readiness, fixtures, dry-runs, operator review, and Brain Console visibility. The Cloud Video Orchestrator is the canonical AWS-backed lane for production-oriented media generation, rendering, storage, and async execution.
-
-## Video Orchestrator purpose
-
-ProChat OS is not a media company.
-
-The Video Orchestrator exists to:
-
-1. generate content for ProChat
-2. generate content for Says The Bible
-3. validate the workflow runtime
-4. showcase ProChat OS through real workflows
-5. eventually become a paid ProChat OS module
-
-The purpose is not to compete with Runway, HeyGen, CapCut, Adobe, or full creative-studio tools.
-
-The first promise should be:
-
-```text
-Generate short social videos with script, scenes, narration, captions, thumbnail, and platform-ready exports.
-```
-
-The first promise should not be:
-
-```text
-Fully automated high-end YouTube studio.
-```
-
-## Video Orchestrator audit summary
-
-Audit findings from the current repo state:
-
-- No large standalone Video Studio strategy file was found in the canonical ProChat brand docs.
-- The existing roadmap mentions video orchestration as an organic content example and video planning as a future shared module.
-- The live video note treats Brain Core as the owner of runtime video status, which risks implying a separate local orchestration runtime.
-- The technical definition already supports optional modules, shared computation, human approvals, logs, and model/provider routing.
-- The docs need one clear rule to avoid drift: ProChat OS owns workflow state; AWS owns cloud media execution.
-
-Conflicting or outdated assumptions to remove:
-
-- local-first video generation as the main production path
-- local rendering as the first implementation path
-- local asset management as the durable media store
-- any separate Video Studio platform outside ProChat OS
-- any second orchestration runtime for video jobs
-- any roadmap that treats video generation as the main company product
-
-## Video Orchestrator roadmap
-
-This is the only canonical video roadmap.
-
-### Phase 1 — Foundation
-
-Goal: prove the AWS execution layer works before building product UI.
-
-Tasks:
-
-- prepare AWS account and permissions
-- create S3 asset storage structure
-- validate Bedrock access
-- validate Polly narration
-- validate Transcribe captions
-- validate MediaConvert rendering/transcoding
-- validate basic Step Functions orchestration
-
-Exit criteria:
-
-```text
-A developer can run one controlled AWS-backed media test and inspect outputs in S3.
-```
-
-### Phase 2 — First Workflow
-
-Goal: create the first approved content workflow without full video generation complexity.
-
-Workflow:
-
-```text
-Topic
-→ Script
-→ Scene prompts
-→ Human approval
-→ Voiceover
-→ Asset storage
-```
-
-Exit criteria:
-
-```text
-A ProChat or Says The Bible topic becomes an approved script, scene plan, voiceover, and stored assets.
-```
-
-## Approval checkpoint strategy
-
-The first approval gate is script approval.
-
-ProChat OS owns the approval decision and approval gate. AWS executes media generation and stops at each gate until approval.
-
-### Approval contract
-
-**metadata/approvals.json** defines the approval checkpoint state for each job.
-
-```json
-{
-  "jobId": "job-id",
-  "approvals": {
-    "script": {
-      "status": "pending|approved|rejected",
-      "approvedBy": "user-id or null",
-      "approvedAt": "2026-05-29T12:00:00Z or null",
-      "notes": "approval notes or null"
-    },
-    "scenes": {
-      "status": "not_required|pending|approved|rejected",
-      "approvedBy": null,
-      "approvedAt": null,
-      "notes": null
-    },
-    "final": {
-      "status": "not_required|pending|approved|rejected",
-      "approvedBy": null,
-      "approvedAt": null,
-      "notes": null
-    }
-  }
-}
-```
-
-### Step Functions behavior at approval gates
-
-1. Step Functions generates script from topic using Bedrock.
-2. Step Functions writes script to metadata/job.json.
-3. Step Functions writes approvals.json with script.status = "pending".
-4. Step Functions writes status.json with status = "awaiting_script_approval".
-5. Step Functions stops execution.
-6. Human approves by editing metadata/approvals.json.
-7. Human sets script.status = "approved" and optionally adds approvedBy, approvedAt, notes.
-8. Later Lambda invocation or Step Functions resume trigger continues to next phase.
-9. If script.status = "rejected", workflow stops and notifies.
-
-### Human approval workflow (v1)
-
-In v1, approval is manual:
-
-1. Developer/human reviews job folder.
-2. Human reads generated script in metadata/job.json.
-3. Human edits metadata/approvals.json directly.
-4. Human sets script.status to "approved" or "rejected".
-5. Human optionally adds approvedBy and notes.
-6. Human triggers next workflow step via Lambda console or workflow resume.
-
-### Future approval workflows
-
-- ProChat OS UI approval form (ProChat OS owns approval UI)
-- Approval API endpoint (ProChat OS owns approval logic)
-- Webhook approval integration (ProChat OS owns webhook logic)
-- Slack approval bot (ProChat OS owns bot)
-
-Automation of approvals (always-approve workflows) is out of scope for the first approval gate.
-
-### Reason for this design
-
-- Clear separation of concerns: ProChat OS owns decisions, AWS owns execution.
-- Gates are explicit and testable without UI.
-- Manual approval in v1 validates the workflow before automating.
-- Approval state is durable and audit-able in S3.
-- Future approval UIs can read/write the same metadata file.
-- Easy to extend with more approval gates later.
-
-### Phase 4 — Internal Video Assembly
-
-Goal: create one end-to-end internal MP4 export using validated assets before automating through Step Functions.
-
-Status: **I-1 complete, I-2 active**
-
-Workflow:
-
-```text
-I-1: Manual assembly validation (narration + transcoded video → final MP4)  ✅ COMPLETE
-I-2: Automate assembly through Step Functions + MediaConvert  🟡 ACTIVE
-I-3: Replace placeholder with generated clips
-I-4: Add thumbnail generation
-I-5: Generate real internal content (Says The Bible or ProChat)
-```
-
-Exit criteria I-1:
-
-```text
-One internal 60-second MP4 created from validated assets and exported to S3.
-Audio and video are synchronized.
-Workflow contract validated before moving to AWS automation.
-```
-
-Exit criteria I-1 met:
-
-```text
-✅ jobs/test-001/exports/test-001-final.mp4 exists and is playable
-✅ Duration: 64.033333 seconds
-✅ Audio/video synchronized
-✅ Validation used local ffmpeg as temporary shortcut (not production path)
-```
-
-Exit criteria I-2:
-
-```text
-Final assembly automated through Step Functions after approval.
-MediaConvert is the canonical execution engine.
-test-001-final.mp4 generated via MediaConvert (not local ffmpeg).
-Proof: output matches I-1 validation (duration ~64s, H.264 + AAC, playable).
-```
-
-Implementation approach for I-2:
-
-```text
-Extend existing Step Functions skeleton with:
-
-1. CheckApproval — Verify approvals.json script.status == approved
-2. UpdateStatusAssembling — Set status = "assembling"
-3. TriggerMediaConvert — Create MediaConvert job (video + audio inputs)
-4. WaitForMediaConvert — Poll job until complete
-5. UpdateStatusComplete — Set status = "complete", record timestamps/jobId
-6. Success — Verify output exists
-
-MediaConvert inputs:
-- Video: jobs/test-001/exports/sample-transcoded.mp4
-- Audio: jobs/test-001/audio/narration.mp3
-
-MediaConvert output:
-- jobs/test-001/exports/test-001-final.mp4
-
-Metadata updates:
-- metadata/status.json: status field transitions assembling → complete
-- metadata/status.json: add assemblyStartedAt, assemblyCompletedAt, mediaConvertJobId
-```
-
-Important distinction:
-
-```text
-I-1 used local ffmpeg as validation shortcut to prove the concept works end-to-end.
-I-2 moves to AWS MediaConvert as the canonical production execution path.
-AWS owns media execution; Step Functions owns orchestration.
-Local ffmpeg was testing only. MediaConvert is the durable production path.
-```
-
-### Phase 5 — Video Generation with Automation ✅ COMPLETE
-
-Goal: automate video generation through the complete workflow.
-
-Workflow (implemented):
-
-```text
-Topic
-→ Script (Bedrock) ✅
-→ Scenes (Nova Canvas prompts) — deferred
-→ Voice (Polly) ✅
-→ Generated clips (Nova Reel us-east-1) ✅
-→ Captions (Transcribe) — deferred
-→ Thumbnail (Nova Canvas) — Phase 6
-→ Export/Assembly (MediaConvert) ✅
-```
-
-Exit criteria: ✅ ACHIEVED
-
-```text
-One short video can be automatically generated, rendered, stored, and exported from one workflow definition.
-Proof: test-001-i3-final-proof-4 execution
-- Generated clip: generated-001.mp4 from Nova Reel
-- Narration: narration.mp3 from Polly
-- Assembly: MediaConvert orchestrated by Step Functions
-- Output: generated-001-final.mp4 in canonical location
-- Metadata: Status tracked in status.json
-```
-
-What's complete:
-- Nova Reel video generation (cross-region us-east-1 → eu-north-1)
-- Step Functions orchestration with state machine
-- MediaConvert assembly with generated clip input
-- Metadata contract and status tracking
-- Output verification and file location confirmation
-
-What's deferred (Phase 6+):
-- Nova Canvas scene generation (not blocking MVP)
-- Transcribe captions (not blocking MVP)
-- ProChat OS console visibility
-- Publishing layer
-
-### Phase 5.5 — Thumbnail Generation ✅ COMPLETE
-
-Goal: Extract and normalize thumbnail from final video.
-
-Approach: MediaConvert native frame capture (no ffmpeg layer required)
-
-Workflow (implemented):
-```text
-Final Video (MediaConvert output)
-→ Frame capture (MediaConvert FRAME_CAPTURE codec) ✅
-→ Select frame 2 (3-second mark) ✅
-→ Normalize to thumbnail-001.jpg ✅
-→ Store in canonical location ✅
-```
-
-Exit criteria: ✅ ACHIEVED
-
-```text
-Thumbnail is automatically extracted from final video and stored at
-jobs/{jobId}/exports/thumbnail-001.jpg
-
-Proof: i4-thumbnail-proof-exports-1780241084 execution
-- Generated frames: 4 JPEG frames at 1280x720 resolution
-- Frame selection: Frame 2 (3-second mark, 76,874 bytes)
-- Normalized output: thumbnail-001.jpg (37,960 bytes after optimization)
-- Quality: 8-bit sRGB JPEG, YouTube-ready
-- Metadata: Tracked in assets.json with MediaConvert job ID
-```
-
-What's complete:
-- MediaConvert frame capture job integration
-- 3 Lambda functions deployed (trigger, wait, select)
-- Step Functions state machine updated with polling loop
-- IAM permissions configured for thumbnail workflow
-- Preflight validation and end-to-end proof passed
-- Metadata contract updated (assets.json, status.json)
-
-What's next (Phase 6):
-- ProChat OS console visibility
-- Publishing layer (YouTube/social media)
-- Dynamic job ID generation (not static test-001)
-
-### Phase 6 — ProChat OS Integration
-
-Goal: make the workflow visible and controllable through ProChat OS.
-
-Tasks:
-
-- job console
-- workflow management
-- logs
-- asset browser
-- approval screens
-- retry actions
-- publishing checklist state
-
-Exit criteria:
-
-```text
-A user can create, review, approve, monitor, retry, and inspect a video job from ProChat OS.
-```
-
-### Phase 5 — Publishing Layer
-
-Goal: prepare platform-specific publishing workflows.
-
-Targets:
-
-- YouTube Shorts
-- TikTok
-- Reels
-- metadata generation
-- publishing checklists first
-- API publishing integrations later
-
-Exit criteria:
-
-```text
-A finished video has platform-ready assets, captions, titles, descriptions, and checklist state.
-```
-
-## Video Orchestrator implementation plan
-
-Do not build fantasy enterprise architecture.
-
-Only support one workflow initially.
-
-Primary objective:
-
-```text
-Validate ProChat OS through real internal workflows before supporting external users.
-```
-
-Initial internal content users:
-
-- Says The Bible
-- ProChat content
-
-Do not build for external customers before the internal workflow produces repeatable videos.
-
-MVP boundary:
-
-The first MVP supports only:
-
-```text
-Topic
-→ 60-second script
-→ 5 scene prompts
-→ human approval
-→ Polly voiceover
-→ generated clips
-→ captions
-→ thumbnail
-→ final render
-→ exported MP4
-```
-
-V1 does not support multiple workflows, many channels, account management, scheduling, or publishing automation.
-
-First MVP workflow:
-
-```text
-Topic
-→ 60 second script
-→ 5 scene prompts
-→ human approval
-→ Polly narration
-→ 5 generated clips
-→ captions
-→ thumbnail
-→ final render
-→ exported MP4
-```
-
-First implementation sequence:
-
-✅ A. Create private S3 dev bucket  
-✅ B. Test Bedrock text generation  
-✅ C. Test Polly text-to-speech into S3  
-✅ D. Test Transcribe captions from audio  
-✅ E. Test MediaConvert on one sample clip  
-✅ F. Create first Step Functions skeleton  
-⬜ G. Add ProChat OS job metadata  
-⬜ H. Add approval checkpoint  
-⬜ I. Generate one complete 60-second internal video
-
-Infrastructure validation status:
-
-```text
-COMPLETE
-```
-
-Validated outputs:
-
-```text
-metadata/status-started.json
-metadata/status-completed.json
-scripts/generated script output
-scripts/usage tracking output
-audio/narration.mp3
-captions/transcript.json
-exports/sample-transcoded.mp4
-```
-
-The validated architecture is:
-
-```text
-ProChat OS
-→ starts workflow
-Step Functions
-→ orchestrates workflow
-S3
-→ stores workflow state and media assets
-```
-
-Current next implementation task:
-
-```text
-G. Canonical Job Metadata Schema
-```
-
-Expected output:
-
-```text
-Replace ad-hoc metadata with canonical per-job metadata files:
-metadata/job.json
-metadata/status.json
-metadata/approvals.json
-metadata/assets.json
-metadata/cost.json
-```
-
-Goal:
-
-```text
-One source of truth per job.
-```
-
-These metadata files are the contract between ProChat OS and AWS execution. ProChat OS should read and write workflow intent, approvals, status, asset references, and cost metadata through these files. AWS execution should update execution state and generated asset references through the same contract.
-
-Canonical S3 metadata structure:
-
-```text
-jobs/
-  {jobId}/
-    metadata/
-      job.json
-      status.json
-      approvals.json
-      assets.json
-      cost.json
-    input/
-    scripts/
-    audio/
-    video-raw/
-    captions/
-    thumbnails/
-    exports/
-    logs/
-```
-
-### metadata/job.json
-
-Purpose: static job definition.
-
-```json
-{
-  "jobId": "vo-20260529-001",
-  "templateId": "short-internal-video",
-  "title": "Example ProChat OS Short",
-  "topic": "How ProChat OS turns messy inputs into structured workflows",
-  "owner": "prochat",
-  "internalUseCase": "ProChat content",
-  "targetDurationSeconds": 60,
-  "targetPlatforms": ["youtube-shorts"],
-  "createdAt": "2026-05-29T12:00:00Z",
-  "updatedAt": "2026-05-29T12:00:00Z",
-  "environment": "dev",
-  "statusFile": "metadata/status.json",
-  "assetsFile": "metadata/assets.json",
-  "approvalsFile": "metadata/approvals.json",
-  "costFile": "metadata/cost.json"
-}
-```
-
-### metadata/status.json
-
-Purpose: current workflow state.
-
-Allowed statuses:
-
-```text
-draft
-script_generated
-awaiting_script_approval
-narration_generated
-captions_generated
-video_processed
-awaiting_final_approval
-exported
-failed
-cancelled
-```
-
-```json
-{
-  "jobId": "vo-20260529-001",
-  "status": "script_generated",
-  "currentStep": "bedrock_script_generation",
-  "completedSteps": [
-    "s3_job_folder_created",
-    "bedrock_script_generation"
-  ],
-  "failedStep": null,
-  "lastError": null,
-  "startedAt": "2026-05-29T12:00:00Z",
-  "completedAt": null,
-  "updatedAt": "2026-05-29T12:03:00Z",
-  "stepFunctionsExecutionArn": "arn:aws:states:eu-west-1:123456789012:execution:video-orchestrator-dev:vo-20260529-001",
-  "retryCount": 0
-}
-```
-
-### metadata/approvals.json
-
-Purpose: human approval gates.
-
-Allowed approval statuses:
-
-```text
-not_required
-pending
-approved
-rejected
-```
-
-```json
-{
-  "jobId": "vo-20260529-001",
-  "approvals": {
-    "script": {
-      "status": "pending",
-      "approvedBy": null,
-      "approvedAt": null,
-      "notes": null
-    },
-    "scenes": {
-      "status": "pending",
-      "approvedBy": null,
-      "approvedAt": null,
-      "notes": null
-    },
-    "final": {
-      "status": "not_required",
-      "approvedBy": null,
-      "approvedAt": null,
-      "notes": null
-    }
-  }
-}
-```
-
-### metadata/assets.json
-
-Purpose: track all generated and uploaded assets.
-
-Each asset must include `assetId`, `type`, `s3Uri`, `contentType`, `sizeBytes`, `createdAt`, `provider`, and `step`. `checksum` is optional.
-
-```json
-{
-  "jobId": "vo-20260529-001",
-  "inputs": [
-    {
-      "assetId": "asset-input-topic-001",
-      "type": "topic",
-      "s3Uri": "s3://prochat-video-dev/jobs/vo-20260529-001/input/topic.json",
-      "contentType": "application/json",
-      "sizeBytes": 512,
-      "createdAt": "2026-05-29T12:00:00Z",
-      "provider": "prochat-os",
-      "step": "job_created",
-      "checksum": null
-    }
-  ],
-  "scripts": [
-    {
-      "assetId": "asset-script-001",
-      "type": "script",
-      "s3Uri": "s3://prochat-video-dev/jobs/vo-20260529-001/scripts/script.json",
-      "contentType": "application/json",
-      "sizeBytes": 4096,
-      "createdAt": "2026-05-29T12:03:00Z",
-      "provider": "bedrock",
-      "step": "bedrock_script_generation",
-      "checksum": null
-    }
-  ],
-  "audio": [
-    {
-      "assetId": "asset-audio-001",
-      "type": "narration",
-      "s3Uri": "s3://prochat-video-dev/jobs/vo-20260529-001/audio/narration.mp3",
-      "contentType": "audio/mpeg",
-      "sizeBytes": 980000,
-      "createdAt": "2026-05-29T12:08:00Z",
-      "provider": "polly",
-      "step": "polly_narration",
-      "checksum": null
-    }
-  ],
-  "videoRaw": [],
-  "captions": [
-    {
-      "assetId": "asset-captions-001",
-      "type": "transcript",
-      "s3Uri": "s3://prochat-video-dev/jobs/vo-20260529-001/captions/transcript.json",
-      "contentType": "application/json",
-      "sizeBytes": 12000,
-      "createdAt": "2026-05-29T12:12:00Z",
-      "provider": "transcribe",
-      "step": "transcribe_captions",
-      "checksum": null
-    }
-  ],
-  "thumbnails": [],
-  "exports": [
-    {
-      "assetId": "asset-export-001",
-      "type": "mp4",
-      "s3Uri": "s3://prochat-video-dev/jobs/vo-20260529-001/exports/sample-transcoded.mp4",
-      "contentType": "video/mp4",
-      "sizeBytes": 8500000,
-      "createdAt": "2026-05-29T12:20:00Z",
-      "provider": "mediaconvert",
-      "step": "mediaconvert_export",
-      "checksum": null
-    }
-  ],
-  "logs": []
-}
-```
-
-### metadata/cost.json
-
-Purpose: track budget and estimated cost. Cost tracking can be approximate in v1.
-
-```json
-{
-  "jobId": "vo-20260529-001",
-  "budgetLimitUsd": 5.0,
-  "estimatedCostUsd": 1.25,
-  "actualCostUsd": null,
-  "currency": "USD",
-  "costItems": [
-    {
-      "service": "bedrock",
-      "step": "bedrock_script_generation",
-      "usageUnit": "tokens",
-      "usageAmount": 1800,
-      "estimatedUsd": 0.05
-    },
-    {
-      "service": "polly",
-      "step": "polly_narration",
-      "usageUnit": "characters",
-      "usageAmount": 900,
-      "estimatedUsd": 0.02
-    },
-    {
-      "service": "transcribe",
-      "step": "transcribe_captions",
-      "usageUnit": "audio_seconds",
-      "usageAmount": 60,
-      "estimatedUsd": 0.03
-    },
-    {
-      "service": "mediaconvert",
-      "step": "mediaconvert_export",
-      "usageUnit": "output_minutes",
-      "usageAmount": 1,
-      "estimatedUsd": 0.15
-    }
-  ],
-  "retryCostUsd": 0.0,
-  "updatedAt": "2026-05-29T12:20:00Z"
-}
-```
-
-G completion criteria:
-
-```text
-The schema examples above define the contract all future code must use.
-```
-
-## F/G bridge — Step Functions writes canonical status metadata
-
-Status:
-
-```text
-COMPLETE
-```
-
-Validation result:
-
-```text
-jobs/test-001/metadata/status.json exists and status is exported.
-```
-
-The bridge proved the schema is not only documentation: Step Functions writes and updates `metadata/status.json` instead of `metadata/status-started.json` and `metadata/status-completed.json`.
-
-Scope boundaries for the bridge:
-
-- keep this as a skeleton state machine only
-- do not call Bedrock, Polly, Transcribe, or MediaConvert yet
-- do not build approval UI
-- do not build a customer dashboard
-- do not expand providers
-- do not redesign the workflow
-
-Required behavior:
-
-1. On start, write `jobs/{jobId}/metadata/status.json` using the canonical `status.json` shape.
-2. Use `draft` as the closest documented starting status.
-3. After the wait/test step, overwrite the same `metadata/status.json` file.
-4. Use `exported` as the documented completed status.
-5. Stop targeting `metadata/status-started.json` and `metadata/status-completed.json`.
-
-Minimal ASL skeleton:
-
-```json
-{
-  "Comment": "AWS-backed Video Orchestrator skeleton that writes canonical metadata/status.json only.",
-  "StartAt": "BuildStartedStatus",
-  "States": {
-    "BuildStartedStatus": {
-      "Type": "Pass",
-      "Parameters": {
-        "bucket.$": "$.bucket",
-        "jobId.$": "$.jobId",
-        "statusDocument": {
-          "jobId.$": "$.jobId",
-          "status": "draft",
-          "currentStep": "skeleton_started",
-          "completedSteps": [],
-          "failedStep": null,
-          "lastError": null,
-          "startedAt.$": "$.State.EnteredTime",
-          "completedAt": null,
-          "updatedAt.$": "$.State.EnteredTime",
-          "stepFunctionsExecutionArn.$": "$.Execution.Id",
-          "retryCount": 0
-        }
-      },
-      "Next": "WriteStartedStatus"
-    },
-    "WriteStartedStatus": {
-      "Type": "Task",
-      "Resource": "arn:aws:states:::aws-sdk:s3:putObject",
-      "Parameters": {
-        "Bucket.$": "$.bucket",
-        "Key.$": "States.Format('jobs/{}/metadata/status.json', $.jobId)",
-        "ContentType": "application/json",
-        "Body.$": "States.JsonToString($.statusDocument)"
-      },
-      "ResultPath": null,
-      "Next": "WaitForSkeletonTest"
-    },
-    "WaitForSkeletonTest": {
-      "Type": "Wait",
-      "Seconds": 5,
-      "Next": "BuildCompletedStatus"
-    },
-    "BuildCompletedStatus": {
-      "Type": "Pass",
-      "Parameters": {
-        "bucket.$": "$.bucket",
-        "jobId.$": "$.jobId",
-        "statusDocument": {
-          "jobId.$": "$.jobId",
-          "status": "exported",
-          "currentStep": "complete",
-          "completedSteps": [
-            "skeleton_started",
-            "status_json_written",
-            "wait_test_completed"
-          ],
-          "failedStep": null,
-          "lastError": null,
-          "startedAt.$": "$.Execution.StartTime",
-          "completedAt.$": "$.State.EnteredTime",
-          "updatedAt.$": "$.State.EnteredTime",
-          "stepFunctionsExecutionArn.$": "$.Execution.Id",
-          "retryCount": 0
-        }
-      },
-      "Next": "WriteCompletedStatus"
-    },
-    "WriteCompletedStatus": {
-      "Type": "Task",
-      "Resource": "arn:aws:states:::aws-sdk:s3:putObject",
-      "Parameters": {
-        "Bucket.$": "$.bucket",
-        "Key.$": "States.Format('jobs/{}/metadata/status.json', $.jobId)",
-        "ContentType": "application/json",
-        "Body.$": "States.JsonToString($.statusDocument)"
-      },
-      "End": true
-    }
-  }
-}
-```
-
-Test input:
-
-```json
-{
-  "bucket": "prochat-video-dev",
-  "jobId": "test-001"
-}
-```
-
-Validation checklist:
-
-```text
-Run one execution against test-001.
-Confirm S3 contains jobs/test-001/metadata/status.json.
-Confirm status.json is overwritten from draft to exported.
-Confirm status-started.json and status-completed.json are no longer the target files.
-```
-
-Next task:
-
-```text
-H. Approval checkpoint
-```
-
-Implementation principles:
-
-- Start with one workflow definition.
-- Store durable media in S3, not in Mind.
-- Store metadata, prompts, approvals, and asset references in ProChat OS.
-- Use AWS for slow async media tasks.
-- Keep the ProChat OS UI focused on job state, approvals, logs, retries, and assets.
-- Do not add platform posting until export quality is proven.
-- Do not optimize for many accounts or many templates in the first version.
-- Do not build a separate Video Studio product.
-
-Cost-control and storage rules:
-
-- Every job has a max budget.
-- Every job has max retries.
-- Every generated clip has max duration.
-- Failed generations are tracked.
-- Raw assets get lifecycle rules.
-- Dev bucket and production bucket must be separate.
-- No public S3 access.
-- CloudFront and signed URLs are used only when needed.
-
-First S3 dev bucket structure:
-
-```text
-prochat-video-dev/
-  jobs/
-    {jobId}/
-      input/
-      scripts/
-      audio/
-      video-raw/
-      captions/
-      thumbnails/
-      exports/
-      logs/
-```
-
-Suggested module shape:
-
-```text
-modules/video-orchestrator/
-  workflows/
-    short-social-video.workflow.json
-  templates/
-    short-internal-video.json
-  providers/
-    aws-bedrock
-    aws-polly
-    aws-transcribe
-    aws-mediaconvert
-  approvals/
-    script-approval
-    scene-approval
-    final-video-approval
-```
-
-First data model concepts:
-
-- video job
-- script draft
-- scene plan
-- prompt history
-- approval state
-- asset reference
-- render profile
-- export package
-- publishing checklist
-
-Non-goals for the first implementation:
-
-- local video generation
-- local FFmpeg as the core production path
-- autonomous publishing
-- multi-account social scheduling
-- full video editor UX
-- HeyGen clone
-- Runway clone
-- long-form cinematic video studio
-- customer-facing SaaS dashboard
-- many templates
-- many model providers
-- multi-tenant video SaaS
-- separate Video Studio platform
-- every social platform
-- direct publishing APIs
-- local GPU model hosting
-- advanced editor UI
-- talking-head avatar studio
-- perfect character consistency
-
-## Business model
-
-ProChat OS can be offered as:
-
-1. **Free personal/non-commercial GitHub version**
-   - source-available
-   - personal/non-commercial use
-   - lets people inspect, fork, and use the system personally
-
-2. **Commercial license**
-   - required for business/commercial use
-   - required for agencies, resale, managed hosting, or internal business use if defined by license terms
-
-3. **Managed ProChat OS**
-   - ProChat installs, configures, updates, and supports the system
-   - can run on customer-owned AWS/VPS
-   - can run on ProChat-managed AWS/VPS
-   - can run on-premise for local/nearby customers
-
-4. **Modular workflow blocks**
-   - customers may start with one workflow outcome
-   - more modules can be added over time
-   - the Video Orchestrator may become a paid module after it proves value internally
-
-## Productized service model
-
-ProChat may sell a managed productized service.
-
-Plain-language definition:
-
-```text
-You are not selling random custom work.
-You are selling the same system repeatedly, with setup and support included.
-```
-
-For ProChat OS:
-
-```text
-ProChat installs ProChat OS, connects it to selected workflows, keeps it updated, and helps the customer run it. The core system stays the same. The modules and integrations vary by customer.
-```
-
-## Deployment philosophy
-
-ProChat OS should become deeply integrated and sticky, but should avoid requiring broad infrastructure access where possible.
-
-Principle:
-
-```text
-Share generic computation.
-Isolate private context.
-```
-
-Customer trust model:
-
-```text
-Customer owns the infrastructure.
-Customer owns the credentials.
-ProChat OS runs the workflows.
-ProChat support sees status and redacted logs, not secrets.
-Human approval is required first.
-Automation increases only after trust.
-```
-
-For video specifically:
-
-```text
-Share media execution where safe.
-Isolate private workflow context, credentials, approvals, and customer memory.
-```
-
-## Go-to-market summary
-
-### Public brand
-
-Business-agnostic ProChat OS messaging.
-
-### First direct wedge
-
-Law firms, using MikeOSS as a tangible legal document AI workspace wedge.
-
-### Second direct wedge
-
-Accountants, if law-firm outreach underperforms or accounting workflows prove clearer.
-
-### Organic wedge
-
-Creators, SaaS builders, influencers, and developers through automated/organic social and YouTube channels. The Video Orchestrator should help generate this content and demonstrate ProChat OS, but it should not become the main public product identity.
-
-Full go-to-market details live in:
-
-```text
-prochat-os-go-to-market.md
-```
-
-## MikeOSS role
-
-MikeOSS is a law-firm wedge and implementation block.
-
-```text
-MikeOSS = legal document AI workspace
-ProChat OS = Agentic Workflow OS around and beyond it
-```
-
-MikeOSS should not define the ProChat website or main product strategy.
-
-Dedicated execution plan:
-
-```text
-mikeoss-law-firm-demo-plan.md
-```
-
-## Legacy products
-
-The following remain real products but are now legacy/secondary:
-
-- ProKit
-- SaaSKit
-- UXKit
-- WaaSKit
-
-They are not abandoned. They may later be upgraded into more agentic ProChat OS modules.
-
-They should not drive the main website, homepage, or flagship positioning.
-
-## Strategic spine
-
-```text
-ProChat OS is the Agentic Workflow OS for turning messy business inputs into structured work.
-
-It is installed as a private workflow runtime, connected to the customer's existing tools, and expanded through modular agents and workflows.
-
-The Video Orchestrator is a ProChat OS module: ProChat OS owns workflows, approvals, logs, templates, metadata, publishing state, and asset references; AWS owns media generation, rendering, storage, transcoding, and long-running execution.
-
-The free version is available for personal/non-commercial use. Commercial and managed use requires a ProChat license or managed plan.
-```
-
-## Execution-stage decisions still open
-
-These do not block the strategy:
-
-- exact first law-firm workflow
-- exact first pricing
-- exact first AWS account and permission layout
-- exact landing page copy
-- exact v1 implementation plan for the core runtime
-- exact demo script and outreach sequence
-
-Those belong in roadmap, implementation, offer, and outreach docs.
-
-## Cross-repo and Video Orchestrator boundary note
-
-The canonical cross-repo constitution lives in:
-
-```text
-wiki/system/repo-boundaries.md
-```
-
-For ProChat OS work, use this rule:
-
-```text
-Strategy lives in mind.
-Execution lives in brain.
-API truth lives in Brain Core.
-UI truth lives in Brain Console.
-```
-
-The Video Orchestrator has two distinct execution lanes:
-
-```text
-Local Video Orchestrator
-Cloud Video Orchestrator
-```
-
-They share ProChat OS workflow concepts, approval concepts, metadata concepts, and Brain Console visibility, but they must not be mixed as one implementation.
-
-The Local Video Orchestrator is for local development, fixtures, dry-runs, readiness checks, local runtime reports, operator review, and Brain Console visibility. Local tooling may validate concepts and workflow contracts, but local shortcuts are not automatically the production media execution path.
-
-The Cloud Video Orchestrator is the AWS-backed execution path for media generation, rendering, storage, transcoding, and long-running orchestration. This is the current production-oriented path for the AWS-backed Video Orchestrator proof.
-
-Both lanes may appear in Brain Console, but every surface should identify whether it represents local capability, cloud capability, or shared metadata/status.
-
-
-
-
-## Niche-agnostic core and vertical modules
-
-ProChat OS must remain niche-agnostic at the core and niche-specific at the module layer.
-
-Core ProChat OS:
-
-```text
-messy information → ready-to-review output → human approval → repeatable workflow
-```
-
-The core should be reusable across many business types. It should not be built only for law firms, accountants, creators, or SaaS builders.
-
-Vertical modules package the core for a specific market and workflow. Each module should make one niche problem easier to understand, sell, demo, and implement.
+A workflow module turns a repeated business situation into a review-ready output.
 
 Examples:
 
-- legal intake module
-- accounting document intake module
-- agency lead intake module
-- consultant proposal/profile module
-- content operations module
-- real estate inquiry/follow-up module
-- internal report module
+- client inquiry to reply draft
+- sales call notes to follow-up email
+- support request to answer draft
+- messy documents to summary and checklist
+- recurring notes to status report
+- content idea to outline and publishing tasks
+- founder notes to delegation instructions
 
-Each vertical module should include:
+Workflow modules are reusable, but they become stronger when connected to Work Memory.
 
-- a clear buyer problem
-- expected input examples
-- expected output examples
-- skills
-- workflows
-- schedules where useful
-- approval checkpoints
-- test data
-- evaluation criteria
-- onboarding notes
+## What we sell first
 
-The website can remain business-agnostic while dedicated landing pages and outreach assets speak to specific niches.
+The first sellable offer is not a broad platform rollout.
 
-## Module and skill architecture
-
-A ProChat OS module is a packaged workflow block.
-
-A module contains:
+The first sellable offer is:
 
 ```text
-skills + workflows + schedules + examples + evaluation criteria + optional connectors
+We make one person or one team faster by turning repeated information work into review-ready output.
 ```
 
-A skill is a narrow, inspectable ability used by a workflow. Skills should not be overloaded.
+Best first offers:
 
-Each skill should define:
+1. Founder/owner work memory
+2. Sales follow-up and proposal memory
+3. Customer support reply memory
+4. Marketing/content voice memory
+5. Operations/reporting memory
 
-- name
-- purpose
-- input schema or expected input
-- output schema or expected output
-- examples of good outputs
-- context/reference files
-- approval needs
-- safe test data
-- sandbox or execution context
+These are easier to sell, demo, and implement than a highly regulated niche product.
 
-Each workflow should define:
+## Buyer problem
 
-- trigger or entry point
-- required skills
-- expected output
-- approval checkpoints
-- logging requirements
-- evaluation criteria
+Most businesses already use AI, but the work around AI is still manual.
 
-Each schedule should define:
+People still have to:
 
-- when it runs
-- which workflow it runs
-- what input it uses
-- whether approval is required
-- what happens after approval
+- explain the same context repeatedly
+- paste the same examples into prompts
+- rewrite AI output into the right tone
+- turn notes into tasks manually
+- create follow-up emails manually
+- search old documents for context
+- remember decisions and preferences
+- onboard new people by repeating the same explanations
+- lose knowledge when employees leave
 
-Design principle:
+This is expensive and slow.
+
+## Buyer outcome
+
+The buyer wants:
+
+- less repetitive admin work
+- faster replies
+- faster proposals
+- more consistent support answers
+- clearer handoffs
+- reusable company knowledge
+- fewer missed details
+- less dependence on one person's memory
+- output that already matches the company's way of working
+
+## Primary audience
+
+ProChat OS is business-agnostic.
+
+It is for teams where knowledge work repeats.
+
+Best early buyers:
+
+- small business owners
+- founders
+- sales teams
+- support teams
+- marketing teams
+- operations managers
+- consultants
+- agencies
+- local service businesses
+
+Niche pages and outreach can target one role or sector, but the product stays business-agnostic.
+
+## Positioning hierarchy
+
+Public brand:
 
 ```text
-One module should solve one recognizable business problem for one niche or workflow family.
+ProChat OS
 ```
 
-Avoid giving an agent too many unrelated skills. More skills can reduce reliability because the workflow may choose the wrong tool or produce unfocused output.
-
-## Scheduling and recurring workflows
-
-Recurring work is a core ProChat OS opportunity.
-
-ProChat OS should support scheduled workflows such as:
-
-- daily intake summary
-- weekly missing-information report
-- monthly client document checklist
-- daily lead follow-up draft
-- weekly internal status report
-- scheduled content workflow
-
-Scheduled workflows must still respect approval checkpoints.
-
-Public buyer language:
+Public category:
 
 ```text
-Recurring work can be prepared automatically, but your team can still review important outputs before they are used.
+Managed AI work system
 ```
 
-Internal technical language:
+Internal architecture:
 
 ```text
-Modules may define cron-like schedules that trigger workflows and route outputs into approval queues, reports, email drafts, tasks, or status updates.
+Work Memory + Workflow Modules + Review Loop
 ```
 
-## Feedback and evaluation loop
-
-ProChat OS modules must improve through review.
-
-Every module should define how output quality is evaluated.
-
-Evaluation can include:
-
-- was the summary accurate?
-- did the checklist catch missing information?
-- was the draft reply useful?
-- did the task list match the actual next steps?
-- how much manual time was saved?
-- what did the reviewer edit?
-- what should be changed in the examples, instructions, or skill definition?
-
-The product should eventually support storing generated outputs, reviewer notes, approval/rejection state, and iteration history.
-
-This creates a repeatable improvement loop:
+Public promise:
 
 ```text
-run workflow → review output → capture feedback → refine skill/context/examples → rerun → compare improvement
+Turn messy work into clear outputs your team can review and use.
 ```
 
-## Reproducible environment and deployment story
+## What ProChat OS is not
 
-For engineering and self-hosted/commercial deployments, ProChat OS should have a reproducible environment definition.
+ProChat OS is not sold as:
 
-Candidate options:
+- a chatbot
+- a dashboard
+- a knowledge graph
+- a second brain
+- an infinite brain
+- a legal AI tool
+- a model router
+- a prompt library
+- a generic automation platform
+- a SaaS kit
+- an infrastructure project
 
-- Devbox
-- Nix
-- containers
-- documented managed-server baseline
+Those may be implementation details, inspiration, components, or niche examples. They are not the buyer-facing product.
 
-The goal is not to lead marketing with installation details. The goal is to reduce support overhead and make deployments predictable.
+## Commercial model
 
-Public buyer wording:
+ProChat sells outcomes first.
+
+Practical commercial offers:
+
+- first time-saving test
+- done-for-you launch
+- managed monthly improvement
+- team rollout
+- department rollout
+
+Suggested starting pricing:
 
 ```text
-ProChat sets up and manages the workflow system for you. Your team can send work to it by email, forms, file drops, manual upload, or API calls.
+First time-saving test: from €750
+Done-for-you launch: from €1,500
+Managed improvement: from €250/month
+Team or department rollout: custom
 ```
 
-Technical implementation wording:
+Pricing should increase when the buyer has more people, more review steps, more data, or higher-value work.
+
+## Delivery model
+
+Default delivery:
 
 ```text
-ProChat OS should eventually include a reproducible environment file and setup path so local, cloud, and managed deployments use the same dependency versions.
+ProChat sets up and manages the system. The customer sends work through simple entry points and receives useful outputs for review.
 ```
+
+Possible entry points:
+
+- email
+- form
+- file drop
+- manual upload
+- shared folder
+- API call
+
+Avoid implying that ProChat needs to enter the customer's computers or internal network by default.
+
+## Strategic focus
+
+Build the product around this sequence:
+
+```text
+one person → one team → one department → company memory
+```
+
+The first sale should make one person or one team faster.
+
+The expansion sale turns the best examples, instructions, and review feedback into team or department memory.
+
+The long-term value is that the business stops losing reusable knowledge and starts turning repeated work into reusable output patterns.
+
+## Marketing rule
+
+Public marketing should not explain the system.
+
+Public marketing should sell the before and after:
+
+```text
+Before: scattered information, repeated explanations, slow follow-up, manual rewriting.
+After: summaries, drafts, tasks, reports, and replies that are ready for review.
+```
+
+Do not lead with:
+
+- operating system
+- work brain
+- memory
+- graph
+- modules
+- runtime
+- connectors
+- routing
+- architecture
+- autonomous agents
+
+Use simple buyer language:
+
+- save time
+- reply faster
+- stop rewriting the same thing
+- keep knowledge reusable
+- make handoffs clearer
+- prepare work for review
+- get useful drafts from messy information

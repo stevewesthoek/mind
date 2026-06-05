@@ -2,401 +2,325 @@
 
 **Status:** canonical go-to-market direction  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-05-29
+**Last updated:** 2026-06-03
 
 ## GTM principle
 
-ProChat OS has one business-agnostic public brand and multiple focused go-to-market wedges.
+Sell a clear time-saving outcome before selling a platform.
+
+The first buyer should understand this immediately:
 
 ```text
-Website = ProChat OS, business-agnostic
-Direct outreach = law firms first
-Second local niche = accountants
-Organic content = SaaS builders, creators, influencers, personal developers
+ProChat helps your team stop rewriting, re-explaining, and redoing the same work.
 ```
 
-Do not make the main ProChat website about lawyers, accountants, MikeOSS, or old kits.
-
-## Public website positioning
-
-The website should position ProChat OS around buyer outcomes:
+## Main offer
 
 ```text
-Messy business information in. Useful work out.
+We turn one repeated information task into review-ready output using your own examples, style, and business knowledge.
 ```
 
-Supporting explanation:
+This can apply to any business because every business has repeated knowledge work.
+
+## Best first wedges
+
+Start with roles, not industries.
+
+Best first role-based wedges:
+
+1. Founder/owner
+2. Sales
+3. Support
+4. Marketing/content
+5. Operations/reporting
+
+These are easier to explain than a regulated niche and easier to demo with safe sample data.
+
+## Founder/owner wedge
+
+Buyer pain:
+
+- the owner keeps explaining how the business works
+- decisions live in the owner's head
+- delegation takes too long
+- emails, proposals, instructions, and follow-ups are rewritten manually
+- new people need repeated context
+
+Offer:
 
 ```text
-ProChat OS helps businesses get repetitive admin, document, intake, reporting, and follow-up work done faster by turning messy information into ready-to-review outputs.
+We organize the owner's reusable knowledge and examples so ProChat can prepare drafts, replies, instructions, and summaries that already fit how the business works.
 ```
 
-The website should explain:
+Example outputs:
 
-- what messy information comes in
-- what useful output comes back
-- how the customer saves admin time
-- how follow-up becomes faster
-- how fewer details are missed
-- how humans review important outputs first
-- how ProChat sets up and manages the workflow system for the customer
+- email draft
+- proposal draft
+- delegation note
+- client summary
+- task instruction
+- SOP draft
+- decision summary
 
-The website should not lead with technical implementation details such as runtime, memory, connectors, model routing, CLI, or installation.
+## Sales wedge
 
-## Public messaging rules
+Buyer pain:
+
+- leads need follow-up
+- proposals take time
+- objections repeat
+- CRM notes are inconsistent
+- the best sales replies are not reused
+
+Offer:
+
+```text
+We turn your best sales examples, objections, and follow-up style into reusable drafts your team can review and send faster.
+```
+
+Example outputs:
+
+- follow-up email
+- proposal draft
+- call summary
+- objection response
+- CRM note
+- next-step checklist
+
+## Support wedge
+
+Buyer pain:
+
+- customers ask similar questions
+- replies need consistency
+- support knowledge is scattered
+- escalation notes are manually written
+- new support staff need context
+
+Offer:
+
+```text
+We help your team answer customers faster and more consistently using your approved answers, examples, and product knowledge.
+```
+
+Example outputs:
+
+- support reply draft
+- issue summary
+- escalation note
+- FAQ update
+- ticket category
+- next-step checklist
+
+## Marketing/content wedge
+
+Buyer pain:
+
+- AI drafts do not sound like the business
+- brand voice is scattered
+- good examples are not reused
+- content ideas become stuck in notes
+- campaign work is repetitive
+
+Offer:
+
+```text
+We organize your voice, examples, and campaign knowledge so ProChat can prepare more useful content drafts for review.
+```
+
+Example outputs:
+
+- social post draft
+- email draft
+- outline
+- campaign brief
+- content checklist
+- publishing tasks
+
+## Operations/reporting wedge
+
+Buyer pain:
+
+- status updates are repetitive
+- notes need to become tasks
+- reports are manually rewritten
+- missing information slows work down
+- handoffs are unclear
+
+Offer:
+
+```text
+We turn recurring notes, documents, and updates into clearer reports, task lists, and handoffs.
+```
+
+Example outputs:
+
+- status report
+- task list
+- missing-information checklist
+- meeting summary
+- action plan
+- handoff note
+
+## Landing page rule
+
+The main website must speak from the buyer's perspective.
+
+Do not explain:
+
+- Work Memory
+- modules
+- architecture
+- graphs
+- agents
+- runtime
+- connectors
+- model routing
+- installation
+
+Do explain:
+
+- what painful work they do now
+- what output they get back
+- how it saves time
+- how it keeps their style/knowledge reusable
+- how humans review outputs first
+
+## Public language
 
 Use:
 
-- save admin time
-- respond faster
-- fewer missed follow-ups
-- clearer handoffs
-- messy information in, useful work out
-- summaries, checklists, reports, tasks, status updates, and draft replies
-- ready-to-review outputs
-- human review first
-- managed for you
+- stop rewriting the same work
+- stop re-explaining the same context
+- turn messy information into clear next steps
+- prepare drafts your team can review
+- make replies faster and more consistent
+- keep useful knowledge reusable
+- get outputs in your company's style
 
-Avoid leading with:
+Avoid:
 
-- generic AI chatbot
-- legal AI platform
-- SaaS builder kit
-- open source, if commercial use is restricted
-- dashboard as the product
-- fully autonomous claims
-- lawyer/accountant-only positioning
-- installable
-- runtime
-- memory
+- AI OS
+- infinite brain
+- work brain
+- knowledge graph
+- second brain
+- model router
 - connectors
-- model routing
 - CLI
-- architecture
+- runtime
+- installable
+- autonomous employee
 
-## Primary website promise
-
-```text
-Get repetitive business work done faster without the manual copy-paste.
-```
-
-## Secondary promise
+## First outreach message pattern
 
 ```text
-Send messy emails, PDFs, forms, notes, folders, or API data in. Get summaries, checklists, tasks, reports, status updates, and draft replies back for human review.
+Hi [Name], quick question.
+
+I help small teams stop rewriting and re-explaining the same work.
+
+For example, we can turn your best examples, style, common replies, and recurring notes into review-ready drafts: emails, summaries, task lists, proposals, support replies, or reports.
+
+Is there one type of work your team repeats every week that still takes too much manual effort?
 ```
 
-## First direct outreach niche
+## First sales call goal
 
-Law firms are the first direct outreach niche.
+Do not sell the full system.
 
-This is a wedge, not the main product identity.
+Find one repeated task with:
 
-### Why law firms
+- clear input
+- clear desired output
+- visible time cost
+- low risk
+- available examples
+- a person willing to review outputs
 
-Law firms are a strong first niche because they have:
+Discovery questions:
 
-- budget
-- document-heavy workflows
-- messy client intake
-- repetitive admin
-- high value of time
-- clear need for structured information
-- local trust-based sales potential
+- What do you rewrite every week?
+- What do you keep explaining to people or AI?
+- What examples do you reuse manually?
+- Which replies, reports, or proposals take too long?
+- What does a good output look like?
+- Who reviews the output?
+- What would make this worth paying for?
 
-### Law-firm positioning
-
-Do not sell legal advice.
-
-Sell admin/document workflow support:
+## First offer
 
 ```text
-ProChat helps your firm spend less time sorting client emails, PDFs, notes, forms, and attachments by preparing intake summaries, missing-information checklists, task lists, and draft follow-ups — with lawyer review before anything is used.
+First time-saving test
 ```
 
-### Law-firm demo angle
+Description:
 
 ```text
-messy client matter inputs
-→ MikeOSS document workspace
-→ ProChat OS workflow layer
-→ structured intake summary, checklist, tasks, drafts, and status
+We take one repeated task, collect a few examples, build the first review-ready output flow, and show whether it saves real time.
 ```
 
-## MikeOSS wedge
-
-MikeOSS is the first tangible legal wedge.
+Pricing:
 
 ```text
-MikeOSS = legal document workspace demo
-ProChat OS = managed workflow system that prepares useful legal admin outputs around and beyond the document workspace
+from €750
 ```
 
-MikeOSS helps start the conversation because law firms can understand document AI quickly.
-
-Use MikeOSS to demo:
-
-- private legal document workspace
-- document upload
-- document chat
-- cited answers
-- review workflows
-
-Then sell ProChat OS as the broader system around it:
-
-- intake workflows
-- admin/document agents
-- follow-up workflows
-- reporting
-- approvals
-- managed hosting/support
-- integrations
-
-Dedicated execution plan:
+## Expansion offer
 
 ```text
-mikeoss-law-firm-demo-plan.md
+Done-for-you launch
 ```
 
-## Second local niche
-
-Accountants are the second comparison niche.
-
-Use them if:
-
-- law-firm outreach is slow
-- accounting workflows prove easier to demo
-- bookkeeping/tax/document-intake pain becomes clearer
-
-Possible accounting workflow:
+Description:
 
 ```text
-client emails + PDFs + receipts + forms
-→ structured client intake summary
-→ missing-document checklist
-→ draft follow-up
-→ task list
+We set up the working flow for one person or team, using simple entry points such as email, forms, file drops, or API calls.
 ```
 
-## Organic/inbound audience
-
-Creators, SaaS builders, personal developers, and influencers should be reached through content rather than direct outreach.
-
-Primary channels:
-
-- YouTube
-- Facebook pages/groups/channels
-- automated social channels
-- build-in-public examples
-
-Organic content should show ProChat OS running workflows such as:
-
-- research to video outline
-- Git commits to X posts
-- product updates to content drafts
-- messy notes to content calendar
-- AWS-backed Video Orchestrator module demos
-- local app building
-
-Video content should validate and showcase ProChat OS. It should not reposition ProChat as a media company or a Runway, HeyGen, CapCut, or Adobe competitor.
-
-The AWS-backed Video Orchestrator must prove repeatable internal output for Says The Bible and ProChat before any customer-facing productization. V1 is a narrow internal workflow that produces one exported MP4; it does not include account management, scheduling, autonomous publishing, or a customer-facing SaaS dashboard.
-
-The first Video Orchestrator users are Says The Bible and ProChat. Do not sell or package the module for external customers until the internal AWS-backed workflow repeatedly produces usable 60-second exported MP4 videos with controlled cost and human approval.
-
-## Outreach phase
-
-The first outreach phase is validation, not final sales.
-
-Goal:
+Pricing:
 
 ```text
-Find the workflow that law firms or accountants actually hate doing manually.
+from €1,500
 ```
 
-Do not assume the customer's pain from the outside.
-
-Show a short visual demo, then ask what workflow they want automated.
-
-## First Loom demo
-
-Create a 60–90 second Loom.
-
-Show:
+## Recurring offer
 
 ```text
-messy inputs
-emails + PDFs + notes + forms + links + files + voice notes
-
-→ ProChat OS / MikeOSS in the middle
-memory + agents + workflow rules + approvals + document workspace
-
-→ structured outputs
-summary + checklist + tasks + draft follow-up + report + CRM-ready fields
+Managed improvement
 ```
 
-The viewer should understand:
+Description:
 
 ```text
-I have workflows like this.
-This could save time.
-I want to know what this could automate in my firm.
+We keep the outputs useful, update examples and rules, improve the flow from review feedback, and expand only when it keeps saving time.
 ```
 
-## Example law-firm outreach message
+Pricing:
 
 ```text
-Hi [Name], I’m testing a new agentic workflow system called ProChat OS for document-heavy firms.
-
-The idea is simple: messy client emails, PDFs, notes, forms, and attachments go in — then structured intake summaries, missing-info checklists, task lists, and draft follow-ups come out.
-
-It does not give legal advice. It helps with the admin around client intake and document organization, with human approval before anything is sent or updated.
-
-I made a short visual demo here: [Loom]
-
-Is there one repetitive intake, document, or admin workflow in your firm that takes too much time and feels like it should be automated?
+from €250/month
 ```
 
-## Discovery call questions
+## Proof strategy
 
-Ask:
+The first proof should show before and after.
 
-1. What repetitive admin, document, or intake task do you hate most?
-2. Where does the information come from?
-3. What does the finished output need to look like?
-4. Who uses that output?
-5. What happens if it is late or wrong?
-6. How often does this happen?
-7. How long does it take manually?
-8. What tools are involved today?
-9. Would an assistant need approval before sending or updating anything?
-10. If this was automated, what would it be worth per month?
-
-## First pilot shape
-
-Preferred first pilot model:
+Before:
 
 ```text
-free setup + higher monthly managed plan
+messy notes, emails, examples, decisions, and repeated manual rewriting
 ```
 
-Pilot promise:
+After:
 
 ```text
-We install a private ProChat OS/MikeOSS environment for your firm and configure one workflow that turns messy legal/admin information into structured output. If it saves time after 30 days, you continue on a managed monthly plan.
+draft, summary, checklist, report, reply, or task list ready for review
 ```
 
-## Success criteria
+The demo should use safe sample data and a simple role-based scenario.
 
-A niche/workflow is promising if prospects:
-
-- respond to the Loom
-- quickly name painful workflows
-- repeat the same problem often
-- handle messy inputs and structured outputs
-- see obvious time savings
-- accept human approval first
-- are willing to join a pilot call
-- can imagine paying monthly for managed automation
-
-## Next step after validation
-
-After outreach, choose:
+Best first demo:
 
 ```text
-first niche + first workflow + first managed pilot promise
+Founder/owner gives messy notes and examples → ProChat prepares a client reply, task instruction, and proposal draft in the business style.
 ```
-
-Then finalize landing page copy, demo script, offer, pricing, and implementation scope.
-
-
-
-
-## Niche module GTM model
-
-ProChat OS has one business-agnostic brand and multiple niche-specific offers.
-
-Public website:
-
-```text
-ProChat OS = messy business information in, useful work out.
-```
-
-Niche pages:
-
-```text
-specific painful workflow → specific ready-to-review output → pilot call
-```
-
-Each niche page should show:
-
-- the painful workflow
-- what comes in
-- what comes out
-- who reviews it
-- what time/admin pain is reduced
-- what the first pilot looks like
-
-Niche modules may include:
-
-- legal intake
-- accounting document intake
-- agency lead intake
-- consultant proposal/profile preparation
-- content operations
-- internal reporting
-
-The main website should not become niche-only. Niche pages and outreach assets can be specific.
-
-## Module offer language
-
-Do not sell modules as architecture.
-
-Bad:
-
-```text
-Install a workflow runtime with skills and schedules.
-```
-
-Good:
-
-```text
-Turn messy client intake into a summary, missing-information checklist, task list, and draft follow-up for review.
-```
-
-The customer buys the outcome. ProChat internally delivers that outcome using modules, skills, workflows, schedules, approvals, and evaluation loops.
-
-
-
-
-## Vertical module positioning
-
-ProChat OS has one business-agnostic core brand and multiple niche-specific workflow offers.
-
-Core website promise:
-
-```text
-Messy business information in. Useful work out.
-```
-
-Niche pages should translate that same promise into specific buyer pain.
-
-Examples:
-
-- legal page: spend less time sorting client documents and intake information
-- accounting page: spend less time chasing missing receipts, forms, and documents
-- agency page: qualify inbound leads and prepare follow-up faster
-- consultant page: turn messy client notes and CV/profile information into client-ready drafts
-- content page: turn notes, transcripts, and product updates into content drafts and publishing tasks
-
-Niche pages should show:
-
-- the painful before state
-- the useful after state
-- the output ProChat prepares
-- the human review point
-- the pilot or discovery CTA
-
-Niche pages should not describe module manifests, skills, schedules, environment setup, or internal architecture.
-
-Internal delivery can use the module architecture in `prochat-os-modules.md`.
