@@ -100,6 +100,16 @@ Task titles are user data.
 
 Legacy titles such as `Product: Model Router` must not be rewritten automatically. They may be manually renamed by the user or migrated with the raw original title preserved.
 
+## Export tool
+
+A read-only export tool now exists at:
+
+```text
+tools/export-kanban-tasks.mjs
+```
+
+It parses `kanban.md` into structured task data without modifying the board. See `tools/README.md` for usage.
+
 ## Validation requirements
 
 Before any generated/synced `kanban.md` is allowed:
