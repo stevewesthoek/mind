@@ -1,6 +1,6 @@
 # Sources Index
 
-Raw evidence and source material live here. The model router compiles useful knowledge from sources into `wiki/` while preserving source references when helpful.
+Raw evidence and source material live here. Mind Steward compiles useful knowledge from sources into `wiki/` while preserving source references when helpful.
 
 ## Source folders
 

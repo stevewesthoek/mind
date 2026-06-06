@@ -47,10 +47,10 @@ This is your daily driver. Open it to see what is to-do, in-progress, and done. 
 |------|-------|
 | New captures (unreviewed) | `capture/inbox/` |
 | Pending system proposals | `wiki/log.md` |
-| Active tasks | `live/tasks.md` |
+| Working task board and current task source of truth | `kanban.md` |
+| Mind Steward task summary surface | `live/tasks.md` |
 | Active projects | `live/projects/` |
 | Committed decisions | `live/decisions.md` |
-| Your working board | `kanban.md` |
 | Business & org knowledge | `wiki/organisations/` (ProChat, Arkware, Yeshua Academy) |
 | Personal areas (faith, family, health) | `wiki/areas/` |
 | Apologetics research | `sources/research/apologetics/` |
@@ -91,6 +91,15 @@ When you tell any AI "remember this" or save a preference, it goes into the shar
 - **Review:** say "show all my memories" to any AI
 
 The memory system is separate from Mind notes. Notes are your knowledge. Memory is your AI context.
+
+---
+
+## System contracts and generated indexes
+
+- `system/task-kanban-contract.md` explains why `kanban.md` remains the current task source of truth and how any future task sync must avoid data loss.
+- `system/graph-visualization-contract.md` explains the current Graphify output and the future visual graph target.
+- `graphify-out/GRAPH_REPORT.md` is the current generated graph report.
+- `graphify-out/graph.json` is generated graph data, not a note to edit manually.
 
 ---
 
