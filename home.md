@@ -98,6 +98,7 @@ The memory system is separate from Mind notes. Notes are your knowledge. Memory 
 
 - `system/folder-contract.md` explains the current top-level folder structure, root cleanliness rules, and move/rename safety checks.
 - `system/automation-contract.md` explains the current Save-to-Mind, Mind Steward, AI Model Selector, and capture processing boundary.
+- `system/realtime-inbox-processing-spec.md` explains the safe future path for throttled on-arrival capture processing.
 - `system/task-kanban-contract.md` explains why `kanban.md` remains the current task source of truth and how any future task sync must avoid data loss.
 - `system/graph-visualization-contract.md` explains the current Graphify output and the future visual graph target.
 - `system/generated-output-policy.md` explains which generated outputs should be tracked, ignored, or treated as refreshable.
