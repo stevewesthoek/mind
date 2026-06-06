@@ -29,6 +29,12 @@ A clickable visual graph artifact such as `graph.html` is not currently confirme
 
 ## Desired future behavior
 
+The safe future implementation specification is documented in:
+
+```text
+system/graph-visualization-spec.md
+```
+
 Mind should support both:
 
 1. human-readable graph reports for review; and
