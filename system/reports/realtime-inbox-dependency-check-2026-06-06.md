@@ -45,11 +45,40 @@ http://127.0.0.1:11434/v1
 
 This supports the existing Mind automation contract statement that capture classification can use the AI Model Selector with `local_only: true`.
 
+## Additional confirmed Brain evidence
+
+Brain Core exposes scheduler state through its scheduler adapter:
+
+```text
+projects/brain-core/src/adapters/scheduler.ts
+```
+
+The adapter includes a scheduler item:
+
+```text
+id: mind-steward-dry-run
+name: Mind Steward dry-run report
+```
+
+It reads a Mind Steward runtime report from:
+
+```text
+process.env.BRAIN_CORE_MIND_STEWARD_REPORT_PATH
+```
+
+or defaults to:
+
+```text
+runtime/local/mind-steward/latest.json
+```
+
+This confirms Brain Core currently has a status/report visibility path for Mind Steward output.
+
 ## Not confirmed in this pass
 
-This small search did not find the exact Brain-side Mind Steward scheduler implementation file.
+This search found Brain Core scheduler visibility for Mind Steward reports, but did not confirm a Brain Core route or scheduler action that executes real-time capture processing.
 
-Do not implement real-time processing until the concrete implementation path is found and read.
+Do not implement real-time processing until the concrete execution path is found and read.
 
 ## Current safe conclusion
 
