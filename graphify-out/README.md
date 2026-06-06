@@ -11,7 +11,9 @@ Generated graph artifacts for the Mind knowledge base live here.
 
 ## Current status
 
-This folder currently stores graph data and reports. A clickable visual graph artifact such as `graph.html` is not confirmed here yet.
+This folder currently stores graph data, reports, and a generated clickable visual graph.
+
+- `graph.html` — generated visual graph for browser-based exploration.
 
 ## Rules
 

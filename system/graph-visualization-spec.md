@@ -2,7 +2,7 @@
 
 This specification defines the safe future path for adding a clickable visual graph to Mind.
 
-It does not generate or change graph output yet.
+The renderer is implemented and can generate `graphify-out/graph.html` locally from `graphify-out/graph.json`.
 
 ## Current state
 
@@ -19,7 +19,7 @@ Confirmed current artifacts:
 - `graphify-out/manifest.json` — generated file manifest and hashes.
 - `graphify-out/cache/` — generated graph cache.
 
-A clickable visual graph artifact such as `graphify-out/graph.html` is not currently confirmed.
+A clickable visual graph artifact is now generated at `graphify-out/graph.html`.
 
 The current graph contract records the known refresh command:
 

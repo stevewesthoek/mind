@@ -23,9 +23,13 @@ The current graph report states:
 
 ## Current visual status
 
-A clickable visual graph artifact such as `graph.html` is not currently confirmed in `graphify-out/`.
+A clickable visual graph artifact is now available at:
 
-`GRAPH_REPORT.md` is a navigational/reporting surface, not a visual graph renderer.
+```text
+graphify-out/graph.html
+```
+
+`GRAPH_REPORT.md` remains the navigational/reporting surface. `graph.html` is the generated visual graph renderer.
 
 ## Desired future behavior
 
