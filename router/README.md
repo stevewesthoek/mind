@@ -63,7 +63,7 @@ mind_steward_model: qwen2.5:14b
 
 | Classification | Review target |
 |---|---|
-| `task` | `live/tasks.md` |
+| `task` | `kanban.md` |
 | `project` | `live/projects.md` |
 | `decision` | `live/decisions.md` |
 | `area` | `wiki/areas/` |
