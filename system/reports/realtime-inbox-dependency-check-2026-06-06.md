@@ -101,17 +101,38 @@ scheduler-run-
 scheduler-run-mind-
 ```
 
-However, `projects/brain-core/src/adapters/actions.ts` confirms the current action request behavior:
+Further inspection found that `projects/brain-core/src/adapters/actions.ts` already has a narrow execution hook for the exact approval kind:
 
 ```text
-Brain Core creates approval records and audit events only; it does not execute actions yet.
+scheduler-run-mind-steward-dry-run
 ```
 
-The approval store summary also reports:
+This hook is gated by the feature flag:
 
 ```text
-executableActions: false
+BRAIN_CORE_ENABLE_MIND_STEWARD_DRY_RUN_EXECUTION=true
+```
+
+and runs the allowlisted script:
+
+```text
+tools/scripts/mind-steward-dry-run-report.sh
+```
+
+That script generates a runtime report only and explicitly reports:
+
+```text
 writesToMind: false
+executableActions: false
+mode: dry-run-report-only
+```
+
+The execution readiness adapter still reports:
+
+```text
+executionEnabled: false
+writesToMind: false
+executableActions: false
 ```
 
 ## Current safe conclusion
@@ -126,7 +147,7 @@ Brain Core / scheduler
 → documented Mind output surfaces
 ```
 
-But it is not yet safe to implement on-arrival processing because the current Brain Core scheduler run path creates approvals/audit records only and does not execute actions.
+The current Brain Core implementation can execute an approved, feature-flagged Mind Steward dry-run report, but it does not execute real-time capture processing and does not write to Mind. Phase 8 implementation remains blocked until a dedicated on-arrival Mind Steward job is implemented behind the same approval, queue, throttle, and AI Model Selector boundaries.
 
 ## Next dependency search
 
