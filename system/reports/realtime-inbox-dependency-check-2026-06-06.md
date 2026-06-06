@@ -195,11 +195,51 @@ Confirmed behavior:
 - does not modify `kanban.md`;
 - does not write to the Mind repo.
 
+## Confirmed AI Model Selector evidence
+
+The AI Model Selector runtime exists at:
+
+```text
+operations/system-configs/model-selector/runtime/core.py
+```
+
+It exposes a selector function with this shape:
+
+```text
+select(task_type, input_token_count, urgent, previous_failures, task_metadata)
+```
+
+The selector can support local/private classification through task metadata flags such as:
+
+```text
+private
+offline
+external_provider_disallowed
+```
+
+Earlier selector tests confirm the task type:
+
+```text
+mind_capture_classification
+```
+
+can select the local provider:
+
+```text
+ollama-local
+```
+
+with endpoint:
+
+```text
+http://127.0.0.1:11434/v1
+```
+
 ## Updated Phase 8 status
 
-Phase 8 now has a Brain-side approved, feature-flagged, report-only inbox preflight.
+Phase 8 now has a Brain-side approved, feature-flagged, report-only inbox preflight and a verified AI Model Selector runtime path for local capture classification.
 
-It is still not real-time processing. The next implementation step is a controlled classifier dry-run that uses AI Model Selector with `local_only: true` and writes only a Brain runtime report, not Mind files.
+It is still not real-time processing. The next implementation step is a controlled classifier dry-run that uses AI Model Selector with local/private/offline metadata and writes only a Brain runtime report, not Mind files.
 
 ## Next dependency search
 
