@@ -60,6 +60,12 @@ Brain Core / scheduler
 
 ## Future on-arrival processing requirements
 
+The safe future specification is documented in:
+
+```text
+system/realtime-inbox-processing-spec.md
+```
+
 Before on-arrival processing is enabled, define and test:
 
 1. debounce behavior for newly written files;

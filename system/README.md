@@ -11,6 +11,7 @@ Do not store raw captures, durable knowledge notes, or generated automation dump
 ## Current contracts
 
 - `automation-contract.md` — Save-to-Mind, Mind Steward, AI Model Selector, and capture-processing boundary.
+- `realtime-inbox-processing-spec.md` — safe future specification for on-arrival capture processing.
 - `folder-contract.md` — top-level folder meanings, root cleanliness rules, and move/rename safety checks.
 - `task-kanban-contract.md` — current `kanban.md` source-of-truth rule and no-data-loss task migration boundary.
 - `task-sync-spec.md` — safe future task-record and Kanban sync specification.
