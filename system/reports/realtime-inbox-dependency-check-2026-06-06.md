@@ -80,6 +80,40 @@ This search found Brain Core scheduler visibility for Mind Steward reports, but 
 
 Do not implement real-time processing until the concrete execution path is found and read.
 
+## Additional confirmed execution-path evidence
+
+Brain Core exposes scheduler run requests through:
+
+```text
+POST /scheduler/jobs/:id/request-run
+```
+
+In `projects/brain-core/src/api/routes.ts`, this route maps to an approval/action request kind:
+
+```text
+scheduler-run-<id>
+```
+
+The action allowlist includes:
+
+```text
+scheduler-run-
+scheduler-run-mind-
+```
+
+However, `projects/brain-core/src/adapters/actions.ts` confirms the current action request behavior:
+
+```text
+Brain Core creates approval records and audit events only; it does not execute actions yet.
+```
+
+The approval store summary also reports:
+
+```text
+executableActions: false
+writesToMind: false
+```
+
 ## Current safe conclusion
 
 It is reasonable to keep the documented future flow as a target:
@@ -92,7 +126,7 @@ Brain Core / scheduler
 → documented Mind output surfaces
 ```
 
-But it is not yet safe to implement on-arrival processing because the actual scheduler/Mind Steward entrypoint was not verified in this pass.
+But it is not yet safe to implement on-arrival processing because the current Brain Core scheduler run path creates approvals/audit records only and does not execute actions.
 
 ## Next dependency search
 
