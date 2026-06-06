@@ -13,6 +13,7 @@ Do not store raw captures, durable knowledge notes, or generated automation dump
 - `automation-contract.md` — Save-to-Mind, Mind Steward, AI Model Selector, and capture-processing boundary.
 - `folder-contract.md` — top-level folder meanings, root cleanliness rules, and move/rename safety checks.
 - `task-kanban-contract.md` — current `kanban.md` source-of-truth rule and no-data-loss task migration boundary.
+- `task-sync-spec.md` — safe future task-record and Kanban sync specification.
 - `graph-visualization-contract.md` — current Graphify output and future visual graph target.
 - `generated-output-policy.md` — generated Graphify output, capture inbox handling, and recommended ignore rules.
 

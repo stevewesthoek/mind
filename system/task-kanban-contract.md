@@ -37,3 +37,7 @@ That future migration must be lossless and reversible:
 The current board inventory is documented in:
 
 `system/reports/kanban-inventory-2026-06-06.md`
+
+The future no-data-loss task sync specification is documented in:
+
+`system/task-sync-spec.md`
