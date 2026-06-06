@@ -5,13 +5,13 @@ status: live
 
 # Machine
 
-Obsidian-facing entry point for local machine state. Open Brain Console plugin for live data.
+Obsidian-facing entry point for local machine state. Open Brain Console Center for live data.
 
 Brain Core owns all live runtime data — this note stays sparse.
 
 ## Brain Console (primary)
 
-Open Brain Console via ribbon icon or command `Open Brain Console dashboard`.
+Open Brain Console Center via ribbon icon or command `Open Brain Console dashboard`.
 
 Tabs: Overview · Apps · Sessions · Infra · Analytics · Stripe · Monitoring · Studio · Orchestrators · Pipelines · Projects · Reports · Posts · Agents · Recovery
 
