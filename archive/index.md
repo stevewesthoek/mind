@@ -4,7 +4,7 @@ Old, completed, superseded, or legacy material belongs here.
 
 ## Migration rule
 
-Do not move legacy numbered folders into `archive/old/` until the new structure, Save-to-Mind target, and model-router dry run are validated.
+Do not move legacy numbered folders into `archive/old/` until the new structure, Save-to-Mind target, and Mind Steward dry run are validated.
 
 ## Planned legacy targets
 
