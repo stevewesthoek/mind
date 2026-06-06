@@ -47,9 +47,25 @@ The visual graph should be generated from existing graph data, not hand-maintain
 - Do not move or rename `graphify-out/` without checking Graphify, Obsidian, Brain, and automation references.
 - Do not require cloud AI for graph rendering unless explicitly needed later.
 
+## Renderer tool
+
+A local renderer now exists at:
+
+```text
+tools/render-graph-html.mjs
+```
+
+It reads `graphify-out/graph.json` and can generate `graphify-out/graph.html` when run locally.
+
+Default command:
+
+```bash
+node tools/render-graph-html.mjs
+```
+
 ## Required behavior
 
-A future graph visualization process should:
+A graph visualization process should:
 
 1. read `graphify-out/graph.json`;
 2. produce `graphify-out/graph.html`;
