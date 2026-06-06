@@ -147,7 +147,59 @@ Brain Core / scheduler
 → documented Mind output surfaces
 ```
 
-The current Brain Core implementation can execute an approved, feature-flagged Mind Steward dry-run report, but it does not execute real-time capture processing and does not write to Mind. Phase 8 implementation remains blocked until a dedicated on-arrival Mind Steward job is implemented behind the same approval, queue, throttle, and AI Model Selector boundaries.
+The current Brain Core implementation can execute an approved, feature-flagged Mind Steward dry-run report, but that original dry-run does not inspect the inbox, execute real-time capture processing, or write to Mind.
+
+## New confirmed inbox dry-run preflight
+
+Brain commit `62a35e64` adds a dedicated report-only inbox preflight:
+
+```text
+scheduler-run-mind-steward-inbox-dry-run
+```
+
+The action is gated by:
+
+```text
+BRAIN_CORE_ENABLE_MIND_STEWARD_INBOX_DRY_RUN_EXECUTION=true
+```
+
+and runs:
+
+```text
+tools/scripts/mind-steward-inbox-dry-run-report.sh
+```
+
+The script inspects:
+
+```text
+mind/capture/inbox/
+```
+
+and writes only Brain runtime reports:
+
+```text
+runtime/local/mind-steward/inbox-latest.json
+runtime/local/mind-steward/inbox-latest.md
+```
+
+Confirmed behavior:
+
+- counts inbox files;
+- samples filenames with a bounded sample limit;
+- flags files above the 2 MB default threshold;
+- reports `writesToMind: false`;
+- reports `externalSideEffects: false`;
+- reports `executableActions: false`;
+- does not classify captures;
+- does not call local models;
+- does not modify `kanban.md`;
+- does not write to the Mind repo.
+
+## Updated Phase 8 status
+
+Phase 8 now has a Brain-side approved, feature-flagged, report-only inbox preflight.
+
+It is still not real-time processing. The next implementation step is a controlled classifier dry-run that uses AI Model Selector with `local_only: true` and writes only a Brain runtime report, not Mind files.
 
 ## Next dependency search
 
