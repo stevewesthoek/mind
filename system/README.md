@@ -14,6 +14,7 @@ Do not store raw captures, durable knowledge notes, or generated automation dump
 - `folder-contract.md` — top-level folder meanings, root cleanliness rules, and move/rename safety checks.
 - `task-kanban-contract.md` — current `kanban.md` source-of-truth rule and no-data-loss task migration boundary.
 - `graph-visualization-contract.md` — current Graphify output and future visual graph target.
+- `generated-output-policy.md` — generated Graphify output, capture inbox handling, and recommended ignore rules.
 
 ## Reports
 
