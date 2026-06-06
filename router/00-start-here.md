@@ -89,7 +89,7 @@ Synthesis / brief
 Committed decision
   → wiki/organisations/<org>/ or live/decisions.md
 Executable action
-  → live/tasks.md
+  → kanban.md
 ```
 
 ## Core Organisation Context
@@ -111,7 +111,7 @@ Use safe defaults:
 - Capture first: `capture/inbox/`
 - Research/reference: `sources/research/`
 - Final decisions: `wiki/organisations/` or `live/decisions.md`
-- Tasks: `live/tasks.md`
+- Tasks: `kanban.md`
 - Completed history: `archive/`
 
 Ask before moving, deleting, renaming, bulk editing, or changing automation-sensitive files.
