@@ -28,7 +28,8 @@ These are incoming captures, not root-level notes. They should remain reviewable
 ## Tracking rule
 
 - Source notes, contracts, and documentation should be tracked.
-- Generated graph outputs should normally be ignored or regenerated unless a specific artifact is intentionally committed for audit.
+- Generated graph outputs should normally be ignored or regenerated unless a specific artifact is intentionally committed for audit or convenience.
+- `graphify-out/graph.html` is intentionally tracked as a convenience artifact so the visual graph can be opened without regenerating it first.
 - Capture inbox files should not be deleted automatically; they are user/source material until processed or archived.
 - Generated output should never be written to the repository root.
 
