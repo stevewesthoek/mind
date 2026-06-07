@@ -115,7 +115,16 @@ Brain Core / scheduler
 → documented Mind output surfaces
 ```
 
-Requirements:
+Current progress:
+
+- Brain-side approved, feature-flagged inbox preflight implemented.
+- Brain-side approved, feature-flagged selector-backed classifier dry-run implemented.
+- Queue/throttle design documented in `system/inbox-queue-throttle-spec.md`.
+- Real-time watcher is not implemented.
+- Mind writes remain disabled.
+- Kanban writes remain disabled.
+
+Remaining requirements:
 
 - debounce;
 - queueing;
