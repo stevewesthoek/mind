@@ -55,7 +55,9 @@ Completed:
 Completed:
 
 - Graphify HTML renderer added at `tools/render-graph-html.mjs`;
+- graph refresh wrapper added at `tools/update-graph.sh`;
 - visual graph generated at `graphify-out/graph.html`;
+- graph refresh reports written to `system/reports/graph-refresh-latest.json` and `system/reports/graph-refresh-latest.md` when the wrapper runs;
 - home/system/graph docs updated to reflect current visual graph availability.
 
 ### Phase 7 / 8 — Mind Steward preflight pipeline

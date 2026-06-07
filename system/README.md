@@ -10,6 +10,7 @@ Do not store raw captures, durable knowledge notes, or generated automation dump
 
 ## Current contracts
 
+- `automation-roadmap.md` — remaining Infinite Brain automation phases and execution order.
 - `automation-contract.md` — Save-to-Mind, Mind Steward, AI Model Selector, and capture-processing boundary.
 - `realtime-inbox-processing-spec.md` — safe future specification for on-arrival capture processing.
 - `inbox-queue-throttle-spec.md` — queue, throttle, debounce, retry, and large-file rules required before real-time or Mind-writing processing.

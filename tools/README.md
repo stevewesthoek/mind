@@ -66,6 +66,32 @@ node tools/render-graph-html.mjs --max-nodes 2000 --max-links 5000
 
 The generated HTML is a refreshable artifact. It should be regenerated from `graphify-out/graph.json`, not hand-edited.
 
+## Graph refresh
+
+`update-graph.sh` refreshes the Graphify graph and regenerates the clickable HTML graph in one command.
+
+Run from the Mind repo root:
+
+```bash
+bash tools/update-graph.sh
+```
+
+It runs:
+
+```text
+graphify update .
+node tools/render-graph-html.mjs
+```
+
+It writes refresh reports to:
+
+```text
+system/reports/graph-refresh-latest.json
+system/reports/graph-refresh-latest.md
+```
+
+It should not write generated files to the repository root.
+
 ## Safety
 
 - The Kanban exporter reads `kanban.md` and does not modify it.
