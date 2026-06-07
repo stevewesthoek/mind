@@ -50,6 +50,12 @@ file lands in capture/inbox/
 
 ## Required controls
 
+The queue and throttle rules required before real-time or Mind-writing processing are documented in:
+
+```text
+system/inbox-queue-throttle-spec.md
+```
+
 Before on-arrival processing is enabled, implement and test:
 
 1. debounce — wait until file writes are stable;
