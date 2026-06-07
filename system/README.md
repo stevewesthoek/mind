@@ -10,6 +10,7 @@ Do not store raw captures, durable knowledge notes, or generated automation dump
 
 ## Current contracts
 
+- `graphify-strategy.md` — Mind-owned strategy for Graphify, Infinite Brain context, and cross-repo graph modes.
 - `automation-roadmap.md` — remaining Infinite Brain automation phases and execution order.
 - `automation-contract.md` — Save-to-Mind, Mind Steward, AI Model Selector, and capture-processing boundary.
 - `realtime-inbox-processing-spec.md` — safe future specification for on-arrival capture processing.
