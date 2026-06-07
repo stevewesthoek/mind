@@ -293,7 +293,59 @@ Confirmed behavior:
 
 Phase 8 now has a Brain-side approved, feature-flagged inbox preflight and a Brain-side approved, feature-flagged selector-backed classifier dry-run.
 
-It is still not real-time processing. The next implementation step is not a watcher yet; it should be a controlled queue/throttle design for turning these dry-runs into safe scheduled/on-demand processing while preserving no Mind writes until explicitly approved.
+## New confirmed queue dry-run preflight
+
+Brain commit `7eeb43ac` adds a dedicated report-only queue preflight:
+
+```text
+scheduler-run-mind-steward-inbox-queue-dry-run
+```
+
+The action is gated by:
+
+```text
+BRAIN_CORE_ENABLE_MIND_STEWARD_INBOX_QUEUE_DRY_RUN_EXECUTION=true
+```
+
+and runs:
+
+```text
+tools/scripts/mind-steward-inbox-queue-dry-run-report.sh
+```
+
+The script inspects:
+
+```text
+mind/capture/inbox/
+```
+
+and writes only Brain runtime reports:
+
+```text
+runtime/local/mind-steward/inbox-queue-latest.json
+runtime/local/mind-steward/inbox-queue-latest.md
+```
+
+Confirmed behavior:
+
+- selects up to 3 pending queue candidates;
+- flags files larger than 2 MB as `blocked_large_file`;
+- marks overflow entries as `skipped_capacity`;
+- records queue defaults such as max concurrency, debounce, retries, large-file threshold, and minimum seconds between runs;
+- reports `writesToMind: false`;
+- reports `externalSideEffects: false`;
+- reports `executableActions: false`;
+- does not process files with AI;
+- does not classify captures;
+- does not move, delete, or rewrite captures;
+- does not modify `kanban.md`;
+- does not write to the Mind repo.
+
+## Updated Phase 8 status
+
+Phase 8 now has Brain-side approved, feature-flagged report-only preflights for inbox inspection, selector-backed classifier dry-run, and queue/throttle planning.
+
+It is still not real-time processing. The next implementation step should be a scheduled/on-demand queue runner that remains report-only first, or a dashboard/status surface for these preflight reports. Do not add a filesystem watcher or Mind-writing behavior yet.
 
 ## Next dependency search
 
