@@ -28,6 +28,7 @@ Do not store raw captures, durable knowledge notes, or generated automation dump
 
 - `reports/mind-inventory-2026-06-06.md` — read-only structural and dependency inventory.
 - `reports/kanban-inventory-2026-06-06.md` — lossless inventory of the current Obsidian Kanban board.
+- `reports/mind-cleanup-final-handoff-2026-06-07.md` — completed phase summary, current source-of-truth rules, and remaining automation roadmap.
 
 ## Rules
 
