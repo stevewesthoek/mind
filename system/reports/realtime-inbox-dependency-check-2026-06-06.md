@@ -345,7 +345,43 @@ Confirmed behavior:
 
 Phase 8 now has Brain-side approved, feature-flagged report-only preflights for inbox inspection, selector-backed classifier dry-run, and queue/throttle planning.
 
-It is still not real-time processing. The next implementation step should be a scheduled/on-demand queue runner that remains report-only first, or a dashboard/status surface for these preflight reports. Do not add a filesystem watcher or Mind-writing behavior yet.
+## New confirmed Brain Core status endpoint
+
+Brain commit `827a3586` adds a read-only status endpoint:
+
+```text
+GET /scheduler/mind-steward/status
+```
+
+The endpoint aggregates Brain runtime reports from:
+
+```text
+runtime/local/mind-steward/latest.json
+runtime/local/mind-steward/inbox-latest.json
+runtime/local/mind-steward/inbox-classifier-latest.json
+runtime/local/mind-steward/inbox-queue-latest.json
+```
+
+It returns compact availability/status fields such as:
+
+```text
+available
+status
+message
+mode
+writesToMind
+executableActions
+endedAtLisbon
+durationSeconds
+```
+
+This is read-only visibility. It does not execute jobs, write to Mind, classify captures permanently, move files, or modify Kanban.
+
+## Updated Phase 8 status
+
+Phase 8 now has Brain-side approved, feature-flagged report-only preflights for inbox inspection, selector-backed classifier dry-run, queue/throttle planning, and a read-only Brain Core status endpoint for these reports.
+
+It is still not real-time processing. The next implementation step should be Brain Console Center visibility for this endpoint or a scheduled/on-demand queue runner that remains report-only first. Do not add a filesystem watcher or Mind-writing behavior yet.
 
 ## Next dependency search
 
