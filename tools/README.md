@@ -40,6 +40,8 @@ node tools/export-kanban-tasks.mjs --write --output system/reports/kanban-export
 
 `render-graph-html.mjs` renders the generated Graphify data into a clickable static HTML graph.
 
+By default, the renderer now focuses on human-readable Markdown knowledge paths and filters out generated/plugin/code-heavy internals such as `.obsidian/`, `graphify-out/`, caches, and non-Markdown implementation nodes.
+
 Generate the default visual graph:
 
 ```bash

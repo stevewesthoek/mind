@@ -59,9 +59,57 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
+function isHumanReadablePath(pathValue) {
+  const path = String(pathValue ?? '');
+  if (!path) return false;
+  if (!path.endsWith('.md')) return false;
+
+  const blockedPrefixes = [
+    '.git/',
+    '.obsidian/',
+    'graphify-out/',
+    'node_modules/',
+    'cache/',
+  ];
+  if (blockedPrefixes.some(prefix => path.startsWith(prefix))) return false;
+
+  const allowedPrefixes = [
+    'archive/',
+    'capture/',
+    'live/',
+    'router/',
+    'sources/',
+    'system/',
+    'tasks/',
+    'wiki/',
+    'home.md',
+    'kanban.md',
+  ];
+
+  return allowedPrefixes.some(prefix => path.startsWith(prefix));
+}
+
+function labelForNode(node) {
+  const sourceFile = String(node.source_file ?? '');
+  const label = String(node.label ?? node.id);
+  const location = String(node.source_location ?? '');
+
+  if (sourceFile.endsWith('.md')) {
+    const noteName = sourceFile.split('/').pop()?.replace(/\.md$/, '') || sourceFile;
+    if (label && label !== node.id && label !== sourceFile) return `${noteName} — ${label}`;
+    if (location && location !== sourceFile) return `${noteName} — ${location}`;
+    return noteName;
+  }
+
+  return label;
+}
+
 function selectGraph(rawGraph, maxNodes, maxLinks) {
-  const nodes = Array.isArray(rawGraph.nodes) ? rawGraph.nodes : [];
-  const links = Array.isArray(rawGraph.links) ? rawGraph.links : [];
+  const allNodes = Array.isArray(rawGraph.nodes) ? rawGraph.nodes : [];
+  const allLinks = Array.isArray(rawGraph.links) ? rawGraph.links : [];
+  const nodes = allNodes.filter(node => isHumanReadablePath(node.source_file));
+  const humanIds = new Set(nodes.map(node => String(node.id)));
+  const links = allLinks.filter(link => humanIds.has(String(link.source)) && humanIds.has(String(link.target)));
 
   const degree = new Map();
   for (const link of links) {
@@ -74,7 +122,8 @@ function selectGraph(rawGraph, maxNodes, maxLinks) {
     .slice(0, maxNodes)
     .map(node => ({
       id: String(node.id),
-      label: String(node.label ?? node.id),
+      label: labelForNode(node),
+      raw_label: String(node.label ?? node.id),
       file_type: node.file_type ?? null,
       source_file: node.source_file ?? null,
       source_location: node.source_location ?? null,
