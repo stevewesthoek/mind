@@ -239,7 +239,61 @@ http://127.0.0.1:11434/v1
 
 Phase 8 now has a Brain-side approved, feature-flagged, report-only inbox preflight and a verified AI Model Selector runtime path for local capture classification.
 
-It is still not real-time processing. The next implementation step is a controlled classifier dry-run that uses AI Model Selector with local/private/offline metadata and writes only a Brain runtime report, not Mind files.
+## New confirmed classifier dry-run preflight
+
+Brain commit `30ef779a` adds a dedicated report-only classifier preflight:
+
+```text
+scheduler-run-mind-steward-inbox-classifier-dry-run
+```
+
+The action is gated by:
+
+```text
+BRAIN_CORE_ENABLE_MIND_STEWARD_INBOX_CLASSIFIER_DRY_RUN_EXECUTION=true
+```
+
+and runs:
+
+```text
+tools/scripts/mind-steward-inbox-classifier-dry-run-report.sh
+```
+
+The script inspects a bounded sample from:
+
+```text
+mind/capture/inbox/
+```
+
+and writes only Brain runtime reports:
+
+```text
+runtime/local/mind-steward/inbox-classifier-latest.json
+runtime/local/mind-steward/inbox-classifier-latest.md
+```
+
+Confirmed behavior:
+
+- samples at most 3 files;
+- reads at most a small bounded preview from each sampled file;
+- skips files larger than 2 MB;
+- calls the AI Model Selector runtime for `mind_capture_classification` when available;
+- clears proxy environment variables and sets localhost-only proxy bypass values;
+- reports selected provider/model/base URL when selector succeeds;
+- reports blocked status if selector runtime is missing or unavailable;
+- reports `writesToMind: false`;
+- reports `externalSideEffects: false`;
+- reports `executableActions: false`;
+- does not classify captures permanently;
+- does not move, delete, or rewrite captures;
+- does not modify `kanban.md`;
+- does not write to the Mind repo.
+
+## Updated Phase 8 status
+
+Phase 8 now has a Brain-side approved, feature-flagged inbox preflight and a Brain-side approved, feature-flagged selector-backed classifier dry-run.
+
+It is still not real-time processing. The next implementation step is not a watcher yet; it should be a controlled queue/throttle design for turning these dry-runs into safe scheduled/on-demand processing while preserving no Mind writes until explicitly approved.
 
 ## Next dependency search
 
