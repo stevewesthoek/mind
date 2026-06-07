@@ -122,6 +122,7 @@ Current progress:
 - Brain-side approved, feature-flagged queue/throttle dry-run implemented.
 - Read-only Brain Core status endpoint implemented: `GET /scheduler/mind-steward/status`.
 - Brain Console Center overview card implemented for Mind Steward preflight visibility.
+- Operator runbook documented in `system/runbooks/mind-steward-preflight-runbook.md`.
 - Queue/throttle design documented in `system/inbox-queue-throttle-spec.md`.
 - Real-time watcher is not implemented.
 - Mind writes remain disabled.

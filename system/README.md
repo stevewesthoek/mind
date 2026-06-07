@@ -20,6 +20,10 @@ Do not store raw captures, durable knowledge notes, or generated automation dump
 - `graph-visualization-spec.md` — safe future implementation specification for a clickable visual graph.
 - `generated-output-policy.md` — generated Graphify output, capture inbox handling, and recommended ignore rules.
 
+## Runbooks
+
+- `runbooks/mind-steward-preflight-runbook.md` — safe operator sequence for the current report-only Mind Steward preflights.
+
 ## Reports
 
 - `reports/mind-inventory-2026-06-06.md` — read-only structural and dependency inventory.
