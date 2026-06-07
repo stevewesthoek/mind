@@ -381,7 +381,37 @@ This is read-only visibility. It does not execute jobs, write to Mind, classify 
 
 Phase 8 now has Brain-side approved, feature-flagged report-only preflights for inbox inspection, selector-backed classifier dry-run, queue/throttle planning, and a read-only Brain Core status endpoint for these reports.
 
-It is still not real-time processing. The next implementation step should be Brain Console Center visibility for this endpoint or a scheduled/on-demand queue runner that remains report-only first. Do not add a filesystem watcher or Mind-writing behavior yet.
+## New confirmed Brain Console Center visibility
+
+Brain commit `5ac735d2` adds read-only Brain Console Center visibility for:
+
+```text
+GET /scheduler/mind-steward/status
+```
+
+The overview dashboard now shows Mind Steward preflight report status for:
+
+```text
+dry run
+inbox
+classifier
+queue
+```
+
+It displays availability/status and safety flags such as:
+
+```text
+writesToMind
+executableActions
+```
+
+This is dashboard visibility only. It does not execute jobs, write to Mind, classify captures permanently, move files, or modify Kanban.
+
+## Updated Phase 8 status
+
+Phase 8 now has Brain-side approved, feature-flagged report-only preflights for inbox inspection, selector-backed classifier dry-run, queue/throttle planning, a read-only Brain Core status endpoint, and Brain Console Center visibility for those reports.
+
+It is still not real-time processing. The next implementation step should be either a scheduled/on-demand queue runner that remains report-only first, or manual operator workflow documentation for running the existing preflights safely. Do not add a filesystem watcher or Mind-writing behavior yet.
 
 ## Next dependency search
 
