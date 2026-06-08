@@ -102,9 +102,9 @@ The memory system is separate from Mind notes. Notes are your knowledge. Memory 
 - `system/task-kanban-contract.md` explains why `kanban.md` remains the current task source of truth and how any future task sync must avoid data loss.
 - `system/graph-visualization-contract.md` explains the current Graphify output and the future visual graph target.
 - `system/generated-output-policy.md` explains which generated outputs should be tracked, ignored, or treated as refreshable.
-- `graphify-out/GRAPH_REPORT.md` is the current generated graph report.
-- `graphify-out/graph.html` is the generated clickable visual graph.
-- `graphify-out/graph.json` is generated graph data, not a note to edit manually.
+- `.graphify-out/GRAPH_REPORT.md` is the current generated graph report.
+- `.graphify-out/graph.html` is the generated clickable visual graph.
+- `.graphify-out/graph.json` is generated graph data, not a note to edit manually.
 
 ---
 

@@ -29,4 +29,4 @@ Mind Steward may suggest wiki updates from captures and sources, but durable wik
 - Prefer clear, linked, source-aware notes over deep folder nesting.
 - Preserve source references when compiling knowledge from captures or sources.
 - Do not use `wiki/` as an automation dump.
-- Keep generated graph output in `graphify-out/`, not here.
+- Keep generated graph output in `.graphify-out/`, not here.

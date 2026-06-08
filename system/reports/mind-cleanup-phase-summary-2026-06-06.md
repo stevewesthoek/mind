@@ -55,7 +55,7 @@ Started and completed first design slice:
 - `capture/inbox/` is the intake landing zone.
 - `wiki/` is durable compiled knowledge.
 - `sources/` is raw evidence/source material.
-- `graphify-out/` contains generated graph output.
+- `.graphify-out/` contains generated graph output.
 - `system/` contains operating contracts and reports.
 
 ## Remaining uncommitted items at last status check
@@ -66,7 +66,7 @@ These are intentionally outside the completed cleanup commits:
 - `wiki/areas/theological-studies/dance-of-life/README.md`
 - `wiki/log.md`
 - untracked `capture/inbox/*.md` files
-- untracked generated `graphify-out/*` files
+- untracked generated `.graphify-out/*` files
 - untracked `wiki/organisations/prochat/brand/ProChat OS Refinement Report.md`
 
 ## Remaining implementation phases
@@ -89,11 +89,11 @@ Requirements:
 
 Goal:
 
-Generate a clickable visual graph from `graphify-out/graph.json`.
+Generate a clickable visual graph from `.graphify-out/graph.json`.
 
 Requirements:
 
-- output should be `graphify-out/graph.html` or another documented generated artifact;
+- output should be `.graphify-out/graph.html` or another documented generated artifact;
 - no source-note modifications;
 - no root writes;
 - regeneration command documented;

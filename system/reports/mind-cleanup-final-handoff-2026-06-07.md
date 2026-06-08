@@ -37,7 +37,7 @@ Completed:
 
 - Graphify output contract documented;
 - visual graph renderer added;
-- `graphify-out/graph.html` generated and tracked as a convenience artifact;
+- `.graphify-out/graph.html` generated and tracked as a convenience artifact;
 - generated-output policy documented;
 - Save-to-Mind → Mind Steward → AI Model Selector automation boundary documented.
 
@@ -56,7 +56,7 @@ Completed:
 
 - Graphify HTML renderer added at `tools/render-graph-html.mjs`;
 - graph refresh wrapper added at `tools/update-graph.sh`;
-- visual graph generated at `graphify-out/graph.html`;
+- visual graph generated at `.graphify-out/graph.html`;
 - graph refresh reports written to `system/reports/graph-refresh-latest.json` and `system/reports/graph-refresh-latest.md` when the wrapper runs;
 - home/system/graph docs updated to reflect current visual graph availability.
 
@@ -79,8 +79,8 @@ Completed across Brain and Mind:
 - `capture/failed/` is the failure/safety buffer.
 - `wiki/` is durable compiled knowledge.
 - `sources/` is raw evidence/source material.
-- `graphify-out/` contains generated graph output.
-- `graphify-out/graph.html` is intentionally tracked as a convenience visual artifact.
+- `.graphify-out/` contains generated graph output.
+- `.graphify-out/graph.html` is intentionally tracked as a convenience visual artifact.
 - `system/` contains operating contracts, reports, specs, and runbooks.
 
 ## Current Phase 8 safety state
@@ -110,17 +110,17 @@ These items were not part of the cleanup commits and need manual or later automa
 
 ```text
 M .obsidian/graph.json
-M graphify-out/graph.html
+M .graphify-out/graph.html
 M kanban.md
 M wiki/areas/theological-studies/dance-of-life/README.md
 M wiki/log.md
 ?? capture/inbox/*.md
-?? graphify-out/.graphify_labels.json
-?? graphify-out/.graphify_root
-?? graphify-out/GRAPH_REPORT.md
-?? graphify-out/cache/
-?? graphify-out/graph.json
-?? graphify-out/manifest.json
+?? .graphify-out/.graphify_labels.json
+?? .graphify-out/.graphify_root
+?? .graphify-out/GRAPH_REPORT.md
+?? .graphify-out/cache/
+?? .graphify-out/graph.json
+?? .graphify-out/manifest.json
 ?? wiki/organisations/prochat/brand/ProChat OS Refinement Report.md
 ```
 
@@ -134,7 +134,7 @@ Recommended sequence:
 
 1. Review and process current `capture/inbox/` backlog using report-only preflights.
 2. Decide which generated Graphify artifacts should be tracked versus ignored.
-3. Decide whether `graphify-out/graph.html` should be refreshed/committed after each graph run.
+3. Decide whether `.graphify-out/graph.html` should be refreshed/committed after each graph run.
 4. Design a reviewed write proposal format for Mind Steward suggestions.
 5. Only then add approved write behavior for wiki/source/task suggestions.
 

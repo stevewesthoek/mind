@@ -4,14 +4,14 @@ This document records the current Mind graph reality and the safe boundary for f
 
 ## Current generated graph
 
-Graphify output currently lives in `graphify-out/`.
+Graphify output currently lives in `.graphify-out/`.
 
 Confirmed artifacts:
 
-- `graphify-out/graph.json` — generated machine-readable graph data.
-- `graphify-out/GRAPH_REPORT.md` — generated human-readable graph report.
-- `graphify-out/manifest.json` — generated file manifest and hashes.
-- `graphify-out/cache/` — generated cache.
+- `.graphify-out/graph.json` — generated machine-readable graph data.
+- `.graphify-out/GRAPH_REPORT.md` — generated human-readable graph report.
+- `.graphify-out/manifest.json` — generated file manifest and hashes.
+- `.graphify-out/cache/` — generated cache.
 
 The current graph report states:
 
@@ -54,13 +54,13 @@ graphify-out/graph.html
 
 Recommended root behavior:
 
-- root graph overview links to `graphify-out/GRAPH_REPORT.md`
-- root graph overview links to `graphify-out/graph.html` once it exists
+- root graph overview links to `.graphify-out/GRAPH_REPORT.md`
+- root graph overview links to `.graphify-out/graph.html` once it exists
 - generated graph files remain generated outputs, not source-of-truth notes
 
 ## Safety rules
 
 - Do not manually edit generated graph data as the source of truth.
-- Do not move or rename `graphify-out/` without checking Graphify refresh commands and any Brain/Obsidian references.
+- Do not move or rename `.graphify-out/` without checking Graphify refresh commands and any Brain/Obsidian references.
 - Do not assume graph visualization exists until a generated visual artifact is present and documented.
 - Refreshes should be repeatable and should not require writing captures or reports to the repository root.

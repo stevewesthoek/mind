@@ -54,7 +54,7 @@ No generated output files, transcripts, captures, or temporary files in root.
 Critical gaps:
 - `archive/` — No README (but has `archive/index.md` and `archive/old/README.md`)
 - `capture/` — Has `capture/inbox/README.md` but not at capture root
-- `graphify-out/` — No README (has GRAPH_REPORT.md instead)
+- `.graphify-out/` — No README (has GRAPH_REPORT.md instead)
 - `live/` — No README
 - `sources/` — No README
 - `system/` — No README
@@ -158,7 +158,7 @@ Critical gaps:
 - **Note:** Active ProChat OS go-to-market document. "Model router" listed as a component/feature (not a name). **This is about ProChat product positioning, not Mind terminology.**
 
 #### Match 7
-- **File:** `graphify-out/graph.json`
+- **File:** `.graphify-out/graph.json`
 - **Line:** 77065
 - **Content:** Node label normalization: `"norm_label": "conversation transcript — model router product idea"`
 - **Note:** Graph index entry. References archived conversation about personal product strategy (2026-04-17 AI Cost Router).
@@ -224,8 +224,8 @@ Example locations:
 - `router/README.md` — "Mind Steward classifies captures through the AI Model Selector"
 
 **Graph Nodes:**
-- `graphify-out/graph.json` — Multiple normalized nodes: "mind steward classification", "mind steward implementation plan", "mind steward contract", "mind steward roadmap"
-- `graphify-out/GRAPH_REPORT.md` — "Mind Steward" hub and community references
+- `.graphify-out/graph.json` — Multiple normalized nodes: "mind steward classification", "mind steward implementation plan", "mind steward contract", "mind steward roadmap"
+- `.graphify-out/GRAPH_REPORT.md` — "Mind Steward" hub and community references
 
 ---
 
@@ -374,10 +374,10 @@ Example locations:
 ### Graphify
 
 **References:**
-- `graphify-out/` — Generated output folder
-- `graphify-out/graph.json` — Knowledge graph (10.9 MB)
-- `graphify-out/GRAPH_REPORT.md` — Graph analysis report (updated 2026-06-06)
-- `graphify-out/cache/` — AST cache for indexing
+- `.graphify-out/` — Generated output folder
+- `.graphify-out/graph.json` — Knowledge graph (10.9 MB)
+- `.graphify-out/GRAPH_REPORT.md` — Graph analysis report (updated 2026-06-06)
+- `.graphify-out/cache/` — AST cache for indexing
 
 **Graph Freshness:**
 - Built from commit: `79796272` (as of report generation)
@@ -429,9 +429,9 @@ find . -type l | grep -v '\.git'
 
 | File | Size | Status |
 |------|------|--------|
-| `graphify-out/graph.json` | 10.9 MB | Active |
-| `graphify-out/GRAPH_REPORT.md` | Readable | Active (2026-06-06) |
-| `graphify-out/cache/` | (multiple AST JSON files) | Active |
+| `.graphify-out/graph.json` | 10.9 MB | Active |
+| `.graphify-out/GRAPH_REPORT.md` | Readable | Active (2026-06-06) |
+| `.graphify-out/cache/` | (multiple AST JSON files) | Active |
 | `.obsidian/graph.json` | Readable | Obsidian local graph |
 | `GRAPH.md` (root) | Not found | Does not exist |
 
@@ -643,7 +643,7 @@ The Mind vault is well-organized and actively maintained. The current structure 
 
 1. **Generate graph.html** (optional):
    - Current state is acceptable if the focus is knowledge management, not visualization
-   - If visualization would help navigation, consider generating `graphify-out/graph.html` using graphify's render tools
+   - If visualization would help navigation, consider generating `.graphify-out/graph.html` using graphify's render tools
 
 2. **Create GRAPH.md** (optional):
    - Document how to interpret the graph
@@ -678,7 +678,7 @@ The Mind vault is well-organized and actively maintained. The current structure 
 
 **Phase 2: Optional Refactoring (If Desired)**
 1. Create `GRAPH.md` to document graph conventions and navigation
-2. Generate `graphify-out/graph.html` visualization (if visualization is valuable for navigation)
+2. Generate `.graphify-out/graph.html` visualization (if visualization is valuable for navigation)
 3. Flatten or reorganize archive legacy folders (if numbering convention is obsolete)
 4. Create README.md files in folders without them (e.g., `archive/`, `live/`, `sources/`)
 
@@ -714,7 +714,7 @@ The Mind vault is well-organized and actively maintained. The current structure 
 10. `wiki/index.md` — Optional: link to graph, if visualization is generated
 
 **If graph improvements are decided:**
-1. `graphify-out/graph.html` — Generate (does not exist yet)
+1. `.graphify-out/graph.html` — Generate (does not exist yet)
 2. `GRAPH.md` — Create (does not exist yet)
 
 **If automation documentation is decided:**

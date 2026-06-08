@@ -40,7 +40,7 @@ node tools/export-kanban-tasks.mjs --write --output system/reports/kanban-export
 
 `render-graph-html.mjs` renders the generated Graphify data into a clickable static HTML graph.
 
-By default, the renderer now focuses on human-readable Markdown knowledge paths and filters out generated/plugin/code-heavy internals such as `.obsidian/`, `graphify-out/`, caches, and non-Markdown implementation nodes.
+By default, the renderer now focuses on human-readable Markdown knowledge paths and filters out generated/plugin/code-heavy internals such as `.obsidian/`, `.graphify-out/`, caches, and non-Markdown implementation nodes.
 
 Generate the default visual graph:
 
@@ -66,7 +66,7 @@ Render more nodes or links:
 node tools/render-graph-html.mjs --max-nodes 2000 --max-links 5000
 ```
 
-The generated HTML is a refreshable artifact. It should be regenerated from `graphify-out/graph.json`, not hand-edited.
+The generated HTML is a refreshable artifact. It should be regenerated from `.graphify-out/graph.json`, not hand-edited.
 
 ## Graph refresh
 
@@ -99,6 +99,6 @@ It should not write generated files to the repository root.
 - The Kanban exporter reads `kanban.md` and does not modify it.
 - `kanban.md` remains the current task source of truth.
 - Do not use generated exports to overwrite `kanban.md` until the task sync validation rules are implemented.
-- The graph renderer reads `graphify-out/graph.json` and writes generated HTML only when run locally.
+- The graph renderer reads `.graphify-out/graph.json` and writes generated HTML only when run locally.
 - Do not manually edit generated graph artifacts as source knowledge.
 - See `../system/task-kanban-contract.md`, `../system/task-sync-spec.md`, and `../system/graph-visualization-spec.md`.

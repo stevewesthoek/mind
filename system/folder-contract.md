@@ -19,7 +19,7 @@ Generated captures, transcripts, reports, research drafts, and automation dumps 
 
 - `archive/` — legacy, completed, superseded, or historical material.
 - `capture/` — Save-to-Mind inbox, failed captures, and daily capture groupings.
-- `graphify-out/` — generated Graphify graph output.
+- `.graphify-out/` — generated Graphify graph output.
 - `live/` — active dashboard surfaces, task summaries, decisions, and current-state views.
 - `router/` — Mind Steward and AI handoff/startup contracts.
 - `sources/` — raw evidence, research, files, books, papers, and source material.
