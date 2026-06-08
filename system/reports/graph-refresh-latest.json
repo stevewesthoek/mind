@@ -1,0 +1,13 @@
+{
+  "status": "ok",
+  "startedAt": "2026-06-07T10:45:40+01:00",
+  "endedAt": "2026-06-07T10:45:56+01:00",
+  "writesToRoot": false,
+  "updatesGraphifyOut": true,
+  "updatesVisualGraph": true,
+  "graphReport": "graphify-out/GRAPH_REPORT.md",
+  "graphData": "graphify-out/graph.json",
+  "visualGraph": "graphify-out/graph.html",
+  "graphifyLogTail": "Re-extracting code files in . (no LLM needed)...\n  AST extraction: 1306/1306 files (100%)\n[graphify watch] Skipped graph.html: Graph has 12993 nodes - too large for HTML viz (limit: 5000). Use --no-viz, raise GRAPHIFY_VIZ_NODE_LIMIT, or reduce input size.\n[graphify watch] Rebuilt: 12993 nodes, 22126 edges, 1456 communities\n[graphify watch] graph.json and GRAPH_REPORT.md updated in graphify-out\nCode graph updated. For doc/paper/image changes run /graphify --update in your AI assistant.\nTip: set GEMINI_API_KEY or GOOGLE_API_KEY to use Gemini for semantic extraction.\n",
+  "rendererLogTail": "Wrote /Users/Office/Repos/stevewesthoek/mind/graphify-out/graph.html\nRendered 1200/6259 nodes and 166/4998 links.\n"
+}

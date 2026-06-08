@@ -86,8 +86,8 @@ AI assistants should not default to broad repo scans when Graphify outputs are a
 Expected AI behavior:
 
 ```text
-1. read graphify-out/GRAPH_REPORT.md;
-2. query graphify-out/graph.json or Graphify query/path/explain commands;
+1. read .graphify-out/GRAPH_REPORT.md;
+2. query .graphify-out/graph.json or Graphify query/path/explain commands;
 3. inspect targeted source files only after graph traversal;
 4. cite or describe the graph path used when relevant.
 ```
@@ -140,8 +140,8 @@ Give AI fast relational context at low token cost.
 
 Canonical inputs:
 
-- `graphify-out/GRAPH_REPORT.md`;
-- `graphify-out/graph.json`;
+- `.graphify-out/GRAPH_REPORT.md`;
+- `.graphify-out/graph.json`;
 - Graphify query/path/explain commands when available;
 - repo-local profile metadata.
 
@@ -261,10 +261,10 @@ The profile should not implement custom logic. It should only declare which stan
 Every Graphify-enabled repo should use standard output paths unless the Brain standard explicitly allows otherwise:
 
 ```text
-graphify-out/GRAPH_REPORT.md
-graphify-out/graph.json
-graphify-out/graph.html
-graphify-out/cache/
+.graphify-out/GRAPH_REPORT.md
+.graphify-out/graph.json
+.graphify-out/graph.html
+.graphify-out/cache/
 ```
 
 Optional outputs for code repos may include architecture/call-flow views.

@@ -40,3 +40,6 @@ oauth_token*
 *credentials*
 *.secret
 .env.local
+
+# Graphify generated output
+.graphify-out/
