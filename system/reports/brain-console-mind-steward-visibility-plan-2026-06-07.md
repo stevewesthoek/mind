@@ -34,7 +34,7 @@ inbox-queue-latest.md
 A quick Brain Console inspection did not find existing scheduler-specific Zod schemas in:
 
 ```text
-projects/brain-console-center/lib/braincore-schemas.ts
+projects/brain-console/lib/braincore-schemas.ts
 ```
 
 So adding Mind Steward visibility to Brain Console is not a one-line UI patch. It needs a small schema + component/API integration slice.
