@@ -15,7 +15,7 @@ scheduler-run-mind-steward-inbox-classifier-dry-run
 scheduler-run-mind-steward-inbox-queue-dry-run
 ```
 
-Brain Console Center shows their read-only status through:
+Brain Console shows their read-only status through:
 
 ```text
 GET /scheduler/mind-steward/status
@@ -27,7 +27,7 @@ These preflights are allowed to:
 
 - inspect current runtime or inbox state;
 - produce Brain runtime reports;
-- expose status in Brain Console Center.
+- expose status in Brain Console.
 
 They are not allowed to:
 
@@ -83,7 +83,7 @@ Use this order when checking the inbox pipeline:
 2. Run inbox dry-run report.
 3. Run inbox queue dry-run report.
 4. Run inbox classifier dry-run report.
-5. Review Brain Console Center preflight status.
+5. Review Brain Console preflight status.
 6. Review generated Brain runtime reports.
 7. Confirm no Mind files changed.
 8. Confirm `kanban.md` did not change.
@@ -93,7 +93,7 @@ Use this order when checking the inbox pipeline:
 After running preflights, verify:
 
 - Brain runtime reports exist;
-- Brain Console Center shows report status;
+- Brain Console shows report status;
 - `writesToMind` remains `false`;
 - `executableActions` remains `false` unless explicitly changed by a future approved phase;
 - no files were moved out of `mind/capture/inbox/`;

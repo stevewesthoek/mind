@@ -68,7 +68,7 @@ Completed across Brain and Mind:
 - Brain-side selector-backed classifier dry-run implemented;
 - Brain-side queue/throttle dry-run implemented;
 - Brain Core read-only status endpoint implemented: `GET /scheduler/mind-steward/status`;
-- Brain Console Center read-only visibility implemented;
+- Brain Console read-only visibility implemented;
 - Mind runbook added for safe preflight operation.
 
 ## Current source-of-truth rules
@@ -91,7 +91,7 @@ Implemented:
 - report-only classifier dry-run;
 - report-only queue dry-run;
 - read-only Brain Core status endpoint;
-- read-only Brain Console Center visibility;
+- read-only Brain Console visibility;
 - operator runbook.
 
 Not implemented:

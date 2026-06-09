@@ -29,15 +29,15 @@ inbox-queue-latest.json
 inbox-queue-latest.md
 ```
 
-## Current Brain Console Center finding
+## Current Brain Console finding
 
-A quick Brain Console Center inspection did not find existing scheduler-specific Zod schemas in:
+A quick Brain Console inspection did not find existing scheduler-specific Zod schemas in:
 
 ```text
 projects/brain-console-center/lib/braincore-schemas.ts
 ```
 
-So adding Mind Steward visibility to Brain Console Center is not a one-line UI patch. It needs a small schema + component/API integration slice.
+So adding Mind Steward visibility to Brain Console is not a one-line UI patch. It needs a small schema + component/API integration slice.
 
 ## Recommended next implementation slice
 
@@ -77,7 +77,7 @@ reports:
 
 ## UI slice after endpoint exists
 
-After the endpoint exists, Brain Console Center can add:
+After the endpoint exists, Brain Console can add:
 
 - a Zod schema in `projects/brain-console-center/lib/braincore-schemas.ts`;
 - a small `MindStewardDashboard` component or section;
@@ -101,4 +101,4 @@ Do not:
 
 ## Recommended next prompt
 
-Ask Claude Code in the Brain repo to implement a read-only Brain Core status endpoint for Mind Steward runtime reports first. Only after that endpoint exists should Brain Console Center UI be added.
+Ask Claude Code in the Brain repo to implement a read-only Brain Core status endpoint for Mind Steward runtime reports first. Only after that endpoint exists should Brain Console UI be added.

@@ -16,7 +16,7 @@ Implemented:
 - Brain-side classifier dry-run;
 - Brain-side queue dry-run;
 - Brain Core status endpoint: `GET /scheduler/mind-steward/status`;
-- Brain Console Center read-only visibility;
+- Brain Console read-only visibility;
 - operator runbook for safe preflights.
 
 Not implemented:
@@ -167,7 +167,7 @@ Make the automated runtime observable and recoverable.
 
 Required surfaces:
 
-- Brain Console Center status;
+- Brain Console status;
 - latest run reports;
 - failed item list;
 - retry controls;

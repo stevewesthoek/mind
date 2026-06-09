@@ -114,8 +114,8 @@ Brain Core is the local API boundary and operational source of truth for machine
 Brain Console is the human control plane. The canonical Brain Console runtime is now a standalone local web application owned entirely by the `brain` repo.
 
 ```text
-Brain Console Center = primary control-plane UI in brain.
-Obsidian = optional viewer of local Brain Console Center pages.
+Brain Console = primary control-plane UI in brain.
+Obsidian = optional viewer of local Brain Console pages.
 ```
 
 Brain Console visualizes and controls the system by consuming Brain Core API surfaces. It should not depend on native Obsidian plugin lifecycle for operational workflows.
@@ -142,7 +142,7 @@ Brain Console visualizes and controls the system by consuming Brain Core API sur
 
 ### Obsidian relationship
 
-`mind` may view Brain Console Center through an Obsidian web viewer, but `mind` does not consume, host, or implement Brain Console. The operational console remains in `brain`; Obsidian is only a viewing surface.
+`mind` may view Brain Console through an Obsidian web viewer, but `mind` does not consume, host, or implement Brain Console. The operational console remains in `brain`; Obsidian is only a viewing surface.
 
 ## Product strategy and implementation plans
 
