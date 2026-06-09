@@ -1,0 +1,42 @@
+# .graphifyignore — Mind repo
+#
+# Narrows Graphify's scan to strategy, knowledge, and task content only.
+# Graphify reads this file (prefers it over .gitignore) per gitignore spec.
+#
+# Mind is an Obsidian vault. Graphify should see the notes, not the
+# Obsidian runtime state, plugin binaries, or Python/Node artifacts.
+
+# ── VCS & OS ──────────────────────────────────────────────────────────────
+.git/
+.DS_Store
+**/.DS_Store
+
+# ── Obsidian runtime state (changes every open, not content) ──────────────
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/plugins/obsidian-git/data/
+# Plugin JS bundles are compiled artifacts, not knowledge content
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/styles.css
+.obsidian/cache/
+.obsidian/snippets/
+# Obsidian trash
+.trash/
+
+# ── Graphify output ────────────────────────────────────────────────────────
+graphify-out/
+.graphify-out/
+
+# ── Python / Node environments ─────────────────────────────────────────────
+**/.venv/
+**/.venv*/
+**/venv/
+**/env/
+**/node_modules/
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+**/.cache/
+
+# ── Daily notes (ephemeral, high-churn, low graph value) ──────────────────
+daily/
