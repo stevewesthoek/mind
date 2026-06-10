@@ -318,3 +318,140 @@ Research tasks:
 
 Do not propose building a full SaaS platform, dashboard, vector database, MCP server, or test automation framework unless there is a compelling reason and a lightweight path.
 ```
+
+## 18. NotebookLM Research Report: ProChat QA Memory v0.1 Improvement & Implementation
+
+This section contains research findings from NotebookLM analysis of the product spec against best practices from agent-qa, QASkills, GitHub Copilot custom instructions, OWASP Agent Memory Guard, and modern AI memory/security research.
+
+### 18.1 Keep (From Current Spec)
+
+The following foundational elements are well-defined and should remain the core of the product:
+
+- **Product Principles:** The "Review-first," "Portable," and "AI-agnostic" principles are critical for the primary buyer (freelance testers and QA agencies) who work across disparate environments.
+- **Agnosticism:** Remaining tool-agnostic (Playwright, Cypress, etc.) and environment-agnostic ensures the memory layer is not tied to a specific CI/CD pipeline or test runner.
+- **Markdown-First Architecture:** Using standard file types (Memory, Workflow, Skill) as the source of truth maintains portability and inspectability.
+- **Safety Constraints:** The prohibition of storing secrets, tokens, or unreviewed AI summaries in persistent memory is a necessary security baseline.
+
+### 18.2 Add (Missing Requirements)
+
+To make v0.1 viable, the following requirements must be added to provide structure to the "memory layer":
+
+- **Manifest Schema Completeness:** Every module (Skill, Workflow, or Memory bundle) requires a unique identifier, version string, and explicit dependency list to prevent desync during updates.
+- **Workflow Processing Rules:** Define a standard "Processing Logic" for how a raw log or note becomes a "draft" vs. "trusted" memory. This includes a mandatory "Sanitization Step" before any data is moved to the portable layer.
+- **Memory Promotion Validation:** A checklist or "Safety Gate" must be defined to ensure that generalizable lessons are stripped of client-specific selectors, IPs, or naming conventions before promotion.
+- **Audit Trail Requirements:** Use Git commit history as the primary audit trail, but include a `last_reviewed_by` and `source_reference` field within the Markdown metadata of memory files.
+- **Version Control Integration:** Clear guidance on using Git branches for "Draft" memory vs. `main` for "Trusted" memory.
+
+### 18.3 Remove or Defer (Out-of-Scope)
+
+The following should be explicitly deferred to v0.2+ to maintain a "lean" v0.1:
+
+- **Automated Ingestion:** Any "automatic" syncing from Jira, GitHub Issues, or CI logs should be deferred. v0.1 should focus on manual, human-reviewed entry.
+- **Complex CLI/GUI:** While a CLI is mentioned as out-of-scope, even basic "installers" should be deferred in favor of simple Git cloning.
+- **Real-time Multi-user Syncing:** Rely entirely on Git for collision resolution and synchronization.
+
+### 18.4 Clarify (Ambiguous Points)
+
+The spec requires specificity in these areas before development:
+
+- **Memory Separation vs. Combination:** The current spec lists these as headers but lacks the actual logic rules. Specify how an AI assistant should be instructed to "look" in both the local client folder and the global product folder simultaneously.
+- **"Tester/Company-Approved Workspace":** Clarify the directory relationship. Does the product repo live *inside* the client workspace, or is the client workspace an external path referenced by the AI?
+- **The Promotion Path:** Define the exact "file move" or "content copy" steps required to move a lesson from a `raw-notes.md` to a `known-failures.md`.
+
+### 18.5 Risks (Critical Gaps)
+
+If not addressed in v0.1, these gaps could compromise the product:
+
+- **Memory Poisoning/Hallucination:** If "Review-first" is not strictly enforced via the manifest/workflow, AI-generated "false lessons" could pollute the persistent memory.
+- **Privacy Leaks:** Without a mandatory "Sanitization" rule for cross-project promotion, testers may accidentally leak one client's infrastructure details to another.
+- **Context Fragmentation:** If there is no standard for how memory files are organized, the AI may fail to find relevant "lessons" when needed.
+
+### 18.6 Lean Repo Structure for v0.1
+
+The absolute minimum structure to support the spec's core file types:
+
+```text
+prochat-qa-memory/
+├── core/                   # Core principles and safety guides
+│   ├── safety-rules.md
+│   └── promotion-guide.md
+├── skills/                 # Task-specific AI instructions (.SKILL.md)
+│   ├── analyze-failure.md
+│   └── sanitize-lesson.md
+├── workflows/              # Process descriptions
+│   ├── triage-workflow.md
+│   └── memory-update-workflow.md
+├── templates/              # Blank structures for new memory files
+│   ├── known-failure-template.md
+│   └── manifest-template.yaml
+└── examples/               # Demo content for public repo
+    └── webshop-demo/
+```
+
+### 18.7 Minimal Manifest Schema
+
+A minimal `manifest.yaml` is required to make the system "inspectable and versioned".
+
+**Core Fields:**
+
+```yaml
+id: unique-slug-identifier
+name: Display Name
+version: 1.0.0
+type: memory|workflow|skill
+scope: global|local
+author: Author Name
+last_reviewed: 2024-05-20
+description: Brief summary for AI context
+```
+
+**Example Manifest:**
+
+```yaml
+id: playwright-selector-strategy
+name: Playwright Selector Strategy
+version: 1.0.0
+type: memory
+scope: global
+author: "Steve Westhoek"
+last_reviewed: 2024-05-20
+description: "Validated selector patterns for resilient Playwright tests across common web frameworks."
+```
+
+### 18.8 Safety Rules Summary
+
+Consolidated critical rules for memory separation and promotion:
+
+1. **Isolation:** Client-specific data (IDs, PII, internal URLs) must never be committed to the `global` (portable) memory directory. Enforced by `.gitignore` and pre-merge review.
+
+2. **Sanitization:** All lessons promoted to `global` memory must be generalized. Example: change "Login failed on staging-01.client.com" to "Login timeout patterns on high-latency environments".
+
+3. **Human Sign-off:** No AI-generated content can move from a `.raw` or `.draft` status to a `.trusted` status without a human-in-the-loop review. This is the primary review-first gate.
+
+4. **No Secrets:** A `.gitignore` must be pre-configured to block common sensitive file extensions and specific patterns (e.g., `.env`, `*confidential*`, `*.key`).
+
+### 18.9 Implementation Recommendations
+
+Based on this research, the following are recommended first steps for v0.1 development:
+
+1. **Finalize Manifest Schema:** Adopt the minimal manifest schema (Section 18.7) and document it in `core/manifest-spec.md`.
+
+2. **Document Promotion Flow:** Create `core/promotion-guide.md` with step-by-step rules for sanitization and human sign-off before cross-project promotion.
+
+3. **Create Template Pack:** Build the templates in `templates/` directory to make first-use onboarding fast and consistent.
+
+4. **Write AI Instructions:** Develop `core/ai-instructions.md` that explains to AI assistants exactly how to use and update memory files while respecting safety boundaries.
+
+5. **Set Up Safety Tooling:** Pre-configure `.gitignore` and create a `scripts/validate-safety.sh` hook to catch common mistakes before commit.
+
+### 18.10 Key Uncertainties Remaining
+
+- **Workspace Integration:** Need clarity on how external workspaces reference and compose the product repo's memory with their own client-specific memory.
+- **AI Context Window Management:** How should large memory collections be chunked for AI assistants when they have limited context?
+- **Conflict Resolution:** Need decision rules when the same lesson appears in both project and cross-project memory—which takes precedence?
+
+---
+
+**Research Date:** 2026-06-10  
+**Research Method:** NotebookLM analysis of product spec against industry best practices  
+**Next Steps:** Incorporate findings into core documentation, templates, and AI instructions before v0.1 alpha release
