@@ -279,18 +279,17 @@ This is what happens without memory. AI starts from zero every time.
 
 ### 2–4 min — The memory
 
-Show the `memory/` and `skills/` folders.
-
-Point out:
+Show only the two memory files that matter:
 
 - `selector-strategy.md`
 - `known-failures.md`
-- `analyze-failure.SKILL.md`
+
+Do not explain the internal `.SKILL.md` mechanics during the live demo. Treat skills as helpers and keep the focus on memory.
 
 Narration:
 
 ```text
-This is the tester's reviewed QA memory: what the project has already taught us.
+This is what the tester or team has already learned about this app. It is active memory, not a passive wiki page.
 ```
 
 ### 4–7 min — The memory-aware answer
@@ -305,14 +304,22 @@ Narration:
 Same problem, same AI, better context. The answer becomes more specific because it uses reviewed testing memory.
 ```
 
-### 7–9 min — Human review
+### 7–9 min — Human review and sanitization
 
 Show the reviewed memory update.
+
+Then show one unsafe raw detail being generalized before promotion:
+
+```text
+staging-client-01.example.internal → staging environment
+internal Jira ticket URL → sanitized source reference
+client-specific selector name → approved selector pattern
+```
 
 Narration:
 
 ```text
-AI drafts. Tester decides. Memory improves.
+AI drafts. Tester decides. Sensitive details are removed. Memory improves safely.
 ```
 
 ### 9–10 min — The close
@@ -395,7 +402,41 @@ Demo message:
 Better memory leads to better testing, regardless of execution tool.
 ```
 
-## 15. Demo acceptance criteria
+## 15. Skeptical buyer objections
+
+### Objection: This is just a folder of markdown files. We already have a wiki.
+
+Answer:
+
+```text
+A wiki is passive documentation. ProChat QA Memory is active memory designed to be used at the moment of failure with an AI assistant.
+```
+
+### Objection: Is this just another prompt library?
+
+Answer:
+
+```text
+Prompts tell the AI how to work. Memory tells the AI what the tester, project, and team already know.
+```
+
+### Objection: How do we avoid leaking client data?
+
+Answer:
+
+```text
+Client-specific memory stays scoped to the client/project workspace. Cross-project memory is sanitized before promotion.
+```
+
+### Objection: Why not just use the test tool's reports?
+
+Answer:
+
+```text
+Reports explain what happened in one run. ProChat QA Memory captures the reusable lesson so future investigations start smarter.
+```
+
+## 16. Demo acceptance criteria
 
 The demo succeeds when a viewer can answer yes to all of these:
 
@@ -407,7 +448,7 @@ The demo succeeds when a viewer can answer yes to all of these:
 6. I see how reviewed memory improves future testing.
 7. I could try this in less than a day.
 
-## 16. What not to demo yet
+## 17. What not to demo yet
 
 Do not demo:
 
@@ -423,64 +464,29 @@ Do not demo:
 
 These may create excitement, but they create the wrong expectation for v0.1.
 
-## 17. Research assessment
+## 18. Research assessment
 
-NotebookLM research was useful and sufficient for the v0.1 demo plan.
+Two NotebookLM passes have now been processed into this demo plan.
 
-Integrated:
+Integrated from the latest pass:
 
-- sharpened demo thesis
-- single focused login selector walkthrough
-- public demo repo minimization
-- before/after specificity gap
-- 10-minute script
-- public vs paid boundary
-- wording fixes to avoid platform/test-runner confusion
-- fake webshop confirmation as best demo domain
-
-Adjusted:
-
-- payment and checkout examples are no longer part of the live walkthrough; they stay as future examples only.
-- the demo emphasizes customer value, not file structure.
+- stronger specificity-gap thesis
+- less explanation of folder mechanics during the demo
+- visible sanitization proof
+- buyer objections and concise answers
+- sharper public vs paid boundary
+- stronger closing statement
 
 Rejected or deferred:
 
-- complex multi-case live demo
-- automation-style demo
+- detailed skill-file explanation during the demo
+- payment and checkout live walkthroughs
 - dashboard or CI-driven proof
+- automation-style demo language
 - advanced paid features in the public demo
 
-## 18. Follow-up NotebookLM prompt
+## 19. Demo readiness verdict
 
-```text
-You are reviewing the refined DEMO-PLAN.md for ProChat QA Memory.
+This demo plan is ready to support building the public demo materials.
 
-Goal:
-Stress-test whether the demo is clear, persuasive, and simple enough to prove the value of persistent QA memory in 10 minutes.
-
-Product constraints:
-- ProChat QA Memory is not a test runner, QA dashboard, CI tool, SaaS app, or self-healing automation engine.
-- The demo must use fake data only.
-- The demo should prove that memory makes AI-assisted triage more specific and reusable.
-- The target buyer may be a freelance tester, QA consultancy, testing company, or QA lead whose testers work across many external client environments.
-- The demo should speak in customer value, not technical architecture.
-
-Review tasks:
-1. Evaluate whether the login selector failure is the strongest first demo scenario.
-2. Identify any wording that still makes the product sound like an automation platform.
-3. Improve the 10-minute walkthrough script for clarity and buyer impact.
-4. Recommend the minimum public demo repo files.
-5. Recommend what should stay hidden in the paid repo.
-6. Identify the strongest before/after proof.
-7. Identify what a skeptical QA lead would challenge and how the demo should answer it.
-8. Recommend a concise demo closing statement.
-
-Output format:
-- Keep
-- Improve
-- Remove/postpone
-- Strongest demo message
-- Skeptical buyer objections
-- Revised 10-minute walkthrough
-- Demo readiness verdict
-```
+No further broad NotebookLM research is recommended before building the first demo. The next useful research should come from testing the demo with 3–5 target buyers or users and capturing their objections.

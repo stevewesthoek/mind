@@ -77,31 +77,35 @@ The product must support both strict memory separation and safe cross-project re
 
 ## 7. Memory scopes
 
-ProChat QA Memory must support multiple scopes from the beginning.
+ProChat QA Memory must support multiple scopes from the beginning, but v0.1 should keep the user-facing scope model simple.
+
+### v0.1 primary scopes
 
 ```text
-personal tester memory
-client memory
-project memory
-department/team memory
-test-suite memory
-test-case memory
-cross-project QA memory
-company/team-approved memory
+personal memory
+client/project memory
+cross-project memory
+company-approved memory
 ```
-
-### Scope meanings
 
 | Scope | Purpose |
 |---|---|
-| Personal tester memory | The tester's own reusable heuristics, prompts, habits, lessons, and mistakes to avoid. |
-| Client memory | Approved context that applies across multiple projects inside one client organization. |
-| Project memory | Context, tools, risks, rules, environments, and lessons for one project. |
-| Department/team memory | Rules that apply to one team or department, not necessarily the whole client. |
-| Test-suite memory | Patterns for a smoke, regression, API, performance, mobile, or accessibility suite. |
-| Test-case memory | Recurring behavior or known issues for a specific test or scenario. |
-| Cross-project QA memory | Generalized lessons that are safe and useful across clients. |
-| Company/team-approved memory | Patterns approved by the testing company for all licensed testers. |
+| Personal memory | The tester's own reusable heuristics, prompts, habits, lessons, and mistakes to avoid. |
+| Client/project memory | Client-specific and project-specific context, tools, risks, rules, environments, failures, and lessons. |
+| Cross-project memory | Generalized lessons that are safe and useful across clients without leaking confidential details. |
+| Company-approved memory | Patterns approved by the testing company for all licensed testers. |
+
+### v0.2+ sub-scopes
+
+The full long-term model can still support more precise scopes, but they should not create folder fatigue in v0.1.
+
+```text
+department/team memory
+test-suite memory
+test-case memory
+```
+
+In v0.1, suite-level and test-case-level details can live as headings, tags, or sections inside client/project memory. They can become separate folders later if real use proves the need.
 
 ## 8. Memory separation and combination rules
 
@@ -151,15 +155,18 @@ Customers license access per tester or company. Testers clone the product repo o
 
 Client-specific memory should live outside the product repo in a tester/company-approved workspace.
 
-Recommended relationship:
+Recommended standard relationship:
 
 ```text
-prochat-qa-memory/        # licensed product repo: core method, templates, skills, workflows
-qa-workspaces/            # user-controlled local/company workspace
-  client-a/
-  client-b/
-  cross-project/
+qa-memory-system/
+  prochat-qa-memory/      # licensed product repo: core method, templates, skills, workflows
+  qa-workspaces/          # user-controlled local/company workspace
+    client-a/
+    client-b/
+    cross-project/
 ```
+
+The product repo and workspace should be siblings under one parent folder. This makes relative-path examples predictable while keeping private client memory out of the licensed product repo.
 
 The product repo provides the method. The workspace contains private working memory.
 
@@ -261,26 +268,29 @@ Manifest files keep modules inspectable, versioned, and standard.
 
 All v0.1 memory, workflow, and skill files should use lightweight YAML frontmatter.
 
-Minimum fields:
+Hard-coded v0.1 minimum fields:
 
 ```yaml
 ---
 id: unique-slug
-name: Human-readable name
-type: memory|workflow|skill
-version: 0.1.0
-scope: product|personal|client|project|suite|test|cross-project|team-approved
-status: draft|reviewed|trusted|deprecated
-owner: owner-name
-last_reviewed: YYYY-MM-DD
-source_reference: source or origin
-review_required: true
+scope: personal|client-project|cross-project|company-approved
+status: raw|draft|reviewed|trusted|deprecated
+created: YYYY-MM-DD
+source_ref: sanitized-source-or-origin
 ---
 ```
 
-Optional fields:
+These fields are intentionally minimal. Git history can track authorship and version history in v0.1.
+
+Optional fields for product repo files, mature shared memory, workflows, and skills:
 
 ```yaml
+name: Human-readable name
+type: memory|workflow|skill
+version: 0.1.0
+owner: owner-name
+last_reviewed: YYYY-MM-DD
+review_required: true
 dependencies:
   - related-memory-or-skill-id
 supported_frameworks:
@@ -295,6 +305,8 @@ inputs:
 outputs:
   - reviewed-memory-update
 ```
+
+`source_ref` must be sanitized when memory is promoted to cross-project or company-approved memory. Do not place private Jira links, PR URLs, internal hostnames, client names, or ticket IDs in portable metadata.
 
 ## 13. Memory states
 
@@ -416,57 +428,29 @@ Should contain:
 
 ## 19. Research assessment
 
-NotebookLM research was useful and sufficient for v0.1 product specification.
+Two NotebookLM passes have now been processed into this product spec.
 
-Integrated:
+Integrated from the latest pass:
 
-- frontmatter/manifest discipline
-- draft vs trusted memory states
-- memory promotion validation
-- audit/source metadata
-- Git as primary audit trail
-- explicit product repo vs workspace separation
-- conflict/precedence rules
-- memory safety and sanitization
-- v0.1 vs v0.2 boundaries
+- v0.1 scope consolidation to four primary scopes
+- clear sibling relationship between licensed product repo and private workspaces
+- hard-coded minimum frontmatter fields
+- metadata sanitization for `source_ref`
+- raw input sandboxing concept
+- stronger commercial hook for freelance testers and QA agencies
 
 Rejected or deferred:
 
+- automated promotion
 - complex CLI/GUI for v0.1
 - automated ingestion
 - real-time multi-user syncing
 - heavy validation scripts in v0.1
+- separate suite and test-case folders before real usage proves the need
 - broad specialized testing packs before the failure-memory loop is validated
 
-## 20. Follow-up NotebookLM prompt
+## 20. Product readiness verdict
 
-```text
-You are reviewing the refined PRODUCT-SPEC.md for ProChat QA Memory.
+This product specification is ready to support v0.1 implementation planning.
 
-Goal:
-Stress-test the product specification for clarity, safety, commercial viability, and v0.1 implementability without changing the product direction.
-
-Product direction:
-- ProChat QA Memory is a portable, markdown-first persistent QA memory system.
-- It is not a test runner, SaaS dashboard, CI/CD platform, AI agent harness, vector database, or self-healing execution engine.
-- It is designed for freelance testers, QA consultancies, and testing companies whose testers work across many external client environments.
-- It must support personal, client, project, suite, test-case, cross-project, and team-approved memory scopes.
-- It must be review-first, source-traceable, safe, AI-agnostic, tool-agnostic, and environment-agnostic.
-
-Review tasks:
-1. Identify any remaining ambiguity in the product repo vs external workspace model.
-2. Identify any missing v0.1 requirements that are essential for safe use.
-3. Identify anything that still feels like feature bloat and should move to v0.2+.
-4. Review the metadata/frontmatter schema and recommend only essential changes.
-5. Review the memory scope and precedence rules for tester usability.
-6. Review the safety and sanitization rules for client confidentiality and memory poisoning risk.
-7. Recommend the clearest commercial explanation of what the buyer is paying for.
-
-Output format:
-- Ready to keep
-- Must clarify before build
-- Move to roadmap
-- Safety concerns
-- Suggested wording improvements
-- Final v0.1 readiness verdict
-```
+No further broad NotebookLM research is recommended before building the first repo skeleton and demo. The next useful research should be based on pilot feedback or a concrete blocked implementation decision.
