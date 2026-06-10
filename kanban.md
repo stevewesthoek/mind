@@ -38,9 +38,9 @@ kanban-plugin: board
 - [x] Figure out new direction Vila Solidaria ✅ 2026-06-05
 - [x] read mark's boek ✅ 2026-06-07
 - [ ] how  can we see soccer on our TV in 4K
+- [ ] YA finance app
 - [ ] Find Amazon products for FGWA and make example description
 - [ ] Learn Portuguese for Passport
-- [ ] YA finance app
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
 - [ ] Make FB shorts account with free github repos
 - [ ] Prepare Lambda meeting
