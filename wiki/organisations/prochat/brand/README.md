@@ -10,19 +10,41 @@
 ProChat OS helps businesses turn messy work into useful outputs their team can review and use.
 ```
 
+## Core philosophy
+
+ProChat OS is memory-first.
+
+The durable product layer is Work Memory: reusable knowledge, examples, decisions, preferences, rules, and feedback that make repeated work better over time.
+
+```text
+Memory is the product foundation.
+Workflows are the method.
+AI is the assistant.
+Software and agents are implementation layers.
+```
+
 ## Canonical documents
 
-- `prochat-os-strategy.md` — business strategy and product definition
-- `prochat-os-technical-definition.md` — internal product architecture
-- `prochat-os-modules.md` — Work Memory and workflow module architecture
-- `prochat-os-go-to-market.md` — offer, wedges, outreach, and sales language
-- `prochat-os-roadmap.md` — phased execution path
+Start here:
+
+1. `prochat-os-strategy.md` — highest-level strategy, vision, philosophy, product definition, and buyer outcome
+2. `prochat-os-modules.md` — Work Memory and workflow module architecture
+3. `prochat-os-roadmap.md` — phased execution path
+4. `prochat-os-go-to-market.md` — offer, wedges, outreach, and sales language
+5. `prochat-os-technical-definition.md` — internal product architecture and implementation options
+
+Supporting brand documents:
+
 - `company-overview.md` — concise company overview
 - `category-definition.md` — category and positioning
 - `customer-profiles.md` — target buyers and first wedges
 - `narrative.md` — story and belief system
 - `content-strategy.md` — content direction
 - `brand-ruleset.md` — copy rules and voice
+
+Historical documents:
+
+- `archive/` — superseded or historical strategy material kept for reference only
 
 ## Public marketing rule
 

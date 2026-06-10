@@ -14,6 +14,28 @@ ProChat OS helps businesses turn messy information and reusable company knowledg
 Messy work in. Useful work out.
 ```
 
+## Core philosophy
+
+ProChat OS is memory-first.
+
+The durable product layer is **Work Memory**: reusable knowledge, examples, decisions, preferences, rules, and feedback that make repeated work better over time.
+
+```text
+Every repeated work situation should leave reusable memory behind.
+That memory should make the next run faster, clearer, and more accurate.
+```
+
+This is the foundation of ProChat OS.
+
+```text
+Memory is the product foundation.
+Workflows are the method.
+AI is the assistant.
+Software, agents, connectors, and runtimes are implementation layers.
+```
+
+Public marketing should still lead with buyer outcomes such as less rewriting, less re-explaining, faster drafts, clearer handoffs, and review-ready work. The memory-first philosophy is the internal strategic foundation.
+
 ## What ProChat OS is
 
 ProChat OS is a managed AI work system for businesses.
