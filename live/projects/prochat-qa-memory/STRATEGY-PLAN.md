@@ -1,4 +1,4 @@
-# ProKit QA Memory — Strategy Plan
+# ProChat QA Memory — Strategy Plan
 
 **Status:** discovery strategy draft  
 **Created:** 2026-06-08  
@@ -7,17 +7,37 @@
 
 ## 1. Executive summary
 
-ProKit QA Memory is a proposed derivative product from the ProKit / ProChat OS direction.
+ProChat QA Memory is a proposed niche-specific derivative product from the ProChat OS direction.
+
+The highest ProChat OS vision is not to build another temporary software tool, another isolated agent, or another workflow that becomes obsolete when tools change. The highest vision is to give people and businesses a **persistent Work Memory**: a growing, reusable body of knowledge, examples, decisions, lessons, preferences, rules, and feedback that makes every future AI-assisted workflow better.
+
+The core ProChat OS philosophy:
+
+```text
+Every repeated work situation should leave reusable memory behind.
+That memory should make the next run faster, clearer, and more accurate.
+```
+
+ProChat QA Memory applies this philosophy to software testing.
 
 The product should not be a new testing framework, test runner, SaaS dashboard, CI/CD tool, self-healing engine, or AI agent platform. Those categories are crowded, tool-dependent, maintenance-heavy, and difficult to differentiate.
 
-The recommended product is a **portable, licensed, markdown-first QA memory operating system** for software testers and software testing companies.
+The recommended product is a **portable, licensed, markdown-first persistent QA memory system** for software testers and software testing companies.
 
 The core promise:
 
 ```text
 Give every tester a structured way to capture client context, test decisions, failures, risks, regression lessons, performance lessons, and reusable AI instructions — so testing knowledge compounds over time instead of disappearing into chats, tickets, logs, and people’s heads.
 ```
+
+The product distinction:
+
+```text
+Most QA tools help testers write, run, heal, or report tests.
+ProChat QA Memory helps testers remember what testing has already taught them.
+```
+
+The more ProChat QA Memory is used, the more valuable it becomes. Each reviewed failure, flaky test, regression issue, performance concern, client rule, test-data problem, selector lesson, and release decision becomes reusable testing intelligence for future work.
 
 The best first buyer is not necessarily a software company that owns one product. The better first buyer is a **software testing company, QA consultancy, SDET staffing company, or test automation agency** with multiple testers working across multiple client environments.
 
@@ -26,7 +46,7 @@ Those testers often cannot install new tools in client systems, cannot change cl
 The recommended initial packaging:
 
 ```text
-ProKit QA Memory
+ProChat QA Memory
 A private, licensed, versioned GitHub repository containing:
 - core QA memory model
 - tester workspace templates
@@ -40,34 +60,36 @@ A private, licensed, versioned GitHub repository containing:
 - examples and training cases
 ```
 
-The customer licenses access per tester or per company. Testers clone the product repo, then create private local/client workspaces from the provided templates. Client-specific information stays in their own local or employer-approved environment and does not return to ProKit.
+The customer licenses access per tester or per company. Testers clone the product repo, then create private local/client workspaces from the provided templates. Client-specific information stays in their own local or employer-approved environment and does not return to ProChat.
 
-This is viable if the product stays focused on **portable memory and reusable testing intelligence**, not test execution automation.
+This is viable if the product stays focused on **persistent memory and reusable testing intelligence**, not test execution automation.
 
 ## 2. Terminology note
 
 The current canonical repo strategy documents refer to **ProChat OS** as the managed AI work system that turns messy information and reusable company knowledge into review-ready outputs.
 
-This plan uses the name **ProKit QA Memory** because that is the product name requested during the conversation. Naming should be confirmed later.
+This plan uses the name **ProChat QA Memory** because that is the product name requested during the conversation. Naming should be confirmed later.
 
 Potential naming options:
 
 | Name | Positioning | Notes |
 |---|---|---|
-| ProKit QA Memory | Productized derivative from ProKit/ProChat OS | Good if ProKit becomes the commercial product family. |
+| ProChat QA Memory | Productized derivative from ProChat/ProChat OS | Good if ProChat becomes the commercial product family. |
 | ProChat QA Memory | Stronger connection to existing ProChat OS docs | Good if ProChat remains the public brand. |
 | QA Memory OS | Clear category name | Generic, but strong. |
 | Test Memory OS | Broader and simpler | Could include manual, automation, regression, performance, API, mobile. |
-| ProKit Test Memory | Slightly broader than QA | May be easier to understand for testers. |
+| ProChat Test Memory | Slightly broader than QA | May be easier to understand for testers. |
 
 Recommendation for now:
 
 ```text
-Use “ProKit QA Memory” as the project name internally.
+Use “ProChat QA Memory” as the project name internally.
 Use “portable QA memory for AI-assisted software testers” as the public explanation.
 ```
 
-## 3. How it relates to ProKit / ProChat OS
+## 3. How it relates to ProChat / ProChat OS
+
+ProChat OS is the higher-level product philosophy and operating pattern. It exists to turn repeated work into persistent Work Memory that improves future work.
 
 The canonical ProChat OS pattern is:
 
@@ -75,28 +97,47 @@ The canonical ProChat OS pattern is:
 messy input + work memory → useful output → human review → improvement loop
 ```
 
-ProKit QA Memory is the QA-specific version:
+The deeper principle is persistence:
+
+```text
+Useful work should not disappear after it is completed.
+Every run should leave behind reusable memory.
+That memory should improve the next run.
+```
+
+This is the foundation of ProChat OS across all niches. ProChat OS should be understood as a memory-first work system, not primarily as software, automation, or agents. Software, automations, and agents may be used later, but they are replaceable implementation layers. The persistent Work Memory is the durable product layer.
+
+ProChat QA Memory is the QA-specific version:
 
 ```text
 test failures + logs + tester notes + client constraints + testing standards + historical lessons
-→ QA memory
+→ persistent QA memory
 → better triage, better test decisions, better AI assistance, better regression judgment
 → tester review
-→ memory improves
+→ QA memory improves
 ```
 
-This makes ProKit QA Memory a natural derivative product rather than a new business direction.
+This makes ProChat QA Memory a natural derivative product rather than a new business direction.
 
-### 3.1 ProKit OS layer mapping
+The key relationship:
 
-| ProKit / ProChat OS concept | QA-specific version |
+```text
+ProChat OS = persistent Work Memory for repeated business work.
+ProChat QA Memory = persistent QA Memory for repeated software testing work.
+```
+
+ProChat QA Memory should therefore be built from the same foundation as ProChat OS: memory first, workflows second, software third.
+
+### 3.1 ProChat OS layer mapping
+
+| ProChat / ProChat OS concept | QA-specific version |
 |---|---|
 | Messy input | Failed test logs, Playwright traces, screenshots, Jira tickets, PR notes, test run summaries, performance results, release notes, acceptance criteria. |
 | Work Memory | QA Memory: known failures, flaky tests, product risks, client rules, selector strategy, test data rules, regression lessons, performance baselines, release lessons. |
 | Workflow module | Failed-test-to-lesson, flaky-test review, new-story-to-test-plan, regression scope review, performance regression review. |
 | Human review | Tester confirms whether AI analysis is correct before memory is updated. |
 | Improvement loop | Each reviewed failure or release adds more reusable knowledge. |
-| Managed improvement | ProKit updates the core memory model, templates, checklists, and AI instructions. |
+| Managed improvement | ProChat updates the core memory model, templates, checklists, and AI instructions. |
 
 ### 3.2 Why QA is a good derivative niche
 
@@ -112,7 +153,7 @@ QA is a strong derivative niche because testing already produces repeated knowle
 - repeated onboarding context for new testers
 - repeated explanations given to AI assistants
 
-This matches ProKit OS perfectly: recurring knowledge work becomes reusable memory.
+This matches ProChat OS perfectly: recurring knowledge work becomes reusable memory.
 
 ## 4. Product thesis
 
@@ -147,7 +188,7 @@ Current tester workflow often looks like this:
 Test fails → tester investigates → conclusion goes into Slack/Jira/PR comment/head → lesson is forgotten → similar failure happens later → investigation repeats.
 ```
 
-ProKit QA Memory changes the loop:
+ProChat QA Memory changes the loop:
 
 ```text
 Test fails → tester investigates with QA memory → tester confirms conclusion → reusable lesson is stored → future AI/test work starts smarter.
@@ -211,7 +252,7 @@ Your testers keep their existing tools, but gain a portable memory system that c
 
 ## 6. What the product is
 
-ProKit QA Memory is a **licensed, portable QA memory repo**.
+ProChat QA Memory is a **licensed, portable QA memory repo**.
 
 It contains:
 
@@ -223,7 +264,7 @@ It contains:
 6. Review checklists.
 7. Example memories.
 8. Training and rollout guides.
-9. Versioned improvements maintained by ProKit.
+9. Versioned improvements maintained by ProChat.
 
 ### 6.1 What it is not
 
@@ -251,7 +292,7 @@ The strategic advantage is low dependency, low maintenance, high portability, an
 
 ### 7.1 Master product repo
 
-ProKit maintains one private repository:
+ProChat maintains one private repository:
 
 ```text
 prokit-qa-memory/
@@ -311,11 +352,11 @@ my-qa-work/
 
 Client-specific data lives only in the tester/company-controlled workspace.
 
-ProKit’s repo contains the reusable method, not the customer’s private data.
+ProChat’s repo contains the reusable method, not the customer’s private data.
 
 ### 7.3 Update model
 
-ProKit updates the product repo with:
+ProChat updates the product repo with:
 
 - new workflow templates
 - improved AI instructions
@@ -331,11 +372,11 @@ Customers pull updates:
 git pull
 ```
 
-Or their company mirror pulls from ProKit on a release schedule.
+Or their company mirror pulls from ProChat on a release schedule.
 
 ### 7.4 No-access constraint
 
-Because the buyer’s testers work at external client companies, ProKit should assume:
+Because the buyer’s testers work at external client companies, ProChat should assume:
 
 - no access to client repos
 - no access to client laptops
@@ -493,7 +534,7 @@ Failure memory is the best first module because:
 ```text
 1. A test fails.
 2. Tester collects minimal evidence.
-3. Tester runs the ProKit failed-test workflow with their AI assistant.
+3. Tester runs the ProChat failed-test workflow with their AI assistant.
 4. AI proposes a failure summary, category, next action, and reusable lesson.
 5. Tester reviews and corrects the proposal.
 6. Final lesson is stored in QA memory.
@@ -502,7 +543,7 @@ Failure memory is the best first module because:
 
 ### 9.3 Failure categories
 
-ProKit QA Memory should standardize failure categories:
+ProChat QA Memory should standardize failure categories:
 
 - real product bug
 - test automation bug
@@ -555,28 +596,28 @@ Compete as a portable QA memory operating system for testers who cannot depend o
 |---|---|---|
 | Direct / strongest conceptual competitor | Vostride agent-qa | Has an agentic QA harness with file-backed memory. Very relevant, but more software/runtime-heavy. |
 | QA skills / AI-agent skill libraries | QASkills.sh | Provides installable QA skills for AI coding agents. Relevant as a skills competitor, not full memory OS. |
-| AI test automation platforms | mabl, Functionize, Testim, Katalon, testRigor, ACCELQ, Autify, MagicPod, Momentic, QA Wolf, LambdaTest, Rainforest QA, Applitools, Bug0, TestSprite, Octomind, BaseRock, Autonoma, SpurTest, Autosana | These compete if ProKit QA Memory is positioned as AI testing automation. They are less direct if ProKit is positioned as portable memory. |
+| AI test automation platforms | mabl, Functionize, Testim, Katalon, testRigor, ACCELQ, Autify, MagicPod, Momentic, QA Wolf, LambdaTest, Rainforest QA, Applitools, Bug0, TestSprite, Octomind, BaseRock, Autonoma, SpurTest, Autosana | These compete if ProChat QA Memory is positioned as AI testing automation. They are less direct if ProChat is positioned as portable memory. |
 | Test analytics / failure analysis platforms | ReportPortal | Relevant for failure history, pattern analysis, AI failure reason detection. More platform/integration-heavy. |
 | Research / experimental approaches | RAG Selenium agents, self-healing selector frameworks, AI E2E generation papers | Validate the trend, but usually require systems, tooling, vector DBs, or frameworks. |
 | Public workflow/template repos | AI QA workflow repos, markdown QA memory examples | Conceptually similar, but usually not packaged as a B2B licensed tester memory product. |
 
 ## 11. Competitor comparison table
 
-| Product / competitor | What it does | Strengths | Limitations / cons | What it cannot easily do | Threat to ProKit QA Memory | ProKit QA Memory differentiation |
+| Product / competitor | What it does | Strengths | Limitations / cons | What it cannot easily do | Threat to ProChat QA Memory | ProChat QA Memory differentiation |
 |---|---|---|---|---|---|---|
-| **Vostride agent-qa** | Agentic QA harness with memory; natural-language tests; CLI/dashboard; self-improving test execution. | Very close to QA + memory. Has runtime, test execution, file-backed memory, self-healing direction. Strong validation that QA memory matters. | More tool/runtime-heavy. Requires adopting its harness. Commercial reuse is license-sensitive due to Functional Source License style restrictions. More likely to need setup, dependencies, and LLM/runtime decisions. | Does not primarily serve as a portable consultant memory system independent of its execution harness. | High conceptual threat. Closest direct signal. | ProKit should be lighter, framework-agnostic, no harness required, no pipeline integration required, designed for testers moving across client environments. |
-| **QASkills.sh** | Directory of QA skills for AI coding agents, including Playwright, API, performance, accessibility, visual regression, etc. | Strong skills marketplace angle. Easy install into many coding agents. Broad testing coverage. | Primarily skill installation, not persistent project/client memory. Requires Node/npx for quick install flow. Skills may improve AI behavior but do not necessarily create a long-term QA memory discipline. | Does not provide a full memory operating system with client/project/personal/team memory, review loops, and licensing for testing companies. | Medium threat if ProKit is positioned as “QA skills.” | ProKit should include skills, but as part of a larger memory system: lessons learned, failure memory, regression memory, onboarding, governance. |
-| **mabl** | AI-native test automation platform with low-code testing, auto-healing, regression, performance, API/mobile/web testing. | Mature platform; strong automation story; broad enterprise features; self-healing and AI testing positioning. | SaaS/platform dependency. Competes in test execution and automation, not portable memory. Adoption requires tool change and budget. May not fit testers embedded in client environments without permission. | Cannot be a simple, local, markdown-first personal/client memory system usable across any tool stack. | High only if ProKit claims to be AI test automation. Low if ProKit stays memory-first. | ProKit complements mabl by documenting what failures teach testers, independent of test platform. |
-| **Functionize** | Enterprise AI test automation platform; agentic AI builds, runs, diagnoses, and self-heals tests. | Strong enterprise automation promise. Reduces maintenance. Good for teams that can adopt a platform. | Heavy platform category. May be expensive and client-permission dependent. Not designed as portable memory for outsourced testers. | Cannot easily give an individual tester a client-safe local memory method across many tool stacks. | High in AI testing automation category. Low in portable memory category. | ProKit avoids platform replacement and focuses on tester-owned memory. |
-| **Testim / Tricentis** | AI-powered low-code web app test automation with smart/self-healing locators and test management. | Strong smart-locator and low-code test maintenance story. Backed by Tricentis. | Platform adoption required. Primarily about test creation/execution/maintenance. Less focused on transferable human/AI memory. | Cannot standardize lessons learned across client projects without adopting the platform. | Medium if ProKit talks about self-healing. | ProKit should avoid “self-healing engine” claims and focus on remembering selector lessons, failure patterns, and decisions. |
-| **ReportPortal** | Test automation analytics platform with dashboards, history, ML/AI failure reason detection, pattern analysis. | Strong in test result history, failure categorization, dashboards, and analytics. Open-source ecosystem signal. | Requires integration and operation. More centralized system than portable repo. Better for companies controlling their pipelines than testers moving across clients. | Does not provide a lightweight, AI-agnostic memory repo for personal/client QA lessons. | Medium-high for failure analysis and history. | ProKit can be the low-friction memory layer when ReportPortal is unavailable or too heavy. |
-| **Katalon** | AI platform for software quality across web, mobile, API, desktop; includes planning, authoring, executing, analyzing, and self-healing locators. | Broad platform and known brand. Strong coverage across testing workflows. | Platform dependency. License and setup required. Not portable for testers across client environments. | Cannot act as a simple client-safe markdown memory method independent of Katalon. | Medium-high in all-in-one QA tooling. | ProKit should not compete as a platform; it should work beside Katalon and capture reusable lessons. |
-| **testRigor** | AI/no-code/plain-English test automation; self-healing; web/mobile/API/desktop. | Very simple authoring story. Good for non-technical testers. Strong “plain English” appeal. | Natural language can become limiting for complex technical test logic. Platform dependency. Not primarily a memory system. | Cannot preserve cross-client tester lessons as portable markdown memory. | Medium if ProKit is sold as natural-language testing. | ProKit should focus on persistent testing intelligence, not plain-English test execution. |
-| **ACCELQ** | AI-powered codeless test automation and continuous testing platform. | Enterprise codeless automation and broad lifecycle coverage. | Platform replacement/integration category. Less relevant for client-embedded testers without control over tool stack. | Not a local memory OS. | Medium adjacent threat. | ProKit stays tool-independent and lightweight. |
-| **Autify / MagicPod** | AI/codeless test automation platforms. | Easier test authoring and maintenance. | Platform-specific. Tool adoption required. | Not portable across client restrictions. | Medium adjacent threat. | ProKit works without changing the client’s automation platform. |
-| **Momentic / QA Wolf / LambdaTest / Rainforest QA / Applitools / Bug0 / TestSprite / Octomind / BaseRock / Autonoma / SpurTest / Autosana** | Various AI QA, automated testing, visual testing, cloud testing, managed QA, and agentic testing tools. | Validate strong market demand for AI-assisted QA. Some may have powerful automation or managed services. | Mostly platform/service/tooling categories. They usually require adoption, integration, or vendor workflow. | They do not primarily sell portable, markdown-first tester memory for use across unrelated client environments. | Medium market-noise threat. | ProKit should use different language: memory, lessons learned, AI-usable QA context, portable tester operating system. |
-| **Public markdown QA memory examples / workflow repos** | Individual repos and articles showing QA memory, `.md` long-term memory, agent workflows, regression maps, and AI skills. | Very close conceptually. Shows the idea is emerging organically. | Often not commercialized, not packaged, not maintained for B2B licensing, not focused on outsourced testers. | Usually lacks professional rollout, licensing, training, maintenance, and a complete productized system. | Medium idea-copy threat. | ProKit can win by packaging, clarity, training, and buyer-specific positioning. |
-| **Academic / research prototypes** | RAG-based Selenium agents, self-healing selector approaches, AI E2E generation, API test generation. | Validates trend: context, history, and grounding improve testing. | Research prototypes are not usually easy commercial products. Often require vector DBs, tools, datasets, or specific frameworks. | Do not provide a ready-to-use consultant memory system. | Low direct threat, high inspiration. | ProKit can translate research insight into simple operational memory patterns. |
+| **Vostride agent-qa** | Agentic QA harness with memory; natural-language tests; CLI/dashboard; self-improving test execution. | Very close to QA + memory. Has runtime, test execution, file-backed memory, self-healing direction. Strong validation that QA memory matters. | More tool/runtime-heavy. Requires adopting its harness. Commercial reuse is license-sensitive due to Functional Source License style restrictions. More likely to need setup, dependencies, and LLM/runtime decisions. | Does not primarily serve as a portable consultant memory system independent of its execution harness. | High conceptual threat. Closest direct signal. | ProChat should be lighter, framework-agnostic, no harness required, no pipeline integration required, designed for testers moving across client environments. |
+| **QASkills.sh** | Directory of QA skills for AI coding agents, including Playwright, API, performance, accessibility, visual regression, etc. | Strong skills marketplace angle. Easy install into many coding agents. Broad testing coverage. | Primarily skill installation, not persistent project/client memory. Requires Node/npx for quick install flow. Skills may improve AI behavior but do not necessarily create a long-term QA memory discipline. | Does not provide a full memory operating system with client/project/personal/team memory, review loops, and licensing for testing companies. | Medium threat if ProChat is positioned as “QA skills.” | ProChat should include skills, but as part of a larger memory system: lessons learned, failure memory, regression memory, onboarding, governance. |
+| **mabl** | AI-native test automation platform with low-code testing, auto-healing, regression, performance, API/mobile/web testing. | Mature platform; strong automation story; broad enterprise features; self-healing and AI testing positioning. | SaaS/platform dependency. Competes in test execution and automation, not portable memory. Adoption requires tool change and budget. May not fit testers embedded in client environments without permission. | Cannot be a simple, local, markdown-first personal/client memory system usable across any tool stack. | High only if ProChat claims to be AI test automation. Low if ProChat stays memory-first. | ProChat complements mabl by documenting what failures teach testers, independent of test platform. |
+| **Functionize** | Enterprise AI test automation platform; agentic AI builds, runs, diagnoses, and self-heals tests. | Strong enterprise automation promise. Reduces maintenance. Good for teams that can adopt a platform. | Heavy platform category. May be expensive and client-permission dependent. Not designed as portable memory for outsourced testers. | Cannot easily give an individual tester a client-safe local memory method across many tool stacks. | High in AI testing automation category. Low in portable memory category. | ProChat avoids platform replacement and focuses on tester-owned memory. |
+| **Testim / Tricentis** | AI-powered low-code web app test automation with smart/self-healing locators and test management. | Strong smart-locator and low-code test maintenance story. Backed by Tricentis. | Platform adoption required. Primarily about test creation/execution/maintenance. Less focused on transferable human/AI memory. | Cannot standardize lessons learned across client projects without adopting the platform. | Medium if ProChat talks about self-healing. | ProChat should avoid “self-healing engine” claims and focus on remembering selector lessons, failure patterns, and decisions. |
+| **ReportPortal** | Test automation analytics platform with dashboards, history, ML/AI failure reason detection, pattern analysis. | Strong in test result history, failure categorization, dashboards, and analytics. Open-source ecosystem signal. | Requires integration and operation. More centralized system than portable repo. Better for companies controlling their pipelines than testers moving across clients. | Does not provide a lightweight, AI-agnostic memory repo for personal/client QA lessons. | Medium-high for failure analysis and history. | ProChat can be the low-friction memory layer when ReportPortal is unavailable or too heavy. |
+| **Katalon** | AI platform for software quality across web, mobile, API, desktop; includes planning, authoring, executing, analyzing, and self-healing locators. | Broad platform and known brand. Strong coverage across testing workflows. | Platform dependency. License and setup required. Not portable for testers across client environments. | Cannot act as a simple client-safe markdown memory method independent of Katalon. | Medium-high in all-in-one QA tooling. | ProChat should not compete as a platform; it should work beside Katalon and capture reusable lessons. |
+| **testRigor** | AI/no-code/plain-English test automation; self-healing; web/mobile/API/desktop. | Very simple authoring story. Good for non-technical testers. Strong “plain English” appeal. | Natural language can become limiting for complex technical test logic. Platform dependency. Not primarily a memory system. | Cannot preserve cross-client tester lessons as portable markdown memory. | Medium if ProChat is sold as natural-language testing. | ProChat should focus on persistent testing intelligence, not plain-English test execution. |
+| **ACCELQ** | AI-powered codeless test automation and continuous testing platform. | Enterprise codeless automation and broad lifecycle coverage. | Platform replacement/integration category. Less relevant for client-embedded testers without control over tool stack. | Not a local memory OS. | Medium adjacent threat. | ProChat stays tool-independent and lightweight. |
+| **Autify / MagicPod** | AI/codeless test automation platforms. | Easier test authoring and maintenance. | Platform-specific. Tool adoption required. | Not portable across client restrictions. | Medium adjacent threat. | ProChat works without changing the client’s automation platform. |
+| **Momentic / QA Wolf / LambdaTest / Rainforest QA / Applitools / Bug0 / TestSprite / Octomind / BaseRock / Autonoma / SpurTest / Autosana** | Various AI QA, automated testing, visual testing, cloud testing, managed QA, and agentic testing tools. | Validate strong market demand for AI-assisted QA. Some may have powerful automation or managed services. | Mostly platform/service/tooling categories. They usually require adoption, integration, or vendor workflow. | They do not primarily sell portable, markdown-first tester memory for use across unrelated client environments. | Medium market-noise threat. | ProChat should use different language: memory, lessons learned, AI-usable QA context, portable tester operating system. |
+| **Public markdown QA memory examples / workflow repos** | Individual repos and articles showing QA memory, `.md` long-term memory, agent workflows, regression maps, and AI skills. | Very close conceptually. Shows the idea is emerging organically. | Often not commercialized, not packaged, not maintained for B2B licensing, not focused on outsourced testers. | Usually lacks professional rollout, licensing, training, maintenance, and a complete productized system. | Medium idea-copy threat. | ProChat can win by packaging, clarity, training, and buyer-specific positioning. |
+| **Academic / research prototypes** | RAG-based Selenium agents, self-healing selector approaches, AI E2E generation, API test generation. | Validates trend: context, history, and grounding improve testing. | Research prototypes are not usually easy commercial products. Often require vector DBs, tools, datasets, or specific frameworks. | Do not provide a ready-to-use consultant memory system. | Low direct threat, high inspiration. | ProChat can translate research insight into simple operational memory patterns. |
 
 ## 12. Public evidence and source notes
 
@@ -607,6 +648,30 @@ Research signals found during the conversation:
 
 ## 13. Strategic positioning
 
+### 13.0 Core positioning principle
+
+The product should be positioned around persistent QA memory, not around automation.
+
+Recommended internal principle:
+
+```text
+Memory is the product.
+Workflows are the method.
+AI is the assistant.
+Testing tools are the environment.
+```
+
+This keeps ProChat QA Memory aligned with ProChat OS. The system should become more valuable over time because the tester or team keeps adding reviewed knowledge from real testing work.
+
+The strongest strategic distinction:
+
+```text
+ProChat QA Memory does not try to be the tool that runs or heals tests.
+It is the memory layer that remembers what previous tests, failures, regressions, and releases have taught the tester.
+```
+
+This persistent memory can later support more advanced capabilities such as better AI-assisted triage, better test planning, safer self-healing suggestions, automated summaries, or tool integrations. But those capabilities should be built on top of memory, not replace memory as the product foundation.
+
 ### 13.1 Do not say
 
 Avoid positioning as:
@@ -628,7 +693,7 @@ These terms create direct comparison with large and crowded tools.
 Recommended positioning:
 
 ```text
-ProKit QA Memory is a portable memory system for AI-assisted software testers.
+ProChat QA Memory is a portable memory system for AI-assisted software testers.
 ```
 
 Expanded version:
@@ -642,7 +707,7 @@ It helps testers capture client context, failure patterns, regression lessons, t
 The unique selling proposition:
 
 ```text
-Your testers already have tools. ProKit QA Memory gives them persistent testing memory that works across all of them.
+Your testers already have tools. ProChat QA Memory gives them persistent testing memory that works across all of them.
 ```
 
 More specific:
@@ -664,7 +729,7 @@ Most competitors focus on:
 - low-code automation
 - agentic execution
 
-ProKit QA Memory focuses on:
+ProChat QA Memory focuses on:
 
 - remembering lessons
 - preserving client/project context
@@ -676,11 +741,11 @@ ProKit QA Memory focuses on:
 
 This is a different category.
 
-## 14. What ProKit QA Memory can and cannot do
+## 14. What ProChat QA Memory can and cannot do
 
 ### 14.1 Can do
 
-ProKit QA Memory can:
+ProChat QA Memory can:
 
 - help testers structure project/client context
 - capture recurring failure patterns
@@ -694,11 +759,11 @@ ProKit QA Memory can:
 - support testers in environments where no tool installation is allowed
 - work with many frameworks and AI tools
 - be sold as a maintained licensed repo
-- be updated centrally by ProKit
+- be updated centrally by ProChat
 
 ### 14.2 Cannot do
 
-ProKit QA Memory cannot, by itself:
+ProChat QA Memory cannot, by itself:
 
 - run tests
 - automatically collect pipeline logs
@@ -715,7 +780,7 @@ These limitations should be embraced, not hidden.
 Buyer-facing explanation:
 
 ```text
-ProKit QA Memory does not replace your testing tools. It makes your testing knowledge reusable across them.
+ProChat QA Memory does not replace your testing tools. It makes your testing knowledge reusable across them.
 ```
 
 ## 15. Lean product recommendation
@@ -725,7 +790,7 @@ ProKit QA Memory does not replace your testing tools. It makes your testing know
 Build only the following first:
 
 ```text
-ProKit QA Memory v0.1
+ProChat QA Memory v0.1
 - README and quickstart
 - core QA memory principles
 - workspace template
@@ -781,7 +846,7 @@ Tester pastes a failure into AI and gets a generic answer.
 After:
 
 ```text
-Tester uses ProKit QA Memory context and gets a more specific, reusable failure analysis plus memory update.
+Tester uses ProChat QA Memory context and gets a more specific, reusable failure analysis plus memory update.
 ```
 
 ## 16. Commercial model
@@ -818,7 +883,7 @@ They are paying for:
 - reusable AI instructions
 - consistent team practice
 - onboarding material
-- updates from ProKit
+- updates from ProChat
 - a structured way to make AI-assisted testing safer and more useful
 - a system that works without client-system access
 
@@ -858,13 +923,13 @@ The private paid repo includes:
 ### 17.1 One-liner
 
 ```text
-ProKit QA Memory gives software testers a portable memory system for AI-assisted testing, so lessons from failures, regressions, and client projects do not disappear.
+ProChat QA Memory gives software testers a portable memory system for AI-assisted testing, so lessons from failures, regressions, and client projects do not disappear.
 ```
 
 ### 17.2 Buyer pitch
 
 ```text
-Your testers already use different tools at different clients. They cannot always install new platforms or change pipelines. ProKit QA Memory gives them a structured, local-first way to capture what they learn, reuse it with AI assistants, and standardize QA thinking across projects.
+Your testers already use different tools at different clients. They cannot always install new platforms or change pipelines. ProChat QA Memory gives them a structured, local-first way to capture what they learn, reuse it with AI assistants, and standardize QA thinking across projects.
 ```
 
 ### 17.3 Tester pitch
@@ -876,7 +941,7 @@ Stop asking AI the same testing questions from zero. Keep a client-safe QA memor
 ### 17.4 QA lead pitch
 
 ```text
-Give every tester the same memory discipline without forcing one testing tool. ProKit QA Memory standardizes how your testers capture lessons, use AI, and avoid repeated investigation across client projects.
+Give every tester the same memory discipline without forcing one testing tool. ProChat QA Memory standardizes how your testers capture lessons, use AI, and avoid repeated investigation across client projects.
 ```
 
 ## 18. Risks and mitigations
@@ -885,7 +950,7 @@ Give every tester the same memory discipline without forcing one testing tool. P
 |---|---|---|
 | Buyers think it is just markdown templates | Repo-only products can feel low-value. | Sell it as maintained QA operating method, with training, examples, versioned updates, and rollout material. |
 | Testers do not use it consistently | Memory systems only work if updated. | Make workflows extremely short. Start with failure memory only. Add weekly review habit. |
-| Client data/security concerns | Testers may handle confidential logs or product data. | Build client-data safety rules. Encourage local/client-approved storage only. Never require upload to ProKit. |
+| Client data/security concerns | Testers may handle confidential logs or product data. | Build client-data safety rules. Encourage local/client-approved storage only. Never require upload to ProChat. |
 | Competition from AI testing tools | Large platforms can claim AI memory, self-healing, analytics. | Avoid automation category. Position around portable memory for testers across client environments. |
 | Too broad too soon | QA includes manual, automation, API, performance, mobile, security, accessibility. | Start with failure memory for automation/regression. Add domains later. |
 | Hard to prove ROI | Memory value compounds over time. | Use before/after demos and repeated-failure examples. Track repeated investigations avoided. |
@@ -902,7 +967,7 @@ Proceed, but only as a narrow, portable QA memory product.
 
 This is viable because:
 
-- it fits ProKit / ProChat OS core strategy
+- it fits ProChat / ProChat OS core strategy
 - it uses memory, not tool replacement, as the main value
 - it can be built leanly in markdown
 - it does not require APIs, servers, or client access
@@ -989,20 +1054,20 @@ Measure:
 Offer:
 
 ```text
-ProKit QA Memory Team License
+ProChat QA Memory Team License
 For up to 20 testers.
 Includes private repo access, onboarding guide, first workflow pack, quarterly updates, and team lead rollout guide.
 ```
 
 ## 21. Final strategic recommendation
 
-ProKit QA Memory should be built as a **productized memory layer**, not as software automation.
+ProChat QA Memory should be built as a **productized memory layer**, not as software automation.
 
-The perfect ProKit OS alignment is:
+The perfect ProChat OS alignment is:
 
 ```text
-ProKit OS = reusable work memory for businesses.
-ProKit QA Memory = reusable testing memory for software testers.
+ProChat OS = reusable work memory for businesses.
+ProChat QA Memory = reusable testing memory for software testers.
 ```
 
 The unique wedge is:
@@ -1020,7 +1085,7 @@ Every failed test becomes a reusable lesson.
 The strongest buyer sentence:
 
 ```text
-Your testers already have testing tools. ProKit QA Memory gives them the persistent memory those tools do not carry across clients.
+Your testers already have testing tools. ProChat QA Memory gives them the persistent memory those tools do not carry across clients.
 ```
 
-This is the leanest, most ProKit-native path.
+This is the leanest, most ProChat-native path.
