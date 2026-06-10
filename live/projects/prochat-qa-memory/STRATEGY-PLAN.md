@@ -157,6 +157,59 @@ This matches ProChat OS perfectly: recurring knowledge work becomes reusable mem
 
 ## 4. Product thesis
 
+### 4.0 Product foundation
+
+ProChat QA Memory is not a QA tool, test runner, or automation platform.
+
+It is the persistent memory layer for QA work.
+
+It should work with:
+
+- any testing framework
+- any AI assistant
+- any IDE
+- any client environment
+- any repository setup
+- with or without API access
+- with or without CI integration
+- with or without permission to install tools in the client environment
+
+Its core job is to make testing knowledge compound.
+
+```text
+Failed tests, flaky tests, regressions, performance issues, client rules, test-data problems, selector lessons, release decisions, and tester corrections become reusable QA memory.
+```
+
+This is the QA-specific version of the ProChat OS memory-first strategy.
+
+### 4.1 QA memory design principles
+
+- **Persistent:** lessons should survive individual chats, tickets, pipeline runs, and tester memory.
+- **Portable:** testers should be able to carry their approved working method across clients without carrying confidential client data.
+- **Client-safe:** client-specific memory should stay in the tester/company-approved workspace, not in the ProChat product repo.
+- **AI-agnostic:** the memory should be usable with ChatGPT, Claude, Copilot, Cursor, Gemini, or future AI assistants.
+- **Tool-agnostic:** the memory should support Playwright, Robot Framework, Cypress, Selenium, API testing, performance testing, manual testing, and future tools.
+- **Environment-agnostic:** the product should still be useful when testers cannot change the client repo, pipeline, or tooling.
+- **Canonical:** every important rule, lesson, pattern, or decision should have one trusted current place.
+- **Source-traceable:** important lessons should link back where possible to the failed run, bug ticket, PR, test file, screenshot, trace, report, or tester note that created the lesson.
+- **Review-first:** AI can draft summaries and memory updates, but testers decide what becomes trusted QA memory.
+- **Self-improving through use:** every reviewed failure, correction, regression, and release should make the next investigation easier.
+
+### 4.2 Practical meaning of self-healing
+
+ProChat QA Memory should not initially promise automatic self-healing test execution.
+
+In this product, self-healing means:
+
+```text
+A failure does not only get fixed.
+It leaves behind a reviewed lesson that reduces the chance of repeating the same mistake.
+```
+
+Future automation can use this memory to suggest safer fixes, better triage, improved test design, and eventually tool-specific self-healing workflows. But the foundation is the memory, not the automation.
+
+## 4.3 Product thesis
+
 Most QA teams and testers already have tools:
 
 - Playwright

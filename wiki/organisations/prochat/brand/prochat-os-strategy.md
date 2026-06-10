@@ -36,6 +36,29 @@ Software, agents, connectors, and runtimes are implementation layers.
 
 Public marketing should still lead with buyer outcomes such as less rewriting, less re-explaining, faster drafts, clearer handoffs, and review-ready work. The memory-first philosophy is the internal strategic foundation.
 
+## Design principles
+
+Every ProChat OS product, module, and niche derivative should follow these principles.
+
+- **Memory-first:** useful work should leave reusable memory behind.
+- **Review-first:** important outputs and memory updates should be reviewed by a human before they become trusted.
+- **Modular:** Work Memory, workflow modules, skills, and implementation tools should be separable and replaceable.
+- **Portable:** memory should be easy to move, export, inspect, and reuse across tools and environments.
+- **Inspectable:** users should be able to see what knowledge, examples, rules, and feedback influence outputs.
+- **Editable:** memory should be simple to correct, improve, split, merge, or retire.
+- **AI-agnostic:** the system should not depend on one model provider or assistant.
+- **Tool-agnostic:** the system should work with different IDEs, business tools, file systems, and automation layers.
+- **Environment-agnostic:** the system should still be useful with or without APIs, servers, SaaS integrations, or local installations.
+- **Source-traceable:** important memory should preserve where it came from, such as a source document, decision, example, review, customer conversation, or correction.
+- **Self-improving through use:** each reviewed run should improve memory, examples, rules, or workflow quality.
+
+Design rule:
+
+```text
+Do not add features for their own sake.
+Strengthen the memory layer first, then add workflows or software only when they make the memory more useful.
+```
+
 ## What ProChat OS is
 
 ProChat OS is a managed AI work system for businesses.
