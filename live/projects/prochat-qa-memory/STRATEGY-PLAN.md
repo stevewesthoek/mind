@@ -192,10 +192,74 @@ This is the QA-specific version of the ProChat OS memory-first strategy.
 - **Environment-agnostic:** the product should still be useful when testers cannot change the client repo, pipeline, or tooling.
 - **Canonical:** every important rule, lesson, pattern, or decision should have one trusted current place.
 - **Source-traceable:** important lessons should link back where possible to the failed run, bug ticket, PR, test file, screenshot, trace, report, or tester note that created the lesson.
+- **Evidence-aware:** memory should guide the tester, but it should not override current logs, screenshots, traces, source code, test output, or human judgment.
+- **Safe to promote:** raw notes, logs, and AI summaries should become trusted memory only after review, sanitization, and approval.
 - **Review-first:** AI can draft summaries and memory updates, but testers decide what becomes trusted QA memory.
 - **Self-improving through use:** every reviewed failure, correction, regression, and release should make the next investigation easier.
 
-### 4.2 Practical meaning of self-healing
+### 4.2 Multi-client and multi-project memory model
+
+ProChat QA Memory must be designed from the beginning for testers who work across many companies, departments, teams, tools, and test environments.
+
+The primary buyer may be:
+
+- a freelance tester
+- a software testing company
+- a QA consultancy
+- a test automation agency
+- a staffing company with testers placed at client organizations
+
+The primary user may work on one client today, another client next quarter, and a different department inside the same company after that. The memory system must therefore support strict separation where needed and cross-project reuse where safe.
+
+Core memory scopes:
+
+```text
+personal tester memory
+client memory
+project memory
+department/team memory
+test-suite memory
+test-case memory
+cross-project QA memory
+company/team-approved memory
+```
+
+Practical meaning:
+
+- **Project memory** stores context, failures, risks, tools, test-data rules, environments, and lessons for one project.
+- **Client memory** stores approved context that applies across multiple projects inside one client organization.
+- **Department/team memory** stores rules that apply to one client team or department, but not necessarily the whole client.
+- **Test-suite memory** stores patterns for a smoke, regression, API, performance, mobile, or accessibility suite.
+- **Test-case memory** stores recurring behavior and known issues for a specific test or scenario.
+- **Personal tester memory** stores the tester's own reusable lessons, prompts, heuristics, and mistakes to avoid.
+- **Cross-project QA memory** stores generalized lessons that are safe and useful across clients without leaking confidential information.
+- **Company/team-approved memory** stores patterns approved by the testing company for all licensed testers.
+
+Memory separation rule:
+
+```text
+Client-specific knowledge stays scoped to that client or project.
+Generalized lessons may be promoted to cross-project memory only after confidential details are removed.
+```
+
+Memory combination rule:
+
+```text
+A tester should be able to use one project memory, multiple project memories, or broad cross-project QA memory depending on the task.
+```
+
+Example:
+
+```text
+When triaging a payment regression for Client A:
+use personal tester memory + Client A project memory + Client A payment suite memory.
+Do not use Client B-specific rules.
+Use cross-project QA memory only for generic testing heuristics.
+```
+
+This multi-scope model is not an optional feature. It is a core product requirement because external testers move between clients, departments, teams, tools, and environments.
+
+### 4.3 Practical meaning of self-healing
 
 ProChat QA Memory should not initially promise automatic self-healing test execution.
 

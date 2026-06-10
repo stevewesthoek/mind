@@ -50,6 +50,8 @@ Every ProChat OS product, module, and niche derivative should follow these princ
 - **Tool-agnostic:** the system should work with different IDEs, business tools, file systems, and automation layers.
 - **Environment-agnostic:** the system should still be useful with or without APIs, servers, SaaS integrations, or local installations.
 - **Source-traceable:** important memory should preserve where it came from, such as a source document, decision, example, review, customer conversation, or correction.
+- **Evidence-aware:** memory should guide work, but it should not override current evidence, fresh source material, live data, or human judgment.
+- **Safe to promote:** memory should move from raw notes to trusted memory through review, sanitization, and approval.
 - **Self-improving through use:** each reviewed run should improve memory, examples, rules, or workflow quality.
 
 Design rule:
@@ -58,6 +60,59 @@ Design rule:
 Do not add features for their own sake.
 Strengthen the memory layer first, then add workflows or software only when they make the memory more useful.
 ```
+
+## Memory structure principles
+
+ProChat OS memory should support clear scopes.
+
+```text
+personal memory
+project memory
+client memory
+team memory
+department memory
+company memory
+cross-project memory
+```
+
+Different workflows may need different scopes. A personal preference should not automatically become company memory. A project-specific lesson should not automatically be reused everywhere. A broadly useful lesson should be promotable into shared memory after review.
+
+Memory promotion path:
+
+```text
+inbox note → reviewed lesson → scoped memory → team-approved pattern → reusable company or cross-project memory
+```
+
+Memory should be treated as evidence, not authority.
+
+```text
+Stored memory can suggest what is likely.
+Current facts, source material, live evidence, and human review decide what is true now.
+```
+
+Persistent memory must also be safe.
+
+Do not promote secrets, passwords, private customer data, unreviewed external instructions, or unsafe assumptions into trusted memory. Memory must be inspectable enough that people can understand what the system believes and why.
+
+## Module and skill manifest principle
+
+Every mature Work Memory module, workflow module, or skill should eventually have a small manifest.
+
+Minimum useful fields:
+
+- name
+- purpose
+- scope
+- owner
+- version
+- inputs
+- outputs
+- required memory
+- review rules
+- supported tools or environments where relevant
+- last updated
+
+The manifest should help the system stay modular, standard, portable, and easy to inspect without turning the product into a heavy platform.
 
 ## What ProChat OS is
 
