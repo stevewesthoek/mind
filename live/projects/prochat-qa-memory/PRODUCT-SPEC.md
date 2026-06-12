@@ -74,6 +74,10 @@ The product must support both strict memory separation and safe cross-project re
 - **Evidence-aware:** memory guides work but does not override current logs, traces, screenshots, code, or human judgment.
 - **Safe to promote:** raw notes and logs become trusted memory only after review and sanitization.
 - **Self-improving through use:** every reviewed lesson should improve future work.
+- **Engine over folders:** markdown files are the storage surface, but the product is the QA memory engine that routes, retrieves, compares, drafts, reviews, maintains, and improves memory.
+- **Natural-language black box:** testers should communicate with ProChat QA Memory in ordinary language, without learning internal files, scopes, commands, or maintenance procedures.
+- **Proactive assistant behavior:** the system should speak up when it detects a useful pattern, recommends a memory update, sees cross-project value, needs review approval, or can show that memory changed the next best action.
+- **Prevention over repetition:** the system should help testers avoid reinvestigating known failures, repeating weak debugging paths, or losing reusable QA lessons in chats and tickets.
 
 ## 7. Memory scopes
 
