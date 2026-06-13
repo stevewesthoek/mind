@@ -70,28 +70,28 @@
 
 ### Tasks
 
-- [ ] Create `system/brain-mind-bridge.md`.
-- [ ] Define Brain-owned and Mind-owned information.
-- [ ] Define allowed Brain → Mind proposal types:
+- [x] Create `system/brain-mind-bridge.md`.
+- [x] Define Brain-owned and Mind-owned information.
+- [x] Define allowed Brain → Mind proposal types:
   - capture classification;
   - research summary;
   - decision proposal;
   - maintenance proposal;
   - project/status handoff;
   - task proposal.
-- [ ] Define allowed Mind → Brain context types:
+- [x] Define allowed Mind → Brain context types:
   - approved strategy;
   - current priorities;
   - durable decisions;
   - project context;
   - personal constraints and preferences;
   - reviewed research conclusions.
-- [ ] Define one compact cross-repo envelope.
-- [ ] Decide which fields are required versus optional.
-- [ ] Define default proposal destinations.
-- [ ] Define approval and write boundaries.
-- [ ] Define source, supersession, and rejection behavior.
-- [ ] Compare the bridge contract with Brain's current memory/handoff policies.
+- [x] Define one compact cross-repo envelope.
+- [x] Decide which fields are required versus optional.
+- [x] Define default proposal destinations.
+- [x] Define approval and write boundaries.
+- [x] Define source, supersession, and rejection behavior.
+- [x] Compare the bridge contract with Brain's current memory/handoff policies.
 
 ### Acceptance criteria
 
