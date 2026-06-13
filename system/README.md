@@ -22,6 +22,7 @@ These documents lead the contracts and technical sub-roadmaps below.
 ## Current contracts
 
 - `brain-mind-bridge.md` — canonical ownership, exchange, approval, provenance, and write rules between Brain and Mind.
+- `knowledge-freshness-standard.md` — selective status, review, contradiction, supersession, and archive rules for changing knowledge.
 - `graphify-strategy.md` — Mind-owned strategy for Graphify, Infinite Brain context, and cross-repo graph modes.
 - `automation-roadmap.md` — remaining Infinite Brain automation phases and execution order.
 - `automation-contract.md` — Save-to-Mind, Mind Steward, AI Model Selector, and capture-processing boundary.
