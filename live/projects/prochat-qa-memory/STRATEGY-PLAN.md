@@ -1,7 +1,10 @@
 # ProChat QA Memory — Strategy Plan
 
-**Status:** discovery strategy draft  
+**Status:** draft  
 **Created:** 2026-06-08  
+**Last reviewed:** 2026-06-13  
+**Review after:** 2026-07-13  
+**Freshness risk:** medium  
 **Owner:** Steve Westhoek  
 **Location:** `live/projects/prochat-qa-memory/STRATEGY-PLAN.md`
 
