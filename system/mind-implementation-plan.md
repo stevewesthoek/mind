@@ -142,10 +142,11 @@
 
 ### Mind tasks
 
-- [ ] Define report formats and review surfaces.
-- [ ] Add clear dismissal and false-positive behavior.
-- [ ] Define which reports belong in `system/reports/` versus `wiki/log.md`.
-- [ ] Define evidence requirements for each suggestion type.
+- [x] Define report formats and review surfaces in `system/maintenance-report-contract.md` and `system/reports/README.md`.
+- [x] Add clear dismissal, suppression, recurrence, and false-positive behavior.
+- [x] Define which reports belong in `system/reports/` versus `wiki/log.md`.
+- [x] Define evidence requirements for each suggestion type.
+- [x] Select a bounded five-file pilot dataset and explicit report-only acceptance tests.
 
 ### Brain implementation tasks
 
