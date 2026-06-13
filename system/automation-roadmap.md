@@ -1,6 +1,11 @@
 # Mind Automation Roadmap
 
+**Status:** technical automation sub-roadmap  
+**Depends on:** `system/infinite-brain-philosophy.md`, `system/mind-strategy.md`, `system/mind-roadmap.md`, `system/mind-implementation-plan.md`
+
 This roadmap defines the remaining automation work for the automated Infinite Brain runtime.
+
+It does not lead Mind strategy. The canonical roadmap is `system/mind-roadmap.md`. This file should only define the technical automation sequence inside that wider human-first direction.
 
 The cleanup, contract, graph, and report-only Mind Steward preflight foundation is complete. The remaining work should be implemented in small phases with report-only mode first, then approved writes, then automation.
 

@@ -6,6 +6,28 @@ type: dashboard
 
 This is your personal knowledge system. Most of it runs automatically. This file tells you what happens without you, what you need to do, and where everything lives.
 
+## Infinite Brain philosophy
+
+Mind should become more useful over time without becoming harder to read.
+
+```text
+capture continuously
+→ keep current truth visible
+→ turn reviewed insight into durable knowledge
+→ retrieve what matters
+→ revalidate changing information
+→ update, supersede, or archive
+```
+
+Mind remains human-first. Brain may classify, compare, and prepare proposals, but personal and business truth stays reviewable and human-approved.
+
+Canonical direction:
+
+1. `system/infinite-brain-philosophy.md`
+2. `system/mind-strategy.md`
+3. `system/mind-roadmap.md`
+4. `system/mind-implementation-plan.md`
+
 ---
 
 ## What happens automatically (you do nothing)

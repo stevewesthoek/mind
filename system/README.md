@@ -8,6 +8,17 @@ Use this folder for rules that describe how Mind works, how automation is allowe
 
 Do not store raw captures, durable knowledge notes, or generated automation dumps here.
 
+## Canonical direction
+
+Read these in order before changing Mind structure, lifecycle, or automation:
+
+1. `infinite-brain-philosophy.md` — first principles for a human-first, self-improving Mind.
+2. `mind-strategy.md` — strategic choices, Brain/Mind boundary, structure, and success measures.
+3. `mind-roadmap.md` — phased path from current foundation to safe maintenance and automation.
+4. `mind-implementation-plan.md` — concrete tasks, dependencies, acceptance criteria, and stop points.
+
+These documents lead the contracts and technical sub-roadmaps below.
+
 ## Current contracts
 
 - `graphify-strategy.md` — Mind-owned strategy for Graphify, Infinite Brain context, and cross-repo graph modes.
