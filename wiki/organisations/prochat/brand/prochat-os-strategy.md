@@ -1,8 +1,11 @@
 # ProChat OS Strategy
 
-**Status:** canonical strategy  
+**Status:** current  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-06-03
+**Last updated:** 2026-06-03  
+**Last reviewed:** 2026-06-13  
+**Review after:** 2026-07-13  
+**Freshness risk:** high
 
 ## One-sentence strategy
 
