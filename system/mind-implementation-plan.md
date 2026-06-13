@@ -123,8 +123,11 @@
 - [x] Define contradiction handling.
 - [x] Define supersession and archive behavior.
 - [x] Add examples that are readable in Obsidian.
-- [x] Validate the standard against three changing Mind pages without applying metadata yet.
-- [ ] Apply pilot fields to no more than three pages after Steve reviews the recommendations.
+- [x] Validate the standard against three changing Mind pages before applying metadata.
+- [x] Apply pilot fields to exactly three reviewed pages:
+  - `router/00-current-context.md`;
+  - `live/projects/prochat-qa-memory/STRATEGY-PLAN.md`;
+  - `wiki/organisations/prochat/brand/prochat-os-strategy.md`.
 
 ### Acceptance criteria
 
