@@ -106,12 +106,12 @@
 
 ### Tasks
 
-- [ ] Create `system/knowledge-freshness-standard.md`.
-- [ ] Define statuses:
+- [x] Create `system/knowledge-freshness-standard.md`.
+- [x] Define statuses:
   `draft`, `current`, `review-needed`, `superseded`, `archived`.
-- [ ] Define optional fields:
+- [x] Define optional fields:
   `last_reviewed`, `review_after`, `supersedes`.
-- [ ] Identify content classes that need freshness checks:
+- [x] Identify content classes that need freshness checks:
   - business strategy;
   - active projects;
   - prices and offers;
@@ -119,11 +119,12 @@
   - services/vendors;
   - legal/regulatory research;
   - operating procedures.
-- [ ] Identify content classes that should not require review dates.
-- [ ] Define contradiction handling.
-- [ ] Define supersession and archive behavior.
-- [ ] Add examples that are readable in Obsidian.
-- [ ] Pilot the fields on no more than three changing pages.
+- [x] Identify content classes that should not require review dates.
+- [x] Define contradiction handling.
+- [x] Define supersession and archive behavior.
+- [x] Add examples that are readable in Obsidian.
+- [x] Validate the standard against three changing Mind pages without applying metadata yet.
+- [ ] Apply pilot fields to no more than three pages after Steve reviews the recommendations.
 
 ### Acceptance criteria
 
