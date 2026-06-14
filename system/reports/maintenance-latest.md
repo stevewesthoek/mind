@@ -1,15 +1,15 @@
 # Mind Maintenance Report
 
-**Report ID:** `mind-maintenance-20260614T103145Z`  
-**Generated:** 2026-06-14T10:31:45.637Z  
-**Source commit:** `c60f7f8abd83992b69fc7084ecbcce69e17c7c8e`  
+**Report ID:** `mind-maintenance-20260614T113334Z`  
+**Generated:** 2026-06-14T11:33:34.067Z  
+**Source commit:** `b77f203de203757362054cab3f6b196a96df6880`  
 **Mode:** report-only  
 **Writes performed:** none
 
 ## Summary
 
 - Files considered: 5
-- Open findings: 1
+- Open findings: 0
 - Accepted findings: 0
 - Dismissed findings: 0
 - Resolved findings: 0
@@ -26,32 +26,15 @@
 - Contradiction Candidate: disabled
 - Capture Promotion: disabled
 
-## High-priority findings
+## Findings
 
-### finding-stale-page-router-00-current-context-001
-
-- **Type:** stale-page
-- **Risk:** high
-- **Confidence:** 0.98
-- **Paths:** `router/00-current-context.md`
-- **Trigger:** review_after date has passed
-- **Uncertainty:** The elapsed review date shows that review is due; it does not show that any statement on the page is incorrect.
-- **Recommended review:** Review the page and either confirm it as current or update only the sections that no longer match present reality.
-- **Approval required:** yes
-- **Write performed:** no
-
-**Matched evidence**
-
-- `router/00-current-context.md` — freshness metadata: The page is marked review-needed and review_after is 2026-06-05, earlier than the report date. It was last reviewed on 2026-05-22.
-
-## Other findings
-
-None.
+No valid findings were detected by enabled detectors.
 
 ## No findings detected
 
 The enabled detectors found no evidence meeting the configured threshold for:
 
+- `router/00-current-context.md`
 - `live/projects/prochat-qa-memory/STRATEGY-PLAN.md`
 - `wiki/organisations/prochat/brand/prochat-os-strategy.md`
 - `live/dashboard.md`

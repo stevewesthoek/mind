@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0",
-  "reportId": "mind-maintenance-20260614T103145Z",
-  "generatedAt": "2026-06-14T10:31:45.637Z",
+  "reportId": "mind-maintenance-20260614T113334Z",
+  "generatedAt": "2026-06-14T11:33:34.067Z",
   "generatedBy": "controlled-real-mind-pilot",
   "mode": "report-only",
   "sourceRepo": "mind",
-  "sourceCommit": "c60f7f8abd83992b69fc7084ecbcce69e17c7c8e",
+  "sourceCommit": "b77f203de203757362054cab3f6b196a96df6880",
   "configuration": {
     "maxFiles": 5,
     "maxFindingsPerDetector": 5,
@@ -47,45 +47,15 @@
   ],
   "summary": {
     "filesConsidered": 5,
-    "findingsTotal": 1,
-    "findingsOpen": 1,
+    "findingsTotal": 0,
+    "findingsOpen": 0,
     "findingsAccepted": 0,
     "findingsDismissed": 0,
     "findingsResolved": 0,
     "findingsSuppressed": 0,
     "detectorErrors": 0
   },
-  "findings": [
-    {
-      "id": "finding-stale-page-router-00-current-context-001",
-      "type": "stale-page",
-      "status": "open",
-      "created": "2026-06-14",
-      "sourceRepo": "mind",
-      "scope": "system",
-      "paths": [
-        "router/00-current-context.md"
-      ],
-      "trigger": "review_after date has passed",
-      "matchedEvidence": [
-        {
-          "path": "router/00-current-context.md",
-          "location": "freshness metadata",
-          "summary": "The page is marked review-needed and review_after is 2026-06-05, earlier than the report date. It was last reviewed on 2026-05-22."
-        }
-      ],
-      "comparisonEvidence": [],
-      "uncertainty": "The elapsed review date shows that review is due; it does not show that any statement on the page is incorrect.",
-      "confidence": 0.98,
-      "risk": "high",
-      "recommendedAction": "Review the page and either confirm it as current or update only the sections that no longer match present reality.",
-      "requiresApproval": true,
-      "noWritePerformed": true,
-      "deduplicationKey": "stale-page:router/00-current-context.md:review_after",
-      "suppressionUntil": null,
-      "review": null
-    }
-  ],
+  "findings": [],
   "suppressedFindings": [],
   "errors": [],
   "safety": {
