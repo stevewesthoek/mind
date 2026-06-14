@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.0",
+  "reportId": "mind-maintenance-20260614T103145Z",
+  "generatedAt": "2026-06-14T10:31:45.637Z",
+  "generatedBy": "controlled-real-mind-pilot",
+  "mode": "report-only",
+  "sourceRepo": "mind",
+  "sourceCommit": "c60f7f8abd83992b69fc7084ecbcce69e17c7c8e",
+  "configuration": {
+    "maxFiles": 5,
+    "maxFindingsPerDetector": 5,
+    "minimumConfidence": 0.7,
+    "aiAssist": "when-ambiguous"
+  },
+  "detectors": {
+    "stale-page": {
+      "enabled": true,
+      "status": "completed"
+    },
+    "completed-but-active": {
+      "enabled": true,
+      "status": "completed"
+    },
+    "source-gap": {
+      "enabled": true,
+      "status": "completed"
+    },
+    "duplicate-candidate": {
+      "enabled": false,
+      "status": "disabled"
+    },
+    "contradiction-candidate": {
+      "enabled": false,
+      "status": "disabled"
+    },
+    "capture-promotion": {
+      "enabled": false,
+      "status": "disabled"
+    }
+  },
+  "filesConsidered": [
+    "router/00-current-context.md",
+    "live/projects/prochat-qa-memory/STRATEGY-PLAN.md",
+    "wiki/organisations/prochat/brand/prochat-os-strategy.md",
+    "live/dashboard.md",
+    "system/automation-roadmap.md"
+  ],
+  "summary": {
+    "filesConsidered": 5,
+    "findingsTotal": 1,
+    "findingsOpen": 1,
+    "findingsAccepted": 0,
+    "findingsDismissed": 0,
+    "findingsResolved": 0,
+    "findingsSuppressed": 0,
+    "detectorErrors": 0
+  },
+  "findings": [
+    {
+      "id": "finding-stale-page-router-00-current-context-001",
+      "type": "stale-page",
+      "status": "open",
+      "created": "2026-06-14",
+      "sourceRepo": "mind",
+      "scope": "system",
+      "paths": [
+        "router/00-current-context.md"
+      ],
+      "trigger": "review_after date has passed",
+      "matchedEvidence": [
+        {
+          "path": "router/00-current-context.md",
+          "location": "freshness metadata",
+          "summary": "The page is marked review-needed and review_after is 2026-06-05, earlier than the report date. It was last reviewed on 2026-05-22."
+        }
+      ],
+      "comparisonEvidence": [],
+      "uncertainty": "The elapsed review date shows that review is due; it does not show that any statement on the page is incorrect.",
+      "confidence": 0.98,
+      "risk": "high",
+      "recommendedAction": "Review the page and either confirm it as current or update only the sections that no longer match present reality.",
+      "requiresApproval": true,
+      "noWritePerformed": true,
+      "deduplicationKey": "stale-page:router/00-current-context.md:review_after",
+      "suppressionUntil": null,
+      "review": null
+    }
+  ],
+  "suppressedFindings": [],
+  "errors": [],
+  "safety": {
+    "allowedOutputPaths": [
+      "system/reports/maintenance-latest.json",
+      "system/reports/maintenance-latest.md"
+    ],
+    "sourceFilesChanged": 0,
+    "kanbanChanged": false,
+    "captureFilesChanged": 0,
+    "wikiFilesChanged": 0,
+    "liveFilesChanged": 0,
+    "archiveFilesChanged": 0,
+    "rootFilesCreated": 0,
+    "noWritePerformed": true
+  },
+  "noWritePerformed": true
+}
