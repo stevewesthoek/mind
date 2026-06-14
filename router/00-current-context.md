@@ -7,9 +7,9 @@ Agents should read this early, but should not treat it as exhaustive. Use `00-me
 ## Status
 
 ```yaml
-status: review-needed
-last_reviewed: 2026-05-22
-review_after: 2026-06-05
+status: current
+last_reviewed: 2026-06-14
+review_after: 2026-06-28
 freshness_risk: high
 owner: Steve Westhoek
 purpose: Keep AI sessions oriented without loading the whole vault.
