@@ -59,10 +59,10 @@ Software and agents are implementation layers.
 Start here:
 
 1. `product-naming-architecture.md` — business, product, solution, and interface naming hierarchy
-2. `prochat-os-strategy.md` — highest-level strategy, philosophy, product definition, and buyer outcome
-3. `prochat-os-modules.md` — memory and automation module architecture
+2. `product-strategy.md` — highest-level strategy, philosophy, product definition, and buyer outcome
+3. `product-modules.md` — memory and automation module architecture
 4. `prochat-os-roadmap.md` — phased execution path
-5. `prochat-os-go-to-market.md` — offer, wedges, outreach, and sales language
+5. `go-to-market.md` — offer, wedges, outreach, and sales language
 6. `prochat-os-technical-definition.md` — internal product architecture and implementation options
 
 Supporting brand documents:
