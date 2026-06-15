@@ -2,62 +2,124 @@
 
 **Status:** canonical category definition  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-06-05
+**Last updated:** 2026-06-14
+
+## Company and suite
+
+ProChat is the business and master brand.
+
+The product suite is:
+
+```text
+ProChat Memory
+ProChat Answers
+ProChat Automations
+ProChat Workbench
+ProChat for [Role or Industry]
+ProChat API
+ProChat MCP
+```
+
+Canonical naming architecture:
+
+```text
+wiki/organisations/prochat/brand/product-naming-architecture.md
+```
 
 ## Category
 
-ProChat OS operates in the category:
+ProChat operates across two connected categories:
 
 ```text
-Managed AI Work Systems
+Memory-first AI work systems
+Local AI workbenches for builders
 ```
+
+The shared idea is that useful context should remain reusable, inspectable, and actionable.
 
 ## Category problem
 
-AI tools can answer questions, but businesses still have to do the work around AI manually.
+AI tools can answer questions, but businesses and builders still have to do much of the surrounding work manually.
 
 Teams still:
 
 - explain the same context repeatedly
 - paste examples into prompts
 - rewrite outputs into the right style
-- turn notes into tasks
-- create reports manually
-- draft follow-ups from scratch
-- search old work for context
+- search old work for answers
+- turn notes into tasks manually
+- create reports from scratch
 - lose knowledge when people leave
+- reconnect AI tools to local projects repeatedly
 
 ## Category promise
 
-A managed AI work system turns repeated knowledge work into reusable, review-ready outputs.
+A memory-first AI work system turns reusable knowledge into reliable answers and review-ready work.
 
-## ProChat OS position
+A local AI workbench lets ChatGPT safely use real project context without relying on pasted snippets or unrestricted autonomous execution.
 
-ProChat OS sits between messy business input and useful business output.
+## Product positions
 
-It uses reusable company knowledge, examples, style, and review feedback to prepare work that is closer to how the business actually works.
+### ProChat Memory
 
-## Core category pattern
+The reusable knowledge foundation behind the business products.
+
+### ProChat Answers
+
+Reliable, sourced answers from approved business knowledge.
+
+### ProChat Automations
+
+Repeated business work turned into drafts, reports, replies, tasks, and next steps ready for review.
+
+### ProChat Workbench
+
+A safe local project workbench for ChatGPT, powered by the BuildFlow engine.
+
+### ProChat for [Role or Industry]
+
+Packaged combinations of memory, answers, automations, review rules, and delivery configuration for one audience.
+
+## Core category patterns
+
+Business products:
 
 ```text
-messy input + reusable work knowledge → ready-to-review output
+reusable knowledge + question → grounded answer with sources
+```
+
+```text
+messy input + reusable knowledge → review-ready work
+```
+
+Builder product:
+
+```text
+ChatGPT reasoning + exact local project context + guarded operations
 ```
 
 ## Differentiation
 
-ProChat OS is different from:
+ProChat differs from:
 
-- chatbots, because it prepares repeated work outputs instead of only answering questions
-- automation tools, because it uses business knowledge and examples, not just if-this-then-that steps
-- generic AI tools, because it can reuse a company's context, style, and feedback over time
-- dashboards, because the value is the prepared work, not the interface
+- generic chatbots, because answers can be grounded in approved reusable knowledge
+- simple automation tools, because automations use examples, context, and review feedback
+- generic AI tools, because memory can persist and improve over time
+- dashboards, because the value is the answer or prepared work, not the interface
+- unrestricted coding agents, because ProChat Workbench uses bounded local operations and explicit source control
 
 ## Buyer-friendly category language
 
-Use:
+For business buyers, use:
 
 ```text
-AI that helps your team prepare repeated work faster.
+Reliable answers and repeated work prepared from the knowledge your business trusts.
+```
+
+For builders, use:
+
+```text
+Let ChatGPT work safely with your real local projects.
 ```
 
 Avoid leading with:
@@ -67,6 +129,9 @@ operating system
 work brain
 knowledge graph
 agentic runtime
+memory architecture
+MCP server
+workflow engine
 ```
 
-Those concepts may help internally, but they do not help most buyers understand the outcome.
+Those concepts may help internally, but buyers should first understand the pain and outcome.

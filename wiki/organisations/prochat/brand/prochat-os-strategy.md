@@ -1,27 +1,48 @@
-# ProChat OS Strategy
+# ProChat Product Strategy
 
 **Status:** current  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-06-03  
-**Last reviewed:** 2026-06-13  
-**Review after:** 2026-07-13  
+**Last updated:** 2026-06-14  
+**Last reviewed:** 2026-06-14  
+**Review after:** 2026-07-14  
 **Freshness risk:** high
+
+## Naming source of truth
+
+The canonical product suite is defined in:
+
+```text
+wiki/organisations/prochat/brand/product-naming-architecture.md
+```
+
+Current hierarchy:
+
+```text
+ProChat
+├── ProChat Memory
+├── ProChat Answers
+├── ProChat Automations
+├── ProChat Workbench
+├── ProChat for [Role or Industry]
+├── ProChat API
+└── ProChat MCP
+```
 
 ## One-sentence strategy
 
-ProChat OS helps businesses turn messy information and reusable company knowledge into ready-to-review work.
+ProChat helps businesses turn messy information and reusable company knowledge into reliable answers and ready-to-review work.
 
 ## Short definition
 
 ```text
-Messy work in. Useful work out.
+Business knowledge, put to work.
 ```
 
 ## Core philosophy
 
-ProChat OS is memory-first.
+The ProChat product suite is memory-first.
 
-The durable product layer is **Work Memory**: reusable knowledge, examples, decisions, preferences, rules, and feedback that make repeated work better over time.
+The durable foundation is **ProChat Memory**: reusable knowledge, examples, decisions, preferences, rules, and feedback that make answers and repeated work better over time.
 
 ```text
 Every repeated work situation should leave reusable memory behind.

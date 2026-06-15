@@ -2,23 +2,82 @@
 
 **Status:** canonical overview  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-06-05
+**Last updated:** 2026-06-14
 
-## What ProChat does
+## Company
 
-ProChat builds ProChat OS: a managed AI work system for businesses.
+ProChat is the business and master brand.
 
-ProChat OS helps teams turn messy information and reusable company knowledge into useful outputs they can review and use.
+ProChat builds a family of memory-first products that turn reusable business knowledge into reliable answers, review-ready work, and safe local project action.
 
-Short version:
+## Product suite
 
 ```text
-Messy work in. Useful work out.
+FOUNDATION
+ProChat Memory
+
+BUSINESS PRODUCTS
+ProChat Answers
+ProChat Automations
+
+BUILDER PRODUCT
+ProChat Workbench
+Powered by the BuildFlow engine
+
+SOLUTIONS
+ProChat for [Role or Industry]
+
+INTERFACES
+ProChat API
+ProChat MCP
 ```
 
-## What customers get
+Canonical naming details:
 
-Customers get practical help with repeated knowledge work such as:
+```text
+wiki/organisations/prochat/brand/product-naming-architecture.md
+```
+
+## Core philosophy
+
+```text
+Memory is the product foundation.
+Workflows are the method.
+AI is the assistant.
+```
+
+Every repeated work situation should leave reusable memory behind. That memory should make later answers and outputs faster, clearer, and more accurate.
+
+## ProChat Memory
+
+ProChat Memory is the shared foundation behind the business products.
+
+It organizes reusable:
+
+- examples
+- decisions
+- rules
+- procedures
+- style and tone
+- client and project context
+- recurring formats
+- corrections
+- reviewer feedback
+- source references
+
+## ProChat Answers
+
+ProChat Answers provides reliable, sourced answers from approved business knowledge.
+
+```text
+question → approved knowledge → grounded answer → sources → feedback
+```
+
+## ProChat Automations
+
+ProChat Automations turns repeated business work into useful output ready for review.
+
+Examples:
 
 - drafting replies
 - preparing proposals
@@ -26,26 +85,45 @@ Customers get practical help with repeated knowledge work such as:
 - turning documents into checklists
 - creating task lists
 - preparing reports
-- answering support questions
-- turning founder or team knowledge into reusable output patterns
+- preparing support responses
+- turning recurring context into repeatable output
+
+## ProChat Workbench
+
+ProChat Workbench lets ChatGPT work safely with real local repositories, documentation, notes, and projects.
+
+```text
+Public product: ProChat Workbench
+Technical engine: BuildFlow
+```
+
+During the naming migration, BuildFlow remains the technical repository and internal identifier where compatibility matters.
+
+## ProChat solutions
+
+Use:
+
+```text
+ProChat for [Role or Industry]
+```
+
+Examples:
+
+- ProChat for Founders
+- ProChat for Sales
+- ProChat for Support
+- ProChat for Marketing
+- ProChat for Operations
+- ProChat for Legal
+- ProChat for Accounting
+
+Solutions package the relevant memory, answers, automations, review rules, and delivery configuration for one audience.
 
 ## Why it matters
 
 Most teams already have AI tools, but they still spend time explaining context, rewriting output, searching old examples, and repeating the same manual work.
 
-ProChat makes that work reusable.
-
-## How ProChat delivers value
-
-ProChat combines:
-
-```text
-Work Memory + Workflow Modules + Review Loop
-```
-
-- Work Memory organizes the examples, style, rules, and context that make outputs useful.
-- Workflow Modules turn repeated work situations into ready-to-review outputs.
-- The Review Loop improves results from human feedback.
+ProChat makes that knowledge reusable and puts it to work.
 
 ## First commercial direction
 
@@ -73,4 +151,4 @@ Stop rewriting, re-explaining, and redoing the same work.
 
 ProChat does not sell technical architecture first.
 
-ProChat sells time saved, clearer handoffs, faster drafts, reusable knowledge, and review-ready work.
+ProChat sells reliable answers, time saved, clearer handoffs, faster drafts, reusable knowledge, and review-ready work.

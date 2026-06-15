@@ -1,66 +1,175 @@
-# ProChat OS Go-To-Market
+# ProChat Go-To-Market
 
 **Status:** canonical go-to-market direction  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-06-03
+**Last updated:** 2026-06-14
 
-## GTM principle
-
-Sell a clear time-saving outcome before selling a platform.
-
-The first buyer should understand this immediately:
+## Naming source of truth
 
 ```text
-ProChat helps your team stop rewriting, re-explaining, and redoing the same work.
+wiki/organisations/prochat/brand/product-naming-architecture.md
 ```
 
-## Main offer
+## Product suite
 
 ```text
-We turn one repeated information task into review-ready output using your own examples, style, and business knowledge.
+COMPANY
+ProChat
+
+FOUNDATION
+ProChat Memory
+
+BUSINESS PRODUCTS
+ProChat Answers
+ProChat Automations
+
+BUILDER PRODUCT
+ProChat Workbench
+Powered by the BuildFlow engine
+
+SOLUTIONS
+ProChat for [Role or Industry]
+
+INTERFACES
+ProChat API
+ProChat MCP
 ```
 
-This can apply to any business because every business has repeated knowledge work.
+## Go-to-market principle
 
-## Best first wedges
+Sell one clear outcome before selling the product suite or its architecture.
 
-Start with roles, not industries.
+The first buyer should understand one of these immediately:
 
-Best first role-based wedges:
+```text
+ProChat Answers gives your team reliable answers from approved business knowledge.
+```
 
-1. Founder/owner
+```text
+ProChat Automations helps your team stop rewriting, re-explaining, and redoing the same work.
+```
+
+```text
+ProChat Workbench lets ChatGPT work safely with your real local projects.
+```
+
+## Commercial entry points
+
+### ProChat Answers pilot
+
+```text
+We connect one approved knowledge set and test whether ProChat Answers can return useful, sourced answers to real questions.
+```
+
+Best when the buyer has:
+
+- recurring internal questions
+- scattered policies or procedures
+- product or support knowledge
+- project or client files
+- approved reference documents
+- onboarding knowledge
+
+Proof should show:
+
+```text
+question → grounded answer → visible sources → correction or approval
+```
+
+### ProChat Automations pilot
+
+```text
+We turn one repeated information task into review-ready output using your examples, style, and business knowledge.
+```
+
+Best when the buyer repeatedly prepares:
+
+- follow-up emails
+- proposals
+- support replies
+- summaries
+- reports
+- task lists
+- intake documents
+- handoffs
+
+Proof should show:
+
+```text
+messy input → useful output → human review → improved next run
+```
+
+### ProChat Workbench adoption
+
+```text
+We help builders connect ChatGPT to real local repositories, documentation, notes, and projects through bounded, guarded operations.
+```
+
+Best when the user:
+
+- repeatedly pastes code or files into chat
+- loses context between ChatGPT and local projects
+- wants local-first project access
+- wants guarded changes instead of unrestricted execution
+- needs targeted validation and explicit commits
+
+Proof should show:
+
+```text
+request → exact local context → guarded change → targeted validation
+```
+
+## Best first business wedges
+
+Start with roles before industries.
+
+1. Founder or owner
 2. Sales
 3. Support
-4. Marketing/content
-5. Operations/reporting
+4. Marketing and content
+5. Operations and reporting
 
-These are easier to explain than a regulated niche and easier to demo with safe sample data.
+These are easier to explain, easier to demonstrate with safe sample data, and easier to package into one recognizable outcome.
 
-## Founder/owner wedge
+## Founder or owner wedge
 
 Buyer pain:
 
-- the owner keeps explaining how the business works
 - decisions live in the owner's head
+- the owner keeps explaining how the business works
 - delegation takes too long
-- emails, proposals, instructions, and follow-ups are rewritten manually
+- emails, proposals, and instructions are rewritten manually
 - new people need repeated context
+
+Relevant products:
+
+```text
+ProChat Memory
+ProChat Answers
+ProChat Automations
+```
 
 Offer:
 
 ```text
-We organize the owner's reusable knowledge and examples so ProChat can prepare drafts, replies, instructions, and summaries that already fit how the business works.
+We organize the owner's approved knowledge and examples so the team can get reliable answers and prepare drafts, instructions, summaries, and next steps faster.
 ```
 
-Example outputs:
+Example outcomes:
 
-- email draft
-- proposal draft
-- delegation note
-- client summary
-- task instruction
-- SOP draft
-- decision summary
+- company knowledge answers
+- delegation notes
+- proposal drafts
+- client summaries
+- task instructions
+- SOP drafts
+- decision summaries
+
+Solution name:
+
+```text
+ProChat for Founders
+```
 
 ## Sales wedge
 
@@ -72,72 +181,111 @@ Buyer pain:
 - CRM notes are inconsistent
 - the best sales replies are not reused
 
+Relevant products:
+
+```text
+ProChat Answers
+ProChat Automations
+```
+
 Offer:
 
 ```text
-We turn your best sales examples, objections, and follow-up style into reusable drafts your team can review and send faster.
+We turn approved sales knowledge, examples, objections, and follow-up patterns into grounded answers and review-ready sales work.
 ```
 
-Example outputs:
+Example outcomes:
 
-- follow-up email
-- proposal draft
-- call summary
-- objection response
-- CRM note
-- next-step checklist
+- answers about offers and objections
+- follow-up drafts
+- proposal drafts
+- call summaries
+- CRM notes
+- next-step checklists
+
+Solution name:
+
+```text
+ProChat for Sales
+```
 
 ## Support wedge
 
 Buyer pain:
 
 - customers ask similar questions
+- approved answers are scattered
 - replies need consistency
-- support knowledge is scattered
 - escalation notes are manually written
 - new support staff need context
+
+Relevant products:
+
+```text
+ProChat Answers
+ProChat Automations
+```
 
 Offer:
 
 ```text
-We help your team answer customers faster and more consistently using your approved answers, examples, and product knowledge.
+We help the team answer questions from approved product knowledge and prepare consistent support replies, summaries, and escalations for review.
 ```
 
-Example outputs:
+Example outcomes:
 
-- support reply draft
-- issue summary
-- escalation note
-- FAQ update
-- ticket category
-- next-step checklist
+- grounded product answers
+- support reply drafts
+- issue summaries
+- escalation notes
+- FAQ improvements
+- next-step checklists
 
-## Marketing/content wedge
+Solution name:
+
+```text
+ProChat for Support
+```
+
+## Marketing and content wedge
 
 Buyer pain:
 
 - AI drafts do not sound like the business
 - brand voice is scattered
 - good examples are not reused
-- content ideas become stuck in notes
+- ideas remain stuck in notes
 - campaign work is repetitive
+
+Relevant products:
+
+```text
+ProChat Memory
+ProChat Automations
+```
 
 Offer:
 
 ```text
-We organize your voice, examples, and campaign knowledge so ProChat can prepare more useful content drafts for review.
+We organize approved voice, examples, and campaign knowledge so ProChat can prepare more useful content work for review.
 ```
 
-Example outputs:
+Example outcomes:
 
-- social post draft
-- email draft
-- outline
-- campaign brief
-- content checklist
+- content briefs
+- social post drafts
+- email drafts
+- outlines
+- campaign checklists
 - publishing tasks
 
-## Operations/reporting wedge
+Solution name:
+
+```text
+ProChat for Marketing
+```
+
+## Operations and reporting wedge
 
 Buyer pain:
 
@@ -147,180 +295,164 @@ Buyer pain:
 - missing information slows work down
 - handoffs are unclear
 
+Relevant products:
+
+```text
+ProChat Answers
+ProChat Automations
+```
+
 Offer:
 
 ```text
-We turn recurring notes, documents, and updates into clearer reports, task lists, and handoffs.
+We turn approved procedures, recurring notes, documents, and updates into clearer answers, reports, task lists, and handoffs.
 ```
 
-Example outputs:
+Example outcomes:
 
-- status report
-- task list
-- missing-information checklist
-- meeting summary
-- action plan
-- handoff note
+- procedure answers
+- status reports
+- task lists
+- missing-information checklists
+- meeting summaries
+- handoff notes
 
-## Landing page rule
+Solution name:
 
-The main website must speak from the buyer's perspective.
+```text
+ProChat for Operations
+```
 
-Do not explain:
+## Industry solutions
 
-- Work Memory
-- modules
-- architecture
-- graphs
-- agents
-- runtime
-- connectors
-- model routing
-- installation
+Use one predictable naming pattern:
 
-Do explain:
+```text
+ProChat for [Role or Industry]
+```
 
-- what painful work they do now
-- what output they get back
-- how it saves time
-- how it keeps their style/knowledge reusable
-- how humans review outputs first
+Examples:
+
+- ProChat for Legal
+- ProChat for Accounting
+- ProChat for Agencies
+- ProChat for Consultants
+
+Each solution packages:
+
+```text
+relevant ProChat Memory
++ ProChat Answers where useful
++ ProChat Automations where useful
++ review rules
++ delivery configuration
+```
+
+Do not create separate technical foundations or fragmented niche brands.
+
+## Offer ladder
+
+### 1. First proof
+
+Prove one answer set or repeated-work outcome with safe sample or customer-provided material.
+
+### 2. Done-for-you launch
+
+Configure approved knowledge, sources, automations, review rules, and delivery entry points.
+
+### 3. Managed improvement
+
+Review performance, add approved memory, refine answers and automations, and improve recurring outputs.
+
+### 4. Team rollout
+
+Add permissions, shared memory, broader answer coverage, more automations, and team review practices.
+
+### 5. Department or company rollout
+
+Expand carefully across teams while preserving memory scope, ownership, traceability, and review.
+
+## Website structure
+
+The main website should introduce the company and route visitors by need.
+
+```text
+Business knowledge
+├── ProChat Answers
+├── ProChat Automations
+└── ProChat for [Audience]
+
+For builders
+└── ProChat Workbench
+```
+
+ProChat Memory should be explained as the shared foundation after the visitor understands the outcome.
 
 ## Public language
 
 Use:
 
+- reliable answers from approved knowledge
+- see the sources behind an answer
 - stop rewriting the same work
 - stop re-explaining the same context
-- turn messy information into clear next steps
 - prepare drafts your team can review
 - make replies faster and more consistent
 - keep useful knowledge reusable
-- get outputs in your company's style
+- let ChatGPT work safely with your local projects
 
-Avoid:
+Avoid leading with:
 
-- AI OS
-- infinite brain
-- work brain
+- ProChat OS
+- AI operating system
+- Work Memory
+- workflow modules
 - knowledge graph
-- second brain
-- model router
-- connectors
-- CLI
-- runtime
-- installable
-- autonomous employee
+- agentic runtime
+- model routing
+- MCP server
+- technical architecture
 
-## First outreach message pattern
+## Naming rules
 
-```text
-Hi [Name], quick question.
-
-I help small teams stop rewriting and re-explaining the same work.
-
-For example, we can turn your best examples, style, common replies, and recurring notes into review-ready drafts: emails, summaries, task lists, proposals, support replies, or reports.
-
-Is there one type of work your team repeats every week that still takes too much manual effort?
-```
-
-## First sales call goal
-
-Do not sell the full system.
-
-Find one repeated task with:
-
-- clear input
-- clear desired output
-- visible time cost
-- low risk
-- available examples
-- a person willing to review outputs
-
-Discovery questions:
-
-- What do you rewrite every week?
-- What do you keep explaining to people or AI?
-- What examples do you reuse manually?
-- Which replies, reports, or proposals take too long?
-- What does a good output look like?
-- Who reviews the output?
-- What would make this worth paying for?
-
-## First offer
+Use:
 
 ```text
-First time-saving test
+ProChat Memory
+ProChat Answers
+ProChat Automations
+ProChat Workbench
+ProChat for [Role or Industry]
+ProChat API
+ProChat MCP
 ```
 
-Description:
+Describe BuildFlow as:
 
 ```text
-We take one repeated task, collect a few examples, build the first review-ready output flow, and show whether it saves real time.
+The technical engine powering ProChat Workbench.
 ```
 
-Pricing:
+Preserve BuildFlow technical identifiers until a separate compatibility-safe migration is approved.
 
-```text
-from €750
-```
+## Sales qualification
 
-## Expansion offer
+Good first questions:
 
-```text
-Done-for-you launch
-```
+1. What questions does your team answer repeatedly?
+2. What task is rewritten or rebuilt most often?
+3. What approved documents, examples, or sources show what good looks like?
+4. Who reviews the answer or output today?
+5. What would make the first test clearly useful?
+6. Does the work belong in Answers, Automations, Workbench, or a packaged solution?
 
-Description:
+## Success criteria
 
-```text
-We set up the working flow for one person or team, using simple entry points such as email, forms, file drops, or API calls.
-```
+A first engagement succeeds when:
 
-Pricing:
-
-```text
-from €1,500
-```
-
-## Recurring offer
-
-```text
-Managed improvement
-```
-
-Description:
-
-```text
-We keep the outputs useful, update examples and rules, improve the flow from review feedback, and expand only when it keeps saving time.
-```
-
-Pricing:
-
-```text
-from €250/month
-```
-
-## Proof strategy
-
-The first proof should show before and after.
-
-Before:
-
-```text
-messy notes, emails, examples, decisions, and repeated manual rewriting
-```
-
-After:
-
-```text
-draft, summary, checklist, report, reply, or task list ready for review
-```
-
-The demo should use safe sample data and a simple role-based scenario.
-
-Best first demo:
-
-```text
-Founder/owner gives messy notes and examples → ProChat prepares a client reply, task instruction, and proposal draft in the business style.
-```
+- the answer or output is recognizably useful
+- the sources or context are visible
+- the reviewer remains in control
+- the result saves measurable time or reduces repeated explanation
+- feedback improves the next run
+- the buyer understands which ProChat product solved the problem
