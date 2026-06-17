@@ -167,7 +167,7 @@
 ### Validation
 
 - [x] Run each implemented report detector on bounded fixtures (evidence: focused detector tests and Brain aggregate gate passed 120 tests, 0 failed; controlled five-file Mind run completed with 0 detector errors).
-- [ ] Measure false positives.
+- [x] Measure false positives (evidence: reviewed bounded-fixture audit `system/reports/maintenance-history/2026-06-17-false-positive-measurement.md` measured 7 explicit negative cases, 0 false positives, and a 0% observed false-positive rate; the same audit records 1 missed required positive and 0% recall, so stale-page detection still requires repair before Phase 4 detector quality is acceptable).
 - [x] Confirm no Mind content changes (evidence: Brain test `projects/brain-core/src/tests/mind-maintenance-source-integrity.test.ts`; controlled run reported `sourceFilesChanged: 0`).
 - [x] Confirm suggestions cite exact source paths (evidence: Brain report schema and detector tests require path-bearing evidence; controlled report used the bounded five-file dataset).
 - [ ] Collect human usefulness feedback.
