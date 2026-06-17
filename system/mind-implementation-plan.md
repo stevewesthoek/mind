@@ -170,7 +170,7 @@
 - [x] Measure false positives (evidence: reviewed bounded-fixture audit `system/reports/maintenance-history/2026-06-17-false-positive-measurement.md` measured 7 explicit negative cases, 0 false positives, and a 0% observed false-positive rate; the same audit records 1 missed required positive and 0% recall, so stale-page detection still requires repair before Phase 4 detector quality is acceptable).
 - [x] Confirm no Mind content changes (evidence: Brain test `projects/brain-core/src/tests/mind-maintenance-source-integrity.test.ts`; controlled run reported `sourceFilesChanged: 0`).
 - [x] Confirm suggestions cite exact source paths (evidence: Brain report schema and detector tests require path-bearing evidence; controlled report used the bounded five-file dataset).
-- [ ] Collect human usefulness feedback.
+- [x] Collect human usefulness feedback (evidence: Steve Westhoek reviewed the bounded pilot and recorded “Useful after stale-page repair” in `system/reports/maintenance-history/2026-06-17-human-usefulness-feedback.md`; the review confirms the report is not useful enough as-is because it missed the required stale-page finding, but remains potentially useful after repair because it produced 0 false positives across 7 labeled negatives, remained report-only, changed no Mind source files, and exposed no detector errors).
 
 ### Acceptance criteria
 
