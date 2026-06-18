@@ -19,6 +19,7 @@ They represent the same run.
 - `maintenance-latest.md` is the compact human-readable projection.
 - Both must share the same report ID, generation time, source commit, detector list, and finding count.
 - Both must state `mode: report-only` and confirm that no content write occurred.
+- `maintenance-decisions.json` is optional. When absent, the workflow treats the decision ledger as empty rather than failing.
 
 Reviewed or operationally significant snapshots may be preserved under:
 
@@ -80,6 +81,7 @@ A report run may:
 - preserve selected reviewed history;
 - expose errors and partial detector results;
 - prepare recommendations.
+- read `maintenance-decisions.json` when present, but never require it for a valid report-only run.
 
 A report run may not:
 
@@ -125,10 +127,10 @@ enabled detectors
 summary counts
 findings
 errors
-no_write_performed: true
+noWritePerformed: true
 ```
 
-Every finding must include a stable deduplication key so identical open, dismissed, or resolved findings do not repeatedly reappear without changed evidence.
+Every finding must include a stable `deduplicationKey` so identical open, dismissed, or resolved findings do not repeatedly reappear without changed evidence.
 
 ## Errors and partial reports
 

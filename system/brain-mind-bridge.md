@@ -105,6 +105,91 @@ Optional when useful:
 
 This envelope is for cross-repo communication. It is not required on every human-authored Mind note.
 
+## Exact-path approval payload
+
+An approval payload authorizes one bounded Mind action against explicit repository paths. It is separate from the proposal envelope and must not be inferred from a finding, recommendation, chat message, folder name, or broad goal.
+
+Required JSON shape:
+
+```json
+{
+  "schemaVersion": "1.0",
+  "approvalId": "mind-approval-YYYYMMDD-HHMMSS-<short-id>",
+  "proposalId": "<finding-or-proposal-id>",
+  "sourceReportId": "<maintenance-report-id-or-null>",
+  "sourceRepo": "mind",
+  "sourceCommit": "<full-commit-hash>",
+  "approvedBy": "<human-reviewer>",
+  "approvedAt": "YYYY-MM-DDTHH:MM:SSZ",
+  "expiresAt": "YYYY-MM-DDTHH:MM:SSZ",
+  "action": "create | update | move | archive | supersede | add-source-reference",
+  "targets": [
+    {
+      "path": "wiki/example.md",
+      "expectedBeforeHash": "<sha256-or-null-for-create>",
+      "destinationPath": null,
+      "allowedSections": ["<exact-heading-or-frontmatter-key>"],
+      "contentIntent": "<concise approved change intent>"
+    }
+  ],
+  "sourceReferences": [
+    {
+      "path": "sources/example.md",
+      "location": "<heading-or-line-range>",
+      "summary": "<why this source supports the change>"
+    }
+  ],
+  "constraints": {
+    "maxFilesChanged": 1,
+    "allowCreate": false,
+    "allowDelete": false,
+    "allowBroadFolderWrite": false,
+    "preserveFrontmatter": true,
+    "preserveSourceReferences": true
+  },
+  "validation": {
+    "requiredChecks": [
+      "target-path-match",
+      "before-hash-match",
+      "source-reference-preserved",
+      "no-unapproved-paths-changed"
+    ]
+  },
+  "reason": "<human approval reason>"
+}
+```
+
+Rules:
+
+- `targets` must contain at least one file and every target must be a repository-relative file path.
+- Folder paths, globs, wildcards, repository roots, and unspecified destinations are invalid.
+- `action` must describe one approved operation class; mixed unrelated actions require separate approvals.
+- `expectedBeforeHash` is required for every existing target and must match immediately before execution.
+- `destinationPath` is required only for `move`, `archive`, or `supersede`, and must also be an exact repository-relative file path.
+- `allowedSections` must identify the exact headings or frontmatter keys that may change. An empty list means the whole explicitly named file was approved, not any sibling path.
+- `contentIntent` must be specific enough to reject materially different edits.
+- `sourceCommit` binds approval to reviewed repository state; execution must stop when the approved state is stale.
+- `expiresAt` prevents indefinite reuse. Expired approvals require a new human review.
+- `approvedBy`, `approvedAt`, and `reason` must come from an explicit human decision.
+- `maxFilesChanged` must equal or exceed the number of distinct approved target and destination files, and execution must stop if the limit would be exceeded.
+- `allowDelete` defaults to false. Archive and supersede flows must preserve history unless a separately approved exact deletion exists.
+- Source references attached to the proposal must be preserved unless the approval explicitly identifies a replacement source reference.
+- An accepted maintenance finding is not itself an approval payload.
+- Approval payloads are single-use. Applied, rejected, expired, hash-mismatched, or superseded approvals must not be replayed.
+
+Invalid payload examples:
+
+```text
+path: wiki/
+path: "**/*.md"
+action: clean up related files
+destinationPath: choose the best location
+expectedBeforeHash: omitted for an existing file
+approvedBy: inferred from report status
+```
+
+A valid approval authorizes only the exact paths, operation, sections, intent, and repository state recorded in the payload.
+
 ## Brain → Mind flows
 
 ### Capture classification

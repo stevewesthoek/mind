@@ -4,7 +4,7 @@ type: dashboard
 
 # Mind — User Manual
 
-This is your personal knowledge system. Most of it runs automatically. This file tells you what happens without you, what you need to do, and where everything lives.
+This is your personal knowledge system. This page explains what happens automatically, what still needs review, and where your information lives.
 
 ## Infinite Brain philosophy
 
@@ -30,36 +30,47 @@ Canonical direction:
 
 ---
 
-## What happens automatically (you do nothing)
+## What happens automatically
 
-**Save-to-Mind runs when you use it. Mind Steward runs every night.**
+1. **Save-to-Mind places new captures in `capture/inbox/` when you use it.** You do not need to choose a permanent destination during capture.
 
-1. **New captures land in your inbox** — Anything you save via "Save to Mind" is written immediately to GitHub under `capture/inbox/`. You do not need to file it yourself.
+2. **Brain runs report-only Mind Steward and scheduler workflows.** These workflows inspect, classify, and prepare status or review information without moving captures or changing durable Mind content automatically.
 
-2. **Mind Steward classifies locally overnight** — The nightly scheduler syncs missing inbox captures to this computer, then Mind Steward classifies new captures with a local model through the AI Model Selector and writes proposed actions to `wiki/log.md`. The file is never moved automatically. You review and decide.
+3. **Brain Console provides the primary live system view.** Use the Obsidian Brain Console plugin for Brain Core, Mind Steward, scheduler, approval, and maintenance status. `live/dashboard.md` remains the Markdown fallback.
 
-3. **Memory context is refreshed** — AI sessions read the refreshed memory context overnight. When you start a session the next day, the active AI has the latest saved context.
+Automatic capture moves, automatic durable knowledge writes, automatic Kanban writes, and continuous processing are not enabled.
 
 ---
 
-## What you need to do (your daily interaction)
+## What you need to do
 
-**One regular review: `wiki/log.md`**
+**Use Brain Console for system status and exceptions.**
 
-Open `wiki/log.md`. Each line added by the system looks like this:
+Open the Obsidian Brain Console plugin when you need runtime status, maintenance previews, approvals, scheduler state, or the next safe action.
 
-> `2026-05-22 — compile-suggest — **Title** (project page) → propose move capture/inbox/filename.md → live/projects/slug.md`
+**Review `wiki/log.md` when proposals are present.**
 
-For each line, decide:
-- **Accept** — move or copy the file to the proposed destination yourself, then delete the line.
-- **Reject** — delete the line.
-- **Later** — leave it. It stays until you act on it.
+For each proposal:
+- **Accept** — approve or perform the documented exact-path action.
+- **Reject** — record or remove the proposal according to its review instructions.
+- **Later** — leave it open for later review.
 
-That is the only maintenance task this system asks of you.
+A proposal does not authorize an automatic content change.
 
-**Your working board: `kanban.md`**
+**Use `kanban.md` as the current task source of truth.**
 
-This is your daily driver. Open it to see what is to-do, in-progress, and done. Tasks on the Kanban are managed by you — add, move, and complete them as you work.
+Open it to see what is to-do, in progress, and done. Add, move, and complete tasks there until a lossless task-sync implementation is validated.
+
+---
+
+## Current, durable, source, and historical information
+
+- **`live/` — current state:** active projects, current decisions, dashboards, task summaries, and other information that describes what is true or active now.
+- **`wiki/` — durable knowledge:** reviewed, compiled knowledge intended to remain useful beyond the original capture or source.
+- **`sources/` — evidence:** raw evidence, research, files, books, papers, and other source material that supports later conclusions.
+- **`archive/` — historical material:** completed, superseded, legacy, or otherwise inactive material preserved for history rather than presented as current truth.
+
+Use `live/` for what is current, `wiki/` for what has been distilled, `sources/` for what supports a claim, and `archive/` for what should remain retrievable without appearing active.
 
 ---
 
@@ -84,55 +95,16 @@ This is your daily driver. Open it to see what is to-do, in-progress, and done. 
 
 ---
 
-## How a capture flows through the system
+## How information moves
 
-```
-You save something (voice, text, AI session)
-        ↓
-n8n webhook → GitHub capture/inbox/
-        ↓
-Nightly local scheduler syncs missing inbox captures to this computer
-        ↓
-Mind Steward → AI Model Selector with local_only=true → local Ollama classification
-        ↓
-Compile loop reads inbox → proposes where it belongs → appends to wiki/log.md
-        ↓
-You review wiki/log.md → accept (move it) or reject (delete line)
-        ↓
-File lives in its permanent home (live/ or wiki/ or sources/)
+```text
+capture → review → place → use → revalidate → supersede or archive
 ```
 
----
-
-## AI memory — how it connects
-
-When you tell any AI "remember this" or save a preference, it goes into the shared memory store. Every AI session the next day already knows. You never re-explain preferences.
-
-- **Save:** say "remember this" or "save this preference" to any AI
-- **Recall:** the AI knows automatically — no command needed
-- **Review:** say "show all my memories" to any AI
-
-The memory system is separate from Mind notes. Notes are your knowledge. Memory is your AI context.
+Brain may prepare classifications and proposals. Durable placement or truth changes remain reviewed and approval-gated.
 
 ---
 
-## System contracts and generated indexes
+## Technical details
 
-- `system/folder-contract.md` explains the current top-level folder structure, root cleanliness rules, and move/rename safety checks.
-- `system/automation-contract.md` explains the current Save-to-Mind, Mind Steward, AI Model Selector, and capture processing boundary.
-- `system/realtime-inbox-processing-spec.md` explains the safe future path for throttled on-arrival capture processing.
-- `system/task-kanban-contract.md` explains why `kanban.md` remains the current task source of truth and how any future task sync must avoid data loss.
-- `system/graph-visualization-contract.md` explains the current Graphify output and the future visual graph target.
-- `system/generated-output-policy.md` explains which generated outputs should be tracked, ignored, or treated as refreshable.
-- `.graphify-out/GRAPH_REPORT.md` is the current generated graph report.
-- `.graphify-out/graph.html` is the generated clickable visual graph.
-- `.graphify-out/graph.json` is generated graph data, not a note to edit manually.
-
----
-
-## What this system does NOT do automatically
-
-- Move files for you — it only proposes moves in `wiki/log.md`
-- Manage your Kanban — that is always manual
-- Approve decisions — those go in `live/decisions.md` only when you write them
-- Clean up your archive — `archive/` is append-only history
+For system contracts, automation boundaries, and generated-output rules, use `system/README.md`.

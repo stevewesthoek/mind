@@ -1,45 +1,27 @@
 # Live Dashboard
 
-**Use the Brain Console plugin dashboard (primary) — this page is reference fallback.**
+Use the Obsidian Brain Console plugin as the primary live system view. This page is the Markdown fallback when the plugin is unavailable.
 
-## 🧠 Brain Console Plugin Dashboard (Primary)
+## Main navigation
 
-Open the **Obsidian Brain Console plugin** in the right sidebar. It displays:
-- Status strip with 6 pills (Brain Core, Mind Steward, Scheduler, Save-to-Mind, Approvals, Maintenance)
-- 6 core cards: Wiki Health, Maintenance Previews, Approvals, Scheduler Status, Brain Core readiness, Next Safe Action
-- Action buttons: Refresh, Request Dry Run, View Latest, Open Mind, Wiki Log
-- Recent activity panel
+- [[../home|Mind user manual]]
+- [[tasks|Current task summary]]
+- [[projects|Current projects]]
+- [[decisions|Committed decisions]]
+- [[business|Business overview]]
 
-This is your primary system cockpit — it pulls live data from Brain Core and requires no manual updates.
+## Additional operational views
 
-## 📋 Reference Navigation
+- [[sessions|AI session visibility]]
+- [[machine|Machine and Brain Core entry point]]
+- [[video|Video workflow visibility]]
+- [[fala|Fala learning cockpit]]
+- [[workflows|Workflow overview]]
 
-If you need to browse Mind Markdown directly (plugin unavailable):
+## Current boundary
 
-- [[../HOME|HOME]] — command center with task/project dataviews
-- [[../TODAY|TODAY]] — today’s focus
-- [[tasks]] — current tasks (fallback browsing)
-- [[projects]] — current projects (fallback browsing)
-- [[sessions]] — AI session visibility (fallback)
-- [[machine]] — Brain Core machine entry point (fallback; plugin is primary)
-- [[video]] — Video Orchestrator visibility (fallback)
-- [[fala]] — Fala local language-learning cockpit
-- [[business]] — sparse business operating surface
-- [[workflows]] — workflow launch and tracking
-- [[decisions]] — current committed decisions
+Brain Console displays live runtime status from Brain. Mind Markdown remains the human-readable fallback and does not store runtime logs or duplicate live machine state.
 
-## Machine Visibility (Brain Console Primary)
+Mind Steward and maintenance workflows are report-only. They may inspect information and prepare review material, but they do not automatically move captures or change durable Mind content.
 
-Machine and scheduler state is exposed through **Brain Console plugin cards**, not copied into Markdown files in this vault. Live data comes from Brain Core endpoints:
-- `/status` → Brain Core status card
-- `/runtime/reports` → Wiki health card
-- `/execution/mind-previews` → Maintenance previews card
-- `/scheduler/jobs` → Scheduler status card
-- `/approvals` → Approvals card
-- `/execution/readiness` → Next safe action card
-
-## Status
-
-- Brain Console plugin is the primary Obsidian interface.
-- Mind Steward classifies captures locally and writes review suggestions.
-- Archive maintenance requires an explicit cleanup plan.
+Archive maintenance and durable truth changes require an explicit reviewed action.

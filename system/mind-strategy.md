@@ -230,6 +230,30 @@ Brain should contain:
 - runtime status;
 - automated execution.
 
+### Continuous processing rules
+
+Continuous processing is optional and disabled by default. Basic Mind use — reading, navigation, capture, and Obsidian workflows — does not depend on continuous automation.
+
+Continuous processing must not be enabled until its operational value is demonstrated through a bounded, approved trial with before/after evidence. `continuousEnabled: false` and `watcherEnabled: false` are the safe default state.
+
+The current implementation is gated and plan-only. Large-file nightly fallback is a bounded plan, not active autonomous execution.
+
+### Operational validation requirement
+
+Automation must be retained only when value is demonstrated. Meaningful time savings and reduced maintenance burden remain unproven for the current continuous processing implementation. Lack of demonstrated value must remain visible and must not be treated as success.
+
+### Simplification strategy
+
+Do not solve retrieval problems by adding more folder depth first. Prefer better page titles, links, compact indexes, frontmatter where useful, Obsidian search, and Graphify.
+
+Physical folder depth is not the same as useful depth. Useful-depth recommendations require navigation, usability, and maintenance evidence before they can be made. A bounded simplification review may validly conclude that no deletion or archival is justified.
+
+No destructive simplification occurs without explicit human approval.
+
+### Approval evidence rule
+
+Persistent approval volume is measurable only when persistence is configured and readable. Absent persistent evidence does not prove no approvals have ever occurred. When the approval store is not configured, the result is `insufficient-evidence`, not a zero count.
+
 ## Success measures
 
 The strategy is working when:

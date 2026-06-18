@@ -1,6 +1,7 @@
 # Mind Maintenance Report Contract
 
 **Status:** canonical implementation contract  
+**Contract version:** 1.0
 **Depends on:** `system/maintenance-intelligence-standard.md`, `system/knowledge-freshness-standard.md`, `system/brain-mind-bridge.md`  
 **Purpose:** define the exact report formats, review states, evidence rules, detector boundaries, and Brain implementation handoff for report-only Mind maintenance intelligence.
 
@@ -51,18 +52,21 @@ Rules:
 - dated history files are created only for reviewed or operationally significant runs.
 - generated reports must never be written to the repository root.
 - a report run may replace the latest files, but it must not overwrite reviewed historical records.
+- `system/reports/maintenance-decisions.json` is optional and may be absent when the decision ledger is empty.
 
 ## Report-level JSON schema
 
+`generatedBy` identifies the actual generator or operator that produced the report. It is a free-form string and does not need to equal a fixed sentinel value.
+
 ```json
 {
-  "schema_version": "1.0",
-  "report_id": "mind-maintenance-YYYYMMDD-HHMMSS",
-  "generated_at": "YYYY-MM-DDTHH:MM:SSZ",
-  "generated_by": "brain/mind-steward",
+  "schemaVersion": "1.0",
+  "reportId": "mind-maintenance-YYYYMMDD-HHMMSS",
+  "generatedAt": "YYYY-MM-DDTHH:MM:SSZ",
+  "generatedBy": "controlled-real-mind-pilot",
   "mode": "report-only",
-  "source_repo": "mind",
-  "source_commit": "",
+  "sourceRepo": "mind",
+  "sourceCommit": "",
   "detectors": [
     "stale-page",
     "duplicate-candidate",
@@ -72,15 +76,15 @@ Rules:
     "capture-promotion"
   ],
   "summary": {
-    "files_considered": 0,
-    "findings_total": 0,
-    "findings_open": 0,
-    "findings_suppressed": 0,
-    "detector_errors": 0
+    "filesConsidered": 0,
+    "findingsTotal": 0,
+    "findingsOpen": 0,
+    "findingsSuppressed": 0,
+    "detectorErrors": 0
   },
   "findings": [],
   "errors": [],
-  "no_write_performed": true
+  "noWritePerformed": true
 }
 ```
 
@@ -94,7 +98,7 @@ Each finding must use this shape:
   "type": "stale-page",
   "status": "open",
   "created": "YYYY-MM-DD",
-  "source_repo": "mind",
+  "sourceRepo": "mind",
   "scope": "system",
   "paths": [
     "router/00-current-context.md"
@@ -112,9 +116,9 @@ Each finding must use this shape:
   "risk": "medium",
   "recommended_action": "Review the page and either confirm current or update the affected sections.",
   "requires_approval": true,
-  "no_write_performed": true,
-  "deduplication_key": "stale-page:router/00-current-context.md:review_after",
-  "suppression_until": null,
+  "noWritePerformed": true,
+  "deduplicationKey": "stale-page:router/00-current-context.md:review_after",
+  "suppressionUntil": null,
   "review": null
 }
 ```
@@ -218,12 +222,12 @@ A newer finding or broader review replaced this finding.
 
 ```json
 {
-  "reviewed_by": "Steve Westhoek",
-  "reviewed_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "reviewedBy": "Steve Westhoek",
+  "reviewedAt": "YYYY-MM-DDTHH:MM:SSZ",
   "decision": "accepted",
   "reason": "The current-context page is genuinely outdated.",
-  "next_action": "Prepare an exact-path update proposal.",
-  "resolution_ref": null
+  "nextAction": "Prepare an exact-path update proposal.",
+  "resolutionRef": null
 }
 ```
 
@@ -440,7 +444,7 @@ Never promote directly into trusted `wiki/` knowledge without approval.
 
 ## Deduplication and recurrence
 
-Every finding must include a stable `deduplication_key`.
+Every finding must include a stable `deduplicationKey`.
 
 Recommended patterns:
 
@@ -569,7 +573,7 @@ Reasoning:
 - latest JSON and Markdown files are created in `system/reports/`;
 - both outputs share the same report ID and finding count;
 - `mode` equals `report-only`;
-- `no_write_performed` equals `true`;
+- `noWritePerformed` equals `true`;
 - detector errors are visible;
 - no files outside approved report paths change.
 
@@ -625,6 +629,15 @@ The pilot should deliberately include:
 - one technical roadmap.
 
 Do not use the full Mind vault for the first implementation test.
+
+## Optional decision ledger
+
+`system/reports/maintenance-decisions.json` is an optional empty-state artifact.
+
+- When present, it is the canonical decision ledger for persisted accepts, dismissals, and resolutions.
+- When absent, the maintenance workflow treats the decision set as empty.
+- The report-only runner may create or replace it only through explicit decision recording.
+- The absence of this file is not a failure condition for a valid report-only pilot.
 
 ## Definition of done for this slice
 

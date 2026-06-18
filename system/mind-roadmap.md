@@ -29,13 +29,35 @@ Already present:
 - `live/`, `wiki/`, `sources/`, and `archive/` roles;
 - `kanban.md` protected as task source of truth;
 - Mind Steward report-only classification;
+- canonical philosophy and strategy links;
+- Brain-Mind bridge contract;
+- freshness model and selective review metadata;
+- maintenance report contract and report-only surfaces;
 - `wiki/log.md` maintenance/proposal surface;
 - Graphify outputs and visual graph;
 - Brain Core and Brain Console read-only visibility;
 - automation, folder, queue, graph, and task contracts;
 - human approval before durable writes.
 
-The missing layer is a canonical philosophy, strategy, standardized Brain–Mind bridge, freshness model, and implementation sequence.
+**Implemented through Phases 1–10:**
+
+- persistent Brain-owned queue state;
+- debounce, stability detection, and concurrency controls;
+- retry and failure-buffer visibility;
+- approval and execution gates with kill switch;
+- scheduler planning and readiness surfaces;
+- kill switch and recovery guidance;
+- plan-only large-file nightly fallback;
+- optional continuous-processing safety capabilities;
+- bounded simplification review (evidence-based, no destructive action).
+
+**Still unresolved or inactive:**
+
+- active autonomous continuous execution (disabled by default; no approved trial has run);
+- meaningful time-savings evidence (no before/after baseline exists);
+- reduced maintenance-burden evidence (unproven);
+- stale-page detector recall (currently 0% on required positive case; repair required);
+- demonstrated operational value for every retained automation.
 
 ## Phase 0 — Canonical direction
 
@@ -227,6 +249,24 @@ Exit criteria:
 - failures do not lose data or corrupt current truth;
 - the system can be paused instantly.
 
+### Phase 9 verified outcome (2026-06-18)
+
+**Implemented safety capability (confirmed):**
+
+- stable-file detection and debounce are implemented and tested;
+- concurrency cap, failure buffer, and retry exhaustion are implemented;
+- large-file nightly fallback is a bounded plan adapter — not active autonomous execution;
+- disable and recovery procedures are documented;
+- continuous processing remains optional and disabled by default (`continuousEnabled: false`, `watcherEnabled: false`);
+- basic Mind use does not depend on continuous processing;
+- measurement adapter collects real timestamps and process memory; configuration is clearly separated from measurements; missing evidence returns null with explicit blockers, never zero.
+
+**Unresolved (Phase 9 acceptance criteria not yet satisfied):**
+
+- meaningful time savings relative to manual processing are not yet proven;
+- no before/after time-savings comparison exists;
+- operational continuous processing has not yet run in a real approved trial.
+
 ## Phase 10 — Evaluation and simplification
 
 **Goal:** ensure Infinite Brain growth makes Mind simpler, not heavier.
@@ -249,6 +289,68 @@ Exit criteria:
 - Mind remains calm and human-readable;
 - automation reduces work;
 - the architecture is still understandable without technical expertise.
+
+### Phase 10 verified outcome (2026-06-18)
+
+**Confirmed:**
+
+- canonical documentation matches implemented behavior;
+- no destructive simplification occurred; all review tasks were bounded and evidence-based;
+- continuous processing remains optional and disableable;
+- bounded review tasks produced no file deletions or archival actions.
+
+**Partially supported:**
+
+- Mind remains human-readable and calm (structure is unchanged; no folder depth was added).
+
+**Unresolved:**
+
+- stale-page detection recall is 0% against its required positive case — repair is required before Phase 4 detector quality is acceptable;
+- meaningful time savings remain unproven;
+- Steve spends less time maintaining the system: unproven;
+- every retained automation has demonstrated value: not yet satisfied (stale-page detection still requires repair; time savings have no baseline).
+
+### Post-plan operational validation work
+
+The following work is needed after the plan is structurally complete. This is not a new phase — it is the operational validation that determines whether the Phase 9/10 acceptance criteria are eventually satisfied:
+
+- collect before/after maintenance-time evidence;
+- repair and validate stale-page detection recall;
+- conduct a bounded real continuous-processing trial only after explicit approval;
+- review the five human-decision file candidates (see Task 7 and Task 8 pending decisions);
+- keep continuous execution disabled until value and safety are demonstrated.
+
+## Current milestone close-out (2026-06-18)
+
+### Complete — manual/report-only operation
+
+The following capabilities are implemented and ready for use without continuous automation:
+
+- human-first Mind usage: capture flows through `capture/inbox/` and review is human-led;
+- automatic capture intake: Save-to-Mind places captures in `capture/inbox/` automatically;
+- report-only Mind Steward: Brain inspects, classifies, and prepares proposals without durable writes;
+- Brain Console and status visibility: Brain Core API exposes queue state, scheduler status, and maintenance reports;
+- manual proposal review: proposals appear in `wiki/log.md` for human approval;
+- manual Kanban operation: `kanban.md` remains the task source of truth; no automated task writes;
+- disabled continuous execution: continuous processing is off by default and unused for current manual operation.
+
+The current release is fully usable without continuous processing. No claim of autonomous self-improvement or black-box operation is made.
+
+### Future automation track — deferred
+
+The following capabilities are not implemented or not approved for current use:
+
+- optional continuous runner activation (disabled by default; requires explicit approval);
+- real-world approved continuous-processing trial;
+- auto-resume and persisted pause/recovery state;
+- self-optimization and feedback learning;
+- approval-feedback loop integration;
+- automated durable writes beyond current bounded write adapters (requires separate approval);
+- demonstrated time savings relative to manual processing.
+
+Do not mark these as defects in the current milestone. They are intentional deferrals.
+
+---
 
 ## Roadmap guardrails
 

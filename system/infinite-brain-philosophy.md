@@ -1,6 +1,7 @@
 # Infinite Brain Philosophy for Mind
 
 **Status:** canonical philosophy  
+**Contract version:** 1.0
 **Purpose:** define the first principles from which Mind strategy, roadmap, and implementation decisions must follow.
 
 ## Core idea
@@ -34,6 +35,8 @@ Therefore:
 - one clear page is better than several fragmented indexes;
 - natural titles and links are better than machine-only identifiers;
 - automation should reduce maintenance, not make the vault feel technical;
+- continuous automation is optional and disabled by default; basic reading and navigation do not require it;
+- automation is retained only when its value is demonstrated, not assumed;
 - important truth changes remain visible and reviewable by a human.
 
 Mind may be AI-readable, but it must never become organized primarily for an AI at the expense of the human experience.
@@ -107,9 +110,21 @@ Each capture, decision, correction, and completed project should have the opport
 
 Automation may detect, prepare, and recommend. It must not silently redefine personal beliefs, business strategy, priorities, or durable conclusions.
 
-### 10. Keep the system calm
+### 10. Evidence honesty
+
+Missing evidence remains null, blocked, or insufficient. Missing evidence must not be converted to zero. Configuration and proxies must not be mislabeled as measured outcomes.
+
+### 11. Keep the system calm
 
 The Infinite Brain should feel simpler as it grows, not more complicated.
+
+## Cross-repo consistency
+
+The shared laws above are canonical and must remain word-for-word consistent with `../../brain/operations/specs/infinite-brain-philosophy.md`.
+
+Note: law 10 (Evidence honesty) and law 11 (Keep the system calm) are Mind-side additions that extend the shared chain. Laws 1–9 must stay word-for-word consistent with the Brain counterpart.
+
+If Brain and Mind need different implementation details, keep those differences in repo-specific sections instead of rewriting the shared laws.
 
 ## Information lifecycle
 
@@ -213,6 +228,8 @@ The system should help detect:
 ## Simplicity boundary
 
 The philosophy should improve the existing shallow structure, not create a new maze of folders.
+
+Physical folder depth is not the same as useful depth. Useful-depth recommendations require navigation, usability, and maintenance evidence. No destructive simplification occurs without human approval.
 
 The preferred top-level model remains:
 
