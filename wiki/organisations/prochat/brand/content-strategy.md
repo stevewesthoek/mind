@@ -2,101 +2,179 @@
 
 **Status:** canonical content strategy  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-06-05
+**Last updated:** 2026-07-01
 
 ## Content goal
 
-Content should make one idea obvious:
+Content should make the two-product company structure obvious:
 
 ```text
-AI becomes more useful when it can reuse your business knowledge, examples, style, and feedback.
+ProChat Memory
+ProChat Workbench
 ```
 
-## Main content pillars
+ProChat Memory for QA is the first discipline-specific edition of the flagship product.
 
-### 1. Repeated work
+Content must stay practical, evidence-aware, local-first, and honest about the pre-revenue beta stage.
 
-Show examples of work people repeat every week:
+## Content lane 1 — ProChat Memory for QA
 
-- follow-up emails
-- proposals
-- reports
-- support replies
-- task instructions
-- content drafts
-- meeting summaries
-
-### 2. Before and after
-
-Show the transformation:
+### Core message
 
 ```text
-messy notes/examples/context → review-ready output
+Stop solving the same QA failure twice.
 ```
 
-### 3. Owner/founder leverage
+### What to explain
 
-Show how owners can stop being the bottleneck for context, decisions, tone, and delegation.
+Show how reviewed QA investigation knowledge can remain reusable across later work.
 
-### 4. Team consistency
+Topics include:
 
-Show how sales, support, marketing, and operations can produce more consistent work from shared examples and review feedback.
+- recurring test failures;
+- failed-test investigation lessons;
+- local tester-owned memory;
+- Markdown-first workspaces;
+- Git-versioned QA knowledge;
+- evidence versus stored memory;
+- review and approval before a lesson becomes trusted;
+- sanitizing client and project information;
+- project and client memory scopes;
+- retrieving earlier fixes, causes, selectors, and environment notes;
+- preserving knowledge across releases, projects, and team changes;
+- beta lessons from real tester feedback.
 
-### 5. Human review
-
-Show that ProChat prepares work. People stay in control.
-
-## Content formats
-
-- short before/after demos
-- Loom walkthroughs
-- local business examples
-- role-specific landing page examples
-- LinkedIn posts
-- short YouTube demos
-- outreach assets
-- simple checklists
-
-## Content rule
-
-Do not create content about architecture first.
-
-Do not lead with:
-
-- Work Memory
-- operating systems
-- modules
-- graphs
-- agents
-- model routing
-- infrastructure
-
-Lead with:
-
-- the painful repeated task
-- the messy input
-- the useful output
-- the time saved
-- the review step
-
-## Best demo themes
-
-1. Founder notes to client reply and task instructions
-2. Sales call notes to follow-up and proposal draft
-3. Support ticket to reply and escalation note
-4. Marketing examples to on-brand content draft
-5. Operations notes to status report and action list
-
-## Content CTA
-
-Primary CTA:
+### Proof pattern
 
 ```text
-Show us one repeated task your team still does by hand.
+failed test
+→ relevant reviewed memory
+→ evidence-aware investigation
+→ human-approved lesson
+→ better future investigation
 ```
 
-Secondary CTA:
+### Useful formats
+
+- short failed-test walkthroughs;
+- before-and-after investigation examples;
+- local workspace demonstrations;
+- CLI walkthroughs;
+- memory review and sanitization examples;
+- beta tester stories;
+- lessons about trust, privacy, and retrieval quality;
+- QA-specific articles, posts, and videos.
+
+### Primary audiences
+
+- individual QA testers;
+- QA engineers;
+- QA leads;
+- test managers;
+- QA businesses evaluating future tester licenses.
+
+### Calls to action
+
+- Explore ProChat Memory for QA
+- Join the selected QA beta
+- Try it with one recurring QA failure
+- Share a QA investigation pattern you keep repeating
+
+## Content lane 2 — ProChat Workbench
+
+### Core message
 
 ```text
-We will show what a review-ready version could look like.
+Use ChatGPT as the reasoning layer and your local computer as the project and execution layer.
+```
+
+### What to explain
+
+Show how builders can use the native ChatGPT experience with real local projects through guarded operations.
+
+Topics include:
+
+- exact local repository context;
+- bounded context reads;
+- verified file changes;
+- allowlisted commands;
+- targeted validation;
+- persistent runs and handoffs;
+- explicit-path Git operations;
+- confirmation for sensitive actions;
+- continuing project planning and review through the ChatGPT ecosystem;
+- practical comparisons with Cursor, Claude Code, and similar tools;
+- cost-conscious workflows without promising unlimited usage or universal savings.
+
+### Proof pattern
+
+```text
+request
+→ exact local context
+→ ChatGPT reasoning
+→ guarded change
+→ targeted validation
+→ explicit Git action
+```
+
+### Useful formats
+
+- real repository walkthroughs;
+- feature implementation demos;
+- documentation and refactoring examples;
+- phone-to-desktop workflow demonstrations;
+- local setup guides;
+- guarded-operation explanations;
+- honest tool comparisons;
+- reliability and safety case studies.
+
+### Primary audiences
+
+- developers;
+- builders;
+- technical founders;
+- vibe coders;
+- people already comfortable using ChatGPT for project work.
+
+### Calls to action
+
+- Explore ProChat Workbench
+- View the project on GitHub
+- Connect ChatGPT to a local project
+- Try one guarded change on a real repository
+
+## Shared content rules
+
+Do not present future capabilities as current products.
+
+Do not lead with speculative architecture, autonomous-agent claims, or broad transformation promises.
+
+Do not claim:
+
+- unlimited usage;
+- zero hallucinations;
+- guaranteed cost savings;
+- complete replacement of every editor;
+- automatic trust in unreviewed memory.
+
+Every piece of content should show at least one of these:
+
+- a real problem;
+- the local context used;
+- the review step;
+- the evidence or source boundary;
+- the useful result;
+- what remains uncertain or requires human judgment.
+
+## Publishing balance
+
+Keep the two lanes visibly separate.
+
+Do not merge QA Memory and Workbench into one vague product story.
+
+A practical starting balance is:
+
+```text
+ProChat Memory for QA: domain learning, beta recruitment, and tester proof
+ProChat Workbench: builder adoption, demonstrations, and technical credibility
 ```

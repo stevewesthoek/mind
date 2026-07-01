@@ -2,153 +2,73 @@
 
 **Status:** canonical overview  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-06-14
+**Last updated:** 2026-07-01
 
 ## Company
 
-ProChat is the business and master brand.
+ProChat is a memory-first software company.
 
-ProChat builds a family of memory-first products that turn reusable business knowledge into reliable answers, review-ready work, and safe local project action.
+It builds local products that keep project knowledge reusable and connect familiar AI interfaces to real project work.
 
-## Product suite
+## Products
+
+ProChat currently has exactly two products:
 
 ```text
-FOUNDATION
 ProChat Memory
-
-BUSINESS PRODUCTS
-ProChat Answers
-ProChat Automations
-
-BUILDER PRODUCT
 ProChat Workbench
-Powered by the BuildFlow engine
-
-SOLUTIONS
-ProChat for [Role or Industry]
-
-INTERFACES
-ProChat API
-ProChat MCP
 ```
 
-Canonical naming details:
+## ProChat Memory
+
+ProChat Memory is the flagship product.
+
+It keeps reviewed project knowledge local, readable, inspectable, editable, source-traceable, and versionable with Git.
+
+The first discipline-specific edition is:
 
 ```text
-wiki/organisations/prochat/brand/product-naming-architecture.md
+ProChat Memory for QA
 ```
+
+ProChat Memory for QA helps individual testers preserve reviewed lessons from test investigations so they do not have to solve the same failure repeatedly.
+
+Customer memory remains on the customer’s computer. ProChat does not host it.
+
+## ProChat Workbench
+
+ProChat Workbench is a ChatGPT-first local builder workbench for repositories, documentation, notes, and project folders.
+
+```text
+ChatGPT provides the reasoning interface.
+The local computer remains the source of truth and execution environment.
+```
+
+Workbench is designed for developers, builders, technical founders, and vibe coders. It can offer an alternative workflow to Cursor, Claude Code, and similar tools through exact context, guarded operations, targeted validation, and explicit Git control.
+
+BuildFlow remains the technical engine and compatibility identifier where required.
 
 ## Core philosophy
 
 ```text
-Memory is the product foundation.
-Workflows are the method.
-AI is the assistant.
+Memory is the foundation.
+Evidence keeps it trustworthy.
+Human review improves it.
+AI puts it to work.
 ```
 
-Every repeated work situation should leave reusable memory behind. That memory should make later answers and outputs faster, clearer, and more accurate.
+## Current stage
 
-## ProChat Memory
+ProChat is pre-revenue. Both products are in active development.
 
-ProChat Memory is the shared foundation behind the business products.
+The immediate business focus is to gain QA domain experience, invite selected beta testers, collect evidence from real use, improve the products, build a relevant network, and prepare licensing before monetization.
 
-It organizes reusable:
+## Future direction
 
-- examples
-- decisions
-- rules
-- procedures
-- style and tone
-- client and project context
-- recurring formats
-- corrections
-- reviewer feedback
-- source references
-
-## ProChat Answers
-
-ProChat Answers provides reliable, sourced answers from approved business knowledge.
+Future discipline-specific editions should follow this naming pattern:
 
 ```text
-question → approved knowledge → grounded answer → sources → feedback
+ProChat Memory for [Discipline]
 ```
 
-## ProChat Automations
-
-ProChat Automations turns repeated business work into useful output ready for review.
-
-Examples:
-
-- drafting replies
-- preparing proposals
-- summarizing notes
-- turning documents into checklists
-- creating task lists
-- preparing reports
-- preparing support responses
-- turning recurring context into repeatable output
-
-## ProChat Workbench
-
-ProChat Workbench lets ChatGPT work safely with real local repositories, documentation, notes, and projects.
-
-```text
-Public product: ProChat Workbench
-Technical engine: BuildFlow
-```
-
-During the naming migration, BuildFlow remains the technical repository and internal identifier where compatibility matters.
-
-## ProChat solutions
-
-Use:
-
-```text
-ProChat for [Role or Industry]
-```
-
-Examples:
-
-- ProChat for Founders
-- ProChat for Sales
-- ProChat for Support
-- ProChat for Marketing
-- ProChat for Operations
-- ProChat for Legal
-- ProChat for Accounting
-
-Solutions package the relevant memory, answers, automations, review rules, and delivery configuration for one audience.
-
-## Why it matters
-
-Most teams already have AI tools, but they still spend time explaining context, rewriting output, searching old examples, and repeating the same manual work.
-
-ProChat makes that knowledge reusable and puts it to work.
-
-## First commercial direction
-
-Start small.
-
-Make one person or one team faster first.
-
-Best first buyers:
-
-- founders and owners
-- sales teams
-- support teams
-- marketing teams
-- operations teams
-- consultants and agencies
-- local service businesses
-
-## Public promise
-
-```text
-Stop rewriting, re-explaining, and redoing the same work.
-```
-
-## Brand rule
-
-ProChat does not sell technical architecture first.
-
-ProChat sells reliable answers, time saved, clearer handoffs, faster drafts, reusable knowledge, and review-ready work.
+Automation capabilities, API access, and MCP integrations are possible future capabilities, not current products.

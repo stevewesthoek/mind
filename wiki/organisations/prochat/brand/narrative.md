@@ -2,105 +2,125 @@
 
 **Status:** canonical narrative  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-06-05
+**Last updated:** 2026-07-01
 
 ## The belief
 
-AI is powerful, but most businesses still use it like a separate chat window.
+AI becomes more useful when project knowledge does not disappear after each conversation, investigation, or work session.
 
-That means people still do the real work around it:
+The model is not the durable asset.
 
-- explaining context
-- finding examples
-- rewriting drafts
-- turning notes into tasks
-- preparing reports
-- repeating decisions
-- correcting tone
-- copying outputs into other places
+The durable asset is the reviewed memory created through real work:
 
-The model is not enough.
+- decisions;
+- failures;
+- fixes;
+- evidence;
+- corrections;
+- procedures;
+- examples;
+- lessons learned.
 
-The missing layer is the business's own reusable knowledge and repeated work patterns.
+## The problem
+
+Important project knowledge is often scattered across people, chats, tickets, logs, repositories, notes, and old investigations.
+
+That creates repeated work:
+
+- investigating the same failure again;
+- re-explaining project context;
+- searching for an old fix;
+- repeating a preventable mistake;
+- losing knowledge when a project or person changes;
+- pasting incomplete context into an AI tool.
 
 ## The ProChat story
 
-Every business has valuable knowledge hidden in people, documents, examples, emails, notes, and old decisions.
+ProChat builds local, memory-first products.
 
-Most of that knowledge is not reusable.
+ProChat Memory keeps reviewed project knowledge reusable.
 
-It lives in someone's head, in old threads, in scattered folders, or in examples nobody can find when they need them.
+ProChat Workbench lets ChatGPT use real local project context through bounded, guarded operations.
 
-ProChat helps turn that scattered knowledge into useful work.
+The shared idea is simple:
 
-Not by replacing people.
+```text
+Useful project work should leave useful memory behind.
+```
 
-By preparing better drafts, summaries, reports, replies, tasks, and next steps for people to review and use.
+## The flagship product
 
-## The enemy
+ProChat Memory is the flagship product.
 
-The enemy is repeated manual knowledge work.
+It keeps memory local, readable, inspectable, editable, source-traceable, and versionable with Git.
 
-Repeated manual knowledge work looks like:
+The first edition is ProChat Memory for QA.
 
-- writing the same kind of reply again
-- explaining the same context again
-- searching for the same example again
-- rewriting AI output again
-- creating the same report again
-- turning the same type of notes into tasks again
+It helps testers preserve lessons from failed tests and investigations so that similar problems can be recognized and resolved with better context later.
+
+## The second product
+
+ProChat Workbench is a ChatGPT-first local builder workbench.
+
+It uses the native ChatGPT experience as the reasoning interface while the user’s local computer remains the source of truth and execution environment.
+
+It offers developers and builders an alternative workflow to Cursor, Claude Code, and similar tools when they value exact context, guarded operations, explicit validation, and local control.
 
 ## The promise
 
-```text
-Stop rewriting, re-explaining, and redoing the same work.
-```
-
-## The product role
-
-ProChat OS helps a business create a practical layer between messy input and useful output.
-
-It uses the company's examples, style, rules, and review feedback to prepare work that is closer to how the business actually works.
-
-## The before and after
-
-Before:
+For ProChat Memory:
 
 ```text
-Scattered context, repeated explanations, slow drafts, inconsistent outputs, manual follow-up.
+Keep reviewed project knowledge reusable.
 ```
 
-After:
+For ProChat Memory for QA:
 
 ```text
-Drafts, summaries, checklists, task lists, reports, and replies ready for review.
+Stop solving the same QA failure twice.
 ```
+
+For ProChat Workbench:
+
+```text
+Use ChatGPT as the reasoning layer and your local computer as the project and execution layer.
+```
+
+## The trust model
+
+ProChat does not treat every note, log, or AI draft as trusted memory.
+
+```text
+raw evidence
+→ draft lesson
+→ sanitization
+→ human review
+→ approved memory
+```
+
+Current evidence and human judgment override stored memory.
 
 ## The tone
 
 ProChat should sound:
 
-- practical
-- direct
-- outcome-focused
-- calm
-- clear
-- business-first
+- practical;
+- direct;
+- calm;
+- evidence-aware;
+- local-first;
+- honest about the beta stage.
 
 ProChat should not sound:
 
-- hype-driven
-- overly technical
-- like an AI guru
-- like a chatbot wrapper
-- like a broad transformation consultancy
+- hype-driven;
+- autonomous-first;
+- architecture-obsessed;
+- like a generic chatbot;
+- like a broad transformation consultancy.
 
-## Simple story for buyers
+## Current chapter
 
-```text
-Your team repeats the same kind of work every week.
+ProChat is pre-revenue.
 
-ProChat helps capture the examples, style, and context behind that work.
-
-Then it prepares drafts, summaries, reports, replies, and next steps your team can review and use faster.
-```
+The current chapter is about entering the QA discipline, inviting selected testers, learning from real use, improving the products, building trust, and preparing licensing before monetization.

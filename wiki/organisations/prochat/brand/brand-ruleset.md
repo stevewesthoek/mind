@@ -2,7 +2,7 @@
 
 **Status:** canonical copy rules  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-06-14
+**Last updated:** 2026-07-01
 
 ## Naming source of truth
 
@@ -10,200 +10,136 @@
 wiki/organisations/prochat/brand/product-naming-architecture.md
 ```
 
-## Approved product names
+## Approved company and product names
 
 Use:
 
 - ProChat
 - ProChat Memory
-- ProChat Answers
-- ProChat Automations
+- ProChat Memory for QA
+- ProChat Memory for [Discipline]
 - ProChat Workbench
-- ProChat for [Role or Industry]
-- ProChat API
-- ProChat MCP
 
-Describe BuildFlow as the technical engine powering ProChat Workbench while internal identifiers remain unchanged.
+Describe BuildFlow as the technical engine behind ProChat Workbench when technical compatibility matters.
 
-Do not use these as primary public product names:
+Do not introduce additional product names without first updating the canonical naming architecture.
 
-- ProChat OS
-- ProChat Workflows
-- MemOS
-- MemQA
-- ProChat QA
-- Ask ProChat
+## Product-count rule
+
+Public product pages and company summaries must show exactly two products:
+
+```text
+ProChat Memory
+ProChat Workbench
+```
+
+ProChat Memory for QA is an edition of ProChat Memory, not a third product.
+
+Automation capabilities, API access, and MCP integrations may be discussed only as future capabilities, not current products.
 
 ## Core message
 
 ```text
-ProChat turns reusable business knowledge into reliable answers and useful work ready for review.
+ProChat keeps project knowledge reusable and puts it to work through familiar AI interfaces.
+```
+
+## Core philosophy
+
+```text
+Memory is the foundation.
+Evidence keeps it trustworthy.
+Human review improves it.
+AI puts it to work.
 ```
 
 ## Brand voice
 
 Use language that is:
 
-- simple
-- practical
-- direct
-- buyer-focused
-- outcome-first
-- calm
-- specific
+- simple;
+- practical;
+- direct;
+- calm;
+- specific;
+- evidence-aware;
+- honest about the current beta stage.
 
 Avoid language that is:
 
-- technical first
-- hype-driven
-- abstract
-- vague
-- guru-like
-- too strategic for a buyer
+- hype-driven;
+- architecture-first;
+- vague;
+- guru-like;
+- autonomous-first;
+- absolute about cost, accuracy, or usage limits.
 
-## Product-specific promises
+## Product promises
 
 ### ProChat Memory
 
 ```text
-Keep useful business knowledge reusable.
+Keep reviewed project knowledge reusable.
 ```
 
-### ProChat Answers
+### ProChat Memory for QA
 
 ```text
-Get reliable answers from the knowledge your business trusts.
-```
-
-### ProChat Automations
-
-```text
-Turn repeated work into useful output ready for review.
+Stop solving the same QA failure twice.
 ```
 
 ### ProChat Workbench
 
 ```text
-Let ChatGPT work safely with your real local projects.
+Use ChatGPT as the reasoning layer and your local computer as the project and execution layer.
 ```
 
-## Buyer language to use
+## Proof patterns
 
-Use phrases like:
-
-- stop rewriting the same work
-- stop re-explaining the same context
-- get answers grounded in approved knowledge
-- see the sources behind an answer
-- reply faster
-- prepare better drafts
-- turn messy notes into clear next steps
-- make handoffs clearer
-- keep useful knowledge reusable
-- prepare work for human review
-- use your own examples and style
-- save time on repeated work
-
-## Internal terms to avoid in public marketing
-
-Do not lead general buyer pages with:
-
-- memory architecture
-- work brain
-- infinite brain
-- second brain
-- operating system
-- modules
-- knowledge graph
-- runtime
-- connectors
-- routing
-- model selector
-- CLI
-- architecture
-- autonomous employee
-
-These terms may appear in technical documentation where necessary, but buyers should first see the pain and outcome.
-
-## Before-and-after rule
-
-Every marketing page should quickly show the relevant transformation.
-
-ProChat Answers:
+For ProChat Memory for QA:
 
 ```text
-scattered knowledge and repeated questions
-→ grounded answers with visible sources
+failed test
+→ relevant reviewed memory
+→ evidence-aware investigation
+→ human-approved lesson
+→ better future investigation
 ```
 
-ProChat Automations:
+For ProChat Workbench:
 
 ```text
-messy input, repeated explanation, manual rewriting
-→ drafts, summaries, reports, replies, tasks, and next steps ready for review
+request
+→ exact local context
+→ guarded change
+→ targeted validation
+→ explicit Git action
 ```
 
-ProChat Workbench:
+## Website rule
 
-```text
-pasted snippets and missing project context
-→ exact local context, guarded changes, targeted checks, and explicit commits
-```
+The homepage shows two product cards:
 
-## Offer clarity rule
+1. `ProChat Memory` — subtitle: `Currently available for QA`
+2. `ProChat Workbench` — subtitle: `A ChatGPT-first local builder workbench`
 
-Every offer should answer:
+Do not show future capabilities as product cards.
 
-1. What painful or repeated task exists?
-2. What input or knowledge does the buyer already have?
-3. What answer or useful output will ProChat provide?
-4. What sources or context support it?
-5. Who reviews it?
-6. How does this save time or reduce risk?
+## Comparison rule
 
-## CTA rules
+Workbench may be described as an alternative workflow to Cursor, Claude Code, and similar tools.
 
-Good business CTAs:
+Do not claim that it completely replaces every editor, has unlimited usage, eliminates hallucinations, or is always cheaper.
 
-- Show us one repeated task
-- Book a time-saving call
-- See what ProChat can prepare
-- Get a review-ready example
-- Test ProChat Answers with your knowledge
+## CTA examples
 
-Good builder CTAs:
+For Memory:
+
+- Explore ProChat Memory for QA
+- Join the QA beta
+- Try it with one recurring QA failure
+
+For Workbench:
 
 - Explore ProChat Workbench
-- View BuildFlow on GitHub
-- Install the local workbench
-
-Avoid CTAs that require understanding internal architecture:
-
-- Explore the OS
-- Configure a module
-- Build a workflow runtime
-- Install ProChat OS
-
-## Proof rule
-
-Proof should be visual and practical.
-
-For Answers, show:
-
-```text
-question → answer → sources → feedback
-```
-
-For Automations, show:
-
-```text
-input → output → review
-```
-
-For Workbench, show:
-
-```text
-request → exact repo context → guarded change → validation
-```
-
-Do not show architecture before the audience understands the outcome.
+- View the project on GitHub
+- Connect ChatGPT to a local project

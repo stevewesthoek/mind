@@ -2,136 +2,113 @@
 
 **Status:** canonical category definition  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-06-14
+**Last updated:** 2026-07-01
 
-## Company and suite
+## Company and products
 
 ProChat is the business and master brand.
 
-The product suite is:
+It currently has exactly two products:
 
 ```text
 ProChat Memory
-ProChat Answers
-ProChat Automations
 ProChat Workbench
-ProChat for [Role or Industry]
-ProChat API
-ProChat MCP
 ```
 
-Canonical naming architecture:
+ProChat Memory for QA is the first discipline-specific edition of the flagship product.
 
-```text
-wiki/organisations/prochat/brand/product-naming-architecture.md
-```
-
-## Category
+## Connected categories
 
 ProChat operates across two connected categories:
 
 ```text
-Memory-first AI work systems
-Local AI workbenches for builders
+Local project memory
+ChatGPT-first local builder workbenches
 ```
 
-The shared idea is that useful context should remain reusable, inspectable, and actionable.
+The shared idea is that useful project context should remain local, reusable, inspectable, reviewable, and actionable.
 
-## Category problem
+## Category 1 — Local project memory
 
-AI tools can answer questions, but businesses and builders still have to do much of the surrounding work manually.
+ProChat Memory keeps reviewed project knowledge reusable over time.
 
-Teams still:
+It differs from a generic chatbot or document search tool because the durable asset is a maintained memory workspace containing reviewed lessons, sources, decisions, corrections, and scoped context.
 
-- explain the same context repeatedly
-- paste examples into prompts
-- rewrite outputs into the right style
-- search old work for answers
-- turn notes into tasks manually
-- create reports from scratch
-- lose knowledge when people leave
-- reconnect AI tools to local projects repeatedly
-
-## Category promise
-
-A memory-first AI work system turns reusable knowledge into reliable answers and review-ready work.
-
-A local AI workbench lets ChatGPT safely use real project context without relying on pasted snippets or unrestricted autonomous execution.
-
-## Product positions
-
-### ProChat Memory
-
-The reusable knowledge foundation behind the business products.
-
-### ProChat Answers
-
-Reliable, sourced answers from approved business knowledge.
-
-### ProChat Automations
-
-Repeated business work turned into drafts, reports, replies, tasks, and next steps ready for review.
-
-### ProChat Workbench
-
-A safe local project workbench for ChatGPT, powered by the BuildFlow engine.
-
-### ProChat for [Role or Industry]
-
-Packaged combinations of memory, answers, automations, review rules, and delivery configuration for one audience.
-
-## Core category patterns
-
-Business products:
+Core pattern:
 
 ```text
-reusable knowledge + question → grounded answer with sources
+current evidence
++ relevant reviewed memory
++ human judgment
+→ better work
+→ reviewed new lesson
+→ improved future memory
 ```
+
+### Current edition
+
+ProChat Memory for QA applies this category to software testing.
+
+It helps testers reuse reviewed investigation knowledge so they do not have to solve the same failure repeatedly.
+
+Buyer-friendly category language:
 
 ```text
-messy input + reusable knowledge → review-ready work
+Local, reviewed project memory for QA testers.
 ```
 
-Builder product:
+Primary promise:
 
 ```text
-ChatGPT reasoning + exact local project context + guarded operations
+Stop solving the same QA failure twice.
 ```
 
-## Differentiation
+## Category 2 — ChatGPT-first local builder workbench
 
-ProChat differs from:
+ProChat Workbench connects the native ChatGPT experience to real local repositories, documentation, notes, and project folders.
 
-- generic chatbots, because answers can be grounded in approved reusable knowledge
-- simple automation tools, because automations use examples, context, and review feedback
-- generic AI tools, because memory can persist and improve over time
-- dashboards, because the value is the answer or prepared work, not the interface
-- unrestricted coding agents, because ProChat Workbench uses bounded local operations and explicit source control
-
-## Buyer-friendly category language
-
-For business buyers, use:
+Core pattern:
 
 ```text
-Reliable answers and repeated work prepared from the knowledge your business trusts.
+ChatGPT reasoning
++ exact local project context
++ bounded operations
++ targeted validation
 ```
 
-For builders, use:
+It differs from unrestricted coding agents because actions are bounded, sensitive operations can require confirmation, validation is explicit, and Git operations use exact paths.
+
+Buyer-friendly category language:
 
 ```text
-Let ChatGPT work safely with your real local projects.
+A ChatGPT-first local builder workbench.
 ```
 
-Avoid leading with:
+Workbench may be compared with Cursor, Claude Code, and similar tools as an alternative workflow, not as a guaranteed replacement for every editor.
 
-```text
-operating system
-work brain
-knowledge graph
-agentic runtime
-memory architecture
-MCP server
-workflow engine
-```
+## Shared differentiation
 
-Those concepts may help internally, but buyers should first understand the pain and outcome.
+ProChat products emphasize:
+
+- local ownership;
+- readable and inspectable context;
+- human review;
+- source traceability;
+- explicit scope;
+- Git-compatible work;
+- guarded actions;
+- compatibility with familiar AI interfaces.
+
+## Category boundaries
+
+ProChat is not currently positioned as:
+
+- a hosted customer-memory platform;
+- a generic chatbot company;
+- a test runner;
+- a test-management suite;
+- an autonomous employee;
+- a broad automation platform;
+- a complete replacement for every code editor.
+
+Automation capabilities, API access, and MCP integrations remain future capabilities rather than current product categories.

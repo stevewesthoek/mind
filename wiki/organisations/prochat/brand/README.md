@@ -2,127 +2,84 @@
 
 **Status:** canonical brand index  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-06-14
+**Last updated:** 2026-07-01
 
-## Company and product suite
+## Company and products
 
 ```text
 COMPANY
 ProChat
 
-FOUNDATION
+PRODUCT 1 — FLAGSHIP
 ProChat Memory
+└── CURRENT EDITION
+    ProChat Memory for QA
 
-BUSINESS PRODUCTS
-ProChat Answers
-ProChat Automations
-
-BUILDER PRODUCT
+PRODUCT 2
 ProChat Workbench
-Powered by the BuildFlow engine
-
-SOLUTIONS
-ProChat for [Role or Industry]
-
-INTERFACES
-ProChat API
-ProChat MCP
 ```
 
-Canonical naming architecture:
+ProChat currently has exactly two products: ProChat Memory and ProChat Workbench.
 
-```text
-product-naming-architecture.md
-```
-
-## Core idea
-
-```text
-ProChat turns reusable business knowledge into reliable answers and useful work ready for review.
-```
+ProChat Memory for QA is the first discipline-specific edition of ProChat Memory. It is not a separate product.
 
 ## Core philosophy
 
-The ProChat product suite is memory-first.
-
-The durable foundation is ProChat Memory: reusable knowledge, examples, decisions, preferences, rules, and feedback that make answers and repeated work better over time.
+ProChat is a memory-first software company.
 
 ```text
-Memory is the product foundation.
-Workflows are the method.
-AI is the assistant.
-Software and agents are implementation layers.
+Memory is the foundation.
+Evidence keeps it trustworthy.
+Human review improves it.
+AI puts it to work.
 ```
+
+Useful project work should leave reusable memory behind. That memory should remain local, readable, inspectable, editable, source-traceable, and versionable with Git.
+
+## Current business stage
+
+ProChat is pre-revenue. Both products are in active development.
+
+The current priority is to gain direct QA experience, invite selected testers, observe real use, improve the products, build a relevant network, and prepare suitable licenses before monetization.
 
 ## Canonical documents
 
 Start here:
 
-1. `product-naming-architecture.md` — business, product, solution, and interface naming hierarchy
-2. `product-strategy.md` — highest-level strategy, philosophy, product definition, and buyer outcome
-3. `product-modules.md` — memory and automation module architecture
-4. `prochat-os-roadmap.md` — phased execution path
-5. `go-to-market.md` — offer, wedges, outreach, and sales language
-6. `prochat-os-technical-definition.md` — internal product architecture and implementation options
+1. `product-naming-architecture.md` — company, product, edition, and future-capability naming
+2. `product-strategy.md` — highest-level philosophy, strategy, product boundary, and business stage
+3. `product-architecture.md` — relationship between ProChat Memory and ProChat Workbench
+4. `product-roadmap.md` — phased beta and product-development path
+5. `prochat-memory-technical-definition.md` — local Markdown-first memory architecture
+6. `future-capabilities.md` — explicitly non-product future capabilities
 
 Supporting brand documents:
 
-- `company-overview.md` — concise company and product-suite overview
-- `category-definition.md` — category and positioning
-- `customer-profiles.md` — target buyers and first wedges
-- `narrative.md` — story and belief system
-- `content-strategy.md` — content direction
-- `brand-ruleset.md` — copy rules and voice
+- `company-overview.md`
+- `category-definition.md`
+- `customer-profiles.md`
+- `narrative.md`
+- `content-strategy.md`
+- `messaging-framework.md`
+- `brand-ruleset.md`
+- `go-to-market.md`
 
-Historical documents:
+## Approved public names
 
-- `archive/` — superseded or historical strategy material kept for reference only
-
-## Product naming rule
-
-Use:
-
+- ProChat
 - ProChat Memory
-- ProChat Answers
-- ProChat Automations
+- ProChat Memory for QA
+- ProChat Memory for [Discipline]
 - ProChat Workbench
-- ProChat for [Role or Industry]
-- ProChat API
-- ProChat MCP
 
-Retire from primary public naming:
-
-- ProChat OS
-- ProChat Workflows
-- MemOS
-- MemQA
-- ProChat QA
-- Ask ProChat
-
-BuildFlow remains the technical engine and temporary internal identifier behind ProChat Workbench where renaming would create compatibility risk.
+BuildFlow remains the technical engine and compatibility identifier behind ProChat Workbench where renaming would create technical risk.
 
 ## Public marketing rule
 
-Do not explain the architecture first.
+Lead with the user problem and the result.
 
-Sell the outcome:
+For ProChat Memory, emphasize reusable project knowledge, local ownership, reviewed lessons, and avoiding repeated mistakes.
 
-```text
-reliable answers, less rewriting, less re-explaining, faster drafts, clearer handoffs, reusable knowledge
-```
+For ProChat Workbench, emphasize the familiar ChatGPT interface, exact local project context, guarded operations, validation, and explicit Git control.
 
-Avoid leading public pages with:
-
-- memory architecture
-- modules
-- operating system
-- knowledge graph
-- infinite brain
-- runtime
-- connectors
-- model routing
-- API
-- MCP
-- installation
-
-Use technical terms only in technical documentation or later-stage implementation conversations.
+Do not present future capabilities, interfaces, or internal architecture as current products.

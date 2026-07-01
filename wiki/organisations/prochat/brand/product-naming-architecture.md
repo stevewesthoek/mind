@@ -2,43 +2,35 @@
 
 **Status:** canonical naming architecture  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-06-14
+**Last updated:** 2026-07-01
 
 ## Source of truth
 
-This document defines the canonical relationship between the ProChat business, its products, solution bundles, and technical interfaces.
+This document defines the canonical relationship between the ProChat business, its two products, discipline-specific Memory editions, and future capabilities.
 
-All downstream documentation and public product naming should follow this hierarchy.
+All downstream documentation and public product naming must follow this hierarchy.
 
-## Product suite
+## Canonical hierarchy
 
 ```text
 COMPANY
 ProChat
 
-FOUNDATION
+PRODUCT 1 — FLAGSHIP
 ProChat Memory
+└── CURRENT EDITION
+    ProChat Memory for QA
 
-BUSINESS PRODUCTS
-ProChat Answers
-ProChat Automations
-
-BUILDER PRODUCT
+PRODUCT 2
 ProChat Workbench
-Powered by the BuildFlow engine
 
-SOLUTIONS
-ProChat for Founders
-ProChat for Sales
-ProChat for Support
-ProChat for Marketing
-ProChat for Operations
-ProChat for Legal
-ProChat for Accounting
+FUTURE MEMORY EDITIONS
+ProChat Memory for [Discipline]
 
-INTERFACES
-ProChat API
-ProChat MCP
+FUTURE CAPABILITIES — NOT PRODUCTS
+Automation capabilities
+API access
+MCP integrations
 ```
 
 ## Company
@@ -47,238 +39,99 @@ ProChat MCP
 
 ProChat is the business and master brand.
 
-Do not use ProChat as the name of one individual product when describing the full suite.
+Do not use ProChat as the name of an individual product when the distinction matters.
 
-## Foundation
+## Product 1 — ProChat Memory
 
-### ProChat Memory
+ProChat Memory is the flagship product.
 
-ProChat Memory is the shared memory foundation behind the business products.
+It keeps reviewed project knowledge reusable, local, inspectable, editable, source-traceable, and versionable with Git.
 
-It stores and improves reusable:
+It may store and improve:
 
-- examples
-- decisions
-- rules
-- procedures
-- style and tone
-- client and project context
-- recurring formats
-- corrections
-- reviewer feedback
-- source references
+- project context;
+- decisions;
+- failures and fixes;
+- investigation lessons;
+- procedures;
+- examples;
+- corrections;
+- reviewer feedback;
+- source references.
 
 Core principle:
 
 ```text
-Memory is the product foundation.
-Workflows are the method.
-AI is the assistant.
+Memory is the foundation.
+Evidence keeps it trustworthy.
+Human review improves it.
+AI puts it to work.
 ```
 
-ProChat Memory is not automatically a standalone buyer-facing application in every sales conversation. It is the durable foundation that powers answers, automations, and niche solutions.
+Question answering, retrieval, summarization, and future automation are capabilities of ProChat Memory. They are not separate products.
 
-## Business products
+## Memory edition naming
 
-### ProChat Answers
-
-Purpose:
+Use this pattern:
 
 ```text
-Reliable, sourced answers from approved business knowledge.
+ProChat Memory for [Discipline]
 ```
 
-Core experience:
+Current edition:
+
+- ProChat Memory for QA
+
+Possible future examples:
+
+- ProChat Memory for Lawyers
+- ProChat Memory for Accountants
+
+A discipline-specific edition remains part of ProChat Memory. It is not a separate product family.
+
+## ProChat Memory for QA
+
+ProChat Memory for QA is the first and only current discipline-specific edition.
+
+It helps individual QA testers preserve reviewed knowledge from test investigations, including failed tests, evidence, causes, fixes, corrections, environment conditions, and lessons that should be reused when similar failures happen again.
+
+The primary user is an individual QA tester. A future economic buyer may be a QA business or software company purchasing licenses for its testers.
+
+## Product 2 — ProChat Workbench
+
+ProChat Workbench is a ChatGPT-first local builder workbench for repositories, documentation, notes, and project folders.
 
 ```text
-question
-→ approved knowledge and sources
-→ grounded answer
-→ source references
-→ correction or feedback
-→ improved memory
+ChatGPT provides the reasoning interface.
+The local computer remains the source of truth and execution environment.
+Workbench connects them with bounded, guarded operations.
 ```
 
-Use `Q&A` only as a descriptive phrase. Do not use `QA` in the product name because software audiences commonly read QA as quality assurance.
+Primary audiences include developers, builders, technical founders, and vibe coders.
 
-### ProChat Automations
+Workbench can be presented as an alternative workflow to Cursor, Claude Code, and similar tools without claiming to replace every editor or coding environment.
 
-Purpose:
+BuildFlow remains the technical engine and internal compatibility identifier where required.
 
-```text
-Turn repeated business work into useful output ready for review.
-```
+## Future capabilities
 
-Examples:
+Automation capabilities, API access, and MCP integrations are future capabilities or interfaces. They are not current products and must not appear beside ProChat Memory and ProChat Workbench as product cards.
 
-```text
-sales notes → follow-up draft
-support request → reply draft
-meeting notes → task list
-documents → summary and checklist
-weekly updates → status report
-client context → proposal draft
-```
+See `future-capabilities.md`.
 
-Internally, these may use workflow modules. Publicly, use `Automations` because it communicates buyer value more clearly than `Workflows`.
+## Approved names
 
-## Builder product
-
-### ProChat Workbench
-
-Purpose:
-
-```text
-Let ChatGPT work safely with real local repositories, documentation, notes, and projects.
-```
-
-Positioning:
-
-```text
-ChatGPT does the reasoning.
-The local computer remains the source of truth.
-ProChat Workbench connects the two with bounded, guarded operations.
-```
-
-Relationship to BuildFlow:
-
-```text
-Public product name: ProChat Workbench
-Technical engine and temporary internal identifier: BuildFlow
-```
-
-During the naming migration, preserve technical identifiers where renaming would create compatibility risk:
-
-- repository name
-- package names
-- workspace scopes
-- source IDs
-- action operation names
-- scripts
-- environment variables
-- API contracts
-
-Public documentation should describe BuildFlow as the engine powering ProChat Workbench until the technical rename is intentionally planned.
-
-## Solutions
-
-Use one predictable pattern:
-
-```text
-ProChat for [Role or Industry]
-```
-
-Examples:
-
-- ProChat for Founders
-- ProChat for Sales
-- ProChat for Support
-- ProChat for Marketing
-- ProChat for Operations
-- ProChat for Legal
-- ProChat for Accounting
-
-Solutions are packaged combinations of ProChat Memory, ProChat Answers, ProChat Automations, review rules, and delivery configuration.
-
-They are not separate technical foundations.
-
-Example:
-
-```text
-ProChat for Sales
-├── sales memory
-├── ProChat Answers
-│   └── answers about offers, accounts, objections, and previous conversations
-└── ProChat Automations
-    ├── follow-up drafts
-    ├── proposal drafts
-    ├── call summaries
-    └── next-step preparation
-```
-
-## Interfaces
-
-### ProChat API
-
-Programmatic access to approved memory, answers, automations, review, and feedback capabilities.
-
-### ProChat MCP
-
-MCP-compatible access for supported AI clients and developer tools.
-
-API and MCP are technical interfaces, not primary buyer-facing products.
-
-## Naming rules
-
-### Products
-
-Use:
-
-```text
-ProChat + clear noun
-```
-
-Approved:
-
+- ProChat
 - ProChat Memory
-- ProChat Answers
-- ProChat Automations
+- ProChat Memory for QA
+- ProChat Memory for [Discipline]
 - ProChat Workbench
 
-### Solutions
+## Product-count rule
 
-Use:
-
-```text
-ProChat for [Audience]
-```
-
-### Automations
-
-Use:
+Any current company overview, product page, or product hierarchy must show exactly two products:
 
 ```text
-[Outcome] Automation
-```
-
-Examples:
-
-- Follow-up Automation
-- Proposal Automation
-- Reporting Automation
-- Intake Automation
-- Support Reply Automation
-
-### Technical access
-
-Use:
-
-- ProChat API
-- ProChat MCP
-
-## Names to retire from public product architecture
-
-Do not use these as primary public product names:
-
-- ProChat OS
-- MemOS
-- MemQA
-- ProChat QA
-- Ask ProChat
-- ProChat Workflows
-- SalesBrain
-- LegalOS
-- SupportAgent
-
-`ProChat OS` may remain temporarily in historical paths or implementation references until documentation and code migrations are complete, but it is no longer the preferred product-suite name.
-
-## One-line suite logic
-
-```text
-Memory remembers.
-Answers explains.
-Automations prepares.
-Workbench changes.
-Solutions package.
-API and MCP connect.
+ProChat Memory
+ProChat Workbench
 ```
