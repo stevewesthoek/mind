@@ -1,397 +1,391 @@
-📘 PROCHAT — VISUAL STYLE GUIDE v1.0
+# ProChat YouTube Visual Style Guide
 
-Purpose:
-Create a coherent visual system that communicates technical clarity, structural thinking, and calm authority across:
-	•	YouTube (primary surface)
-	•	Website
-	•	Boilerplate marketing pages
-	•	Documentation
-	•	Product dashboards
-	•	Future digital products
+**Status:** canonical channel visual system  
+**Owner:** Steve Westhoek  
+**Last updated:** 2026-07-02
 
-This guide defines constraints.
-Constraints create recognisability.
+## Purpose
 
-⸻
+Create a calm, precise visual system for videos about exactly two product lanes:
+
+```text
+ProChat Memory for QA
+ProChat Workbench
+```
 
-1. ICP — Emotional & Functional Needs
+The visual system should make evidence, scope, review, and validation easier to understand.
 
-Primary ICP
+It should never make a weak claim look stronger than the evidence supports.
+
+## Visual promise
+
+```text
+Calm technical clarity.
+Visible evidence.
+Controlled scope.
+Low visual noise.
+```
 
-Non-technical founders who want to launch SaaS without hiring a developer.
+The viewer should feel that they are looking at a careful working environment, not a performance stage.
 
-They are not looking for entertainment.
-They are looking for control.
+## Shared principles
 
-Emotional needs
+- structure over decoration;
+- evidence over spectacle;
+- hierarchy over density;
+- readable product state over cinematic framing;
+- calm pacing over artificial urgency;
+- consistent labels over novelty;
+- real interfaces over generic stock imagery;
+- honest limitations over visual persuasion.
 
-• Reduce overwhelm
-• Avoid breaking things
-• Feel competent
-• Avoid expensive mistakes
-• Replace chaos with structure
-• Trust the system
+## Product-lane expression
 
-Functional needs
+### ProChat Memory for QA
 
-• Clear installs
-• Step-by-step configuration
-• Predictable deployment
-• Safe defaults
-• Reproducible workflows
+The visual language should emphasize:
 
-The design must feel like opening a clean workspace, not joining a startup party.
+- current failure evidence;
+- reviewed memory;
+- source traceability;
+- local Markdown files;
+- Git history where relevant;
+- sanitization;
+- applicability and uncertainty;
+- comparison between stored lessons and current evidence.
 
-⸻
+Useful screen elements include:
 
-2. Brand Answer
+- test output;
+- logs;
+- traces;
+- screenshots;
+- selectors;
+- test data examples;
+- memory entries;
+- review states;
+- source references;
+- corrected or retired lessons.
 
-Brand name: ProChat
-Tagline anchor: Test first. SaaS second.
+Do not show private customer, client, employer, repository, environment, or account information.
 
-Brand promise expressed visually:
+### ProChat Workbench
 
-Structure before scale.
+The visual language should emphasize:
 
-You don’t feel excited.
-You feel in control.
+- selected source identity;
+- exact local context;
+- approved paths;
+- bounded operations;
+- validation output;
+- changed versus staged files;
+- cached diffs;
+- commits;
+- protection of unrelated work.
 
-Visual tone keywords
+Useful screen elements include:
 
-Calm technical authority
-Precision
-Editorial clarity
-Clean engineering
-Modern but restrained
-Predictable
-Intentional
+- ChatGPT conversation context;
+- Workbench operation results;
+- repository trees;
+- focused file excerpts;
+- terminal validation;
+- Git status;
+- changed-path lists;
+- staged diffs;
+- commit evidence.
 
-Avoid
+Do not imply that an operation succeeded until the visible evidence confirms it.
 
-Hacker aesthetics
-Dark cyber gradients
-Over-designed UI
-Neon Dev Twitter vibe
-Clickbait YouTube energy
-Overly playful startup design
+## Aesthetic direction
 
-This is not a hype channel.
-It is a systems channel.
+Use calm systems minimalism:
 
-⸻
+- neutral working surfaces;
+- restrained accents;
+- generous spacing;
+- clear type hierarchy;
+- crisp screen capture;
+- minimal decoration;
+- predictable layout;
+- stable framing.
 
-3. Core Aesthetic Philosophy
+Avoid:
 
-The brand uses Calm Systems Minimalism.
+- neon hacker styling;
+- aggressive gradients;
+- noisy backgrounds;
+- startup-celebration imagery;
+- exaggerated success graphics;
+- heavy glow effects;
+- clickbait visual language;
+- decorative elements that obscure evidence.
 
-Definition:
+## Color behavior
 
-Design that feels like a well-organized technical workspace photographed in neutral light.
+Use the approved ProChat brand palette when available from the canonical brand source.
 
-Principles:
+For channel execution:
 
-Structure over decoration
-Spacing over density
-Hierarchy over noise
-Neutral tones over trend colors
-Confidence over persuasion
+- use neutral surfaces for most of the frame;
+- use one restrained accent to guide attention;
+- reserve success treatment for actually validated results;
+- reserve warning treatment for real uncertainty, failure, or review requirements;
+- do not use color alone to communicate status;
+- maintain readable contrast in code, logs, terminal output, captions, and diagrams.
 
-Every surface should feel stable.
+Do not create a separate YouTube-only product palette that conflicts with the canonical brand.
 
-⸻
+## Typography
 
-4. Color System
+Typography should feel technical, editorial, and readable.
 
-Primary palette:
+Use:
 
-Deep indigo (#4338CA family)
-Slate / charcoal
-Soft neutral gray
-Off-white (not pure white)
+- a clear sans-serif for headings and labels;
+- a highly readable sans-serif for body text and captions;
+- monospace only for code, commands, paths, hashes, logs, and structured output;
+- short labels;
+- consistent capitalization;
+- generous line spacing.
 
-Accent color:
+Avoid:
 
-Muted technical blue (for focus states only)
+- decorative display fonts;
+- excessive bold text;
+- long paragraphs over screen recordings;
+- tiny terminal or code text;
+- multiple type styles competing in one frame.
 
-Optional subtle highlight:
+## Screen-capture standards
 
-Very restrained green for “success / verified” states only (never dominant)
+Before recording:
 
-Color behavior:
+- use a dedicated sanitized environment;
+- close unrelated windows and tabs;
+- hide notifications;
+- remove personal bookmarks and recent files;
+- remove secrets, tokens, account identifiers, and private URLs;
+- enlarge important text;
+- confirm the cursor is visible;
+- confirm terminal history is safe;
+- confirm browser and editor profiles reveal no private data;
+- check the recording area before every take.
 
-• Large neutral surfaces
-• Accents used sparingly
-• No aggressive gradients
-• No heavy glow effects
-• No saturated backgrounds
+When private information appears, stop and correct the source. Do not rely only on blur added later.
 
-This should feel like a modern documentation platform, not a SaaS landing page template marketplace.
+## Composition
 
-⸻
+Each frame should have one clear focal point.
 
-5. Typography
+Prefer:
 
-Tone: Technical editorial.
+- one primary product or evidence view;
+- deliberate negative space;
+- one short overlay when needed;
+- consistent placement for scope, evidence, validation, and limitation labels;
+- stable window positions during a workflow.
 
-Primary font (headings):
-Modern sans-serif with authority (clean geometry, medium weight)
+Avoid showing multiple terminals, editors, dashboards, and diagrams simultaneously unless the comparison is necessary.
 
-Secondary font (body):
-Highly readable sans-serif, generous line height
+## Evidence labels
 
-Optional monospace:
-Used only for:
-	•	Code blocks
-	•	Terminal output
-	•	Commands
+Use simple labels where they improve comprehension:
 
-Rules:
+```text
+SCOPE
+CURRENT EVIDENCE
+STORED MEMORY
+HUMAN REVIEW
+VALIDATION
+LIMITATION
+UNSTAGED
+STAGED
+COMMITTED
+```
 
-• Generous spacing
-• Clear hierarchy
-• No playful typography
-• No decorative fonts
-• Avoid excessive bold
+A label must describe the actual state. Do not use `VALIDATED`, `SAFE`, or `APPROVED` before the required check occurs.
 
-Typography should feel like documentation you trust.
+## Motion language
 
-⸻
+Motion should reduce intimidation and preserve context.
 
-6. Imagery System
+Allowed:
 
-ProChat is primarily screen-share driven.
+- stable screen share;
+- smooth cursor movement;
+- clean cuts;
+- restrained zoom for readability;
+- simple highlight boxes;
+- short transitions between workflow stages;
+- subtle progress indicators for real multi-step sequences.
 
-Imagery is not illustration-based. It is:
+Avoid:
 
-Environment + interface.
+- rapid zooms;
+- animated reactions;
+- loud transitions;
+- cursor circling without purpose;
+- frequent camera changes;
+- motion that hides the before-and-after state.
 
-Primary imagery types:
+## Editing rhythm
 
-• Clean desktop setup
-• Terminal windows
-• Editor UI
-• Browser dashboards
-• Code in context
-• Structured diagrams
+Let the viewer see important evidence long enough to read it.
 
-Shared traits:
+Keep:
 
-• Neutral lighting
-• No RGB lighting
-• No visual chaos
-• No cluttered desktops
-• Limited background elements
-• Crisp resolution
+- the initial result visible;
+- the scope visible before action;
+- the failed state visible when it teaches the control point;
+- validation output visible after execution;
+- the final limitation visible before the call to action.
 
-The image must say: “This works.”
+Remove:
 
-⸻
+- dead time;
+- repeated navigation;
+- accidental private information;
+- irrelevant setup;
+- decorative pauses;
+- duplicated explanation.
 
-7. Composition Template
+Do not edit out a relevant failure merely to make the product appear flawless.
 
-Every thumbnail and banner follows structure:
+## Diagrams
 
-Primary focal object (screen or window)
-Strong negative space
-Clear typographic overlay
-No visual clutter
+Use diagrams only when the relationship is difficult to understand from the interface alone.
 
-The eye should know where to look in under 1 second.
+### QA lane diagram patterns
 
-Stability > novelty.
+```text
+failure evidence
+→ reviewed lesson
+→ local memory
+→ later retrieval
+→ current verification
+```
 
-⸻
+```text
+raw evidence
+→ sanitization
+→ human review
+→ approved memory
+```
 
-8. Motion Language (Video Layer)
+### Workbench lane diagram patterns
 
-Motion goal: remove intimidation.
+```text
+ChatGPT reasoning
+→ bounded Workbench operation
+→ local source
+→ validation
+→ explicit Git state
+```
 
-Allowed motion:
+```text
+requested task
+→ approved paths
+→ verified changes
+→ staged paths
+→ commit
+```
 
-• Static screen-share
-• Smooth cursor movement
-• Occasional zoom for clarity
-• Clean cuts
-• No flashy transitions
+Keep diagrams flat, labeled, and source-traceable. Avoid decorative architecture complexity.
 
-Not allowed:
+## Thumbnail system
 
-Fast edits
-Sound effects
-Zoom punch-ins
-Animated lower thirds
-Explosive transitions
+Every thumbnail should communicate one bounded outcome.
 
-Editing should feel invisible.
+Use:
 
-The content carries the authority.
+- one real interface or evidence view;
+- one short phrase;
+- high readability;
+- strong negative space;
+- restrained product identification.
 
-⸻
+### QA examples
 
-9. Website Translation
+- `The Failure Returned`
+- `Memory vs Fresh Logs`
+- `Review Before Reuse`
+- `Sanitize This Lesson`
 
-The website is not a growth funnel machine.
-It is a structured explanation.
+### Workbench examples
 
-Homepage:
+- `Only These 3 Files`
+- `Protect Unrelated Changes`
+- `Review the Cached Diff`
+- `One Bounded Repair`
 
-Clear headline
-Strong hierarchy
-Minimal hype
-Direct language
-Clean spacing
+Avoid:
 
-Product pages:
+- unsupported numbers;
+- income or growth claims;
+- exaggerated emotional faces;
+- red circles and arrows;
+- unrelated brand logos;
+- generic “AI changed everything” language;
+- text implying guaranteed success.
 
-Hero
-What you get
-Technical overview
-Installation clarity
-Pricing
+## On-screen product naming
 
-No emotional theatrics.
-Clarity is the conversion driver.
+Use exact names:
 
-⸻
+```text
+ProChat Memory for QA
+ProChat Workbench
+```
 
-10. YouTube Channel Identity
+Do not shorten names in a way that creates a third product or confuses the company with a feature.
 
-Banner:
+## Calls to action
 
-Neutral background
-Minimal text
-Tagline present
-No faces
-No hype language
+Use one visually restrained, lane-specific action.
 
-Channel grid:
+### ProChat Memory for QA
 
-All thumbnails share:
+- Review the beta
+- Try one recurring failure
+- Share an investigation pattern
+- Provide structured feedback
 
-Consistent layout
-Consistent font
-Consistent color bias
-Clear focal object
+### ProChat Workbench
 
-Scrolling should feel structured, not random.
+- Review the GitHub repository
+- Follow the installation guide
+- Try one guarded task
+- Report an onboarding problem
 
-⸻
+Do not use visual calls to action for obsolete products, generic software courses, or monetization systems.
 
-11. Video Visual Template
+## Accessibility
 
-Each video:
-	1.	Short intro (max 5 seconds)
-	2.	Immediate screen share
-	3.	Calm voice
-	4.	Clean environment
-	5.	Clear result
+- provide accurate captions;
+- avoid color-only distinctions;
+- maintain readable contrast;
+- keep overlays concise;
+- explain important visual state verbally;
+- enlarge evidence before discussing it;
+- avoid flashing or rapid motion;
+- provide meaningful link descriptions.
 
-No cinematic intro.
+## Legacy warning
 
-This is practical engineering media.
+The existing `scripts/001` through `scripts/010` and `../assets/YouTube-Money-Plan.pdf` belong to the previous channel direction.
 
-⸻
+They are not approved sources for current thumbnails, visual examples, diagrams, calls to action, or product positioning pending Phase 4B review.
 
-12. Thumbnail Formula
+## Final visual review
 
-Structure:
+Before publication, confirm:
 
-Left: Visual context (UI / terminal / dashboard)
-Right: Clear 3–6 word phrase
-Small brand anchor element
-
-Rules:
-
-• High legibility
-• No arrows
-• No reaction faces
-• No red circles
-• No fake urgency
-• No “You’re doing this wrong” energy
-
-Recognition > clickbait.
-
-⸻
-
-13. Product Visual System
-
-Boilerplate previews:
-
-• Clean UI
-• Neutral demo content
-• Placeholder copy that feels structured
-• No gimmicks
-
-Screenshots must look installable, not aspirational.
-
-Everything shown must feel buildable.
-
-⸻
-
-14. Prompt Architecture (for AI imagery when needed)
-
-Permanent style block:
-
-clean modern workspace aesthetic, neutral lighting, structured interface layout, calm technical minimalism, indigo accent palette, soft shadows, professional SaaS UI presentation, editorial clarity, no visual clutter
-
-Subject block changes per topic:
-
-Vercel dashboard
-Supabase setup
-Stripe checkout
-GitHub repository
-Terminal configuration
-
-Consistency prevents brand drift.
-
-⸻
-
-15. Sensory Guardrails
-
-Design must never:
-
-Increase overwhelm
-Signal urgency
-Look like Dev Twitter
-Look like SaaS hype
-Feel chaotic
-Feel experimental
-
-If it feels exciting, it’s wrong.
-
-It must feel safe.
-
-⸻
-
-16. Evolution Rules
-
-Allowed evolution:
-
-Improved layout structure
-Refined spacing
-Better visual hierarchy
-Clearer diagrams
-
-Not allowed:
-
-Dark hacker pivot
-Neon developer aesthetic
-Trend-driven design shifts
-Rebranding every 6 months
-
-Consistency builds authority.
-
-⸻
-
-Final Principle
-
-ProChat is not designed to impress.
-
-It is designed to stabilize.
-
-Visual clarity builds trust.
-Trust builds confidence.
-Confidence enables shipping.
-Shipping creates businesses.
-
-Test first. SaaS second.
+- the primary product lane is unmistakable;
+- the focal evidence is readable;
+- private information is absent;
+- status labels match the actual state;
+- success styling follows validation;
+- the limitation is visible or spoken;
+- the call to action matches the lane;
+- visual restraint supports comprehension rather than hiding weak evidence.

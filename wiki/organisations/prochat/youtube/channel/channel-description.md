@@ -1,27 +1,55 @@
+# ProChat YouTube Channel Description
+
 I’m Steve.
 
-For 12 years I worked as a professional software tester. My job was to test software in real environments, find where it breaks, and understand what keeps it stable.
+I spent more than 12 years testing software in real environments: finding failures, collecting evidence, tracing causes, and checking whether fixes actually held.
 
-Now I apply that same mindset to SaaS.
+This channel applies that same discipline to two ProChat YouTube content lanes:
 
-Today, with AI, you can build software yourself.
-That wasn’t realistic a few years ago.
+```text
+ProChat Memory for QA
+ProChat Workbench
+```
 
-But tools alone don’t give you structure.
+## ProChat Memory for QA
 
-On this channel I show — step by step — how to:
+I show how testers can preserve reviewed investigation knowledge locally:
 
-• Launch a SaaS without getting lost in tools
-• Set up clean infrastructure
-• Avoid expensive early mistakes
-• Use AI without creating chaos
-• Build something solid you can actually sell
+- what failed;
+- which evidence mattered;
+- what caused the issue;
+- what was ruled out;
+- how it was fixed;
+- what should be checked when a similar failure returns.
 
-No hype.
-No “make money fast.”
+The product does not replace Playwright, Cypress, Selenium, Robot Framework, CI systems, issue trackers, or tester judgment.
 
-Just clear systems and calm execution.
+Current evidence always matters more than stored memory.
 
-If you’re serious about building SaaS properly, start with The SaaS Starting Point below.
+## ProChat Workbench
+
+I also show how ChatGPT can work with real local repositories, documentation, notes, and project folders through bounded operations:
+
+- exact context;
+- guarded changes;
+- targeted validation;
+- explicit Git control;
+- protection of unrelated work;
+- responsible workflow comparisons.
+
+Workbench is a ChatGPT-first local builder workflow, not a claim that every editor or coding tool is obsolete.
+
+## What to expect
+
+Videos are calm, practical, and evidence-first.
+
+Each video demonstrates one bounded outcome on screen, explains the control point that matters, and shows what was actually verified.
+
+No hype. No invented outcomes. No automatic trust in AI output.
+
+Start with the lane that matches your work:
+
+- **QA testers:** review ProChat Memory for QA and try one recurring failure.
+- **Developers and builders:** review ProChat Workbench on GitHub and try one guarded task on a real project.
 
 — Steve

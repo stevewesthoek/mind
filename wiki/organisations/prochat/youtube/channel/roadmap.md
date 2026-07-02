@@ -1,356 +1,327 @@
-PROCHAT YOUTUBE ROADMAP
+# ProChat YouTube Roadmap
 
-Version: Systems Lab Phase 1 (Revised Practical Flow)
+**Status:** canonical channel roadmap  
+**Owner:** Steve Westhoek  
+**Last updated:** 2026-07-02
 
-⸻
+## Roadmap principle
 
-CORE POSITIONING
+Publish only what current product evidence supports.
 
-ProChat is a structured systems lab for founders who want control.
+The channel has exactly two content lanes:
 
-We do not:
-• Build startups live.
-• Chase trends.
-• Ship chaos.
+```text
+ProChat Memory for QA
+ProChat Workbench
+```
 
-We:
-• Install.
-• Configure.
-• Evaluate.
-• Refine.
+The roadmap should build viewer understanding in this order:
 
-Every video reduces fragility.
+```text
+problem
+→ product boundary
+→ first safe workflow
+→ evidence and review
+→ repeated use
+→ honest comparison or limitation
+```
 
-Primary CTA across videos:
-“Start with The SaaS Starting Point.”
+## Current stage
 
-Secondary contextual CTA:
-“If you want this structure ready-made, SaaSKit is below.”
+ProChat is pre-revenue.
 
-⸻
+YouTube should prioritize:
 
-CHANNEL FORMAT RULES (NON-NEGOTIABLE)
+- product understanding;
+- selected QA beta learning;
+- qualified Workbench discovery;
+- installation and onboarding;
+- real demonstrations;
+- trust and privacy;
+- evidence of repeated value;
+- documentation improvements.
 
-• Screen share only.
-• Calm delivery.
-• Max 7 minutes.
-• One hyperspecific outcome per video.
-• No theory-heavy lectures.
-• No chaotic builds.
-• No “Let’s try this and see.”
+It should not optimize around generic software-building demand, founder monetization, or unrelated infrastructure tutorials.
 
-Every video answers:
+## Shared production sequence
 
-“How do I do this safely and correctly?”
+Every roadmap item must define:
 
-⸻
+1. product lane;
+2. viewer problem;
+3. bounded outcome;
+4. sanitized demonstration source;
+5. evidence shown;
+6. validation shown;
+7. limitation stated;
+8. one relevant call to action.
 
-CONTENT ARCHITECTURE (THE SIX PILLARS)
+## Lane 1 — ProChat Memory for QA
 
-(Structure unchanged — only clarified where needed.)
+### Stage QA-1 — Problem and product boundary
 
-⸻
+Goal:
 
-PILLAR 1 — Controlled MVP Stack (Vercel + Supabase + Next.js)
+```text
+Help testers recognize repeated investigation work and understand what ProChat Memory does not replace.
+```
 
-Goal: Remove fear of starting.
+Candidate videos:
 
-These are fast, practical installs.
+1. **Why the same QA failure gets investigated twice**  
+   Show where useful lessons disappear after a test is fixed.
 
-Topics:
-• Create Next.js app from scratch
-• Deploy to Vercel
-• Connect GitHub
-• Connect Supabase
-• Add environment variables correctly
-• Understand local vs production
+2. **What belongs in QA memory—and what does not**  
+   Separate current evidence, draft observations, and reviewed lessons.
 
-These videos are:
-Fast.
-Empowering.
-Low friction.
-High psychological payoff.
+3. **Old memory versus today’s logs**  
+   Demonstrate why current evidence overrides a stored lesson.
 
-⸻
+4. **ProChat Memory for QA in one local workflow**  
+   Show capture, sanitization, review, approval, retrieval, and correction.
 
-PILLAR 2 — Fragility Prevention (Tester Layer)
+Exit criteria:
 
-Goal: Differentiate from hype YouTubers.
+- the product is clearly understood as local reviewed memory;
+- no viewer could reasonably mistake it for a test runner or autonomous diagnosis system.
 
-Topics:
-• Break env variables on purpose
-• Why localhost is not production
-• Production build failures
-• What fails first in small SaaS
-• Production checklist before launch
-• Logging basics
+### Stage QA-2 — First useful memory cycle
 
-These build authority.
-These sell SaaSKit implicitly.
+Goal:
 
-⸻
+```text
+Show one tester completing a bounded memory cycle locally.
+```
 
-PILLAR 3 — Deployment & Self-Hosting
+Candidate videos:
 
-Goal: Build credibility and attract serious founders.
+5. **Turn one failed test into a reviewed lesson**  
+   Use a sanitized failure with visible evidence.
 
-Topics:
-• Deploy on Vercel correctly
-• Custom domain setup
-• When Vercel becomes expensive
-• Hetzner server install (AI guided)
-• Docker install safely
-• Basic production firewall setup
-• Backup strategy
+6. **Record what was ruled out during an investigation**  
+   Preserve discarded hypotheses without presenting them as truth.
 
-⸻
+7. **Store the fix without exposing client information**  
+   Demonstrate sanitization and project boundaries.
 
-PILLAR 4 — AI Workflow Layer
+8. **Retrieve a relevant lesson for a similar failure**  
+   Show why retrieval narrows the search but does not decide the cause.
 
-Goal: Remove overwhelm.
+Exit criteria:
 
-Topics:
-• Modify production app with AI safely
-• What NOT to ask AI
-• Prompting for structure, not hacks
-• AI + Git workflow
-• Avoiding AI hallucination disasters
+- installation and first use are demonstrable;
+- one complete local cycle can be shown without private data;
+- the review step is visible.
 
-⸻
+### Stage QA-3 — Tool-specific demonstrations
 
-PILLAR 5 — SaaSKit Layer
+Goal:
 
-Goal: Introduce structured system.
+```text
+Connect the memory workflow to real testing evidence without replacing the testing tool.
+```
 
-Important:
-Never open with this.
+Candidate videos:
 
-After trust is built:
-• Compare manual setup vs SaaSKit
-• Show friction reduction
-• Show auth, billing, dashboard
-• Show structure
+9. **Playwright failure memory: selector changed**
+10. **Cypress investigation memory: environment mismatch**
+11. **Selenium lesson: timing and stale element evidence**
+12. **Robot Framework memory: data or keyword change**
+13. **CI failure: what the trace proved and what it did not**
 
-Positioning:
-“This is the controlled baseline.”
+Each video must:
 
-⸻
+- use current evidence from the named tool;
+- sanitize repositories and test data;
+- show the reviewed memory created;
+- state applicability limits.
 
-PILLAR 6 — UX Kit (Visual Control Layer)
+Exit criteria:
 
-Goal: Premium upsell.
+- at least one current tool workflow is demonstrated safely;
+- practitioner feedback identifies which examples are genuinely useful.
 
-Structure:
-	1.	Show polished end result.
-	2.	Brief walkthrough.
-	3.	Apply live to SaaSKit.
-	4.	Before/After comparison.
+### Stage QA-4 — Repeated value and case-study learning
 
-Positioning:
-“This improves perception and hierarchy. Not just design.”
+Goal:
 
-⸻
+```text
+Show whether reviewed memory helps during a later investigation.
+```
 
-FIRST 10 VIDEOS (UPDATED — FULLY PRACTICAL FLOW)
+Candidate videos:
 
-These are now strictly executable and beginner-safe.
+14. **The failure returned: did the old lesson help?**
+15. **When a QA lesson should be corrected**
+16. **When a QA lesson should be retired**
+17. **What a tester rejected—and why**
+18. **A beta onboarding problem we fixed**
 
-⸻
+Case-study requirements:
 
-Video 1
+- real or explicitly reconstructed timeline;
+- permission for any participant information;
+- no invented time saving;
+- visible evidence for the claimed benefit;
+- limitation and counterexample where relevant.
 
-Deploy a Production-Ready Next.js App in 7 Minutes
+Exit criteria:
 
-Goal: Remove fear.
+- reviewed memory helps at least one later investigation;
+- the workflow’s trust and onboarding problems are understood better.
 
-Flow:
-• npx create-next-app
-• Push to GitHub
-• Import to Vercel
-• Deploy
-• Change headline
-• Commit
-• Redeploy
+## Lane 2 — ProChat Workbench
 
-Outcome:
-“I can ship.”
+### Stage WB-1 — Product and installation boundary
 
-CTA:
-Start with The SaaS Starting Point.
+Goal:
 
-No product selling.
+```text
+Explain the ChatGPT-first local workflow and get one supported installation working.
+```
 
-⸻
+Candidate videos:
 
-Video 2
+1. **What ProChat Workbench connects—and what stays local**
+2. **Install Workbench and connect one source**
+3. **Give ChatGPT exact repository context without uploading the whole project**
+4. **Workbench versus an editor-first workflow: the practical difference**
 
-Modify Your Live App Using AI (Safely)
+Exit criteria:
 
-Same project.
+- viewers understand ChatGPT as the reasoning interface and the local computer as the project layer;
+- installation and source connection are reproducible from current documentation.
 
-Flow:
-• Open locally
-• Use Antigravity
-• Add a new page
-• Add simple API route
-• Commit
-• Redeploy
+### Stage WB-2 — Guarded task fundamentals
 
-Outcome:
-“AI is controlled, not chaotic.”
+Goal:
 
-Still no SaaSKit mention.
+```text
+Show a meaningful real-project task with visible boundaries.
+```
 
-⸻
+Candidate videos:
 
-Video 3
+5. **Read only the files needed for one change**
+6. **Make one bounded documentation update**
+7. **Validate a change without running the whole test suite**
+8. **Protect unrelated worktree changes during an AI-assisted task**
+9. **Review a diff before staging anything**
 
-Add a Database to Your App in 6 Minutes
+Exit criteria:
 
-Flow:
-• Create Supabase project
-• Add environment variables
-• Add simple query
-• Display data on page
-• Redeploy
+- one real repository task is completed with exact scope;
+- validation and final Git state are shown.
 
-No database lecture.
-Just execution.
+### Stage WB-3 — Git control and repair
 
-Outcome:
-“This feels real.”
+Goal:
 
-⸻
+```text
+Demonstrate explicit Git control and evidence-based repair.
+```
 
-Video 4
+Candidate videos:
 
-Break Your App on Purpose (And Fix It)
+10. **Stage exact paths instead of everything**
+11. **Review the cached diff before committing**
+12. **A validation failed: one bounded repair attempt**
+13. **Why Workbench stops when source identity changes**
+14. **Commit a clean task while unrelated files remain modified**
 
-Flow:
-• Remove env variable
-• Push
-• Watch build fail
-• Diagnose
-• Fix properly
+Exit criteria:
 
-Outcome:
-Authority. Calm competence.
+- viewers can distinguish changed, staged, and committed work;
+- failure handling is shown honestly rather than edited out.
 
-This is where you separate from hype YouTube.
+### Stage WB-4 — Real-project workflows and comparisons
 
-⸻
+Goal:
 
-Video 5
+```text
+Show where the Workbench workflow is useful and where another tool may fit better.
+```
 
-Production Checklist Before You Call It “Live”
+Candidate videos:
 
-Flow:
-• Build locally
-• Check logs
-• Verify env
-• Test route
-• Test DB
-• Confirm deployment
+15. **Documentation migration across several verified files**
+16. **Resume a project task from persisted state**
+17. **Workbench and Cursor: compare one repository workflow**
+18. **Workbench and Claude Code: compare validation and Git control**
+19. **When not to use Workbench**
+20. **An onboarding problem that changed the product**
 
-Pure systems energy.
+Comparison requirements:
 
-No lecturing.
+- verify current product behavior;
+- compare one concrete workflow;
+- acknowledge plan, platform, and usage differences;
+- avoid universal conclusions;
+- state personal preference separately from observed behavior.
 
-⸻
+Exit criteria:
 
-Video 6
+- qualified builders try the repository for a relevant reason;
+- comparisons produce actionable onboarding or product feedback.
 
-Add Authentication Manually
+## Cross-lane videos
 
-Flow:
-• Install auth (Supabase Auth or NextAuth)
-• Protect route
-• Deploy
+A video may discuss both products only when the relationship is the subject, such as:
 
-No SaaSKit yet.
+- why local project memory and guarded project work are separate products;
+- how reviewed memory can inform a Workbench task without becoming automatic authority;
+- shared principles: local-first, Git-versioned, review-first, and evidence-aware.
 
-Outcome:
-“You can wire real infrastructure.”
+The title, description, and call to action must still identify one primary lane.
 
-⸻
+## Publishing priorities
 
-Video 7
+Select the next video using this order:
 
-Add Stripe in Test Mode (Minimal Billing)
+1. unblock installation or first use;
+2. answer a repeated practitioner question;
+3. demonstrate a current product capability;
+4. clarify a trust, privacy, or review boundary;
+5. show repeated value;
+6. compare workflows responsibly;
+7. address distribution opportunities only when product relevance remains strong.
 
-Flow:
-• Create Stripe test account
-• Add env vars
-• Add simple checkout route
-• Deploy
-• Test payment
+## Legacy content status
 
-Outcome:
-“This is a real SaaS.”
+The current files `scripts/001` through `scripts/010` are from the previous channel roadmap.
 
-Still manual.
+They are:
 
-⸻
+- legacy;
+- non-canonical;
+- not approved for recording;
+- not approved for publication;
+- pending Phase 4B disposition.
 
-Video 8
+`../assets/YouTube-Money-Plan.pdf` is an unverified legacy asset pending inspection.
 
-Connect a Custom Domain to Vercel
+No roadmap item may depend on those materials until their content is reviewed and deliberately migrated.
 
-Flow:
-• Buy domain
-• Connect DNS
-• Verify SSL
-• Redeploy
+## Roadmap success
 
-Practical credibility builder.
+The roadmap succeeds when YouTube contributes to:
 
-⸻
+### ProChat Memory for QA
 
-Video 9
+- better QA problem understanding;
+- suitable selected beta participants;
+- successful local evaluations;
+- evidence of later reuse;
+- trust and privacy learning;
+- honest case studies.
 
-Manual Setup vs Structured Setup
+### ProChat Workbench
 
-Now introduce SaaSKit softly.
+- qualified GitHub discovery;
+- successful installation;
+- real guarded tasks;
+- clearer validation and Git control;
+- repeat builder use;
+- useful comparison and onboarding feedback.
 
-Show:
-• What you wired manually
-• What comes pre-wired in SaaSKit
-• Time difference
-• Fragility difference
-
-Positioning:
-“This is the controlled baseline.”
-
-No hard sell.
-
-⸻
-
-Video 10
-
-What Changes When Structure Is Pre-Wired
-
-Show:
-• Auth included
-• Billing included
-• Dashboard included
-• Guardrails included
-
-This is the transition moment.
-
-Authority + Product alignment.
-
-⸻
-
-MONETIZATION FLOW (UNCHANGED LOGIC, STRONGER FOUNDATION)
-
-Early Stage:
-Trust → Starting Point PDF
-
-Mid Stage:
-Soft SaaSKit introduction (Video 9)
-
-Later Stage:
-UX Kit visual upsell
-
-Bundle:
-SaaSKit + UX Kit $497
+Views and subscribers are distribution signals, not roadmap exit criteria.

@@ -1,233 +1,452 @@
-ProChat — YouTube Playbook (v0.3)
+# ProChat YouTube Playbook
 
-Status: Active
-Audience: Non-technical founders
-Channel Type: Systems, decisions, failure-prevention, cash-first
-Style: Screen-share, artifacts, lived constraints
-Anti-style: Talking heads, tutorials, hype, “success porn”
+**Status:** canonical channel playbook  
+**Owner:** Steve Westhoek  
+**Last updated:** 2026-07-02
 
-⸻
+## Purpose
 
-0. Strategic Clarification (NEW — READ FIRST)
+Use YouTube to demonstrate real product workflows, teach practical control points, build relevant practitioner trust, and collect product learning.
 
-WaaS is not just a validation tactic.
-WaaS is a way to market SaaS before SaaS exists — and get paid while doing it.
+Every approved video belongs to exactly one lane:
 
-This channel exists to normalize a hard truth:
+```text
+ProChat Memory for QA
+ProChat Workbench
+```
 
-Most founders don’t fail because their SaaS idea is bad.
-They fail because they build first, market later, and run out of time or money.
+The channel is not a generic software-building course, a founder monetization system, or an infrastructure tutorial library.
 
-WaaS solves that structurally, not motivationally.
+## Channel promise
 
-⸻
+```text
+One real problem.
+One bounded workflow.
+Visible evidence.
+A reviewed result.
+```
 
-1. Updated Channel Authority (unchanged, reinforced)
+The viewer should leave knowing:
 
-(Same as v0.2 — no claims of SaaS success, authority rooted in failure-pattern literacy, testing background, real WaaS + early SaaS experience.)
+- what problem was addressed;
+- what evidence was used;
+- what ProChat did;
+- what the human still had to review;
+- what was validated;
+- what remains uncertain.
 
-Your authority is not:
-	•	outcomes
-	•	revenue screenshots
-	•	scale stories
+## Audience
 
-Your authority is:
-	•	having paid for mistakes
-	•	having seen failure repeatedly
-	•	having designed systems to block those failures earlier
+### Lane 1 — ProChat Memory for QA
 
-⸻
+Primary audience:
 
-2. Updated Core Promise of the Channel (v0.3)
+- individual QA testers;
+- QA engineers;
+- test-automation practitioners;
+- Playwright, Cypress, Selenium, and Robot Framework users;
+- QA leads and test managers evaluating future tester adoption.
 
-“I help non-technical founders avoid building SaaS too early — and show them how to get paid before product risk destroys momentum.”
+Viewer problems may include:
 
-This is:
-	•	preventative
-	•	cash-aware
-	•	realistic
+- solving similar failures repeatedly;
+- losing useful investigation notes;
+- weak handoffs between testers;
+- outdated lessons overriding current evidence;
+- private client information appearing in notes;
+- difficulty finding the relevant root cause later;
+- uncertainty about what belongs in trusted memory.
 
-⸻
+### Lane 2 — ProChat Workbench
 
-3. WaaS Reframed Correctly (CRITICAL UPDATE)
+Primary audience:
 
-What WaaS actually is (in ProChat)
+- developers;
+- builders;
+- technical operators;
+- vibe coders;
+- ChatGPT power users;
+- people evaluating local AI-assisted project workflows.
 
-WaaS is:
-	•	a cash-first entry point
-	•	a marketing system, not just a service
-	•	a way to force founders to spend 60–80% of their time on acquisition, not building
-	•	a way to get paid clients now, not “someday after launch”
+Viewer problems may include:
 
-WaaS exists because:
-	•	most founders don’t have investors
-	•	many already have jobs
-	•	building for months without revenue is unsustainable
-	•	marketing after building is harder than marketing instead of building
+- ChatGPT lacking exact local context;
+- broad or accidental file changes;
+- unverified edits;
+- unrelated work entering a commit;
+- unclear Git state;
+- unsafe command execution;
+- broken onboarding;
+- uncertainty about tradeoffs between project tools.
 
-⸻
+## Authority
 
-What WaaS is NOT
+Steve’s authority comes from:
 
-WaaS is not:
-	•	a side hustle
-	•	“agency work forever”
-	•	custom client chaos
-	•	a detour from SaaS
+- professional software-testing experience;
+- visible investigation discipline;
+- careful scoping;
+- evidence review;
+- verification rather than performance;
+- honest disclosure of failed attempts and limitations;
+- current product work shown on screen.
 
-It is:
+Authority does not come from:
 
-SaaS marketing done early, manually, and with cash attached.
+- invented customer outcomes;
+- revenue claims;
+- follower counts;
+- speed claims without evidence;
+- universal tool comparisons;
+- pretending the beta is more mature than it is.
 
-⸻
+## Content lane 1 — ProChat Memory for QA
 
-4. The Time Allocation Rule (NEW — explicit)
+### Objectives
 
-If you are early-stage, your time should look like this:
-	•	60–80% → marketing & client acquisition
-	•	20–40% → delivery & learning
+Videos should support:
 
-WaaS enforces this ratio by design.
+- QA domain credibility;
+- selected beta understanding;
+- real workflow demonstrations;
+- tester onboarding;
+- structured feedback;
+- privacy and trust learning;
+- evidence-based case-study development.
 
-SaaS breaks this ratio by default.
+### Approved video types
 
-⸻
+#### Repeated failure demonstration
 
-5. Why WaaS Comes Before SaaS (now explicit)
+Show:
 
-Building first means:
-	•	months without feedback
-	•	months without money
-	•	marketing starts when energy is lowest
-	•	discovery happens too late
+1. a sanitized failure;
+2. the evidence collected;
+3. the reviewed lesson created;
+4. a later similar failure;
+5. how memory narrowed the investigation;
+6. why current evidence still controlled the conclusion.
 
-WaaS flips the order:
-	1.	Market first
-	2.	Get paid first
-	3.	Talk to clients early
-	4.	Discover pain with consequences
-	5.	Build SaaS slowly, deliberately, and safely
+#### Investigation-memory walkthrough
 
-This is not faster.
-It is safer.
+Show one bounded memory cycle:
 
-⸻
+```text
+capture
+→ sanitize
+→ review
+→ approve
+→ retrieve
+→ verify
+→ improve or retire
+```
 
-6. What This Channel Actually Sells (updated framing)
+#### Tool-specific QA example
 
-You are not selling:
-	•	dreams
-	•	SaaS outcomes
-	•	revenue guarantees
+Use a real or carefully sanitized example from:
 
-You are selling:
-	•	a way to stay solvent
-	•	a way to learn with guardrails
-	•	a way to avoid unpaid optimism
-	•	a way to get paid to understand businesses
+- Playwright;
+- Cypress;
+- Selenium;
+- Robot Framework;
+- CI logs;
+- selectors;
+- test data;
+- environment differences.
 
-⸻
+The tool remains the source of current evidence. ProChat Memory preserves reviewed learning around it.
 
-7. Content Philosophy (v0.3 — aligned)
+#### Trust and privacy video
 
-The channel is about:
-	•	decisions before building
-	•	money before product
-	•	constraints before features
-	•	marketing before software
-	•	proof before belief
+Explain:
 
-The channel is NOT about:
-	•	shipping fast for ego
-	•	building before demand
-	•	tooling fascination
-	•	developer culture
+- what stays local;
+- what should be sanitized;
+- how project scopes work;
+- why client information should not enter public demonstrations;
+- why retrieved memory may be wrong or outdated;
+- how human review protects trust.
 
-⸻
+#### Beta onboarding video
 
-8. Video Types (v0.3 — one addition)
+Demonstrate one verified installation or first-use path.
 
-All v0.2 types remain, plus:
+State accurately that:
 
-8.1 Cash-First Reality Videos (NEW)
+- beta participation is selected;
+- the beta is free;
+- it has no fixed end date;
+- customer and client memory remains local;
+- licensing is not final;
+- human review remains required.
 
-These explicitly talk about:
-	•	money pressure
-	•	time pressure
-	•	lack of investors
-	•	working alongside a job
-	•	fear of “wasting months”
+#### Product-learning video
+
+Show a real onboarding problem, failed retrieval, trust concern, or product limitation and explain what changed afterward.
+
+### Prohibited QA positioning
+
+Do not claim that ProChat Memory:
+
+- automatically diagnoses every failure;
+- replaces test runners or tester judgment;
+- guarantees correct root causes;
+- turns unreviewed input into trusted knowledge;
+- eliminates the need for fresh logs or reproduction;
+- hosts customer project memory.
+
+## Content lane 2 — ProChat Workbench
+
+### Objectives
+
+Videos should support:
+
+- qualified GitHub discovery;
+- installation and onboarding;
+- real-project adoption;
+- guarded workflow understanding;
+- validation discipline;
+- explicit Git control;
+- responsible comparisons;
+- product feedback.
+
+### Approved video types
+
+#### Guarded repository task
+
+Show:
+
+1. the exact requested outcome;
+2. source selection;
+3. bounded context reading;
+4. one verified change;
+5. targeted validation;
+6. the final diff;
+7. explicit staging or the decision not to stage.
+
+#### Unrelated-work protection
+
+Demonstrate how a task proceeds while pre-existing unrelated changes remain untouched and unstaged.
+
+#### Validation and repair
+
+Show:
+
+- a failed validation;
+- the evidence from the failure;
+- one bounded repair;
+- the rerun;
+- the final state.
+
+Do not hide the failure to make the workflow look smoother.
+
+#### Git-control demonstration
+
+Show:
+
+- exact changed paths;
+- staged versus unstaged state;
+- cached diff review;
+- an explicit-path commit;
+- why broad staging is avoided.
+
+#### Installation and onboarding
+
+Demonstrate one supported installation or source-connection path using current documentation.
+
+Record real friction and update the documentation when appropriate.
+
+#### Responsible comparison
+
+Compare Workbench with Cursor, Claude Code, or another tool only through specific criteria:
+
+- reasoning interface;
+- local context access;
+- execution boundaries;
+- validation;
+- Git control;
+- onboarding;
+- workflow continuity;
+- usage constraints.
+
+A comparison must acknowledge tradeoffs and current verification limits.
+
+### Prohibited Workbench positioning
+
+Do not claim that Workbench:
+
+- replaces every editor or coding tool;
+- guarantees correct or secure code;
+- prevents every hallucination;
+- has unlimited usage;
+- is always cheaper or faster;
+- can operate safely without review;
+- should be trusted with production changes without independent verification.
+
+## Video selection rules
+
+Create a video only when:
+
+- it belongs to one product lane;
+- the workflow exists now;
+- a real demonstration or approved sanitized example is available;
+- the outcome can be bounded;
+- validation can be shown;
+- privacy can be protected;
+- the viewer can take one relevant next action.
+
+Skip or defer when:
+
+- the capability is future-only;
+- the example depends on private material that cannot be sanitized safely;
+- the result is not reproducible enough to demonstrate honestly;
+- the video would exist only to maintain a publishing schedule;
+- the topic is generic software advice unrelated to either current product.
+
+## Production format
+
+### Delivery
+
+- screen share is the default;
+- use calm, direct narration;
+- show the result early;
+- explain only the context needed for the bounded outcome;
+- preserve mistakes that teach a useful control point;
+- avoid performance, drama, and artificial urgency.
+
+### Length
+
+Use the shortest complete format.
+
+A video may be short when one control point is enough. It may be longer when evidence, privacy, or a multi-step workflow requires context.
+
+Do not force every video into an arbitrary duration.
+
+### Editing
+
+Use:
+
+- clean cuts;
+- occasional zoom for readability;
+- labels for scope, evidence, validation, and result;
+- readable terminal, browser, editor, or product views.
+
+Avoid:
+
+- fast cuts;
+- loud sound effects;
+- manufactured suspense;
+- exaggerated reaction shots;
+- decorative animation that obscures evidence.
+
+## Evidence standard
+
+Every demonstration should identify:
+
+- the source of truth;
+- the observed evidence;
+- the action taken;
+- the validation performed;
+- the limitation of the result.
+
+Use direct language for observed facts and qualified language for interpretations.
 
 Examples:
-	•	“Why I needed WaaS before SaaS”
-	•	“What happens when you build first and market later”
-	•	“How WaaS forces you to talk to customers”
 
-These normalize financial reality, not hustle.
+```text
+The test failed because the selector no longer matched the current page.
+```
 
-⸻
+```text
+The retrieved lesson suggests checking the environment variable, but today’s logs still need to confirm it.
+```
 
-9. Checklist Positioning (updated clarity)
+```text
+The cached diff contains only the three approved paths. That confirms commit scope, not product quality.
+```
 
-The SaaS Failure-Prevention Checklist now has a clear role:
+## Privacy and sanitization
 
-It answers:
+Before recording:
 
-“Should I be building SaaS right now — or should I be doing WaaS instead?”
+- use a sanitized repository or example;
+- remove customer and client identifiers;
+- remove secrets, tokens, internal URLs, and private account details;
+- review terminal history and notifications;
+- check filenames, branches, tabs, browser profiles, and recent files;
+- avoid exposing private memory or unrelated worktree content;
+- confirm permission for any third-party material.
 
-It is not neutral.
-It is a traffic controller.
+Stop recording when private information appears. Correct the source rather than relying only on post-production blur.
 
-⸻
+## Calls to action
 
-10. Updated CTA Logic (v0.3)
+Use one relevant action.
 
-Primary CTA (unchanged)
+### ProChat Memory for QA
 
-👉 SaaS Failure-Prevention Checklist
+- Review the ProChat Memory for QA beta
+- Try one recurring failure
+- Share a repeated investigation pattern
+- Provide structured beta feedback
 
-But now framed as:
+### ProChat Workbench
 
-“This checklist tells you whether you should build SaaS — or focus on getting paid clients first.”
+- Review ProChat Workbench on GitHub
+- Follow the installation guide
+- Try one guarded task on a real repository
+- Report an onboarding problem
 
-Kit routing (now clearer)
-	•	Blocked by checklist → WaaSKit (cash + learning)
-	•	Passed checklist → SaaSKit
-	•	Wants speed + accepts risk → ProKit
+Do not direct viewers to obsolete products, generic monetization resources, or unrelated software-building offers.
 
-⸻
+## Publishing workflow
 
-11. First Videos to Record (UPDATED ORDER)
+1. Select one content lane.
+2. Define one viewer problem and one bounded outcome.
+3. Confirm the current product capability.
+4. Prepare sanitized evidence and a safe demonstration environment.
+5. Record the result-first workflow.
+6. Review claims, privacy, limitations, and product boundaries.
+7. Confirm the call to action matches the lane.
+8. Publish manually after Steve’s approval.
+9. Record useful questions, objections, onboarding problems, and product learning.
 
-Foundational (PINNED + featured)
-	1.	“Why WaaS exists: getting paid before SaaS” ← new #1
-	2.	“Why I don’t build SaaS until these constraints are true”
-	3.	“The SaaS mistakes I made before I knew better”
+## Success signals
 
-These establish:
-	•	money realism
-	•	discipline
-	•	lived experience
+### ProChat Memory for QA
 
-⸻
+- a tester understands one memory cycle;
+- a suitable tester expresses informed beta interest;
+- a repeated QA problem is articulated more clearly;
+- a privacy or trust requirement is discovered;
+- a demonstration leads to structured product feedback;
+- a real later investigation benefits from reviewed memory.
 
-12. Ethical Boundary (unchanged, reinforced)
+### ProChat Workbench
 
-You are not promising success.
-You are promising fewer unforced errors.
+- a relevant builder reviews the repository;
+- installation or onboarding succeeds;
+- a real guarded task is attempted;
+- a validation or Git-control concept becomes clearer;
+- a responsible comparison generates useful feedback;
+- a product or documentation issue is identified.
 
-You are not saying:
+Views, subscribers, and watch time may provide distribution context. They do not prove retained product value.
 
-“Do this and you’ll win.”
+## Legacy boundary
 
-You are saying:
+`scripts/001` through `scripts/010` belong to the previous channel direction.
 
-“Ignore this and you’ll likely lose.”
+They are non-canonical and not approved for recording or publication pending Phase 4B review.
 
-That is honest.
+`../assets/YouTube-Money-Plan.pdf` is an unverified legacy asset and must not guide current channel decisions.
 
-⸻
+## Core principle
 
-Final Summary (v0.3 in one sentence)
-
-This channel teaches founders how to stay alive long enough to build the right SaaS — by getting paid early, learning deliberately, and refusing to build on hope.
+```text
+Show one real workflow.
+Expose the evidence.
+Keep the scope bounded.
+Review the result.
+State the limitation.
+```
