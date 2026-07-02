@@ -1,406 +1,321 @@
-Below is a clean Markdown document you can drop into your Brain / AI prompts / LinkedIn system and feed into ProBot.
-It contains:
-	•	Daily LinkedIn growth system
-	•	Comment Pyramid strategy
-	•	Comment structure templates
-	•	AI prompt template to generate replies
-	•	Example comments
+# ProChat LinkedIn Comment Strategy
 
-You can store it as something like:
+**Status:** canonical LinkedIn relationship system  
+**Owner:** Steve Westhoek  
+**Last updated:** 2026-07-01
 
-/Brain/growth/linkedin-comment-strategy.md
+## Purpose
 
-⸻
+Use thoughtful LinkedIn participation to learn from practitioners, contribute useful observations, build trusted relationships, and create qualified discovery for the appropriate ProChat product.
 
-LinkedIn Comment Growth System for SaaS Founders
+The strategy has exactly two network tracks:
 
-Purpose
+```text
+ProChat Memory for QA
+ProChat Workbench
+```
 
-This document defines a repeatable system for gaining LinkedIn visibility, authority, and inbound traffic without relying on posting your own content.
+Comments must be useful without depending on promotion.
 
-Instead, the strategy uses strategic commenting on high-reach posts to gain exposure.
+## Shared principles
 
-When executed consistently, this method can produce:
-	•	50k – 500k monthly impressions
-	•	Profile visits
-	•	Followers
-	•	Founder credibility
-	•	Traffic to projects
+- add a real observation, useful distinction, or thoughtful question;
+- comment only where ProChat has relevant experience or a sincere learning objective;
+- prefer practitioner relationships over raw reach;
+- use specific language instead of broad trend claims;
+- disclose uncertainty when evidence is incomplete;
+- never invent product usage, customer results, or professional experience;
+- avoid turning another person’s post into an unsolicited product pitch;
+- keep all comments and replies manually reviewed and posted;
+- respect private, client, and employer information.
+
+## Track 1 — ProChat Memory for QA
 
-This strategy is particularly effective for:
-	•	SaaS founders
-	•	Dev tool builders
-	•	AI builders
-	•	Indie hackers
+### Network focus
+
+Engage with:
+
+- individual QA testers;
+- QA engineers;
+- test-automation practitioners;
+- QA leads;
+- test managers;
+- software-quality practitioners;
+- Playwright, Cypress, Selenium, and Robot Framework communities.
 
-⸻
+### Objectives
 
-Core Principle
+- learn how testers investigate and revisit failures;
+- understand where useful QA lessons are currently stored;
+- contribute practical observations from real testing work;
+- identify recurring trust, privacy, and handoff problems;
+- build relationships with suitable selected beta testers;
+- invite feedback only when the conversation makes it relevant;
+- discover case-study questions worth validating.
+
+### Relevant discussion areas
 
-LinkedIn already has large traffic streams around influential accounts.
+- recurring test failures;
+- flaky-test investigation;
+- selectors and test data;
+- environment-specific failures;
+- evidence collection;
+- root-cause documentation;
+- lost investigation knowledge;
+- QA handoffs;
+- local-data requirements;
+- review and approval of AI-assisted lessons;
+- team memory versus project-specific memory.
 
-Instead of trying to create your own audience immediately, you:
+### Appropriate invitation pattern
 
-Place high-quality comments inside existing high-traffic posts.
+Do not introduce the beta in the first comment unless the post explicitly requests tools or participants.
 
-This allows you to borrow the reach of those posts.
+A later invitation may be appropriate when:
 
-If a post receives:
+- the person describes a recurring investigation problem;
+- the person asks how others preserve QA knowledge;
+- the person shows interest in local, reviewed project memory;
+- the person appears able to evaluate a local technical beta;
+- the invitation can be specific and non-pressuring.
 
-100,000 views
+Example:
 
-and 5–10% of readers check comments, your comment may be seen by:
+```text
+You described the exact kind of repeated investigation I’m studying.
+I’m testing a local QA memory workflow with a small selected group.
+Happy to share the approach privately if it would be useful.
+```
 
-5,000–10,000 people
+## Track 2 — ProChat Workbench
 
+### Network focus
 
-⸻
+Engage with:
 
-The Comment Pyramid Strategy
+- developers;
+- builders;
+- technical founders;
+- vibe coders;
+- ChatGPT power users;
+- local-first tool builders;
+- developer-tool maintainers;
+- people comparing AI-assisted project workflows.
 
-The Comment Pyramid is the most efficient method for unknown founders to gain visibility.
+### Objectives
 
-It works by targeting posts at different audience sizes.
+- contribute credible observations about local project work;
+- explain guarded operations and explicit validation;
+- learn where builder onboarding fails;
+- discuss exact context and Git control;
+- create qualified GitHub discovery;
+- invite real-project trials when relevant;
+- compare workflows without attacking other tools.
 
-        Tier 1
-     Mega creators
-   (100k–1M reach)
+### Relevant discussion areas
 
-      Tier 2
-   Mid creators
-  (20k–100k reach)
+- ChatGPT with local repositories;
+- exact project context;
+- bounded file changes;
+- allowlisted commands;
+- targeted validation;
+- explicit Git operations;
+- protecting unrelated worktree changes;
+- persistent project work;
+- installation and local connection problems;
+- workflow comparisons with Cursor, Claude Code, and similar tools.
 
-      Tier 3
- Small creators
- (5k–20k reach)
+### Responsible comparison pattern
 
-Tier 1 — Mega Creators
+Use specific criteria:
 
-Examples:
-	•	AI founders
-	•	Dev tool CEOs
-	•	Tech influencers
-	•	Engineering leaders
+- reasoning interface;
+- context access;
+- execution boundaries;
+- validation behavior;
+- Git control;
+- onboarding;
+- device or workflow continuity;
+- plan and usage constraints.
 
-Goal:
+Do not claim universal superiority, complete editor replacement, unlimited usage, or guaranteed savings.
 
-High visibility.
+## Comment selection
 
-These posts may generate 100k+ views.
+Choose posts where at least one condition is true:
 
-Your comment can reach thousands of people.
+- you can add a tested observation;
+- you can clarify an important boundary;
+- you can ask a question that supports real product learning;
+- the discussion includes a problem one ProChat lane addresses;
+- the author belongs to a relevant practitioner network;
+- the conversation may lead to useful feedback or a qualified relationship.
 
-⸻
+Skip posts when:
 
-Tier 2 — Mid Creators
+- the only available response is generic agreement;
+- you would need to exaggerate experience;
+- the topic has no clear connection to either product lane;
+- the discussion is primarily hostile or performative;
+- participation would expose private project information.
 
-Examples:
-	•	SaaS founders
-	•	startup operators
-	•	engineering managers
+## Daily workflow
 
-Goal:
+### Step 1 — Select one network track
 
-Conversation.
+Choose either:
 
-These posts usually get 10k–50k views.
+```text
+ProChat Memory for QA
+```
 
-Comments often get replies.
+or:
 
-Replies boost comment ranking.
+```text
+ProChat Workbench
+```
 
-⸻
+Do not mix both products into one comment unless the original post genuinely concerns both.
 
-Tier 3 — Small Creators
+### Step 2 — Find relevant discussions
 
-Examples:
-	•	early founders
-	•	indie hackers
-	•	dev builders
+Look for recent posts from practitioners, maintainers, users, and community leaders in the selected track.
 
-Goal:
+Prioritize relevance and the opportunity to contribute over account size.
 
-Relationship building.
+### Step 3 — Leave one or two useful comments
 
-These creators are more likely to reply and engage.
+Use one of these structures:
 
-Over time these connections compound.
-
-⸻
-
-Daily LinkedIn Task System
-
-Total time required:
-
-10–20 minutes per day
-
-
-⸻
-
-Daily Task List
-
-Step 1 — Check Feed
-
-Time: 2 minutes
-
-Open LinkedIn and scan for:
-	•	AI development posts
-	•	SaaS building posts
-	•	developer productivity discussions
-	•	startup founder insights
-
-Prioritize posts from creators with high engagement.
-
-⸻
-
-Step 2 — Find Fresh Posts
-
-Time: 2 minutes
-
-Look for posts that were published:
-
-within the last 60 minutes
-
-Early comments stay near the top of the thread.
-
-⸻
-
-Step 3 — Leave 2–3 Insightful Comments
-
-Time: 5–10 minutes
-
-Choose posts where you can add:
-	•	a practical insight
-	•	a technical observation
-	•	a thoughtful question
-
-Avoid generic responses.
-
-⸻
-
-Step 4 — Reply to Other Comments
-
-Time: 3 minutes
-
-Find interesting comments and reply to them.
-
-This increases your visibility within the discussion.
-
-⸻
-
-Step 5 — Check Notifications Later
-
-Time: 2 minutes
-
-If people reply to your comment:
-
-Respond.
-
-Threads with conversation receive more algorithm exposure.
-
-⸻
-
-Comment Structure
-
-The most effective LinkedIn comments follow a simple pattern.
-
+```text
 Observation → Insight → Question
+```
 
-Example:
+```text
+Experience → Boundary → Question
+```
 
-Observation
-AI coding tools seem to be accelerating code generation massively.
+```text
+Problem → Practical distinction → Suggested check
+```
 
-Insight
-But the bottleneck now feels like architecture and integration rather than writing code.
+### Step 4 — Reply thoughtfully
 
-Question
-Curious if teams are seeing the same shift in where development time is actually spent.
+When someone responds:
 
+- address their point directly;
+- add one useful detail;
+- ask a follow-up only when it advances the discussion;
+- avoid forcing a product mention;
+- move to a private conversation only with clear mutual relevance.
 
-⸻
+### Step 5 — Record learning
 
-Alternative Comment Structure
+Capture useful non-private learning such as:
 
-Insight → Example → Question
+- recurring practitioner language;
+- product objections;
+- onboarding questions;
+- trust or privacy concerns;
+- beta-fit signals;
+- useful comparison criteria;
+- content or demonstration ideas.
 
-Example:
+Do not treat impressions or reactions as evidence of product value.
 
-Insight
-AI is definitely increasing developer speed.
+## Comment quality rules
 
-Example
-I've noticed the biggest change is actually in code review. There's more generated code to review carefully.
+Strong comments are:
 
-Question
-Do you think engineering metrics should evolve because of that shift?
+- specific;
+- relevant to the original post;
+- based on real knowledge or an honest question;
+- concise enough to read naturally;
+- non-promotional;
+- respectful of uncertainty;
+- written in Steve’s natural professional voice.
 
+Avoid:
 
-⸻
+- generic praise;
+- manufactured controversy;
+- copied templates that ignore the post;
+- unsupported statistics;
+- false authority;
+- engagement bait;
+- hidden product pitches;
+- automated posting.
 
-What NOT to Do
+## Comment drafting prompt
 
-Avoid comments like:
+```text
+Help me draft a thoughtful LinkedIn comment.
 
-Great post!
-Totally agree!
-Interesting perspective!
+PRODUCT TRACK:
+[ProChat Memory for QA or ProChat Workbench]
 
-These add no value and are buried by the algorithm.
+MY REAL CONTEXT OR EVIDENCE:
+[approved observation, experience, or question]
 
-⸻
+POST CONTENT:
+[paste the relevant post]
 
-Good Comment Characteristics
+GOAL:
+Add a useful perspective or sincere question without promoting a product.
 
-Strong comments:
-	•	add a new angle
-	•	share a real observation
-	•	ask a thoughtful question
+REQUIREMENTS:
+- remain specific to the post;
+- use only the context provided;
+- do not invent experience, users, or results;
+- avoid generic praise and marketing language;
+- keep the reply natural and professional;
+- produce up to three alternatives;
+- flag any claim that requires verification.
+```
 
-They are usually:
+## Reply drafting prompt
 
-3–6 lines long
+```text
+Help me reply naturally to a LinkedIn response.
 
+PRODUCT TRACK:
+[ProChat Memory for QA or ProChat Workbench]
 
-⸻
+MY ORIGINAL COMMENT:
+[paste comment]
 
-AI Comment Generation Prompt
+THEIR RESPONSE:
+[paste response]
 
-You can use the following prompt to automatically generate LinkedIn comments.
+RELEVANT REAL CONTEXT:
+[approved context]
 
-Prompt Template
-
-You are helping me write a thoughtful LinkedIn comment.
-
-Context:
-I am a software tester and SaaS builder interested in AI development, SaaS infrastructure, and startup engineering.
-
-Goal:
-Write a comment that adds insight to the discussion without promoting my product.
-
-Requirements:
-- 3–6 lines
-- Add a new perspective
-- Ask a thoughtful question
-- Avoid marketing language
-- Sound natural and professional
-
-Post Content:
-[PASTE LINKEDIN POST HERE]
-
-Generate 3 possible comments.
-
-
-⸻
-
-AI Reply Generator Prompt
-
-When someone replies to your comment, use this prompt.
-
-You are helping me write a thoughtful reply on LinkedIn.
-
-Goal:
-Continue the discussion intelligently without sounding promotional.
-
-Requirements:
-- friendly and thoughtful
-- 2–4 sentences
-- add insight or a follow-up question
-
-Original Comment:
-[PASTE MY COMMENT]
-
-Reply From Other Person:
-[PASTE THEIR COMMENT]
-
-Write a natural response.
-
-
-⸻
-
-Example High-Quality Comments
-
-Example 1 — AI Development
-
-Interesting shift happening with AI coding tools.
-
-They’re clearly accelerating code generation, but it feels like the real bottleneck is moving toward architecture and system integration.
-
-Writing code is faster, but making sure everything actually works together still takes careful thinking.
-
-Curious if teams are noticing the same change.
-
-
-⸻
-
-Example 2 — SaaS Engineering
-
-This reminds me of something I’ve seen with early SaaS teams.
-
-Speed increases quickly when new tools arrive, but reliability often becomes the hidden challenge.
-
-Shipping fast is easy — shipping systems that survive production is much harder.
-
-How are teams balancing speed and stability right now?
-
-
-⸻
-
-Example 3 — AI Productivity
-
-One interesting question is whether our productivity metrics are still valid in the AI era.
-
-If AI is generating large portions of code, the value of developers might shift toward architecture and decision-making.
-
-Measuring lines of code or commits might become meaningless.
-
-What metrics do you think will matter most going forward?
-
-
-⸻
-
-Weekly Strategy
-
-Each week aim for:
-
-10–15 comments
-
-This produces:
-	•	algorithm exposure
-	•	profile visits
-	•	credibility
-
-Over time, people begin to recognize your name in discussions.
-
-⸻
-
-Long-Term Outcome
-
-Consistent commenting produces:
-	•	network growth
-	•	follower growth
-	•	inbound messages
-	•	authority in your niche
-
-Many founders build audiences this way before posting regularly.
-
-⸻
-
-Summary
-
-Daily system:
-
-1. Check feed
-2. Find fresh posts
-3. Write 2–3 insightful comments
-4. Reply to discussions
-5. Repeat daily
-
-Estimated time:
-
-10–20 minutes per day
-
-Expected outcome over months:
-	•	strong network
-	•	high profile visibility
-	•	organic growth in the SaaS / AI builder ecosystem
+REQUIREMENTS:
+- answer their point directly;
+- add one useful detail or question;
+- do not force a product mention;
+- do not invent facts;
+- flag anything requiring verification.
+```
+
+## Success signals
+
+### ProChat Memory for QA
+
+- a useful QA relationship develops;
+- a recurring investigation problem becomes clearer;
+- a suitable tester expresses beta interest;
+- a practitioner provides actionable feedback;
+- a trust or privacy requirement is discovered;
+- an approved demonstration or case-study opportunity emerges.
+
+### ProChat Workbench
+
+- a builder asks a qualified product question;
+- someone reviews the GitHub repository;
+- an onboarding problem becomes clear;
+- a real-project trial begins;
+- a useful workflow comparison develops;
+- product feedback leads to a documented improvement.
+
+Network size and visibility may support these outcomes, but they are not the primary measure of success.

@@ -1,253 +1,258 @@
-Keyword Topic Engine
-
-Purpose
-
-This file provides a structured list of:
-	•	SEO keywords
-	•	social media discussion topics
-	•	evergreen SaaS builder problems
-
-The AI should choose topics from this list when generating:
-	•	blog posts
-	•	Reddit discussions
-	•	LinkedIn insights
-	•	X posts
-
-Priority order:
-
-1. evergreen SEO keywords
-2. long-tail problem queries
-3. trending social topics
-
-
-⸻
-
-# Category 0 — Non-Dev Founder / No-Code / AI Founder Keywords (Highest Priority)
-
-## Beginner founder search queries (evergreen)
-how to start a saas without coding
-how to build a saas with ai
-best no code tools to build saas
-bubble vs webflow vs softr
-how to validate a saas idea
-how to find b2b saas ideas
-how to get first customers saas
-how to price a saas
-how to build an mvp fast
-ai tools for founders
-
-## Fear / doubt / decision queries
-i have an idea but don’t know where to start
-shiny object syndrome founders
-how to choose a tech stack as non technical founder
-when to use no code vs custom code
-how to avoid building the wrong thing
-how to hire developers as non technical founder
-how to manage a dev team as non technical founder
-what is mvp and what should it include
-how to avoid burnout as founder
-how to ship consistently
-
-## Infrastructure in founder language (not technical)
-how to set up payments for saas
-how to handle logins for saas
-how to send emails for saas
-how to keep customer data safe
-how to avoid saas outages
-what to track in a saas dashboard
-
-Category 1 — High-Intent SEO Keywords
-
-These keywords are searched by people who already want solutions.
-
-Core SaaS Keywords
-
-nextjs saas boilerplate
-ai saas starter kit
-saas architecture example
-saas infrastructure setup
-build saas with ai
-how to build a saas
-saas tech stack
-modern saas architecture
-saas backend architecture
-production ready saas stack
-
-
-⸻
-
-Developer SaaS Queries
-
-nextjs saas architecture
-stripe subscription nextjs
-saas authentication system
-multi tenant saas architecture
-saas database structure
-saas deployment architecture
-nextjs stripe subscription example
-prisma saas architecture
-supabase saas setup
-
-
-⸻
-
-Category 2 — Pain-Point Keywords
-
-These perform extremely well because they solve problems.
-
-why saas projects fail
-why ai generated code breaks
-why startups fail technically
-common saas architecture mistakes
-saas infrastructure mistakes
-stripe webhook problems
-authentication problems in saas
-environment variables deployment issues
-nextjs production errors
-
-
-⸻
-
-Category 3 — AI Builder Keywords
-
-These are exploding in search volume.
-
-build ai saas
-ai saas ideas
-cursor ai workflow
-ai coding tools comparison
-vibe coding
-ai developer tools
-ai coding stack
-ai coding workflow
-ai startup tools
-ai product builder
-
-
-⸻
-
-Category 4 — Founder Learning Topics
-
-These are extremely shareable on social platforms.
-
-mistakes building saas
-lessons building saas
-hardest part of building saas
-how to launch saas
-indie hacker lessons
-startup technical mistakes
-building saas alone
-bootstrapped saas lessons
-
-
-⸻
-
-Category 5 — Technical Breakdown Topics
-
-Good for blog posts and dev communities.
-
-saas deployment architecture
-stripe subscription flow
-multi tenant database design
-saas authentication architecture
-api architecture saas
-nextjs production architecture
-saas infrastructure checklist
-
-
-⸻
-
-Category 6 — Viral Discussion Topics
-
-These perform well on Reddit, LinkedIn, and X.
-
-ai writes code but still fails
-developers becoming architects
-future of software development
-ai replacing developers debate
-ai coding vs real engineering
-why ai generated startups fail
-
-
-⸻
-
-Category 7 — Evergreen Blog Topics
-
-These can rank for years.
-
-saas infrastructure checklist
-saas architecture guide
-build saas with nextjs
-saas deployment guide
-startup tech stack guide
-
-
-⸻
-
-Topic Selection Rules
-
-## Topic Selection Rules (Founder Filter)
-
-Pick topics in this priority order:
-1) Category 0 (Non-Dev Founder)
-2) Founder Learning Topics
-3) Pain-Point Keywords in founder language
-Only choose developer-heavy topics if they can be reframed for founders in plain language.
-
-When choosing topics, prioritize:
-
-1. topics solving real problems
-2. topics matching search queries
-3. topics matching founder frustrations
-
-Avoid topics that are purely theoretical.
-
-⸻
-
-Topic Selection Prompt for AI
-
-You are selecting a topic for a blog post.
-
-Choose a topic from keyword-topic-engine.md that:
-
-- has high search intent
-- solves a real SaaS problem
-- is relevant to AI builders or SaaS founders
-
-Return:
-
-1. Blog title
-2. SEO keyword
-3. Social media hook
-
-
-⸻
-
-Why This Structure Works
-
-This file ensures the AI always picks topics that are:
-
-• searchable
-• discussable
-• relevant to founders
-
-It prevents the AI from writing random content.
-
-⸻
-
-Example AI Output
-
-Topic chosen:
-
-SEO keyword:
-why ai generated code breaks
-
-Blog title:
-
-Why AI-Generated SaaS Apps Break in Production
-
-Social hook:
-
-AI can write code fast.
-
-But most AI-generated SaaS apps fail the moment they hit production.
+# ProChat Keyword and Topic Engine
+
+**Status:** canonical growth topic system  
+**Owner:** Steve Westhoek  
+**Last updated:** 2026-07-01
+
+## Purpose
+
+This file provides approved search, discussion, demonstration, and relationship topics for ProChat growth execution.
+
+Every selected topic must belong to exactly one product lane:
+
+```text
+ProChat Memory for QA
+ProChat Workbench
+```
+
+The topic engine supports learning and qualified adoption. It must not manufacture claims, demand, or evidence.
+
+## Selection principles
+
+Choose topics that:
+
+- match a real audience problem;
+- connect to a demonstrated product capability;
+- have an available evidence source;
+- can produce a useful lesson or demonstration;
+- support one clear next action;
+- remain honest about product maturity;
+- fit the current pre-revenue stage.
+
+Prefer specific problem language over broad trend commentary.
+
+## Lane 1 — ProChat Memory for QA
+
+Growth focus: QA domain credibility, selected beta recruitment, demonstrations, feedback, case studies, and QA network development.
+
+### Recurring investigation problems
+
+- why QA teams investigate the same failure repeatedly;
+- how testers preserve lessons from failed tests;
+- what information is lost between test investigations;
+- how to document a root cause for later reuse;
+- how to record what was ruled out during debugging;
+- how repeated triage creates avoidable QA effort;
+- how useful testing knowledge disappears across releases;
+- how tester handoffs lose investigation context.
+
+### Test automation and failure memory
+
+- Playwright failure investigation lessons;
+- Cypress failure investigation lessons;
+- Selenium failure investigation lessons;
+- Robot Framework failure investigation lessons;
+- remembering selector-related failures;
+- preserving test-data corrections;
+- recording environment-specific failures;
+- recurring CI failure categories;
+- flaky-test investigation memory;
+- framework-specific project lessons;
+- failed-test evidence checklists.
+
+### Trust and evidence
+
+- current test evidence versus stored memory;
+- why reviewed memory should not override fresh logs;
+- how testers decide whether an old lesson still applies;
+- separating raw evidence from approved memory;
+- reviewing AI-assisted QA lessons;
+- correcting or retiring outdated QA memory;
+- exposing which memory influenced an investigation;
+- avoiding confident answers from weak evidence.
+
+### Local ownership and privacy
+
+- local QA memory workspaces;
+- Markdown-first testing knowledge;
+- Git-versioned QA lessons;
+- project-scoped and client-scoped memory;
+- sanitizing test evidence before reuse;
+- keeping client information out of public repositories;
+- separating product code, memory, and client projects;
+- cross-project reuse with explicit approval.
+
+### Beta learning
+
+- what makes a useful QA Memory beta tester;
+- time to first useful memory;
+- retrieving a lesson during a later investigation;
+- accepted and rejected memory suggestions;
+- trust problems in AI-assisted testing memory;
+- onboarding problems for local QA tools;
+- what repeated usage reveals;
+- how tester feedback changes the product;
+- what a responsible QA Memory case study should prove.
+
+### QA network discussions
+
+- recurring investigation habits among testers;
+- how QA engineers currently preserve lessons;
+- where failure knowledge lives today;
+- how QA leads reduce repeated triage;
+- local-data requirements in testing work;
+- when project knowledge should remain personal or become team knowledge;
+- what testers need before trusting retrieved memory.
+
+### QA search-intent phrases
+
+- remember previous test failures;
+- document recurring test failures;
+- reuse QA investigation lessons;
+- local knowledge base for QA testers;
+- Git based QA knowledge;
+- Playwright failure history;
+- Cypress debugging notes;
+- Selenium investigation knowledge;
+- flaky test root cause notes;
+- preserve software testing knowledge;
+- QA investigation checklist;
+- test failure lessons learned.
+
+## Lane 2 — ProChat Workbench
+
+Growth focus: qualified GitHub discovery, real-project demonstrations, builder adoption, onboarding, and responsible comparisons.
+
+### ChatGPT and local projects
+
+- use ChatGPT with a local repository;
+- give ChatGPT exact project context;
+- connect ChatGPT to local documentation;
+- use ChatGPT with notes and knowledge folders;
+- continue substantial project work through ChatGPT;
+- reduce repeated copying of project files into chat;
+- keep the local computer as the execution environment.
+
+### Guarded operations
+
+- bounded local context reads;
+- verified file changes;
+- allowlisted command execution;
+- confirmation for sensitive actions;
+- exact-path Git operations;
+- targeted validation after changes;
+- protecting unrelated worktree changes;
+- safe defaults for local AI tooling;
+- explicit scope before automated action.
+
+### Real-project demonstrations
+
+- implement a focused repository change through ChatGPT;
+- update project documentation with exact context;
+- review a scoped Git diff before committing;
+- perform a bounded refactor with targeted validation;
+- resume a multi-step project from persistent state;
+- maintain a knowledge folder through ChatGPT;
+- isolate requested changes from existing worktree edits;
+- document a failed validation and bounded repair.
+
+### Onboarding and adoption
+
+- install a ChatGPT-first local workbench;
+- connect a project source safely;
+- understand source IDs and repository scope;
+- choose the smallest useful context read;
+- understand guarded confirmation;
+- review changes before committing;
+- troubleshoot local connection problems;
+- move from demonstration to repeated project use;
+- measure successful onboarding.
+
+### Responsible workflow comparisons
+
+- ProChat Workbench versus Cursor workflow;
+- ProChat Workbench versus Claude Code workflow;
+- native ChatGPT experience with local project context;
+- editor-first versus ChatGPT-first project work;
+- bounded operations versus unrestricted execution;
+- explicit Git control across AI coding tools;
+- workflow tradeoffs for developers and builders;
+- when Workbench is not the best fit;
+- comparing tools without universal replacement claims.
+
+### GitHub discovery
+
+- ProChat Workbench installation guide;
+- ProChat Workbench GitHub walkthrough;
+- first guarded repository task;
+- release notes tied to real capabilities;
+- reproducible demonstration repositories;
+- contribution and feedback guidance;
+- common setup mistakes;
+- product architecture explained through a real task.
+
+### Workbench search-intent phrases
+
+- ChatGPT local repository access;
+- ChatGPT local coding workflow;
+- ChatGPT project context tool;
+- local AI workbench for developers;
+- guarded AI coding workflow;
+- ChatGPT Git workflow;
+- ChatGPT repository assistant;
+- alternative workflow to Cursor;
+- alternative workflow to Claude Code;
+- AI tool with explicit Git control;
+- use ChatGPT for real projects;
+- local-first ChatGPT development.
+
+## Topic scoring
+
+Score each candidate from 0–5:
+
+- product-lane fit;
+- audience relevance;
+- real evidence available;
+- demonstrated capability;
+- learning value;
+- discussion value;
+- search intent;
+- clear next action.
+
+Reject a topic when:
+
+- it cannot be tied to one product lane;
+- it requires an unsupported product claim;
+- it depends on private or unapproved evidence;
+- it promotes a future capability as current;
+- it is broad commentary without a useful ProChat connection;
+- it exists only to chase reach.
+
+## Topic selection output
+
+```text
+PRODUCT LANE
+AUDIENCE
+TOPIC
+SEARCH OR DISCUSSION INTENT
+EVIDENCE SOURCE
+PRIMARY ASSET
+CALL TO ACTION
+WHY THIS TOPIC NOW
+```
+
+## Evidence rule
+
+A strong topic is not enough by itself.
+
+Before publication, connect the topic to at least one of:
+
+- approved documentation;
+- a sanitized real demonstration;
+- a verified product change;
+- approved user feedback;
+- a measured result;
+- a clearly labeled personal observation;
+- an explicit question for practitioners.
+
+Do not turn a keyword into a claim that the available evidence cannot support.

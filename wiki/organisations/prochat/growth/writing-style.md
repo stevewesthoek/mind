@@ -1,621 +1,518 @@
-X Writing Style — ProChat / SaaSKit
+# ProChat Public Writing Style
 
-Purpose
+**Status:** supporting public voice standard  
+**Owner:** Steve Westhoek  
+**Last updated:** 2026-07-02
 
-This document defines how replies, quote posts, and short posts should sound when writing as Steve / ProChat in public on X.
+## Purpose
 
-The job is not to sound polished.
-The job is to sound real.
+Define how Steve and ProChat should sound in public posts, comments, replies, demonstrations, documentation excerpts, and community discussions.
 
-The immediate goal is:
-	1.	gain followers
-	2.	build trust
-	3.	become recognizable in the SaaS / boilerplate / AI builder space
-	4.	convert attention into curiosity
-	5.	only then turn curiosity into SaaSKit sales
+The writing style supports exactly two growth lanes:
 
-Do not write like a growth robot.
-Do not write like a motivational influencer.
-Do not write like a technical documentation page.
+```text
+ProChat Memory for QA
+ProChat Workbench
+```
 
-Strategic Context
+The goal is not to sound polished, clever, or highly optimized. The goal is to sound like a real, informed person communicating clearly from evidence and experience.
 
-The comment strategy says growth comes from replies, not broadcast posting. It also says the best replies add insight, experience, technical perspective, or a thoughtful question, and that overt promotion performs poorly.
+## Shared voice
 
-This writing style exists to make those replies feel human, sharp, varied, and memorable.
+The ProChat voice should feel:
 
-Core Identity
+- calm;
+- direct;
+- technically credible;
+- practical;
+- specific;
+- evidence-aware;
+- low-ego;
+- honest about uncertainty;
+- occasionally witty;
+- never desperate for attention.
 
-The voice should feel like:
-	•	a builder who has actually shipped things
-	•	technically competent without showing off
-	•	skeptical of fluff
-	•	commercially aware
-	•	slightly contrarian
-	•	calm, grounded, and direct
-	•	occasionally witty
-	•	never needy
-	•	never preachy
-	•	never trying too hard to sound smart
+The voice should avoid:
 
-This voice should sound like someone who has seen enough broken products, broken launches, and broken promises to stop being impressed by shiny nonsense.
+- hype;
+- false authority;
+- motivational performance;
+- engagement bait;
+- corporate vagueness;
+- generic AI phrasing;
+- hidden promotion;
+- manufactured controversy;
+- absolute claims without evidence.
 
-Positioning
+## Product-lane modes
 
-We are speaking mainly to:
-	•	non-technical founders who want to launch faster
-	•	indie founders exploring SaaS
-	•	builders around AI, dev tools, and productized software
-	•	developers adjacent to founder conversations
-	•	people who are not perfect buyers yet but can amplify trust and reach
+### Lane 1 — ProChat Memory for QA
 
-That means the writing must work on two levels:
+Use a practitioner-oriented voice.
 
-Level 1 — For the target buyer
+The writing should sound like someone who:
 
-They should feel:
-	•	understood
-	•	less intimidated
-	•	more confident that launching is possible
-	•	aware that the real bottleneck is not “learning to code everything” but getting a working product live
+- understands that test failures require evidence;
+- respects current logs, screenshots, traces, and reproduction steps;
+- distinguishes observed facts from remembered lessons;
+- cares about review, sanitization, and project boundaries;
+- is learning directly from QA work;
+- does not claim to replace test runners, issue trackers, or QA judgment.
 
-Level 2 — For adjacent audiences
+Useful language emphasizes:
 
-These include:
-	•	developers
-	•	AI tinkerers
-	•	indie hackers
-	•	technical operators
-	•	startup observers
+- recurring investigations;
+- failed-test evidence;
+- root causes and fixes;
+- selectors, test data, and environments;
+- reviewed lessons;
+- local ownership;
+- uncertainty and applicability;
+- what a tester should verify next.
 
-They may not buy now, but they can:
-	•	like
-	•	repost
-	•	reply
-	•	validate your credibility publicly
-	•	send future buyers your way
+Avoid language that sounds like autonomous diagnosis, guaranteed accuracy, or universal testing advice.
 
-The Central Tension
+### Lane 2 — ProChat Workbench
 
-Every message should live somewhere between:
-	•	credibility and accessibility
-	•	insight and conversation
-	•	taste and simplicity
-	•	commercial intent and non-obvious selling
+Use a builder and technical workflow voice.
 
-If a reply sounds too clever, it loses warmth.
-If it sounds too basic, it loses authority.
-If it sounds too salesy, it kills trust.
+The writing should sound like someone who:
 
-The Main Rule
+- values exact local context;
+- scopes changes before acting;
+- protects unrelated work;
+- validates outcomes;
+- keeps Git actions explicit;
+- understands tool tradeoffs;
+- does not claim one workflow replaces every editor or coding tool.
 
-Write like a person reacting in real time, not like a system generating engagement bait.
+Useful language emphasizes:
+
+- bounded reads;
+- guarded operations;
+- verified file changes;
+- targeted validation;
+- explicit Git control;
+- persistent project work;
+- onboarding lessons;
+- specific workflow comparisons.
+
+Avoid vague claims that AI makes software work effortless or that one tool is always faster, cheaper, or better.
+
+## Main rule
+
+Write like a person responding to the actual situation, not like a system filling a content template.
 
 That means:
-	•	vary sentence length
-	•	vary rhythm
-	•	sometimes use one clean punchline
-	•	sometimes use three short lines
-	•	sometimes use a longer reflective answer
-	•	do not always end with a question
-	•	do not always structure replies the same way
-	•	do not always “teach”
-	•	do not force a CTA
 
-Tone Spectrum
+- vary sentence length;
+- vary rhythm;
+- use contractions naturally;
+- allow occasional fragments when they improve clarity;
+- do not always end with a question;
+- do not always teach;
+- do not force a call to action;
+- do not repeat the same opener or structure;
+- stop when the useful point is complete.
 
-Use a mix of these tones depending on the post, the author, and the audience.
+## Evidence and certainty
 
-1) Philosophical / reflective
+Match the strength of the wording to the strength of the evidence.
 
-Use when the post is about founder behavior, incentives, product thinking, trends, hype, or tradeoffs.
+### Observed fact
 
-Feels like:
-	•	thoughtful
-	•	grounded
-	•	lightly contrarian
-	•	observant
+Use direct language when the evidence is clear.
 
-Avoid:
-	•	sounding abstract for its own sake
-	•	fake profundity
-	•	motivational waffle
+```text
+The validation failed because the referenced file did not exist.
+```
 
-Example feel:
+### Supported interpretation
 
-Most founder problems aren’t lack of ideas. They’re lack of subtraction. Too many moving parts, too little proof.
+Show that the conclusion is reasoned rather than directly observed.
 
-2) Technical / builder-grounded
+```text
+That pattern suggests the project scope may be too broad.
+```
 
-Use when the post is about AI coding, infra, auth, deployment, architecture, product complexity, maintenance, or why products break.
+### Personal experience
 
-Feels like:
-	•	experienced
-	•	practical
-	•	not lecture-y
-	•	not jargon-drunk
+Label it naturally.
 
-Avoid:
-	•	overexplaining
-	•	naming tech for status
-	•	reading like a docs page
+```text
+In this workflow, the exact-path staging step prevented unrelated changes from entering the commit.
+```
 
-Example feel:
+### Hypothesis or open question
 
-AI can write code faster. It still can’t magically remove integration risk. The messy part starts when auth, billing, email, and deployment all need to behave at once.
+Do not convert uncertainty into certainty.
 
-3) Sales-aware / commercially sharp
+```text
+I’m testing whether reviewed failure memory helps on the second investigation, not just the first.
+```
 
-Use when the post is about offers, startup advice, customer demand, distribution, validation, shipping fast, or buying vs building.
+### Future capability
 
-Feels like:
-	•	commercially literate
-	•	honest
-	•	strategically useful
-	•	subtly wedge-shaped toward SaaSKit when relevant
+State it as future or exploratory.
 
-Avoid:
-	•	hard pitching
-	•	“DM me” energy
-	•	fake scarcity
+```text
+An MCP integration may become an optional interface later.
+```
 
-Example feel:
+## Tone spectrum
 
-Most people don’t need more ideas. They need a shorter path from “I should build this” to “someone can pay for this.” That gap eats months.
+Choose tone based on the subject, audience, and evidence.
 
-4) Witty / lightly humorous
+### 1. Practical and direct
 
-Use when the original post invites levity or when a sharp one-liner will earn attention.
+Use for instructions, product boundaries, and workflow lessons.
 
-Feels like:
-	•	dry
-	•	controlled
-	•	not clownish
-	•	a builder making a clean observation
+Feels:
 
-Avoid:
-	•	memes for the sake of memes
-	•	trying to go viral by acting unserious
-	•	sarcasm that makes you sound bitter
-
-Example feel:
-
-A lot of “build in public” is really “debug in public with confidence.”
-
-5) Serious / sober / high-trust
-
-Use when the original post is vulnerable, critical, cautionary, or discussing failure.
-
-Feels like:
-	•	respectful
-	•	clear-eyed
-	•	low-ego
-	•	useful
-
-Avoid:
-	•	jokes in the wrong room
-	•	using someone else’s pain as a wedge for marketing
-
-Example feel:
-
-This is the part people skip when they glorify speed. Fast is good. Fragile is not.
-
-Message Objectives by Stage
-
-Stage 1 — Gain followers
-
-Priority:
-	•	be interesting enough to follow
-	•	be clear enough to understand in seconds
-	•	be distinct enough to remember
-
-Best moves:
-	•	strong observations
-	•	mild contrarian takes
-	•	clean technical truths
-	•	short witty reframes
-
-Stage 2 — Build authority
-
-Priority:
-	•	repeatedly sound like someone who understands the real bottlenecks
-	•	make complexity feel simpler without dumbing it down
-
-Best moves:
-	•	explain tradeoffs clearly
-	•	identify where founders waste time
-	•	point out what breaks in practice
-	•	connect product, infra, and business reality
-
-Stage 3 — Sell carefully
-
-Priority:
-	•	make people naturally curious about SaaSKit
-	•	connect pain to product without sounding like an ad
-
-Best moves:
-	•	mention the category of solution before mentioning the product
-	•	frame the bottleneck first, product second
-	•	use SaaSKit as a natural example, not as a forced ending
-
-SaaSKit Wedge Rules
-
-SaaSKit should appear as a natural bridge, not as a sales interruption.
-
-Use SaaSKit mention only when at least one is true:
-	•	the post is about launching faster
-	•	the post is about non-technical founders
-	•	the post is about repeated SaaS setup pain
-	•	the post is about shipping instead of endlessly planning
-	•	the post is about infra or architecture bottlenecks
-
-When mentioning SaaSKit:
-	•	keep it casual
-	•	keep it brief
-	•	make it feel like a relevant example
-	•	do not mention it in every reply
-	•	do not mention it when the conversation is emotional, vulnerable, or unrelated
-
-Good wedge pattern:
-	•	identify the bottleneck
-	•	explain why it matters
-	•	casually connect that bottleneck to what SaaSKit solves
+- clear;
+- grounded;
+- useful;
+- concise.
 
 Example:
 
-This is exactly why a lot of non-technical founders stall. The product idea isn’t the blocker anymore. The setup burden is. That’s the gap tools like SaaSKit are meant to shrink.
+```text
+The useful part is not generating more notes. It is reviewing one lesson and finding it again when the failure returns.
+```
 
-Bad wedge pattern:
+### 2. Technical and builder-grounded
 
-Totally agree. Check out SaaSKit.
+Use for repositories, validation, Git, local tools, and implementation details.
 
-That is spam wearing shoes.
+Feels:
 
-Naturalness Rules
-
-To avoid sounding AI-generated:
-	•	do not reuse the same opener repeatedly
-	•	do not always use em dashes
-	•	do not always write in perfect symmetry
-	•	do not always end with a clean “lesson”
-	•	sometimes be a little unfinished in cadence, while still clear
-	•	use contractions naturally
-	•	occasionally use fragments
-	•	occasionally use contrast words like “but,” “still,” “except,” “honestly,” “weirdly,” “sometimes”
-	•	avoid polished cliché phrases like “this resonates,” “well said,” “spot on,” “100% agree,” unless deliberately used sparingly
-
-The reply should feel typed by a real person who had an immediate, informed reaction.
-
-What to Avoid
-
-Never write replies that feel like:
-	•	LinkedIn guru sludge
-	•	startup bro chest-beating
-	•	AI-generated “thought leadership” foam
-	•	lecture mode
-	•	fake curiosity
-	•	obvious engagement bait
-	•	generic praise with no substance
-	•	aggressive self-promo
-
-Avoid these weak patterns:
-	•	“This is so true”
-	•	“Absolutely agree”
-	•	“Couldn’t agree more”
-	•	“This is exactly it”
-	•	“Great post” with nothing added
-	•	“People don’t realize…” used constantly
-	•	“The real game changer is…” unless truly warranted
-
-Structural Patterns to Rotate
-
-Use these patterns interchangeably.
-
-Pattern A — Observation → Reframe
-
-Use for quick punchy replies.
+- experienced;
+- specific;
+- readable;
+- free of status-signaling jargon.
 
 Example:
 
-Most people think the problem is building.
-It’s usually finishing.
+```text
+The change was small. The important part was proving the staged diff contained only the approved paths.
+```
 
-Pattern B — Agreement → Sharpening insight
+### 3. Practitioner and evidence-aware
 
-Use when the post is directionally right but incomplete.
+Use for QA investigations, trust, privacy, and memory.
 
-Example:
+Feels:
 
-Yes, but the hidden tax is maintenance.
-Shipping fast is easy compared to keeping the thing stable once real users arrive.
-
-Pattern C — Contrarian correction
-
-Use when a claim is overhyped or simplistic.
-
-Example:
-
-Slightly disagree.
-AI reduced the cost of code, not the cost of judgment.
-
-Pattern D — Experience-based add-on
-
-Use to sound grounded.
+- careful;
+- curious;
+- realistic;
+- respectful of fresh evidence.
 
 Example:
 
-I keep seeing this in practice.
-Founders think they need more features when they usually need fewer moving parts.
+```text
+An old lesson can narrow the search. It should not overrule today’s logs.
+```
 
-Pattern E — Insight → light question
+### 4. Reflective
 
-Use when conversation is valuable.
+Use for product philosophy, learning, and tradeoffs.
 
-Example:
+Feels:
 
-The bottleneck has clearly moved upstream.
-Less “can we build it?” and more “can we make it coherent?”
-Curious how many teams are actually feeling that shift.
-
-Pattern F — Witty one-liner
-
-Use sparingly.
+- thoughtful;
+- restrained;
+- specific enough to avoid empty profundity.
 
 Example:
 
-Modern SaaS: 10% idea, 90% wiring the octopus.
+```text
+Faster answers are useful. Reusable judgment is more valuable.
+```
 
-Length Variation Rules
+### 5. Witty or lightly humorous
 
-Do not keep everything at 2–4 sentences.
-Rotate deliberately.
+Use sparingly when the subject permits it.
 
-Short
+Feels:
 
-Use for large accounts and fast-moving posts.
-1 line or 2 short lines.
+- dry;
+- controlled;
+- human;
+- never dismissive.
 
-Medium
+Example:
 
-Default mode.
-2–4 sentences.
-Most useful for discoverability and credibility.
+```text
+The untracked file was not mysterious. It was just very committed to staying untracked.
+```
 
-Long
+Do not use humor around customer incidents, private data, professional failure, security concerns, or vulnerable disclosures.
 
-Use only when the post deserves substance.
-4–7 lines max.
-Should still feel readable inside the feed.
+### 6. Serious and high-trust
 
-Different Message Types
+Use for mistakes, failures, privacy, risk, and correction.
 
-Type 1 — Philosophical
+Feels:
 
-Use for incentive design, founder psychology, hype cycles, simplicity, focus, distribution.
+- factual;
+- respectful;
+- accountable;
+- low-drama.
 
-Template feel:
-	•	start with a clean observation
-	•	add a deeper truth
-	•	stop before it becomes a sermon
+Example:
 
-Examples:
+```text
+The first validation was scoped incorrectly. No product files changed, and the check was corrected before review continued.
+```
 
-Short
+## Naturalness rules
 
-Most founders drown in options before they ever reach traction.
-Freedom is useful. Too much of it is a trap.
+To avoid repetitive or artificial writing:
 
-Medium
+- do not reuse the same opening phrase across several comments;
+- do not force symmetrical three-part sentences;
+- do not use em dashes in every paragraph;
+- do not end every post with a broad question;
+- do not add a lesson after the point is already clear;
+- mix short and medium-length responses;
+- use plain words when they are more precise;
+- preserve Steve’s actual wording when it is clearer than a polished alternative;
+- remove filler that exists only to sound authoritative.
 
-A lot of startup advice accidentally rewards motion over clarity.
-New tool, new channel, new feature.
-Meanwhile the actual business still needs one thing: proof that someone cares.
+Avoid stock phrases such as:
 
-Long
+- “This resonates”;
+- “Spot on”;
+- “Absolutely agree”;
+- “This is the real game changer”;
+- “People don’t realize”;
+- “In today’s fast-paced world”;
+- “Unlock the power of”;
+- “Revolutionize your workflow.”
 
-The weird thing about building now is that execution got cheaper, but distraction got cheaper too.
-So more people can start.
-Fewer people finish.
-The bottleneck isn’t access anymore. It’s judgment.
+## Response structures
 
-Type 2 — Technical
+Rotate structures according to the situation.
 
-Use for AI coding, infrastructure, auth, deployment, product reliability, architecture, code review.
+### Observation → distinction
 
-Template feel:
-	•	name the practical truth
-	•	explain the hidden complexity
-	•	keep it readable for non-developers too
+```text
+The repository transfer is straightforward.
+The operational risk is not Git history. It is forgetting the integrations tied to the old owner name.
+```
 
-Examples:
+### Agreement → sharper boundary
 
-Short
+```text
+Yes, local memory is useful.
+It still needs review, source context, and a way to retire outdated lessons.
+```
 
-AI writes code fast.
-Production still collects the bill.
+### Evidence → conclusion → limitation
 
-Medium
+```text
+The validation passed across all active growth files.
+That confirms the terminology and links are consistent.
+It does not prove the strategy will produce adoption.
+```
 
-The code is rarely the scary part now.
-It’s everything around it: auth, billing, email, state, deployment, edge cases.
-That’s where “simple SaaS idea” turns into a small circus.
+### Experience → practical lesson
 
-Long
+```text
+The unrelated worktree changes remained unstaged throughout the migration.
+Explicit path lists made that protection visible and reviewable.
+```
 
-People keep saying AI makes SaaS easy.
-Writing code, sure, much easier.
-But the second a real product needs auth, payments, emails, analytics, admin flows, and a deployment that doesn’t fall over, the real complexity shows up.
-Faster coding doesn’t erase integration debt.
+### Disagreement → reason
 
-Type 3 — Sales-aware
+```text
+I would not describe Workbench as a complete Cursor replacement.
+The stronger claim is that it offers a different ChatGPT-first workflow with guarded local operations.
+```
 
-Use for launch speed, validation, offers, buying vs building, customer pain, time-to-market.
+### Problem → useful check
 
-Template feel:
-	•	start from business pain
-	•	show the cost of delay or complexity
-	•	optionally bridge to SaaSKit
+```text
+If a retrieved lesson conflicts with the current failure evidence, verify the evidence first and review whether the lesson should be updated or retired.
+```
 
-Examples:
+### Insight → light question
 
-Short
+```text
+A tester may not need more documentation. They may need one reviewed lesson to appear at the right moment.
+Where does that lesson live in your current workflow?
+```
 
-Most ideas don’t die from bad code.
-They die from too much setup before anyone pays.
+### One-line observation
 
-Medium
+Use when the point is complete without explanation.
 
-Non-technical founders usually don’t need another six months of “learning the stack.”
-They need a faster path to a working product and real feedback.
-That’s the whole game in the beginning.
+```text
+A clean diff is part of the product experience.
+```
 
-Long
+## Length guidance
 
-The expensive mistake isn’t usually building the wrong feature first.
-It’s spending months assembling the basics before the market has even voted.
-That’s why packaged starting points matter.
-Not because they’re glamorous, but because they buy back time.
+### Short
 
-Type 4 — Witty / sharp
+One sentence or two short lines.
 
-Use for profile growth, likes, reposts, and memorability.
+Use for:
 
-Template feel:
-	•	one insight
-	•	one twist
-	•	stop
+- direct replies;
+- clear boundaries;
+- simple observations;
+- quick corrections.
 
-Examples:
+### Medium
 
-Short
+Two to four sentences.
 
-Every “quick MVP” eventually meets its lawyers: auth, billing, and edge cases.
+Use for:
 
-Medium
+- most comments;
+- practical distinctions;
+- product explanations;
+- comparison points.
 
-A lot of startup speed is just skipping the boring parts until they become expensive parts.
+### Long
 
-Long
+Several short paragraphs.
 
-Founders love saying “just ship it.”
-Which is fine.
-Right until “it” includes permissions, retries, invoices, email deliverability, and a production deploy held together by prayer and string.
+Use only when:
 
-Type 5 — Serious / trust-building
+- the question deserves evidence and nuance;
+- the reader needs a complete workflow;
+- a product boundary requires careful explanation;
+- privacy, trust, or risk needs context.
 
-Use for hard-earned lessons, failure, mistakes, or sober reflections.
+Long writing should remain scannable and should not repeat the conclusion.
 
-Template feel:
-	•	validate the core reality
-	•	add one useful truth
-	•	no jokes unless clearly appropriate
+## Calls to action
 
-Examples:
+Calls to action should be relevant, proportionate, and optional.
 
-Short
+### ProChat Memory for QA
 
-This is the side of speed people conveniently forget.
+Appropriate examples:
 
-Medium
+- share a recurring QA investigation;
+- review the beta workflow;
+- apply for the selected beta;
+- test one failure-memory cycle;
+- provide structured feedback.
 
-Fast execution matters.
-But speed without structure becomes rework, and rework is where momentum quietly dies.
+### ProChat Workbench
 
-Long
+Appropriate examples:
 
-There’s a difference between moving fast and stacking fragility.
-A lot of founders only notice that difference once users arrive.
-By then, every shortcut starts sending invoices.
+- review the GitHub repository;
+- read the installation guide;
+- try one guarded repository task;
+- report an onboarding problem;
+- compare one specific workflow.
 
-Comment Writing Rules by Audience Tier
+Do not force a call to action into a reply that is already useful without one.
 
-Tier 1 — Large creators
+## Product mention rules
 
-Goal: visibility
+Mention a product only when:
 
-Write:
-	•	shorter
-	•	sharper
-	•	more universal
-	•	easier to scan
+- it directly relates to the subject;
+- the capability exists now;
+- the description is accurate;
+- affiliation is clear where required;
+- the mention improves the reader’s understanding.
 
-Do not:
-	•	overexplain
-	•	pitch
-	•	make it about yourself
+Do not use indirect selling tactics designed to appear non-promotional.
 
-Tier 2 — Mid creators
+## Comparison rules
 
-Goal: conversation
+When comparing Workbench with Cursor, Claude Code, or another tool:
 
-Write:
-	•	medium length
-	•	more nuance
-	•	some thoughtful friction
-	•	possible question at the end
+- compare specific workflows;
+- distinguish observed behavior from preference;
+- acknowledge tradeoffs;
+- avoid claims about plans or features without current verification;
+- do not attack users or competitors;
+- do not claim universal superiority.
 
-Tier 3 — Small creators
+Useful comparison dimensions include:
 
-Goal: relationship
+- reasoning interface;
+- local context access;
+- execution controls;
+- validation;
+- Git behavior;
+- onboarding;
+- workflow continuity;
+- usage constraints.
 
-Write:
-	•	more personal
-	•	more direct
-	•	more conversational
-	•	can be slightly warmer
+## Privacy and professional boundaries
 
-Tactical Style Controls
+Never publish:
 
-When generating replies, vary these on purpose:
-	•	opener type
-	•	sentence length
-	•	seriousness level
-	•	directness level
-	•	whether a question is used
-	•	whether SaaSKit is mentioned
-	•	whether humor is used
-	•	whether it sounds like a builder, founder, or operator
+- private client information;
+- customer memory;
+- secrets;
+- internal repository details without approval;
+- identifiable failure evidence without permission;
+- private conversations;
+- unapproved testimonials or quotes.
 
-Signature Traits
+Sanitize examples and state when an example is simplified or reconstructed.
 
-Over time, the audience should associate this voice with:
-	•	clarity over hype
-	•	practical truth over fantasy
-	•	taste over noise
-	•	calm authority
-	•	sharp but not annoying
-	•	commercial intelligence without constant pitching
+## Manual review checklist
 
-Reusable Guardrails for AI-Generated Replies
+Before publishing, ask:
 
-Every reply should pass this filter:
-	•	Does this sound like a real person reacting, not a content machine?
-	•	Does it add a useful angle, not just agreement?
-	•	Is it short enough for X, but not empty?
-	•	Is it distinct from generic AI sludge?
-	•	Is SaaSKit only mentioned when it genuinely fits?
-	•	Would this make someone more likely to follow, even if they never buy?
+- Does this belong to one product lane?
+- Is the useful point supported by real evidence or clearly labeled opinion?
+- Does it sound like Steve rather than a content generator?
+- Is the tone appropriate for the subject?
+- Is uncertainty represented honestly?
+- Is private information removed?
+- Is the product boundary accurate?
+- Is any comparison fair and specific?
+- Is the call to action necessary?
+- Will Steve publish it manually?
 
-If not, rewrite it.
+## Default drafting instruction
 
-Default Instruction for Future Comment Generation
+```text
+Write in Steve’s natural ProChat voice.
 
-When writing X replies for Steve / ProChat:
-	•	sound natural, sharp, and human
-	•	optimize first for trust and follower growth, not direct selling
-	•	vary rhythm, tone, and length
-	•	use one of the five message types when appropriate
-	•	avoid robotic symmetry and generic praise
-	•	avoid obvious AI phrasing
-	•	mention SaaSKit only when it creates a natural bridge from the topic
-	•	aim to sound like a credible builder with taste, not a marketer farming impressions
+PRODUCT LANE:
+[ProChat Memory for QA or ProChat Workbench]
 
-Final Principle
+AUDIENCE:
+[reader or community]
 
-The best replies do not beg for attention.
-They earn it.
+REAL CONTEXT OR EVIDENCE:
+[approved context]
 
-And the best selling at this stage is mostly indirect:
-people notice the thinking,
-trust the taste,
-and then investigate the product on their own.
+GOAL:
+[the useful point]
+
+REQUIREMENTS:
+- sound calm, direct, specific, and human;
+- vary rhythm and sentence length;
+- preserve uncertainty;
+- avoid generic praise, hype, and hidden promotion;
+- use restrained humor only when appropriate;
+- do not invent facts, users, results, or experience;
+- flag claims requiring verification;
+- produce the smallest complete response;
+- do not publish automatically.
+```
+
+## Core principle
+
+```text
+Sound human.
+Use evidence.
+Respect uncertainty.
+Say the useful thing.
+Stop.
+```

@@ -1,350 +1,283 @@
-Daily Growth Command System
+# ProChat Daily Growth Command
 
-Command
+**Status:** canonical daily growth execution system  
+**Owner:** Steve Westhoek  
+**Last updated:** 2026-07-01
 
+## Command
+
+```text
 /daily-growth
+```
 
-Purpose
+## Purpose
 
-This command generates a complete daily distribution package based on topics found in:
+Generate one focused, evidence-based growth package for one product lane.
 
-keyword-topic-engine.md
+Each run must choose:
 
-The AI must:
-	1.	choose a high-value keyword/topic
-	2.	generate a blog post
-	3.	generate social content
-	4.	generate comment templates
-	5.	generate reply templates
+```text
+one product lane
++ one audience
++ one measurable objective
++ one real evidence source
++ one primary asset
++ limited supporting distribution
+```
 
-The goal is maximum exposure from minimal effort.
+The goal is not maximum content volume. The goal is useful, credible execution that creates learning, qualified adoption, or trusted relationships.
 
-⸻
+## Product-lane selection
 
-## Audience Guardrails (Hard Requirements)
+Every run must select exactly one lane.
 
-Primary audience: non-dev founders using AI/no-code/low-code who want to build SaaS without technical overwhelm.
+### Lane 1 — ProChat Memory for QA
 
-Tone: practical, reassuring, motivational, founder-first. No developer jargon unless explained in one sentence.
+Allowed objectives:
 
-Technicality limit:
-- Assume reader cannot code.
-- Avoid code snippets entirely.
-- Avoid framework deep-dives (Next.js, Prisma, webhooks) unless used as a simple analogy.
-- Prefer plain-language concepts: “logins”, “payments”, “data”, “security”, “reliability”, “handoffs”, “automation”.
+- build QA domain credibility;
+- recruit a suitable selected beta tester;
+- demonstrate one recurring QA investigation workflow;
+- request structured feedback;
+- document a real product lesson;
+- prepare an evidence-based case study;
+- develop a relevant QA relationship.
 
-Content must focus on:
-- fears, doubts, shiny-object syndrome
-- what to do next
-- decision frameworks
-- common founder mistakes
-- checklists founders can use
+Primary audiences:
 
-Output quality gate (must pass):
-- If a paragraph contains more than 2 technical terms, rewrite it in founder language.
-- Every piece must contain: 1 story/analogy + 1 checklist + 1 clear “next step”.
+- individual QA testers;
+- QA engineers;
+- QA leads;
+- test managers;
+- QA businesses evaluating future tester licenses.
 
-⸻
+Approved calls to action:
 
-## Topic Scoring (choose the highest score)
-Score each candidate 0–5:
-- Founder relevance (0–5)
-- Search intent (0–5)
-- Emotional resonance (fear/doubt/clarity) (0–5)
-- Discussion potential (0–5)
-Pick the top scoring topic.
+- join the selected QA beta;
+- try one recurring QA failure;
+- share an investigation pattern that keeps repeating;
+- review a real QA Memory demonstration;
+- provide structured beta feedback.
 
+### Lane 2 — ProChat Workbench
 
-Step 1 — Topic Selection
+Allowed objectives:
 
-The AI must scan:
+- improve qualified GitHub discovery;
+- demonstrate meaningful real-project work;
+- support installation or onboarding;
+- encourage qualified builder adoption;
+- explain guarded local operations;
+- document a real reliability or workflow lesson;
+- compare workflows responsibly.
 
-keyword-topic-engine.md
+Primary audiences:
 
-and select a topic that meets these conditions:
+- developers;
+- builders;
+- technical founders;
+- vibe coders;
+- people already using ChatGPT for project work.
 
-Priority rules:
+Approved calls to action:
 
-1. high search intent
-2. evergreen topic
-3. relevant to SaaS builders or AI founders
-4. discussion-worthy on social media
+- view ProChat Workbench on GitHub;
+- review the installation guide;
+- try one guarded task on a real local project;
+- share an onboarding problem;
+- compare the workflow with an existing tool using specific criteria.
 
-Output:
+## Hard guardrails
 
-Topic:
-SEO keyword:
-Blog title:
-Social hook:
+Every run must comply with these rules:
 
-Example:
+- use only real observations, product behavior, approved documentation, or clearly labeled hypotheses;
+- do not invent users, testimonials, case studies, usage numbers, or performance results;
+- do not present future capabilities as current product features;
+- do not promise unlimited usage, zero hallucinations, guaranteed savings, or complete editor replacement;
+- do not present the QA beta as generally accepted enrollment;
+- do not expose private customer, client, repository, or memory data;
+- do not use unrelated topics that do not support either product lane;
+- do not generate content merely to fill every platform;
+- do not publish automatically;
+- require Steve’s explicit review and approval before posting or outreach.
 
-Topic: AI-generated SaaS failures
-SEO keyword: why ai generated code breaks
-Blog title: Why AI-Generated SaaS Apps Break in Production
-Social hook: AI writes code fast, but SaaS still breaks in production
+## Step 1 — Select the objective
 
+Read `keyword-topic-engine.md` and choose one topic that supports a current product need.
 
-⸻
+Score candidate topics from 0–5 on:
 
-Step 2 — Blog Article Generation
-
-Generate a blog post with structure:
-
-Title
-Introduction
-Main insight
-Practical lessons
-Conclusion
-
-Requirements:
-
-800–1200 words
-problem → explanation → solution
-natural tone
-no marketing language
-
-Blog article requirements (Founder Edition):
-- 900–1400 words
-- Written for non-dev founders
-- No code, no libraries, no APIs explained in depth
-- Use examples like: "login", "payments", "emails", "data backups"
-- Include:
-  1) “What can go wrong” section (fear)
-  2) “Simple plan” section (clarity)
-  3) “Checklist” section (action)
-
-Blog posts are the source content.
-
-All social content derives from them.
-
-⸻
-
-Step 3 — LinkedIn Content
-
-Generate:
-
-1 LinkedIn post
-
-Structure:
-
-Hook
-Insight
-Short explanation
-Question
-
-Example structure:
-
-AI can generate code incredibly fast now.
-
-But most SaaS products don’t fail because of missing code.
-
-They fail because of infrastructure.
-
-Auth.
-Billing.
-Deployment.
-Environment variables.
-
-Curious if other builders are seeing the same pattern.
-
-
-⸻
-
-LinkedIn Comment Templates
-
-Generate 3 comments that can be posted on large posts.
-
-Structure:
-
-Observation
-Insight
-Question
-
-
-⸻
-
-Step 4 — X Content
-
-Generate:
-
-1 insight post
-1 mini thread
-5 reply comments
-
-Insight Post
-
-1–3 sentences.
-
-Example:
-
-AI writes code fast.
-
-But SaaS products rarely fail because of missing code.
-
-They fail because infrastructure breaks.
-
-
-⸻
-
-Thread Structure
-
-Tweet 1 — Hook
-Tweet 2–4 — Insight
-Tweet 5 — Lesson
-
-
-⸻
-
-Reply Comments
-
-Short replies for discussions.
-
-Example:
-
-Interesting shift.
-
-AI tools accelerate coding, but architecture decisions are becoming even more important.
-
-
-⸻
-
-Step 5 — Reddit Content
-
-Generate:
-
-1 Reddit discussion post
-3 helpful comment templates
-
-Reddit Post Structure
-
-Problem
-Explanation
-Discussion question
-
-Example:
-
-AI can generate code extremely fast now.
-
-But something interesting is happening.
-
-Many SaaS products fail when they reach production.
-
-Auth systems, billing logic, and deployment setups still require careful thinking.
-
-Curious if other builders are seeing the same thing.
-
-
-⸻
-
-Step 6 — Comment Pyramid Kit
-
-Generate comments for visibility.
-
-Output:
-
-3 LinkedIn comments
-3 X replies
-3 Reddit comments
-
-These should be:
-
-insightful
-non-promotional
-discussion-oriented
-
-
-⸻
-
-Step 7 — Reply Templates
-
-Generate conversation replies.
-
-These are used when people respond to posts.
-
-Output:
-
-5 thoughtful replies
-
-Example:
-
-That’s an interesting point.
-
-I’ve noticed something similar where AI speeds up coding but makes architectural thinking more important.
-
-Curious how your team approaches that balance.
-
-
-⸻
-
-Final Output Format
-
-When /daily-growth runs, the AI must produce:
-
+- product-lane fit;
+- audience relevance;
+- real evidence available;
+- demonstrated product capability;
+- learning value;
+- discussion value;
+- clear next action.
+
+Select the highest-value topic, not the broadest topic.
+
+Return:
+
+```text
+PRODUCT LANE
+AUDIENCE
+OBJECTIVE
 TOPIC
-SEO KEYWORD
-BLOG TITLE
+EVIDENCE SOURCE
+PRIMARY CHANNEL
+CALL TO ACTION
+```
 
-BLOG ARTICLE
+## Step 2 — Verify evidence
 
-LINKEDIN POST
-3 LINKEDIN COMMENTS
+Before drafting, identify the evidence source.
 
-X POST
-X THREAD
-5 X REPLIES
+Accepted evidence may include:
 
-REDDIT POST
-3 REDDIT COMMENTS
+- approved product documentation;
+- a sanitized real workflow;
+- a repository change or release;
+- a real installation or onboarding observation;
+- structured beta feedback approved for reuse;
+- a measured result with a documented method;
+- a personal QA or builder lesson clearly presented as personal experience.
 
-5 REPLY TEMPLATES
+When evidence is incomplete, label the content as:
 
+- an open question;
+- a working hypothesis;
+- a planned experiment;
+- a request for practitioner feedback.
 
-⸻
+Do not convert assumptions into claims.
 
-Execution Workflow
+## Step 3 — Choose one primary asset
 
-Daily workflow becomes:
+Choose the smallest useful primary asset:
 
-Morning:
+- practical LinkedIn post;
+- short technical or QA article;
+- GitHub-oriented release or demonstration note;
+- concise X post or thread;
+- professional discussion prompt;
+- beta recruitment message;
+- case-study draft based on approved evidence;
+- onboarding improvement note.
 
-run /daily-growth
+Long-form content is optional. Do not require a blog article for every run.
 
-Then:
+## Step 4 — Draft the primary asset
 
-publish blog
-post LinkedIn
-post X insight
-comment on posts
+Use this structure where appropriate:
 
-Total manual time:
+```text
+real problem
+→ observed evidence
+→ useful lesson or demonstration
+→ limitation or review boundary
+→ relevant next action
+```
 
-20–30 minutes
+### QA Memory quality gate
 
+The asset should make at least one of these clearer:
 
-⸻
+- what investigation knowledge is repeatedly lost;
+- how reviewed memory could help later work;
+- why current evidence overrides stored memory;
+- how sanitization and approval protect project boundaries;
+- what was learned from a real QA workflow;
+- who is a suitable beta tester.
 
-Weekly Compounding
+### Workbench quality gate
 
-Each blog post becomes:
+The asset should make at least one of these clearer:
 
-1 blog article
-1 LinkedIn post
-1 Reddit discussion
-6+ X posts
-10+ comments
+- how ChatGPT receives exact local context;
+- how operations remain bounded or guarded;
+- what validation was run;
+- how Git actions remain explicit;
+- what onboarding problem was solved;
+- where the workflow differs from Cursor, Claude Code, or similar tools without overstating superiority.
 
-That is ~20 distribution points per week from one idea.
+## Step 5 — Prepare limited supporting distribution
 
-⸻
+Create only the supporting assets that have a clear use.
 
-Key Principle
+Possible outputs:
 
-This system works because:
+- one shorter LinkedIn variation;
+- one X post or short thread;
+- two thoughtful comments for relevant discussions;
+- two natural replies to likely questions;
+- one direct beta invitation for a known suitable tester;
+- one GitHub or documentation call to action.
 
-SEO captures search
-LinkedIn builds authority
-Reddit creates discussion
-X creates visibility
+Do not create all outputs by default.
 
-Together they compound.
+## Step 6 — Manual review checklist
+
+Before approval, verify:
+
+- the product lane is explicit;
+- the audience is appropriate;
+- the evidence is real and traceable;
+- no private data is exposed;
+- the claim matches current product behavior;
+- the beta or product stage is described honestly;
+- the call to action fits the selected lane;
+- the writing is useful without being promotional;
+- no competitor is attacked or misrepresented;
+- no post or message will be sent automatically.
+
+## Final output format
+
+```text
+PRODUCT LANE
+AUDIENCE
+OBJECTIVE
+TOPIC
+EVIDENCE SOURCE
+PRIMARY CHANNEL
+CALL TO ACTION
+
+PRIMARY ASSET
+
+OPTIONAL SUPPORTING ASSETS
+
+CLAIMS REQUIRING VERIFICATION
+
+MANUAL REVIEW CHECKLIST
+
+LEARNING TO RECORD AFTER EXECUTION
+```
+
+## After execution
+
+Record the useful result, not only reach.
+
+Examples:
+
+### ProChat Memory for QA
+
+- qualified beta conversation;
+- recurring QA problem discovered;
+- tester feedback received;
+- demonstration completed;
+- case-study evidence approved;
+- relationship strengthened;
+- onboarding or trust problem identified.
+
+### ProChat Workbench
+
+- qualified GitHub visit;
+- installation completed;
+- meaningful project task attempted;
+- onboarding problem identified;
+- product feedback received;
+- real-project demonstration completed;
+- responsible comparison discussion created.
+
+Reach, likes, impressions, and followers may be recorded as context, but they are not proof of product value.

@@ -1,451 +1,346 @@
-Below is a clean Markdown document you can store in your AI knowledge base (for example:
-/Brain/growth/reddit-growth-system.md).
+# ProChat Reddit Participation Strategy
 
-It is written so ProBot can generate Reddit posts, comments, and replies automatically using the prompts included.
+**Status:** supporting community participation system  
+**Owner:** Steve Westhoek  
+**Last updated:** 2026-07-02
 
-⸻
+## Purpose
 
-Reddit Growth System for SaaS Builders
+Use Reddit to learn from practitioners, contribute useful experience, discuss real problems, and create qualified product discovery without disguised promotion.
 
-Purpose
+Every Reddit activity must belong to exactly one product lane:
 
-This document defines a repeatable system for gaining visibility, traffic, and feedback on Reddit without being perceived as a spammer.
+```text
+ProChat Memory for QA
+ProChat Workbench
+```
 
-Reddit rewards:
-	•	insight
-	•	authenticity
-	•	experience
-	•	storytelling
+Participation remains manual, community-rule-aware, review-first, and evidence-based.
 
-Reddit punishes:
-	•	marketing
-	•	promotion
-	•	fake authority
+## Shared principles
 
-This system allows founders to:
-	•	gain traffic
-	•	get product feedback
-	•	build credibility
-	•	attract early adopters
+- read each community’s rules before posting or commenting;
+- contribute to the discussion before mentioning a product;
+- use only real experience, approved documentation, or clearly labeled questions;
+- disclose product affiliation when it is relevant to the discussion;
+- avoid repeated links, copied replies, and promotional templates;
+- never invent users, results, testimonials, or technical experience;
+- protect customer, client, employer, repository, and memory data;
+- do not automate posts, comments, replies, votes, or messages;
+- accept that some communities do not permit product links or recruitment;
+- remove or correct a contribution when it contains an inaccurate claim.
 
-When executed well, a single Reddit post can generate 10k–100k visitors.
+## Participation lane 1 — ProChat Memory for QA
 
-⸻
+### Purpose
 
-Core Principle
+Support:
 
-Reddit is not a marketing platform.
+- QA domain learning;
+- useful testing discussions;
+- selected beta relationships;
+- practical workflow demonstrations;
+- structured feedback;
+- evidence-based case-study discovery.
 
-It is a discussion platform.
+### Relevant communities
 
-Success comes from sharing experiences and lessons, not promoting products.
+Participate only where the topic and community rules make the contribution appropriate.
 
-The best posts follow this format:
+Potential discussion areas include:
 
-Problem
-Story
-Lesson
+- software testing;
+- test automation;
+- Playwright;
+- Cypress;
+- Selenium;
+- Robot Framework;
+- flaky tests;
+- CI investigation;
+- QA knowledge management;
+- local developer and tester tools.
 
-Your product appears only as context, not the focus.
+Do not assume a named community permits product discussion. Check its current rules before every post.
 
-⸻
+### Useful discussion topics
 
-Subreddits Relevant for SaaS Builders
+- why similar failures are investigated repeatedly;
+- where testers currently store investigation lessons;
+- preserving root causes, fixes, selectors, and test data;
+- separating raw evidence from approved memory;
+- deciding when an old lesson still applies;
+- sanitizing client or project information;
+- local and Git-versioned QA knowledge;
+- trust requirements for AI-assisted testing memory;
+- handoff problems between testers;
+- onboarding problems for local QA tools.
 
-Focus on communities where founders discuss building products.
+### Beta boundary
 
-Primary Subreddits
+A beta invitation is appropriate only when:
 
-r/SaaS
-r/Entrepreneur
-r/IndieHackers
-r/startups
-r/SideProject
+- the person describes a recurring investigation problem;
+- the person asks for a local knowledge or memory workflow;
+- the community permits product or research participation;
+- the tester appears able to evaluate a local technical beta;
+- the invitation is specific, transparent, and non-pressuring.
 
-⸻
+When mentioning the beta, state accurately that:
 
-Technical Builder Subreddits
+- participation is selected;
+- the beta is free and has no fixed end date;
+- customer and client memory remains local;
+- human review is required;
+- licensing is not final.
 
-r/webdev
-r/Nextjs
-r/programming
-r/devops
+## Participation lane 2 — ProChat Workbench
 
-⸻
+### Purpose
 
-AI Builder Subreddits
+Support:
 
-r/ArtificialIntelligence
-r/MachineLearning
-r/LocalLLaMA
-r/ChatGPT
+- qualified GitHub discovery;
+- real-project demonstrations;
+- builder onboarding;
+- workflow feedback;
+- responsible tool comparisons;
+- relationships with developers and technical builders.
 
-⸻
+### Relevant communities
+
+Potential discussion areas include:
 
-Reddit Karma Warm-Up System
+- ChatGPT workflows;
+- developer tools;
+- local-first software;
+- Git and repository workflows;
+- AI-assisted coding;
+- documentation and knowledge systems;
+- guarded execution;
+- builder productivity.
 
-New Reddit accounts with no history are often filtered.
+Community rules determine whether a product link, repository link, or comparison is appropriate.
 
-Before posting about your project, spend 7–10 days building credibility.
+### Useful discussion topics
 
-Goal
+- giving ChatGPT exact local repository context;
+- protecting unrelated worktree changes;
+- bounded file operations;
+- allowlisted commands;
+- targeted validation;
+- explicit Git staging and commits;
+- installation and local connection problems;
+- persistent project work;
+- tradeoffs between editor-first and ChatGPT-first workflows;
+- specific comparisons with Cursor, Claude Code, and similar tools.
 
-Create:
+### Comparison boundary
 
-10–20 helpful comments
+Use concrete comparison criteria:
 
-This builds:
-	•	karma
-	•	account trust
-	•	comment visibility
+- reasoning interface;
+- local context access;
+- execution boundaries;
+- validation;
+- Git control;
+- onboarding;
+- workflow continuity;
+- plan and usage constraints.
 
-⸻
+Do not claim universal superiority, complete editor replacement, unlimited usage, zero hallucinations, or guaranteed savings.
 
-Daily Reddit Task System
+## Selecting a discussion
 
-Total time required:
+Contribute when at least one condition is true:
 
-10–15 minutes per day
+- you can answer from real experience;
+- you can add a useful technical or QA distinction;
+- you can ask a sincere question that supports product learning;
+- the post describes a problem one product lane addresses;
+- the community explicitly invites tool, workflow, or beta discussion.
 
+Skip when:
 
-⸻
+- the response would be generic agreement;
+- the contribution depends on an unverified claim;
+- the community prohibits product discussion;
+- you would need to expose private information;
+- the thread is primarily hostile, political, or unrelated;
+- the only objective is traffic or link placement.
 
-Step 1 — Browse Subreddits
+## Comment structure
 
-Time: 2 minutes
+Useful structures include:
 
-Look for posts where people discuss:
-	•	building SaaS
-	•	startup struggles
-	•	AI development
-	•	infrastructure problems
+```text
+Observation → Practical distinction → Question
+```
 
-Sort by:
+```text
+Experience → Evidence → Limitation
+```
 
-Hot
-or
-New
+```text
+Problem → Suggested check → Invitation to compare results
+```
 
+A strong comment should:
 
-⸻
+- answer the original point;
+- add one useful detail;
+- remain natural rather than polished like an advertisement;
+- avoid unnecessary product references;
+- distinguish evidence from opinion;
+- disclose uncertainty.
 
-Step 2 — Leave Helpful Comments
+## Post structure
 
-Time: 5 minutes
+Create a standalone post only when the community permits it and the material has independent discussion value.
 
-Respond to questions where you can provide:
-	•	technical insight
-	•	practical advice
-	•	lessons learned
+A useful structure is:
 
-Avoid mentioning your product.
+```text
+real problem
+→ sanitized evidence or experience
+→ what was tried
+→ what was learned
+→ what remains uncertain
+→ discussion question
+```
 
-⸻
+The product may appear as context when relevant, but the post must still be useful to someone who never visits a product link.
 
-Step 3 — Engage in Discussions
+## Product mention rules
 
-Time: 3 minutes
+A product mention must be:
 
-Reply to comments in active threads.
+- relevant to the original question;
+- accurate about current capability;
+- transparent about Steve’s relationship to ProChat;
+- compliant with community rules;
+- secondary to the useful substance of the response.
 
-This increases:
-	•	karma
-	•	visibility
+Avoid indirect promotion designed only to create curiosity.
 
-⸻
+Do not use phrases that conceal affiliation, such as describing ProChat as an unrelated tool you happened to find.
 
-Step 4 — Observe Pain Points
+## Link rules
 
-Time: 2 minutes
+Before adding a link:
 
-Look for recurring complaints.
+- confirm links are permitted;
+- explain why the link helps;
+- link to the most relevant page, repository, or documentation;
+- avoid link shorteners and tracking-heavy URLs;
+- do not repeat the same link across unrelated discussions;
+- do not ask others to upvote or amplify the contribution.
 
-These often reveal:
-	•	product opportunities
-	•	feature ideas
-	•	messaging improvements
+## Manual workflow
 
-⸻
+### Step 1 — Select one lane
 
-Weekly Reddit Strategy
+Choose either ProChat Memory for QA or ProChat Workbench.
 
-Once per week write one high-quality post.
+### Step 2 — Check community rules
 
-Best formats:
+Confirm rules for:
 
-Lessons learned
-Mistakes
-Build stories
-Technical breakdowns
+- self-promotion;
+- product links;
+- recruitment;
+- surveys or research;
+- AI-generated content;
+- account requirements;
+- flair and formatting.
 
-Avoid direct promotion.
+### Step 3 — Read the full discussion
 
-⸻
+Understand the question, existing answers, and tone before drafting.
 
-Post Formats That Perform Well
+### Step 4 — Draft from real context
 
-1 — Build Story
+Use the approved product documentation, a sanitized real observation, or a clearly labeled question.
 
-Title example:
+### Step 5 — Review manually
 
-I spent 3 weeks debugging a Stripe webhook bug that cost me real users
+Verify:
 
-Structure:
+- lane fit;
+- factual accuracy;
+- affiliation disclosure where relevant;
+- privacy;
+- community rules;
+- product maturity language;
+- absence of disguised promotion;
+- absence of unsupported claims.
 
-Problem
-What happened
-What you learned
+### Step 6 — Post manually
 
-Mention your project only briefly.
+Steve posts the approved contribution directly.
 
-⸻
+### Step 7 — Reply and record learning
 
-2 — Lessons Learned
+Respond naturally when useful. Record non-private product learning, not only votes or traffic.
 
-Title example:
+## Drafting prompt
 
-Things that break most SaaS apps after deployment
+```text
+Help me draft a Reddit contribution.
 
-Content:
-	•	infrastructure problems
-	•	auth complexity
-	•	billing issues
-	•	deployment mistakes
+PRODUCT LANE:
+[ProChat Memory for QA or ProChat Workbench]
 
-These posts often perform extremely well.
+COMMUNITY RULES:
+[paste relevant rules]
 
-⸻
+POST OR DISCUSSION:
+[paste content]
 
-3 — Mistake Posts
+MY REAL CONTEXT OR EVIDENCE:
+[approved context]
 
-Title example:
+GOAL:
+Contribute useful information or a sincere question without disguised promotion.
 
-The biggest mistake I made building my first SaaS
+REQUIREMENTS:
+- follow the supplied community rules;
+- use only the supplied context;
+- disclose my ProChat affiliation when relevant;
+- do not invent experience, users, metrics, or results;
+- avoid marketing language and engagement bait;
+- flag claims or links requiring verification;
+- produce up to three natural alternatives;
+- do not post automatically.
+```
 
-People love vulnerability and honesty.
+## Success signals
 
-⸻
+### ProChat Memory for QA
 
-4 — Insight Posts
+- a recurring QA problem becomes clearer;
+- a practitioner shares a useful workflow;
+- a suitable tester expresses informed beta interest;
+- a trust or privacy requirement is discovered;
+- a demonstration or case-study question is validated;
+- product feedback leads to a documented improvement.
 
-Title example:
+### ProChat Workbench
 
-AI can generate code fast, but SaaS still breaks in production
+- a builder asks a qualified workflow question;
+- someone reviews the repository for a relevant reason;
+- an installation or onboarding problem is identified;
+- a real-project trial begins;
+- a responsible comparison produces useful feedback;
+- documentation or product behavior improves.
 
-Explain the reasoning.
+Votes, karma, impressions, and traffic may be recorded as context, but they do not prove product value.
 
-These posts trigger discussion.
+## Core principle
 
-⸻
-
-Reddit Comment Strategy
-
-Many founders miss this:
-
-Comments often generate more visibility than posts.
-
-Find posts with:
-
-50–200 comments
-
-Write a thoughtful reply.
-
-Highly visible comments can reach thousands of readers.
-
-⸻
-
-Effective Comment Structure
-
-Observation → Insight → Advice
-
-Example:
-
-Observation
-AI tools definitely accelerate coding.
-
-Insight
-But they often hide architectural mistakes that only appear later in production.
-
-Advice
-One thing that helped me is slowing down at the architecture stage rather than the coding stage.
-
-
-⸻
-
-Alternative Comment Structure
-
-Experience → Lesson → Question
-
-Example:
-
-Experience
-I ran into this exact problem while building a SaaS backend.
-
-Lesson
-The biggest challenge wasn't writing code but making sure authentication and billing worked reliably.
-
-Question
-How are you currently handling those parts?
-
-
-⸻
-
-What NOT to Do
-
-Never post like this:
-
-Check out my SaaS tool!
-Buy my product!
-Launch announcement
-
-Reddit will downvote or remove these.
-
-⸻
-
-Soft Mention Strategy
-
-If relevant, mention your project indirectly.
-
-Example:
-
-I ended up building a structured SaaS base after running into these issues repeatedly.
-
-This creates curiosity.
-
-People may check your profile.
-
-⸻
-
-Reddit Profile Optimization
-
-Your profile should be simple.
-
-Example bio:
-
-Software tester building SaaS infrastructure tools.
-
-Documenting what works and what breaks.
-
-prochat.tools
-
-People often click profiles after reading comments.
-
-⸻
-
-AI Prompt for Reddit Comment Generation
-
-Use this prompt when responding to Reddit posts.
-
-You are helping me write a Reddit comment.
-
-Context:
-I am a software tester and SaaS builder interested in AI development and SaaS infrastructure.
-
-Goal:
-Write a helpful comment that adds insight to the discussion.
-
-Requirements:
-- natural tone
-- 3–5 sentences
-- no marketing
-- share experience or insight
-- optionally ask a question
-
-Post:
-[PASTE REDDIT POST]
-
-Generate 3 possible comments.
-
-
-⸻
-
-AI Prompt for Reddit Post Creation
-
-You are helping me write a Reddit post.
-
-Goal:
-Create a discussion post that shares a lesson or experience related to SaaS building.
-
-Requirements:
-- natural storytelling tone
-- avoid marketing language
-- mention my project only briefly if relevant
-- focus on lessons learned
-
-Topic:
-[PASTE IDEA]
-
-Write the post.
-
-
-⸻
-
-AI Prompt for Replying to Comments
-
-You are helping me reply to a Reddit comment.
-
-Goal:
-Continue the discussion naturally and intelligently.
-
-Requirements:
-- friendly
-- 2–4 sentences
-- thoughtful
-- no promotion
-
-My Post:
-[PASTE POST]
-
-Comment Reply:
-[PASTE COMMENT]
-
-Generate a response.
-
-
-⸻
-
-High-Performing Post Example
-
-AI can generate code extremely fast now.
-
-But something interesting is happening.
-
-Many founders are shipping faster, yet more SaaS products fail when they reach production.
-
-The reason seems to be infrastructure.
-
-Auth systems, billing logic, deployment setups, and environment variables still require careful thinking.
-
-Curious if others building AI tools are seeing the same pattern.
-
-
-⸻
-
-Expected Results
-
-With consistent activity:
-
-3–5 comments per day
-1 post per week
-
-You can expect:
-	•	growing karma
-	•	discussion visibility
-	•	profile clicks
-	•	website traffic
-
-Occasionally a post may go viral.
-
-⸻
-
-Key Principle
-
-The goal is not to promote.
-
-The goal is to become an interesting voice in builder discussions.
-
-If people trust your insights, they will naturally explore what you are building.
-
-⸻
-
-If you want, I can also show you the three specific Reddit post templates that most frequently go viral in r/SaaS, which dramatically increases the chance of getting 10k–50k visitors from a single post.
+```text
+Respect the community.
+Contribute before linking.
+Disclose affiliation.
+Post manually.
+Learn from the discussion.
+```
