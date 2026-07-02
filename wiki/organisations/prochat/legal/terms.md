@@ -1,192 +1,443 @@
-TERMS OF SERVICE
+# ProChat Beta and Evaluation Terms
 
-Last updated: [INSERT DATE]
+**Status:** internal draft for factual verification and qualified Portuguese/EU legal review  
+**Last updated:** 2026-07-02  
+**Commercial status:** pre-revenue; final commercial licensing is not settled
 
-These Terms of Service (“Terms”) govern your access to and use of the ProChat website and all products and services provided by:
+> These draft terms describe the intended beta permissions and boundaries. They must not be treated as final published terms until the acceptance mechanism, controller details, governing-law language, liability provisions, and mandatory consumer or business rights have been reviewed by qualified counsel.
 
-Steve Westhoek, trading as ProChat (ENI)
-Porto, Portugal
-Email: support@prochat.tools
+## 1. Parties and scope
 
-By accessing the website or purchasing any product, you agree to these Terms.
+These Beta and Evaluation Terms are intended to govern approved evaluation of products made available by Steve Westhoek, trading as ProChat.
 
-⸻
+ProChat currently has exactly two products:
 
-1. OVERVIEW
+```text
+ProChat Memory
+└── current edition: ProChat Memory for QA
 
-ProChat provides digital products, including but not limited to software boilerplates such as SaaSKit and ProKit (the “Products”).
+ProChat Workbench
+```
 
-These Terms apply to:
-	•	Website use
-	•	All digital products
-	•	All updates and versions
-	•	All related services
+ProChat Memory for QA is the current selected beta focus.
 
-If you do not agree, do not use the website or purchase the Products.
+These terms cover:
 
-⸻
+- access to a sanitized public repository;
+- participation in a manually selected feedback cohort;
+- local installation and evaluation;
+- authorized company or client evaluation;
+- source-visible evaluation access;
+- feedback, issue reports, and contributions;
+- restrictions on transfer, resale, redistribution, sublicensing, hosted resale, and repackaging;
+- beta-stage support, warranty, availability, and responsibility boundaries.
 
-2. ELIGIBILITY
+Final paid-product, individual, organization, team, consumer, support, update, and service-level terms remain deferred.
 
-You must be at least 18 years old and legally capable of entering into binding contracts.
+## 2. Publication and acceptance gate
 
-If purchasing on behalf of a business, you confirm you have authority to bind that entity.
+Before these terms are used publicly, ProChat must define how a person receives, reviews, and accepts them.
 
-⸻
+Possible mechanisms may include:
 
-3. DIGITAL PRODUCT LICENSE (GENERAL)
+- an accompanying repository license or evaluation notice;
+- click-through acceptance;
+- an invitation or cohort agreement;
+- another counsel-approved process.
 
-Upon purchase, you are granted a:
+The public visibility of source code does not by itself prove that a visitor has accepted contractual terms.
 
-Non-exclusive, non-transferable, non-sublicensable license
-to use the purchased Product under the conditions below.
+The final process must make clear which permissions apply to:
 
-You may:
-	•	Use the Product for your own commercial activities
-	•	Build unlimited SaaS applications
-	•	Sell subscriptions to your SaaS products
-	•	Modify the source code for your internal business use
+- public repository visitors;
+- selected beta testers;
+- company evaluators;
+- client-work evaluators;
+- contributors.
 
-You may NOT:
-	•	Resell, sublicense, distribute, or transfer the source code
-	•	Share repository access outside your licensed organization
-	•	Publish the source code publicly
-	•	Sell the Product as a template, boilerplate, starter, framework, or competing product
-	•	Create a competing boilerplate or derivative framework based substantially on the Product
-	•	Include the source code inside client deliverables unless the client has purchased their own license
+## 3. Beta status
 
-This license grants usage rights, not ownership. All intellectual property remains with ProChat.
+ProChat is pre-revenue.
 
-⸻
+The current ProChat Memory for QA beta is intended to be:
 
-4. INTERNAL TEAM ACCESS
+- free;
+- available for an indefinite period with no fixed end date;
+- distributed through a sanitized public repository;
+- supported through a manually selected feedback cohort;
+- subject to change, suspension, replacement, or withdrawal.
 
-A license may be used internally by one business entity.
+“Indefinite” means that no end date has been set. It does not promise permanent availability, continued maintenance, future compatibility, or perpetual support.
 
-Internal team members may access the code only if:
-	•	They are employees or contractors of the same business
-	•	They are working on the same SaaS project(s) under that business
+Public repository access does not guarantee:
 
-If a separate department, subsidiary, client, or separate legal entity uses the Product, a separate license is required.
+- selection for the feedback cohort;
+- onboarding or support;
+- access to private development work;
+- access to future versions;
+- commercial license rights;
+- organization-wide permission.
 
-⸻
+## 4. Source-visible evaluation status
 
-5. BUSINESS SALE OR TRANSFER
+The beta source may be visible so that people can inspect and evaluate it.
 
-If you sell your SaaS business and transfer ownership of the source code, the new owner must purchase a new license from ProChat.
+ProChat does not currently describe the beta as open source.
 
-The license is non-transferable.
+Unless a separate published license expressly grants broader rights, source visibility does not grant permission to:
 
-⸻
+- redistribute the product;
+- sublicense it;
+- sell it;
+- host it for third parties as a paid or bundled service;
+- publish a mirror or repackaged distribution;
+- remove ownership or attribution notices;
+- present the product as the evaluator’s own product;
+- use substantial product code to create a directly competing distributable product.
 
-6. PRODUCT-SPECIFIC TERMS
+Final source-visible or source-available terminology and the final commercial license model remain subject to legal and product review.
 
-6.1 SaaSKit License
+## 5. Evaluation permission
 
-SaaSKit is licensed for:
-	•	Unlimited SaaS projects under one business
-	•	Commercial deployment
-	•	Lifetime access to updates via GitHub
+Subject to the final acceptance mechanism and these terms, an approved evaluator may be permitted to:
 
-You may not:
-	•	Resell SaaSKit as a development kit
-	•	Offer SaaSKit as a service to clients
-	•	Provide repo access to clients
+- download or clone the sanitized public repository;
+- inspect the source;
+- install and run the product locally;
+- make local modifications for authorized evaluation;
+- create local project memory;
+- test documented product workflows;
+- use the product while performing authorized company work;
+- use the product while performing authorized client work;
+- provide feedback, issue reports, and sanitized diagnostic material;
+- use evaluation results internally.
 
-Clients must purchase their own license.
+This permission is intended to be:
 
-⸻
+- non-exclusive;
+- limited to evaluation;
+- non-transferable;
+- non-sublicensable;
+- revocable;
+- subject to the evaluator’s authority and applicable third-party obligations.
 
-6.2 ProKit License
+No ownership of ProChat product code, branding, documentation, or other intellectual property is transferred.
 
-ProKit is licensed under the same conditions as SaaSKit.
+## 6. Company and client evaluation
 
-Commercial usage is permitted for your own SaaS businesses only.
+An approved tester may evaluate ProChat Memory for QA in real company or client work only when the tester:
 
-Resale, redistribution, and template repackaging are strictly prohibited.
+- has authority from the employer, company, or client;
+- complies with employment, confidentiality, security, repository, and data-protection obligations;
+- keeps customer and client project memory local;
+- does not transfer the product or repository access to the employer or client as a separate licensed asset;
+- does not include ProChat product code in a client deliverable unless a later written license expressly permits it;
+- does not sublicense, resell, or host the product for the employer, client, or another person;
+- sanitizes any information sent to ProChat;
+- remains responsible for professional decisions and work output.
 
-⸻
+Using ProChat during authorized client work is different from transferring or licensing ProChat to the client.
 
-7. LIFETIME UPDATES
+The former may be permitted for an approved evaluator. The latter is not permitted without a separate written license.
 
-Your purchase includes lifetime access to future updates of the Product.
+## 7. Local data ownership and hosting boundary
 
-Updates are provided at ProChat’s discretion and may modify structure, features, or dependencies.
+Customer and client project memory remains local to the evaluator’s computer or customer-controlled environment.
 
-No guarantee is made regarding frequency or scope of updates.
+ProChat does not host customer or client project memory as part of the current beta.
 
-⸻
+Local data may include:
 
-8. SUPPORT
+- memory workspaces;
+- Markdown files;
+- test evidence;
+- root causes, fixes, and reviewed lessons;
+- repository context;
+- local configuration;
+- Git history;
+- Workbench context and operation records stored locally.
 
-Support is limited.
+The evaluator controls local files and is responsible for access controls, backups, retention, deletion, repository permissions, and compliance with employer or client requirements.
 
-Documentation is provided.
-Questions may be submitted to: support@prochat.tools
+ProChat may receive information only when a person deliberately sends it through a support, feedback, repository, communication, or other approved channel.
 
-There is no obligation to provide custom development, consulting, or extended assistance.
+## 8. Sanitization and confidentiality
 
-⸻
+Before sending information to ProChat, an evaluator must remove or avoid unnecessary:
 
-9. NO REFUNDS
+- customer or client identifiers;
+- personal data;
+- confidential business information;
+- proprietary source code;
+- credentials, keys, tokens, or secrets;
+- private repository details;
+- security-sensitive information;
+- contract-restricted material.
 
-Due to the digital and irreversible nature of source code access, all sales are final.
+An evaluator must have authority to submit any material they provide.
 
-No refunds, cancellations, or chargebacks are permitted once access is granted.
+Support, feedback, issue, and community channels are not approved storage for customer project memory.
 
-⸻
+ProChat may refuse, remove, redact, or delete submitted material that appears unsafe, unlawful, confidential, or outside the beta purpose.
 
-10. INTELLECTUAL PROPERTY
+## 9. Human review and professional responsibility
 
-All Products, source code, branding, structure, architecture, and related materials remain the exclusive intellectual property of ProChat.
+The products are review-first and evidence-aware.
 
-No ownership rights are transferred.
+Evaluators remain responsible for:
 
-⸻
+- reviewing inputs and outputs;
+- checking current evidence;
+- confirming permissions;
+- validating changes;
+- protecting confidential information;
+- maintaining backups;
+- complying with professional, employer, client, and legal obligations;
+- deciding whether a suggestion or action is appropriate.
 
-11. DISCLAIMER
+Product output may be incomplete, outdated, irrelevant, insecure, or incorrect.
 
-Products are provided “as is” without warranties of any kind.
+No output should be treated as automatically approved or authoritative.
 
-ProChat does not guarantee:
-	•	Business success
-	•	Revenue
-	•	Compatibility with future technologies
-	•	Continuous availability
+## 10. ProChat Memory responsibilities and limits
 
-Use is at your own risk.
+ProChat Memory helps capture, review, retrieve, and improve local project knowledge.
 
-⸻
+For ProChat Memory for QA:
 
-12. LIMITATION OF LIABILITY
+- current logs, screenshots, traces, reproduction results, and other evidence override stored memory;
+- retrieved memory may not apply to the current project, version, environment, test, or failure;
+- memory should be reviewed, corrected, split, merged, or retired when appropriate;
+- the tester remains responsible for the investigation and conclusion;
+- the product does not replace test runners, CI systems, issue trackers, test-management tools, security review, or tester judgment;
+- no time saving, diagnosis, defect detection, or testing outcome is guaranteed.
 
-To the maximum extent permitted by law, ProChat shall not be liable for:
-	•	Indirect or consequential damages
-	•	Loss of profits
-	•	Business interruption
-	•	Data loss
+## 11. ProChat Workbench responsibilities and limits
 
-Total liability shall not exceed the amount paid for the Product.
+ProChat Workbench connects ChatGPT to local repositories, documentation, notes, and project folders through bounded operations.
 
-⸻
+Evaluators remain responsible for:
 
-13. TERMINATION
+- choosing the correct source and scope;
+- reviewing context before relying on it;
+- reviewing every proposed file change;
+- understanding commands and their effects;
+- checking validation results;
+- checking staged and unstaged Git changes;
+- protecting unrelated worktree changes;
+- maintaining backups and recovery options;
+- confirming repository, employer, and client permissions;
+- obtaining independent review for sensitive, production, legal, security, financial, or safety-critical work.
 
-Violation of these Terms results in immediate termination of your license without refund.
+Workbench does not guarantee correct, complete, secure, deployable, or production-ready code.
 
-Upon termination, you must cease using the Product and destroy all copies.
+## 12. Third-party services
 
-⸻
+Evaluators may choose to use third-party services with ProChat products, including AI services, Git hosting, editors, terminals, cloud services, or communication tools.
 
-14. GOVERNING LAW
+Third-party services are governed by their own terms, privacy notices, security practices, usage limits, and data settings.
 
-These Terms are governed by the laws of Portugal.
+The evaluator is responsible for:
 
-Any disputes shall be resolved in Porto, Portugal.
+- deciding whether a third party is appropriate;
+- understanding what data may be transmitted;
+- confirming employer or client authorization;
+- complying with third-party terms;
+- protecting confidential information;
+- reviewing provider retention and training settings;
+- paying any third-party charges.
 
-⸻
+ProChat does not guarantee that information remains local after the evaluator intentionally sends it to a third-party service.
 
-15. CONTACT
+## 13. Prohibited uses
 
-Support: support@prochat.tools
-Business: Steve Westhoek (ENI), Porto, Portugal
+Unless a later written license expressly permits the activity, an evaluator must not:
+
+- sell, resell, rent, lease, sublicense, or transfer the product;
+- sell repository or source access;
+- redistribute the product or substantial portions of it;
+- publish a mirror or repackaged distribution;
+- bundle the product into a commercial offering for third parties;
+- provide hosted access to the product for payment or other consideration;
+- provide the product as a managed service to clients;
+- remove or obscure ownership, copyright, attribution, or license notices;
+- misrepresent authorship or affiliation;
+- use the product to create a directly competing distributable product based substantially on ProChat code;
+- bypass technical or access restrictions;
+- use the product unlawfully or in violation of third-party rights;
+- disclose secrets, confidential data, or personal data without authority;
+- use the product to make unreviewed high-impact decisions.
+
+These restrictions do not prevent an approved evaluator from using the product as a local tool during authorized company or client work within the evaluation permission.
+
+## 14. Modifications and contributions
+
+An evaluator may make local modifications only for authorized evaluation unless a separate license states otherwise.
+
+The final terms must decide:
+
+- whether modified versions may be retained after evaluation ends;
+- whether modifications may be used in later commercial work;
+- whether patches may be shared publicly;
+- whether contributions require a contributor agreement or inbound license;
+- how third-party code and dependencies are handled.
+
+Submitting feedback does not transfer ownership of the evaluator’s pre-existing materials.
+
+The final contribution terms should grant ProChat sufficient permission to review, reproduce, adapt, and use voluntarily submitted feedback or code contributions while preserving applicable third-party and contributor rights.
+
+No testimonial, name, logo, quote, or case-study material may be published without separate approval.
+
+## 15. Beta changes, availability, and termination
+
+The beta may contain defects and may change without notice.
+
+ProChat may:
+
+- change features or repository structure;
+- add, remove, or replace documentation;
+- pause onboarding;
+- decline or remove a feedback participant;
+- suspend access to private beta resources;
+- discontinue a version or the beta;
+- require acceptance of updated terms for continued participation.
+
+Where practical, ProChat should communicate material changes to selected testers.
+
+A participant may stop evaluating the product at any time.
+
+The final terms must define what happens to local copies and modifications after permission ends. No automatic destruction obligation should be published until its practicality and enforceability have been reviewed.
+
+## 16. Support and updates
+
+Beta support is limited and discretionary.
+
+Unless ProChat makes a separate written commitment, the beta does not include:
+
+- guaranteed response times;
+- custom development;
+- consulting;
+- installation for every environment;
+- service-level commitments;
+- continuous availability;
+- compatibility with every tool or platform;
+- security-fix deadlines;
+- a guaranteed update schedule;
+- lifetime updates.
+
+Documentation and support channels may change.
+
+## 17. No payment or refund terms
+
+The current beta is free.
+
+These terms do not create a purchase, subscription, payment obligation, refund policy, or waiver of withdrawal rights.
+
+Any future paid offer must have separate terms appropriate to the customer type, sales flow, mandatory rights, payment processing, taxes, delivery, withdrawal, refunds, updates, and support.
+
+Final individual and organization licensing remains deferred.
+
+## 18. Intellectual property
+
+Subject to third-party licenses and contributor rights, ProChat retains its rights in the product code, documentation, branding, design, and other original materials.
+
+Evaluation permission grants limited use rights only. It does not transfer ownership or grant trademark rights.
+
+Third-party components remain subject to their respective licenses. The final repository must include appropriate notices and dependency-license information.
+
+## 19. Beta warranty disclaimer
+
+The beta is provided for evaluation on an “as available” basis and may contain defects.
+
+Subject to applicable mandatory law, ProChat does not promise that the beta will be:
+
+- uninterrupted;
+- error-free;
+- secure in every environment;
+- compatible with future versions or third-party services;
+- accurate or complete;
+- suitable for a particular professional or commercial purpose;
+- maintained or available for any minimum period;
+- capable of saving a particular amount of time or effort.
+
+Evaluators must independently review evidence, outputs, code, commands, and decisions.
+
+The exact warranty wording must be reviewed for compliance with Portuguese and EU law before publication.
+
+## 20. Liability boundary
+
+Software evaluation can affect repositories, files, project decisions, confidentiality, and professional work.
+
+Evaluators are responsible for maintaining backups, testing changes safely, reviewing outputs, and using appropriate professional judgment.
+
+Subject to applicable mandatory law, the intended terms should limit ProChat’s responsibility for indirect, consequential, or unforeseeable losses arising from beta evaluation, including loss of data, business interruption, lost opportunity, or third-party claims.
+
+No final monetary cap is stated in this draft because:
+
+- the beta is free;
+- no final commercial license exists;
+- consumer and business treatment may differ;
+- enforceability depends on applicable law and the circumstances.
+
+The final exclusions, cap, remedies, and exceptions for intent, gross negligence, personal injury, data protection, intellectual-property claims, or other non-excludable liability require qualified legal review.
+
+## 21. Compliance and authority
+
+An evaluator confirms that they will use the product only when legally and contractually authorized.
+
+The evaluator is responsible for complying with:
+
+- applicable law;
+- employer policies;
+- client contracts;
+- confidentiality duties;
+- data-protection requirements;
+- repository and software licenses;
+- third-party service terms;
+- professional obligations.
+
+The evaluator must stop using or sharing affected material when they discover that authorization is missing.
+
+## 22. Governing law and disputes
+
+The intended governing-law position is Portuguese law, subject to mandatory rights that may apply in another jurisdiction.
+
+The final terms must be reviewed before specifying:
+
+- exclusive courts or venue;
+- consumer jurisdiction rights;
+- informal dispute steps;
+- notices;
+- language precedence;
+- severability;
+- assignment;
+- waiver;
+- entire-agreement terms.
+
+No draft venue clause should be published as final without review.
+
+## 23. Future licensing
+
+Commercial licensing will be defined only after product evidence and legal review.
+
+Potential future documents may include:
+
+- individual tester license;
+- individual builder license;
+- organization or team license;
+- tester-seat license;
+- client or consultancy permission;
+- support and update policy;
+- paid-product consumer or business terms.
+
+No future model is promised by this draft.
+
+## 24. Contact
+
+Questions about the intended beta terms may be sent to:
+
+```text
+support@prochat.tools
+```
+
+Before publication, confirm that the contact address is monitored and that the final business identity and notice details are complete.
