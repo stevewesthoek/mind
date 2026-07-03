@@ -24,32 +24,50 @@ ProChat Workbench
 - `video-template.md` — result-first production template
 - `visual-style-guide.md` — calm, technical, low-clutter visual system
 
-## Legacy scripts warning
+## Current script drafts
 
-The following files are legacy material from the previous SaaS-focused channel direction:
+The following scripts have been rewritten for the current channel strategy:
+
+| Script | Product lane | Bounded outcome |
+|---|---|---|
+| `scripts/001` | ProChat Workbench | connect one repository and complete one read-only first task |
+| `scripts/002` | ProChat Workbench | make one guarded change with exact scope and validation |
+| `scripts/004` | ProChat Memory for QA | create, review, retrieve, and re-verify one QA lesson |
+| `scripts/005` | ProChat Workbench | verify task completion through scope, validation, diff, and Git state |
+| `scripts/009` | ProChat Workbench | compare manual ChatGPT project work with a guarded Workbench workflow |
+
+All five files are drafts.
+
+They require manual review before recording or publication.
+
+Manual review must confirm:
+
+- current product behavior;
+- one bounded outcome;
+- sanitized recording material;
+- visible evidence;
+- human review;
+- meaningful validation;
+- accurate limitations;
+- a product-specific call to action.
+
+## Deleted legacy scripts
+
+The following obsolete scripts are no longer part of the current channel folder:
 
 ```text
-scripts/001
-scripts/002
 scripts/003
-scripts/004
-scripts/005
 scripts/006
 scripts/007
 scripts/008
-scripts/009
 scripts/010
 ```
 
-All ten scripts are:
+Their previous versions remain available through Git history.
 
-- non-canonical;
-- not approved for recording;
-- not approved for publication;
-- not approved as current product documentation;
-- pending individual review, rewrite, archival, or deletion in Phase 4B.
+Previous versions of the rewritten scripts also remain available through Git history.
 
-Their existence does not authorize obsolete product references, generic software infrastructure positioning, founder monetization, or any previous product direction.
+Historical availability does not make an earlier script canonical or approved for publication.
 
 ## Current operating model
 
@@ -109,4 +127,6 @@ A video is approved only when:
 
 ## Boundary
 
-This folder is channel-specific execution material. It does not create new products, licensing rights, hosting commitments, support promises, or commercial offers.
+This folder is channel-specific execution material.
+
+It does not create new products, licensing rights, hosting commitments, support promises, or commercial offers.

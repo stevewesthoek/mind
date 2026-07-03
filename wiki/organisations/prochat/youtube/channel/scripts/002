@@ -1,124 +1,153 @@
-Modify Your Live App Using AI (Safely)
-Video 2 Script (teleprompter-ready, one sentence per line)
+Make One Guarded Change with ProChat Workbench
 
-Today I’m going to modify the live app we deployed in video 1.
-But this time we do it locally.
-And we do it with AI.
-Safely.
-Controlled.
-No chaos.
+**Status:** draft requiring manual review before recording or publication  
+**Product lane:** ProChat Workbench  
+**Bounded outcome:** change one approved file, validate it, and leave unrelated work untouched
 
-The outcome you want is simple.
-AI becomes a power tool.
-Not a random code generator.
+Today I’m going to make one small repository change with ProChat Workbench.
 
-We are using the same project as before.
-So nothing new to set up.
-We just extend what already exists.
+And I’m going to show the controls before I show the edit.
 
-Here is the flow for today.
-Open the repo locally.
-Open it in Antigravity.
-Add a new page.
-Add a simple API route.
-Commit.
-Push.
-And watch Vercel redeploy automatically.
+The result is simple.
 
-Before we touch anything, one rule.
-We only change one thing at a time.
-Small steps.
-Small commits.
-Easy rollbacks.
+One approved file changes.
 
-Step one.
-Clone the repo to your computer.
-You can do this with Antigravity’s clone feature.
-Or you can do it with Git in your terminal.
+The targeted validation passes.
 
-Once it’s local, open the project in Antigravity.
-On the left you have files.
-On the right you have AI.
-That’s the whole game.
+Unrelated work remains untouched and unstaged.
 
-Now we set guardrails.
-We tell the AI exactly what we want.
-We tell it which files it may touch.
-We tell it to keep changes minimal.
-And we tell it to show the diff before we accept anything.
+That is the entire outcome.
 
-Here is the prompt I’m going to use.
-Add a new page called /ai-check.
-Keep styling consistent with the existing app.
-Add one button that calls an API route.
-And display the API response on the page.
-Do not refactor anything else.
-Do not touch unrelated files.
-Show the final diff.
+My name is Steve.
 
-Now I run it.
-I review what it changed.
-I’m not trusting it blindly.
-I’m checking the exact file edits.
+I spent more than 12 years testing software.
 
-If the AI changed extra things, I reject it.
-If the AI touched unrelated files, I reject it.
-If the AI made the diff too big, I reject it.
+The habit that matters here is not trusting a result because it looks reasonable.
 
-Assuming it’s clean, I accept the change.
+We need visible evidence for scope and behavior.
 
-Now let’s add the API route.
-We keep it boring on purpose.
-A simple endpoint like /api/ping.
-It returns JSON.
-Something like ok true and a timestamp.
+Let’s begin with the before-state.
 
-Again, I prompt the AI with constraints.
-Create /api/ping that returns a small JSON response.
-Do not add dependencies.
-Do not edit other API routes.
-Show the diff.
+I have a sanitized repository with one pre-existing unrelated change.
 
-I run it.
-I review it.
-I accept it only if it’s minimal and correct.
+That unrelated file is not part of today’s task.
 
-Now we test locally.
-We start the dev server.
-We open the new page.
-We click the button.
-We confirm we see the API response.
+I show Git status before asking Workbench to do anything.
 
-If anything breaks, we stop.
-We fix the smallest thing.
-Then we re-test.
+This gives us evidence we can compare later.
 
-Now we commit.
-One commit for the new page and API route.
-A clear message.
-Add ai-check page and ping API route.
+Now I define the task.
 
-Now we push to GitHub.
-This is the trigger.
-GitHub updates.
-Vercel sees it.
-Vercel redeploys automatically.
+Update one sentence in the project README.
 
-Now we verify in production.
-Open the live URL.
-Visit /ai-check.
-Click the button.
-Confirm the API response is working live.
+Modify exactly that path.
 
-And that’s the point of this video.
-AI didn’t replace your brain.
-It amplified your workflow.
-Because you constrained it.
-You reviewed it.
-And you shipped it in small steps.
+Do not change application files.
 
-AI is controlled.
-Not chaotic.
+Do not stage or commit.
 
-In the next video, we’ll cover what usually breaks in this setup.
-And the simple checks that prevent pain later.
+Run the smallest relevant documentation check afterward.
+
+That task has one outcome and one approved path.
+
+Before editing, Workbench reads the exact current file.
+
+This protects us from changing an outdated or imagined version of the text.
+
+Now ChatGPT proposes the wording.
+
+The proposed wording is an interpretation of the task.
+
+The current file remains the source of truth for where the change belongs.
+
+Workbench applies the bounded edit.
+
+Now I stop and inspect the changed-path list.
+
+I expect two modified files in the worktree.
+
+The unrelated file that already existed.
+
+And the one README file changed for this task.
+
+If another path appears, the task is not clean.
+
+I do not continue by hoping the extra change is harmless.
+
+I inspect or revert it before moving forward.
+
+In this demonstration, the changed-path list matches the expected state.
+
+Next, I review the diff for the approved file.
+
+The diff shows one sentence changed.
+
+No surrounding section was rewritten.
+
+No unrelated wording moved.
+
+No hidden formatting change appeared.
+
+Now I run the targeted validation.
+
+The check confirms that the document still satisfies its required structure.
+
+A passing check is evidence for that specific rule.
+
+It is not proof that every part of the project is correct.
+
+That distinction matters.
+
+Now I check Git status again.
+
+The pre-existing unrelated file is still modified.
+
+The approved README is also modified.
+
+Nothing is staged.
+
+Nothing is committed.
+
+The unrelated work was not overwritten, included, or silently cleaned up.
+
+That is the control point for this video.
+
+A clean task does not require a clean worktree.
+
+It requires a verified boundary between task work and unrelated work.
+
+Now I show the final evidence side by side.
+
+The approved path.
+
+The exact diff.
+
+The passing targeted check.
+
+And the final staged state.
+
+This task is complete because those pieces agree.
+
+Not because the sentence looks better.
+
+Not because ChatGPT said it was done.
+
+The limitation is clear.
+
+This demonstration proves one guarded documentation change.
+
+It does not prove that every kind of repository task has the same risk.
+
+Larger changes need broader evidence and different validation.
+
+The next action is simple.
+
+Try one guarded task on a repository you are allowed to use.
+
+Name the exact paths that may change.
+
+State what must remain untouched.
+
+And decide before the task whether anything may be staged or committed.
+
+Before recording or publishing this script, the repository example, exact commands, validation result, and visible worktree state must be reviewed manually.

@@ -58,16 +58,43 @@ Use YouTube to support:
 - `channel/` — canonical channel description, playbook, roadmap, templates, visual guidance, and scripts
 - `assets/` — supporting reference assets
 
+## Current script set
+
+The current channel folder contains five rewritten script drafts:
+
+```text
+channel/scripts/001 — ProChat Workbench
+channel/scripts/002 — ProChat Workbench
+channel/scripts/004 — ProChat Memory for QA
+channel/scripts/005 — ProChat Workbench
+channel/scripts/009 — ProChat Workbench
+```
+
+Every rewritten script:
+
+- selects one product lane;
+- demonstrates one bounded outcome;
+- distinguishes observed evidence from interpretation;
+- requires human review;
+- includes visible validation;
+- states a limitation;
+- requires manual review before recording or publication.
+
+Five obsolete scripts were removed from the current channel folder.
+
+Their previous versions remain available through Git history.
+
 ## Current asset warning
 
 `assets/YouTube-Money-Plan.pdf` is an unverified legacy asset.
 
 It is:
 
+- unchanged in Phase 4B1;
 - not canonical;
 - not approved for publication;
 - not approved as a source for channel strategy;
-- pending separate inspection in Phase 4B.
+- pending separate visual inspection in Phase 4B2.
 
 ## Operating rules
 
@@ -79,7 +106,7 @@ YouTube work must:
 - keep customer and client memory local;
 - require human review before publishing;
 - avoid invented users, outcomes, testimonials, metrics, or product claims;
-- avoid generic SaaS-building, founder monetization, boilerplate, or infrastructure-course positioning;
+- avoid obsolete software-launch, commercial-growth, and generic infrastructure-course positioning;
 - avoid presenting future capabilities as current products;
 - avoid claiming that ProChat replaces test tools, professional judgment, editors, or all competing workflows.
 

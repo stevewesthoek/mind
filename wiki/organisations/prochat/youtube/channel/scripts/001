@@ -1,138 +1,159 @@
-Today I’m going to show you how to take a real web app from 0 to life.
-Even if you don’t see yourself as very technical.
+Connect ProChat Workbench to One Repository
 
-In the next few minutes, we’ll set up the core tools.
-Deploy the app to the internet.
-Change something in the code.
-And watch that change appear live.
+**Status:** draft requiring manual review before recording or publication  
+**Product lane:** ProChat Workbench  
+**Bounded outcome:** connect one local repository and inspect one exact file without changing anything
 
-There is no hidden complexity.
-Just the workflow you will actually use.
-Just a real workflow you’ll actually use.
+Today I’m going to connect ProChat Workbench to one real local repository.
+
+And by the end of the video, we will prove one thing.
+
+Workbench can identify the correct source and read one exact file without modifying the project.
+
+No broad scan.
+No hidden edit.
+No commit.
+
+Just one bounded first task.
 
 My name is Steve.
-I was a professional software tester for over 12 years for some of the biggest companies in the Netherlands.
-My job was to find where things break and prove where they remain stable.
 
-Okay, let’s start.
+I spent more than 12 years testing software in real environments.
 
-These are the tools that we will be using today.
-We start with GitHub.
-That’s where your project files live online.
-And Vercel.
-That’s what puts your project live on the internet.
-Node JS.
-That allows your computer to run modern web apps.
-And anti-gravity.
-That’s where we will be working with AI to work with the project using AI.
+That work taught me to separate what I assume from what the evidence actually proves.
 
-I myself am on macOS.
-If you are on Windows, the flow is almost identical.
+So before asking ChatGPT to change a project, I want to know three things.
 
-If you don’t have a Vercel and GitHub account, then pause the video.
-Because now is the time to do so.
-Don’t worry, it’s absolutely for free.
+Which source is selected.
+Which path is being read.
+And whether the worktree changed.
 
-Let’s install Node JS.
-First, you go to the website.
-Link is in the description.
-You click on download.
-And you click on the package that is applicable to your operating system.
-You just download it.
-And install it as normal.
+Let’s start with the result.
 
-You don’t need to understand what Node JS is.
-Just know your computer now understands modern JavaScript projects.
+Here is the repository source selected in Workbench.
 
-Okay, let’s continue with anti-gravity.
-We go to anti-gravity.
-We download it.
-And also here we just install it as normal, just like Node JS.
+Here is the exact file we asked it to read.
 
-Now we are prepared.
-And we can actually start with the deployment of our first web app by going to Vercel.
+And here is the final Git status.
 
-I assume that you have a GitHub account.
-Now that accounts are created and applications are installed, we can proceed with actually building the web application.
+The repository remains unchanged.
 
-For this we go to Vercel.
-We log in.
-The easiest is with GitHub.
+That is the complete outcome for this video.
 
-Here you see my empty account.
-Let’s use a template and have a clean starting point.
-We are going to install the Next JS boilerplate from Vercel.
-We click on deploy.
+Now let’s reproduce it calmly.
 
-Since I logged in to Vercel with GitHub, my account is already loaded here.
-Here I can give the name of the project.
-I’ll leave it as the default.
-And I create.
+First, I open ChatGPT with ProChat Workbench available.
 
-Now Vercel is actually building a default template and pushing that.
+Workbench is the local project layer.
 
-As you can see, we have not configured any servers.
-We have not touched any infrastructure.
-We just hit deploy.
-And the website is live.
+ChatGPT remains the reasoning interface.
 
-Okay, this is the preview when I click on it.
-This is the actual website.
-This is live in production.
-That means it is available to the public.
+The repository remains on this computer.
 
-If we go back to Vercel and we go to our dashboard, we go to deployments.
-Here we can see that Vercel actually committed the code to GitHub.
+Before doing anything, I ask Workbench for its available sources.
 
-We can confirm that by going to our GitHub account.
-We log in.
-And here we see that the project is available.
-This is what came from Vercel.
+I do not guess the repository name.
 
-When we click on it, we see here all the files that make the boilerplate or the template.
+I verify it from the returned source list.
 
-This website tells us that if we want to edit this more, then we need to edit this page.
-So we go to GitHub.
-We go to app.
-And here we see that page.
+For this demonstration, I select one sanitized repository prepared for recording.
 
-This is the code that makes the page.
-So when we now make a change, we can go to this pencil right here.
-This text is editable.
-And now we can remove it and place something else.
+The repository contains no client information.
 
-Okay, I just updated it.
-As you can see, I made the update.
-Now I save it.
+It contains no secrets.
 
-Here I can give the save or the commit a description.
-I’ll leave it at the default.
-I save it by committing it.
+It contains no unrelated private work.
 
-Okay, that is done.
+Now I lock that source for the task.
 
-Now we go to the website that is available to the public.
-And we refresh the page.
-And now it is saved.
+This matters because the same file path could exist in more than one project.
 
-Now we go to Vercel.
-And we see that the commit of the code has automatically triggered a build in Vercel.
-Which means that the newly updated code is now rebuilt and brought live to the internet.
+A path without a verified source is incomplete context.
 
-So if we go now to the application on the internet side and we refresh the application, then we see that it is updated.
-So we are now live.
+Next, I check the current Git status.
 
-We just installed basic tools.
-You deployed a project.
-You edited the code.
-And you redeployed automatically.
+This is our before-state evidence.
 
-This is the baseline.
+I can see whether files are modified, deleted, untracked, or staged before Workbench reads anything.
 
-Once you understand this loop, you are no longer dependent on someone else for basic deployments.
+For this first demonstration, the repository is clean.
 
-And if you are serious about building SaaS or web apps, start with the SaaS starting point.
-Link in the description.
+That makes the result easy to verify.
 
-In the next video, I’ll show you what usually breaks in this setup and how to prevent it.
-See you next time.
+Now I ask one bounded question.
+
+Read the repository README and tell me the stated project purpose.
+
+Do not modify any file.
+
+Workbench reads that exact path.
+
+ChatGPT summarizes what the current file says.
+
+The file is the source of truth for this answer.
+
+The summary is an interpretation of that source.
+
+Those are not the same thing.
+
+If the summary sounds plausible but does not match the file, the file wins.
+
+Now I verify the exact path that was read.
+
+I do not treat a general project summary as evidence that the whole repository was inspected.
+
+This demonstration proves only that one source was selected and one file was read.
+
+It does not prove that Workbench understands every part of the project.
+
+It does not prove that the repository is correct.
+
+And it does not prove that any future change will be safe automatically.
+
+Now I run Git status again.
+
+The before-state and after-state match.
+
+No file changed.
+
+Nothing is staged.
+
+Nothing is committed.
+
+That visible result completes the task.
+
+The control point is simple.
+
+Verify the source before trusting the context.
+
+Then keep the first task small enough to inspect completely.
+
+For a later change, we will add more controls.
+
+Exact approved paths.
+Diff review.
+Targeted validation.
+And explicit Git decisions.
+
+But not today.
+
+Today we proved one bounded starting point.
+
+One repository.
+One exact file.
+No modification.
+Visible Git evidence.
+
+The limitation is equally important.
+
+A successful read does not authorize a write.
+
+Every change still needs its own scope, review, and validation.
+
+The next action is simple.
+
+Review ProChat Workbench on GitHub.
+
+Then try one read-only task on a repository you are allowed to use.
+
+Before recording or publishing this script, the source-selection flow, repository example, product behavior, and all visible screen content must be reviewed manually.

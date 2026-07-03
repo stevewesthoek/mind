@@ -1,147 +1,165 @@
-Production Checklist Before You Call It “Live”
-Video 5 Script (same tone and structure as Video 1)
+Before You Call a Workbench Task Done
 
-Today I’m going to show you what I do before I call something live.
+**Status:** draft requiring manual review before recording or publication  
+**Product lane:** ProChat Workbench  
+**Bounded outcome:** verify one completed task through scope, validation, diff, staged state, and limitations
 
-Not when it “looks fine.”
-Not when it “probably works.”
+Today I’m going to show you the checklist I use before calling a ProChat Workbench task done.
 
-When it is actually ready.
+Not when the answer sounds confident.
 
-We are going to run a simple production checklist.
-No theory.
-No lecturing.
-Just execution.
+Not when the file looks improved.
 
-Here is what we are going to do.
-We will build locally.
-We will check logs.
-We will verify environment variables.
-We will test an API route.
-We will test the database.
-And we will confirm the deployment in Vercel.
+When the evidence supports completion.
 
-The tools are the same as before.
-Your local machine.
-Antigravity.
-GitHub.
-Vercel.
-Supabase.
-
-I assume you already have the app working.
-Database connected.
-Environment variables configured.
-And a successful deployment.
+The result is one reviewed task with a verified scope and an explicit Git state.
 
 My name is Steve.
-I was a professional software tester for over 12 years.
-My job was to verify that systems behave correctly under real conditions.
-So this is not superstition.
-This is discipline.
 
-Let’s start.
+I spent more than 12 years testing software.
 
-First step.
-Build locally in production mode.
+A completed change needs more than activity.
 
-Not dev mode.
-Production mode.
+It needs evidence that the requested outcome happened without crossing the approved boundary.
 
-Run the production build.
-If it fails locally, it will fail in Vercel.
-Better to catch it here.
+For this demonstration, the task is already implemented in a sanitized repository.
 
-If the build passes, good.
-If not, read the error.
-Fix it before you push.
+One documentation file was supposed to change.
 
-Second step.
-Check the logs.
+No other task file was approved.
 
-Run the app locally in production mode.
-Open the terminal.
-Watch for warnings.
-Watch for undefined variables.
-Watch for silent errors.
+Nothing was supposed to be staged or committed yet.
 
-No red text.
-No weird output.
-Clean console.
+Let’s start with the final result.
 
-Third step.
-Verify environment variables.
+The changed-path list contains the approved file and one unrelated pre-existing file.
 
-Open your local environment file.
-Confirm names are correct.
-No typos.
-No missing values.
+The task diff contains only the intended wording change.
 
-Then go to Vercel project settings.
-Compare them.
-Same names.
-Same keys.
-No accidental differences.
+The targeted documentation check passes.
 
-Fourth step.
-Test an API route directly.
+The staged-path list is empty.
 
-Open your browser.
-Go to your live domain.
-Add /api/ping or whatever route you created.
+That is the result we are going to verify step by step.
 
-You want a clean JSON response.
-No HTML error page.
-No 500.
-No undefined.
+Check one.
 
-If the route works directly, that’s a good sign.
+Confirm the source.
 
-Fifth step.
-Test the database.
+I verify that Workbench is still operating on the repository selected for this task.
 
-Load the page that fetches real data.
-Confirm data is rendered.
-Then change something in the database.
-Refresh.
+A correct file path in the wrong source is still the wrong context.
 
-Does it reflect the change?
-If yes, your connection is real.
-Not cached.
-Not fake.
+Check two.
 
-Final step.
-Confirm the deployment itself.
+Restate the approved scope.
 
-Go to Vercel.
-Open the latest deployment.
-Check the commit hash.
-Confirm it matches the latest commit in GitHub.
+One exact documentation path may change.
 
-No ghost builds.
-No outdated version.
+The unrelated pre-existing file must remain untouched.
 
-Now refresh the live site one more time.
+No staging.
 
-Everything loads.
-No console errors.
-No broken routes.
-Database responding.
-Deployment clean.
+No commit.
 
-Now you can call it live.
+This gives the review a concrete boundary.
 
-Not because it feels done.
-But because you verified it.
+Check three.
 
-This is pure systems energy.
+List every changed path.
 
-Small checks.
-Clear loop.
-No drama.
+I compare the current Git status with the before-state captured at the start.
 
-Once this checklist becomes automatic, you stop hoping things work.
-You know they work.
+The unrelated file is still present exactly as unrelated work.
 
-In the next video, we’ll move from “it works” to “it’s structured properly.”
+The approved task file is the only new change.
 
-See you there.
+No unexpected path appears.
+
+Check four.
+
+Review the task diff.
+
+I look at the exact added and removed lines.
+
+The wording matches the requested outcome.
+
+The surrounding section remains intact.
+
+There is no accidental rewrite.
+
+There is no hidden cleanup.
+
+Check five.
+
+Run the smallest meaningful validation.
+
+For this task, that is a documentation check covering the changed rule.
+
+The check passes.
+
+That result proves the document satisfies that check.
+
+It does not prove every statement is factually correct.
+
+It does not prove unrelated parts of the repository work.
+
+Check six.
+
+Review the staged state.
+
+I list the staged paths without limiting the check to one folder.
+
+The list is empty.
+
+That matches the task instruction.
+
+If the task had approved staging, I would expect an exact path list instead.
+
+Check seven.
+
+State the limitation.
+
+This was a bounded documentation task.
+
+The validation does not cover application behavior, security, performance, or future compatibility.
+
+Those areas were outside scope.
+
+Now I compare all seven checks.
+
+The selected source is correct.
+
+The approved path changed.
+
+The unrelated file remains untouched.
+
+The diff matches the request.
+
+The targeted check passes.
+
+Nothing is staged.
+
+The limitation is explicit.
+
+Those pieces agree.
+
+Now I can call the task complete.
+
+The control point is simple.
+
+Completion is a set of verified states.
+
+It is not a feeling.
+
+It is not the amount of work performed.
+
+And it is not a confident final message from an assistant.
+
+The next action is simple.
+
+Before finishing your next guarded task, inspect scope, validation, diff, staged state, and limitations separately.
+
+Do not let one passing check stand in for all of them.
+
+Before recording or publishing this script, the source, diff, validation output, staged-path list, and limitation statement must be reviewed manually.

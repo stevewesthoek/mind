@@ -1,129 +1,195 @@
-Break Your App on Purpose (And Fix It)
-Video 4 Script (same tone and structure as Video 1)
+The Failure Returned: Build a Reviewed QA Lesson
 
-Today I’m going to break this app on purpose.
+**Status:** draft requiring manual review before recording or publication  
+**Product lane:** ProChat Memory for QA  
+**Bounded outcome:** investigate one controlled test failure, approve one local lesson, then verify it against a later failure
 
-And then we’re going to fix it.
+Today I’m going to create one controlled test failure.
 
-No panic.
-No drama.
-Just calm diagnosis.
+Then I’m going to investigate it calmly.
 
-This is where you separate yourself from hype YouTube.
-Because real builders know how things fail.
-And how to respond.
+And finally, I’m going to show what happens when a similar failure returns later.
 
-Here is what we are going to do.
-We will remove an environment variable.
-We will push the change.
-We will watch the build fail in Vercel.
-We will diagnose the issue.
-And we will fix it properly.
+The result is one reviewed lesson in ProChat Memory for QA.
 
-The tools are the same as before.
-GitHub.
-Vercel.
-Antigravity.
-Supabase.
+That lesson helps narrow a later investigation.
 
-I assume you already have the project running.
-You have a database connected.
-You have environment variables set locally and in Vercel.
-And everything currently works.
+Current evidence still decides whether it applies.
 
 My name is Steve.
-I was a professional software tester for over 12 years.
-My job was to find where systems break and prove where they remain stable.
-So today we’re doing exactly that.
-On purpose.
 
-Let’s start.
+I spent more than 12 years testing software in real environments.
 
-Right now, the app works.
-The database is connected.
-Data loads.
-Everything feels stable.
+The useful part of an investigation is not only the final fix.
 
-Now we remove one environment variable.
-For example, the Supabase URL.
-We remove it from Vercel.
-But we leave the code as it is.
+It is the evidence, the ruled-out ideas, the cause, and the conditions that made the lesson true.
 
-We commit a tiny change.
-Or even just trigger a redeploy.
+For this demonstration, I use a sanitized local test project.
 
-Now we push.
+There are no client names.
 
-We go to Vercel.
-And we watch.
+There are no private URLs.
 
-The build starts.
-It compiles.
-And then it fails.
+There are no credentials.
 
-This is good.
+The project memory stays local.
 
-We don’t guess.
-We don’t randomly change things.
-We read the error.
+Let’s start with the result.
 
-The error usually tells you exactly what’s wrong.
-Missing environment variable.
-Undefined value.
-Cannot read property of undefined.
+Here is the reviewed memory entry.
 
-Instead of panic, we trace it calmly.
+It records the observed failure.
 
-What changed?
-We removed a variable.
-The app expects it.
-The build fails because it cannot initialize the database client.
+It links to the evidence used during the investigation.
 
-This is not chaos.
-This is logic.
+It states the confirmed cause.
 
-Now we fix it properly.
+It records one plausible idea that was ruled out.
 
-We go back to Vercel settings.
-We restore the missing environment variable.
-Exactly as it was.
-Correct name.
-Correct value.
-No typos.
+And it includes a verification note for the next time a similar failure appears.
 
-We redeploy.
+Now let’s reproduce the investigation.
 
-The build runs again.
+The test currently passes.
 
-This time it passes.
+I make one controlled change in the sanitized example so that the expected selector no longer matches.
 
-We open the live site.
-We refresh.
-The data loads again.
+Then I run the test again.
 
-Calm.
-Controlled.
-Resolved.
+The test fails.
 
-Here is the lesson.
+That failure is an observed fact.
 
-Most people are afraid of breaking production.
-So they never really understand it.
+The first interpretation might be that the page loaded too slowly.
 
-But when you break things intentionally, in a controlled way, you remove fear.
-You learn the system.
-You learn where the weak points are.
-And you learn how to diagnose.
+But that is only a hypothesis.
 
-That’s authority.
+I do not store it as a lesson yet.
 
-Not flashy animations.
-Not fake revenue screenshots.
-Calm competence.
+I collect the current evidence.
 
-If you can break your own app and fix it without stress, you are no longer dependent on luck.
-You are operating a system.
+The failure message.
 
-In the next video, we’ll go one layer deeper and look at how to protect yourself from silent failures before they hit production.
+The trace.
 
-See you there.
+The screenshot.
+
+And the current test code.
+
+The evidence shows that the page loaded.
+
+The expected element is absent under the old selector.
+
+The current page contains the same element under a changed attribute.
+
+Now I test the timing hypothesis.
+
+I rerun with an explicit wait in the sanitized example.
+
+The failure remains.
+
+That rules out the timing explanation for this case.
+
+I update the selector to match the current page.
+
+Then I rerun the test.
+
+It passes.
+
+Now I can draft the lesson.
+
+The draft says what failed.
+
+It identifies the evidence.
+
+It states that the selector changed.
+
+It records that additional waiting did not resolve the failure.
+
+It describes the fix.
+
+And it tells the future tester what to verify before reusing the lesson.
+
+Before approval, I review the draft manually.
+
+I check that the evidence supports the stated cause.
+
+I remove project-specific details that are not needed.
+
+I confirm that no private information remains.
+
+Then I approve the lesson into local memory.
+
+That review step matters.
+
+Raw notes are not trusted memory automatically.
+
+Now we move forward in time.
+
+A later test fails with a similar message.
+
+ProChat Memory for QA retrieves the reviewed lesson.
+
+The lesson suggests checking whether the selector changed again.
+
+That is useful guidance.
+
+It is not a diagnosis.
+
+I collect fresh evidence from the later failure.
+
+This time the selector still matches.
+
+The trace shows that the element never appeared because the expected test data was missing.
+
+The old lesson does not apply.
+
+Current evidence overrides it.
+
+I do not force the failure into the old explanation.
+
+I record that the lesson was considered and rejected for this case.
+
+The original lesson can remain valid for its original conditions.
+
+The later investigation needs its own reviewed conclusion.
+
+That is the control point.
+
+Memory narrows the search.
+
+Evidence decides the cause.
+
+Human review decides what becomes trusted memory.
+
+The visible validation for this video is clear.
+
+The controlled failure is reproducible.
+
+The first fix makes the test pass.
+
+The lesson preserves its evidence and review state.
+
+The later failure retrieves the lesson.
+
+Fresh evidence correctly rejects that lesson as the cause.
+
+The limitation is also clear.
+
+One useful retrieval does not prove that every stored lesson will be relevant or correct.
+
+Lessons can become outdated.
+
+They may need correction or retirement.
+
+The next action is simple.
+
+Try one recurring failure with ProChat Memory for QA.
+
+Start with sanitized evidence.
+
+Review the lesson before approval.
+
+And verify it again when the failure returns.
+
+Before recording or publishing this script, every failure, trace, screenshot, memory entry, and sanitization step must be reviewed manually.
