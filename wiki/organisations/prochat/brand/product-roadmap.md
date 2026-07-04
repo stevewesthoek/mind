@@ -207,7 +207,23 @@ Compare honestly with Cursor, Claude Code, and similar tools without claiming un
 
 ### Phase 5 — Licensing and launch
 
-Define the public source license, commercial-use boundary, support expectations, and launch criteria.
+Current Workbench-specific exception:
+
+```text
+ProChat Workbench Local has a public prerelease snapshot licensed under AGPL-3.0-only.
+Separate commercial or OEM licensing may be requested, but public documentation does not grant commercial rights.
+Commercial rights require a separate written agreement.
+```
+
+This exception applies only to ProChat Workbench Local and does not apply to ProChat Memory, ProChat Memory for QA, future products, managed services, private modules, customer operations, or internal commercial systems.
+
+Remaining work:
+
+- define support expectations;
+- define managed-service and private-module boundaries;
+- define paid commercial-agreement workflow where appropriate;
+- complete qualified legal review for broader terms, warranties, contributor terms, trademark permissions, and future products;
+- keep launch criteria evidence-based and product-specific.
 
 ## Expansion rule
 

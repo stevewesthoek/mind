@@ -81,12 +81,29 @@ The beta may be source-visible for evaluation without being open source.
 
 Final license terminology and permissions must be selected deliberately. Until then, growth, product, and repository documentation must not promise:
 
-- open-source status;
+- open-source status, except for the product-specific ProChat Workbench Local public snapshot exception recorded below;
 - perpetual commercial rights;
 - lifetime updates;
 - transferable access;
 - organization-wide use;
-- redistribution or sublicensing rights.
+- redistribution or sublicensing rights beyond the Workbench Local public snapshot license and any separate written commercial/OEM agreement.
+
+## ProChat Workbench Local public release exception
+
+ProChat Workbench Local has a product-specific public prerelease and licensing exception.
+
+The exception records the current implementation fact that:
+
+- the generated public Workbench Local snapshot is licensed under GNU Affero General Public License v3.0 only (`AGPL-3.0-only`);
+- the public release applies only to ProChat Workbench Local files included in that generated public snapshot;
+- separate commercial or OEM licensing may be requested from ProChat;
+- public documentation does not grant a commercial or OEM license;
+- commercial rights require a separate written agreement;
+- managed services, private modules, customer operations, internal commercial material, and private Workbench infrastructure remain outside the public snapshot.
+
+This exception does not apply to ProChat Memory, ProChat Memory for QA, future Memory editions, future ProChat products, managed services, private modules, customer operations, or internal commercial systems.
+
+Broader legal terms, paid agreements, support commitments, managed services, commercial warranties, contributor terms, trademark permissions, and future product licensing still require deliberate owner approval and qualified legal review before public promotion.
 
 ## Factual verification required before publication
 
