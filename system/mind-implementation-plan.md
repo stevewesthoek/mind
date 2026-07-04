@@ -379,7 +379,7 @@ _Historical note: the "First implementation batch" items (update `system/README.
 The following validation work is needed to determine whether Phase 9/10 acceptance criteria are satisfied. This is not a new phase — it is the operational evidence collection that the implementation plan is waiting for:
 
 1. collect before/after maintenance-time evidence;
-2. repair and validate stale-page detection recall (currently 0% on required positive case);
+2. continue monitoring stale-page detector quality after deterministic validation of the required freshness-metadata positive case;
 3. conduct a bounded real continuous-processing trial only after explicit approval and approval store configuration;
 4. review the five human-decision file candidates listed under Phase 10 Tasks 7–8;
 5. keep continuous execution disabled until value and safety are demonstrated.
@@ -416,8 +416,8 @@ without becoming harder for Steve to read or navigate.
 
 - meaningful time savings are not yet proven;
 - Steve spends less time maintaining the system: not yet demonstrated;
-- every retained automation has demonstrated value: not yet satisfied (stale-page detection recall is 0%; time savings have no baseline);
-- stale-page detector recall: repair required before Phase 4 quality is acceptable;
+- every retained automation has demonstrated value: not yet satisfied (time savings have no baseline; broader maintenance value needs operational evidence);
+- stale-page detector recall for the required freshness-metadata positive case is validated by Brain's deterministic `mind-maintenance-pilot-loader-stale` test, including Mind-style fenced YAML status blocks;
 - real continuous-processing operational value: requires a bounded approved trial.
 
 ### Pending human decisions

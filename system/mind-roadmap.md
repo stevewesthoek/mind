@@ -56,7 +56,7 @@ Already present:
 - active autonomous continuous execution (disabled by default; no approved trial has run);
 - meaningful time-savings evidence (no before/after baseline exists);
 - reduced maintenance-burden evidence (unproven);
-- stale-page detector recall (currently 0% on required positive case; repair required);
+- stale-page detector recall for the required freshness-metadata positive case is validated by a deterministic Brain test; broader maintenance value remains unproven;
 - demonstrated operational value for every retained automation.
 
 ## Phase 0 — Canonical direction
@@ -305,17 +305,17 @@ Exit criteria:
 
 **Unresolved:**
 
-- stale-page detection recall is 0% against its required positive case — repair is required before Phase 4 detector quality is acceptable;
+- stale-page detection recall for the required freshness-metadata positive case is validated (Brain test `mind-maintenance-pilot-loader-stale` covers Mind-style fenced YAML status blocks);
 - meaningful time savings remain unproven;
 - Steve spends less time maintaining the system: unproven;
-- every retained automation has demonstrated value: not yet satisfied (stale-page detection still requires repair; time savings have no baseline).
+- every retained automation has demonstrated value: not yet satisfied (time savings have no baseline and broader maintenance value still requires operational evidence).
 
 ### Post-plan operational validation work
 
 The following work is needed after the plan is structurally complete. This is not a new phase — it is the operational validation that determines whether the Phase 9/10 acceptance criteria are eventually satisfied:
 
 - collect before/after maintenance-time evidence;
-- repair and validate stale-page detection recall;
+- continue monitoring stale-page detector quality beyond the validated required freshness-metadata positive case;
 - conduct a bounded real continuous-processing trial only after explicit approval;
 - review the five human-decision file candidates (see Task 7 and Task 8 pending decisions);
 - keep continuous execution disabled until value and safety are demonstrated.
