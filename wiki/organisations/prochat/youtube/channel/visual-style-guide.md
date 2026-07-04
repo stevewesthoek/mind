@@ -373,7 +373,7 @@ Do not use visual calls to action for obsolete products, generic software course
 
 ## Legacy warning
 
-The existing `scripts/001` through `scripts/010` and `../assets/YouTube-Money-Plan.pdf` belong to the previous channel direction.
+The existing `scripts/001` through `scripts/010` and `../archive/YouTube-Money-Plan.pdf` belong to the previous channel direction and are preserved as historical legacy material.
 
 They are not approved sources for current thumbnails, visual examples, diagrams, calls to action, or product positioning pending Phase 4B review.
 

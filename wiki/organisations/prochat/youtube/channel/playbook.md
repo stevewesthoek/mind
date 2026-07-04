@@ -439,7 +439,7 @@ Views, subscribers, and watch time may provide distribution context. They do not
 
 They are non-canonical and not approved for recording or publication pending Phase 4B review.
 
-`../assets/YouTube-Money-Plan.pdf` is an unverified legacy asset and must not guide current channel decisions.
+`../archive/YouTube-Money-Plan.pdf` is an archived historical legacy asset and must not guide current channel decisions.
 
 ## Core principle
 

@@ -298,7 +298,7 @@ They are:
 - not approved for publication;
 - pending Phase 4B disposition.
 
-`../assets/YouTube-Money-Plan.pdf` is an unverified legacy asset pending inspection.
+`../archive/YouTube-Money-Plan.pdf` is an archived historical legacy asset and is not approved as current roadmap guidance.
 
 No roadmap item may depend on those materials until their content is reviewed and deliberately migrated.
 

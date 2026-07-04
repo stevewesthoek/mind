@@ -236,7 +236,7 @@ The files `scripts/001` through `scripts/010` belong to the previous channel dir
 
 They are non-canonical and not approved for recording or publication pending Phase 4B review.
 
-`../assets/YouTube-Money-Plan.pdf` is an unverified legacy asset and is not approved as current channel guidance.
+`../archive/YouTube-Money-Plan.pdf` is an archived historical legacy asset and is not approved as current channel guidance.
 
 ## Choose one lane
 

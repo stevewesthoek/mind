@@ -86,15 +86,16 @@ Their previous versions remain available through Git history.
 
 ## Current asset warning
 
-`assets/YouTube-Money-Plan.pdf` is an unverified legacy asset.
+`archive/YouTube-Money-Plan.pdf` is an archived historical legacy asset.
 
 It is:
 
 - unchanged in Phase 4B1;
+- preserved as historical material;
 - not canonical;
 - not approved for publication;
 - not approved as a source for channel strategy;
-- pending separate visual inspection in Phase 4B2.
+- archived in Phase 4B2 instead of deleted.
 
 ## Operating rules
 
