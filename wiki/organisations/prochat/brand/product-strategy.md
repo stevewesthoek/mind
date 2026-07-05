@@ -98,14 +98,27 @@ The primary user is an individual QA tester. The future economic buyer may be a 
 
 ProChat Workbench is a ChatGPT-first local builder workbench.
 
+Its primary promise is:
+
+```text
+Build apps through ChatGPT locally.
+```
+
 It connects ChatGPT to real repositories, documentation, notes, and project folders through bounded, guarded operations.
 
 ```text
 ChatGPT provides the reasoning interface.
 The local computer remains the project and execution layer.
+Workbench is the trusted control plane between them.
 ```
 
 Workbench is for developers, builders, technical founders, and vibe coders who want to use the familiar ChatGPT interface for substantial local project work.
+
+Its canonical product strategy is defined in:
+
+```text
+wiki/organisations/prochat/brand/prochat-workbench-strategy.md
+```
 
 It can provide an alternative workflow to Cursor, Claude Code, and similar tools, especially when a user values local control, exact project context, explicit Git operations, targeted validation, and the ability to continue planning or reviewing through the native ChatGPT ecosystem.
 

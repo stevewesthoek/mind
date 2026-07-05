@@ -181,6 +181,12 @@ Potential additions:
 
 ## Lane 2 — ProChat Workbench
 
+Canonical strategy:
+
+```text
+wiki/organisations/prochat/brand/prochat-workbench-strategy.md
+```
+
 ### Phase 1 — Reliability
 
 Maintain exact context reads, guarded file changes, allowlisted commands, persistent runs, targeted validation, and explicit Git operations.
@@ -203,7 +209,7 @@ ChatGPT reasoning
 + guarded execution
 ```
 
-Compare honestly with Cursor, Claude Code, and similar tools without claiming universal replacement or unlimited usage.
+Compare honestly with Cursor, Claude Code, Codex, and similar tools without claiming universal replacement or unlimited usage.
 
 ### Phase 5 — Licensing and launch
 

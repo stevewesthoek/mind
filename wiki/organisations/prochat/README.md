@@ -29,13 +29,14 @@ Start here:
 2. `brand/product-naming-architecture.md` — company, product, and edition naming
 3. `brand/product-strategy.md` — philosophy, product boundary, QA focus, and business stage
 4. `brand/product-architecture.md` — relationship between Memory and Workbench
-5. `brand/prochat-memory-technical-definition.md` — local Markdown-first memory architecture
-6. `brand/product-roadmap.md` — beta and product-development sequence
-7. `brand/future-capabilities.md` — capabilities that are explicitly not current products
-8. `brand/company-overview.md` — concise company overview
-9. `brand/category-definition.md` — product categories and differentiation
-10. `brand/narrative.md` — company story and belief system
-11. `brand/brand-ruleset.md` — approved public language
+5. `brand/prochat-workbench-strategy.md` — canonical Workbench strategy, autonomy, Codex, MCP, and capability direction
+6. `brand/prochat-memory-technical-definition.md` — local Markdown-first memory architecture
+7. `brand/product-roadmap.md` — beta and product-development sequence
+8. `brand/future-capabilities.md` — capabilities that are explicitly not current products
+9. `brand/company-overview.md` — concise company overview
+10. `brand/category-definition.md` — product categories and differentiation
+11. `brand/narrative.md` — company story and belief system
+12. `brand/brand-ruleset.md` — approved public language
 
 ## Current strategy
 

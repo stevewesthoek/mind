@@ -49,9 +49,10 @@ Start here:
 1. `product-naming-architecture.md` — company, product, edition, and future-capability naming
 2. `product-strategy.md` — highest-level philosophy, strategy, product boundary, and business stage
 3. `product-architecture.md` — relationship between ProChat Memory and ProChat Workbench
-4. `product-roadmap.md` — phased beta and product-development path
-5. `prochat-memory-technical-definition.md` — local Markdown-first memory architecture
-6. `future-capabilities.md` — explicitly non-product future capabilities
+4. `prochat-workbench-strategy.md` — canonical Workbench strategy, autonomy, Codex, MCP, and capability direction
+5. `product-roadmap.md` — phased beta and product-development path
+6. `prochat-memory-technical-definition.md` — local Markdown-first memory architecture
+7. `future-capabilities.md` — explicitly non-product future capabilities
 
 Supporting brand documents:
 
