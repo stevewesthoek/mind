@@ -552,6 +552,16 @@ Design criteria for promotion from transcript/newsletter/email/meeting/source in
 - expected reuse value;
 - human approval requirement.
 
+Implementation handoff (2026-07-05):
+
+- Status: implemented as Mind-owned lightweight source-quality gates; ready for optional use before promoting captures, transcripts, newsletters, emails, meetings, web clips, research notes, or external ideas into durable orientation.
+- Gate document: `system/source-quality-gates.md`.
+- Gates defined: source trust, relevance, evidence quality, freshness risk, expected reuse value, and human approval requirement.
+- Outcomes defined: promote allowed, promote with caution, summary only, source reference only, reject for quality, needs more evidence, and needs human approval.
+- Captures: source path/type/name, reviewer, proposed destination, gate status, freshness risk, reuse value, approval status, outcome, summary, evidence, caveats, next action, and no-write-performed flag.
+- Validation evidence: gate document created and verified on disk; documentation-only change; no source was promoted, rejected, deleted, moved, or ingested automatically.
+- Safety boundary: source-quality review is a filter before promotion; it does not authorize durable writes, task edits, project updates, deletion, or broad ingestion automation.
+
 ### Task H — Wager/verdict pattern
 
 Goal: add a lightweight scientific-method layer for significant business or workflow changes.
