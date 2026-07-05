@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0",
-  "reportId": "mind-maintenance-20260614T113334Z",
-  "generatedAt": "2026-06-14T11:33:34.067Z",
-  "generatedBy": "controlled-real-mind-pilot",
+  "reportId": "mind-maintenance-20260705T101133Z",
+  "generatedAt": "2026-07-05T10:11:33.714Z",
+  "generatedBy": "Workbench canonical real-Mind report",
   "mode": "report-only",
   "sourceRepo": "mind",
-  "sourceCommit": "b77f203de203757362054cab3f6b196a96df6880",
+  "sourceCommit": "fb7fc6801237a76c787d76bac56747886ad9f758",
   "configuration": {
     "maxFiles": 5,
     "maxFindingsPerDetector": 5,
@@ -26,22 +26,22 @@
       "status": "completed"
     },
     "duplicate-candidate": {
-      "enabled": false,
-      "status": "disabled"
+      "enabled": true,
+      "status": "completed"
     },
     "contradiction-candidate": {
-      "enabled": false,
-      "status": "disabled"
+      "enabled": true,
+      "status": "completed"
     },
     "capture-promotion": {
-      "enabled": false,
-      "status": "disabled"
+      "enabled": true,
+      "status": "completed"
     }
   },
   "filesConsidered": [
     "router/00-current-context.md",
     "live/projects/prochat-qa-memory/STRATEGY-PLAN.md",
-    "wiki/organisations/prochat/brand/prochat-os-strategy.md",
+    "wiki/organisations/prochat/brand/product-strategy.md",
     "live/dashboard.md",
     "system/automation-roadmap.md"
   ],

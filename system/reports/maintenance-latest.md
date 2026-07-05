@@ -1,8 +1,8 @@
 # Mind Maintenance Report
 
-**Report ID:** `mind-maintenance-20260614T113334Z`  
-**Generated:** 2026-06-14T11:33:34.067Z  
-**Source commit:** `b77f203de203757362054cab3f6b196a96df6880`  
+**Report ID:** `mind-maintenance-20260705T101133Z`  
+**Generated:** 2026-07-05T10:11:33.714Z  
+**Source commit:** `fb7fc6801237a76c787d76bac56747886ad9f758`  
 **Mode:** report-only  
 **Writes performed:** none
 
@@ -22,9 +22,9 @@
 - Stale Page: completed
 - Completed But Active: completed
 - Source Gap: completed
-- Duplicate Candidate: disabled
-- Contradiction Candidate: disabled
-- Capture Promotion: disabled
+- Duplicate Candidate: completed
+- Contradiction Candidate: completed
+- Capture Promotion: completed
 
 ## Findings
 
@@ -36,7 +36,7 @@ The enabled detectors found no evidence meeting the configured threshold for:
 
 - `router/00-current-context.md`
 - `live/projects/prochat-qa-memory/STRATEGY-PLAN.md`
-- `wiki/organisations/prochat/brand/prochat-os-strategy.md`
+- `wiki/organisations/prochat/brand/product-strategy.md`
 - `live/dashboard.md`
 - `system/automation-roadmap.md`
 
