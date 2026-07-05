@@ -583,6 +583,16 @@ After the window, record a verdict:
 
 This should start as manual/report-only and must not require a business-intelligence database before proving value.
 
+Implementation handoff (2026-07-05):
+
+- Status: implemented as a Mind-owned lightweight wager/verdict pattern; ready for optional manual use on significant business, workflow, product, strategy, automation, or project-direction changes.
+- Pattern document: `system/wager-verdict-pattern.md`.
+- Wager captures: proposed change, reason, expected improvement, metric or observable evidence, baseline, measurement window, planned verdict date, affected components, risk/reversibility, approval status, evidence sources, next action, and no-write-performed flag.
+- Verdict captures: wager reference, verdict, evidence used, observed result, changed conditions, retain/revert/adjust/continue-measuring/no-action decision, follow-up action, and reviewer.
+- Verdict outcomes defined: improved, neutral, worsened, insufficient evidence, not measured, and superseded.
+- Validation evidence: pattern created and verified on disk; documentation-only change; no BI dependency, automation, measurement job, implementation authorization, or durable write was added.
+- Safety boundary: a wager does not authorize implementation, and a verdict does not authorize automatic retain/revert/adjust actions; exact-path approval remains required for durable edits.
+
 ## Definition of done
 
 The implementation is successful when:
