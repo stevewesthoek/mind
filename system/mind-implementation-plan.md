@@ -408,6 +408,17 @@ Acceptance evidence:
 - clear pass/warn/fail status;
 - focused tests for missing required paths and stale Graphify naming.
 
+Implementation handoff (2026-07-05):
+
+- Status: implemented in Brain Core as a report-only validator module and CLI; no Mind writes are performed.
+- Brain module: `projects/brain-core/src/mind-structure-validator/validator.ts`.
+- Brain CLI: `projects/brain-core/src/bin/mind-structure-validator.ts`.
+- Package script: `test:mind-structure-validator`.
+- Output: JSON report with schema version, generated metadata, overall `pass | warn | fail` status, check summary, individual checks, and safety block (`noWritePerformed: true`, `sourceFilesChanged: 0`, `reportOnly: true`).
+- CLI usage from local Brain terminal: `node projects/brain-core/dist/bin/mind-structure-validator.js --mind-root ../mind --generated-by "<name>"`.
+- Validation evidence: `test:mind-structure-validator` passed 4/4 tests; `typecheck` passed 0 errors; CLI `--help` printed usage and changed no files.
+- Safety boundary: this does not authorize continuous processing, durable Mind writes, report-file writes, path migration, Graphify refresh, or cleanup of generated/local files.
+
 ### Task B — Lightweight session closeout receipts
 
 Goal: prevent forgotten branches, hidden dirty state, and lost decisions after significant AI/repo work.
