@@ -18,39 +18,51 @@ kanban-plugin: board
 
 ## To Do
 
+- [ ] Make FB shorts account with free github repos
+- [ ] Find Amazon products for FGWA and make example description
+- [ ] Analyse documents + book Mark
 - [ ] Product: Model Router
 - [ ] Explore barcode idea
 - [ ] Empty mail
 - [ ] Send message to Norbert
 - [ ] Make a strategy agent
-- [ ] Vraag Tim voor verhuizen domein & Vraag Tim om terug betalen geld
+- [x] Bespreek met Tim lening ✅ 2026-06-30
+- [ ] Prepare Lambda meeting
 - [ ] empty ChatGPT into Obsidian
 - [ ] Sell video cameras Miro
 - [ ] Sell Miro's safe
 - [ ] Fix the curtains
 - [ ] Buy paint & filler & brushes
 - [ ] Clean garage floor
-- [ ] Unlimited TV sub
 
 
 ## Doing
 
-- [x] Figure out new direction Vila Solidaria ✅ 2026-06-05
-- [x] read mark's boek ✅ 2026-06-07
-- [ ] how  can we see soccer on our TV in 4K
+- [ ] Finish JPV platform
+- [ ] Make up CV Elton
 - [ ] YA finance app
-- [ ] Find Amazon products for FGWA and make example description
+- [ ] Maak de balans op (elke week)
 - [ ] Learn Portuguese for Passport
-- [ ] Expand STB pipeline and start posting FB, YT & PIN
-- [ ] Make FB shorts account with free github repos
-- [ ] Prepare Lambda meeting
+- [ ] Update Freek with Wilson
+- [ ] Document Wilson
 - [ ] Deel getuigenis met Goodje
-- [ ] Message Sami
+- [ ] Plan meeting w/ Yosef
+- [ ] Expand STB pipeline and start posting FB, YT & PIN
+- [x] Update VDI website Joe ✅ 2026-07-03
+- [x] Vila Solidaria opzeggen ✅ 2026-07-03
 
 
 ## Done
 
 **Complete**
+- [x] Contact Wilson ✅ 2026-07-03
+- [x] Buy fan ✅ 2026-06-30
+- [x] Check the car ✅ 2026-07-01
+- [x] read mark's boek ✅ 2026-06-07
+- [x] Order taxi ✅ 2026-06-30
+- [x] Unlimited TV sub ✅ 2026-06-11
+- [x] Message Sami ✅ 2026-06-11
+- [x] how  can we see soccer on our TV in 4K ✅ 2026-06-10
 - [x] Fix Antenna ✅ 2026-06-05
 - [x] Invoice VDE ✅ 2026-06-03
 - [x] Invoice TDP ✅ 2026-06-03
