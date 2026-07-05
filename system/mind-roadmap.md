@@ -328,7 +328,7 @@ From the Infinite Brain OS repo review:
 
 - add a lightweight Brain-owned Mind structural validator/report for the exact files, folders, freshness metadata, Graphify output path, maintenance pilot paths, and report outputs that Steve's workflow depends on — implemented in Brain Core as a report-only module/CLI on 2026-07-05;
 - add a lightweight session closeout receipt pattern so major AI/repo sessions record branch, commits, changed files, remaining dirty state, decisions, and next task without requiring a heavy transcript archive — implemented as `system/session-closeout-receipt-template.md` on 2026-07-05;
-- add processed-capture receipt tracking only when inbox volume makes it necessary, so captures can be traced from intake to ignored/summarized/promoted/task outcome;
+- add processed-capture receipt tracking only when inbox volume makes it necessary, so captures can be traced from intake to ignored/summarized/promoted/task outcome — implemented as `system/processed-capture-receipt-template.md` on 2026-07-05;
 - audit Brain `operations/system-configs/**` ownership so canonical config, generated adapter shims, live local state, logs, and machine-specific files are not confused or accidentally committed.
 
 From the OODA / Infinite Brain transcript review:

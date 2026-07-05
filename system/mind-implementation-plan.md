@@ -454,6 +454,17 @@ Design first; do not move files yet. A processed-capture receipt should record w
 
 This remains optional until capture volume or lost-context risk justifies it.
 
+Implementation handoff (2026-07-05):
+
+- Status: implemented as a Mind-owned lightweight template; ready for optional human use when capture volume or lost-context risk justifies it.
+- Template: `system/processed-capture-receipt-template.md`.
+- Default receipt destination: `wiki/log.md`.
+- Optional later destination, only if capture processing becomes too noisy for `wiki/log.md`: `system/capture-receipts/YYYY-MM-DD-short-source.md`.
+- Captures: capture path, source type/name, outcome, destination paths, approval requirement/status/reference, reason, summary, evidence, follow-up task, and do-not-forget items.
+- Outcome vocabulary: ignored, summarized, promoted to knowledge, converted to task, project update proposed, maintenance finding, source rejected, left pending, or merged with other capture.
+- Validation evidence: template created and verified on disk; documentation-only change; no capture files were moved, deleted, processed, archived, or rewritten.
+- Safety boundary: a processed-capture receipt records an outcome; it does not authorize promotion, deletion, archive, durable writes, or broad ingestion automation.
+
 ### Task D — Runtime/system-config ownership audit
 
 Goal: separate canonical configuration from generated adapter shims, live local machine state, logs, and machine-specific files under Brain `operations/system-configs/**`.
