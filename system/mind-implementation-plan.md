@@ -436,6 +436,16 @@ Design a small receipt pattern before implementation. Each closeout should captu
 
 Do not require a full transcript archive unless later evidence shows it is useful.
 
+Implementation handoff (2026-07-05):
+
+- Status: implemented as a Mind-owned lightweight template; ready for human use, with operational usefulness to be reviewed after several real closeouts.
+- Template: `system/session-closeout-receipt-template.md`.
+- Default receipt destination: `wiki/log.md`.
+- Optional later destination, only if receipts become too long for `wiki/log.md`: `system/session-closeouts/YYYY-MM-DD-short-title.md`.
+- Captures: date, repo, branch before/after, commit range, commits, changed files, validation evidence, remaining dirty files, decisions made, exact next task, and do-not-forget items.
+- Validation evidence: template created and verified on disk; documentation-only change; no transcript archive, automation, or tooling was added.
+- Safety boundary: a receipt records what happened; it does not authorize new writes, cleanup, branch deletion, secret storage, or broad commits.
+
 ### Task C — Processed-capture receipts
 
 Goal: make capture outcomes auditable when inbox volume grows.
