@@ -529,6 +529,16 @@ An intake item may be routed to:
 
 Durable writes remain human-approved. Deterministic and cheap-model routing should be preferred for simple cases; stronger models should be reserved for high-context orientation tasks.
 
+Implementation handoff (2026-07-05):
+
+- Status: implemented as a Mind-owned lightweight pattern; ready for optional human/Brain use before adding more ingestion automation.
+- Pattern document: `system/intake-disposition-pattern.md`.
+- Routing outcomes defined: ignore/archive, deterministic action, knowledge proposal, task proposal, project update proposal, maintenance finding, source-quality rejection, and left pending.
+- Model-routing guidance documented: deterministic rules first, cheap model for simple low-risk classification, stronger model only for high-context/strategic/ambiguous work, and human review whenever durable truth, tasks, projects, or business decisions could change.
+- Captures: source path/type/name, observation summary, primary disposition, routing layer, confidence, reason, recommended destination, affected paths, approval status, evidence, source-quality notes, next action, and no-write-performed flag.
+- Validation evidence: pattern created and verified on disk; documentation-only change; no ingestion automation, capture moves, task writes, project writes, or durable Mind writes were added.
+- Safety boundary: a disposition is routing, not approval; archive/delete, knowledge promotion, task writes, project updates, and fixes still require exact-path approval.
+
 ### Task G — Source-quality gates
 
 Goal: prevent mediocre or untrusted inputs from becoming durable orientation just because they were ingested.
