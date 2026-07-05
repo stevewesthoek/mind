@@ -333,7 +333,7 @@ From the Infinite Brain OS repo review:
 
 From the OODA / Infinite Brain transcript review:
 
-- strengthen Mind as the orientation layer: current context, strategy, constraints, trusted thinkers/sources, active projects, and decision principles should be easy for Brain to retrieve as compact briefs;
+- strengthen Mind as the orientation layer: current context, strategy, constraints, trusted thinkers/sources, active projects, and decision principles should be easy for Brain to retrieve as compact briefs — implemented as `system/orientation-brief-template.md` on 2026-07-05;
 - define an intake-disposition pattern: approved observations may become ignored items, deterministic actions, knowledge proposals, task proposals, project updates, or maintenance findings, but durable changes remain human-approved;
 - add source-quality gates before promotion: newsletters, transcripts, emails, meetings, and external ideas should not become durable orientation just because they were ingested;
 - add a lightweight wager/verdict pattern for significant business or workflow changes: proposal, expected improvement, measurement window, evidence source, later verdict, and follow-up action;

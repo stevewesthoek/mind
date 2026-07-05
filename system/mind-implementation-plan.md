@@ -504,6 +504,15 @@ Design compact briefs for the information Brain needs before acting:
 
 The brief should be retrieved from existing Mind surfaces where possible, not duplicated into a new large folder structure.
 
+Implementation handoff (2026-07-05):
+
+- Status: implemented as a Mind-owned lightweight template; ready for optional human/Brain use before significant context-sensitive work.
+- Template: `system/orientation-brief-template.md`.
+- Source mapping: current context, memory map, home, kanban, wiki log, live dashboard, strategy/roadmap/implementation plan, Brain/Mind bridge, latest maintenance report, relevant `wiki/`, and relevant `sources/`.
+- Captures: purpose, scope, source references, current context, strategy/priorities, constraints, trusted sources/thinkers, active projects/status, decision principles, evidence links, unknowns/gaps, recommended next action, and approval requirement.
+- Validation evidence: template created and verified on disk; documentation-only change; no source pages were duplicated, rewritten, or promoted as truth.
+- Safety boundary: an orientation brief orients work; it does not approve durable writes, override current evidence, replace source pages, or permit broad context copying.
+
 ### Task F — Intake-disposition pattern
 
 Goal: define how observations become outcomes before building more ingestion automation.
