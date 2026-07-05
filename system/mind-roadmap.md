@@ -320,6 +320,27 @@ The following work is needed after the plan is structurally complete. This is no
 - review the five human-decision file candidates (see Task 7 and Task 8 pending decisions);
 - keep continuous execution disabled until value and safety are demonstrated.
 
+### Post-plan improvement backlog — documentation first
+
+These items are approved for roadmap tracking only. They must be split into implementation-plan tasks before any code, automation, folder migration, or continuous behavior is built.
+
+From the Infinite Brain OS repo review:
+
+- add a lightweight Brain-owned Mind structural validator/report for the exact files, folders, freshness metadata, Graphify output path, maintenance pilot paths, and report outputs that Steve's workflow depends on;
+- add a lightweight session closeout receipt pattern so major AI/repo sessions record branch, commits, changed files, remaining dirty state, decisions, and next task without requiring a heavy transcript archive;
+- add processed-capture receipt tracking only when inbox volume makes it necessary, so captures can be traced from intake to ignored/summarized/promoted/task outcome;
+- audit Brain `operations/system-configs/**` ownership so canonical config, generated adapter shims, live local state, logs, and machine-specific files are not confused or accidentally committed.
+
+From the OODA / Infinite Brain transcript review:
+
+- strengthen Mind as the orientation layer: current context, strategy, constraints, trusted thinkers/sources, active projects, and decision principles should be easy for Brain to retrieve as compact briefs;
+- define an intake-disposition pattern: approved observations may become ignored items, deterministic actions, knowledge proposals, task proposals, project updates, or maintenance findings, but durable changes remain human-approved;
+- add source-quality gates before promotion: newsletters, transcripts, emails, meetings, and external ideas should not become durable orientation just because they were ingested;
+- add a lightweight wager/verdict pattern for significant business or workflow changes: proposal, expected improvement, measurement window, evidence source, later verdict, and follow-up action;
+- prefer routed model tiers for intake review: deterministic rules first, cheap model for simple classification, stronger model only for high-context or strategic orientation tasks.
+
+These are not new phases and do not authorize continuous processing. They are the next documentation backlog for improving Infinite Brain without making Mind harder to read.
+
 ## Current milestone close-out (2026-06-18)
 
 ### Complete — manual/report-only operation

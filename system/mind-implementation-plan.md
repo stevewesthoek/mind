@@ -166,7 +166,7 @@ Phase 0 documentation review was completed. Later implementation phases added pe
 ### Validation
 
 - [x] Run each implemented report detector on bounded fixtures (evidence: focused detector tests and Brain aggregate gate passed 120 tests, 0 failed; controlled five-file Mind run completed with 0 detector errors).
-- [x] Measure false positives (evidence: reviewed bounded-fixture audit `system/reports/maintenance-history/2026-06-17-false-positive-measurement.md` measured 7 explicit negative cases, 0 false positives, and a 0% observed false-positive rate; the same audit records 1 missed required positive and 0% recall, so stale-page detection still requires repair before Phase 4 detector quality is acceptable).
+- [x] Measure false positives (evidence: reviewed bounded-fixture audit `system/reports/maintenance-history/2026-06-17-false-positive-measurement.md` measured 7 explicit negative cases, 0 false positives, and a 0% observed false-positive rate; the same audit recorded 1 missed required positive and 0% recall at that time. That specific freshness-metadata positive case was later validated by Brain's deterministic `mind-maintenance-pilot-loader-stale` test).
 - [x] Confirm no Mind content changes (evidence: Brain test `projects/brain-core/src/tests/mind-maintenance-source-integrity.test.ts`; controlled run reported `sourceFilesChanged: 0`).
 - [x] Confirm suggestions cite exact source paths (evidence: Brain report schema and detector tests require path-bearing evidence; controlled report used the bounded five-file dataset).
 - [x] Collect human usefulness feedback (evidence: Steve Westhoek reviewed the bounded pilot and recorded “Useful after stale-page repair” in `system/reports/maintenance-history/2026-06-17-human-usefulness-feedback.md`; the review confirms the report is not useful enough as-is because it missed the required stale-page finding, but remains potentially useful after repair because it produced 0 false positives across 7 labeled negatives, remained report-only, changed no Mind source files, and exposed no detector errors).
@@ -363,7 +363,7 @@ Phase 0 documentation review was completed. Later implementation phases added pe
   - `system/mind-strategy.md` — added four new subsections under the Automation strategy section: Continuous processing rules (disabled by default, gated, plan-only, current implementation), Operational validation requirement (automation retained only when value demonstrated; unproven claim must remain visible), Simplification strategy (physical depth ≠ useful depth; no destructive action without approval), Approval evidence rule (persistent approval volume; absent evidence ≠ zero count).
   - `system/mind-roadmap.md` — added Phase 9 verified outcome block (implemented safety capability confirmed; unresolved acceptance criteria listed). Added Phase 10 verified outcome block (confirmed/partially supported/unresolved acceptance criteria listed). Added Post-plan operational validation work section (five items; explicitly not a new phase).
   - `system/mind-implementation-plan.md` (this file) — corrected Task 8 evidence to list actual diffs across all four canonical documents. Replaced stale "First implementation batch" section with "Post-plan operational validation" section. Corrected definition of done to match actual and intended behavior. Added Phase 9/10 close-out acceptance status block.
-  **What was NOT claimed:** meaningful time savings proven; full machine load measured; all approvals absent; redundant files deleted; specs archived; all retained automation has demonstrated operational value (the maintenance system has 0% recall on its required positive case — stale-page detection repair is still required before the maintenance automation demonstrates positive operational value).
+  **What was NOT claimed:** meaningful time savings proven; full machine load measured; all approvals absent; redundant files deleted; specs archived; all retained automation has demonstrated operational value. The stale-page detector's required freshness-metadata positive case is now validated, but broader maintenance value still requires operational evidence.
 
 ### Acceptance criteria
 
@@ -383,6 +383,134 @@ The following validation work is needed to determine whether Phase 9/10 acceptan
 3. conduct a bounded real continuous-processing trial only after explicit approval and approval store configuration;
 4. review the five human-decision file candidates listed under Phase 10 Tasks 7–8;
 5. keep continuous execution disabled until value and safety are demonstrated.
+
+## Post-plan improvement implementation backlog
+
+These tasks came from two reviews: the Infinite Brain OS repository review and the OODA / Infinite Brain transcript review. They are not authorized implementation work yet; each task must be selected, scoped, validated, and approved before code or workflow changes are made.
+
+### Task A — Brain-owned Mind structural validator/report
+
+Goal: create a lightweight report-only validator for the exact Mind structure Steve depends on, without imposing a full typed ontology on every note.
+
+Initial checks to design:
+
+- required startup and workflow files exist (`home.md`, `kanban.md`, `wiki/log.md`, `router/00-current-context.md`, `router/00-memory-map.md`, `capture/inbox/`, `capture/failed/`);
+- maintenance pilot configured paths exist and match real Mind;
+- latest maintenance report JSON and Markdown exist and are parseable;
+- freshness metadata is parseable where present;
+- Graphify output path naming is consistent (`graphify-out/` versus `.graphify-out/`);
+- generated/runtime files are not mistaken for durable Mind truth.
+
+Acceptance evidence:
+
+- report-only output;
+- no Mind source writes;
+- clear pass/warn/fail status;
+- focused tests for missing required paths and stale Graphify naming.
+
+### Task B — Lightweight session closeout receipts
+
+Goal: prevent forgotten branches, hidden dirty state, and lost decisions after significant AI/repo work.
+
+Design a small receipt pattern before implementation. Each closeout should capture:
+
+- date and repo;
+- branch and commit range;
+- changed files;
+- validation evidence;
+- remaining dirty files;
+- decisions made;
+- exact next task;
+- what must not be forgotten.
+
+Do not require a full transcript archive unless later evidence shows it is useful.
+
+### Task C — Processed-capture receipts
+
+Goal: make capture outcomes auditable when inbox volume grows.
+
+Design first; do not move files yet. A processed-capture receipt should record whether a capture was ignored, summarized, promoted to durable knowledge, converted into a task, or left pending, plus the destination and approval evidence.
+
+This remains optional until capture volume or lost-context risk justifies it.
+
+### Task D — Runtime/system-config ownership audit
+
+Goal: separate canonical configuration from generated adapter shims, live local machine state, logs, and machine-specific files under Brain `operations/system-configs/**`.
+
+Design questions:
+
+- which files are canonical and should be committed;
+- which files are generated and should be reproducible;
+- which files are local runtime state and should remain uncommitted;
+- which adapters should be regenerated from canonical config rather than hand-edited.
+
+No reset, clean, delete, or broad ignore change is authorized by this task alone.
+
+### Task E — Orientation-layer briefs
+
+Goal: strengthen Mind as Brain's orientation layer without making Steve maintain a complex ontology.
+
+Design compact briefs for the information Brain needs before acting:
+
+- current context;
+- strategy and priorities;
+- constraints and non-negotiables;
+- trusted sources/thinkers;
+- active projects and status;
+- decision principles;
+- relevant evidence links.
+
+The brief should be retrieved from existing Mind surfaces where possible, not duplicated into a new large folder structure.
+
+### Task F — Intake-disposition pattern
+
+Goal: define how observations become outcomes before building more ingestion automation.
+
+An intake item may be routed to:
+
+- ignore/archive;
+- deterministic action;
+- knowledge proposal;
+- task proposal;
+- project update proposal;
+- maintenance finding;
+- source-quality rejection.
+
+Durable writes remain human-approved. Deterministic and cheap-model routing should be preferred for simple cases; stronger models should be reserved for high-context orientation tasks.
+
+### Task G — Source-quality gates
+
+Goal: prevent mediocre or untrusted inputs from becoming durable orientation just because they were ingested.
+
+Design criteria for promotion from transcript/newsletter/email/meeting/source into durable Mind knowledge:
+
+- source trust;
+- relevance to Steve's current projects or strategy;
+- evidence quality;
+- freshness risk;
+- expected reuse value;
+- human approval requirement.
+
+### Task H — Wager/verdict pattern
+
+Goal: add a lightweight scientific-method layer for significant business or workflow changes.
+
+Before major changes, a proposal may include:
+
+- expected improvement;
+- metric or observable evidence;
+- measurement window;
+- risk and reversibility;
+- affected components;
+- planned verdict date.
+
+After the window, record a verdict:
+
+- improved / neutral / worsened / insufficient evidence;
+- evidence used;
+- whether to retain, revert, or adjust the change.
+
+This should start as manual/report-only and must not require a business-intelligence database before proving value.
 
 ## Definition of done
 
