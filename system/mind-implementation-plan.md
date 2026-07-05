@@ -478,6 +478,16 @@ Design questions:
 
 No reset, clean, delete, or broad ignore change is authorized by this task alone.
 
+Implementation handoff (2026-07-05):
+
+- Status: implemented as a Brain-owned documentation-only audit baseline; no cleanup, ignore migration, symlink changes, binary edits, or runtime-state commits were performed.
+- Audit document: `brain/operations/specs/runtime-system-config-ownership-audit.md`.
+- Ownership classes defined: canonical portable config, canonical templates/generated-from-canon inputs, generated adapter shims/reproducible exports, intentionally synced runtime state, local-only machine state, binary/application bundles, and unknown/pending classification.
+- Current recurring dirty-state pressure recorded as evidence only: `.graphifyignore`, `operations/system-configs/claude/**`, `operations/system-configs/codex/**`, and `tools/firecrawl/logs/firecrawl.log`.
+- Recommended next follow-up: create a path-by-path classification table for recurring dirty paths, still report-only unless Steve separately approves exact-path ignore or cleanup proposals.
+- Validation evidence: audit document created and verified on disk; documentation-only change; no dirty runtime/system files were staged, cleaned, reset, or modified by the audit.
+- Safety boundary: this audit does not authorize reset, clean, stash, delete, broad ignore changes, binary bundle commits, symlink replacement, adapter regeneration, or committing currently dirty local/runtime files.
+
 ### Task E — Orientation-layer briefs
 
 Goal: strengthen Mind as Brain's orientation layer without making Steve maintain a complex ontology.
