@@ -352,9 +352,10 @@ Roadmap candidates:
 - add a capture sensemaking proposal pipeline so messy client requests, feature ideas, bugs, future work, coding thoughts, meeting notes, and voice/text captures can become structured project/app/repo proposals with destination, evidence, confidence, and approval requirements;
 - add a coding lessons learned to best-practices flow so bug fixes, failed validations, architecture decisions, and repo cleanups can become reusable repo/tool/product/engineering lessons with provenance;
 - add a strategy drift and focus guardrail that compares new work, requests, and coding plans against current strategy, priorities, constraints, and active commitments, then warns Steve when work is drifting or distracting;
-- validate and document the Brain/Mind two-repo operating model so the split remains intentional: Mind owns human truth and context, Brain owns automation/runtime/tooling, and the bridge makes LLMs work for Steve instead of making Steve maintain machine structures.
+- validate and document the Brain/Mind two-repo operating model so the split remains intentional: Mind owns human truth and context, Brain owns automation/runtime/tooling, and the bridge makes LLMs work for Steve instead of making Steve maintain machine structures;
+- redesign the Mind top-level folder structure around human concepts instead of system terms, using `inbox/`, `organizations/`, `projects/`, `repos/`, `people/`, `faith/`, `knowledge/`, `resources/`, `history/`, `system/`, and `tasks.md` as the target structure, with the full migration plan recorded in `system/top-level-folder-redesign-migration-plan.md`.
 
-All of these begin as report-only or proposal-only work. They do not authorize automatic durable writes, task edits, project updates, folder moves, continuous processing, or repo merging.
+All of these begin as report-only, proposal-only, or migration-planning work. They do not authorize automatic durable writes, task edits, project updates, folder moves, continuous processing, or repo merging.
 
 ## Current milestone close-out (2026-06-18)
 

@@ -712,6 +712,30 @@ Acceptance evidence:
 - no duplicate source of truth is created;
 - the roadmap focuses on making Brain use Mind better, not merging the repos.
 
+### Task O — Human-first top-level folder redesign migration
+
+Goal: replace the unclear top-level structure (`capture/`, `live/`, `wiki/`, `sources/`, `archive/`, `kanban.md`, `router/`, `graphify-out/`) with a simpler human-first structure while preserving every Brain automation, Save-to-Mind path, validator, approval gate, Obsidian link, and source file.
+
+Migration plan:
+
+- canonical plan: `system/top-level-folder-redesign-migration-plan.md`;
+- target root: `home.md`, `tasks.md`, `inbox/`, `organizations/`, `projects/`, `repos/`, `people/`, `faith/`, `knowledge/`, `resources/`, `history/`, `system/`;
+- `inbox/` becomes the universal dump and processing lifecycle;
+- `faith/` becomes first-class for Bible, theology, apologetics, ministry, studies, and faith resources;
+- `people/` becomes first-class and must support automatic relation proposals to projects, organizations, Bible studies, resources, and topics;
+- each significant code repo/app gets a corresponding `repos/` page or folder;
+- the migration must start with a full Brain + Mind reference inventory before any file moves.
+
+Acceptance evidence:
+
+- full inventory report covers active references in both `mind` and `brain` for old path tokens and classifies them as code, test, config, docs, generated runtime output, Obsidian link, or historical report;
+- Brain readers support new paths before Save-to-Mind writes to them;
+- Save-to-Mind writes to `inbox/new/` after migration;
+- Brain Mind Steward, structure validator, approval gates, Brain Console, and relevant tests are updated and pass;
+- Obsidian links and user-facing docs use the new structure;
+- old top-level folders are removed only after validation and explicit approval;
+- no durable truth, task, project, or faith-study content is rewritten except required path/link migration.
+
 ## Definition of done
 
 The implementation is successful when:
