@@ -341,6 +341,21 @@ From the OODA / Infinite Brain transcript review:
 
 These are not new phases and do not authorize continuous processing. They are the next documentation backlog for improving Infinite Brain without making Mind harder to read.
 
+## Sensemaking and identity backlog
+
+This backlog moves Mind from a safe manual/report-only foundation toward the experience Steve wants: unstructured thoughts, client requests, app features, future work, and coding lessons can be dumped into `capture/inbox/`, while Brain finds relations, proposes structure, remembers useful lessons, and warns about strategy drift without silently rewriting durable truth.
+
+Roadmap candidates:
+
+- align coding-LLM Mind context entrypoints so Claude Code, Codex, Cursor, Kiro, Gemini, Antigravity, and future terminal agents can retrieve Steve's identity, strategy, current context, active projects, best-practice memory, and Brain/Mind boundaries without loading the whole vault;
+- add an active relation discovery report that proposes related notes, backlinks, duplicate/overlap candidates, recurring themes, contradictions, and missing source references across selected captures, projects, sources, strategy, and wiki notes;
+- add a capture sensemaking proposal pipeline so messy client requests, feature ideas, bugs, future work, coding thoughts, meeting notes, and voice/text captures can become structured project/app/repo proposals with destination, evidence, confidence, and approval requirements;
+- add a coding lessons learned to best-practices flow so bug fixes, failed validations, architecture decisions, and repo cleanups can become reusable repo/tool/product/engineering lessons with provenance;
+- add a strategy drift and focus guardrail that compares new work, requests, and coding plans against current strategy, priorities, constraints, and active commitments, then warns Steve when work is drifting or distracting;
+- validate and document the Brain/Mind two-repo operating model so the split remains intentional: Mind owns human truth and context, Brain owns automation/runtime/tooling, and the bridge makes LLMs work for Steve instead of making Steve maintain machine structures.
+
+All of these begin as report-only or proposal-only work. They do not authorize automatic durable writes, task edits, project updates, folder moves, continuous processing, or repo merging.
+
 ## Current milestone close-out (2026-06-18)
 
 ### Complete — manual/report-only operation

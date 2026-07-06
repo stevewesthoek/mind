@@ -593,6 +593,125 @@ Implementation handoff (2026-07-05):
 - Validation evidence: pattern created and verified on disk; documentation-only change; no BI dependency, automation, measurement job, implementation authorization, or durable write was added.
 - Safety boundary: a wager does not authorize implementation, and a verdict does not authorize automatic retain/revert/adjust actions; exact-path approval remains required for durable edits.
 
+## Sensemaking and identity implementation backlog
+
+These tasks extend the safe foundation toward the experience Steve actually wants: Mind gets smarter, more personal, more connected, and more useful each day while Brain does the organizing work through proposals instead of silently rewriting truth.
+
+They are roadmap tasks only until explicitly selected. They do not authorize continuous processing, autonomous durable writes, broad folder migrations, or automatic strategy/task/project edits.
+
+### Task I — Coding-LLM Mind context entrypoints
+
+Goal: make terminal coding LLMs reliably retrieve Steve's identity, strategy, current context, active projects, best-practice memory, and Brain/Mind boundaries.
+
+Design requirements:
+
+- align the Mind entrypoints expected by Brain IDE/tooling contracts with the actual Mind entrypoints;
+- make compact root or pointer files available for coding agents without loading the entire vault;
+- include Steve's current context, identity-relevant constraints, business/project priorities, strategy, active repos/apps, and non-negotiables;
+- preserve privacy and selective retrieval;
+- keep Brain as automation/system owner and Mind as personal/business truth owner.
+
+Acceptance evidence:
+
+- Claude Code, Codex, Cursor, Kiro, Gemini, Antigravity, and future terminal agents can find the same compact Mind orientation entrypoints;
+- coding agents can answer where to retrieve Steve's strategy and project context;
+- no agent needs to load the whole Mind vault by default;
+- no durable Mind truth is rewritten automatically.
+
+### Task J — Active relation discovery report
+
+Goal: make Brain automatically find useful relationships Steve may miss across captures, projects, sources, strategy, wiki notes, and active work.
+
+Design requirements:
+
+- scan selected `capture/inbox/`, `live/`, `wiki/`, and `sources/` surfaces report-only;
+- propose related notes, candidate backlinks, duplicate/overlap candidates, recurring themes, contradictions, and missing source references;
+- explain why each relation is suggested;
+- prefer updating an existing note over creating duplicate durable knowledge;
+- distinguish weak associations from high-confidence useful connections.
+
+Acceptance evidence:
+
+- given an inbox capture, Brain proposes related existing Mind pages and explains the relation;
+- proposals can include links Steve would not naturally have noticed;
+- no backlinks or durable notes are written automatically;
+- rejected relation proposals are not silently reapplied.
+
+### Task K — Capture sensemaking proposal pipeline
+
+Goal: let Steve dump client requests, feature ideas, bugs, future work, coding thoughts, meeting notes, and unstructured voice/text captures into `capture/inbox/`, then have Brain route them toward the right structured project data.
+
+Design requirements:
+
+- classify captures as client request, feature request, bug, future work, coding lesson, project update, strategy signal, source/research input, task proposal, or personal note;
+- map project/app/repo captures to existing `live/projects/`, `wiki/organisations/`, `sources/`, and related project files where possible;
+- produce structured proposals with destination, affected project/app/repo, evidence, confidence, source path, and approval requirement;
+- support client-request and feature-request fields such as requester/client, app/repo, desired outcome, urgency, risk, dependencies, and follow-up question;
+- preserve raw capture provenance and avoid moving files automatically.
+
+Acceptance evidence:
+
+- dumping a messy client or feature request into `capture/inbox/` produces a reviewable structured proposal;
+- existing project/app/repo pages are preferred over new duplicate pages;
+- proposals can feed `kanban.md` or project files only after exact-path approval;
+- no task/project/durable knowledge write occurs without human approval.
+
+### Task L — Coding lessons learned to best practices
+
+Goal: make lessons learned during coding become reusable best-practice memory instead of disappearing in chat logs or commits.
+
+Design requirements:
+
+- capture lessons from coding sessions, bug fixes, failed validations, architecture decisions, and repo cleanups;
+- classify lessons as repo-specific, tool-specific, product-specific, strategy-specific, or general engineering practice;
+- propose storage destinations in Mind for human/business/project lessons and Brain for AI-system/tooling/runbook lessons;
+- link lessons to source commits, files, errors, validations, and decisions;
+- avoid promoting one-off accidents into global rules without review.
+
+Acceptance evidence:
+
+- after a coding session, Brain can propose reusable lessons learned;
+- accepted lessons become best-practice candidates with provenance;
+- rejected or low-confidence lessons do not become standing rules;
+- coding agents can retrieve accepted best practices in future work.
+
+### Task M — Strategy drift and focus guardrail
+
+Goal: make Mind remind Steve when new work, requests, or coding direction drifts from current strategy, priorities, constraints, or active commitments.
+
+Design requirements:
+
+- compare new captures, feature requests, task proposals, and coding plans against current strategy and active priorities;
+- produce report-only warnings for strategic drift, low-priority distractions, repeated context switching, or work that conflicts with stated constraints;
+- distinguish intentional strategy changes from accidental drift;
+- connect warnings to `system/orientation-brief-template.md`, `system/wager-verdict-pattern.md`, and current project/strategy files;
+- require human decision before blocking, changing, or reprioritizing work.
+
+Acceptance evidence:
+
+- Brain can flag a candidate task or feature as aligned, questionable, or drifting;
+- the warning cites the relevant strategy/project source;
+- Steve can accept, reject, or override the warning;
+- no automatic task cancellation or priority rewrite occurs.
+
+### Task N — Brain/Mind split validation and operating model
+
+Goal: confirm and document that the split between `brain` and `mind` is the right architecture for Steve, even though some external systems use one large repo.
+
+Design conclusion to validate:
+
+- `mind` should stay the human-readable personal/business knowledge and truth system;
+- `brain` should stay the AI operating system, automation runtime, adapters, skills, queues, validators, reports, and coding-agent context infrastructure;
+- the split keeps personal truth separate from runtime machinery, limits blast radius, improves human readability, and lets coding agents retrieve personal context without turning Mind into a technical repo;
+- the bridge must improve so the LLM works for Steve: capture, relate, propose, remind, and retrieve without making Steve maintain machine structures.
+
+Acceptance evidence:
+
+- a short operating-model note explains why the two-repo split remains correct;
+- coding agents know when to read Brain versus Mind;
+- no duplicate source of truth is created;
+- the roadmap focuses on making Brain use Mind better, not merging the repos.
+
 ## Definition of done
 
 The implementation is successful when:
