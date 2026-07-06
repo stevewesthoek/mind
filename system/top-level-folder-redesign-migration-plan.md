@@ -229,6 +229,21 @@ Inventory destinations:
 - docs, runbooks, package scripts, and tests;
 - generated runtime files, which may be ignored but must not be confused with source contracts.
 
+## Phase 1 inventory evidence
+
+Initial Phase 1 inventory report:
+
+```text
+system/reports/top-level-folder-path-inventory-2026-07-06.md
+```
+
+Summary:
+
+- Mind scan: 1,471 text-like files scanned; 120 files matched old-path tokens.
+- Brain active-source scan: 884 bounded active files scanned; 142 files matched migration-sensitive tokens.
+- Brain generated-runtime scan: 57 runtime files scanned; 24 generated files matched old-path tokens.
+- Conclusion: do not start with file moves; first implement Brain path compatibility and tests, then migrate Save-to-Mind and Mind folders in small validated slices.
+
 ## Migration phases
 
 ### Phase 0 — approval and freeze window
