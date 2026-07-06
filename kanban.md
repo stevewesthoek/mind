@@ -20,7 +20,6 @@ kanban-plugin: board
 
 - [ ] Make FB shorts account with free github repos
 - [ ] Find Amazon products for FGWA and make example description
-- [ ] Analyse documents + book Mark
 - [ ] Product: Model Router
 - [ ] Explore barcode idea
 - [ ] Empty mail
@@ -42,14 +41,15 @@ kanban-plugin: board
 - [ ] Make up CV Elton
 - [ ] YA finance app
 - [ ] Maak de balans op (elke week)
-- [ ] Learn Portuguese for Passport
 - [ ] Update Freek with Wilson
-- [ ] Document Wilson
 - [ ] Deel getuigenis met Goodje
 - [ ] Plan meeting w/ Yosef
+- [ ] Learn Portuguese for Passport
 - [ ] Expand STB pipeline and start posting FB, YT & PIN
+- [ ] Analyse documents + book Mark
 - [x] Update VDI website Joe ✅ 2026-07-03
 - [x] Vila Solidaria opzeggen ✅ 2026-07-03
+- [x] Document Wilson ✅ 2026-07-06
 
 
 ## Done
