@@ -152,3 +152,20 @@ Boundaries preserved:
 - `wiki/organisations/prochat/pitch-decks/` untouched;
 - Save-to-Mind unchanged;
 - continuous processing disabled.
+
+
+
+## Batch 3D remaining live files decision request — 2026-07-07
+
+Decision request note:
+
+```text
+system/reports/remaining-live-files-decision-request-2026-07-07.md
+```
+
+Outcome:
+
+- no remaining root `live/*.md` file was safe to move automatically;
+- `live/projects.md`, `live/business.md`, `live/tasks.md`, `live/video.md`, and `live/workflows.md` remain in place;
+- exact Steve choices are documented in the decision request note;
+- recommended next migration batch is Batch 4 — Organizations migration planning/precheck.
