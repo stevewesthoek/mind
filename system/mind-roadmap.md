@@ -355,6 +355,8 @@ Roadmap candidates:
 - validate and document the Brain/Mind two-repo operating model so the split remains intentional: Mind owns human truth and context, Brain owns automation/runtime/tooling, and the bridge makes LLMs work for Steve instead of making Steve maintain machine structures;
 - redesign the Mind top-level folder structure around human concepts instead of system terms, using `inbox/`, `organizations/`, `projects/`, `repos/`, `people/`, `faith/`, `knowledge/`, `resources/`, `history/`, `system/`, and `tasks.md` as the target structure, with the full migration plan recorded in `system/top-level-folder-redesign-migration-plan.md`.
 
+Progress note (2026-07-07): Phase 1 inventory and Phase 2 Brain compatibility are complete. Phase 3 prepared README-backed target folders for the new structure without moving content, deleting old folders, changing Save-to-Mind, or enabling continuous processing. `system/generated/graph/` remains documentation-only because generated-output writes are blocked by repository policy.
+
 All of these begin as report-only, proposal-only, or migration-planning work. They do not authorize automatic durable writes, task edits, project updates, folder moves, continuous processing, or repo merging.
 
 ## Current milestone close-out (2026-06-18)

@@ -244,6 +244,34 @@ Summary:
 - Brain generated-runtime scan: 57 runtime files scanned; 24 generated files matched old-path tokens.
 - Conclusion: do not start with file moves; first implement Brain path compatibility and tests, then migrate Save-to-Mind and Mind folders in small validated slices.
 
+## Phase 3 structure-prep evidence
+
+Initial target folders now have README-backed placeholders before any content moves:
+
+```text
+inbox/
+inbox/new/
+inbox/raw/
+inbox/processed/
+inbox/failed/
+organizations/
+projects/
+repos/
+people/
+faith/
+knowledge/
+resources/
+history/
+system/agent-context/
+```
+
+Notes:
+
+- no existing Mind content was moved;
+- no old folder was deleted;
+- Save-to-Mind still writes to the legacy capture path until a later explicit switch;
+- `system/generated/graph/README.md` could not be created through Workbench because generated-output paths are blocked by repository write policy; keep generated graph output documented in contracts until Graphify config can create the target output safely.
+
 ## Migration phases
 
 ### Phase 0 — approval and freeze window

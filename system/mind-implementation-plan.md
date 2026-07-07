@@ -736,6 +736,14 @@ Acceptance evidence:
 - old top-level folders are removed only after validation and explicit approval;
 - no durable truth, task, project, or faith-study content is rewritten except required path/link migration.
 
+Phase evidence:
+
+- Phase 1 inventory complete: `system/reports/top-level-folder-path-inventory-2026-07-06.md`;
+- Phase 2 Brain compatibility complete: Brain active-source audit found zero still-active old-only blockers before Mind moves;
+- Phase 3 structure preparation started: target README-backed folders exist for `inbox/`, `organizations/`, `projects/`, `repos/`, `people/`, `faith/`, `knowledge/`, `resources/`, `history/`, and `system/agent-context/`;
+- `system/generated/graph/` remains documented but not manually created because generated-output writes are blocked by Workbench policy;
+- no content moves, old-folder deletions, Save-to-Mind path changes, or continuous processing were authorized in Phase 3 preparation.
+
 ## Definition of done
 
 The implementation is successful when:

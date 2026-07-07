@@ -61,6 +61,25 @@ The bridge should exchange references and summaries, not duplicate whole reposit
 9. Rejected proposals must not be silently reapplied.
 10. Every approved write must target an explicit path and action.
 
+## Current migration path guidance
+
+Brain should prefer target paths in new proposals while retaining legacy paths as compatibility fallbacks until migration is complete.
+
+| Purpose | Target path | Legacy fallback |
+|---------|-------------|-----------------|
+| New captures | `inbox/new/` | `capture/inbox/` |
+| Failed captures | `inbox/failed/` | `capture/failed/` |
+| Processed proposals and receipts | `inbox/processed/` | `wiki/log.md` |
+| Tasks | `tasks.md` | `kanban.md` |
+| Projects | `projects/` | `live/projects/` |
+| Organizations | `organizations/` | `wiki/organisations/` |
+| Durable knowledge | `knowledge/` or `faith/` | `wiki/` |
+| Sources/resources | `resources/` or `faith/resources/` | `sources/` |
+| Historical material | `history/` | `archive/` |
+| Agent context | `system/agent-context/` | `router/` |
+
+This table is guidance only. It does not authorize moves, deletions, durable writes, Save-to-Mind destination changes, or automatic processing.
+
 ## Normalized bridge envelope
 
 Use this compact envelope for cross-repo proposals and handoffs:
@@ -125,7 +144,7 @@ Required JSON shape:
   "action": "create | update | move | archive | supersede | add-source-reference",
   "targets": [
     {
-      "path": "wiki/example.md",
+      "path": "knowledge/example.md",
       "expectedBeforeHash": "<sha256-or-null-for-create>",
       "destinationPath": null,
       "allowedSections": ["<exact-heading-or-frontmatter-key>"],

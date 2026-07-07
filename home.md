@@ -16,10 +16,10 @@ capture continuously
 → turn reviewed insight into durable knowledge
 → retrieve what matters
 → revalidate changing information
-→ update, supersede, or archive
+→ update, supersede, or preserve in history
 ```
 
-Mind remains human-first. Brain may classify, compare, and prepare proposals, but personal and business truth stays reviewable and human-approved.
+Mind remains human-first. Brain may classify, compare, and prepare proposals, but personal, business, and faith truth stays reviewable and human-approved.
 
 Canonical direction:
 
@@ -27,18 +27,19 @@ Canonical direction:
 2. `system/mind-strategy.md`
 3. `system/mind-roadmap.md`
 4. `system/mind-implementation-plan.md`
+5. `system/top-level-folder-redesign-migration-plan.md`
 
 ---
 
 ## What happens automatically
 
-1. **Save-to-Mind places new captures in `capture/inbox/` when you use it.** You do not need to choose a permanent destination during capture.
+1. **Save-to-Mind currently places new captures in legacy `capture/inbox/`.** The target path is `inbox/new/`, but the write destination will not change until Brain, Obsidian links, and validation are ready.
 
 2. **Brain runs report-only Mind Steward and scheduler workflows.** These workflows inspect, classify, and prepare status or review information without moving captures or changing durable Mind content automatically.
 
-3. **Brain Console provides the primary live system view.** Use the Obsidian Brain Console plugin for Brain Core, Mind Steward, scheduler, approval, and maintenance status. `live/dashboard.md` remains the Markdown fallback.
+3. **Brain Console provides the primary live system view.** Use the Obsidian Brain Console plugin for Brain Core, Mind Steward, scheduler, approval, and maintenance status. Legacy `live/dashboard.md` remains the Markdown fallback until dashboard surfaces migrate.
 
-Automatic capture moves, automatic durable knowledge writes, automatic Kanban writes, and continuous processing are not enabled.
+Automatic capture moves, automatic durable knowledge writes, automatic task writes, and continuous processing are not enabled.
 
 ---
 
@@ -48,7 +49,11 @@ Automatic capture moves, automatic durable knowledge writes, automatic Kanban wr
 
 Open the Obsidian Brain Console plugin when you need runtime status, maintenance previews, approvals, scheduler state, or the next safe action.
 
-**Review `wiki/log.md` when proposals are present.**
+**Review proposals in the current proposal surface.**
+
+Target review surface after migration: `inbox/processed/`.
+
+Compatibility surface during migration: `wiki/log.md`.
 
 For each proposal:
 - **Accept** — approve or perform the documented exact-path action.
@@ -57,54 +62,54 @@ For each proposal:
 
 A proposal does not authorize an automatic content change.
 
-**Use `kanban.md` as the current task source of truth.**
+**Use the current task source of truth.**
 
-Open it to see what is to-do, in progress, and done. Add, move, and complete tasks there until a lossless task-sync implementation is validated.
+Target path after migration: `tasks.md`.
 
----
+Compatibility surface during migration: `kanban.md`.
 
-## Current, durable, source, and historical information
-
-- **`live/` — current state:** active projects, current decisions, dashboards, task summaries, and other information that describes what is true or active now.
-- **`wiki/` — durable knowledge:** reviewed, compiled knowledge intended to remain useful beyond the original capture or source.
-- **`sources/` — evidence:** raw evidence, research, files, books, papers, and other source material that supports later conclusions.
-- **`archive/` — historical material:** completed, superseded, legacy, or otherwise inactive material preserved for history rather than presented as current truth.
-
-Use `live/` for what is current, `wiki/` for what has been distilled, `sources/` for what supports a claim, and `archive/` for what should remain retrievable without appearing active.
+Open the active task surface to see what is to-do, in progress, and done. Add, move, and complete tasks there until a lossless task-sync implementation is validated.
 
 ---
 
-## Where everything lives
+## Target structure
 
-| What | Where |
-|------|-------|
-| New captures (unreviewed) | `capture/inbox/` |
-| Pending system proposals | `wiki/log.md` |
-| Working task board and current task source of truth | `kanban.md` |
-| Mind Steward task summary surface | `live/tasks.md` |
-| Active projects | `live/projects/` |
-| Committed decisions | `live/decisions.md` |
-| Business & org knowledge | `wiki/organisations/` (ProChat, Arkware, Yeshua Academy) |
-| Personal areas (faith, family, health) | `wiki/areas/` |
-| Apologetics research | `sources/research/apologetics/` |
-| Bible studies | `sources/research/bible/` |
-| Theology | `sources/research/theology/` |
-| Marketing & business research | `sources/research/marketing/` · `sources/research/business/` |
-| Books and people | `sources/research/books/` · `sources/research/people/` |
-| Completed or inactive material | `archive/` |
+| What | Target path | Compatibility fallback |
+|------|-------------|------------------------|
+| New captures | `inbox/new/` | `capture/inbox/` |
+| Raw originals | `inbox/raw/` | selected `capture/` or source paths after review |
+| Processed proposals and receipts | `inbox/processed/` | `wiki/log.md` and current reports |
+| Failed intake | `inbox/failed/` | `capture/failed/` |
+| Organizations | `organizations/` | `wiki/organisations/` |
+| Active projects | `projects/` | `live/projects/` |
+| Repos and apps | `repos/` | none; new target area |
+| People | `people/` | selected legacy research/source notes after review |
+| Faith, Bible, theology, apologetics, ministry | `faith/` | `sources/research/bible/`, `sources/research/theology/`, `sources/research/apologetics/`, selected `wiki/areas/` |
+| Durable non-faith knowledge | `knowledge/` | `wiki/` |
+| Non-faith source material | `resources/` | `sources/` |
+| Completed or inactive material | `history/` | `archive/` |
+| AI/coding-agent context | `system/agent-context/` | `router/` |
+| Generated graph output | `system/generated/graph/` | `graphify-out/` and older `.graphify-out/` references |
 
 ---
 
 ## How information moves
 
 ```text
-capture → review → place → use → revalidate → supersede or archive
+inbox → review → propose destination and relations → approve → place → use → revalidate → supersede or preserve in history
 ```
 
-Brain may prepare classifications and proposals. Durable placement or truth changes remain reviewed and approval-gated.
+During migration, old folders remain as compatibility fallbacks. No content has been moved merely because the target folder exists.
+
+Brain may prepare classifications, relation proposals, and destination proposals. Durable placement or truth changes remain reviewed and approval-gated.
 
 ---
 
 ## Technical details
 
-For system contracts, automation boundaries, and generated-output rules, use `system/README.md`.
+For system contracts, automation boundaries, generated-output rules, and migration status, use:
+
+- `system/README.md`
+- `system/folder-contract.md`
+- `system/brain-mind-bridge.md`
+- `system/top-level-folder-redesign-migration-plan.md`
