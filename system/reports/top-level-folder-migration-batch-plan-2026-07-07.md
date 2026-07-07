@@ -93,6 +93,8 @@ Human decision needed:
 
 ### Batch 2 — Task surface migration
 
+**Status:** precheck completed 2026-07-07. See `system/reports/task-surface-migration-precheck-2026-07-07.md`. Decision: do not move `kanban.md` yet; use a later copy-first validation batch before switching the task source of truth.
+
 **Goal:** migrate the human task source from `kanban.md` to `tasks.md` only after task compatibility is validated.
 
 Candidate moves/copies:
