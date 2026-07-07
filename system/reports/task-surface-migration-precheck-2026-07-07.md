@@ -89,8 +89,49 @@ Human decision required before moving `live/tasks.md`.
 | `live/tasks.md` | Report/summary surface; not equivalent to the task board. |
 | `wiki/log.md` | Unrelated dirty file; do not touch. |
 
+## Batch 2A validation copy evidence
+
+**Status:** completed 2026-07-07.
+
+`tasks.md` was created as an exact byte-for-byte validation copy of `kanban.md`.
+
+```text
+kanban.md bytes: 4930
+tasks.md bytes: 4930
+content match: true
+```
+
+`kanban.md` remains the active source of truth until Steve confirms Obsidian task/board behavior and Brain task compatibility are safe on `tasks.md`.
+
+`live/tasks.md` remains a report/summary surface and was not edited.
+
 ## Recommendation
 
-Proceed next with **Batch 2A — copy-first task validation**, not a direct move.
+Proceed next with **Batch 2B — task validation and source-of-truth decision**, not a direct retirement of `kanban.md`.
 
 This keeps the working task board safe while preparing the target `tasks.md` path for validation.
+
+
+
+## Batch 2A copy-first validation — 2026-07-07
+
+`tasks.md` has been created as an exact validation copy of `kanban.md`.
+
+Status:
+
+- `kanban.md` remains the active source of truth for now;
+- `tasks.md` is a validation copy only, not yet the source of truth;
+- `live/tasks.md` remains a report/summary surface;
+- `wiki/log.md` was not touched;
+- no Save-to-Mind behavior changed;
+- continuous processing remains disabled.
+
+Validation evidence:
+
+```text
+kanban.md bytes: 4836
+tasks.md bytes: 4836
+contentMatches: true
+```
+
+Do not retire `kanban.md` until Steve confirms Obsidian/Kanban behavior is acceptable on `tasks.md` and Brain task compatibility checks pass.
