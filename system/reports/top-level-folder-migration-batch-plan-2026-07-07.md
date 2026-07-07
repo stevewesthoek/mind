@@ -150,6 +150,8 @@ Validation:
 
 ### Batch 4 — Organizations migration
 
+**Status:** precheck completed 2026-07-07. See `system/reports/organizations-migration-precheck-2026-07-07.md`. Recommendation: start with Batch 4A moving only `arkware/` and `yeshua-academy/`; hold ProChat and root docs for separate decisions.
+
 **Goal:** move organization/business knowledge from legacy `wiki/organisations/` to `organizations/`.
 
 Candidate move:
