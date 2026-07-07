@@ -1,4 +1,4 @@
-# Live Decisions
+# Decisions
 
 Current committed decisions that should guide future work.
 

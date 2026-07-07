@@ -128,3 +128,27 @@ Do not move `live/tasks.md`, `live/business.md`, `live/video.md`, `live/workflow
 - `wiki/organisations/prochat/pitch-decks/` untouched;
 - Save-to-Mind unchanged;
 - continuous processing disabled.
+
+
+
+## Batch 3C completion — 2026-07-07
+
+The two likely-safe root live files were moved:
+
+```text
+live/decisions.md -> knowledge/decisions.md
+live/dashboard.md -> system/reports/dashboard.md
+```
+
+Updates made:
+
+- `knowledge/decisions.md` title changed from `Live Decisions` to `Decisions`;
+- `system/reports/dashboard.md` links were updated for the new `system/reports/` location;
+- held files remained unmoved: `live/projects.md`, `live/business.md`, `live/tasks.md`, `live/video.md`, and `live/workflows.md`.
+
+Boundaries preserved:
+
+- `wiki/log.md` untouched;
+- `wiki/organisations/prochat/pitch-decks/` untouched;
+- Save-to-Mind unchanged;
+- continuous processing disabled.

@@ -117,7 +117,7 @@ Human decision needed:
 
 ### Batch 3 — Active projects migration
 
-**Status:** Batch 3B precheck completed 2026-07-07. See `system/reports/active-projects-migration-precheck-2026-07-07.md` and `system/reports/root-live-files-migration-decision-precheck-2026-07-07.md`. The two clear `live/projects/` subfolders moved to `projects/`; root `live/*.md` files remain decision-gated, with `live/decisions.md` and `live/dashboard.md` identified as likely-safe later moves.
+**Status:** Batch 3C completed 2026-07-07. See `system/reports/active-projects-migration-precheck-2026-07-07.md` and `system/reports/root-live-files-migration-decision-precheck-2026-07-07.md`. The two clear `live/projects/` subfolders moved to `projects/`; `live/decisions.md` moved to `knowledge/decisions.md`; `live/dashboard.md` moved to `system/reports/dashboard.md`; remaining root `live/*.md` files are decision-gated.
 
 **Goal:** move active project state from `live/projects/` into `projects/`.
 
@@ -139,8 +139,8 @@ Related `live/` files needing classification:
 | `live/video.md` | `projects/`, `repos/`, `knowledge/`, or `resources/` | Human review needed because it is large/current. |
 | `live/workflows.md` | `knowledge/` or `system/` | Human review needed. |
 | `live/sessions.md` | `history/`, `resources/meetings/`, or `system/reports/` | Human review needed. |
-| `live/decisions.md` | `knowledge/decisions.md` | Likely move after decision-link review. |
-| `live/dashboard.md` | `system/reports/dashboard.md` | Likely move after Brain Console/report validation. |
+| `live/decisions.md` | `knowledge/decisions.md` | Completed in Batch 3C; moved without changing accepted decision text beyond title. |
+| `live/dashboard.md` | `system/reports/dashboard.md` | Completed in Batch 3C; moved as Brain Console Markdown fallback with updated links. |
 
 Validation:
 
