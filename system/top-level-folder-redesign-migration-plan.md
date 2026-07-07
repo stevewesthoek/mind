@@ -244,6 +244,21 @@ Summary:
 - Brain generated-runtime scan: 57 runtime files scanned; 24 generated files matched old-path tokens.
 - Conclusion: do not start with file moves; first implement Brain path compatibility and tests, then migrate Save-to-Mind and Mind folders in small validated slices.
 
+## Phase 4 batch-plan evidence
+
+Initial content migration batch plan:
+
+```text
+system/reports/top-level-folder-migration-batch-plan-2026-07-07.md
+```
+
+Summary:
+
+- current legacy content groups were inventoried read-only;
+- exact migration batches were proposed without moving files;
+- human-decision paths and legacy-hold paths were identified;
+- recommended first move batch is `router/` → `system/agent-context/` because it is small, bounded, and low-truth-risk.
+
 ## Phase 3 structure-prep evidence
 
 Initial target folders now have README-backed placeholders before any content moves:
