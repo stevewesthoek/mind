@@ -75,7 +75,7 @@ The target folders now exist with README files, but legacy folders remain active
 | `sources/research/apologetics/` | `faith/apologetics/` or `faith/resources/` | Distinguish conclusions from source material. |
 | `archive/` | `history/` | Historical content moves only after validation. |
 | `kanban.md` | `tasks.md` | Switch only after lossless task migration is validated. |
-| `router/` | `system/agent-context/` | Move only after coding-agent/root entrypoints validate. |
+| `router/` | `system/agent-context/` | Batch 1 moved tracked agent-context files to `system/agent-context/`; legacy `router/` references are now compatibility/history only until validation cleanup. |
 | `graphify-out/` and `.graphify-out/` references | `system/generated/graph/` | Generated path is blocked for manual writes; use docs/config migration before generating output. |
 
 ## Root write rule

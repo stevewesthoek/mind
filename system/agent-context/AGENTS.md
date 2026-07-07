@@ -10,11 +10,11 @@ Every AI agent working with this repo must start here.
 
 Then read, in this order:
 
-1. `router/00-start-here.md` — high-level map and operating model.
-2. `router/00-current-context.md` — current priorities and active context.
-3. `router/00-memory-map.md` — where to search for the user's request.
-4. `router/README.md` — full vault/automation documentation when needed.
-5. `router/CLAUDE.md` — Claude-specific compatibility notes; also useful to other agents.
+1. `system/agent-context/00-start-here.md` — high-level map and operating model.
+2. `system/agent-context/00-current-context.md` — current priorities and active context.
+3. `system/agent-context/00-memory-map.md` — where to search for the user's request.
+4. `system/agent-context/README.md` — full vault/automation documentation when needed.
+5. `system/agent-context/CLAUDE.md` — Claude-specific compatibility notes; also useful to other agents.
 
 Do not scan the whole repo blindly. Use the memory map, then search/read only the relevant files.
 
@@ -41,9 +41,9 @@ TODAY.md
 Do not rename or replace these router files unless explicitly asked:
 
 ```text
-router/AGENTS.md
-router/CLAUDE.md
-router/README.md
+system/agent-context/AGENTS.md
+system/agent-context/CLAUDE.md
+system/agent-context/README.md
 ```
 
 Do not break existing automations:
@@ -185,8 +185,8 @@ A good session:
 
 ## Related Files
 
-- `router/00-start-here.md` — concise human/AI orientation.
-- `router/00-current-context.md` — current priorities and active focus.
-- `router/00-memory-map.md` — routing map for context retrieval.
-- `router/README.md` — full vault documentation.
-- `router/CLAUDE.md` — Claude-specific notes.
+- `system/agent-context/00-start-here.md` — concise human/AI orientation.
+- `system/agent-context/00-current-context.md` — current priorities and active focus.
+- `system/agent-context/00-memory-map.md` — routing map for context retrieval.
+- `system/agent-context/README.md` — full vault documentation.
+- `system/agent-context/CLAUDE.md` — Claude-specific notes.

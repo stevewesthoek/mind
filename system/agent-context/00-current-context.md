@@ -31,7 +31,7 @@ capture/daily/    Daily scratch/notes
 live/             Active work surfaces (tasks, projects, decisions, workflows)
 wiki/             Compiled durable knowledge
 sources/          Raw evidence, research notes, source material
-router/           Mind Steward contract and rules
+system/agent-context/           Mind Steward contract and rules
 archive/          Completed or inactive material
 archive/old/      Read-only backups
 ```

@@ -30,13 +30,15 @@ If the user asks what Steve believes, plans, knows, is building, or has decided,
 ## Folder Structure
 
 ```text
-capture/   Raw incoming captures (inbox/, daily/, failed/)
-live/      Active work surfaces (tasks, projects, decisions, workflows)
-wiki/      Compiled durable knowledge (organisations, areas, faith, business, etc.)
-sources/   Raw evidence and research notes (research/notes/bible, apologetics, etc.)
-router/    Mind Steward contract, rules, and maintenance definitions
-archive/   Completed or inactive material
-brain/     AI-system project context lives in the Brain repo, including the video orchestrator
+inbox/                Target intake lifecycle; Save-to-Mind still uses legacy capture/inbox/ until switched
+projects/             Target active project home; legacy live/projects/ remains during migration
+organizations/        Target business/ministry/non-profit entity home; legacy wiki/organisations/ remains during migration
+faith/                Bible, theology, apologetics, ministry, and studies
+knowledge/            Durable non-faith knowledge; legacy wiki/ remains during migration
+resources/            Source/reference material; legacy sources/ remains during migration
+history/              Completed or inactive material; legacy archive/ remains during migration
+system/agent-context/ Mind Steward, AI startup, rules, taxonomy, and maintenance context
+brain/                AI-system project context lives in the Brain repo, including the video orchestrator
 ```
 
 ## Daily Human Interface
@@ -45,7 +47,8 @@ Steve usually works from:
 
 ```text
 home.md
-kanban.md
+tasks.md after task migration
+kanban.md during compatibility
 ```
 
 Agents should not rewrite `kanban.md` unless explicitly asked and should preserve automation-sensitive frontmatter in task files.
@@ -55,20 +58,26 @@ Agents should not rewrite `kanban.md` unless explicitly asked and should preserv
 Agents should use:
 
 ```text
-AGENTS.md
-00-start-here.md
-00-current-context.md
-00-memory-map.md
+system/agent-context/AGENTS.md
+system/agent-context/00-start-here.md
+system/agent-context/00-current-context.md
+system/agent-context/00-memory-map.md
 ```
 
 Then retrieve only relevant files.
 
 ## Research Home
 
-Research lives in:
+Research and source material target:
 
 ```text
-sources/research/
+resources/research/
+```
+
+Faith-specific Bible, theology, apologetics, ministry, and study material target:
+
+```text
+faith/
 ```
 
 The cloud video orchestrator implementation and release docs have moved to:
@@ -108,11 +117,11 @@ Do not duplicate canonical organisation truth into research notes. Link to it or
 
 Use safe defaults:
 
-- Capture first: `capture/inbox/`
-- Research/reference: `sources/research/`
-- Final decisions: `wiki/organisations/` or `live/decisions.md`
-- Tasks: `kanban.md`
-- Completed history: `archive/`
+- Capture first: target `inbox/new/`; compatibility fallback `capture/inbox/`
+- Research/reference: target `resources/`; faith-specific material under `faith/`
+- Final decisions: target `knowledge/decisions.md`; compatibility fallback `live/decisions.md`
+- Tasks: target `tasks.md`; compatibility fallback `kanban.md`
+- Completed history: target `history/`; compatibility fallback `archive/`
 
 Ask before moving, deleting, renaming, bulk editing, or changing automation-sensitive files.
 

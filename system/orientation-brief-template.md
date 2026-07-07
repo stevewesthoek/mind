@@ -19,8 +19,8 @@ Prefer these existing Mind surfaces:
 
 | Orientation need | Preferred source |
 |---|---|
-| Current context | `router/00-current-context.md` |
-| Retrieval map | `router/00-memory-map.md` |
+| Current context | `system/agent-context/00-current-context.md` |
+| Retrieval map | `system/agent-context/00-memory-map.md` |
 | Human entrypoint | `home.md` |
 | Active priorities and tasks | `kanban.md` |
 | Proposals and review log | `wiki/log.md` |

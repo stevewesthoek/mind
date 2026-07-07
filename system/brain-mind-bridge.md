@@ -328,10 +328,10 @@ Brain may retrieve approved Mind context for:
 
 Retrieval rules:
 
-1. Start from `router/AGENTS.md`.
-2. Read `router/00-start-here.md`.
-3. Read `router/00-current-context.md` when current state matters.
-4. Use `router/00-memory-map.md`.
+1. Start from `system/agent-context/AGENTS.md`.
+2. Read `system/agent-context/00-start-here.md`.
+3. Read `system/agent-context/00-current-context.md` when current state matters.
+4. Use `system/agent-context/00-memory-map.md`.
 5. Search/read only the smallest relevant area.
 6. State when information is missing, stale, or contradictory.
 7. Do not treat raw research as committed strategy.

@@ -1,9 +1,22 @@
 # Agent Context
 
-Target home for AI and coding-agent context entrypoints after migration.
+Target home for AI and coding-agent context entrypoints.
 
-This folder will replace the legacy `router/` location once all Brain, IDE, and Obsidian references have been migrated and validated.
+This folder now contains the files formerly stored under legacy `router/`.
 
-Expected future contents include current context, memory map, startup guide, rules, taxonomy, and Mind Steward handoff notes.
+Primary entrypoints:
 
-Compatibility note: legacy `router/` remains active until root entrypoints, Brain compatibility, and coding-agent workflows validate this target path.
+- `AGENTS.md`
+- `00-start-here.md`
+- `00-current-context.md`
+- `00-memory-map.md`
+- `current.md`
+- `map.md`
+- `rules.md`
+- `taxonomy.md`
+- `maintenance.md`
+- `mind-steward.md`
+
+`router-README.md` preserves the old router README for migration reference without overwriting this target README.
+
+Compatibility note: Brain supports this target path. Legacy `router/` references may remain in historical docs, migration plans, and compatibility notes until validation and cleanup are complete.

@@ -257,7 +257,7 @@ Summary:
 - current legacy content groups were inventoried read-only;
 - exact migration batches were proposed without moving files;
 - human-decision paths and legacy-hold paths were identified;
-- recommended first move batch is `router/` → `system/agent-context/` because it is small, bounded, and low-truth-risk.
+- Batch 1 completed: tracked `router/` agent-context files moved to `system/agent-context/`; `router/README.md` preserved as `system/agent-context/router-README.md`.
 
 ## Phase 3 structure-prep evidence
 

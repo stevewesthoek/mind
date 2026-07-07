@@ -27,7 +27,7 @@ Use this before answering Steve-specific questions.
 | Old/completed work | `archive/` | `archive/old/` |
 | Raw captures | `capture/inbox/` | `capture/failed/` |
 | Templates | `wiki/templates/` | existing files of same type |
-| Router/automation rules | `router/` | `AGENTS.md` |
+| Router/automation rules | `system/agent-context/` | `AGENTS.md` |
 
 ## Organisation Routing
 

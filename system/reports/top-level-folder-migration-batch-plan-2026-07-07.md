@@ -58,6 +58,8 @@ No file moves.
 
 ### Batch 1 — Agent context migration
 
+**Status:** completed 2026-07-07. The legacy `router/` files were moved into `system/agent-context/`; `router/README.md` was preserved as `system/agent-context/router-README.md` so the target README was not overwritten.
+
 **Goal:** move AI/coding-agent context from legacy `router/` to target `system/agent-context/`.
 
 Candidate moves:
