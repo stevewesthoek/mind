@@ -108,3 +108,27 @@ live/projects/tiny-word-play/ -> projects/tiny-word-play/
 ```
 
 Do not move root `live/*.md` files until the human-decision items above are resolved.
+
+
+
+## Batch 3A completion — 2026-07-07
+
+The two clear active project folders were moved to the target `projects/` root:
+
+```text
+live/projects/prochat-qa-memory/ -> projects/prochat-qa-memory/
+live/projects/tiny-word-play/ -> projects/tiny-word-play/
+```
+
+Validation evidence:
+
+- eight project files are present under `projects/`;
+- the legacy source project folders no longer exist;
+- root `live/*.md` files were not moved;
+- one stale self-location field was updated in `projects/prochat-qa-memory/STRATEGY-PLAN.md`;
+- `wiki/log.md` was not touched;
+- unrelated `wiki/organisations/prochat/pitch-decks/` was not touched;
+- Save-to-Mind remains unchanged;
+- continuous processing remains disabled.
+
+Remaining Batch 3 decisions are still limited to root `live/*.md` files.

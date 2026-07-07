@@ -6,7 +6,7 @@
 **Review after:** 2026-07-13  
 **Freshness risk:** medium  
 **Owner:** Steve Westhoek  
-**Location:** `live/projects/prochat-qa-memory/STRATEGY-PLAN.md`
+**Location:** `projects/prochat-qa-memory/STRATEGY-PLAN.md`
 
 ## 1. Executive summary
 
