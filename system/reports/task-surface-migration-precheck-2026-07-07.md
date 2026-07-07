@@ -135,3 +135,20 @@ contentMatches: true
 ```
 
 Do not retire `kanban.md` until Steve confirms Obsidian/Kanban behavior is acceptable on `tasks.md` and Brain task compatibility checks pass.
+
+
+
+## Batch 2B validation review — 2026-07-07
+
+Validation review note:
+
+```text
+system/reports/task-source-validation-review-2026-07-07.md
+```
+
+Decision:
+
+- `tasks.md` and `kanban.md` still match exactly;
+- `tasks.md` is not ready to replace `kanban.md` immediately;
+- `kanban.md` remains the source of truth until Steve validates Obsidian/Kanban behavior on `tasks.md` and Brain task compatibility checks pass;
+- `live/tasks.md` remains a report/summary surface.
