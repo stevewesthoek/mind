@@ -117,7 +117,7 @@ Human decision needed:
 
 ### Batch 3 — Active projects migration
 
-**Status:** Batch 3A completed 2026-07-07. See `system/reports/active-projects-migration-precheck-2026-07-07.md`. The two clear `live/projects/` subfolders moved to `projects/`; ambiguous root `live/*.md` files remain for separate human decisions.
+**Status:** Batch 3B precheck completed 2026-07-07. See `system/reports/active-projects-migration-precheck-2026-07-07.md` and `system/reports/root-live-files-migration-decision-precheck-2026-07-07.md`. The two clear `live/projects/` subfolders moved to `projects/`; root `live/*.md` files remain decision-gated, with `live/decisions.md` and `live/dashboard.md` identified as likely-safe later moves.
 
 **Goal:** move active project state from `live/projects/` into `projects/`.
 

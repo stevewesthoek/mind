@@ -132,3 +132,19 @@ Validation evidence:
 - continuous processing remains disabled.
 
 Remaining Batch 3 decisions are still limited to root `live/*.md` files.
+
+
+
+## Batch 3B root live files decision precheck — 2026-07-07
+
+Decision note:
+
+```text
+system/reports/root-live-files-migration-decision-precheck-2026-07-07.md
+```
+
+Summary:
+
+- root `live/*.md` files were inspected but not moved or edited;
+- `live/decisions.md` and `live/dashboard.md` are the only likely-safe later moves;
+- `live/projects.md`, `live/business.md`, `live/tasks.md`, `live/video.md`, and `live/workflows.md` remain on hold pending human decisions or later batch dependencies.
