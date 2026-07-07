@@ -118,7 +118,7 @@ sources/research/apologetics/
 Canonical Yeshua Academy ministry truth belongs under:
 
 ```text
-wiki/organisations/yeshua-academy/
+organizations/yeshua-academy/
 ```
 
 Do not overwrite Yeshua Academy canonical files with raw research. Research should feed strategy after review.
@@ -136,7 +136,7 @@ Canonical ProChat or Arkware strategy belongs under:
 
 ```text
 wiki/organisations/prochat/
-wiki/organisations/arkware/
+organizations/arkware/
 ```
 
 ## Natural Language Workflow

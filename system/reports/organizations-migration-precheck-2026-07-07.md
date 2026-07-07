@@ -108,3 +108,27 @@ Why:
 - `wiki/organisations/prochat/pitch-decks/` untouched;
 - Save-to-Mind unchanged;
 - continuous processing disabled.
+
+
+
+## Batch 4A completion — 2026-07-07
+
+The two small organization folders were moved to the target `organizations/` root:
+
+```text
+wiki/organisations/arkware/ -> organizations/arkware/
+wiki/organisations/yeshua-academy/ -> organizations/yeshua-academy/
+```
+
+Validation evidence:
+
+- `organizations/arkware/` contains the five expected files;
+- `organizations/yeshua-academy/` contains the five expected files;
+- legacy source folders no longer exist;
+- active agent-context references were updated to the new target paths;
+- `wiki/log.md` was not touched;
+- `wiki/organisations/prochat/pitch-decks/` was not touched;
+- Save-to-Mind remains unchanged;
+- continuous processing remains disabled.
+
+Remaining organization migration work stays focused on root organization docs and ProChat-specific content.

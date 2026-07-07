@@ -107,8 +107,8 @@ Important organisation strategy lives under:
 
 ```text
 wiki/organisations/prochat/
-wiki/organisations/arkware/
-wiki/organisations/yeshua-academy/
+organizations/arkware/
+organizations/yeshua-academy/
 ```
 
 Do not duplicate canonical organisation truth into research notes. Link to it or update it only when the user asks for a committed change.

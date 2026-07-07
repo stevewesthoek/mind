@@ -92,8 +92,8 @@ Known organisation folders:
 
 ```text
 wiki/organisations/prochat/
-wiki/organisations/arkware/
-wiki/organisations/yeshua-academy/
+organizations/arkware/
+organizations/yeshua-academy/
 ```
 
 Use these folders for committed strategy, positioning, messaging, offers, brand truth, ministry truth, and organisational decisions.
@@ -103,7 +103,7 @@ Use these folders for committed strategy, positioning, messaging, offers, brand 
 Yeshua Academy context lives in:
 
 ```text
-wiki/organisations/yeshua-academy/
+organizations/yeshua-academy/
 ```
 
 Theological studies and ongoing responsibility context lives in:

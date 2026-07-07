@@ -38,8 +38,8 @@ Use this before answering Steve-specific questions.
 | ProChat growth/marketing | `wiki/organisations/prochat/growth/`, then `sources/research/marketing/` |
 | ProChat YouTube/content | `wiki/organisations/prochat/youtube/` |
 | ProChat legal | `wiki/organisations/prochat/legal/` |
-| Arkware | `wiki/organisations/arkware/` |
-| Yeshua Academy | `wiki/organisations/yeshua-academy/` |
+| Arkware | `organizations/arkware/` |
+| Yeshua Academy | `organizations/yeshua-academy/` |
 | Organisation ecosystem | `wiki/organisations/ecosystem.md` |
 | Organisation conventions | `wiki/organisations/conventions.md` |
 
@@ -74,7 +74,7 @@ Use both wiki and sources, but do not mix them up.
 
 | Need | Location |
 |---|---|
-| Canonical Yeshua Academy ministry truth | `wiki/organisations/yeshua-academy/` |
+| Canonical Yeshua Academy ministry truth | `organizations/yeshua-academy/` |
 | Ongoing theological responsibility area | `wiki/areas/theological-studies/` |
 | Bible research notes | `sources/research/bible/` |
 | Theology research notes | `sources/research/theology/` |
@@ -177,7 +177,7 @@ live/tasks.md
 Search:
 
 ```text
-wiki/organisations/yeshua-academy/
+organizations/yeshua-academy/
 sources/research/bible/
 sources/research/theology/
 ```
