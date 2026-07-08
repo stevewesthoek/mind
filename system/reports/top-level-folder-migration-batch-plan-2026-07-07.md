@@ -210,6 +210,8 @@ Human decision needed:
 
 **Batch 6B status:** personal/private and people-context migration precheck completed 2026-07-08. See `system/reports/personal-private-general-knowledge-migration-precheck-2026-07-08.md`. `wiki/family.md`, `wiki/finance.md`, `wiki/health.md`, `wiki/people.md`, and `wiki/areas/personal-identity/` were classified as privacy-sensitive or human-decision content. No content was moved.
 
+**Batch 6C status:** system/template migration precheck completed 2026-07-08. See `system/reports/system-template-general-knowledge-migration-precheck-2026-07-08.md`. `wiki/system/repo-boundaries.md` was classified as system/process contract content for `system/repo-boundaries.md`, and `wiki/templates/` was classified as template content for `system/templates/`. No content was moved.
+
 Candidate moves:
 
 | From | To |
