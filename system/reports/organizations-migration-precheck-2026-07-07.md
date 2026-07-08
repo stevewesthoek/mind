@@ -169,3 +169,22 @@ wiki/organisations/README.md
 wiki/organisations/prochat/
 wiki/organisations/prochat/pitch-decks/  # unrelated untracked, still untouched
 ```
+
+
+
+## Batch 4C ProChat core precheck — 2026-07-08
+
+Precheck note:
+
+```text
+system/reports/prochat-core-migration-precheck-2026-07-08.md
+```
+
+Outcome:
+
+- no ProChat content was moved or edited;
+- ProChat core in scope is `README.md`, `growth/`, and `legal/`;
+- `brand/`, `playbooks/`, `youtube/`, and `pitch-decks/` remain held;
+- `.DS_Store` was identified as local metadata and should not be migrated as knowledge;
+- target paths under `organizations/prochat/` are absent;
+- recommended next move batch is Batch 4C1 — ProChat core move, after explicit approval or Codex-assisted exact moves if Workbench policy blocks legacy paths.
