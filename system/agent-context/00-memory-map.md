@@ -53,11 +53,11 @@ sources/research/
 
 | User asks about | Search/create under |
 |---|---|
-| Bible passage study | `sources/research/bible/passages/` |
-| Bible topic | `sources/research/bible/topics/` |
-| Bible word study | `sources/research/bible/word-studies/` |
-| Theological question | `sources/research/bible/theological-questions/` or `sources/research/theology/` |
-| Comparative theological views | `sources/research/bible/comparative-views/` |
+| Bible passage study | `faith/resources/bible/passages/` |
+| Bible topic | `faith/resources/bible/topics/` |
+| Bible word study | `faith/resources/bible/word-studies/` |
+| Theological question | `faith/resources/bible/theological-questions/` or `sources/research/theology/` |
+| Comparative theological views | `faith/resources/bible/comparative-views/` |
 | Apologetics | `sources/research/apologetics/` |
 | Steve's apologetics voice/debate style | `sources/research/apologetics/steve-apologetics-voice-and-debate-standard.md` |
 | Marketing research | `sources/research/marketing/` |
@@ -76,10 +76,10 @@ Use both wiki and sources, but do not mix them up.
 |---|---|
 | Canonical Yeshua Academy ministry truth | `organizations/yeshua-academy/` |
 | Ongoing theological responsibility area | `wiki/areas/theological-studies/` |
-| Bible research notes | `sources/research/bible/` |
+| Bible research notes | `faith/resources/bible/` |
 | Theology research notes | `sources/research/theology/` |
 | Apologetics research notes | `sources/research/apologetics/` |
-| Sermon or Bible-study drafts | `sources/research/bible/` unless promoted to a project |
+| Sermon or Bible-study drafts | `faith/resources/bible/` unless promoted to a project |
 
 Rule:
 
@@ -159,7 +159,7 @@ Then answer from the most relevant files.
 Use:
 
 ```text
-sources/research/bible/comparative-views/
+faith/resources/bible/comparative-views/
 ```
 
 If saving, create a research note there. Do not alter Yeshua Academy strategy unless asked.
@@ -178,7 +178,7 @@ Search:
 
 ```text
 organizations/yeshua-academy/
-sources/research/bible/
+faith/resources/bible/
 sources/research/theology/
 ```
 

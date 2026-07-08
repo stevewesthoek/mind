@@ -172,7 +172,7 @@ Human decision needed:
 
 ### Batch 5 — Faith-first migration
 
-**Status:** Batch 5C Bible source resources move precheck completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`, `system/reports/faith-source-subinventory-2026-07-08.md`, and `system/reports/bible-source-resources-move-precheck-2026-07-08.md`. Faith target folders are README-backed; no legacy faith, source, wiki, or area content moved yet. Recommended next work is Batch 5C1 source-preserving Bible resources move, after approval.
+**Status:** Batch 5C1 Bible source resources move completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`, `system/reports/faith-source-subinventory-2026-07-08.md`, and `system/reports/bible-source-resources-move-precheck-2026-07-08.md`. Bible source resources moved source-preservingly from `sources/research/bible/` to `faith/resources/bible/`; theology, apologetics, wiki faith, and area content remain unmoved.
 
 **Goal:** move Bible, theology, apologetics, ministry, and study material into `faith/`.
 
@@ -180,7 +180,7 @@ Candidate moves:
 
 | From | To |
 |------|----|
-| `sources/research/bible/` | `faith/bible/` or `faith/resources/` |
+| `sources/research/bible/` | completed to `faith/resources/bible/` in Batch 5C1 |
 | `sources/research/theology/` | `faith/theology/` or `faith/resources/` |
 | `sources/research/apologetics/` | `faith/apologetics/` or `faith/resources/` |
 | `wiki/faith.md` | `faith/README.md` merge or `faith/index.md` |

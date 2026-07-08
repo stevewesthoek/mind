@@ -1,8 +1,8 @@
 # Bible Source Resources Move Precheck — 2026-07-08
 
 **Task:** Task O — Batch 5C Bible source resources move precheck  
-**Status:** precheck only  
-**Boundary:** no legacy Bible source content moved or edited in this batch.
+**Status:** Batch 5C1 completed after precheck
+**Boundary:** only Bible source resources moved to `faith/resources/bible/`; source/provenance classification preserved.
 
 ## Proposed source-preserving move
 
@@ -136,12 +136,40 @@ Do not change source meaning while updating references. New target paths should 
 8. Keep continuous processing disabled.
 9. Stage only moved Bible source resource files and related active-reference/report updates.
 
-## Boundaries preserved in this precheck
+## Boundaries preserved in Batch 5C1
 
-- No Bible source content moved.
-- No Bible source content edited.
-- No legacy faith/source/wiki content moved.
+- Only the approved Bible source resource package moved.
+- Bible source content was not promoted into `faith/bible/`, `faith/topics/`, `faith/studies/`, or `faith/questions/`.
+- `sources/research/theology/` and `sources/research/apologetics/` were not moved.
+- `wiki/faith.md`, `wiki/areas/personal-identity/theology.md`, and `wiki/areas/theological-studies/` were not moved or edited.
 - `wiki/log.md` untouched.
 - `wiki/organisations/prochat/pitch-decks/` untouched.
 - Save-to-Mind unchanged.
 - Continuous processing disabled.
+
+## Batch 5C1 completion notes
+
+Completed source-preserving move:
+
+```text
+sources/research/bible/ -> faith/resources/bible/
+```
+
+The source tree contained only the approved Bible resource paths:
+
+```text
+sources/research/bible/README.md
+sources/research/bible/comparative-views/
+sources/research/bible/passages/
+sources/research/bible/theological-questions/
+sources/research/bible/topics/
+sources/research/bible/word-studies/
+```
+
+Active reference updates completed in:
+
+```text
+system/agent-context/00-memory-map.md
+system/agent-context/00-current-context.md
+system/agent-context/AGENTS.md
+```

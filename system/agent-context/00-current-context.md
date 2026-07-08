@@ -115,7 +115,7 @@ wiki/areas/theological-studies/
 Bible/theology/apologetics research lives in:
 
 ```text
-sources/research/bible/
+faith/resources/bible/
 sources/research/theology/
 sources/research/apologetics/
 ```

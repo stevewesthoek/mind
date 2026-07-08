@@ -110,7 +110,7 @@ Use `wiki/organisations/` only when research becomes a committed strategy, minis
 Bible and theology research usually belongs under:
 
 ```text
-sources/research/bible/
+faith/resources/bible/
 sources/research/theology/
 sources/research/apologetics/
 ```
