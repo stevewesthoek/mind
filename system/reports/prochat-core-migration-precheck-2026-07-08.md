@@ -1,8 +1,8 @@
 # ProChat Core Migration Precheck — 2026-07-08
 
 **Task:** Task O — Batch 4C ProChat core organization precheck  
-**Status:** planning/precheck only  
-**Boundary:** no ProChat content moved or edited in this batch.
+**Status:** Batch 4C1 completed after precheck
+**Boundary:** only ProChat core README, `growth/`, and `legal/` moved; held legacy ProChat folders remain in place.
 
 ## Files and folders inspected
 
@@ -116,11 +116,44 @@ wiki/organisations/prochat/pitch-decks/
 8. Keep continuous processing disabled.
 9. Stage only moved ProChat core files and related docs/reference updates.
 
-## Boundaries preserved in Batch 4C
+## Boundaries preserved in Batch 4C1
 
-- no ProChat content moved;
-- no ProChat content edited;
+- only ProChat core README, `growth/`, and `legal/` moved;
+- active references updated only for moved ProChat core paths;
 - `wiki/log.md` untouched;
 - `wiki/organisations/prochat/pitch-decks/` untouched;
+- `wiki/organisations/prochat/.DS_Store` untouched;
+- `wiki/organisations/prochat/brand/` untouched;
+- `wiki/organisations/prochat/playbooks/` untouched;
+- `wiki/organisations/prochat/youtube/` untouched;
 - Save-to-Mind unchanged;
 - continuous processing disabled.
+
+## Batch 4C1 completion notes
+
+Completed move set:
+
+```text
+wiki/organisations/prochat/README.md -> organizations/prochat/README.md
+wiki/organisations/prochat/growth/ -> organizations/prochat/growth/
+wiki/organisations/prochat/legal/ -> organizations/prochat/legal/
+```
+
+Reference updates completed in:
+
+```text
+system/agent-context/00-memory-map.md
+organizations/prochat/README.md
+organizations/prochat/legal/README.md
+wiki/organisations/prochat/youtube/README.md
+```
+
+Held paths intentionally left in legacy location:
+
+```text
+wiki/organisations/prochat/.DS_Store
+wiki/organisations/prochat/brand/
+wiki/organisations/prochat/playbooks/
+wiki/organisations/prochat/youtube/
+wiki/organisations/prochat/pitch-decks/
+```

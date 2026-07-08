@@ -33,11 +33,11 @@ Use this before answering Steve-specific questions.
 
 | User asks about | Search first |
 |---|---|
-| ProChat | `wiki/organisations/prochat/` |
+| ProChat | `organizations/prochat/`, then `wiki/organisations/prochat/` |
 | ProChat brand/messaging | `wiki/organisations/prochat/brand/` |
-| ProChat growth/marketing | `wiki/organisations/prochat/growth/`, then `sources/research/marketing/` |
+| ProChat growth/marketing | `organizations/prochat/growth/`, then `sources/research/marketing/` |
 | ProChat YouTube/content | `wiki/organisations/prochat/youtube/` |
-| ProChat legal | `wiki/organisations/prochat/legal/` |
+| ProChat legal | `organizations/prochat/legal/` |
 | Arkware | `organizations/arkware/` |
 | Yeshua Academy | `organizations/yeshua-academy/` |
 | Organisation ecosystem | `organizations/ecosystem.md` |
@@ -97,7 +97,7 @@ Do not overwrite strategy with raw research.
 | Marketing research | `sources/research/marketing/` |
 | Business research | `sources/research/business/` |
 | Brand truth | `wiki/organisations/<org>/brand/` |
-| Growth playbooks | `wiki/organisations/<org>/growth/` |
+| Growth playbooks | `organizations/<org>/growth/` or `wiki/organisations/<org>/growth/` if not migrated |
 | Offers | `wiki/organisations/<org>/offers.md` or brand/offer files |
 | Active campaign/project | `live/projects.md` |
 | Atomic task | `live/tasks.md` |

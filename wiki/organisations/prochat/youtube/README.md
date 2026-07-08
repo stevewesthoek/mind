@@ -135,13 +135,13 @@ wiki/organisations/prochat/brand/
 Growth execution remains in:
 
 ```text
-wiki/organisations/prochat/growth/
+organizations/prochat/growth/
 ```
 
 Legal and licensing language remains in:
 
 ```text
-wiki/organisations/prochat/legal/
+organizations/prochat/legal/
 ```
 
 YouTube documents may translate those sources into video execution, but they must not invent product, legal, licensing, privacy, or commercial commitments.

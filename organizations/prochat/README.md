@@ -15,28 +15,28 @@ ProChat currently has exactly two products.
 
 ## Structure
 
-- `brand/` — canonical philosophy, naming, product architecture, positioning, roadmap, and market context
 - `growth/` — channel and growth execution documents
 - `legal/` — privacy, terms, and future licensing documents
-- `playbooks/` — strategic reference playbooks and assets
-- `youtube/` — ProChat YouTube channel system
+- `wiki/organisations/prochat/brand/` — canonical philosophy, naming, product architecture, positioning, roadmap, and market context
+- `wiki/organisations/prochat/playbooks/` — strategic reference playbooks and assets
+- `wiki/organisations/prochat/youtube/` — ProChat YouTube channel system
 
 ## Recommended reading order
 
 Start here:
 
-1. `brand/README.md` — canonical brand index
-2. `brand/product-naming-architecture.md` — company, product, and edition naming
-3. `brand/product-strategy.md` — philosophy, product boundary, QA focus, and business stage
-4. `brand/product-architecture.md` — relationship between Memory and Workbench
-5. `brand/prochat-workbench-strategy.md` — canonical Workbench strategy, autonomy, Codex, MCP, and capability direction
-6. `brand/prochat-memory-technical-definition.md` — local Markdown-first memory architecture
-7. `brand/product-roadmap.md` — beta and product-development sequence
-8. `brand/future-capabilities.md` — capabilities that are explicitly not current products
-9. `brand/company-overview.md` — concise company overview
-10. `brand/category-definition.md` — product categories and differentiation
-11. `brand/narrative.md` — company story and belief system
-12. `brand/brand-ruleset.md` — approved public language
+1. `wiki/organisations/prochat/brand/README.md` — canonical brand index
+2. `wiki/organisations/prochat/brand/product-naming-architecture.md` — company, product, and edition naming
+3. `wiki/organisations/prochat/brand/product-strategy.md` — philosophy, product boundary, QA focus, and business stage
+4. `wiki/organisations/prochat/brand/product-architecture.md` — relationship between Memory and Workbench
+5. `wiki/organisations/prochat/brand/prochat-workbench-strategy.md` — canonical Workbench strategy, autonomy, Codex, MCP, and capability direction
+6. `wiki/organisations/prochat/brand/prochat-memory-technical-definition.md` — local Markdown-first memory architecture
+7. `wiki/organisations/prochat/brand/product-roadmap.md` — beta and product-development sequence
+8. `wiki/organisations/prochat/brand/future-capabilities.md` — capabilities that are explicitly not current products
+9. `wiki/organisations/prochat/brand/company-overview.md` — concise company overview
+10. `wiki/organisations/prochat/brand/category-definition.md` — product categories and differentiation
+11. `wiki/organisations/prochat/brand/narrative.md` — company story and belief system
+12. `wiki/organisations/prochat/brand/brand-ruleset.md` — approved public language
 
 ## Current strategy
 
@@ -62,8 +62,8 @@ They define current product behavior, code, technical architecture, release mech
 When documents conflict:
 
 1. `wiki/organisations/prochat/brand/` controls company philosophy, naming, product hierarchy, positioning, and strategy.
-2. `wiki/organisations/prochat/legal/` controls approved legal-policy direction and records unresolved legal decisions.
-3. `wiki/organisations/prochat/growth/` and `wiki/organisations/prochat/youtube/` control their respective execution systems.
+2. `organizations/prochat/legal/` controls approved legal-policy direction and records unresolved legal decisions.
+3. `organizations/prochat/growth/` and `wiki/organisations/prochat/youtube/` control their respective execution systems.
 4. The subordinate product repository controls verified implementation facts for that product.
 5. A material implementation fact that contradicts Mind must be reported and reconciled; it must not silently replace canonical strategy.
 
@@ -71,8 +71,8 @@ Subordinate repositories must link back to this authority and clearly label repo
 
 ## Rule
 
-- brand truth lives in `brand/`;
+- brand truth lives in `wiki/organisations/prochat/brand/`;
 - legal reference lives in `legal/`;
-- execution guidance lives in `growth/`, `playbooks/`, and `youtube/`;
+- execution guidance lives in `growth/`, `wiki/organisations/prochat/playbooks/`, and `wiki/organisations/prochat/youtube/`;
 - future capabilities must not be presented as current products;
 - do not duplicate ProChat strategy in ad-hoc root files.

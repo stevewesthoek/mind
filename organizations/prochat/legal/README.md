@@ -133,7 +133,7 @@ wiki/organisations/prochat/brand/
 Growth execution remains in:
 
 ```text
-wiki/organisations/prochat/growth/
+organizations/prochat/growth/
 ```
 
 Brand and growth documents do not create legal permissions or commercial license rights. Published legal terms must be consistent with the canonical strategy, but legal terms control the permissions they expressly grant.
