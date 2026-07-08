@@ -172,7 +172,7 @@ Human decision needed:
 
 ### Batch 5 — Faith-first migration
 
-**Status:** Batch 5F faith landing page migration precheck completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`, `system/reports/faith-source-subinventory-2026-07-08.md`, `system/reports/bible-source-resources-move-precheck-2026-07-08.md`, `system/reports/theology-source-resources-move-precheck-2026-07-08.md`, `system/reports/apologetics-source-resources-move-precheck-2026-07-08.md`, and `system/reports/faith-landing-page-migration-precheck-2026-07-08.md`. Bible, theology, and approved apologetics source resources moved source-preservingly to `faith/resources/`; `wiki/faith.md` is prechecked but not moved; area content remains unmoved.
+**Status:** Batch 5G personal theology boundary precheck completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`, `system/reports/faith-source-subinventory-2026-07-08.md`, `system/reports/bible-source-resources-move-precheck-2026-07-08.md`, `system/reports/theology-source-resources-move-precheck-2026-07-08.md`, `system/reports/apologetics-source-resources-move-precheck-2026-07-08.md`, `system/reports/faith-landing-page-migration-precheck-2026-07-08.md`, and `system/reports/personal-theology-boundary-migration-precheck-2026-07-08.md`. Bible, theology, and approved apologetics source resources moved source-preservingly to `faith/resources/`; `wiki/faith.md` and personal theology boundary content are prechecked but not moved; theological-studies area content remains unmoved.
 
 **Goal:** move Bible, theology, apologetics, ministry, and study material into `faith/`.
 
