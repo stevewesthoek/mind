@@ -208,6 +208,8 @@ Human decision needed:
 
 **Batch 6A1 status:** completed 2026-07-08. `wiki/ai.md`, `wiki/content.md`, `wiki/tools.md`, and `wiki/business.md` moved to `knowledge/ai.md`, `knowledge/content.md`, `knowledge/tools.md`, and `knowledge/business.md`. Active `live/business.md` references now point to `knowledge/business.md`. No other `wiki/` content was moved.
 
+**Batch 6B status:** personal/private and people-context migration precheck completed 2026-07-08. See `system/reports/personal-private-general-knowledge-migration-precheck-2026-07-08.md`. `wiki/family.md`, `wiki/finance.md`, `wiki/health.md`, `wiki/people.md`, and `wiki/areas/personal-identity/` were classified as privacy-sensitive or human-decision content. No content was moved.
+
 Candidate moves:
 
 | From | To |
