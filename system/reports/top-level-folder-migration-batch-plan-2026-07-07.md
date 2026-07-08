@@ -204,6 +204,8 @@ Human decision needed:
 
 **Status:** Batch 6 precheck completed 2026-07-08. See `system/reports/general-knowledge-migration-precheck-2026-07-08.md`. Candidate legacy `wiki/` general-knowledge paths were inventoried and classified; no content was moved. Low-risk durable stubs, personal/private context, people context, organization/business context, and system/template material should be handled in narrower follow-up batches.
 
+**Batch 6A status:** low-risk one-file durable knowledge stub move precheck completed 2026-07-08. See `system/reports/general-knowledge-low-risk-stub-move-precheck-2026-07-08.md`. `wiki/ai.md`, `wiki/content.md`, `wiki/tools.md`, and `wiki/business.md` have no direct `knowledge/*.md` target collisions. No content was moved. Later Batch 6A1 should move only those four stubs and update the active `live/business.md` references.
+
 Candidate moves:
 
 | From | To |
