@@ -172,7 +172,7 @@ Human decision needed:
 
 ### Batch 5 — Faith-first migration
 
-**Status:** Batch 5I2 Dance of Life source-first move completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`, `system/reports/faith-source-subinventory-2026-07-08.md`, `system/reports/bible-source-resources-move-precheck-2026-07-08.md`, `system/reports/theology-source-resources-move-precheck-2026-07-08.md`, `system/reports/apologetics-source-resources-move-precheck-2026-07-08.md`, `system/reports/faith-landing-page-migration-precheck-2026-07-08.md`, `system/reports/personal-theology-boundary-migration-precheck-2026-07-08.md`, `system/reports/dance-of-life-theological-studies-subinventory-2026-07-08.md`, `system/reports/dance-of-life-split-decision-plan-2026-07-08.md`, and `system/reports/dance-of-life-source-first-move-precheck-2026-07-08.md`. Bible, theology, approved apologetics, and Dance of Life source resources moved source-preservingly to `faith/resources/`; `faith/studies/dance-of-life/` remains absent; `wiki/faith.md` and personal theology boundary content remain unmoved.
+**Status:** Batch 5J faith migration finalization completed 2026-07-08. See `system/reports/faith-migration-finalization-closeout-2026-07-08.md`, `system/reports/faith-migration-precheck-2026-07-08.md`, `system/reports/faith-source-subinventory-2026-07-08.md`, `system/reports/bible-source-resources-move-precheck-2026-07-08.md`, `system/reports/theology-source-resources-move-precheck-2026-07-08.md`, `system/reports/apologetics-source-resources-move-precheck-2026-07-08.md`, `system/reports/faith-landing-page-migration-precheck-2026-07-08.md`, `system/reports/personal-theology-boundary-migration-precheck-2026-07-08.md`, `system/reports/dance-of-life-theological-studies-subinventory-2026-07-08.md`, `system/reports/dance-of-life-split-decision-plan-2026-07-08.md`, and `system/reports/dance-of-life-source-first-move-precheck-2026-07-08.md`. Bible, theology, approved apologetics, and Dance of Life source resources now live under `faith/resources/`; `wiki/faith.md` was retired after preserving useful content in `faith/README.md`; personal theology boundary content remains deferred under personal identity; no source material was promoted into distilled faith folders; Save-to-Mind remains unchanged; continuous processing remains disabled.
 
 **Goal:** move Bible, theology, apologetics, ministry, and study material into `faith/`.
 
@@ -183,8 +183,10 @@ Candidate moves:
 | `sources/research/bible/` | completed to `faith/resources/bible/` in Batch 5C1 |
 | `sources/research/theology/` | completed to `faith/resources/theology/` in Batch 5D1 |
 | `sources/research/apologetics/` | completed to `faith/resources/apologetics/` in Batch 5E1 |
-| `wiki/faith.md` | `faith/README.md` merge or `faith/index.md` |
-| selected `wiki/areas/faith*` content | `faith/` |
+| `wiki/areas/theological-studies/dance-of-life/` | completed to `faith/resources/dance-of-life/` in Batch 5I2 |
+| `wiki/faith.md` | retired in Batch 5J after preserving useful content in `faith/README.md` |
+| `wiki/areas/personal-identity/theology.md` | deferred for later personal/people or faith-boundary target decision |
+| selected `wiki/areas/faith*` content | deferred; no blind move in Batch 5J |
 
 Validation:
 

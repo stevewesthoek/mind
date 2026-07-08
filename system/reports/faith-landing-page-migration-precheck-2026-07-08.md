@@ -81,3 +81,7 @@ Do not move `wiki/faith.md` over `faith/README.md`.
 - `wiki/organisations/prochat/pitch-decks/` untouched.
 - Save-to-Mind unchanged.
 - Continuous processing disabled.
+
+## Batch 5J completion notes
+
+The legacy sentence from `wiki/faith.md` was preserved in `faith/README.md`, and `wiki/faith.md` was retired. `faith/README.md` remains the canonical faith landing page and was not overwritten.

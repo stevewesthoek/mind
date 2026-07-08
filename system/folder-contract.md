@@ -2,7 +2,7 @@
 
 This document records the Mind root structure, migration status, and root cleanliness rules.
 
-**Last verified:** 2026-07-07  
+**Last verified:** 2026-07-08
 **Status:** target structure prepared; legacy folders retained as compatibility fallbacks
 
 ## Root purpose
@@ -70,9 +70,10 @@ The target folders now exist with README files, but legacy folders remain active
 | `wiki/` durable knowledge | `knowledge/` or `faith/` | Faith material goes to `faith/`; other durable knowledge goes to `knowledge/`. |
 | `wiki/log.md` | `inbox/processed/` or `system/reports/` | Proposal/review surfaces move later; current local edits must not be overwritten. |
 | `sources/` | `resources/` or `faith/resources/` | Preserve provenance and keep raw evidence separate from conclusions. |
-| `sources/research/bible/` | `faith/bible/` or `faith/resources/` | Distilled study goes to `faith/bible/`; source material goes to `faith/resources/`. |
-| `sources/research/theology/` | `faith/theology/` or `faith/resources/` | Distinguish conclusions from source material. |
-| `sources/research/apologetics/` | `faith/apologetics/` or `faith/resources/` | Distinguish conclusions from source material. |
+| `sources/research/bible/` | completed to `faith/resources/bible/` | Source material moved in Batch 5C1; distilled Bible notes may be promoted later after review. |
+| `sources/research/theology/` | completed to `faith/resources/theology/` | Source material moved in Batch 5D1; distilled theology may be promoted later after review. |
+| `sources/research/apologetics/` | completed to `faith/resources/apologetics/` | Approved source material moved in Batch 5E1; distilled apologetics may be promoted later after review. |
+| `wiki/areas/theological-studies/dance-of-life/` | completed to `faith/resources/dance-of-life/` | Source-first move completed in Batch 5I2; no content promoted to `faith/studies/dance-of-life/`. |
 | `archive/` | `history/` | Historical content moves only after validation. |
 | `kanban.md` | `tasks.md` | Switch only after lossless task migration is validated. |
 | `router/` | `system/agent-context/` | Batch 1 moved tracked agent-context files to `system/agent-context/`; legacy `router/` references are now compatibility/history only until validation cleanup. |

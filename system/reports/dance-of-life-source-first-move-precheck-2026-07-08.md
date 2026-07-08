@@ -220,3 +220,7 @@ No target was created under:
 ```text
 faith/studies/dance-of-life/
 ```
+
+## Batch 5J completion notes
+
+Dance of Life remains source-preserved under `faith/resources/dance-of-life/`. `faith/studies/dance-of-life/` was not created, and zero-byte files, `.base` files, metadata/stub files, `README.md`, and `PROJECT.md` remain preserved for later reviewed promotion or cleanup decisions.

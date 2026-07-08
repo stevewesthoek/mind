@@ -201,3 +201,7 @@ Inventory should distinguish:
 - `wiki/organisations/prochat/pitch-decks/` untouched.
 - Save-to-Mind unchanged.
 - Continuous processing disabled.
+
+## Batch 5J completion notes
+
+Faith source-resource migration finalized. Bible, theology, approved apologetics, and Dance of Life source/provenance packages were moved to `faith/resources/` in prior batches. `wiki/faith.md` was retired after preserving its useful landing-page sentence in `faith/README.md`. Personal theology boundary content remains deferred under personal identity; `faith/studies/dance-of-life/` was not created.

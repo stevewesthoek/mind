@@ -157,3 +157,7 @@ Boundaries preserved:
 - `wiki/organisations/prochat/pitch-decks/` untouched;
 - Save-to-Mind unchanged;
 - continuous processing disabled.
+
+## Batch 5J completion notes
+
+Batch 5 faith migration finalization completed. Bible, theology, approved apologetics, and Dance of Life source resources now live under `faith/resources/`. The useful legacy `wiki/faith.md` sentence was preserved in `faith/README.md`, and `wiki/faith.md` was retired. Personal theology boundary content remains deferred under `wiki/areas/personal-identity/theology.md`; no source material was promoted into distilled faith folders.

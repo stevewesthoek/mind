@@ -88,3 +88,7 @@ Recommended next handling is a human decision batch:
 - `wiki/organisations/prochat/pitch-decks/` untouched.
 - Save-to-Mind unchanged.
 - Continuous processing disabled.
+
+## Batch 5J completion notes
+
+Personal theology boundary content remains deferred under `wiki/areas/personal-identity/theology.md` because it is mixed personal identity, AI/theology boundary, and durable faith guidance. No `faith/theology/personal-boundaries.md` or `people/steve/faith-boundaries.md` target was created.
