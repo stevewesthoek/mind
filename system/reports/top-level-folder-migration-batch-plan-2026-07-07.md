@@ -150,7 +150,7 @@ Validation:
 
 ### Batch 4 — Organizations migration
 
-**Status:** Batch 4C precheck completed 2026-07-08. See `system/reports/organizations-migration-precheck-2026-07-07.md` and `system/reports/prochat-core-migration-precheck-2026-07-08.md`. Arkware, Yeshua Academy, conventions, and ecosystem have moved to `organizations/`. ProChat core is prechecked for a later approved move; hold `brand/`, `playbooks/`, `youtube/`, `pitch-decks/`, and legacy README for separate decisions.
+**Status:** Batch 4C1 completed 2026-07-08. See `system/reports/organizations-migration-precheck-2026-07-07.md` and `system/reports/prochat-core-migration-precheck-2026-07-08.md`. Arkware, Yeshua Academy, conventions, ecosystem, and ProChat core README/growth/legal files have moved to `organizations/`. Hold remaining ProChat `brand/`, `playbooks/`, `youtube/`, `pitch-decks/`, `.DS_Store`, and legacy organization README decisions for separate batches.
 
 **Goal:** move organization/business knowledge from legacy `wiki/organisations/` to `organizations/`.
 
