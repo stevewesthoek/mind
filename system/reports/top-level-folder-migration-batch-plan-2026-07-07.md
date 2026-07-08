@@ -172,7 +172,7 @@ Human decision needed:
 
 ### Batch 5 — Faith-first migration
 
-**Status:** Batch 5 precheck completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`. No faith content moved yet; recommended next step is Batch 5A target folder preparation and source-boundary rules.
+**Status:** Batch 5A target preparation completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`. Faith target folders are README-backed; no legacy faith, source, wiki, or area content moved yet.
 
 **Goal:** move Bible, theology, apologetics, ministry, and study material into `faith/`.
 

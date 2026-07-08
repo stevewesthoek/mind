@@ -118,3 +118,42 @@ Recommended safe next steps:
 - `wiki/organisations/prochat/pitch-decks/` untouched.
 - Save-to-Mind unchanged.
 - Continuous processing disabled.
+
+
+
+## Batch 5A completion notes
+
+Completed target folder preparation:
+
+```text
+faith/bible/README.md
+faith/studies/README.md
+faith/topics/README.md
+faith/theology/README.md
+faith/apologetics/README.md
+faith/ministry/README.md
+faith/resources/README.md
+faith/questions/README.md
+```
+
+Each target folder now has README-backed boundary rules.
+
+No legacy content was moved in Batch 5A:
+
+```text
+sources/research/bible/
+sources/research/theology/
+sources/research/apologetics/
+wiki/faith.md
+wiki/areas/personal-identity/theology.md
+wiki/areas/theological-studies/
+```
+
+Boundaries preserved:
+
+- source and provenance-heavy material remains in legacy source paths for now;
+- distilled faith targets are prepared but empty except for README files;
+- `wiki/log.md` untouched;
+- `wiki/organisations/prochat/pitch-decks/` untouched;
+- Save-to-Mind unchanged;
+- continuous processing disabled.
