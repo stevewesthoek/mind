@@ -214,6 +214,8 @@ Human decision needed:
 
 **Batch 6C1 status:** completed 2026-07-08. `wiki/system/repo-boundaries.md` moved to `system/repo-boundaries.md`, and `wiki/templates/` moved to `system/templates/`. Active template routing in `system/agent-context/00-memory-map.md` now points to `system/templates/`. Template internals were not modernized.
 
+**Batch 6D status:** closeout precheck completed 2026-07-08. See `system/reports/general-knowledge-migration-closeout-precheck-2026-07-08.md`. Batch 6 can be partially closed for completed low-risk durable knowledge and system/template moves, but it must not be claimed as a complete `wiki/` migration. Personal/private content, `wiki/areas/personal-identity/`, `wiki/log.md`, `wiki/organisations/`, root wiki indexes, metadata, and empty legacy directory cleanup remain deferred.
+
 Candidate moves:
 
 | From | To |
