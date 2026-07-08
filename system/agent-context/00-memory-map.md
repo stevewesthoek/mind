@@ -75,7 +75,7 @@ Use both wiki and sources, but do not mix them up.
 | Need | Location |
 |---|---|
 | Canonical Yeshua Academy ministry truth | `organizations/yeshua-academy/` |
-| Ongoing theological responsibility area | `wiki/areas/theological-studies/` |
+| Dance of Life theological source library | `faith/resources/dance-of-life/` |
 | Bible research notes | `faith/resources/bible/` |
 | Theology research notes | `faith/resources/theology/` |
 | Apologetics research notes | `faith/resources/apologetics/` |

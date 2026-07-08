@@ -106,10 +106,10 @@ Yeshua Academy context lives in:
 organizations/yeshua-academy/
 ```
 
-Theological studies and ongoing responsibility context lives in:
+Dance of Life theological source-library context lives in:
 
 ```text
-wiki/areas/theological-studies/
+faith/resources/dance-of-life/
 ```
 
 Bible/theology/apologetics research lives in:

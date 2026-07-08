@@ -1,9 +1,9 @@
 # Dance of Life Source-First Move Precheck — 2026-07-08
 
 **Task:** Task O — Batch 5I1 Dance of Life source-first move precheck  
-**Status:** precheck only  
+**Status:** Batch 5I2 completed after precheck
 **Approved strategy:** Strategy A — conservative source-first migration  
-**Boundary:** no Dance of Life content moved or edited in this batch.
+**Boundary:** Dance of Life content moved source-preservingly to `faith/resources/dance-of-life/`; no content promoted into `faith/studies/dance-of-life/`.
 
 ## Proposed future move
 
@@ -171,11 +171,52 @@ Any cleanup or promotion should be a later separate batch.
 
 ## Boundaries preserved in this precheck
 
-- No Dance of Life content moved.
-- No theological-studies content edited.
-- No `faith/resources/dance-of-life/` target created.
-- No `faith/studies/dance-of-life/` target created.
+- Dance of Life content moved only to `faith/resources/dance-of-life/`.
+- No Dance of Life content promoted into `faith/studies/dance-of-life/`.
+- Zero-byte files, `.base` files, metadata/stub files, README/index files, `PROJECT.md`, and nested transcript files were preserved.
+- No unrelated theological-studies content moved.
 - `wiki/log.md` untouched.
 - `wiki/organisations/prochat/pitch-decks/` untouched.
 - Save-to-Mind unchanged.
 - Continuous processing disabled.
+
+## Batch 5I2 completion notes
+
+Completed source-first move:
+
+```text
+wiki/areas/theological-studies/dance-of-life/ -> faith/resources/dance-of-life/
+```
+
+Verified preserved top-level files:
+
+```text
+faith/resources/dance-of-life/2026-04-13.md
+faith/resources/dance-of-life/PROJECT.md
+faith/resources/dance-of-life/README.md
+faith/resources/dance-of-life/Untitled.base
+```
+
+Preservation checks after the move:
+
+```text
+Subdirectories: 30
+Files: 127
+Markdown files: 126
+Zero-byte files: 2
+.base files: 1
+.DS_Store files: 0
+```
+
+Active reference updates completed in:
+
+```text
+system/agent-context/00-memory-map.md
+system/agent-context/00-current-context.md
+```
+
+No target was created under:
+
+```text
+faith/studies/dance-of-life/
+```
