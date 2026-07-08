@@ -117,13 +117,13 @@ Bible/theology/apologetics research lives in:
 ```text
 faith/resources/bible/
 faith/resources/theology/
-sources/research/apologetics/
+faith/resources/apologetics/
 ```
 
 For apologetics debate replies, use Steve's personal voice/debate standard before drafting:
 
 ```text
-sources/research/apologetics/steve-apologetics-voice-and-debate-standard.md
+faith/resources/apologetics/steve-apologetics-voice-and-debate-standard.md
 ```
 
 The default should be respectful but direct, fair but not timid, and claim-by-claim rather than a soft generalized essay.

@@ -58,8 +58,8 @@ sources/research/
 | Bible word study | `faith/resources/bible/word-studies/` |
 | Theological question | `faith/resources/bible/theological-questions/` or `faith/resources/theology/` |
 | Comparative theological views | `faith/resources/bible/comparative-views/` |
-| Apologetics | `sources/research/apologetics/` |
-| Steve's apologetics voice/debate style | `sources/research/apologetics/steve-apologetics-voice-and-debate-standard.md` |
+| Apologetics | `faith/resources/apologetics/` |
+| Steve's apologetics voice/debate style | `faith/resources/apologetics/steve-apologetics-voice-and-debate-standard.md` |
 | Marketing research | `sources/research/marketing/` |
 | Business research | `sources/research/business/` |
 | AI research | `sources/research/ai/` |
@@ -78,7 +78,7 @@ Use both wiki and sources, but do not mix them up.
 | Ongoing theological responsibility area | `wiki/areas/theological-studies/` |
 | Bible research notes | `faith/resources/bible/` |
 | Theology research notes | `faith/resources/theology/` |
-| Apologetics research notes | `sources/research/apologetics/` |
+| Apologetics research notes | `faith/resources/apologetics/` |
 | Sermon or Bible-study drafts | `faith/resources/bible/` unless promoted to a project |
 
 Rule:

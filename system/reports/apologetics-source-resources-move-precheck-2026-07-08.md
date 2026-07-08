@@ -1,8 +1,8 @@
 # Apologetics Source Resources Move Precheck — 2026-07-08
 
 **Task:** Task O — Batch 5E apologetics source resources move precheck
-**Status:** precheck only
-**Boundary:** no apologetics source content moved or edited in this batch.
+**Status:** Batch 5E1 completed after precheck
+**Boundary:** approved apologetics source resource content moved to `faith/resources/apologetics/`; source/provenance classification preserved.
 
 ## Proposed source-preserving move
 
@@ -181,12 +181,50 @@ unless individual distilled outputs are reviewed separately.
 10. Keep continuous processing disabled.
 11. Stage only moved apologetics source resource files and related active-reference/report updates.
 
-## Boundaries preserved in this precheck
+## Boundaries preserved in Batch 5E1
 
-- No apologetics source content moved.
-- No apologetics source content edited.
-- No legacy faith/source/wiki content moved.
+- Only the approved apologetics source resource package moved.
+- Apologetics source content was not promoted into `faith/apologetics/`.
+- `.DS_Store` metadata was not migrated.
+- `wiki/faith.md`, `wiki/areas/personal-identity/theology.md`, and `wiki/areas/theological-studies/` were not moved or edited.
 - `wiki/log.md` untouched.
 - `wiki/organisations/prochat/pitch-decks/` untouched.
 - Save-to-Mind unchanged.
 - Continuous processing disabled.
+
+## Batch 5E1 completion notes
+
+Completed source-preserving move:
+
+```text
+sources/research/apologetics/README.md -> faith/resources/apologetics/README.md
+sources/research/apologetics/steve-apologetics-voice-and-debate-standard.md -> faith/resources/apologetics/steve-apologetics-voice-and-debate-standard.md
+sources/research/apologetics/atheism-dialogue-001/ -> faith/resources/apologetics/atheism-dialogue-001/
+sources/research/apologetics/baptism-dialogue-001/ -> faith/resources/apologetics/baptism-dialogue-001/
+sources/research/apologetics/gospel-dialogue-001/ -> faith/resources/apologetics/gospel-dialogue-001/
+```
+
+The human-approved Batch 5E1 move included:
+
+```text
+README.md
+steve-apologetics-voice-and-debate-standard.md
+atheism-dialogue-001/
+baptism-dialogue-001/
+gospel-dialogue-001/
+```
+
+Excluded metadata:
+
+```text
+sources/research/apologetics/.DS_Store
+sources/research/apologetics/atheism-dialogue-001/.DS_Store
+```
+
+Active reference updates completed in:
+
+```text
+system/agent-context/00-memory-map.md
+system/agent-context/00-current-context.md
+system/agent-context/AGENTS.md
+```

@@ -112,7 +112,7 @@ Bible and theology research usually belongs under:
 ```text
 faith/resources/bible/
 faith/resources/theology/
-sources/research/apologetics/
+faith/resources/apologetics/
 ```
 
 Canonical Yeshua Academy ministry truth belongs under:

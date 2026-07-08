@@ -172,7 +172,7 @@ Human decision needed:
 
 ### Batch 5 — Faith-first migration
 
-**Status:** Batch 5E apologetics source resources move precheck completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`, `system/reports/faith-source-subinventory-2026-07-08.md`, `system/reports/bible-source-resources-move-precheck-2026-07-08.md`, `system/reports/theology-source-resources-move-precheck-2026-07-08.md`, and `system/reports/apologetics-source-resources-move-precheck-2026-07-08.md`. Bible source resources moved source-preservingly to `faith/resources/bible/`; theology source resources moved source-preservingly to `faith/resources/theology/`; apologetics is prechecked but not moved; wiki faith and area content remain unmoved.
+**Status:** Batch 5E1 apologetics source resources move completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`, `system/reports/faith-source-subinventory-2026-07-08.md`, `system/reports/bible-source-resources-move-precheck-2026-07-08.md`, `system/reports/theology-source-resources-move-precheck-2026-07-08.md`, and `system/reports/apologetics-source-resources-move-precheck-2026-07-08.md`. Bible source resources moved source-preservingly to `faith/resources/bible/`; theology source resources moved source-preservingly to `faith/resources/theology/`; approved apologetics source resources moved source-preservingly to `faith/resources/apologetics/`; wiki faith and area content remain unmoved.
 
 **Goal:** move Bible, theology, apologetics, ministry, and study material into `faith/`.
 
@@ -182,7 +182,7 @@ Candidate moves:
 |------|----|
 | `sources/research/bible/` | completed to `faith/resources/bible/` in Batch 5C1 |
 | `sources/research/theology/` | completed to `faith/resources/theology/` in Batch 5D1 |
-| `sources/research/apologetics/` | prechecked for source-preserving move to `faith/resources/apologetics/`; extra dialogue packages need human decision |
+| `sources/research/apologetics/` | completed to `faith/resources/apologetics/` in Batch 5E1 |
 | `wiki/faith.md` | `faith/README.md` merge or `faith/index.md` |
 | selected `wiki/areas/faith*` content | `faith/` |
 
