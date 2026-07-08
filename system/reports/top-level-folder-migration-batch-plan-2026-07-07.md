@@ -172,6 +172,8 @@ Human decision needed:
 
 ### Batch 5 — Faith-first migration
 
+**Status:** Batch 5 precheck completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`. No faith content moved yet; recommended next step is Batch 5A target folder preparation and source-boundary rules.
+
 **Goal:** move Bible, theology, apologetics, ministry, and study material into `faith/`.
 
 Candidate moves:
