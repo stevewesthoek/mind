@@ -56,7 +56,7 @@ sources/research/
 | Bible passage study | `faith/resources/bible/passages/` |
 | Bible topic | `faith/resources/bible/topics/` |
 | Bible word study | `faith/resources/bible/word-studies/` |
-| Theological question | `faith/resources/bible/theological-questions/` or `sources/research/theology/` |
+| Theological question | `faith/resources/bible/theological-questions/` or `faith/resources/theology/` |
 | Comparative theological views | `faith/resources/bible/comparative-views/` |
 | Apologetics | `sources/research/apologetics/` |
 | Steve's apologetics voice/debate style | `sources/research/apologetics/steve-apologetics-voice-and-debate-standard.md` |
@@ -77,7 +77,7 @@ Use both wiki and sources, but do not mix them up.
 | Canonical Yeshua Academy ministry truth | `organizations/yeshua-academy/` |
 | Ongoing theological responsibility area | `wiki/areas/theological-studies/` |
 | Bible research notes | `faith/resources/bible/` |
-| Theology research notes | `sources/research/theology/` |
+| Theology research notes | `faith/resources/theology/` |
 | Apologetics research notes | `sources/research/apologetics/` |
 | Sermon or Bible-study drafts | `faith/resources/bible/` unless promoted to a project |
 
@@ -179,7 +179,7 @@ Search:
 ```text
 organizations/yeshua-academy/
 faith/resources/bible/
-sources/research/theology/
+faith/resources/theology/
 ```
 
 Separate existing canonical truth from new research or recommendations.

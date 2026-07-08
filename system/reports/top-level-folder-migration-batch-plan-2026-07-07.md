@@ -172,7 +172,7 @@ Human decision needed:
 
 ### Batch 5 — Faith-first migration
 
-**Status:** Batch 5D theology source resources move precheck completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`, `system/reports/faith-source-subinventory-2026-07-08.md`, `system/reports/bible-source-resources-move-precheck-2026-07-08.md`, and `system/reports/theology-source-resources-move-precheck-2026-07-08.md`. Bible source resources moved source-preservingly to `faith/resources/bible/`; theology source move is prechecked but not moved; apologetics, wiki faith, and area content remain unmoved.
+**Status:** Batch 5D1 theology source resources move completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`, `system/reports/faith-source-subinventory-2026-07-08.md`, `system/reports/bible-source-resources-move-precheck-2026-07-08.md`, and `system/reports/theology-source-resources-move-precheck-2026-07-08.md`. Bible source resources moved source-preservingly to `faith/resources/bible/`; theology source resources moved source-preservingly to `faith/resources/theology/`; apologetics, wiki faith, and area content remain unmoved.
 
 **Goal:** move Bible, theology, apologetics, ministry, and study material into `faith/`.
 
@@ -181,7 +181,7 @@ Candidate moves:
 | From | To |
 |------|----|
 | `sources/research/bible/` | completed to `faith/resources/bible/` in Batch 5C1 |
-| `sources/research/theology/` | `faith/theology/` or `faith/resources/` |
+| `sources/research/theology/` | completed to `faith/resources/theology/` in Batch 5D1 |
 | `sources/research/apologetics/` | `faith/apologetics/` or `faith/resources/` |
 | `wiki/faith.md` | `faith/README.md` merge or `faith/index.md` |
 | selected `wiki/areas/faith*` content | `faith/` |

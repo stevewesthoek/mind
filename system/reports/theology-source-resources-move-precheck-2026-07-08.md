@@ -1,8 +1,8 @@
 # Theology Source Resources Move Precheck — 2026-07-08
 
 **Task:** Task O — Batch 5D theology source resources move precheck  
-**Status:** precheck only  
-**Boundary:** no theology source content moved or edited in this batch.
+**Status:** Batch 5D1 completed after precheck
+**Boundary:** only the README-only theology source package moved to `faith/resources/theology/`; source/provenance classification preserved.
 
 ## Proposed source-preserving move
 
@@ -134,12 +134,35 @@ Do not change source meaning while updating references. New target path should r
 8. Keep continuous processing disabled.
 9. Stage only moved theology source resource files and related active-reference/report updates.
 
-## Boundaries preserved in this precheck
+## Boundaries preserved in Batch 5D1
 
-- No theology source content moved.
-- No theology source content edited.
-- No legacy faith/source/wiki content moved.
+- Only the approved README-only theology source package moved.
+- Theology source content was not promoted into `faith/theology/`.
+- `sources/research/apologetics/` was not moved.
+- `wiki/faith.md`, `wiki/areas/personal-identity/theology.md`, and `wiki/areas/theological-studies/` were not moved or edited.
 - `wiki/log.md` untouched.
 - `wiki/organisations/prochat/pitch-decks/` untouched.
 - Save-to-Mind unchanged.
 - Continuous processing disabled.
+
+## Batch 5D1 completion notes
+
+Completed source-preserving move:
+
+```text
+sources/research/theology/ -> faith/resources/theology/
+```
+
+The source tree contained only the approved README-only source package:
+
+```text
+sources/research/theology/README.md
+```
+
+Active reference updates completed in:
+
+```text
+system/agent-context/00-memory-map.md
+system/agent-context/00-current-context.md
+system/agent-context/AGENTS.md
+```

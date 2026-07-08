@@ -116,7 +116,7 @@ Bible/theology/apologetics research lives in:
 
 ```text
 faith/resources/bible/
-sources/research/theology/
+faith/resources/theology/
 sources/research/apologetics/
 ```
 
