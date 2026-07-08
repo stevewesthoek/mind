@@ -244,6 +244,8 @@ Validation:
 
 ### Batch 7 — Resources migration
 
+**Status:** Batch 7 resources migration precheck completed 2026-07-08. See `system/reports/resources-migration-precheck-2026-07-08.md`. Remaining `sources/` content is small README/index source-resource scaffolding plus `.DS_Store`; no content moved yet. Recommended next work is a source-preserving resources move that excludes `.DS_Store`.
+
 **Goal:** move non-faith source/reference material from `sources/` into `resources/`.
 
 Candidate moves:
