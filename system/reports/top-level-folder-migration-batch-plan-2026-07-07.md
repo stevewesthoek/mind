@@ -172,7 +172,7 @@ Human decision needed:
 
 ### Batch 5 — Faith-first migration
 
-**Status:** Batch 5A target preparation completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md`. Faith target folders are README-backed; no legacy faith, source, wiki, or area content moved yet.
+**Status:** Batch 5B source sub-inventory completed 2026-07-08. See `system/reports/faith-migration-precheck-2026-07-08.md` and `system/reports/faith-source-subinventory-2026-07-08.md`. Faith target folders are README-backed; no legacy faith, source, wiki, or area content moved yet. Recommended next work is a narrow source-preserving Bible resources move precheck or Dance of Life sub-inventory.
 
 **Goal:** move Bible, theology, apologetics, ministry, and study material into `faith/`.
 
