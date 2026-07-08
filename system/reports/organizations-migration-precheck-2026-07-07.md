@@ -132,3 +132,40 @@ Validation evidence:
 - continuous processing remains disabled.
 
 Remaining organization migration work stays focused on root organization docs and ProChat-specific content.
+
+
+
+## Batch 4B completion — 2026-07-08
+
+The two safe organization root docs were moved:
+
+```text
+wiki/organisations/conventions.md -> organizations/conventions.md
+wiki/organisations/ecosystem.md -> organizations/ecosystem.md
+```
+
+Validation and updates:
+
+- both target files exist under `organizations/`;
+- both legacy source files no longer exist;
+- `system/agent-context/00-memory-map.md` now points to `organizations/conventions.md` and `organizations/ecosystem.md`;
+- `organizations/ecosystem.md` keeps ProChat pointing to the legacy path until ProChat moves;
+- `organizations/README.md` was not overwritten;
+- `wiki/log.md` was not touched;
+- `wiki/organisations/prochat/pitch-decks/` was not touched;
+- Save-to-Mind remains unchanged;
+- continuous processing remains disabled.
+
+README recommendation:
+
+- keep `wiki/organisations/README.md` in place until ProChat migration is complete;
+- do not merge it into `organizations/README.md` now, because it still describes the legacy folder and old PARA-era structure;
+- after ProChat moves, preserve any useful historical context as `organizations/legacy-README.md` or merge only durable rules into `organizations/README.md` during final cleanup.
+
+Remaining organization migration work:
+
+```text
+wiki/organisations/README.md
+wiki/organisations/prochat/
+wiki/organisations/prochat/pitch-decks/  # unrelated untracked, still untouched
+```

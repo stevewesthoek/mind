@@ -40,8 +40,8 @@ Use this before answering Steve-specific questions.
 | ProChat legal | `wiki/organisations/prochat/legal/` |
 | Arkware | `organizations/arkware/` |
 | Yeshua Academy | `organizations/yeshua-academy/` |
-| Organisation ecosystem | `wiki/organisations/ecosystem.md` |
-| Organisation conventions | `wiki/organisations/conventions.md` |
+| Organisation ecosystem | `organizations/ecosystem.md` |
+| Organisation conventions | `organizations/conventions.md` |
 
 ## Research Routing
 

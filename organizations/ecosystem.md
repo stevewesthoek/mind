@@ -21,5 +21,5 @@ In short: `Faith -> Strategy and Craft -> Scalable Products`.
 
 ## Brand Source of Truth
 - ArkWare brand profile: `arkware/overview.md`
-- ProChat brand profile: `prochat/brand/company-overview.md`
+- ProChat brand profile: `../wiki/organisations/prochat/brand/company-overview.md`
 - Yeshua Academy brand profile: `yeshua-academy/overview.md`

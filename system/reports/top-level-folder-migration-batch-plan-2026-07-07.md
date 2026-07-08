@@ -150,7 +150,7 @@ Validation:
 
 ### Batch 4 — Organizations migration
 
-**Status:** Batch 4A completed 2026-07-07. See `system/reports/organizations-migration-precheck-2026-07-07.md`. `wiki/organisations/arkware/` moved to `organizations/arkware/`; `wiki/organisations/yeshua-academy/` moved to `organizations/yeshua-academy/`; hold ProChat and root docs for separate decisions.
+**Status:** Batch 4B completed 2026-07-08. See `system/reports/organizations-migration-precheck-2026-07-07.md`. `wiki/organisations/arkware/` moved to `organizations/arkware/`; `wiki/organisations/yeshua-academy/` moved to `organizations/yeshua-academy/`; `wiki/organisations/conventions.md` moved to `organizations/conventions.md`; `wiki/organisations/ecosystem.md` moved to `organizations/ecosystem.md`; hold ProChat and legacy README for separate decisions.
 
 **Goal:** move organization/business knowledge from legacy `wiki/organisations/` to `organizations/`.
 
