@@ -202,6 +202,8 @@ Human decision needed:
 
 **Goal:** move non-faith durable knowledge from `wiki/` into `knowledge/`.
 
+**Status:** Batch 6 precheck completed 2026-07-08. See `system/reports/general-knowledge-migration-precheck-2026-07-08.md`. Candidate legacy `wiki/` general-knowledge paths were inventoried and classified; no content was moved. Low-risk durable stubs, personal/private context, people context, organization/business context, and system/template material should be handled in narrower follow-up batches.
+
 Candidate moves:
 
 | From | To |
