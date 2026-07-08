@@ -206,6 +206,8 @@ Human decision needed:
 
 **Batch 6A status:** low-risk one-file durable knowledge stub move precheck completed 2026-07-08. See `system/reports/general-knowledge-low-risk-stub-move-precheck-2026-07-08.md`. `wiki/ai.md`, `wiki/content.md`, `wiki/tools.md`, and `wiki/business.md` have no direct `knowledge/*.md` target collisions. No content was moved. Later Batch 6A1 should move only those four stubs and update the active `live/business.md` references.
 
+**Batch 6A1 status:** completed 2026-07-08. `wiki/ai.md`, `wiki/content.md`, `wiki/tools.md`, and `wiki/business.md` moved to `knowledge/ai.md`, `knowledge/content.md`, `knowledge/tools.md`, and `knowledge/business.md`. Active `live/business.md` references now point to `knowledge/business.md`. No other `wiki/` content was moved.
+
 Candidate moves:
 
 | From | To |

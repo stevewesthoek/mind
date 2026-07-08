@@ -1,7 +1,7 @@
 # General Knowledge Low-Risk Stub Move Precheck — 2026-07-08
 
 **Task:** Task O — Batch 6A general knowledge low-risk stub move precheck
-**Status:** precheck complete; no content moved
+**Status:** Batch 6A1 completed after precheck
 **Boundary:** review target collisions and references for four one-file durable knowledge stubs before any `wiki/` to `knowledge/` move.
 
 ## Current state verified
@@ -208,6 +208,40 @@ Do not claim all top-level migration is complete.
 - no `wiki/` content was moved;
 - no candidate content was edited;
 - no `knowledge/` target content was created by this precheck;
+- `wiki/log.md` was not touched;
+- `Untitled.canvas` was not touched;
+- `wiki/organisations/prochat/pitch-decks/` was not touched;
+- Save-to-Mind behavior was not changed;
+- continuous processing was not enabled.
+
+## Batch 6A1 completion notes
+
+Completed narrow stub moves:
+
+```text
+wiki/ai.md -> knowledge/ai.md
+wiki/content.md -> knowledge/content.md
+wiki/tools.md -> knowledge/tools.md
+wiki/business.md -> knowledge/business.md
+```
+
+Updated active references in:
+
+```text
+live/business.md
+```
+
+Reference updates completed:
+
+```text
+wiki/business.md -> knowledge/business.md
+[[../wiki/business|Business wiki]] -> [[../knowledge/business|Business knowledge]]
+```
+
+Batch 6A1 boundaries preserved:
+
+- no other `wiki/` content was moved;
+- `wiki/family.md`, `wiki/finance.md`, `wiki/health.md`, `wiki/people.md`, `wiki/areas/`, `wiki/system/`, `wiki/templates/`, and `wiki/organisations/` remain in place;
 - `wiki/log.md` was not touched;
 - `Untitled.canvas` was not touched;
 - `wiki/organisations/prochat/pitch-decks/` was not touched;
