@@ -212,6 +212,8 @@ Human decision needed:
 
 **Batch 6C status:** system/template migration precheck completed 2026-07-08. See `system/reports/system-template-general-knowledge-migration-precheck-2026-07-08.md`. `wiki/system/repo-boundaries.md` was classified as system/process contract content for `system/repo-boundaries.md`, and `wiki/templates/` was classified as template content for `system/templates/`. No content was moved.
 
+**Batch 6C1 status:** completed 2026-07-08. `wiki/system/repo-boundaries.md` moved to `system/repo-boundaries.md`, and `wiki/templates/` moved to `system/templates/`. Active template routing in `system/agent-context/00-memory-map.md` now points to `system/templates/`. Template internals were not modernized.
+
 Candidate moves:
 
 | From | To |

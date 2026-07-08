@@ -26,7 +26,7 @@ Use this before answering Steve-specific questions.
 | Research or references | `sources/research/` | `sources/` |
 | Old/completed work | `archive/` | `archive/old/` |
 | Raw captures | `capture/inbox/` | `capture/failed/` |
-| Templates | `wiki/templates/` | existing files of same type |
+| Templates | `system/templates/` | existing files of same type |
 | Router/automation rules | `system/agent-context/` | `AGENTS.md` |
 
 ## Organisation Routing

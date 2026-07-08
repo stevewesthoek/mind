@@ -1,7 +1,7 @@
 # System Template General Knowledge Migration Precheck — 2026-07-08
 
 **Task:** Task O — Batch 6C system/template general knowledge migration precheck
-**Status:** precheck complete; no content moved
+**Status:** Batch 6C1 completed after precheck
 **Boundary:** review legacy `wiki/system/` and `wiki/templates/` candidates before any move into `system/`, `system/templates/`, or `knowledge/system/`.
 
 ## Current state verified
@@ -193,3 +193,36 @@ Do not claim all top-level migration is complete.
 - Save-to-Mind behavior was not changed;
 - continuous processing was not enabled;
 - only this precheck report and the Batch 6 roadmap status should be staged for commit.
+
+## Batch 6C1 completion notes
+
+Completed source-preserving moves:
+
+```text
+wiki/system/repo-boundaries.md -> system/repo-boundaries.md
+wiki/templates/ -> system/templates/
+```
+
+Updated active references in:
+
+```text
+system/agent-context/00-memory-map.md
+```
+
+Reference update completed:
+
+```text
+wiki/templates/ -> system/templates/
+```
+
+Template internals were not modernized in this batch. Legacy template body references such as `notes/projects`, `notes/tasks`, and old project/task links remain preserved for a later template modernization review.
+
+Batch 6C1 boundaries preserved:
+
+- no other `wiki/` content was moved;
+- `wiki/family.md`, `wiki/finance.md`, `wiki/health.md`, `wiki/people.md`, `wiki/areas/`, and `wiki/organisations/` remain in place;
+- `wiki/log.md` was not touched;
+- `Untitled.canvas` was not touched;
+- `wiki/organisations/prochat/pitch-decks/` was not touched;
+- Save-to-Mind behavior was not changed;
+- continuous processing was not enabled.
