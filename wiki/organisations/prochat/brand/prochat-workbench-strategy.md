@@ -253,18 +253,27 @@ Avoid:
 
 ## Strategic roadmap order
 
-The canonical product sequence is:
+The canonical product sequence is now stability-first. Workbench should become reliable as a local background control plane before adding broad new execution capabilities.
 
-1. Product doctrine and autonomy levels.
-2. Capability broker core.
-3. Named local CLI capabilities.
-4. Goal-mode hardening for local roadmap execution.
-5. Codex review adapter.
-6. Codex isolated worktree adapter.
-7. MCP client broker.
-8. Workbench MCP server.
-9. Cross-device ChatGPT/Codex handoff.
-10. Managed/team control plane only after repeated local value is proven.
+1. Performance telemetry dashboard.
+2. Session manager.
+3. Per-repo job queues and locks.
+4. Compact evidence store.
+5. Menu-bar local supervisor.
+6. Worker pool and resource budgets.
+7. Tunnel and local connection monitor.
+8. Source automation and re-indexing.
+9. Multi-repo control board.
+10. Product doctrine and autonomy levels.
+11. Capability broker core.
+12. Named local CLI capabilities.
+13. Goal-mode hardening for local roadmap execution.
+14. Codex review adapter with native approval before delegation.
+15. Codex isolated worktree adapter.
+16. MCP client broker.
+17. Workbench MCP server.
+18. Cross-device ChatGPT/Codex handoff.
+19. Managed/team control plane only after repeated local value is proven.
 
 ## Success criteria
 
