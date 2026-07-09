@@ -5,3 +5,5 @@ Raw recoverable captures that fail classification, routing, or writing should la
 Nothing in this folder should be treated as disposable until it has been retried, reviewed, or archived.
 
 Target rule: no failed capture should remain here longer than 3 days without retry or review.
+
+**Compatibility note:** this is the legacy failure path. Future failed captures will target `inbox/failed/` after the routing switch. No switch has occurred yet. Do not write to `inbox/failed/` until the switch batch is completed and validated.

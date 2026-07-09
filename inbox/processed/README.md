@@ -5,3 +5,5 @@ Brain-generated processing outputs live here after migration.
 Use this for summaries, structured proposals, relation reports, capture receipts, transcript derivatives, and review surfaces.
 
 This folder is not durable truth. Durable updates still require review and exact-path approval before being promoted into `projects/`, `faith/`, `knowledge/`, `resources/`, `people/`, `organizations/`, `repos/`, or `history/`.
+
+**Compatibility note:** legacy daily/historical capture summaries remain in `capture/daily/` until a human target decision is made (options: `inbox/processed/daily/` or `history/capture-daily/`).

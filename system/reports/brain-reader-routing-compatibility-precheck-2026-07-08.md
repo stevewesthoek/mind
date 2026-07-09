@@ -176,6 +176,18 @@ Do not move content or switch routing yet because:
 6. Failure routing needs separate controlled validation before moving failed captures.
 7. Obsidian attachments still require review because `attachmentFolderPath` points at legacy `sources/files` after the resources migration.
 
+## Batch 8B — Documentation compatibility update (2026-07-09)
+
+**Completed:** Batch 8B updated documentation and active compatibility context across all agent-context files, capture/ docs, inbox/ docs, and reports.
+
+See the Batch 8B section in `inbox-migration-save-to-mind-precheck-2026-07-08.md` for the full file-by-file change list.
+
+Key outcomes:
+- Every documentation file now explicitly names both the legacy active path and the future target path.
+- Every reference to `inbox/new/` or `inbox/failed/` is qualified with "after switch" to prevent premature agent writes.
+- Active context still warns not to switch Save-to-Mind yet.
+- No routing was switched. No capture content was moved. `.obsidian/app.json` unchanged.
+
 ## Recommended switch order
 
 Recommended future sequence:
@@ -199,7 +211,7 @@ Recommended future sequence:
 
 ## Recommendation
 
-Proceed next with **Batch 8B — inbox routing compatibility documentation update** or a code/config support check if Brain reader code exists outside this repo.
+Proceed next with **Batch 8C — controlled Brain reader validation** or a code/config support check if Brain reader code exists outside this repo.
 
 Do not move existing capture content and do not switch `.obsidian/app.json` until a controlled Save-to-Mind/n8n test plan is ready.
 

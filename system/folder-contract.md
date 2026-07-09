@@ -4,6 +4,7 @@ This document records the Mind root structure, migration status, and root cleanl
 
 **Last verified:** 2026-07-09
 **Status:** target structure prepared; legacy folders retained as compatibility fallbacks
+**Documentation compatibility:** Batch 8B completed 2026-07-09 — all agent context, capture/ docs, inbox/ docs, and reports now document both legacy and future routing explicitly. No routing has been switched.
 
 ## Root purpose
 

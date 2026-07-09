@@ -25,12 +25,17 @@ The `mind` repo contains personal knowledge, strategy, convictions, business/min
 ## Current Folder Structure
 
 ```text
-capture/inbox/    New captures from Save-to-Mind automation
-capture/failed/   Failed captures needing retry
-capture/daily/    Daily scratch/notes
+capture/inbox/    New captures from Save-to-Mind automation (legacy; future target: inbox/new/)
+capture/failed/   Failed captures needing retry (legacy; future target: inbox/failed/)
+capture/daily/    Daily scratch/notes (legacy; future target: inbox/processed/daily/ or history/)
 live/             Active work surfaces (tasks, projects, decisions, workflows)
 wiki/             Compiled durable knowledge
 resources/        Raw evidence, research notes, source material
+inbox/            Future universal intake structure (not yet active; README-only)
+inbox/new/        Future target for new captures (not yet active)
+inbox/failed/     Future target for failed captures (not yet active)
+inbox/raw/        Future target for immutable raw originals (not yet active)
+inbox/processed/  Future target for Brain-generated summaries (not yet active)
 system/agent-context/           Mind Steward contract and rules
 archive/          Completed or inactive material
 archive/old/      Read-only backups
@@ -149,7 +154,7 @@ When the user says:
 
 | Natural language request | Default action |
 |---|---|
-| "remember this" | save to `capture/inbox/` unless category is obvious |
+| "remember this" | save to `capture/inbox/` unless category is obvious (future: `inbox/new/` after switch) |
 | "research this" | create/use `resources/research/` |
 | "turn this into strategy" | draft in `wiki/organisations/` or `live/decisions.md` |
 | "make a task" | add to `live/tasks.md` |

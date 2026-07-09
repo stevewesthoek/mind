@@ -48,7 +48,7 @@ system/agent-context/README.md
 
 Do not break existing automations:
 
-- Save-to-Mind targets `capture/inbox/` — do not change this path.
+- Save-to-Mind targets `capture/inbox/` — do not change this path (yet).
 - Failed captures belong in `capture/failed/`.
 - Mind Steward classifies captures locally and may append review suggestions; broader write/apply remains blocked unless explicitly approved.
 - Obsidian uses this repo as a vault.
@@ -56,6 +56,21 @@ Do not break existing automations:
 Do not write into `archive/old/` — those are read-only backups.
 
 Never commit secrets, OAuth tokens, API keys, cookies, private keys, service account files, `.env` values, or credentials.
+
+## Inbox Migration Compatibility — Not Yet Switched
+
+Legacy capture paths remain active until the controlled switch batch is completed and validated:
+
+| Path | Status | Future target |
+|------|--------|---------------|
+| `capture/inbox/` | active — do not change | `inbox/new/` (after switch) |
+| `capture/failed/` | active — do not change | `inbox/failed/` (after switch) |
+| `inbox/new/` | README-only; no content | target after Save-to-Mind switch |
+| `inbox/failed/` | README-only; no content | target after failure routing switch |
+| `inbox/raw/` | README-only; no content | target after capture content move |
+| `inbox/processed/` | README-only; no content | target after processing pipeline |
+
+Do not write to `inbox/new/`, `inbox/failed/`, `inbox/raw/`, or `inbox/processed/` until the controlled switch batch is completed. Before the switch, use `capture/inbox/` for captures and `capture/failed/` for failures.
 
 ## How To Use This Repo As AI Memory
 
@@ -85,8 +100,8 @@ Use these defaults:
 
 | Information type | Default location |
 |---|---|
-| Raw capture, unsorted idea | `capture/inbox/` |
-| Failed raw capture needing retry | `capture/failed/` |
+| Raw capture, unsorted idea | `capture/inbox/` (legacy; future: `inbox/new/` after switch) |
+| Failed raw capture needing retry | `capture/failed/` (legacy; future: `inbox/failed/` after switch) |
 | Current operating task/project summaries | `live/` |
 | Compiled durable knowledge | `wiki/` |
 | Raw evidence and source material | `resources/` |

@@ -102,6 +102,24 @@ Do not overwrite strategy with raw research.
 | Active campaign/project | `live/projects.md` |
 | Atomic task | `live/tasks.md` |
 
+## Inbox Migration Compatibility
+
+Legacy capture paths remain active; no switch has occurred yet:
+
+| Path | Status | Future target |
+|------|--------|---------------|
+| `capture/inbox/` | active — Save-to-Mind writes here | `inbox/new/` (after switch) |
+| `capture/failed/` | active — failure routing uses this | `inbox/failed/` (after switch) |
+| `capture/daily/` | active — legacy daily grouping | `inbox/processed/daily/` or `history/` (human decision) |
+| `inbox/new/` | README-only; no content | remains target after switch |
+| `inbox/failed/` | README-only; no content | remains target after switch |
+| `inbox/raw/` | README-only; no content | remains target after migration |
+| `inbox/processed/` | README-only; no content | remains target after migration |
+
+Do not write to `inbox/new/`, `inbox/failed/`, `inbox/raw/`, or `inbox/processed/` until the controlled switch batch is completed and validated.
+
+Before the switch, agents must still use `capture/inbox/` for unsorted captures and `capture/failed/` for failed captures.
+
 ## Natural Language Save Rules
 
 | User says | Save default |

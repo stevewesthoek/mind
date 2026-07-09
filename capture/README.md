@@ -4,9 +4,9 @@ Raw intake lands here before Mind Steward processes it.
 
 ## Folders
 
-- `inbox/` — primary landing zone for Save-to-Mind captures, video/transcript captures, and other unprocessed incoming material.
-- `daily/` — daily capture grouping when a workflow writes date-based intake summaries or batches.
-- `failed/` — safety buffer for captures that could not be processed automatically.
+- `inbox/` — legacy landing zone; Save-to-Mind captures land here (future target: `inbox/new/` after switch).
+- `daily/` — legacy daily capture grouping (future target: under `inbox/processed/` or `history/` by human decision).
+- `failed/` — legacy safety buffer for captures that could not be processed (future target: `inbox/failed/` after routing switch).
 
 ## Rules
 

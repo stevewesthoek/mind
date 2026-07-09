@@ -272,7 +272,9 @@ Validation:
 
 ### Batch 8 — Inbox migration and Save-to-Mind switch
 
-**Status:** Batch 8A Brain reader and routing compatibility precheck completed 2026-07-08. See `system/reports/inbox-migration-save-to-mind-precheck-2026-07-08.md` and `system/reports/brain-reader-routing-compatibility-precheck-2026-07-08.md`. Legacy `capture/inbox/` and `capture/failed/` remain active; `inbox/` target folders are README-only; Save-to-Mind was not switched. Obsidian still routes new files to `capture/inbox` and attachments to legacy `sources/files`; controlled Brain/Save-to-Mind validation is required before any switch or content move.
+**Status:** Batch 8B documentation compatibility completed 2026-07-09. See `system/reports/inbox-migration-save-to-mind-precheck-2026-07-08.md` (with Batch 8B notes), `system/reports/brain-reader-routing-compatibility-precheck-2026-07-08.md` (with Batch 8B notes), and this plan. All agent-context files, capture/ docs, inbox/ docs, and reports now explicitly document both legacy active paths and future target paths. Every `inbox/new/` and `inbox/failed/` reference is qualified with "after switch". Active context still warns not to switch Save-to-Mind yet. No routing has been switched; no capture content has been moved; `.obsidian/app.json` remains unchanged. The next step is Batch 8C — controlled Brain reader validation.
+
+Legacy `capture/inbox/` and `capture/failed/` remain active; `inbox/` target folders are README-only; Save-to-Mind was not switched. Obsidian still routes new files to `capture/inbox` and attachments to legacy `sources/files`; controlled Brain/Save-to-Mind validation is required before any switch or content move.
 
 **Goal:** migrate capture lifecycle paths after Brain readers and docs are validated.
 

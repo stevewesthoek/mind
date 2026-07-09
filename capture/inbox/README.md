@@ -15,3 +15,5 @@ nightly local scheduler -> sync missing inbox captures -> Mind Steward -> AI Mod
 ```
 
 Do not manually delete captures from here unless they have been reviewed and promoted, or intentionally discarded.
+
+**Compatibility note:** this is the legacy capture path. Successful Save-to-Mind captures will target `inbox/new/` after the controlled switch. No switch has occurred yet. Do not write to `inbox/new/` until the switch batch is completed and validated.

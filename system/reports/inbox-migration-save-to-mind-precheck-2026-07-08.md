@@ -168,6 +168,29 @@ or whether docs/config must be updated first.
 
 Do not combine a bulk content move with the Save-to-Mind switch unless the controlled write/read validation is already available.
 
+## Batch 8B — Documentation compatibility update (2026-07-09)
+
+**Completed:** Batch 8B updated documentation and active compatibility context to make the upcoming inbox migration explicit while keeping legacy routing active.
+
+Documentation changes applied:
+
+| File | Change |
+|------|--------|
+| `capture/README.md` | added future target notes (`inbox/new/`, `inbox/failed/`) to each folder entry |
+| `capture/inbox/README.md` | added compatibility note pointing to `inbox/new/`; explicitly says no switch yet |
+| `capture/failed/README.md` | added compatibility note pointing to `inbox/failed/`; explicitly says no switch yet |
+| `inbox/README.md` | added explicit statement: no captures moved, Save-to-Mind still writes to legacy |
+| `inbox/raw/README.md` | added compatibility note about legacy raw material in `capture/` |
+| `inbox/processed/README.md` | added compatibility note about legacy daily material in `capture/daily/` |
+| `system/agent-context/00-memory-map.md` | added Inbox Migration Compatibility table with legacy/future mapping |
+| `system/agent-context/00-current-context.md` | added inbox/ folder entries to folder structure; updated writing defaults |
+| `system/agent-context/AGENTS.md` | added Inbox Migration Compatibility section; updated routing table with future targets |
+| `system/folder-contract.md` | added Batch 8B documentation compatibility status |
+| `system/reports/brain-reader-routing-compatibility-precheck-2026-07-08.md` | added Batch 8B notes |
+| `system/reports/top-level-folder-migration-batch-plan-2026-07-07.md` | updated Batch 8 status with Batch 8B documentation compatibility |
+
+No routing was switched. No capture content was moved. Save-to-Mind remains unchanged. `.obsidian/app.json` unchanged. Continuous processing disabled. Unrelated dirty paths untouched.
+
 ## Boundaries preserved in this precheck
 
 - No capture content moved.
