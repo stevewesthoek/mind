@@ -228,3 +228,9 @@ Batch 7A boundaries preserved:
 - `wiki/organisations/prochat/pitch-decks/` was not touched;
 - Save-to-Mind behavior was not changed;
 - continuous processing was not enabled.
+
+
+
+## Batch 7C completion note
+
+Batch 7C finalized resources migration documentation. Approved non-faith source/resource scaffolding now lives under `resources/`; `sources/.DS_Store` remains local generated metadata and was not touched, staged, or migrated. Save-to-Mind and continuous processing remain unchanged.

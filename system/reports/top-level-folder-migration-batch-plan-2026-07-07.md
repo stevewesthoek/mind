@@ -244,7 +244,7 @@ Validation:
 
 ### Batch 7 — Resources migration
 
-**Status:** Batch 7B resources migration closeout precheck completed 2026-07-08. See `system/reports/resources-migration-precheck-2026-07-08.md` and `system/reports/resources-migration-closeout-precheck-2026-07-08.md`. Approved non-faith source/resource scaffolding now lives under `resources/`; only `sources/.DS_Store` remains as local generated metadata and was not touched or staged. Batch 7 is content-complete pending final closeout or metadata cleanup decision.
+**Status:** Batch 7C resources migration final closeout completed 2026-07-08. See `system/reports/resources-migration-precheck-2026-07-08.md`, `system/reports/resources-migration-closeout-precheck-2026-07-08.md`, and `system/reports/resources-migration-final-closeout-2026-07-08.md`. Approved non-faith source/resource scaffolding now lives under `resources/`; only `sources/.DS_Store` remains as local generated metadata and was not touched or staged. Batch 7 is complete for content migration; any metadata cleanup is deferred to a separate approval.
 
 **Batch 7A status:** completed 2026-07-09. `sources/books/`, `sources/files/`, `sources/papers/`, `sources/transcripts/`, `sources/web/`, `sources/research/`, and `sources/index.md` moved source-preservingly to `resources/`. Active non-faith source/resource routing now points to `resources/` and `resources/research/`. `sources/.DS_Store` was not migrated or staged.
 

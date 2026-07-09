@@ -145,3 +145,9 @@ Recommended next step:
 - `wiki/log.md` untouched.
 - `Untitled.canvas` untouched.
 - `wiki/organisations/prochat/pitch-decks/` untouched.
+
+
+
+## Batch 7C completion note
+
+Batch 7C created `system/reports/resources-migration-final-closeout-2026-07-08.md` and marked Batch 7 content migration complete. `sources/.DS_Store` remains untouched as local generated metadata; no cleanup was performed.
