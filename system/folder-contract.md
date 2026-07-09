@@ -3,8 +3,8 @@
 This document records the Mind root structure, migration status, and root cleanliness rules.
 
 **Last verified:** 2026-07-09
-**Status:** Save-to-Mind routing switched to `inbox/new/` (Batch 8P); legacy folders retained as historical fallbacks
-**Documentation compatibility:** Batch 8B completed 2026-07-09 — all agent context, capture/ docs, inbox/ docs, and reports documented both legacy and future routing explicitly. Batch 8R completed 2026-07-09 — routing switch documentation updated to reflect active `inbox/new/` target.
+**Status:** Capture inbox cleanup completed (Batch 8W); all legacy capture/inbox files migrated; single inbox/new system active
+**Documentation compatibility:** Batch 8B (2026-07-09) documented routing; Batch 8R (2026-07-09) updated for active inbox/new; Batch 8W (2026-07-09) migrated legacy content, capture/inbox now empty.
 
 ## Root purpose
 
@@ -61,7 +61,7 @@ The target folders now exist with README files, but legacy folders remain active
 
 | Legacy path | Target path | Status |
 |-------------|-------------|--------|
-| `capture/inbox/` (19 files) | `inbox/new/` | **✓ SWITCHED (Batch 8P, 2026-07-09).** Active routing now targets `inbox/new/`. Historical captures (19 local, remote may differ) were not moved; `capture/inbox/` remains for reference. |
+| `capture/inbox/` (28 files) | `inbox/new/` | **✓ COMPLETED (Batch 8W, 2026-07-09).** All 28 files migrated: 9 to inbox/new (active), 7+2 to history (archived), 9 to history (quarantined). capture/inbox now empty. |
 | `capture/failed/` (3 files) | `inbox/failed/` | Legacy routing persists. Failure handling not yet switched; remains in `capture/failed/` (3 local). Future switch is separate batch. |
 | `capture/` raw/original material | `inbox/raw/` or `resources/` | Move only after source preservation review. |
 | `live/projects/` | `projects/` | Brain supports both; move project content later in small commits. |

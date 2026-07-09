@@ -1,16 +1,21 @@
 # Inbox
 
+**Single-system active intake — Batch 8W cleanup complete (2026-07-09).**
+
 Universal intake and processing lifecycle for anything not understood yet.
 
-**Status:** Save-to-Mind routing now targets `inbox/new/` as of Batch 8P (2026-07-09). Active routing is now:
+**Status:** Save-to-Mind routing exclusively targets `inbox/new/` as of Batch 8P (2026-07-09). Active routing is:
 
 ```text
 POST /webhook/mind-inbox -> n8n -> GitHub inbox/new/
 ```
 
-Use this folder as the active target structure for new captures, raw originals, processed proposals, and failed intake items.
+**Migration complete (Batch 8W, 2026-07-09):** Legacy `capture/inbox/` has been fully migrated. All active captures and historical material have been moved:
+- Active unprocessed captures: `inbox/new/` (12 files)
+- Historical verified captures: `history/capture-inbox-historical/2026-07-09/` (9 files)
+- Test artifacts: `history/capture-inbox-quarantine/2026-07-09/` (9 files, not deleted)
 
-During the compatibility period, existing legacy `capture/` paths remain in place. Historical `capture/inbox/` (19 files in local clone) and `capture/failed/` (3 files in local clone) were not moved and remain available for reference and backward-compatibility processing by Brain readers and Mind Steward. Remote origin/main may include additional Batch 8P webhook test captures.
+**Legacy status:** `capture/inbox/` is now empty. No backward-compatibility fallback is required; all material has been explicitly migrated.
 
 ## Subfolders
 
