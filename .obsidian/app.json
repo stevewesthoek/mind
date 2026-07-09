@@ -1,6 +1,6 @@
 {
   "newFileLocation": "folder",
-  "newFileFolderPath": "capture/inbox",
+  "newFileFolderPath": "inbox/new",
   "attachmentFolderPath": "sources/files",
   "trashOption": "local",
   "promptDelete": false,

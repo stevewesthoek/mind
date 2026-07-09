@@ -3,8 +3,8 @@
 This document records the Mind root structure, migration status, and root cleanliness rules.
 
 **Last verified:** 2026-07-09
-**Status:** Capture inbox cleanup completed (Batch 8W); all legacy capture/inbox files migrated; single inbox/new system active
-**Documentation compatibility:** Batch 8B (2026-07-09) documented routing; Batch 8R (2026-07-09) updated for active inbox/new; Batch 8W (2026-07-09) migrated legacy content, capture/inbox now empty.
+**Status:** Success inbox migration complete; single unified system (Batch 8X); all intake sources target inbox/new
+**Documentation compatibility:** Batch 8B documented routing; Batch 8R updated for active inbox/new; Batch 8W migrated legacy content; Batch 8X finalized single system (Obsidian + Brain fallback retired).
 
 ## Root purpose
 
@@ -61,7 +61,7 @@ The target folders now exist with README files, but legacy folders remain active
 
 | Legacy path | Target path | Status |
 |-------------|-------------|--------|
-| `capture/inbox/` (28 files) | `inbox/new/` | **✓ COMPLETED (Batch 8W, 2026-07-09).** All 28 files migrated: 9 to inbox/new (active), 7+2 to history (archived), 9 to history (quarantined). capture/inbox now empty. |
+| `capture/inbox/` | `inbox/new/` | **✓ FINALIZED (Batch 8X, 2026-07-09).** All 28 files migrated (Batch 8W): 9 to inbox/new (active), 7+2 to history (archived), 9 to history (quarantined). capture/inbox empty. Brain fallback retired; Obsidian config updated. |
 | `capture/failed/` (3 files) | `inbox/failed/` | Legacy routing persists. Failure handling not yet switched; remains in `capture/failed/` (3 local). Future switch is separate batch. |
 | `capture/` raw/original material | `inbox/raw/` or `resources/` | Move only after source preservation review. |
 | `live/projects/` | `projects/` | Brain supports both; move project content later in small commits. |
