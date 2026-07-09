@@ -223,6 +223,10 @@ Batch 8C is documentation-level validation only. External `brain` repo validatio
 
 See `system/reports/controlled-brain-reader-validation-2026-07-09.md` for the full evidence table and validation requirements.
 
+## Batch 8D — External Brain workflow validation planning (2026-07-09)
+
+**Completed:** Batch 8D inspected the external `brain` repo. Brain TypeScript already supports dual-path; two shell scripts and the n8n workflow hardcode legacy paths and must be updated before switch. See `system/reports/external-brain-workflow-validation-plan-2026-07-09.md` and Brain report at `brain/operations/reports/mind-inbox-external-workflow-validation-plan-2026-07-09.md` (Brain commit `50d46df8`).
+
 ## Boundaries preserved in this precheck
 
 - No capture content moved.

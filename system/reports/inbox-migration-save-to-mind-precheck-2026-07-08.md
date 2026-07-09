@@ -204,6 +204,18 @@ Therefore Batch 8C is documentation-level validation only. External validation i
 
 See `system/reports/controlled-brain-reader-validation-2026-07-09.md` for the full evidence table, risk assessment, and validation requirements.
 
+## Batch 8D — External Brain workflow validation planning (2026-07-09)
+
+**Completed:** Batch 8D inspected the external `brain` repo and created a cross-repo validation plan. Key findings:
+
+- Brain TypeScript code already supports dual-path reading (`inbox/new/` first, `capture/inbox/` fallback).
+- `tools/scripts/mind-steward-inbox-dry-run-report.sh` hardcodes `capture/inbox` — MUST update.
+- `tools/scripts/mind-compile-loop.sh` hardcodes `capture/inbox` — MUST update.
+- `operations/automations/n8n/workflows/mind-inbox-fixed.json` hardcodes `capture/inbox/` and `capture/failed/` — MUST update to env-var-driven paths.
+- No Brain implementation code was changed in this batch.
+
+See `system/reports/external-brain-workflow-validation-plan-2026-07-09.md` and Brain report at `brain/operations/reports/mind-inbox-external-workflow-validation-plan-2026-07-09.md` (Brain commit `50d46df8`).
+
 ## Boundaries preserved in this precheck
 
 - No capture content moved.
