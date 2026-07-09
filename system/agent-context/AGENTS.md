@@ -89,7 +89,7 @@ Use these defaults:
 | Failed raw capture needing retry | `capture/failed/` |
 | Current operating task/project summaries | `live/` |
 | Compiled durable knowledge | `wiki/` |
-| Raw evidence and source material | `sources/` |
+| Raw evidence and source material | `resources/` |
 | Completed, old, or historical material | `archive/` |
 | Archived reference material | `archive/old/` |
 
@@ -98,7 +98,7 @@ Use these defaults:
 Research belongs under:
 
 ```text
-sources/research/
+resources/research/
 ```
 
 Use research folders for investigation, source notes, drafts, Bible studies, marketing research, business research, AI research, book notes, and evidence gathering.
@@ -128,8 +128,8 @@ Do not overwrite Yeshua Academy canonical files with raw research. Research shou
 Marketing and business research usually belongs under:
 
 ```text
-sources/research/marketing/
-sources/research/business/
+resources/research/marketing/
+resources/research/business/
 ```
 
 Canonical ProChat or Arkware strategy belongs under:
@@ -153,7 +153,7 @@ The user should be able to speak naturally. When they say things like:
 
 route automatically using this file plus `00-memory-map.md`.
 
-When uncertain, prefer a safe draft in `capture/inbox/` or `sources/research/` rather than corrupting strategy, tasks, or projects.
+When uncertain, prefer a safe draft in `capture/inbox/` or `resources/research/` rather than corrupting strategy, tasks, or projects.
 
 ## Write Policy For Agents
 

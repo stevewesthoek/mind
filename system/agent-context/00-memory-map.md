@@ -23,7 +23,7 @@ Use this before answering Steve-specific questions.
 | Active projects | `live/projects.md` | `live/tasks.md` |
 | Tasks or execution | `live/tasks.md`, `kanban.md` | `live/projects.md` |
 | Long-term responsibilities | `wiki/areas/` | `wiki/` |
-| Research or references | `sources/research/` | `sources/` |
+| Research or references | `resources/research/` | `resources/` |
 | Old/completed work | `archive/` | `archive/old/` |
 | Raw captures | `capture/inbox/` | `capture/failed/` |
 | Templates | `system/templates/` | existing files of same type |
@@ -35,7 +35,7 @@ Use this before answering Steve-specific questions.
 |---|---|
 | ProChat | `organizations/prochat/`, then `wiki/organisations/prochat/` |
 | ProChat brand/messaging | `wiki/organisations/prochat/brand/` |
-| ProChat growth/marketing | `organizations/prochat/growth/`, then `sources/research/marketing/` |
+| ProChat growth/marketing | `organizations/prochat/growth/`, then `resources/research/marketing/` |
 | ProChat YouTube/content | `wiki/organisations/prochat/youtube/` |
 | ProChat legal | `organizations/prochat/legal/` |
 | Arkware | `organizations/arkware/` |
@@ -48,7 +48,7 @@ Use this before answering Steve-specific questions.
 Research belongs under:
 
 ```text
-sources/research/
+resources/research/
 ```
 
 | User asks about | Search/create under |
@@ -60,13 +60,13 @@ sources/research/
 | Comparative theological views | `faith/resources/bible/comparative-views/` |
 | Apologetics | `faith/resources/apologetics/` |
 | Steve's apologetics voice/debate style | `faith/resources/apologetics/steve-apologetics-voice-and-debate-standard.md` |
-| Marketing research | `sources/research/marketing/` |
-| Business research | `sources/research/business/` |
-| AI research | `sources/research/ai/` |
-| Book notes | `sources/research/books/` |
-| Person research | `sources/research/people/` |
-| Organisation research | `sources/research/organisations/` |
-| Source files | `sources/` |
+| Marketing research | `resources/research/marketing/` |
+| Business research | `resources/research/business/` |
+| AI research | `resources/research/ai/` |
+| Book notes | `resources/research/books/` |
+| Person research | `resources/research/people/` |
+| Organisation research | `resources/research/organisations/` |
+| Source files | `resources/` |
 
 ## Bible / Theology Routing
 
@@ -94,8 +94,8 @@ Do not overwrite strategy with raw research.
 
 | Need | Location |
 |---|---|
-| Marketing research | `sources/research/marketing/` |
-| Business research | `sources/research/business/` |
+| Marketing research | `resources/research/marketing/` |
+| Business research | `resources/research/business/` |
 | Brand truth | `wiki/organisations/<org>/brand/` |
 | Growth playbooks | `organizations/<org>/growth/` or `wiki/organisations/<org>/growth/` if not migrated |
 | Offers | `wiki/organisations/<org>/offers.md` or brand/offer files |
@@ -107,11 +107,11 @@ Do not overwrite strategy with raw research.
 | User says | Save default |
 |---|---|
 | "remember this" | `capture/inbox/` if unsorted; otherwise relevant folder |
-| "save this as research" | `sources/research/` or relevant research category |
+| "save this as research" | `resources/research/` or relevant research category |
 | "this is a decision" | `live/decisions.md` or `wiki/organisations/<org>/` |
 | "make a task" | `live/tasks.md` |
 | "make a project" | `live/projects.md` |
-| "this is reference" | `sources/` |
+| "this is reference" | `resources/` |
 | "archive this" | ask before moving to `archive/` |
 
 ## Write Safety

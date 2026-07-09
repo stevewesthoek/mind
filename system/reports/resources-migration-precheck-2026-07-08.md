@@ -1,7 +1,7 @@
 # Resources Migration Precheck — 2026-07-08
 
-**Task:** Task O — Batch 7 resources migration precheck  
-**Status:** precheck only  
+**Task:** Task O — Batch 7 resources migration precheck
+**Status:** Batch 7A completed after precheck
 **Boundary:** no `sources/` content moved or edited in this batch.
 
 ## Current state verified
@@ -175,3 +175,56 @@ Required active-reference updates during the move should point forward-looking s
 - `wiki/organisations/prochat/pitch-decks/` untouched.
 - Save-to-Mind unchanged.
 - Continuous processing disabled.
+
+## Batch 7A completion notes
+
+Completed source-preserving moves:
+
+```text
+sources/books/ -> resources/books/
+sources/files/ -> resources/files/
+sources/papers/ -> resources/papers/
+sources/transcripts/ -> resources/transcripts/
+sources/web/ -> resources/web/
+sources/research/ -> resources/research/
+sources/index.md -> resources/index.md
+```
+
+Excluded from migration and staging:
+
+```text
+sources/.DS_Store
+```
+
+Updated active references in:
+
+```text
+system/agent-context/00-memory-map.md
+system/agent-context/00-current-context.md
+system/agent-context/AGENTS.md
+system/folder-contract.md
+```
+
+Forward-looking non-faith source/resource routing now points to:
+
+```text
+resources/
+resources/research/
+resources/research/ai/
+resources/research/books/
+resources/research/business/
+resources/research/marketing/
+resources/research/organisations/
+resources/research/people/
+```
+
+Faith resources were not moved or edited.
+
+Batch 7A boundaries preserved:
+
+- `sources/.DS_Store` was not migrated or staged;
+- `wiki/log.md` was not touched;
+- `Untitled.canvas` was not touched;
+- `wiki/organisations/prochat/pitch-decks/` was not touched;
+- Save-to-Mind behavior was not changed;
+- continuous processing was not enabled.

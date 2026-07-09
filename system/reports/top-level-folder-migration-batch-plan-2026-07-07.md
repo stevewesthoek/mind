@@ -246,6 +246,8 @@ Validation:
 
 **Status:** Batch 7 resources migration precheck completed 2026-07-08. See `system/reports/resources-migration-precheck-2026-07-08.md`. Remaining `sources/` content is small README/index source-resource scaffolding plus `.DS_Store`; no content moved yet. Recommended next work is a source-preserving resources move that excludes `.DS_Store`.
 
+**Batch 7A status:** completed 2026-07-09. `sources/books/`, `sources/files/`, `sources/papers/`, `sources/transcripts/`, `sources/web/`, `sources/research/`, and `sources/index.md` moved source-preservingly to `resources/`. Active non-faith source/resource routing now points to `resources/` and `resources/research/`. `sources/.DS_Store` was not migrated or staged.
+
 **Goal:** move non-faith source/reference material from `sources/` into `resources/`.
 
 Candidate moves:

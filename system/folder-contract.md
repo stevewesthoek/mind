@@ -2,7 +2,7 @@
 
 This document records the Mind root structure, migration status, and root cleanliness rules.
 
-**Last verified:** 2026-07-08
+**Last verified:** 2026-07-09
 **Status:** target structure prepared; legacy folders retained as compatibility fallbacks
 
 ## Root purpose
@@ -69,7 +69,8 @@ The target folders now exist with README files, but legacy folders remain active
 | `wiki/organisations/` | `organizations/` | Use `organizations/` after migration. |
 | `wiki/` durable knowledge | `knowledge/` or `faith/` | Faith material goes to `faith/`; other durable knowledge goes to `knowledge/`. |
 | `wiki/log.md` | `inbox/processed/` or `system/reports/` | Proposal/review surfaces move later; current local edits must not be overwritten. |
-| `sources/` | `resources/` or `faith/resources/` | Preserve provenance and keep raw evidence separate from conclusions. |
+| `sources/books/`, `sources/files/`, `sources/papers/`, `sources/transcripts/`, `sources/web/`, `sources/research/`, `sources/index.md` | completed to `resources/` | Non-faith source/resource scaffolding moved in Batch 7A; `.DS_Store` metadata was not migrated. |
+| `sources/` remaining local metadata | cleanup candidate | Preserve provenance and keep raw evidence separate from conclusions; do not migrate `.DS_Store` as knowledge. |
 | `sources/research/bible/` | completed to `faith/resources/bible/` | Source material moved in Batch 5C1; distilled Bible notes may be promoted later after review. |
 | `sources/research/theology/` | completed to `faith/resources/theology/` | Source material moved in Batch 5D1; distilled theology may be promoted later after review. |
 | `sources/research/apologetics/` | completed to `faith/resources/apologetics/` | Approved source material moved in Batch 5E1; distilled apologetics may be promoted later after review. |

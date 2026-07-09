@@ -30,7 +30,7 @@ capture/failed/   Failed captures needing retry
 capture/daily/    Daily scratch/notes
 live/             Active work surfaces (tasks, projects, decisions, workflows)
 wiki/             Compiled durable knowledge
-sources/          Raw evidence, research notes, source material
+resources/        Raw evidence, research notes, source material
 system/agent-context/           Mind Steward contract and rules
 archive/          Completed or inactive material
 archive/old/      Read-only backups
@@ -47,7 +47,7 @@ The cloud video orchestrator implementation is now in the Brain repo at:
 Research lives inside this repo under:
 
 ```text
-sources/research/
+resources/research/
 ```
 
 Subfolders: `bible/`, `theology/`, `apologetics/`, `marketing/`, `business/`, `books/`, `people/`, `organisations/`, `ai/`.
@@ -133,8 +133,8 @@ The default should be respectful but direct, fair but not timid, and claim-by-cl
 Business and marketing research lives in:
 
 ```text
-sources/research/business/
-sources/research/marketing/
+resources/research/business/
+resources/research/marketing/
 ```
 
 Committed business/brand/growth strategy belongs under the relevant organisation:
@@ -150,7 +150,7 @@ When the user says:
 | Natural language request | Default action |
 |---|---|
 | "remember this" | save to `capture/inbox/` unless category is obvious |
-| "research this" | create/use `sources/research/` |
+| "research this" | create/use `resources/research/` |
 | "turn this into strategy" | draft in `wiki/organisations/` or `live/decisions.md` |
 | "make a task" | add to `live/tasks.md` |
 | "archive this" | ask before moving to `archive/` |
