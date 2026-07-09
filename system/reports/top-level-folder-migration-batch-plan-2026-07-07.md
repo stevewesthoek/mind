@@ -272,7 +272,7 @@ Validation:
 
 ### Batch 8 — Inbox migration and Save-to-Mind switch
 
-**Status:** Batch 8 inbox migration and Save-to-Mind switch precheck completed 2026-07-08. See `system/reports/inbox-migration-save-to-mind-precheck-2026-07-08.md`. Legacy `capture/inbox/` and `capture/failed/` remain active; `inbox/` target folders are README-only; Save-to-Mind was not switched. Recommended next work is Brain reader and routing compatibility precheck before any content move.
+**Status:** Batch 8A Brain reader and routing compatibility precheck completed 2026-07-08. See `system/reports/inbox-migration-save-to-mind-precheck-2026-07-08.md` and `system/reports/brain-reader-routing-compatibility-precheck-2026-07-08.md`. Legacy `capture/inbox/` and `capture/failed/` remain active; `inbox/` target folders are README-only; Save-to-Mind was not switched. Obsidian still routes new files to `capture/inbox` and attachments to legacy `sources/files`; controlled Brain/Save-to-Mind validation is required before any switch or content move.
 
 **Goal:** migrate capture lifecycle paths after Brain readers and docs are validated.
 
