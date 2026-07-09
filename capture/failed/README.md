@@ -1,13 +1,9 @@
-# Failed Captures
+# Failed Captures — Legacy Marker
 
-**Legacy folder — Historical failed captures only.** Failure routing remains in legacy mode as of Batch 8P (2026-07-09).
+**DEPRECATED (2026-07-10).** This folder is a legacy-only marker for historical reference. Active failure routing has moved to `inbox/failed/`.
 
-Raw recoverable captures that failed classification, routing, or writing are collected here.
+**Historical note:** capture/failed contained 3 files (2 verification test artifacts from 2026-05-16 + README). All historical files were archived to `history/capture-failed-historical/2026-07-09/` during Batch 8Z finalization (2026-07-10).
 
-Nothing in this folder should be treated as disposable until it has been retried, reviewed, or archived.
+**Do not write to this folder.** All new failed captures should target `inbox/failed/` per unified migration (Batch 8Y-8Z, 2026-07-09–2026-07-10).
 
-Target rule: no failed capture should remain here longer than 3 days without retry or review.
-
-**Status:** 3 files as of 2026-07-09 (local clone). Historical failed captures were not moved. Legacy `capture/failed/` remains in place for reference and processing until explicitly archived.
-
-**Compatibility note:** Save-to-Mind success routing switched to `inbox/new/` (Batch 8P, 2026-07-09). Failure routing was not changed in the current simple n8n deployment and continues to use legacy handling. Future `inbox/failed/` target exists as scaffolding but is not yet active.
+**Brain status:** Failure path fallback retired from MIND_FAILED_INBOX_CANDIDATES (Batch 8Y). Brain readers now check inbox/failed only; capture/failed is not consulted.

@@ -1,9 +1,15 @@
 # Inbox — Failed
 
-**Scaffolding folder — Not yet active.** Failed, blocked, unreadable, duplicate-conflicted, or approval-blocked intake items are targeted here after migration, but the Save-to-Mind workflow does not currently implement failure routing to this path.
+**Active failure intake target — Finalized Batch 8Z (2026-07-10).**
 
-This folder is for preserving failure evidence without losing the original capture.
+Failed, blocked, unreadable, duplicate-conflicted, or approval-blocked captures land here as the unified failure surface.
 
-Current file count: 1 as of 2026-07-09 (README.md only).
+Current file count: 1 as of 2026-07-10 (README.md only, pending n8n failure switch).
 
-**Status:** Batch 8P switched Save-to-Mind success routing to `inbox/new/` but did not implement failure routing. Failure handling remains in legacy `capture/failed/` (3 historical files in local clone, not moved). Future failure routing to `inbox/failed/` will be implemented in a separate controlled batch.
+**Status:** Brain failure path fallback retired (Batch 8Y). All Brain readers check inbox/failed only (no fallback to capture/failed). n8n failure routing switch pending — currently awaiting Dokploy n8n workflow update to target this folder instead of legacy capture/failed.
+
+**Intake sources (target):**
+- Save-to-Mind webhook failure branch: n8n error handler → GitHub inbox/failed/
+- Manual failure captures: Any failure-case capture should target inbox/failed/
+
+**Historical note:** legacy capture/failed contained 3 historical test files (archived 2026-07-10). All new failures use inbox/failed.
