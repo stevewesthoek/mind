@@ -272,6 +272,8 @@ Validation:
 
 ### Batch 8 — Inbox migration and Save-to-Mind switch
 
+**Status:** Batch 8 inbox migration and Save-to-Mind switch precheck completed 2026-07-08. See `system/reports/inbox-migration-save-to-mind-precheck-2026-07-08.md`. Legacy `capture/inbox/` and `capture/failed/` remain active; `inbox/` target folders are README-only; Save-to-Mind was not switched. Recommended next work is Brain reader and routing compatibility precheck before any content move.
+
 **Goal:** migrate capture lifecycle paths after Brain readers and docs are validated.
 
 Candidate moves after approval:
