@@ -2,11 +2,15 @@
 
 Universal intake and processing lifecycle for anything not understood yet.
 
-Use this folder as the target structure for new captures, raw originals, processed proposals, and failed intake items after migration.
+**Status:** Save-to-Mind routing now targets `inbox/new/` as of Batch 8P (2026-07-09). Active routing is now:
 
-No captures have been moved into `inbox/` yet. Save-to-Mind still writes to legacy `capture/inbox/`. Do not switch routing until the controlled switch batch is validated.
+```text
+POST /webhook/mind-inbox -> n8n -> GitHub inbox/new/
+```
 
-During the compatibility period, existing `capture/` paths remain in place until Save-to-Mind, Brain readers, Obsidian links, and validation are migrated.
+Use this folder as the active target structure for new captures, raw originals, processed proposals, and failed intake items.
+
+During the compatibility period, existing legacy `capture/` paths remain in place. Historical `capture/inbox/` (21 files) and `capture/failed/` (5 files) were not moved and remain available for reference and backward-compatibility processing by Brain readers and Mind Steward.
 
 ## Subfolders
 

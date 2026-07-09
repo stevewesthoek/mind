@@ -1,14 +1,20 @@
 # Capture Inbox
 
-Successful Save-to-Mind captures land here after they are synced from GitHub into the local vault.
+**Legacy folder — Historical captures only.** Save-to-Mind routing switched to `inbox/new/` as of Batch 8P (2026-07-09).
 
-Producer:
+**Historical producer (legacy):**
 
 ```text
-POST /webhook/mind-inbox -> n8n -> GitHub capture/inbox/
+POST /webhook/mind-inbox -> n8n -> GitHub capture/inbox/  [LEGACY — SWITCHED 2026-07-09]
 ```
 
-Classification:
+**Current active producer (2026-07-09 onwards):**
+
+```text
+POST /webhook/mind-inbox -> n8n -> GitHub inbox/new/
+```
+
+Classification (historical):
 
 ```text
 nightly local scheduler -> sync missing inbox captures -> Mind Steward -> AI Model Selector -> local_only=true -> local OpenAI-compatible model
@@ -16,4 +22,6 @@ nightly local scheduler -> sync missing inbox captures -> Mind Steward -> AI Mod
 
 Do not manually delete captures from here unless they have been reviewed and promoted, or intentionally discarded.
 
-**Compatibility note:** this is the legacy capture path. Successful Save-to-Mind captures will target `inbox/new/` after the controlled switch. No switch has occurred yet. Do not write to `inbox/new/` until the switch batch is completed and validated.
+**Status:** 21 files as of 2026-07-09. Historical captures were not moved. Legacy `capture/inbox/` remains in place for reference and processing until explicitly archived.
+
+Brain source-of-truth reconciled at commit `31554fd0` in `/Users/Office/Repos/stevewesthoek/brain`.

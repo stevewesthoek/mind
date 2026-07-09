@@ -1,12 +1,12 @@
 # Capture
 
-Raw intake lands here before Mind Steward processes it.
+Historical raw intake buffer. New captures now land in `inbox/new/` via Save-to-Mind routing (active as of 2026-07-09).
 
 ## Folders
 
-- `inbox/` — legacy landing zone; Save-to-Mind captures land here (future target: `inbox/new/` after switch).
+- `inbox/` — **legacy landing zone** (historical captures from prior deployments; still contains 21 files as of 2026-07-09 and was not moved).
 - `daily/` — legacy daily capture grouping (future target: under `inbox/processed/` or `history/` by human decision).
-- `failed/` — legacy safety buffer for captures that could not be processed (future target: `inbox/failed/` after routing switch).
+- `failed/` — **legacy safety buffer** for captures that could not be processed (historical failures; still contains 5 files as of 2026-07-09 and was not moved).
 
 ## Rules
 

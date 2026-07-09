@@ -3,8 +3,8 @@
 This document records the Mind root structure, migration status, and root cleanliness rules.
 
 **Last verified:** 2026-07-09
-**Status:** target structure prepared; legacy folders retained as compatibility fallbacks
-**Documentation compatibility:** Batch 8B completed 2026-07-09 — all agent context, capture/ docs, inbox/ docs, and reports now document both legacy and future routing explicitly. No routing has been switched.
+**Status:** Save-to-Mind routing switched to `inbox/new/` (Batch 8P); legacy folders retained as historical fallbacks
+**Documentation compatibility:** Batch 8B completed 2026-07-09 — all agent context, capture/ docs, inbox/ docs, and reports documented both legacy and future routing explicitly. Batch 8R completed 2026-07-09 — routing switch documentation updated to reflect active `inbox/new/` target.
 
 ## Root purpose
 
@@ -59,10 +59,10 @@ system/
 
 The target folders now exist with README files, but legacy folders remain active until content, Obsidian links, Save-to-Mind, Brain reports, Graphify, task handling, and validation are migrated.
 
-| Legacy path | Target path | Compatibility rule |
-|-------------|-------------|--------------------|
-| `capture/inbox/` | `inbox/new/` | Save-to-Mind remains legacy until explicitly switched and validated. |
-| `capture/failed/` | `inbox/failed/` | Failure routing remains legacy until explicitly switched and validated. |
+| Legacy path | Target path | Status |
+|-------------|-------------|--------|
+| `capture/inbox/` (21 files) | `inbox/new/` | **✓ SWITCHED (Batch 8P, 2026-07-09).** Active routing now targets `inbox/new/`. Historical captures were not moved; `capture/inbox/` remains for reference. |
+| `capture/failed/` (5 files) | `inbox/failed/` | Legacy routing persists. Failure handling not yet switched; remains in `capture/failed/`. Future switch is separate batch. |
 | `capture/` raw/original material | `inbox/raw/` or `resources/` | Move only after source preservation review. |
 | `live/projects/` | `projects/` | Brain supports both; move project content later in small commits. |
 | `live/decisions.md` | `knowledge/decisions.md` | Decide per decision type during migration. |
@@ -83,28 +83,28 @@ The target folders now exist with README files, but legacy folders remain active
 
 ## Root write rule
 
-Target rule after migration:
+**ACTIVE (2026-07-09 onwards):** Save-to-Mind writes new captures to:
 
 ```text
 inbox/new/
 ```
 
-Compatibility rule before Save-to-Mind is switched:
+Historical captures (not moved, for reference):
 
 ```text
-capture/inbox/
+capture/inbox/  [legacy, ~21 files, active until 2026-07-09, now historical]
 ```
 
-If processing fails, the target path is:
+If processing fails, the current/legacy path is:
+
+```text
+capture/failed/  [legacy, ~5 files, not yet migrated to inbox/failed/]
+```
+
+Target path for future failure routing (not yet active):
 
 ```text
 inbox/failed/
-```
-
-Compatibility fallback before routing is switched:
-
-```text
-capture/failed/
 ```
 
 If material is distilled into durable knowledge, it should be linked or moved into the documented destination while preserving source references when useful. Durable writes still require review and exact-path approval.
