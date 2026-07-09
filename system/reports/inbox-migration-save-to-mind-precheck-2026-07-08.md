@@ -191,6 +191,19 @@ Documentation changes applied:
 
 No routing was switched. No capture content was moved. Save-to-Mind remains unchanged. `.obsidian/app.json` unchanged. Continuous processing disabled. Unrelated dirty paths untouched.
 
+## Batch 8C — Controlled Brain reader validation (2026-07-09)
+
+**Completed:** Batch 8C determined that no Brain reader, Mind Steward, AI Model Selector, Save-to-Mind, n8n/webhook, or capture processing implementation code exists in this repo. This repo is a pure Obsidian knowledge vault; all such implementations live in the `brain` repo at `/Users/Office/Repos/stevewesthoek/brain/`.
+
+Key findings:
+- No `package.json`, `src/`, `apps/`, `services/`, `workflows/`, or `.github/` directories exist.
+- Only `tools/update-graph.sh`, `tools/render-graph-html.mjs`, `tools/export-kanban-tasks.mjs`, and two ProChat deploy shell scripts are the repo's non-documentation code.
+- Every reference to Brain readers, Mind Steward, AI Model Selector, Save-to-Mind, n8n, and webhook/mind-inbox is documentation, agent context, or external reference pointing to the `brain` repo.
+
+Therefore Batch 8C is documentation-level validation only. External validation in the `brain` repo is required before any content move or routing switch.
+
+See `system/reports/controlled-brain-reader-validation-2026-07-09.md` for the full evidence table, risk assessment, and validation requirements.
+
 ## Boundaries preserved in this precheck
 
 - No capture content moved.

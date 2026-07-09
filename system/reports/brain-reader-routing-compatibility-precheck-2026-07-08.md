@@ -215,6 +215,14 @@ Proceed next with **Batch 8C — controlled Brain reader validation** or a code/
 
 Do not move existing capture content and do not switch `.obsidian/app.json` until a controlled Save-to-Mind/n8n test plan is ready.
 
+## Batch 8C — Controlled Brain reader validation (2026-07-09)
+
+**Completed:** Batch 8C confirmed that no Brain reader implementation code exists in the `mind` repo. The repo is a pure Obsidian knowledge vault. All Brain reader, Mind Steward, AI Model Selector, Save-to-Mind, n8n/webhook, and capture processing implementations live in the `brain` repo.
+
+Batch 8C is documentation-level validation only. External `brain` repo validation is required before any content move or routing switch.
+
+See `system/reports/controlled-brain-reader-validation-2026-07-09.md` for the full evidence table and validation requirements.
+
 ## Boundaries preserved in this precheck
 
 - No capture content moved.
