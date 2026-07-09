@@ -25,10 +25,10 @@ POST /webhook/mind-inbox -> n8n -> GitHub inbox/new/
 
 | Folder | File Count | Status |
 |--------|-----------|--------|
-| `capture/inbox/` | 21 | Legacy/Historical — not moved, contains prior captures |
-| `inbox/new/` | 3 | Active — receiving new captures (including Batch 8P test file) |
-| `capture/failed/` | 5 | Legacy/Historical — not moved, contains prior failures |
-| `inbox/failed/` | 3 | Scaffolding only (README.md) — not yet active for failure routing |
+| `capture/inbox/` | 19 (local clone) | Legacy/Historical — not moved, contains prior captures. Remote origin/main may have additional Batch 8P files. |
+| `inbox/new/` | 1 (README.md only, local clone) | Active — receiving new captures. Remote origin/main includes Batch 8P webhook test capture. |
+| `capture/failed/` | 3 (local clone) | Legacy/Historical — not moved, contains prior failures |
+| `inbox/failed/` | 1 (README.md only) | Scaffolding only — not yet active for failure routing |
 
 ## Documentation Updates
 
@@ -38,37 +38,38 @@ POST /webhook/mind-inbox -> n8n -> GitHub inbox/new/
    - Updated header to reflect "Historical raw intake buffer"
    - Clarified that new captures now land in `inbox/new/`
    - Noted "active as of 2026-07-09"
-   - Documented that `capture/inbox/` still contains 21 files (not moved)
-   - Documented that `capture/failed/` still contains 5 files (not moved)
+   - Documented that `capture/inbox/` contains 19 files as of 2026-07-09 local clone (not moved)
+   - Documented that `capture/failed/` contains 3 files as of 2026-07-09 local clone (not moved)
+   - Updated automation rule to clarify active Save-to-Mind writes to `inbox/new/`, not `capture/inbox/`
 
 2. **capture/inbox/README.md**
    - Updated header to emphasize "Legacy folder — Historical captures only"
    - Added section showing legacy producer (marked SWITCHED 2026-07-09)
    - Added section showing current active producer routing to `inbox/new/`
-   - Stated 21 files as of 2026-07-09 with no move
+   - Stated 19 files as of 2026-07-09 local clone, with note about remote differences
    - Added Brain source-of-truth reference: commit `31554fd0`
 
 3. **capture/failed/README.md**
    - Updated header to emphasize "Legacy folder — Historical failed captures only"
-   - Stated 5 files as of 2026-07-09 with no move
+   - Stated 3 files as of 2026-07-09 local clone
    - Noted failure routing was not changed in Batch 8P
    - Clarified that `inbox/failed/` is scaffolding but not yet active
 
 4. **inbox/README.md**
    - Updated to state "Save-to-Mind routing now targets `inbox/new/` as of Batch 8P"
    - Added active routing path documentation
-   - Clarified that legacy paths remain in place (21 + 5 files, not moved)
+   - Clarified that legacy paths remain in place (19 local + 3 local files, not moved, remote may differ)
 
 5. **inbox/new/README.md**
    - Updated header to state "Active since Batch 8P (2026-07-09)"
-   - Noted current file count: 3 (includes Batch 8P test capture)
+   - Noted current file count: 1 (README.md only in local clone); remote includes Batch 8P test capture
    - Added active routing path: `POST /webhook/mind-inbox -> n8n -> GitHub inbox/new/`
 
 6. **inbox/failed/README.md**
    - Updated header to state "Scaffolding folder — Not yet active"
    - Clarified that success routing switched to `inbox/new/` but failure routing did not
-   - Noted 3 files (README.md only)
-   - Stated that `capture/failed/` remains active with 5 historical files
+   - Noted 1 file (README.md only) in local clone
+   - Stated that `capture/failed/` remains active with 3 historical files (local clone)
 
 7. **system/folder-contract.md**
    - Updated status line to note "Save-to-Mind routing switched to `inbox/new/` (Batch 8P)"
@@ -76,8 +77,8 @@ POST /webhook/mind-inbox -> n8n -> GitHub inbox/new/
    - Updated routing table: marked `capture/inbox/` → `inbox/new/` as SWITCHED (Batch 8P)
    - Updated routing table: noted `capture/failed/` → `inbox/failed/` remains legacy, future batch
    - Updated "Root write rule" section to reflect active `inbox/new/` target
-   - Documented legacy `capture/inbox/` as historical reference (~21 files)
-   - Documented active `capture/failed/` failure path (~5 files)
+   - Documented legacy `capture/inbox/` as historical reference (19 local files, remote may differ)
+   - Documented active `capture/failed/` failure path (3 local files)
    - Documented future target `inbox/failed/` as not yet active
 
 ### Files NOT Modified:
@@ -94,9 +95,9 @@ POST /webhook/mind-inbox -> n8n -> GitHub inbox/new/
 ## Key Statements
 
 ✓ **Active routing:** `inbox/new/` (confirmed Batch 8P, 2026-07-09)
-✓ **Legacy capture folder status:** `capture/inbox/` contains 21 files, not moved, historical reference
-✓ **Legacy failure folder status:** `capture/failed/` contains 5 files, not moved, historical reference
-✓ **Future failure target:** `inbox/failed/` exists as scaffolding, not yet active, future batch
+✓ **Legacy capture folder status:** `capture/inbox/` contains 19 files (local clone), not moved, historical reference. Remote origin/main may include additional Batch 8P files.
+✓ **Legacy failure folder status:** `capture/failed/` contains 3 files (local clone), not moved, historical reference
+✓ **Future failure target:** `inbox/failed/` exists as scaffolding (1 README.md file), not yet active, future batch
 ✓ **Obsidian integration:** `.obsidian/app.json` not changed in this batch (Batch 8R updates Mind context only)
 ✓ **Brain source-of-truth:** Reconciled at commit `31554fd0` in `brain` repo
 ✓ **No files moved:** All historical capture content remains in place

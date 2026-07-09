@@ -4,6 +4,6 @@
 
 This folder is for preserving failure evidence without losing the original capture.
 
-Current file count: 3 as of 2026-07-09 (README.md only).
+Current file count: 1 as of 2026-07-09 (README.md only).
 
-**Status:** Batch 8P switched Save-to-Mind success routing to `inbox/new/` but did not implement failure routing. Failure handling remains in legacy `capture/failed/` (5 historical files, not moved). Future failure routing to `inbox/failed/` will be implemented in a separate controlled batch.
+**Status:** Batch 8P switched Save-to-Mind success routing to `inbox/new/` but did not implement failure routing. Failure handling remains in legacy `capture/failed/` (3 historical files in local clone, not moved). Future failure routing to `inbox/failed/` will be implemented in a separate controlled batch.

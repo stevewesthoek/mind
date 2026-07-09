@@ -2,7 +2,7 @@
 
 **Active since Batch 8P (2026-07-09).** New unreviewed captures land here via Save-to-Mind webhook.
 
-Current file count: 3 as of 2026-07-09 (includes Batch 8P test capture).
+Current file count: 1 as of 2026-07-09 (README.md only in local clone). Remote origin/main includes Batch 8P webhook test capture not present in local clone.
 
 Examples of captures landing here:
 

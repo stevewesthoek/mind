@@ -61,8 +61,8 @@ The target folders now exist with README files, but legacy folders remain active
 
 | Legacy path | Target path | Status |
 |-------------|-------------|--------|
-| `capture/inbox/` (21 files) | `inbox/new/` | **✓ SWITCHED (Batch 8P, 2026-07-09).** Active routing now targets `inbox/new/`. Historical captures were not moved; `capture/inbox/` remains for reference. |
-| `capture/failed/` (5 files) | `inbox/failed/` | Legacy routing persists. Failure handling not yet switched; remains in `capture/failed/`. Future switch is separate batch. |
+| `capture/inbox/` (19 files) | `inbox/new/` | **✓ SWITCHED (Batch 8P, 2026-07-09).** Active routing now targets `inbox/new/`. Historical captures (19 local, remote may differ) were not moved; `capture/inbox/` remains for reference. |
+| `capture/failed/` (3 files) | `inbox/failed/` | Legacy routing persists. Failure handling not yet switched; remains in `capture/failed/` (3 local). Future switch is separate batch. |
 | `capture/` raw/original material | `inbox/raw/` or `resources/` | Move only after source preservation review. |
 | `live/projects/` | `projects/` | Brain supports both; move project content later in small commits. |
 | `live/decisions.md` | `knowledge/decisions.md` | Decide per decision type during migration. |
@@ -92,13 +92,13 @@ inbox/new/
 Historical captures (not moved, for reference):
 
 ```text
-capture/inbox/  [legacy, ~21 files, active until 2026-07-09, now historical]
+capture/inbox/  [legacy, 19 files local, active until 2026-07-09, now historical; remote may differ]
 ```
 
 If processing fails, the current/legacy path is:
 
 ```text
-capture/failed/  [legacy, ~5 files, not yet migrated to inbox/failed/]
+capture/failed/  [legacy, 3 files local, not yet migrated to inbox/failed/]
 ```
 
 Target path for future failure routing (not yet active):

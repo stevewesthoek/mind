@@ -22,6 +22,6 @@ nightly local scheduler -> sync missing inbox captures -> Mind Steward -> AI Mod
 
 Do not manually delete captures from here unless they have been reviewed and promoted, or intentionally discarded.
 
-**Status:** 21 files as of 2026-07-09. Historical captures were not moved. Legacy `capture/inbox/` remains in place for reference and processing until explicitly archived.
+**Status:** 19 files as of 2026-07-09 (local clone). Remote origin/main may include additional Batch 8P webhook test captures not present in local clone. Historical captures were not moved. Legacy `capture/inbox/` remains in place for reference and processing until explicitly archived.
 
 Brain source-of-truth reconciled at commit `31554fd0` in `/Users/Office/Repos/stevewesthoek/brain`.
