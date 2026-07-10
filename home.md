@@ -27,17 +27,23 @@ Canonical direction:
 2. `system/mind-strategy.md`
 3. `system/mind-roadmap.md`
 4. `system/mind-implementation-plan.md`
-5. `system/top-level-folder-redesign-migration-plan.md`
+5. `system/brain-mind-bridge.md`
+
+Brain's machine capability status is authoritative in:
+
+```text
+/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md
+```
 
 ---
 
 ## What happens automatically
 
-1. **Save-to-Mind currently places new captures in legacy `capture/inbox/`.** The target path is `inbox/new/`, but the write destination will not change until Brain, Obsidian links, and validation are ready.
+1. **Save-to-Mind places new captures in `inbox/new/`.** Failed or blocked processing belongs in `inbox/failed/`; generated proposals and receipts belong in `inbox/processed/`.
 
 2. **Brain runs report-only Mind Steward and scheduler workflows.** These workflows inspect, classify, and prepare status or review information without moving captures or changing durable Mind content automatically.
 
-3. **Brain Console provides the primary live system view.** Use the Obsidian Brain Console plugin for Brain Core, Mind Steward, scheduler, approval, and maintenance status. Legacy `live/dashboard.md` remains the Markdown fallback until dashboard surfaces migrate.
+3. **Brain owns machine status.** Use Brain's canonical live-status runbook and supported Brain Console surfaces for capability, approval, scheduler, and maintenance status. Mind does not duplicate runtime status.
 
 Automatic capture moves, automatic durable knowledge writes, automatic task writes, and continuous processing are not enabled.
 
@@ -74,12 +80,12 @@ Open the active task surface to see what is to-do, in progress, and done. Add, m
 
 ## Target structure
 
-| What | Target path | Compatibility fallback |
-|------|-------------|------------------------|
-| New captures | `inbox/new/` | `capture/inbox/` |
+| What | Target path | Migration note |
+|------|-------------|----------------|
+| New captures | `inbox/new/` | `capture/inbox/` is retired historical intake |
 | Raw originals | `inbox/raw/` | selected `capture/` or source paths after review |
 | Processed proposals and receipts | `inbox/processed/` | `wiki/log.md` and current reports |
-| Failed intake | `inbox/failed/` | `capture/failed/` |
+| Failed intake | `inbox/failed/` | verify current external failure routing in `system/folder-contract.md` |
 | Organizations | `organizations/` | `wiki/organisations/` |
 | Active projects | `projects/` | `live/projects/` |
 | Repos and apps | `repos/` | none; new target area |
@@ -99,7 +105,7 @@ Open the active task surface to see what is to-do, in progress, and done. Add, m
 inbox → review → propose destination and relations → approve → place → use → revalidate → supersede or preserve in history
 ```
 
-During migration, old folders remain as compatibility fallbacks. No content has been moved merely because the target folder exists.
+Some old folders remain as compatibility or historical surfaces. Their current state is defined by `system/folder-contract.md`; an old folder's presence does not make it an active destination.
 
 Brain may prepare classifications, relation proposals, and destination proposals. Durable placement or truth changes remain reviewed and approval-gated.
 

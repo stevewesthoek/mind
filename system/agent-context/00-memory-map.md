@@ -1,203 +1,70 @@
-# Memory Map — Where AI Should Look
+# Memory Map — Mind Retrieval Router
 
-This file tells AI agents where to retrieve context without loading the whole vault.
+Use the smallest relevant area first.
 
-Use this before answering Steve-specific questions.
+## Default protocol
 
-## Default Retrieval Protocol
+1. Classify the request.
+2. Search the first location in the table.
+3. Read the most relevant current pages.
+4. Expand to evidence or history only when needed.
+5. Report missing, stale, or contradictory context.
 
-1. Classify the user's request.
-2. Check the routing table below.
-3. Search the smallest relevant folder first.
-4. Read the most relevant files.
-5. State when context was not found.
-6. Save durable output only in the correct location.
+## Routing table
 
-## High-Level Routing
-
-| User asks about | Search first | Then search |
+| Request | Search first | Then search |
 |---|---|---|
-| Current priorities | `00-current-context.md`, `home.md`, `kanban.md` | `live/tasks.md`, `live/projects.md` |
-| How the vault works | `AGENTS.md`, `00-start-here.md`, `README.md` | `CLAUDE.md` |
-| Strategy or decisions | `wiki/organisations/`, `live/decisions.md` | `archive/` |
-| Active projects | `live/projects.md` | `live/tasks.md` |
-| Tasks or execution | `live/tasks.md`, `kanban.md` | `live/projects.md` |
-| Long-term responsibilities | `wiki/areas/` | `wiki/` |
-| Research or references | `resources/research/` | `resources/` |
-| Old/completed work | `archive/` | `archive/old/` |
-| Raw captures | `capture/inbox/` | `capture/failed/` |
-| Templates | `system/templates/` | existing files of same type |
-| Router/automation rules | `system/agent-context/` | `AGENTS.md` |
+| Current priorities and commitments | `00-current-context.md`, `home.md`, task authority | `projects/`, `organizations/` |
+| How Mind works | `AGENTS.md`, `00-start-here.md`, `system/` | Brain canonical docs |
+| ProChat | `organizations/prochat/` | `projects/`, `resources/research/` |
+| Arkware | `organizations/arkware/` | `projects/`, `resources/research/` |
+| Yeshua Academy | `organizations/yeshua-academy/` | `faith/`, `projects/`, `resources/` |
+| Business strategy or decisions | relevant `organizations/` page | `knowledge/`, `resources/research/business/` |
+| Brand, growth, or marketing | relevant organization | `resources/research/marketing/` |
+| Active project | `projects/` | related organization, repo, people, resources |
+| Code repo or app context | `repos/` | relevant project and Brain repo |
+| Person or relationship | `people/` | related organization/project/resource |
+| Personal durable knowledge | `knowledge/` | `resources/`, `history/` |
+| Bible/theology/apologetics/ministry | `faith/` | `faith/resources/`, relevant organization |
+| Research/source evidence | `resources/` or `faith/resources/` | domain page that cites it |
+| Raw/unreviewed capture | `inbox/new/` | `inbox/raw/`, `inbox/processed/` |
+| Generated proposal or receipt | `inbox/processed/` | cited source and target pages |
+| Failed processing | verified current failure surface | Brain runtime status/report |
+| Completed or superseded work | `history/` | Git history if needed |
+| AI behavior, skills, tools, configs | Brain repo | Brain memory map and runbooks |
 
-## Organisation Routing
+## Authority order
 
-| User asks about | Search first |
+Use as a starting point:
+
+1. recent explicit human decision;
+2. current canonical page;
+3. cited primary evidence;
+4. reviewed synthesis;
+5. unreviewed capture or inference;
+6. generated graph, index, or summary.
+
+Recency does not automatically override authority. Show unresolved conflicts.
+
+## Privacy
+
+Retrieve only the context needed for the task. Do not combine personal, business, ministry, or third-party private content merely because it is available.
+
+## Save routing
+
+Only when a write is explicitly requested:
+
+| Information | Default destination |
 |---|---|
-| ProChat | `organizations/prochat/`, then `wiki/organisations/prochat/` |
-| ProChat brand/messaging | `wiki/organisations/prochat/brand/` |
-| ProChat growth/marketing | `organizations/prochat/growth/`, then `resources/research/marketing/` |
-| ProChat YouTube/content | `wiki/organisations/prochat/youtube/` |
-| ProChat legal | `organizations/prochat/legal/` |
-| Arkware | `organizations/arkware/` |
-| Yeshua Academy | `organizations/yeshua-academy/` |
-| Organisation ecosystem | `organizations/ecosystem.md` |
-| Organisation conventions | `organizations/conventions.md` |
+| Unclassified capture | `inbox/new/` |
+| Raw/source material | `inbox/raw/` or `resources/` |
+| Generated proposal/receipt | `inbox/processed/` |
+| Durable approved non-faith knowledge | `knowledge/` |
+| Approved faith knowledge/source | `faith/` |
+| Organization truth | `organizations/<name>/` |
+| Active project state | `projects/<name>/` |
+| Repo-specific human context | `repos/<name>/` |
+| Person context | `people/` |
+| Completed/superseded history | `history/` after approval |
 
-## Research Routing
-
-Research belongs under:
-
-```text
-resources/research/
-```
-
-| User asks about | Search/create under |
-|---|---|
-| Bible passage study | `faith/resources/bible/passages/` |
-| Bible topic | `faith/resources/bible/topics/` |
-| Bible word study | `faith/resources/bible/word-studies/` |
-| Theological question | `faith/resources/bible/theological-questions/` or `faith/resources/theology/` |
-| Comparative theological views | `faith/resources/bible/comparative-views/` |
-| Apologetics | `faith/resources/apologetics/` |
-| Steve's apologetics voice/debate style | `faith/resources/apologetics/steve-apologetics-voice-and-debate-standard.md` |
-| Marketing research | `resources/research/marketing/` |
-| Business research | `resources/research/business/` |
-| AI research | `resources/research/ai/` |
-| Book notes | `resources/research/books/` |
-| Person research | `resources/research/people/` |
-| Organisation research | `resources/research/organisations/` |
-| Source files | `resources/` |
-
-## Bible / Theology Routing
-
-Use both wiki and sources, but do not mix them up.
-
-| Need | Location |
-|---|---|
-| Canonical Yeshua Academy ministry truth | `organizations/yeshua-academy/` |
-| Dance of Life theological source library | `faith/resources/dance-of-life/` |
-| Bible research notes | `faith/resources/bible/` |
-| Theology research notes | `faith/resources/theology/` |
-| Apologetics research notes | `faith/resources/apologetics/` |
-| Sermon or Bible-study drafts | `faith/resources/bible/` unless promoted to a project |
-
-Rule:
-
-```text
-Research informs strategy.
-Strategy records committed decisions.
-```
-
-Do not overwrite strategy with raw research.
-
-## Business / Marketing Routing
-
-| Need | Location |
-|---|---|
-| Marketing research | `resources/research/marketing/` |
-| Business research | `resources/research/business/` |
-| Brand truth | `wiki/organisations/<org>/brand/` |
-| Growth playbooks | `organizations/<org>/growth/` or `wiki/organisations/<org>/growth/` if not migrated |
-| Offers | `wiki/organisations/<org>/offers.md` or brand/offer files |
-| Active campaign/project | `live/projects.md` |
-| Atomic task | `live/tasks.md` |
-
-## Inbox Migration Compatibility
-
-Legacy capture paths remain active; no switch has occurred yet:
-
-| Path | Status | Future target |
-|------|--------|---------------|
-| `capture/inbox/` | active — Save-to-Mind writes here | `inbox/new/` (after switch) |
-| `capture/failed/` | active — failure routing uses this | `inbox/failed/` (after switch) |
-| `capture/daily/` | active — legacy daily grouping | `inbox/processed/daily/` or `history/` (human decision) |
-| `inbox/new/` | README-only; no content | remains target after switch |
-| `inbox/failed/` | README-only; no content | remains target after switch |
-| `inbox/raw/` | README-only; no content | remains target after migration |
-| `inbox/processed/` | README-only; no content | remains target after migration |
-
-Do not write to `inbox/new/`, `inbox/failed/`, `inbox/raw/`, or `inbox/processed/` until the controlled switch batch is completed and validated.
-
-Before the switch, agents must still use `capture/inbox/` for unsorted captures and `capture/failed/` for failed captures.
-
-## Natural Language Save Rules
-
-| User says | Save default |
-|---|---|
-| "remember this" | `capture/inbox/` if unsorted; otherwise relevant folder |
-| "save this as research" | `resources/research/` or relevant research category |
-| "this is a decision" | `live/decisions.md` or `wiki/organisations/<org>/` |
-| "make a task" | `live/tasks.md` |
-| "make a project" | `live/projects.md` |
-| "this is reference" | `resources/` |
-| "archive this" | ask before moving to `archive/` |
-
-## Write Safety
-
-Prefer creating new notes over modifying canonical files.
-
-Patch canonical files only when the user clearly asks to update a decision, strategy, positioning, messaging, or source of truth.
-
-Ask before:
-
-- moving files
-- deleting files
-- renaming files/folders
-- editing `kanban.md`
-- bulk-changing task frontmatter
-- changing folder names
-- changing automation assumptions
-
-## Context Quality Rules
-
-When answering from `mind`, say what you checked if it matters.
-
-If search finds nothing, say:
-
-```text
-I checked [folder/path/query] and did not find a canonical note yet.
-```
-
-Then recommend a safe save location.
-
-## Good AI Behavior Examples
-
-### Example: "What is my ProChat positioning?"
-
-Search:
-
-```text
-wiki/organisations/prochat/brand/
-```
-
-Then answer from the most relevant files.
-
-### Example: "Research baptism views"
-
-Use:
-
-```text
-faith/resources/bible/comparative-views/
-```
-
-If saving, create a research note there. Do not alter Yeshua Academy strategy unless asked.
-
-### Example: "Make this a task"
-
-Add to:
-
-```text
-live/tasks.md
-```
-
-### Example: "What should we teach at Yeshua Academy?"
-
-Search:
-
-```text
-organizations/yeshua-academy/
-faith/resources/bible/
-faith/resources/theology/
-```
-
-Separate existing canonical truth from new research or recommendations.
+Task writes follow `system/task-kanban-contract.md`.

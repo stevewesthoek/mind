@@ -1,168 +1,55 @@
-# Current Context
-
-This file is the compact current-context layer for AI sessions.
-
-Agents should read this early, but should not treat it as exhaustive. Use `00-memory-map.md` to retrieve supporting files.
-
-## Status
+# Current Context — Mind
 
 ```yaml
 status: current
-last_reviewed: 2026-07-05
-review_after: 2026-07-19
+last_reviewed: 2026-07-10
+review_after: 2026-07-24
 freshness_risk: high
 owner: Steve Westhoek
-purpose: Keep AI sessions oriented without loading the whole vault.
 ```
 
-## Current Operating Model
+## Current operating direction
 
-Steve uses this repo as a personal Obsidian vault and AI-readable memory.
+- Mind remains the human authority and orientation layer.
+- Brain remains the AI capability and execution layer.
+- The repositories remain separate and use a versioned bridge.
+- `inbox/new/` is the active success-intake path.
+- `inbox/failed/` is the target failed-processing path; external failure-routing compatibility must be verified against `system/folder-contract.md` before a write or move.
+- `inbox/processed/` is the target proposal and receipt surface.
+- continuous processing remains disabled until a bounded pilot proves value.
+- broad Mind writes are not active.
+- the next system work is Priority 1: canonical path, policy, and implementation coherence.
 
-The `brain` repo contains AI infrastructure, skills, system configs, and automation logic.
-The `mind` repo contains personal knowledge, strategy, convictions, business/ministry context, projects, tasks, and research.
-
-## Current Folder Structure
+## Canonical direction
 
 ```text
-capture/inbox/    New captures from Save-to-Mind automation (legacy; future target: inbox/new/)
-capture/failed/   Failed captures needing retry (legacy; future target: inbox/failed/)
-capture/daily/    Daily scratch/notes (legacy; future target: inbox/processed/daily/ or history/)
-live/             Active work surfaces (tasks, projects, decisions, workflows)
-wiki/             Compiled durable knowledge
-resources/        Raw evidence, research notes, source material
-inbox/            Future universal intake structure (not yet active; README-only)
-inbox/new/        Future target for new captures (not yet active)
-inbox/failed/     Future target for failed captures (not yet active)
-inbox/raw/        Future target for immutable raw originals (not yet active)
-inbox/processed/  Future target for Brain-generated summaries (not yet active)
-system/agent-context/           Mind Steward contract and rules
-archive/          Completed or inactive material
-archive/old/      Read-only backups
+system/infinite-brain-philosophy.md
+→ system/mind-strategy.md
+→ system/mind-roadmap.md
+→ system/mind-implementation-plan.md
+→ system/brain-mind-bridge.md
 ```
 
-The cloud video orchestrator implementation is now in the Brain repo at:
+Brain's live machine capability status is authoritative at:
 
 ```text
-/Users/Office/Repos/stevewesthoek/brain/projects/video-orchestrator/
+/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md
 ```
 
-## Current Architecture Decision
+## Current seven priorities
 
-Research lives inside this repo under:
+1. Canonical coherence and migration closure.
+2. Vendor-neutral Context Gateway.
+3. Retrieval evaluation and ground truth.
+4. Capability truth and observability.
+5. Controlled proposal application.
+6. Measured automation pilots.
+7. System simplification and performance.
 
-```text
-resources/research/
-```
+## Current retrieval rule
 
-Subfolders: `bible/`, `theology/`, `apologetics/`, `marketing/`, `business/`, `books/`, `people/`, `organisations/`, `ai/`.
+Use `00-memory-map.md`, current canonical domain files, and targeted search. Do not treat captures, generated reports, graphs, or model summaries as approved truth.
 
-Organisation strategy is compiled, committed knowledge that lives in:
+## Maintenance
 
-```text
-wiki/organisations/
-```
-
-## Current AI Memory Decision
-
-AI agents should not load the whole `mind` repo into every session.
-
-They should:
-
-1. Read `AGENTS.md`.
-2. Read `00-start-here.md`.
-3. Read this file.
-4. Read `00-memory-map.md`.
-5. Search/read only relevant files.
-6. Save durable outputs in the correct location when asked.
-
-## Important Active Context Areas
-
-### Personal / Knowledge System
-
-- `README.md` documents the vault and automations.
-- `home.md` is the human daily dashboard.
-- `kanban.md` is the working board.
-- `live/tasks.md` is the current tasks summary.
-
-### Organisations
-
-Canonical organisation truth lives in:
-
-```text
-wiki/organisations/
-```
-
-Known organisation folders:
-
-```text
-wiki/organisations/prochat/
-organizations/arkware/
-organizations/yeshua-academy/
-```
-
-Use these folders for committed strategy, positioning, messaging, offers, brand truth, ministry truth, and organisational decisions.
-
-### Ministry / Theology
-
-Yeshua Academy context lives in:
-
-```text
-organizations/yeshua-academy/
-```
-
-Dance of Life theological source-library context lives in:
-
-```text
-faith/resources/dance-of-life/
-```
-
-Bible/theology/apologetics research lives in:
-
-```text
-faith/resources/bible/
-faith/resources/theology/
-faith/resources/apologetics/
-```
-
-For apologetics debate replies, use Steve's personal voice/debate standard before drafting:
-
-```text
-faith/resources/apologetics/steve-apologetics-voice-and-debate-standard.md
-```
-
-The default should be respectful but direct, fair but not timid, and claim-by-claim rather than a soft generalized essay.
-
-### Business / Marketing
-
-Business and marketing research lives in:
-
-```text
-resources/research/business/
-resources/research/marketing/
-```
-
-Committed business/brand/growth strategy belongs under the relevant organisation:
-
-```text
-wiki/organisations/
-```
-
-## Current Writing Defaults
-
-When the user says:
-
-| Natural language request | Default action |
-|---|---|
-| "remember this" | save to `capture/inbox/` unless category is obvious (future: `inbox/new/` after switch) |
-| "research this" | create/use `resources/research/` |
-| "turn this into strategy" | draft in `wiki/organisations/` or `live/decisions.md` |
-| "make a task" | add to `live/tasks.md` |
-| "archive this" | ask before moving to `archive/` |
-| "what do I believe/decide/plan?" | search `wiki/organisations/`, then relevant sources |
-
-## Maintenance Rule
-
-Keep this file short. It should orient the AI, not become the whole knowledge base.
-
-When context grows, link to dedicated files instead of pasting everything here.
+Keep this file compact. Move details into canonical domain or project pages. Review it on or before `review_after`.

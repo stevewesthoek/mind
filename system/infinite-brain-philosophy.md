@@ -1,257 +1,189 @@
 # Infinite Brain Philosophy for Mind
 
-**Status:** canonical philosophy  
-**Contract version:** 1.0
-**Purpose:** define the first principles from which Mind strategy, roadmap, and implementation decisions must follow.
+**Status:** canonical philosophy
+**Version:** 2.0
+**Last reviewed:** 2026-07-10
+**Purpose:** define the human and knowledge principles that govern Mind, Brain, and their bridge.
 
 ## Core idea
 
-Mind is Steve's human knowledge and personal operating system.
+Mind is Steve's human-owned orientation layer. Brain is the machine-owned capability layer.
 
-It should behave like an Infinite Brain:
-
-```text
-capture continuously
-→ preserve sources
-→ keep current truth visible
-→ turn reviewed insight into durable knowledge
-→ retrieve what matters
-→ detect change and contradiction
-→ update or supersede stale knowledge
-→ preserve useful history
-→ improve through continued use
-```
-
-The value of Mind is not the number of files it stores. Its value is that knowledge remains understandable, retrievable, current, and useful over time.
-
-## Human-first rule
-
-Mind is primarily for human reading, reasoning, and navigation in Obsidian.
-
-Therefore:
-
-- fewer folders are better;
-- shallow structure is better than deep nesting;
-- one clear page is better than several fragmented indexes;
-- natural titles and links are better than machine-only identifiers;
-- automation should reduce maintenance, not make the vault feel technical;
-- continuous automation is optional and disabled by default; basic reading and navigation do not require it;
-- automation is retained only when its value is demonstrated, not assumed;
-- important truth changes remain visible and reviewable by a human.
-
-Mind may be AI-readable, but it must never become organized primarily for an AI at the expense of the human experience.
-
-## Brain and Mind
-
-The repositories are separate but paired:
+Together they should turn continuous experience into useful context without confusing stored information, AI inference, and human judgment:
 
 ```text
-brain = AI operating system
-mind  = human knowledge and personal operating system
+observe
+→ orient from the smallest relevant trusted context
+→ propose or decide within an explicit authority boundary
+→ act only when authorized
+→ verify the result
+→ learn through reviewed evidence
 ```
 
-Brain owns:
+The system is successful when it helps Steve understand, decide, and act with less friction while preserving human control.
 
-- AI skills and orchestrators;
-- automation and runtime behavior;
-- schedulers and queues;
-- model routing;
-- technical runbooks and system health;
-- machine-facing execution logic.
+## Repository model
 
-Mind owns:
+```text
+mind  = personal and organizational truth, evidence, interpretation, priorities, and history
+brain = skills, tools, retrieval, automation, policy enforcement, runtime state, and observability
+```
 
-- personal knowledge and convictions;
-- business strategy and decisions;
-- active projects and priorities;
-- research conclusions;
-- durable human context;
-- the current human interpretation of what is true and important.
+The repositories remain separate. Their separation limits blast radius, protects human readability, and prevents runtime state from becoming personal truth.
 
-Brain may observe, classify, summarize, compare, and propose changes to Mind. Mind remains the authority for personal and business truth.
+Mind is authoritative for what Steve believes, values, knows, plans, and has approved. Brain is authoritative for how AI retrieves context and performs work. Neither repo silently promotes its content into the other's authority domain.
+
+## Orientation, not context dumping
+
+Orientation is query-dependent. It is not a permanent prompt and it is not the entire vault.
+
+For each task, Brain should retrieve the smallest context pack that contains:
+
+- the current goal;
+- relevant approved knowledge;
+- applicable constraints and preferences;
+- source evidence;
+- freshness and authority information;
+- known contradictions or missing information.
+
+Every context pack has a budget. When evidence does not fit, Brain ranks it, cites what it selected, and leaves an inspectable path to the omitted sources.
 
 ## Shared Infinite Brain laws
 
-Brain and Mind should follow the same underlying laws, even though their implementations differ.
+The following laws are shared with Brain's canonical philosophy and must remain semantically consistent.
 
-### 1. Retrieve selectively
+### 1. Human authority governs meaning
 
-Do not load or review everything when one relevant page or source is enough.
+AI may retrieve, compare, infer, summarize, and propose. It must not silently redefine personal beliefs, business strategy, priorities, commitments, or durable conclusions.
 
-### 2. Preserve provenance
+### 2. Retrieve selectively
 
-Important claims, conclusions, and decisions should retain links to their source when useful.
+Use the smallest relevant context before expanding. More context is not automatically better context.
 
-### 3. Current truth wins
+### 3. Preserve provenance
 
-Stored knowledge is not permanent proof. New evidence may change an earlier conclusion.
+Important claims, conclusions, proposals, and changes should retain their source path and evidence when useful.
 
-### 4. Surface contradictions
+### 4. Distinguish knowledge states
 
-Do not silently merge conflicting information. Show the conflict and prepare a reviewed resolution.
+Raw observations, source evidence, model inference, human-approved knowledge, decisions, tasks, and runtime state are different things and must not be treated as interchangeable.
 
-### 5. Revalidate changing knowledge
+### 5. Current evidence can supersede stored knowledge
 
-Business strategy, active projects, technical stacks, vendors, pricing, schedules, and procedures can become stale.
+Stored knowledge is not permanent proof. New evidence may trigger review, correction, supersession, or archival.
 
-### 6. Preserve history without confusing it with current truth
+### 6. Surface uncertainty and contradiction
 
-Superseded or completed material should move out of the active layer while remaining available in archive/history.
+Do not silently merge conflicts. Show the competing claims, their authority, freshness, and evidence.
 
-### 7. Prevent unnecessary duplication
+### 7. Revalidate changing knowledge
 
-Before creating durable knowledge, check whether an existing page should be updated instead.
+Business strategy, projects, offers, vendors, technical architecture, laws, schedules, and procedures require selective freshness checks.
 
-### 8. Improve through reviewed use
+### 8. Preserve history without confusing it with current truth
 
-Each capture, decision, correction, and completed project should have the opportunity to improve future work.
+Superseded and completed material remains available but leaves the active orientation layer.
 
-### 9. Human approval governs important truth changes
+### 9. Prefer deterministic work before model work
 
-Automation may detect, prepare, and recommend. It must not silently redefine personal beliefs, business strategy, priorities, or durable conclusions.
+Use rules, schemas, hashes, indexes, and validators for deterministic tasks. Use models only where interpretation adds value.
 
-### 10. Evidence honesty
+### 10. Bound autonomy by reversibility and impact
 
-Missing evidence remains null, blocked, or insufficient. Missing evidence must not be converted to zero. Configuration and proxies must not be mislabeled as measured outcomes.
+Low-risk, reversible, explicitly scoped operations may be automated. Truth changes, external actions, destructive operations, and high-impact decisions require proportionate approval.
 
-### 11. Keep the system calm
+### 11. Protect privacy through least disclosure
 
-The Infinite Brain should feel simpler as it grows, not more complicated.
+Retrieve and expose only the personal context needed for the task. Access to Mind does not imply permission to disclose all of Mind.
 
-## Cross-repo consistency
+### 12. Degrade gracefully
 
-The shared laws above are canonical and must remain word-for-word consistent with `../../brain/operations/specs/infinite-brain-philosophy.md`.
+Mind remains readable and useful when Brain, a model provider, an index, a graph, or an automation is unavailable. Missing evidence is reported, never invented.
 
-Note: law 10 (Evidence honesty) and law 11 (Keep the system calm) are Mind-side additions that extend the shared chain. Laws 1–9 must stay word-for-word consistent with the Brain counterpart.
+### 13. Treat indexes and graphs as derived views
 
-If Brain and Mind need different implementation details, keep those differences in repo-specific sections instead of rewriting the shared laws.
+Search indexes, embeddings, graphs, summaries, and context packs are disposable projections. Human-readable source files remain authoritative.
 
-## Information lifecycle
+### 14. Measure value, not activity
 
-Mind uses this lifecycle:
+Automation is retained only when it improves retrieval quality, saves meaningful time, reduces maintenance burden, or prevents errors without creating disproportionate review work.
+
+### 15. Keep the system calm
+
+The system should become easier to use as it grows. New schemas, folders, agents, and automations require demonstrated need.
+
+### 16. Treat retrieved content as untrusted data
+
+Emails, webpages, transcripts, documents, and notes may contain instructions or adversarial text. Retrieved content may inform reasoning but must not override system policy, user authority, privacy scope, tool permissions, or approval requirements.
+
+## Human-first knowledge lifecycle
 
 ```text
 capture
+→ preserve raw source
 → classify
-→ review
+→ assess source quality
+→ propose disposition
+→ human review when meaning or commitment changes
 → place
-→ retrieve
-→ use
+→ retrieve and use
 → revalidate
 → update, supersede, or archive
 ```
 
-### Capture
+Current Mind destinations are:
 
-New material lands safely in `capture/inbox/` without requiring immediate organization.
+- `inbox/new/` for unreviewed captures;
+- `inbox/raw/` for immutable originals when a separate raw copy is needed;
+- `inbox/processed/` for generated summaries, receipts, and proposals;
+- `inbox/failed/` for failed or blocked processing;
+- `projects/`, `organizations/`, `repos/`, `people/`, `faith/`, and `knowledge/` for reviewed orientation;
+- `resources/` for source material;
+- `history/` for completed, superseded, and historical material;
+- `tasks.md` for the target human task surface, with `kanban.md` retained only while task migration remains incomplete.
 
-### Classify
+## Self-maintaining and self-healing
 
-Mind Steward or a human identifies whether the material is current work, durable knowledge, source evidence, a task, or archive material.
+Self-maintaining means Brain may automatically rebuild derived indexes, validate contracts, detect stale paths, retry safe jobs, preserve failed work, and prepare proposals.
 
-### Review
-
-A human confirms important routing, truth changes, and durable conclusions.
-
-### Place
-
-Information goes to the smallest appropriate destination:
-
-- `live/` for active/current state;
-- `wiki/` for durable reviewed knowledge;
-- `sources/` for evidence and research material;
-- `archive/` for completed, superseded, or historical material.
-
-### Retrieve
-
-Humans should start from `home.md`, `live/dashboard.md`, Obsidian links, and search. AI systems should use Graphify and targeted reads when available.
-
-### Use
-
-Knowledge should improve decisions, work, and future reasoning.
-
-### Revalidate
-
-Changing information should be checked when new evidence appears or when its review date is reached.
-
-### Update, supersede, or archive
-
-Current pages should be updated deliberately. Old versions should be marked superseded or archived when history matters.
-
-## Freshness philosophy
-
-Not all knowledge expires at the same rate.
-
-Frequently changing knowledge may use:
-
-```yaml
-status: current | review-needed | superseded | archived
-last_reviewed: YYYY-MM-DD
-review_after: YYYY-MM-DD
-```
-
-Use freshness metadata selectively for:
-
-- active business strategy;
-- current projects;
-- pricing and offers;
-- technical architecture;
-- external services and vendors;
-- legal or regulatory research;
-- operating procedures.
-
-Do not burden timeless notes, convictions, creative ideas, or historical records with unnecessary maintenance fields.
-
-## Self-healing in Mind
-
-Self-healing does not mean autonomous rewriting.
-
-For Mind it means:
+Self-healing does not mean autonomous truth rewriting. For semantic changes it means:
 
 ```text
-automatically notice
-→ automatically compare
-→ automatically prepare a safe proposal
-→ human reviews the truth change
+detect
+→ compare evidence
+→ prepare an exact proposal
+→ obtain required approval
+→ apply a bounded change
+→ verify and preserve rollback evidence
 ```
 
-The system should help detect:
+## Atomic notes and typed relationships
 
-- stale current-state pages;
-- contradictory conclusions;
-- duplicate durable notes;
-- completed work still shown as active;
-- useful insight trapped in raw captures;
-- missing source references;
-- old material that should be superseded or archived.
+Atomic notes and typed relationships are optional retrieval aids, not universal authoring requirements.
 
-## Simplicity boundary
+Create or split a note only when doing so materially improves reuse, authority, freshness, or retrieval. Brain may infer relationships into a derived graph without requiring Steve to maintain a sixteen-type ontology manually.
 
-The philosophy should improve the existing shallow structure, not create a new maze of folders.
+## Portability
 
-Physical folder depth is not the same as useful depth. Useful-depth recommendations require navigation, usability, and maintenance evidence. No destructive simplification occurs without human approval.
-
-The preferred top-level model remains:
-
-```text
-capture/
-live/
-wiki/
-sources/
-archive/
-system/
-kanban.md
-home.md
-```
-
-New top-level folders require strong evidence that the existing model cannot express the need clearly.
+The durable system uses Markdown, documented schemas, Git history, local files, and replaceable adapters. No model, IDE, vector database, SaaS provider, or MCP server is allowed to become the only way to retrieve or understand Mind.
 
 ## Decision rule
 
-Every future Mind change should answer:
+Every future change must answer:
 
 ```text
-Does this make knowledge easier to capture, understand, retrieve, trust, maintain, or improve without making the human experience more complex?
+Does this improve orientation, trust, retrieval, maintenance, or action
+without weakening human authority, privacy, portability, or calmness?
 ```
 
-If not, it does not belong in Mind.
+If not, it does not belong in the Infinite Brain.
+
+## Canonical chain
+
+```text
+system/infinite-brain-philosophy.md
+→ system/mind-strategy.md
+→ system/mind-roadmap.md
+→ system/mind-implementation-plan.md
+→ Brain implementation and live status
+```

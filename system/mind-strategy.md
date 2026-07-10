@@ -1,286 +1,216 @@
 # Mind Strategy
 
-**Status:** canonical strategy  
-**Depends on:** `system/infinite-brain-philosophy.md`  
-**Purpose:** translate the Infinite Brain philosophy into strategic choices for Mind.
+**Status:** canonical strategy
+**Version:** 2.0
+**Last reviewed:** 2026-07-10
+**Depends on:** `system/infinite-brain-philosophy.md`
 
-## Strategic definition
+## Strategic objective
 
-Mind is Steve's human-first personal and business knowledge system.
+Mind is Steve's human-first personal and organizational knowledge system.
 
-Its strategic purpose is:
-
-```text
-Turn continuous capture into clear current context, durable knowledge, traceable decisions, and reusable human understanding — without making the vault harder to use as it grows.
-```
-
-Mind should become more useful with time because it remembers, connects, revalidates, and preserves what matters.
-
-## Strategic position in the wider system
+Its objective is:
 
 ```text
-Mind  = human truth, strategy, knowledge, priorities, interpretation
-Brain = AI capabilities, automation, runtime, tools, orchestration
+Turn low-friction capture into trustworthy orientation, clear commitments,
+durable learning, and useful history without making Steve maintain a machine ontology.
 ```
 
-Mind and Brain share the Infinite Brain philosophy but implement it differently.
+## Strategic position
 
-Mind is optimized for:
+```text
+Mind  = authority for human meaning and approved context
+Brain = authority for AI capability and execution
+Bridge = versioned context, proposal, approval, and receipt exchange
+```
 
-- Obsidian;
-- human browsing;
-- shallow navigation;
-- clear current-state pages;
-- durable linked knowledge;
-- personal and business interpretation.
+The two-repo split is permanent unless evidence shows that separation itself causes more cost or errors than it prevents. No such evidence currently exists.
 
-Brain is optimized for:
+## Outcomes
 
-- AI startup and routing;
-- automation;
-- machine-readable contracts;
-- system execution;
-- observability and recovery.
+Mind should deliver seven outcomes:
 
-## Strategic outcomes
+1. Capture takes seconds and does not require immediate organization.
+2. Current priorities, projects, and decisions are easy to locate.
+3. Durable knowledge preserves evidence and compounds through use.
+4. Stale, contradictory, or low-authority information is visible.
+5. Any authorized LLM can obtain a small, cited orientation pack without loading the vault.
+6. Brain reduces maintenance without silently changing human truth.
+7. Steve can correct, supersede, export, or remove his information without provider lock-in.
 
-Mind should deliver five outcomes.
+## Current structure
 
-### 1. Capture without friction
-
-Steve should be able to save text, voice, AI-session output, research, decisions, and ideas without deciding the final destination immediately.
-
-### 2. Current truth is easy to find
-
-Active priorities, projects, decisions, and business state should be visible from a small number of live surfaces.
-
-### 3. Durable knowledge compounds
-
-Reviewed insight should move from raw capture into clear wiki knowledge that can improve future reasoning and work.
-
-### 4. Stale knowledge does not silently mislead
-
-Changing knowledge should be reviewable, contradictions should be surfaced, and superseded information should leave the active layer.
-
-### 5. Brain assists without taking ownership of human truth
-
-Brain should make Mind easier to maintain through classification, summaries, comparison, maintenance suggestions, and approved writes.
-
-## Structural strategy
-
-Keep the existing shallow top-level model:
+The target structure is authoritative:
 
 ```text
 home.md
-kanban.md
-capture/
-live/
-wiki/
-sources/
-archive/
+tasks.md
+inbox/
+organizations/
+projects/
+repos/
+people/
+faith/
+knowledge/
+resources/
+history/
 system/
 ```
 
-The strategic meaning is:
+`kanban.md` and remaining legacy folders are compatibility surfaces only where the current folder contract explicitly says so. New documentation and code plans must use target paths.
 
-| Surface | Role |
-|---|---|
-| `home.md` | Human entrypoint and user manual |
-| `kanban.md` | Current daily task source of truth |
-| `capture/` | Safe intake and failure buffer |
-| `live/` | Current state, active projects, decisions, and dashboards |
-| `wiki/` | Durable reviewed knowledge |
-| `sources/` | Evidence, research, and original material |
-| `archive/` | Completed, superseded, legacy, and historical material |
-| `system/` | Mind philosophy, strategy, contracts, roadmap, plans, and reports |
+## Information classes
 
-Do not solve retrieval problems by adding more folder depth first. Prefer better page titles, links, compact indexes, frontmatter where useful, Obsidian search, and Graphify.
+Mind distinguishes these classes:
 
-## Human navigation strategy
+| Class | Meaning | Default home |
+|---|---|---|
+| Observation | Unreviewed input or event | `inbox/new/` |
+| Raw source | Immutable original or imported evidence | `inbox/raw/` or `resources/` |
+| Proposal | AI-generated classification, summary, relation, or change suggestion | `inbox/processed/` |
+| Failed item | Processing failure or blocked item | `inbox/failed/` |
+| Approved orientation | Reviewed current context or durable understanding | domain folder |
+| Commitment | Human-approved decision, task, priority, or project state | `tasks.md`, `projects/`, `organizations/`, or `knowledge/` |
+| History | Completed, superseded, or inactive material | `history/` |
 
-The human retrieval path should stay simple:
+AI output remains a proposal until its authority is explicitly changed.
+
+## Authority and freshness
+
+When sources disagree, use this order as a starting point:
+
+1. explicit recent human decision;
+2. current canonical organization/project/faith/knowledge page;
+3. cited primary evidence;
+4. reviewed synthesis;
+5. unreviewed capture or model inference;
+6. generated index, graph, or summary.
+
+Recency does not automatically override authority. Brain should show the conflict when the correct interpretation is unclear.
+
+Use freshness metadata only where change risk is meaningful:
+
+```yaml
+status: draft | current | review-needed | superseded | archived
+last_reviewed: YYYY-MM-DD
+review_after: YYYY-MM-DD
+```
+
+## Human navigation
+
+The normal path is:
 
 ```text
 home.md
-→ live/dashboard.md or one clear destination
+→ one domain or active-work surface
 → linked page
 ```
 
-The system should not require Steve to remember technical routing rules.
+Steve should not need to understand schemas, graphs, model routing, or automation state to use Mind.
 
-## AI retrieval strategy
+## AI retrieval
 
-AI systems should:
-
-1. understand the Brain/Mind boundary;
-2. use Graphify or focused search rather than broad scans;
-3. read only relevant Mind pages;
-4. distinguish current state from durable knowledge and source evidence;
-5. state when context is stale, missing, or contradictory;
-6. treat Mind as the authority for personal and business truth.
-
-## Brain–Mind bridge strategy
-
-The bridge should be standardized, normalized, modular, and minimal.
-
-Brain may exchange compact briefs with Mind containing:
-
-```yaml
-title:
-type:
-status:
-source_repo:
-source_path:
-created:
-last_reviewed:
-confidence:
-summary:
-evidence:
-recommended_destination:
-requires_approval:
-supersedes:
-```
-
-This envelope is for cross-repo captures, proposals, maintenance suggestions, and approved handoffs. It is not required on every human-authored note.
-
-### Brain → Mind
-
-Default flow:
+Until the Context Gateway exists, agents use:
 
 ```text
-Brain observes or prepares knowledge
-→ compact normalized proposal
-→ capture/inbox/ or documented review surface
-→ human review
-→ approved placement in live/, wiki/, sources/, archive/, or kanban.md
+system/agent-context/AGENTS.md
+→ 00-start-here.md
+→ 00-current-context.md when needed
+→ 00-memory-map.md
+→ targeted search and reads
 ```
 
-Brain should not silently rewrite durable personal or business truth.
+The target interface is one Brain-owned Context Gateway. It should return cited context packs with authority, freshness, conflicts, exclusions, and a token budget. Agent-specific instructions point to the gateway; they do not reimplement retrieval.
 
-### Mind → Brain
+## Capture and disposition
 
-Brain may retrieve:
-
-- current priorities;
-- approved business strategy;
-- durable decisions;
-- project context;
-- personal preferences and constraints;
-- reviewed research conclusions.
-
-Mind content should become a global AI-system rule only through an explicit promotion decision.
-
-## Knowledge-state strategy
-
-Use a small shared status vocabulary where state matters:
+Capture processing follows:
 
 ```text
-draft
-current
-review-needed
-superseded
-archived
+inbox/new
+→ preserve source identity
+→ deterministic checks
+→ source-quality assessment
+→ classification and relation proposal
+→ inbox/processed or inbox/failed
+→ human approval when meaning or commitment changes
+→ approved destination
 ```
 
-Use it selectively. Human readability remains more important than universal metadata completeness.
+Duplicate detection, metadata extraction, and obvious spam/file validation may be deterministic. Models are reserved for interpretation.
 
-## Maintenance strategy
+## Brain–Mind bridge
 
-Mind maintenance should be proactive but review-gated.
+Mind owns the human policy. Brain owns the executable schema and validation. The bridge exchanges references and compact payloads, not repository copies.
 
-The system should be able to propose:
+Required exchange types:
 
-- duplicate merges;
-- stale-page reviews;
-- contradiction resolutions;
-- archive candidates;
-- updates to current project status;
-- source-reference improvements;
-- durable lessons trapped in capture;
-- completed work still shown as active.
+- context pack;
+- capture disposition;
+- knowledge or task proposal;
+- maintenance finding;
+- exact-path approval;
+- application receipt;
+- rejection/supersession record.
 
-The sequence should remain:
+`system/brain-mind-bridge.md` defines the contract.
+
+## Maintenance
+
+Brain may automatically:
+
+- validate paths and frontmatter;
+- rebuild derived indexes;
+- identify stale or conflicting pages;
+- find duplicates and missing source references;
+- prepare exact proposals;
+- retry safe processing and preserve failures.
+
+Human approval remains required for changes to beliefs, strategy, priorities, commitments, durable conclusions, archival meaning, and externally consequential actions.
+
+## Privacy
+
+Context retrieval is least-disclosure by default.
+
+The future Context Gateway must support scope restrictions such as:
 
 ```text
-report-only
-→ proposal
-→ human approval
-→ bounded write
-→ verification and log
+personal | business | ministry | project:<id> | organization:<id> | public-safe
 ```
 
-## Automation strategy
+Every context pack should record which scopes were searched and which were excluded. Sensitive source content should not be copied into Brain runtime longer than necessary.
 
-Automation belongs operationally in Brain.
+## Measurement
 
-Mind should contain:
+The system is evaluated by:
 
-- the human strategy;
-- destination contracts;
-- approval boundaries;
-- review surfaces;
-- durable logs and results where appropriate.
+- retrieval precision and source coverage;
+- freshness and authority correctness;
+- contradiction detection;
+- time to useful orientation;
+- manual maintenance time;
+- proposal acceptance and rejection rates;
+- rollback and error rates;
+- user-reported usefulness.
 
-Brain should contain:
-
-- scheduler implementation;
-- queues and throttling;
-- model selection;
-- retries and recovery;
-- runtime status;
-- automated execution.
-
-### Continuous processing rules
-
-Continuous processing is optional and disabled by default. Basic Mind use — reading, navigation, capture, and Obsidian workflows — does not depend on continuous automation.
-
-Continuous processing must not be enabled until its operational value is demonstrated through a bounded, approved trial with before/after evidence. `continuousEnabled: false` and `watcherEnabled: false` are the safe default state.
-
-The current implementation is gated and plan-only. Large-file nightly fallback is a bounded plan, not active autonomous execution.
-
-### Operational validation requirement
-
-Automation must be retained only when value is demonstrated. Meaningful time savings and reduced maintenance burden remain unproven for the current continuous processing implementation. Lack of demonstrated value must remain visible and must not be treated as success.
-
-### Simplification strategy
-
-Do not solve retrieval problems by adding more folder depth first. Prefer better page titles, links, compact indexes, frontmatter where useful, Obsidian search, and Graphify.
-
-Physical folder depth is not the same as useful depth. Useful-depth recommendations require navigation, usability, and maintenance evidence before they can be made. A bounded simplification review may validly conclude that no deletion or archival is justified.
-
-No destructive simplification occurs without explicit human approval.
-
-### Approval evidence rule
-
-Persistent approval volume is measurable only when persistence is configured and readable. Absent persistent evidence does not prove no approvals have ever occurred. When the approval store is not configured, the result is `insufficient-evidence`, not a zero count.
-
-## Success measures
-
-The strategy is working when:
-
-- new information is easy to capture;
-- current priorities and decisions are easy to find;
-- fewer useful insights remain trapped in inboxes or chats;
-- stale or conflicting knowledge is surfaced before it misleads;
-- old material leaves the active layer without being lost;
-- Brain can assist without creating duplicate truth;
-- the number of folders and navigation steps remains small;
-- Steve spends less time maintaining Mind as Mind becomes more useful.
+Volume of captures, graph edges, model calls, or generated summaries is not success by itself.
 
 ## Non-goals
 
 Mind should not become:
 
-- a database-shaped vault requiring rigid schemas everywhere;
-- a copy of Brain's AI operating structure;
-- a runtime log store;
-- an automation codebase;
-- a deeply nested PARA implementation;
-- a place where AI silently rewrites personal or business truth;
-- a second copy of information already owned by Brain.
+- an AI runtime or log store;
+- a rigid database-shaped ontology;
+- a copy of Brain configuration;
+- a mandatory vector database;
+- a repository of every AI conversation;
+- a system that autonomously decides Steve's values or priorities;
+- a deeply nested filing system;
+- dependent on continuous automation for basic usefulness.
 
 ## Strategic rule
 
 ```text
-Mind should become more intelligent through better lifecycle, retrieval, freshness, and reviewed maintenance — not through more folders or more complexity.
+Improve orientation through better authority, lifecycle, retrieval, freshness,
+and reviewed learning—not through more folders, prompts, or autonomous activity.
 ```

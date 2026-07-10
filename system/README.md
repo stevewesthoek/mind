@@ -19,9 +19,12 @@ Read these in order before changing Mind structure, lifecycle, or automation:
 
 These documents lead the contracts and technical sub-roadmaps below.
 
+`mind-roadmap.md` owns the seven cross-repo priorities. Brain's runtime roadmap projects those priorities into code work, and Brain's live-status runbook is the only authority for machine capability state. Completed implementation evidence belongs under `system/reports/` rather than in the canonical roadmap.
+
 ## Current contracts
 
 - `brain-mind-bridge.md` — canonical ownership, exchange, approval, provenance, and write rules between Brain and Mind.
+- `/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md` — canonical live machine-capability status.
 - `knowledge-freshness-standard.md` — selective status, review, contradiction, supersession, and archive rules for changing knowledge.
 - `maintenance-intelligence-standard.md` — report-only stale, duplicate, contradiction, source-gap, and capture-promotion review rules.
 - `graphify-strategy.md` — Mind-owned strategy for Graphify, Infinite Brain context, and cross-repo graph modes.

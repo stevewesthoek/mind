@@ -1,410 +1,228 @@
 # Mind Roadmap
 
-**Status:** canonical roadmap  
-**Depends on:** `system/infinite-brain-philosophy.md`, `system/mind-strategy.md`  
-**Purpose:** sequence the transition from the current Mind vault into a human-first Infinite Brain system.
+**Status:** canonical cross-repo priority order
+**Version:** 2.0
+**Last reviewed:** 2026-07-10
+**Depends on:** `system/infinite-brain-philosophy.md`, `system/mind-strategy.md`
 
-## Roadmap rule
+## Roadmap purpose
 
-The roadmap must improve lifecycle and retrieval before adding automation.
+This roadmap defines the strategic order for Mind and Brain as one paired system. Brain's runtime roadmap is an implementation projection and must not reorder these priorities.
+
+The program contains exactly seven priorities:
 
 ```text
-clarify the system
-→ standardize the bridge
-→ improve freshness and maintenance
-→ enable approved writes
-→ automate carefully
-→ evaluate and simplify
+1. Canonical coherence
+2. Context Gateway
+3. Retrieval evaluation
+4. Capability truth
+5. Controlled application
+6. Measured automation
+7. System simplification
 ```
 
-The existing `system/automation-roadmap.md` remains the detailed automation sub-roadmap. This document leads it and defines the human/product order.
-
-## Current foundation
-
-Already present:
-
-- shallow top-level structure;
-- `home.md` human user manual;
-- `capture/inbox/` and `capture/failed/` boundaries;
-- `live/`, `wiki/`, `sources/`, and `archive/` roles;
-- `kanban.md` protected as task source of truth;
-- Mind Steward report-only classification;
-- canonical philosophy and strategy links;
-- Brain-Mind bridge contract;
-- freshness model and selective review metadata;
-- maintenance report contract and report-only surfaces;
-- `wiki/log.md` maintenance/proposal surface;
-- Graphify outputs and visual graph;
-- Brain Core and Brain Console read-only visibility;
-- automation, folder, queue, graph, and task contracts;
-- human approval before durable writes.
-
-**Implemented through Phases 1–10:**
-
-- persistent Brain-owned queue state;
-- debounce, stability detection, and concurrency controls;
-- retry and failure-buffer visibility;
-- approval and execution gates with kill switch;
-- scheduler planning and readiness surfaces;
-- kill switch and recovery guidance;
-- plan-only large-file nightly fallback;
-- optional continuous-processing safety capabilities;
-- bounded simplification review (evidence-based, no destructive action).
-
-**Still unresolved or inactive:**
-
-- active autonomous continuous execution (disabled by default; no approved trial has run);
-- meaningful time-savings evidence (no before/after baseline exists);
-- reduced maintenance-burden evidence (unproven);
-- stale-page detector recall for the required freshness-metadata positive case is validated by a deterministic Brain test; broader maintenance value remains unproven;
-- demonstrated operational value for every retained automation.
-
-## Phase 0 — Canonical direction
-
-**Goal:** make the philosophy and strategy explicit before changing structure or automation.
-
-Deliverables:
-
-- `system/infinite-brain-philosophy.md`;
-- `system/mind-strategy.md`;
-- `system/mind-roadmap.md`;
-- `system/mind-implementation-plan.md`;
-- links from `system/README.md` and `home.md`.
-
-Exit criteria:
-
-- philosophy → strategy → roadmap → implementation plan is clear;
-- existing contracts are subordinate to the canonical chain;
-- no content restructuring has occurred.
-
-## Phase 1 — Human entrypoint and semantic orientation
-
-**Goal:** make Mind understandable from one human entrypoint without adding folder depth.
-
-Deliverables:
-
-- refine `home.md` as the canonical human start page;
-- align `live/dashboard.md` with current-state navigation;
-- add a compact lifecycle explanation;
-- document current truth versus durable knowledge versus source evidence;
-- ensure top-level folder descriptions match actual use.
-
-Exit criteria:
-
-- a human can understand where information belongs within five minutes;
-- current priorities and decisions are reachable in one or two steps;
-- no new top-level folders are needed.
-
-## Phase 2 — Brain–Mind bridge standard
-
-**Goal:** define safe, normalized communication without merging repository ownership.
-
-Deliverables:
-
-- `system/brain-mind-bridge.md`;
-- normalized cross-repo brief envelope;
-- allowed Brain → Mind proposal types;
-- allowed Mind → Brain context types;
-- approval boundaries;
-- source and supersession rules;
-- one documented inbox/review destination for each proposal type.
-
-Exit criteria:
-
-- no automation needs to guess where cross-repo information belongs;
-- Brain cannot silently redefine Mind truth;
-- Mind does not duplicate Brain runtime or system documentation.
-
-## Phase 3 — Freshness and knowledge-state model
-
-**Goal:** prevent changing knowledge from becoming silently stale.
-
-Deliverables:
-
-- small status vocabulary: `draft`, `current`, `review-needed`, `superseded`, `archived`;
-- selective `last_reviewed` and `review_after` guidance;
-- rules for contradiction detection;
-- rules for supersession and archive history;
-- freshness guidance for strategy, projects, vendors, pricing, technical architecture, and procedures;
-- no mandatory metadata on timeless notes.
-
-Exit criteria:
-
-- changing knowledge can be identified and reviewed;
-- current truth is clearly distinguishable from old truth;
-- the human reading experience remains simple.
-
-## Phase 4 — Maintenance intelligence in report-only mode
-
-**Goal:** make self-healing visible before allowing writes.
-
-Deliverables:
-
-- stale-page report;
-- duplicate-candidate report;
-- contradiction-candidate report;
-- completed-but-still-active report;
-- source-reference gap report;
-- durable-insight-trapped-in-capture report;
-- clear false-positive and dismissal path.
-
-Exit criteria:
-
-- reports are useful enough to save human maintenance time;
-- no durable content is changed automatically;
-- recommendations cite the pages and evidence involved.
-
-## Phase 5 — Approved bounded writes
-
-**Goal:** allow safe, explicit changes after review.
-
-Deliverables:
-
-- approved wiki update workflow;
-- approved live-page status update workflow;
-- approved archive/supersede workflow;
-- approved source-routing workflow;
-- verified write log;
-- rollback or recovery instructions.
-
-Exit criteria:
-
-- every write is bounded to an approved path and action;
-- source references are preserved;
-- current truth changes are reviewable;
-- no broad AI rewrite is possible.
-
-## Phase 6 — Capture-to-knowledge improvement
-
-**Goal:** reduce the amount of useful knowledge trapped in capture.
-
-Deliverables:
-
-- persistent inbox queue;
-- structured classification suggestions;
-- destination proposals;
-- duplicate checks before durable creation;
-- source preservation;
-- reviewed promotion into `live/`, `wiki/`, `sources/`, `archive/`, or task surfaces.
-
-Exit criteria:
-
-- captures move through a predictable lifecycle;
-- duplicate durable pages are reduced;
-- rejected suggestions remain safe and traceable.
-
-## Phase 7 — Task and project continuity
-
-**Goal:** connect knowledge, decisions, projects, and tasks without replacing the human Kanban prematurely.
-
-Deliverables:
-
-- task proposals linked to source knowledge;
-- project status review suggestions;
-- completed-project archive suggestions;
-- approved task synchronization only after lossless validation;
-- preserve `kanban.md` as source of truth until migration is proven.
-
-Exit criteria:
-
-- no task loss;
-- active work reflects current knowledge;
-- project history remains retrievable.
-
-## Phase 8 — Scheduled and on-demand automation
-
-**Goal:** run proven workflows through Brain with observability and controls.
-
-Deliverables:
-
-- Brain-owned scheduler jobs;
-- feature flags;
-- queues, throttling, retries, and kill switch;
-- Brain Console visibility;
-- bounded on-demand actions;
-- scheduled graph and maintenance refreshes.
-
-Exit criteria:
-
-- automation is recoverable and observable;
-- no unbounded watcher is needed for ordinary use;
-- human review remains the default for important truth changes.
-
-## Phase 9 — Continuous processing where justified
-
-**Goal:** enable near-real-time behavior only for workflows that proved useful and safe.
-
-Deliverables:
-
-- stable-file detection;
-- debounce and concurrency limits;
-- large-file fallback;
-- failure buffer;
-- bounded continuous runner;
-- measured machine and maintenance impact.
-
-Exit criteria:
-
-- continuous processing saves more time than it creates complexity;
-- failures do not lose data or corrupt current truth;
-- the system can be paused instantly.
-
-### Phase 9 verified outcome (2026-06-18)
-
-**Implemented safety capability (confirmed):**
-
-- stable-file detection and debounce are implemented and tested;
-- concurrency cap, failure buffer, and retry exhaustion are implemented;
-- large-file nightly fallback is a bounded plan adapter — not active autonomous execution;
-- disable and recovery procedures are documented;
-- continuous processing remains optional and disabled by default (`continuousEnabled: false`, `watcherEnabled: false`);
-- basic Mind use does not depend on continuous processing;
-- measurement adapter collects real timestamps and process memory; configuration is clearly separated from measurements; missing evidence returns null with explicit blockers, never zero.
-
-**Unresolved (Phase 9 acceptance criteria not yet satisfied):**
-
-- meaningful time savings relative to manual processing are not yet proven;
-- no before/after time-savings comparison exists;
-- operational continuous processing has not yet run in a real approved trial.
-
-## Phase 10 — Evaluation and simplification
-
-**Goal:** ensure Infinite Brain growth makes Mind simpler, not heavier.
-
-Review:
-
-- folder count and depth;
-- navigation steps;
-- capture backlog age;
-- stale-page detection quality;
-- false-positive maintenance suggestions;
-- approval burden;
-- duplicate reduction;
-- retrieval speed for humans and AI;
-- usefulness of Brain–Mind exchange;
-- whether any files, metadata, or workflows can be removed.
-
-Exit criteria:
-
-- Mind remains calm and human-readable;
-- automation reduces work;
-- the architecture is still understandable without technical expertise.
-
-### Phase 10 verified outcome (2026-06-18)
-
-**Confirmed:**
-
-- canonical documentation matches implemented behavior;
-- no destructive simplification occurred; all review tasks were bounded and evidence-based;
-- continuous processing remains optional and disableable;
-- bounded review tasks produced no file deletions or archival actions.
-
-**Partially supported:**
-
-- Mind remains human-readable and calm (structure is unchanged; no folder depth was added).
-
-**Unresolved:**
-
-- stale-page detection recall for the required freshness-metadata positive case is validated (Brain test `mind-maintenance-pilot-loader-stale` covers Mind-style fenced YAML status blocks);
+Later priorities may be researched early but must not be activated before their dependencies pass.
+
+## Current baseline
+
+Confirmed on 2026-07-10:
+
+- the two-repo split remains correct;
+- `inbox/new/` is the active success intake;
+- `inbox/failed/` is the target failure surface;
+- Mind's target human-first folder model exists;
+- Brain Core type-checks;
+- the separate `projects/mind-steward` package does not type-check;
+- active Brain instructions and some Mind Steward code still contain retired paths;
+- a bounded single-file metadata write path exists;
+- broad proposal application and continuous execution are not active;
 - meaningful time savings remain unproven;
-- Steve spends less time maintaining the system: unproven;
-- every retained automation has demonstrated value: not yet satisfied (time savings have no baseline and broader maintenance value still requires operational evidence).
+- current Graphify reports are stale and their scopes include low-signal/generated code.
 
-### Post-plan operational validation work
+## Priority 1 — Canonical coherence and migration closure
 
-The following work is needed after the plan is structurally complete. This is not a new phase — it is the operational validation that determines whether the Phase 9/10 acceptance criteria are eventually satisfied:
+**Status:** in progress
+**Goal:** every active document, config, script, test, and runtime contract uses the same current Mind paths and authority rules.
 
-- collect before/after maintenance-time evidence;
-- continue monitoring stale-page detector quality beyond the validated required freshness-metadata positive case;
-- conduct a bounded real continuous-processing trial only after explicit approval;
-- review the five human-decision file candidates (see Task 7 and Task 8 pending decisions);
-- keep continuous execution disabled until value and safety are demonstrated.
+Outcomes:
 
-### Post-plan improvement backlog — documentation first
+- one Brain-owned machine-readable Mind path contract;
+- active Mind docs use target paths;
+- Claude, Codex, Gemini, Cursor, Kiro, and IDE context files point to `system/agent-context/`;
+- the legacy Mind Steward package is either migrated into Brain Core or retired;
+- dry-run is the default for classification;
+- raw sources are not rewritten unless an exact approved metadata policy allows it;
+- all relevant typechecks and path-contract tests pass.
 
-These items are approved for roadmap tracking only. They must be split into implementation-plan tasks before any code, automation, folder migration, or continuous behavior is built.
-
-From the Infinite Brain OS repo review:
-
-- add a lightweight Brain-owned Mind structural validator/report for the exact files, folders, freshness metadata, Graphify output path, maintenance pilot paths, and report outputs that Steve's workflow depends on — implemented in Brain Core as a report-only module/CLI on 2026-07-05;
-- add a lightweight session closeout receipt pattern so major AI/repo sessions record branch, commits, changed files, remaining dirty state, decisions, and next task without requiring a heavy transcript archive — implemented as `system/session-closeout-receipt-template.md` on 2026-07-05;
-- add processed-capture receipt tracking only when inbox volume makes it necessary, so captures can be traced from intake to ignored/summarized/promoted/task outcome — implemented as `system/processed-capture-receipt-template.md` on 2026-07-05;
-- audit Brain `operations/system-configs/**` ownership so canonical config, generated adapter shims, live local state, logs, and machine-specific files are not confused or accidentally committed — implemented as `brain/operations/specs/runtime-system-config-ownership-audit.md` on 2026-07-05;
-
-From the OODA / Infinite Brain transcript review:
-
-- strengthen Mind as the orientation layer: current context, strategy, constraints, trusted thinkers/sources, active projects, and decision principles should be easy for Brain to retrieve as compact briefs — implemented as `system/orientation-brief-template.md` on 2026-07-05;
-- define an intake-disposition pattern: approved observations may become ignored items, deterministic actions, knowledge proposals, task proposals, project updates, or maintenance findings, but durable changes remain human-approved — implemented as `system/intake-disposition-pattern.md` on 2026-07-05;
-- add source-quality gates before promotion: newsletters, transcripts, emails, meetings, and external ideas should not become durable orientation just because they were ingested — implemented as `system/source-quality-gates.md` on 2026-07-05;
-- add a lightweight wager/verdict pattern for significant business or workflow changes: proposal, expected improvement, measurement window, evidence source, later verdict, and follow-up action — implemented as `system/wager-verdict-pattern.md` on 2026-07-05;
-- prefer routed model tiers for intake review: deterministic rules first, cheap model for simple classification, stronger model only for high-context or strategic orientation tasks — implemented through `system/intake-disposition-pattern.md` on 2026-07-05.
-
-These are not new phases and do not authorize continuous processing. They are the next documentation backlog for improving Infinite Brain without making Mind harder to read.
-
-## Sensemaking and identity backlog
-
-This backlog moves Mind from a safe manual/report-only foundation toward the experience Steve wants: unstructured thoughts, client requests, app features, future work, and coding lessons can be dumped into `capture/inbox/`, while Brain finds relations, proposes structure, remembers useful lessons, and warns about strategy drift without silently rewriting durable truth.
-
-Roadmap candidates:
-
-- align coding-LLM Mind context entrypoints so Claude Code, Codex, Cursor, Kiro, Gemini, Antigravity, and future terminal agents can retrieve Steve's identity, strategy, current context, active projects, best-practice memory, and Brain/Mind boundaries without loading the whole vault;
-- add an active relation discovery report that proposes related notes, backlinks, duplicate/overlap candidates, recurring themes, contradictions, and missing source references across selected captures, projects, sources, strategy, and wiki notes;
-- add a capture sensemaking proposal pipeline so messy client requests, feature ideas, bugs, future work, coding thoughts, meeting notes, and voice/text captures can become structured project/app/repo proposals with destination, evidence, confidence, and approval requirements;
-- add a coding lessons learned to best-practices flow so bug fixes, failed validations, architecture decisions, and repo cleanups can become reusable repo/tool/product/engineering lessons with provenance;
-- add a strategy drift and focus guardrail that compares new work, requests, and coding plans against current strategy, priorities, constraints, and active commitments, then warns Steve when work is drifting or distracting;
-- validate and document the Brain/Mind two-repo operating model so the split remains intentional: Mind owns human truth and context, Brain owns automation/runtime/tooling, and the bridge makes LLMs work for Steve instead of making Steve maintain machine structures;
-- redesign the Mind top-level folder structure around human concepts instead of system terms, using `inbox/`, `organizations/`, `projects/`, `repos/`, `people/`, `faith/`, `knowledge/`, `resources/`, `history/`, `system/`, and `tasks.md` as the target structure, with the full migration plan recorded in `system/top-level-folder-redesign-migration-plan.md`.
-
-Progress note (2026-07-07): Phase 1 inventory and Phase 2 Brain compatibility are complete. Phase 3 prepared README-backed target folders for the new structure without moving content, deleting old folders, changing Save-to-Mind, or enabling continuous processing. `system/generated/graph/` remains documentation-only because generated-output writes are blocked by repository policy.
-
-All of these begin as report-only, proposal-only, or migration-planning work. They do not authorize automatic durable writes, task edits, project updates, folder moves, continuous processing, or repo merging.
-
-## Current milestone close-out (2026-06-18)
-
-### Complete — manual/report-only operation
-
-The following capabilities are implemented and ready for use without continuous automation:
-
-- human-first Mind usage: capture flows through `capture/inbox/` and review is human-led;
-- automatic capture intake: Save-to-Mind places captures in `capture/inbox/` automatically;
-- report-only Mind Steward: Brain inspects, classifies, and prepares proposals without durable writes;
-- Brain Console and status visibility: Brain Core API exposes queue state, scheduler status, and maintenance reports;
-- manual proposal review: proposals appear in `wiki/log.md` for human approval;
-- manual Kanban operation: `kanban.md` remains the task source of truth; no automated task writes;
-- disabled continuous execution: continuous processing is off by default and unused for current manual operation.
-
-The current release is fully usable without continuous processing. No claim of autonomous self-improvement or black-box operation is made.
-
-### Future automation track — deferred
-
-The following capabilities are not implemented or not approved for current use:
-
-- optional continuous runner activation (disabled by default; requires explicit approval);
-- real-world approved continuous-processing trial;
-- auto-resume and persisted pause/recovery state;
-- self-optimization and feedback learning;
-- approval-feedback loop integration;
-- automated durable writes beyond current bounded write adapters (requires separate approval);
-- demonstrated time savings relative to manual processing.
-
-Do not mark these as defects in the current milestone. They are intentional deferrals.
-
----
-
-## Roadmap guardrails
-
-Do not:
-
-- reorganize the vault before contracts and acceptance criteria are clear;
-- add top-level folders to represent every state;
-- copy Brain's technical entrypoint structure into Mind;
-- enable automatic durable writes before report-only quality is proven;
-- treat Graphify as the human navigation system;
-- duplicate runtime state from Brain into Mind;
-- replace `kanban.md` before lossless task synchronization is verified.
-
-## Roadmap success statement
+Exit gate:
 
 ```text
-Mind becomes a persistent, self-improving human knowledge system while remaining easier to read, easier to trust, and easier to maintain than before.
+No active old-path reference remains unless explicitly marked historical or compatibility-only.
 ```
+
+## Priority 2 — Vendor-neutral Context Gateway
+
+**Status:** planned
+**Depends on:** Priority 1
+**Goal:** any authorized LLM can retrieve a small, cited, privacy-scoped orientation pack through one core interface.
+
+Outcomes:
+
+- deterministic CLI core;
+- versioned context-pack schema;
+- authority, freshness, contradiction, privacy-scope, and token-budget fields;
+- explain/health commands;
+- retrieved source content isolated as untrusted data;
+- MCP, API, Console, and agent adapters reuse the same core;
+- Mind remains usable when the gateway is unavailable.
+
+Exit gate:
+
+```text
+The same query and scope return equivalent source selections through CLI and every enabled adapter.
+```
+
+## Priority 3 — Retrieval evaluation and ground truth
+
+**Status:** planned
+**Depends on:** Priority 2 core output contract
+**Goal:** measure whether Brain understands Steve accurately before expanding semantic automation.
+
+Outcomes:
+
+- versioned real-question corpus;
+- expected and forbidden sources;
+- authority, freshness, contradiction, privacy, and missing-context cases;
+- prompt-injection and data-poisoning cases;
+- top-k precision, required-source recall, latency, and token-cost reporting;
+- fixed regression command;
+- baseline before graph, embedding, or model-ranking experiments.
+
+Exit gate:
+
+```text
+Retrieval changes cannot ship without before/after results on the same corpus.
+```
+
+## Priority 4 — Capability truth and observability
+
+**Status:** partially implemented
+**Depends on:** Priority 1
+**Goal:** distinguish plans from tested and active capability using machine-verifiable evidence.
+
+Outcomes:
+
+- one capability manifest;
+- standardized states: `planned`, `implemented`, `tested`, `report-only`, `approval-gated`, `active`, `paused`, `retired`;
+- status page generated from manifest, tests, feature flags, and health checks;
+- stale status detection;
+- one operator view in Brain Console or CLI;
+- roadmap and implementation-plan documents never claim runtime status.
+
+Exit gate:
+
+```text
+Every active capability has an owner, evidence command, safety mode, and last-verified timestamp.
+```
+
+## Priority 5 — Controlled proposal application
+
+**Status:** narrow proof implemented; general path planned
+**Depends on:** Priorities 1, 3, and 4
+**Goal:** apply small approved Mind changes safely without granting broad autonomy.
+
+Outcomes:
+
+- exact-path and section-bounded proposals;
+- before hashes, source commit, expiry, and single-use approval;
+- idempotency key and conflict detection;
+- rollback bundle;
+- post-write verification and receipt;
+- no folder/glob targets;
+- initial allowlist limited to low-risk metadata or one explicitly selected proposal type.
+
+Exit gate:
+
+```text
+Repeated write → verify → rollback → verify tests pass on approved fixtures and fail closed elsewhere.
+```
+
+## Priority 6 — Measured automation pilots
+
+**Status:** planned
+**Depends on:** Priorities 3–5
+**Goal:** prove that automation saves time or prevents errors before enabling continuous operation.
+
+Outcomes:
+
+- one narrow pilot selected;
+- manual baseline recorded;
+- success, error, review-burden, and rollback measures defined;
+- bounded trial with kill switch;
+- explicit retain, revise, or retire verdict;
+- no expansion when value remains unproven.
+
+Good first pilots:
+
+1. context-pack retrieval for a recurring project question;
+2. report-only stale-page detection;
+3. report-only inbox disposition.
+
+Exit gate:
+
+```text
+Steve records that benefit exceeds maintenance and review cost.
+```
+
+## Priority 7 — System simplification and performance
+
+**Status:** planned; some cleanup already completed
+**Depends on:** may proceed in small safe batches after Priority 1
+**Goal:** reduce code, context, storage, and operational complexity while preserving capability.
+
+Outcomes:
+
+- Brain Core routes split into bounded domain routers;
+- duplicate path/policy constants removed;
+- obsolete Mind Steward package retired or reduced to a thin adapter;
+- Graphify scopes exclude plugins, generated output, vendor code, and unrelated projects;
+- generated Graphify history and runtime artifacts follow retention limits outside Git;
+- system-config binaries and mutable local state are separated from canonical source where feasible;
+- docs are checked for broken links, duplicate authority, stale paths, and unsupported status claims;
+- performance budgets exist for startup, retrieval latency, context tokens, and storage.
+- backup, restore, retention, correction, and deletion procedures are tested without relying on a model provider.
+
+Exit gate:
+
+```text
+Measured complexity or cost decreases with no regression in the Priority 3 corpus or capability manifest.
+```
+
+## Dependency map
+
+```text
+Priority 1 ──→ Priority 2 ──→ Priority 3 ──→ Priority 5 ──→ Priority 6
+     │                              │
+     └────────→ Priority 4 ─────────┘
+     └────────→ Priority 7 (bounded batches)
+```
+
+## Roadmap governance
+
+- Mind owns this priority order and the human success criteria.
+- Brain owns the implementation projection and live capability status.
+- Every task is small enough for a lower-tier model and appears in an implementation plan.
+- A task changes one concern, names exact files, has deterministic verification, and includes a stop condition.
+- New roadmap priorities require a documented gap that cannot fit into these seven.
+
+## Program definition of done
+
+The program is successful when:
+
+- any authorized LLM can retrieve relevant Steve-specific context without a full-vault prompt;
+- context packs cite authority, freshness, scope, and uncertainty;
+- Mind remains human-readable and provider-independent;
+- Brain applies only approved, bounded changes with verification and rollback;
+- live status is evidence-backed;
+- automation demonstrates value;
+- the system becomes smaller and calmer as reliability improves.
