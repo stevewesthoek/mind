@@ -2,7 +2,7 @@
 
 **Status:** canonical brand index  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-07-01
+**Last updated:** 2026-07-10
 
 ## Company and products
 
@@ -53,6 +53,7 @@ Start here:
 5. `product-roadmap.md` — phased beta and product-development path
 6. `prochat-memory-technical-definition.md` — local Markdown-first memory architecture
 7. `future-capabilities.md` — explicitly non-product future capabilities
+8. `canonical-homepage-copy.md` — approved public homepage narrative, section order, claims, and calls to action
 
 Supporting brand documents:
 

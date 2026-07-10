@@ -2,7 +2,7 @@
 
 **Status:** canonical copy rules  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-07-01
+**Last updated:** 2026-07-10
 
 ## Naming source of truth
 
@@ -116,6 +116,12 @@ request
 ```
 
 ## Website rule
+
+The canonical public homepage copy is:
+
+```text
+wiki/organisations/prochat/brand/canonical-homepage-copy.md
+```
 
 The homepage shows two product cards:
 
