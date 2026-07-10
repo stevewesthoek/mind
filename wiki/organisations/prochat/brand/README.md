@@ -54,6 +54,9 @@ Start here:
 6. `prochat-memory-technical-definition.md` — local Markdown-first memory architecture
 7. `future-capabilities.md` — explicitly non-product future capabilities
 8. `canonical-homepage-copy.md` — approved public homepage narrative, section order, claims, and calls to action
+9. `global-design-foundation.md` — canonical typography, color, layout, shape, accessibility, and product-expression system
+10. `website-visual-motion-system.md` — canonical premium visual storytelling, product visualization, and animation direction
+11. `website-build-contract.md` — AI-readable technical implementation, motion, responsive, and validation contract
 
 Supporting brand documents:
 

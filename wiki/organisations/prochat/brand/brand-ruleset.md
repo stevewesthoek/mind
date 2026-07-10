@@ -123,6 +123,18 @@ The canonical public homepage copy is:
 wiki/organisations/prochat/brand/canonical-homepage-copy.md
 ```
 
+The canonical visual and implementation authorities are:
+
+```text
+wiki/organisations/prochat/brand/global-design-foundation.md
+wiki/organisations/prochat/brand/website-visual-motion-system.md
+wiki/organisations/prochat/brand/website-build-contract.md
+```
+
+Existing implementation themes are not design authority. The website uses Golos Text, JetBrains Mono, grayscale plus one global cobalt accent, native scrolling, semantic DOM and SVG product visualizations, and GSAP ScrollTrigger for the approved cinematic chapters.
+
+The homepage must visually explain each major proposition and must not be reduced to generic text, icon cards, or decorative screenshots.
+
 The homepage shows two product cards:
 
 1. `ProChat Memory` — subtitle: `Currently available for QA`
