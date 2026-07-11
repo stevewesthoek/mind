@@ -4,6 +4,18 @@
 **Owner:** Steve Westhoek  
 **Last updated:** 2026-07-01
 
+## Roadmap scope
+
+This document governs product development, validation, licensing, and expansion.
+
+The separate company public-platform, design, content, migration, page-build, and launch program is governed by:
+
+```text
+wiki/organisations/prochat/brand/public-platform-roadmap.md
+```
+
+The two roadmaps must remain aligned but should not be merged. Product evidence governs public claims; public-platform work must not imply product maturity that this roadmap has not reached.
+
 ## Roadmap principle
 
 Build evidence of repeated value before expanding products, disciplines, hosting, or monetization.

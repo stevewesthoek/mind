@@ -119,8 +119,30 @@ ProChat should not sound:
 - like a generic chatbot;
 - like a broad transformation consultancy.
 
+## Company and founder
+
+ProChat is presented publicly as a software company.
+
+Steve Westhoek is presented as its founder and as a QA engineer whose direct discipline experience informs the first ProChat Memory edition.
+
+The company website is not a freelancer portfolio and does not market Steve’s QA services as a ProChat product.
+
+Founder transparency should strengthen trust without making the company identity dependent on one personal service offering.
+
+## Public platform
+
+The homepage leads with ProChat as the company, ProChat Memory as the flagship, ProChat Memory for QA as the current edition and primary conversion path, and ProChat Workbench as the second product.
+
+Dedicated pages carry deeper product, philosophy, founder, contact, documentation, privacy, and terms responsibilities.
+
+The complete public-platform strategy is:
+
+```text
+wiki/organisations/prochat/brand/public-platform-strategy.md
+```
+
 ## Current chapter
 
 ProChat is pre-revenue.
 
-The current chapter is about entering the QA discipline, inviting selected testers, learning from real use, improving the products, building trust, and preparing licensing before monetization.
+The current chapter is about entering the QA discipline, inviting selected testers, learning from real use, improving the products, building trust, preparing a durable public platform, and preparing licensing before monetization.

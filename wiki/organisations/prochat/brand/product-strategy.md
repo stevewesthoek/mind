@@ -13,6 +13,20 @@
 wiki/organisations/prochat/brand/product-naming-architecture.md
 ```
 
+## Company authority
+
+The highest-level company philosophy is:
+
+```text
+wiki/organisations/prochat/brand/company-philosophy.md
+```
+
+The public-platform strategy and company/founder positioning are:
+
+```text
+wiki/organisations/prochat/brand/public-platform-strategy.md
+```
+
 ## One-sentence strategy
 
 ProChat builds local, memory-first products that keep project knowledge reusable and let people put that knowledge to work through familiar AI interfaces.

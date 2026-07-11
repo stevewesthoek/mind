@@ -115,7 +115,29 @@ request
 → explicit Git action
 ```
 
+## Company and founder rule
+
+Present ProChat as the software company.
+
+Present Steve Westhoek as:
+
+```text
+QA Engineer and Founder of ProChat
+```
+
+The homepage must not function as a freelancer portfolio or market Steve’s QA services as a ProChat product.
+
+An About page may explain that ProChat was founded by Steve and that direct QA experience informs the first Memory edition.
+
+Do not imply a larger team than currently exists.
+
 ## Website rule
+
+The complete public-platform strategy is:
+
+```text
+wiki/organisations/prochat/brand/public-platform-strategy.md
+```
 
 The canonical public homepage copy is:
 
