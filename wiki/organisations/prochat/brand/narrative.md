@@ -2,7 +2,7 @@
 
 **Status:** canonical narrative  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-07-01
+**Last updated:** 2026-07-11
 
 ## The belief
 

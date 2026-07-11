@@ -2,7 +2,7 @@
 
 **Status:** canonical copy rules  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-07-10
+**Last updated:** 2026-07-11
 
 ## Naming source of truth
 

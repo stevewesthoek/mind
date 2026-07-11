@@ -44,7 +44,7 @@ Make the highest-level ProChat philosophy, vision, mission, narrative, positioni
 ### Deliverables
 
 ```text
-company-philosophy.md
+company-principles.md
 product-strategy.md
 narrative.md
 public-platform-strategy.md

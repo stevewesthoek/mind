@@ -2,7 +2,7 @@
 
 **Status:** canonical brand index  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-07-10
+**Last updated:** 2026-07-11
 
 ## Company and products
 
@@ -57,7 +57,7 @@ Start here:
 9. `global-design-foundation.md` — canonical typography, color, layout, shape, accessibility, and product-expression system
 10. `website-visual-motion-system.md` — canonical premium visual storytelling, product visualization, and animation direction
 11. `website-build-contract.md` — AI-readable technical implementation, motion, responsive, and validation contract
-12. `company-philosophy.md` — highest-level company belief, vision, mission, design philosophy, communication philosophy, and decision principles
+12. `company-principles.md` — highest-level company belief, vision, mission, design philosophy, communication philosophy, and decision principles
 13. `public-platform-strategy.md` — company-first website hierarchy, page responsibilities, founder positioning, conversion, footer, legal, and governance strategy
 14. `brand-governance.md` — authority, change, design-system, legacy, accessibility, performance, and AI-agent governance
 15. `public-platform-roadmap.md` — complete foundation, prototype, migration, page-build, legacy-removal, launch, and maintenance roadmap

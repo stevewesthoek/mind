@@ -2,9 +2,9 @@
 
 **Status:** canonical strategy  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-07-01  
-**Last reviewed:** 2026-07-01  
-**Review after:** 2026-08-01  
+**Last updated:** 2026-07-11  
+**Last reviewed:** 2026-07-11  
+**Review after:** 2026-08-11  
 **Freshness risk:** high
 
 ## Naming source of truth
@@ -18,7 +18,7 @@ wiki/organisations/prochat/brand/product-naming-architecture.md
 The highest-level company philosophy is:
 
 ```text
-wiki/organisations/prochat/brand/company-philosophy.md
+wiki/organisations/prochat/brand/company-principles.md
 ```
 
 The public-platform strategy and company/founder positioning are:
