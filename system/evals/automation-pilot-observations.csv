@@ -1,2 +1,3 @@
 run_id,run_date,useful,correction_minutes,false_positive_count,missing_context_count,observed_elapsed_seconds,source_count,source_bytes,citation_correct,safety_or_scope_violation,notes
 m6-2-run-001,2026-08-02,true,0,0,0,,1,6627,true,false,"retrieval_elapsed_seconds=0.316; end-to-end report-ready elapsed not measured; Stage 3 human review complete 2026-08-02; reviewer: Steve Westhoek; no optional notes."
+m6-2-run-002,2026-08-02,true,,0,0,90.0,1,6627,true,false,"retrieval_elapsed_seconds=0.344; Stage 1 complete; Stage 2 complete; Stage 3 human review complete 2026-08-02; reviewer: Steve Westhoek; notes: Brief matched the canonical roadmap; review time was not measured."

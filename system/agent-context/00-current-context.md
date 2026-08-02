@@ -30,7 +30,7 @@ owner: Steve Westhoek
 | 3 — Retrieval evaluation | complete |
 | 4 — Capability truth | complete |
 | 5 — Controlled application | complete |
-| 6 — Measured automation | in progress; M6.1 complete; M6.2 run 1 fully evaluated; 7 counted runs remain; run 2 not started |
+| 6 — Measured automation | in progress; M6.1 complete; M6.2 run 1 fully evaluated; run 2 fully evaluated; 6 counted runs remain; M6.2 pending; run 3 not started |
 | 7 — System simplification | planned |
 
 ## Current capability state (from Brain live-status runbook)
