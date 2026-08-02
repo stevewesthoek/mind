@@ -2,9 +2,9 @@
 
 ```yaml
 status: current
-last_reviewed: 2026-07-31
-review_after: 2026-08-14
-freshness_risk: high
+last_reviewed: 2026-08-02
+review_after: 2026-08-16
+freshness_risk: medium
 owner: Steve Westhoek
 ```
 
@@ -13,12 +13,37 @@ owner: Steve Westhoek
 - Mind remains the human authority and orientation layer.
 - Brain remains the AI capability and execution layer.
 - The repositories remain separate and use a versioned bridge.
-- `inbox/new/` is the canonical success-intake target; external deployment and observation remain Brain-owned and unverified here.
-- `inbox/failed/` is the target failed-processing path; external failure-routing compatibility must be verified against `system/folder-contract.md` before a write or move.
+- Branch consolidation complete at `f8ddb3b` (2026-08-02); root agent entrypoints added.
+- `inbox/new/` is the canonical success-intake target (Brain B1.0a verified 2026-07-22).
+- `inbox/failed/` is the target failed-processing path; verify routing against `system/folder-contract.md` before writes or moves.
 - `inbox/processed/` is the target proposal and receipt surface.
 - continuous processing remains disabled until a bounded pilot proves value.
 - broad Mind writes are not active.
-- the next system work is Priority 1: canonical path, policy, and implementation coherence.
+- target folder structure is canonical; legacy folder removal remains gated on separate human approval.
+
+## Priority status
+
+| Priority | Status |
+|----------|--------|
+| 1 — Canonical coherence | in progress; M1.1–M1.5 complete; root shims added; exit gate not yet satisfied |
+| 2 — Context Gateway | in progress; M2.1–M2.3 complete; M2.4 blocked on Gateway adapter activation |
+| 3 — Retrieval evaluation | complete |
+| 4 — Capability truth | complete |
+| 5 — Controlled application | complete |
+| 6 — Measured automation | in progress; M6.1 complete; M6.2 run 1 Stage 3 pending human review |
+| 7 — System simplification | planned |
+
+## Current capability state (from Brain live-status runbook)
+
+- Context Gateway CLI/core: repository-verified read-only; deployment unknown.
+- Context Gateway MCP adapter: fixture-only; not activated.
+- Codebase Memory MCP: candidate binary installed; not activated.
+- Graphify: quiesced; `graphify-transition-governance.json` prohibits deletion.
+- Save-to-Mind: live routing verified (B1.0a, 2026-07-22).
+- Continuous automation: not authorized.
+
+Mind does not infer deployed, observed, or verified capability state from repository configuration or plans. Brain's live-status runbook is authoritative:
+`/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md`
 
 ## Canonical direction
 
@@ -29,24 +54,6 @@ system/infinite-brain-philosophy.md
 → system/mind-implementation-plan.md
 → system/brain-mind-bridge.md
 ```
-
-Brain's live machine capability status is authoritative at:
-
-```text
-/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md
-```
-
-Mind does not infer deployed, observed, or verified capability state from repository configuration or plans.
-
-## Current seven priorities
-
-1. Canonical coherence and migration closure.
-2. Vendor-neutral Context Gateway.
-3. Retrieval evaluation and ground truth.
-4. Capability truth and observability.
-5. Controlled proposal application.
-6. Measured automation pilots.
-7. System simplification and performance.
 
 ## Current retrieval rule
 
