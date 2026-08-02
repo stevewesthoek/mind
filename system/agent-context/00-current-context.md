@@ -25,7 +25,7 @@ owner: Steve Westhoek
 
 | Priority | Status |
 |----------|--------|
-| 1 — Canonical coherence | in progress; M1.1–M1.5 complete; root shims added; exit gate not yet satisfied |
+| 1 — Canonical coherence | in progress; M1.1–M1.5 complete; M1.6 blocked on Mind Steward package disposition; exit-gate report: `system/reports/priority-1-exit-gate-reconciliation-2026-08-02.md` |
 | 2 — Context Gateway | in progress; M2.1–M2.3 complete; M2.4 blocked on Gateway adapter activation |
 | 3 — Retrieval evaluation | complete |
 | 4 — Capability truth | complete |

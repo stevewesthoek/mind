@@ -206,6 +206,19 @@ external writes.
 - **Verify:** a simple heading/frontmatter scan finds all required fields.
 - **Stop if:** two files claim ownership of the same concern; resolve ownership before editing content.
 
+### M1.6 — Close the Priority 1 exit gate
+
+- **Status:** blocked — Mind Steward package disposition unresolved.
+- **Ownership:** Mind documentation and evidence only.
+- **Purpose:** Reconcile the post-consolidation path gate and package disposition to satisfy all Priority 1 outcomes.
+- **Prerequisites:** M1.1–M1.5 complete; Brain BS0.10 (legacy producer retirement) complete; Brain BS0.19 (deletion-readiness evaluation) complete; Brain B1.5 (package-boundary resolution) complete.
+- **Verification:** exact active-path scan (zero active defects found 2026-08-02), agent-entrypoint inventory (all surfaces route through `system/agent-context/`), package-state evidence from Brain B1.5.
+- **Blocker:** The roadmap outcome #5 requires Mind Steward to be "migrated into Brain Core or retired." Brain B1.5 chose "retain with boundary clarification." Human decision required to resolve the mismatch.
+- **Decision report:** `system/reports/priority-1-mind-steward-disposition-decision-2026-08-02.md`
+- **Exit-gate report:** `system/reports/priority-1-exit-gate-reconciliation-2026-08-02.md`
+- **Stop conditions:** active unexplained old path found; package disposition unresolved; Brain evidence stale or contradictory.
+- **Authorization boundary:** no Brain edit; no package migration or retirement; no deletion; no automation activation.
+
 ## Priority 2 — Context Gateway policy and fixtures
 
 ### M2.1 — Finalize the context-pack human policy

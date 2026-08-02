@@ -34,7 +34,8 @@ Confirmed on 2026-07-31:
 - Mind's human-first folder model exists, and `kanban.md` is the sole human task authority;
 - Brain final verification passed its Brain-local Core, Console, Mind Steward, capability, contract, scheduler, retrieval, documentation, recovery, and synthetic-fixture checks;
 - Brain Context Pack 1.0 and Context Gateway are implemented per Brain's live-status authority; thin adapters remain fixture-only until separately activated;
-- active legacy-path producer migration remains Brain BS0.10 work, but its Mind M1.4 authority prerequisite is now satisfied;
+- active legacy-path producer migration (Brain BS0.10) is complete: four legacy producers retired with exit guards (2026-07-31). Producer retirement is not package retirement; Mind Steward remains a separate active Brain-owned package per B1.5;
+- deletion readiness (Brain BS0.19) is complete: 0 SAFE, 2 PARTIAL, 17 BLOCKED; deletion is separately governed and not authorized;
 - the Mind M5.1–M5.3 synthetic exact-scope write proof passes;
 - broad proposal application, production write activation, and continuous execution are not authorized;
 - meaningful time savings remain unproven;
@@ -66,8 +67,8 @@ automation changes, or external writes.
 
 ## Priority 1 — Canonical coherence and migration closure
 
-**Status:** in progress; M1.1–M1.5 complete, with remaining package retirement and full exit-gate work still open
-**Evidence:** `system/reports/m1-3-m1-4-closure-2026-07-31.md`, `system/reports/documentation-consistency-2026-07-31.md`
+**Status:** in progress; M1.1–M1.5 complete; M1.6 blocked on Mind Steward package disposition
+**Evidence:** `system/reports/m1-3-m1-4-closure-2026-07-31.md`, `system/reports/documentation-consistency-2026-07-31.md`, `system/reports/priority-1-exit-gate-reconciliation-2026-08-02.md`, `system/reports/priority-1-mind-steward-disposition-decision-2026-08-02.md`
 **Goal:** every active document, config, script, test, and runtime contract uses the same current Mind paths and authority rules.
 
 Outcomes:
