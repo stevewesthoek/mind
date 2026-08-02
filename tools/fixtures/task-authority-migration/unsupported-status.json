@@ -1,0 +1,26 @@
+{
+  "source": [
+    {
+      "id": "task-fixture-focus",
+      "rawText": "Focus item",
+      "title": "Focus item",
+      "status": "focus",
+      "checked": false,
+      "tags": [],
+      "priority": null,
+      "owner": null,
+      "project": null,
+      "dependencies": [],
+      "completedAt": null,
+      "createdAt": null,
+      "updatedAt": null,
+      "subtasks": [],
+      "order": { "column": "Focus", "ordinal": 0 },
+      "sourceLocation": { "path": "kanban.md", "line": 101 }
+    }
+  ],
+  "destination": "COPY_SOURCE",
+  "roundTrip": "COPY_SOURCE",
+  "secondRun": "COPY_SOURCE",
+  "rollback": "COPY_SOURCE"
+}

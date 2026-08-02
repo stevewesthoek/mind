@@ -1,0 +1,45 @@
+{
+  "source": [
+    {
+      "id": "task-fixture-priority",
+      "rawText": "Keep priority",
+      "title": "Keep priority",
+      "status": "todo",
+      "checked": false,
+      "tags": ["#p1"],
+      "priority": "p1",
+      "owner": null,
+      "project": null,
+      "dependencies": [],
+      "completedAt": null,
+      "createdAt": null,
+      "updatedAt": null,
+      "subtasks": [],
+      "order": { "column": "To Do", "ordinal": 0 },
+      "sourceLocation": { "path": "kanban.md", "line": 20 }
+    }
+  ],
+  "destination": [
+    {
+      "id": "task-fixture-priority",
+      "rawText": "Keep priority",
+      "title": "Keep priority",
+      "status": "todo",
+      "checked": false,
+      "tags": ["#p1"],
+      "priority": "p2",
+      "owner": null,
+      "project": null,
+      "dependencies": [],
+      "completedAt": null,
+      "createdAt": null,
+      "updatedAt": null,
+      "subtasks": [],
+      "order": { "column": "To Do", "ordinal": 0 },
+      "sourceLocation": { "path": "kanban.md", "line": 20 }
+    }
+  ],
+  "roundTrip": "COPY_SOURCE",
+  "secondRun": "COPY_SOURCE",
+  "rollback": "COPY_SOURCE"
+}
