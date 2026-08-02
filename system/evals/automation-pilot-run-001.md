@@ -130,14 +130,16 @@ The following are not knowable from this source:
 ## Stage 3 — Human review
 
 **Human owner:** Steve Westhoek
-**Instructions:** Fill in the four fields below from direct experience. Do not infer or default any field. Leave blank if not yet assessed.
+**Review date:** 2026-08-02
 
 | Field | Value |
 |---|---|
-| useful | |
-| correction_minutes | |
-| false_positive_count | |
-| missing_context_count | |
+| useful | true |
+| correction_minutes | 0 |
+| false_positive_count | 0 |
+| missing_context_count | 0 |
+
+**Optional review notes:** none supplied.
 
 ---
 
@@ -147,5 +149,5 @@ The following are not knowable from this source:
 |---|---|
 | Stage 1 — retrieval | complete |
 | Stage 2 — orientation brief | complete |
-| Stage 3 — human review | pending |
-| **Run complete for pilot-verdict purposes** | no |
+| Stage 3 — human review | complete |
+| **Run complete for pilot-verdict purposes** | yes |

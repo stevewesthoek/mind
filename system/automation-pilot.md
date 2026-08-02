@@ -1,6 +1,6 @@
 # Automation Pilot
 
-**Status:** active; run 1 brief complete, human review pending
+**Status:** active; run 1 fully evaluated, 7 remaining
 **Task:** M6.1
 **Version:** 1.0
 **Date selected:** 2026-08-01
@@ -184,7 +184,7 @@ The retrieval query is deterministic operator configuration optimized for the ra
 **Required-source gate (initial):** FAIL — original query and budget excluded required source
 **Required-source gate (repaired):** PASS — `wiki/organisations/prochat/brand/product-roadmap.md` selected as the sole source object (1,648 tokens of 2,000)
 
-**Status:** active; run 1 brief complete, human review pending
+**Status:** active; run 1 fully evaluated, 7 remaining
 
 **First counted run:** authorized from 2026-08-01 after the readiness gate passed
 
@@ -206,14 +206,15 @@ The retrieval query is deterministic operator configuration optimized for the ra
 - Mind and Brain no-mutation snapshots: PASS
 - automated source and scope gates: PASS
 - Stage 2 model/provider: Claude Code Sonnet session — explicitly authorized by human owner for this run only
-- human-review fields (`useful`, `correction_minutes`, `false_positive_count`, `missing_context_count`): pending and intentionally blank
+- human-review fields: `useful=true`, `correction_minutes=0`, `false_positive_count=0`, `missing_context_count=0`
+- reviewer: Steve Westhoek; review date: 2026-08-02
 - observation record: `system/evals/automation-pilot-observations.csv`
 - run-specific record: `system/evals/automation-pilot-run-001.md`
 - terminal evidence: `/Users/Office/m6-counted-run-1-output-20260802-000713.txt`
 
-**Completion state:** retrieval complete (Stage 1 PASS); orientation brief complete (Stage 2 PASS); human review pending (Stage 3 not yet completed). Run 1 is not fully evaluated. Do not begin run 2 until Stage 3 is complete for run 1.
+**Completion state:** Stage 1 complete (retrieval PASS); Stage 2 complete (orientation brief PASS); Stage 3 complete (human review 2026-08-02). Run 1 counts toward the pilot verdict.
 
-**Progress:** 1 of 8 counted runs recorded. M6.2 remains pending.
+**Progress:** 1 of 8 counted runs fully evaluated. M6.2 remains pending. Run 2 has not started.
 
 ### Verdict criteria (M6.3)
 
