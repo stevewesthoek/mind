@@ -1,6 +1,6 @@
-# Sources Index
+# Resources Index
 
-Raw evidence and source material live here. Mind Steward compiles useful knowledge from sources into `wiki/` while preserving source references when helpful.
+Raw evidence and source material live here. Mind Steward compiles useful knowledge into `knowledge/` or the relevant domain authority while preserving source references when helpful.
 
 ## Source folders
 
@@ -12,4 +12,4 @@ Raw evidence and source material live here. Mind Steward compiles useful knowled
 
 ## Rule
 
-Sources are not the dashboard. Keep raw material here and compiled insight in `wiki/` or `live/`.
+Resources are not the dashboard. Keep raw material here and compiled insight in `knowledge/`, `projects/`, or the relevant domain authority.

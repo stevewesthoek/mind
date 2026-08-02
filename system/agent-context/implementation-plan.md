@@ -23,11 +23,11 @@ mind-steward-dry-run-report.sh
 mind-compile-loop.sh
 ```
 
-`mind-steward-sync-inbox.sh` runs before classification and copies missing `capture/inbox/*.md` files from GitHub into the local checkout without overwriting local files.
+`mind-steward-sync-inbox.sh` runs before classification and copies missing `inbox/new/*.md` files from GitHub into the local checkout without overwriting local files.
 
 ## Classification Contract
 
-Mind Steward classifies files in `capture/inbox/` that do not have:
+Mind Steward classifies files in `inbox/new/` that do not have:
 
 ```yaml
 mind_steward_classified: true

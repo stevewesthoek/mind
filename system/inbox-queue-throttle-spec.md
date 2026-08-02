@@ -4,9 +4,9 @@ This specification defines the safe boundary for turning Mind Steward inbox dry-
 
 It does not enable a filesystem watcher and does not permit writes to Mind yet.
 
-## Current implemented Brain preflights
+## Brain preflight actions
 
-Brain now supports two approved, feature-flagged, report-only actions:
+Brain's implementation and feature-flag state for the following actions is authoritative only in Brain's live-status runbook:
 
 ```text
 scheduler-run-mind-steward-inbox-dry-run
@@ -42,7 +42,7 @@ The queue should make capture processing predictable, bounded, observable, and s
 Future safe processing should use this order:
 
 ```text
-capture/inbox file discovery
+inbox/new file discovery
 → queue candidate selection
 → debounce/stability check
 → size/type checks
@@ -59,7 +59,7 @@ Do not skip directly from file discovery to Mind writes.
 A future queue should preserve these fields per candidate:
 
 ```yaml
-path: capture/inbox/example.md
+path: inbox/new/example.md
 status: pending|running|blocked|failed|reported|approved|done
 size_bytes: 0
 modified_at: null
@@ -109,7 +109,7 @@ Allowed failure outputs:
 - Brain runtime report;
 - queue status record;
 - Mind Steward log suggestion;
-- `capture/failed/` only after explicit approved move behavior exists.
+- `inbox/failed/` only after explicit approved move behavior exists.
 
 Disallowed failure behavior:
 
@@ -124,10 +124,10 @@ The queue/throttle layer may prepare suggestions, but it may not write durable M
 
 Future write phases must be separately documented for:
 
-- proposed `wiki/` updates;
-- proposed `sources/` routing;
+- proposed `knowledge/` updates;
+- proposed `resources/` routing;
 - proposed task suggestions;
-- proposed capture moves to processed/failed/archive.
+- proposed capture moves to `inbox/processed/`, `inbox/failed/`, or `history/`.
 
 ## Brain Core boundary
 

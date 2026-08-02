@@ -201,3 +201,26 @@ Before approving a product, design, copy, or commercial decision, ask:
 7. Does it strengthen the two-product company architecture?
 
 If the answer is unclear, the decision is not ready.
+
+## Infinite Brain foundation
+
+The founder-confirmed long-term philosophy underlying ProChat Memory is canonical in:
+
+```text
+system/infinite-brain-philosophy.md
+```
+
+ProChat Memory is the customer-facing product expression of that Infinite Brain philosophy.
+
+This company-philosophy document controls the current ProChat business and public-product interpretation. The Infinite Brain document supplies the deeper cross-repository human and knowledge principles.
+
+Key relationship:
+
+```text
+Infinite Brain philosophy → long-term human and knowledge principles
+ProChat company philosophy → current company interpretation
+ProChat product strategy → current product scope and market entry
+ProChat public-platform strategy → current website hierarchy and conversion responsibilities
+```
+
+The long-term philosophy does not automatically expand current product claims, availability, market scope, or roadmap. Those changes require separate approval in the applicable ProChat brand authority.

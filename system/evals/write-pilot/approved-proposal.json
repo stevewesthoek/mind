@@ -1,0 +1,18 @@
+{
+  "requestId": "mind-m5-frontmatter-freshness-request-fixture-v1",
+  "idempotencyKey": "mind-m5-frontmatter-freshness-fixture-v1",
+  "changes": [
+    {
+      "path": "system/evals/write-pilot/synthetic-frontmatter-target.md",
+      "beforeHash": "2a124e5bdb01bf3b189699e0a9a55198b86f515366315d5f659fedcbd91ea0a8",
+      "afterContent": "---\ntitle: Synthetic Frontmatter Freshness Fixture\ntype: synthetic-evaluation\nfreshness_status: current\nlast_reviewed: 2026-07-31\n---\n\n# Synthetic Frontmatter Freshness Fixture\n\nThis file contains synthetic, non-production content for the controlled Mind write pilot.\n",
+      "sections": [
+        {
+          "startLine": 4,
+          "endLine": 5
+        }
+      ]
+    }
+  ],
+  "rollbackRequired": true
+}

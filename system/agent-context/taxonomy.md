@@ -27,8 +27,8 @@
 
 ## Routing hints
 
-- High-action items should update `live/tasks.md` or `live/projects.md`.
-- Durable knowledge should compile into `wiki/`.
-- Raw evidence belongs in `sources/`.
-- Temporary or unclear captures remain in `capture/inbox/` until reviewed.
-- Errors and failed saves belong in `capture/failed/`.
+- High-action items should update `kanban.md` or `projects/` while task migration remains incomplete.
+- Durable knowledge should compile into `knowledge/`.
+- Raw evidence belongs in `resources/` or `faith/resources/`.
+- Temporary or unclear captures remain in `inbox/new/` until reviewed.
+- Errors and failed saves target `inbox/failed/`; verify external failure routing against `system/folder-contract.md` before failed writes or moves.

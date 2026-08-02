@@ -1,7 +1,9 @@
 ---
-
 kanban-plugin: board
-
+authority: retired
+status: non-authoritative-compatibility-snapshot
+superseded_by: kanban.md
+do_not_write: true
 ---
 
 ## Backlog

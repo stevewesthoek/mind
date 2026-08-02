@@ -2,9 +2,13 @@
 
 **Status:** canonical human policy
 **Version:** 2.0
-**Last reviewed:** 2026-07-10
+**Last reviewed:** 2026-07-31
+**Owner role:** Steve Westhoek (human policy); Brain (machine schema and execution)
 **Machine schema owner:** Brain
+**Brain context-pack schema:** version `1.0` at `/Users/Office/Repos/stevewesthoek/brain/operations/specs/context-pack.schema.json`.
+**Context Gateway contract:** Brain owns Context Gateway implementation and activation status; see Brain's live-status runbook for current state.
 **Depends on:** `system/infinite-brain-philosophy.md`, `system/mind-strategy.md`
+**Conflict rule:** Mind's human policy fields take precedence for approval, privacy, and authority semantics. Brain's JSON Schema takes precedence for machine payload shape. When field naming differs, adapters must map explicitly rather than treating either as canonical for both domains.
 
 ## Purpose
 
@@ -41,10 +45,10 @@ The bridge owns typed exchange.
 
 | Purpose | Current path |
 |---|---|
-| New captures | `inbox/new/` |
+| New captures | verified live target `inbox/new/` (Brain B1.0a, 2026-07-22) |
 | Raw preserved inputs | `inbox/raw/` or `resources/` |
 | Generated proposals/receipts | `inbox/processed/` |
-| Failed or blocked processing target | `inbox/failed/`; verify current external failure routing in `system/folder-contract.md` |
+| Failed or blocked processing target | verified live target `inbox/failed/` (Brain B1.0a, 2026-07-22) |
 | Tasks | current authority defined by `system/task-kanban-contract.md` |
 | Projects | `projects/` |
 | Organizations | `organizations/` |
@@ -60,7 +64,7 @@ Legacy paths may appear in history, archived reports, or explicit compatibility 
 
 ## Exchange types
 
-The bridge supports seven types:
+The bridge human policy defines seven exchange types:
 
 1. `context-pack`
 2. `capture-disposition`
@@ -70,47 +74,156 @@ The bridge supports seven types:
 6. `exact-path-approval`
 7. `application-receipt`
 
-Every payload contains `schema_version`, stable ID, type, creation time, source references, status, and producer.
+Every conforming payload must contain `schema_version`, stable ID, type, creation time, source references, status, and producer.
 
 ## Context pack contract
 
 A context pack is read-only orientation, not permission.
 
-Required fields:
+**Machine schema:** Brain Context Pack version `1.0` at `/Users/Office/Repos/stevewesthoek/brain/operations/specs/context-pack.schema.json` (validated BS0.21, 2026-07-16).
 
-```yaml
-schema_version: "1.0"
-pack_id: ""
-query: ""
-created_at: ""
-producer: ""
-scopes_searched: []
-scopes_excluded: []
-sources:
-  - path: ""
-    authority: "human-decision | canonical | primary-evidence | reviewed-synthesis | capture | inference | generated"
-    freshness: "current | review-needed | superseded | unknown"
-    relevance_reason: ""
-    excerpt: ""
-authority_summary: ""
-freshness_summary: ""
-conflicts: []
-unknowns: []
-context_budget:
-  requested_tokens: 0
-  estimated_tokens: 0
-  omitted_source_count: 0
-brief: ""
+### Machine-required fields (Brain schema `1.0`)
+
+Brain's executable schema uses camelCase and is authoritative for payload conformance. All fields below are required unless noted.
+
+```text
+packId              string, non-empty
+version             const "1.0"
+queryId             string, non-empty
+generatedAt         date-time
+freshness           "fresh" | "stale" | "mixed" | "unknown"
+authorizedScopes    array of strings, min 1
+sources             array of source objects (see below)
+conflicts           array of conflict objects
+unknowns            array of strings
+exclusions          array of exclusion objects
+privacyClassification  "public" | "internal" | "sensitive"
+budget              { maxItems, maxTokens, usedItems, usedTokens }
+truncation          { truncated: boolean, reason: string|null }
+provenance          { retriever, corpusVersion, deterministicOrder: true }
+state               { repository, deployed, observed, verified }
+safetyWarnings      array of strings
+modelSuppliedAuthority  boolean (optional)
 ```
 
-Rules:
+Source object fields:
+
+```text
+sourceId    string
+path        string
+authority   "canonical" | "supporting" | "conflicting" | "untrusted"
+citation    string, non-empty
+sha256      string, 64 hex chars
+freshness   "fresh" | "stale" | "unknown"
+scope       string
+untrusted   boolean
+```
+
+Conflict object fields: `field`, `leftSourceId`, `rightSourceId`.
+
+Exclusion object fields: `sourceId`, `reason`.
+
+### Human-policy vocabulary and field mapping
+
+Mind's human-policy vocabulary uses expanded labels for human readability. When the bridge human policy uses a different name or value set, the following explicit mapping applies:
+
+| Human-policy label | Machine field | Notes |
+|---|---|---|
+| schema_version | version | Always `"1.0"` |
+| pack_id | packId | |
+| query | queryId | |
+| created_at | generatedAt | ISO 8601 |
+| scopes_searched | authorizedScopes | |
+| scopes_excluded | (derived from exclusions[].reason) | No direct machine field; encode as exclusion entries |
+| authority_summary | (human-only) | Not in machine schema; used in bridge reports and proposals only |
+| freshness_summary | (human-only) | Not in machine schema; used in bridge reports and proposals only |
+| context_budget.requested_tokens | budget.maxTokens | |
+| context_budget.estimated_tokens | budget.usedTokens | |
+| context_budget.omitted_source_count | (derived from exclusions.length) | |
+| brief | (human-only) | Not in machine schema; used in human-facing summaries |
+| producer | provenance.retriever | |
+
+### Authority labels
+
+Machine schema values: `canonical`, `supporting`, `conflicting`, `untrusted`.
+
+Mind human-policy expands authority into seven granular labels for human reasoning. The mapping to machine values:
+
+| Human authority label | Machine authority value | When to use |
+|---|---|---|
+| human-decision | canonical | Explicit recent human decision |
+| canonical | canonical | Current canonical document |
+| primary-evidence | supporting | Cited primary evidence |
+| reviewed-synthesis | supporting | Reviewed synthesis or summary |
+| capture | supporting | Unreviewed capture |
+| inference | untrusted | Model inference without approval |
+| generated | untrusted | Generated index, graph, or summary |
+
+When a source is known to conflict with other sources in the pack, use `conflicting` regardless of its human-policy label.
+
+### Freshness states
+
+Machine schema values (top-level pack): `fresh`, `stale`, `mixed`, `unknown`.
+Machine schema values (per-source): `fresh`, `stale`, `unknown`.
+
+Mind human-policy expansion:
+
+| Human freshness label | Machine freshness value | Meaning |
+|---|---|---|
+| current | fresh | Within review window; no known supersession |
+| review-needed | stale | Past review-after date or flagged for revalidation |
+| superseded | stale | Explicitly replaced by newer material |
+| unknown | unknown | No freshness metadata or unverifiable |
+
+### Privacy scopes
+
+Allowed scope values for `authorizedScopes`:
+
+```text
+personal | business | ministry | project:<id> | organization:<id> | public-safe
+```
+
+Detailed scope definitions: `system/context-privacy-scopes.md`.
+
+### Conflict handling
+
+When the retriever identifies conflicting sources:
+
+1. Include both sources in the pack with `authority: "conflicting"`.
+2. Record the conflict in the `conflicts` array with field, left source ID, and right source ID.
+3. Do not silently omit either side.
+4. Surface the conflict in any human-facing brief or summary.
+
+### Citation rules
+
+- Every material claim in a human-facing brief must cite a source ID.
+- The `citation` field in each source must be a non-empty human-readable reference.
+- Omitted sources must appear in the `exclusions` array with a reason.
+
+### Unknown handling
+
+- A missing source produces an entry in the `unknowns` array, not an inference presented as fact.
+- A source with no freshness metadata uses `freshness: "unknown"`.
+- A scope that cannot be searched (permissions, unavailable) appears in exclusions with reason.
+
+### Least-disclosure behavior
+
+- Search only scopes listed in `authorizedScopes`.
+- Do not copy secrets, credentials, tokens, or private keys into any context pack.
+- The `privacyClassification` field records the highest sensitivity of included content.
+- Sensitive scope content that is not needed for the query must be excluded with reason.
+- Context packs are disposable runtime projections, not durable Mind truth.
+
+### Rules
 
 - search only authorized scopes;
-- cite every material claim in `brief`;
+- cite every material claim;
 - do not silently omit a known contradiction;
-- record omitted source count;
+- record omitted source count via exclusions array;
 - do not copy secrets or unrelated private information;
 - a missing source produces an unknown, not an inference presented as fact;
+- `modelSuppliedAuthority` must be `false` or absent; models cannot self-authorize;
+- `provenance.deterministicOrder` must be `true`; non-deterministic ranking requires the semantic-ranker gate to pass evaluation first;
 - context packs are disposable runtime projections, not durable Mind truth.
 
 ## Proposal contract
@@ -263,8 +376,8 @@ Human approval is required for:
 ## Canonical-source rule
 
 - Mind's philosophy, strategy, roadmap, and this bridge define human policy.
-- Brain's JSON Schemas define executable payload shape.
-- Brain's status runbook defines live capability state.
+- Brain's JSON Schemas define executable payload shape. Context Pack version `1.0` is canonical at `/Users/Office/Repos/stevewesthoek/brain/operations/specs/context-pack.schema.json`.
+- Brain's generated status and dated evidence define live capability state; see Brain's live-status runbook for current implementation and deployment claims.
 - Generated copies must identify source version and must not be edited as new authority.
 
 ## Conformance
@@ -272,7 +385,7 @@ Human approval is required for:
 Priority 1 of both implementation plans must add a cross-repo contract check. Until it exists, reviewers manually verify:
 
 1. current paths match `system/folder-contract.md`;
-2. bridge and Brain schema versions match;
+2. bridge policy and Brain `Context Pack 1.0` schema remain semantically aligned, with explicit mapping for differently named human-policy fields;
 3. active agent instructions use `system/agent-context/`;
 4. no payload implies approval;
 5. Mind remains usable without Brain.

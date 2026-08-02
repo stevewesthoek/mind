@@ -146,17 +146,17 @@ Brain Console visualizes and controls the system by consuming Brain Core API sur
 
 ## Product strategy and implementation plans
 
-There must be only one canonical ProChat OS strategy document:
+There is no single canonical ProChat OS strategy document. The former one-document claim is retired because its referenced file does not exist.
 
-```text
-mind/wiki/organisations/prochat/brand/prochat-os-strategy.md
-```
+ProChat strategy is intentionally scoped in Mind:
 
-That document defines ProChat OS as an **Agentic Workflow OS** and is the leading source for business direction, category, positioning, and non-goals.
+- `wiki/organisations/prochat/brand/product-strategy.md` is the canonical company and product strategy for ProChat's product portfolio.
+- `wiki/organisations/prochat/brand/prochat-workbench-strategy.md` is the canonical strategy for ProChat Workbench.
+- `wiki/organisations/prochat/brand/README.md` is the canonical index that identifies the applicable brand and product authority.
 
-Brain-side ProChat OS documents must be execution-facing. They may describe architecture, CLI plans, managed-service plans, Brain Core contracts, Brain Console surfaces, deployment patterns, implementation phases, and operational runbooks. They must refer back to the Mind strategy instead of restating or replacing it.
+Brain-side ProChat documents must be execution-facing. They may describe architecture, CLI plans, managed-service plans, Brain Core contracts, Brain Console surfaces, deployment patterns, implementation phases, and operational runbooks. They must defer to the applicable scoped Mind strategy rather than restating, replacing, or generalizing it.
 
-If a Brain document conflicts with the Mind strategy, update the Brain document to defer to Mind unless the Mind strategy itself is intentionally changed first.
+If a Brain document conflicts with an applicable Mind strategy, update the Brain document to defer to that scoped strategy unless the Mind strategy itself is intentionally changed first.
 
 ## Duplication rules
 

@@ -1,0 +1,26 @@
+{
+  "source": [
+    {
+      "id": "task-fixture-missing",
+      "rawText": "This task must not disappear",
+      "title": "This task must not disappear",
+      "status": "todo",
+      "checked": false,
+      "tags": [],
+      "priority": null,
+      "owner": null,
+      "project": null,
+      "dependencies": [],
+      "completedAt": null,
+      "createdAt": null,
+      "updatedAt": null,
+      "subtasks": [],
+      "order": { "column": "To Do", "ordinal": 0 },
+      "sourceLocation": { "path": "kanban.md", "line": 20 }
+    }
+  ],
+  "destination": [],
+  "roundTrip": "COPY_SOURCE",
+  "secondRun": "COPY_SOURCE",
+  "rollback": "COPY_SOURCE"
+}

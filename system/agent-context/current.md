@@ -7,9 +7,9 @@ This file is the short-term context surface for Mind Steward. Keep it compact an
 - Obsidian is the human cockpit.
 - `mind` stores human memory, live work, sources, and archive.
 - `brain` stores executable infrastructure, Brain Core, scheduler jobs, and the Mind Steward implementation.
-- Save-to-Mind writes captures immediately to GitHub `capture/inbox/`.
-- The nightly local scheduler syncs missing inbox captures to this computer.
-- Mind Steward classifies captures locally through the AI Model Selector with `local_only: true` during the nightly local run.
+- Save-to-Mind writes captures immediately to GitHub `inbox/new/`.
+- `inbox/failed/` is the failed-processing target; verify external failure routing against `system/folder-contract.md` before moving or writing failed captures.
+- A nightly local scheduler and local classification flow are documented targets; deployed and observed state remain unknown until Brain evidence verifies them.
 - Brain Core runtime reports remain read-only and Brain-owned; do not copy them into `mind`.
 
 ## Guardrails

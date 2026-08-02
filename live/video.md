@@ -20,11 +20,14 @@ ProChat OS owns workflows.
 AWS owns media execution.
 ```
 
-The canonical Video Orchestrator strategy, roadmap, implementation plan, cost controls, S3 layout, service boundaries, metadata contract, and architecture diagram live in:
+Canonical Video Orchestrator strategy and implementation authority lives in Brain:
 
 ```text
-wiki/organisations/prochat/brand/prochat-os-strategy.md
+projects/brain-core/docs/video-orchestrator-strategy.md
+operations/runbooks/video-orchestrator-roadmap-optimistic.md
 ```
+
+This Mind note remains the durable human-facing summary and should not duplicate Brain's implementation details.
 
 This note should stay sparse and should not store render logs, queue dumps, upload credentials, generated media state, or copied asset files.
 

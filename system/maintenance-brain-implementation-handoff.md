@@ -52,10 +52,10 @@ Brain must not reinterpret the Mind policy into broader write permissions.
 Build one report-only maintenance runner that reads exactly:
 
 ```text
-router/00-current-context.md
-live/projects/prochat-qa-memory/STRATEGY-PLAN.md
-wiki/organisations/prochat/brand/prochat-os-strategy.md
-live/dashboard.md
+system/agent-context/00-current-context.md
+projects/prochat-qa-memory/STRATEGY-PLAN.md
+wiki/organisations/prochat/brand/product-strategy.md
+home.md
 system/automation-roadmap.md
 ```
 
@@ -183,7 +183,7 @@ Implement deterministically first.
 
 ### First-pilot rule
 
-For `router/00-current-context.md`, emit a candidate when:
+For `system/agent-context/00-current-context.md`, emit a candidate when:
 
 ```text
 review_after exists
@@ -411,10 +411,10 @@ A mismatch fails the run.
 Before reading, capture hashes or Git state for:
 
 ```text
-router/00-current-context.md
-live/projects/prochat-qa-memory/STRATEGY-PLAN.md
-wiki/organisations/prochat/brand/prochat-os-strategy.md
-live/dashboard.md
+system/agent-context/00-current-context.md
+projects/prochat-qa-memory/STRATEGY-PLAN.md
+wiki/organisations/prochat/brand/product-strategy.md
+home.md
 system/automation-roadmap.md
 kanban.md
 ```
@@ -470,7 +470,7 @@ The first report may emit open findings without a full review UI.
 However, design the finding key now:
 
 ```text
-stale-page:router/00-current-context.md:review_after
+stale-page:system/agent-context/00-current-context.md:review_after
 ```
 
 Suppression storage should eventually preserve:

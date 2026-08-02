@@ -325,3 +325,129 @@ Before monetization, assess:
 - performance and accessibility;
 - clarity of product hierarchy;
 - absence of confusion between ProChat and Steve’s freelance QA work.
+
+
+
+
+## Current repository and adoption model — 2026-07-19
+
+Verified repository and licensing authority:
+
+```text
+organizations/prochat/legal/README.md
+```
+
+The current public platform must distinguish two different adoption models.
+
+### ProChat Memory for QA
+
+Canonical repository:
+
+```text
+https://github.com/prochattools/memory-qa
+```
+
+Current public status:
+
+- public source-available evaluation repository;
+- selected beta;
+- free for approved beta participants;
+- not open source;
+- public viewing and starring are allowed;
+- clone, install, and local evaluation are approved only for selected beta participants under the repository license;
+- Issues and Discussions are approved feedback channels;
+- code contributions and source-code pull requests are not accepted during the current beta.
+
+Approved actions:
+
+```text
+View the Memory for QA repository
+Star Memory for QA on GitHub
+Apply for the selected QA beta
+Report sanitized feedback
+Join the QA Memory discussion
+```
+
+Do not use:
+
+```text
+Open source
+Free forever
+Install now
+Contribute code
+Submit a pull request
+Production ready
+```
+
+unless later authority explicitly changes those facts.
+
+### ProChat Workbench
+
+Canonical repository:
+
+```text
+https://github.com/prochattools/workbench
+```
+
+Current public status:
+
+- public prerelease;
+- free and self-hosted;
+- open source under `AGPL-3.0-only`;
+- viewing, starring, forking, cloning, and self-hosting are approved subject to repository terms;
+- Issues and Discussions are approved;
+- external contribution proposals may be discussed and reviewed;
+- pull requests must not be merged until the contributor-rights workflow is enabled and completed;
+- separate commercial or OEM licensing may be requested.
+
+Approved actions:
+
+```text
+View ProChat Workbench on GitHub
+Star ProChat Workbench
+Clone and self-host Workbench
+Open an issue
+Join a discussion
+Propose a contribution
+Ask about separate commercial or OEM licensing
+```
+
+### Homepage adoption responsibility
+
+The next homepage chapter should be a **Combined Adoption Chapter** rather than a generic open-source or installation chapter.
+
+It must explain two paths without flattening their legal differences:
+
+```text
+Memory for QA
+→ inspect and star the public source-available repository
+→ apply for the selected beta
+→ provide sanitized feedback through Issues or Discussions
+
+Workbench
+→ inspect and star the AGPL public repository
+→ clone and self-host locally
+→ report issues, join discussions, or propose contributions
+```
+
+Memory for QA remains the primary product path. Workbench remains the secondary product path.
+
+The chapter must not imply that Memory for QA is open source or generally installable without approval.
+
+### Managed-service boundary
+
+No standardized managed-implementation offer is currently approved for homepage promotion.
+
+Use only a neutral contact path for:
+
+- partnerships;
+- separate commercial or OEM licensing;
+- other qualified company inquiries.
+
+Do not advertise deployment, customization, integration, training, governance, maintenance, or support packages until the owner approves a defined offer.
+
+### Measurement boundary
+
+No public-platform analytics implementation is currently approved as canonical.
+
+Do not claim that a site click produced a GitHub star, installation, beta acceptance, contribution, or successful self-hosted deployment.

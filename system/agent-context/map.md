@@ -6,10 +6,10 @@ This map tells Mind Steward where to look and where to write proposals during th
 
 Target paths:
 
-- `inbox/new/` — new captures after Save-to-Mind migration.
-- `inbox/failed/` — failed capture routing after migration.
+- `inbox/new/` — active success-intake path.
+- `inbox/failed/` — verified live failed-processing path.
 - `inbox/processed/` — processed summaries, receipts, and proposals.
-- `tasks.md` — target human task source of truth after task migration.
+- `kanban.md` — sole current human task authority.
 - `projects/` — target active project home.
 - `knowledge/decisions.md` — target committed decisions surface when migrated.
 - `knowledge/` — durable non-faith memory.
@@ -17,10 +17,11 @@ Target paths:
 - `resources/` — source/reference material.
 - `history/` — completed or inactive material.
 
-Compatibility fallbacks:
+Historical or compatibility-only paths:
 
-- `capture/inbox/`
-- `capture/failed/`
+- `capture/inbox/` — historical only; retired success-intake path.
+- `capture/failed/` — historical-only failed-routing path.
+- `tasks.md` — retired, non-authoritative compatibility snapshot.
 - `live/tasks.md`
 - `live/projects.md`
 - `live/workflows.md`
@@ -29,7 +30,6 @@ Compatibility fallbacks:
 - `wiki/log.md`
 - `sources/`
 - `archive/`
-- `kanban.md`
 
 ## Search Order
 
@@ -45,17 +45,19 @@ Compatibility fallbacks:
 
 Mind Steward classification writes only to approved capture/intake paths.
 
-Target intake path after Save-to-Mind migration:
+Active success-intake path:
 
 ```text
 inbox/new/
 ```
 
-Compatibility intake path until the switch:
+Failed-processing target:
 
 ```text
-capture/inbox/
+inbox/failed/
 ```
+
+Failed writes and moves use verified canonical `inbox/failed/`; historical `capture/failed/` must not receive new writes.
 
 Mind Steward review suggestions target `inbox/processed/` after migration and `wiki/log.md` as the compatibility surface until proposal-surface migration is approved.
 

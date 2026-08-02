@@ -1,0 +1,26 @@
+{
+  "approvalId": "mind-m5-frontmatter-freshness-approval-fixture-v1",
+  "approvedBy": "human-review-fixture",
+  "approvedAt": "2026-07-31T12:00:00.000Z",
+  "expiresAt": "2026-08-01T12:00:00.000Z",
+  "idempotencyKey": "mind-m5-frontmatter-freshness-fixture-v1",
+  "files": [
+    {
+      "path": "system/evals/write-pilot/synthetic-frontmatter-target.md",
+      "beforeHash": "2a124e5bdb01bf3b189699e0a9a55198b86f515366315d5f659fedcbd91ea0a8",
+      "sections": [
+        {
+          "startLine": 4,
+          "endLine": 5
+        }
+      ]
+    }
+  ],
+  "rollback": {
+    "system/evals/write-pilot/synthetic-frontmatter-target.md": {
+      "required": true,
+      "strategy": "restore-before-content",
+      "beforeHash": "2a124e5bdb01bf3b189699e0a9a55198b86f515366315d5f659fedcbd91ea0a8"
+    }
+  }
+}

@@ -10,18 +10,23 @@ Target inputs after migration:
 - `resources/`
 - `faith/resources/`
 
-Compatibility inputs during migration:
+Historical or compatibility-only inputs:
 
-- `capture/inbox/`
-- `sources/`
+- `capture/inbox/` — historical only; retired success-intake path.
+- `sources/` — compatibility-only source path during migration.
 
 Target outputs after migration:
 
 - `knowledge/`
 - `faith/`
 - `resources/index.md`
-- `tasks.md` when action is needed
 - `knowledge/decisions.md` when a decision becomes committed
+
+Task output boundary:
+
+- Human task changes require exact review and write only to authoritative `kanban.md`.
+- `live/tasks.md` may remain a derived summary surface.
+- `tasks.md` is retired and non-authoritative.
 
 Compatibility outputs during migration:
 
@@ -63,7 +68,8 @@ Checks:
 - expected target and fallback folders exist
 - agent-context contract files exist
 - frontmatter schema is valid
-- Save-to-Mind target remains explicit: legacy `capture/inbox/` until the approved switch to `inbox/new/`
+- Save-to-Mind target remains explicit: active `inbox/new/`
+- failed-processing target remains explicit: `inbox/failed/`; verify external failure routing against `system/folder-contract.md` before failed writes or moves
 - failed captures are not stuck
 - Brain Core is reachable when needed
 - scheduler latest run is fresh when scheduler integration exists

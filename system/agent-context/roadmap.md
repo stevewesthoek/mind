@@ -8,11 +8,11 @@ Mind Steward keeps the Mind vault useful by classifying captures locally, produc
 
 ```text
 Save-to-Mind
-  -> GitHub capture/inbox/
+  -> GitHub inbox/new/
   -> nightly local inbox sync
   -> Mind Steward local classification
   -> wiki/log.md review suggestions
-  -> reviewed promotion into live/, wiki/, or sources/
+  -> reviewed promotion into projects/, organizations/, knowledge/, resources/, or faith/
 ```
 
 ## Local AI Requirement
@@ -29,11 +29,11 @@ Only local OpenAI-compatible model endpoints are valid for this job.
 
 ## Phases
 
-1. **Capture reliability** — Save-to-Mind writes every capture to GitHub `capture/inbox/`.
+1. **Capture reliability** — Save-to-Mind writes every capture to GitHub `inbox/new/`.
 2. **Local sync** — The nightly scheduler copies missing inbox captures to this computer without overwriting local files.
 3. **Local classification** — Mind Steward adds classification frontmatter using local AI only.
 4. **Review queue** — Mind Steward appends proposed promotions to `wiki/log.md`.
-5. **Approved promotion** — reviewed material moves into `live/`, `wiki/`, or `sources/`.
+5. **Approved promotion** — reviewed material moves into `projects/`, `organizations/`, `knowledge/`, `resources/`, or `faith/`.
 6. **Maintenance** — Mind Steward reports stale captures, failed captures, oversized wiki pages, broken links, and missing source traces.
 
 ## Safety Gates

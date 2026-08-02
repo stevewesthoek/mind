@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "status": "pre-cutover-blocked",
+  "currentAuthority": {
+    "path": "kanban.md",
+    "representation": "obsidian-kanban-board",
+    "writePolicy": "human-only",
+    "evidence": [
+      "system/task-kanban-contract.md",
+      "system/task-sync-spec.md",
+      "system/mind-implementation-plan.md"
+    ]
+  },
+  "futureAuthority": null,
+  "futureAuthorityCandidates": [
+    {
+      "model": "tasks-md",
+      "evidence": [
+        "home.md",
+        "system/folder-contract.md",
+        "system/agent-context/rules.md"
+      ],
+      "state": "target-only"
+    },
+    {
+      "model": "structured-task-records",
+      "evidence": [
+        "system/task-kanban-contract.md",
+        "system/task-sync-spec.md"
+      ],
+      "state": "proposed-only"
+    }
+  ],
+  "canonicalTaskIdentity": {
+    "requiredFields": [
+      "id",
+      "rawText",
+      "sourceLocation"
+    ],
+    "rule": "An ID must be explicitly stored or come from an approved reversible export table. Source lines alone are not stable when a card moves."
+  },
+  "allowedStatusValues": [
+    "backlog",
+    "todo",
+    "doing",
+    "done"
+  ],
+  "authoritativeFields": [
+    "id",
+    "rawText",
+    "title",
+    "status",
+    "checked",
+    "tags",
+    "priority",
+    "owner",
+    "project",
+    "dependencies",
+    "completedAt",
+    "createdAt",
+    "updatedAt",
+    "subtasks",
+    "order",
+    "sourceLocation"
+  ],
+  "fieldMapping": {
+    "id": "must be established by an approved reversible export table before cutover",
+    "rawText": "kanban card raw text, preserved byte-for-byte",
+    "title": "kanban card title, preserved without automatic renaming",
+    "status": "explicit approved column mapping only; unsupported columns fail closed",
+    "checked": "kanban checkbox state, independent from status",
+    "tags": "lexically extracted tags, preserved as an ordered list",
+    "priority": "null unless an approved explicit mapping exists",
+    "owner": "null unless an approved explicit mapping exists",
+    "project": "null unless an approved explicit mapping exists",
+    "dependencies": "empty only when none are represented; otherwise explicit mapping is required",
+    "completedAt": "preserve the parsed completion date or null",
+    "createdAt": "null unless source evidence exists",
+    "updatedAt": "null unless source evidence exists",
+    "subtasks": "preserve nesting, text, checkbox state, tags, and completion date",
+    "order": "preserve column and ordinal order unless a later contract makes ordering non-authoritative",
+    "sourceLocation": "preserve source path, column, and original line"
+  },
+  "integrityRules": {
+    "duplicates": "Reject duplicate stable IDs and duplicate destination IDs.",
+    "conflicts": "Reject any field difference for a shared stable ID.",
+    "loss": "Reject a missing source stable ID or a destination-only stable ID.",
+    "unknownFields": "Reject unsupported task-record fields rather than dropping them.",
+    "idempotency": "A second migration result must equal the first result exactly.",
+    "rollback": "The rollback result must equal the pre-cutover canonical record set exactly.",
+    "rendering": "Rendering must be deterministic from canonical records; it cannot create another write authority."
+  },
+  "cutoverCriteria": [
+    "M1.3 is complete and task runtime behavior is stable.",
+    "One future authority model is selected by an existing or explicitly approved Mind contract.",
+    "Every current card has a stable ID backed by a reversible export table.",
+    "Every live source column has an approved status mapping.",
+    "Fixture equivalence, divergence, unknown-field, round-trip, idempotency, and rollback checks pass.",
+    "A human approves the exact snapshot hash, target, compatibility behavior, and rollback procedure.",
+    "No active producer writes during the local cutover."
+  ],
+  "postCutoverCompatibility": {
+    "rule": "Only the selected authority may be writable. All other surfaces are generated, read-only compatibility, or historical.",
+    "legacyWriteTargets": [
+      "kanban.md",
+      "tasks.md",
+      "tasks/",
+      "live/tasks.md",
+      "04-tasks/"
+    ],
+    "deletionPrerequisite": "No legacy surface may be removed until the selected authority, all compatibility readers, producer migration, and exact rollback proof are approved."
+  },
+  "brainProducerInterface": {
+    "current": "No Brain producer may write a task representation while futureAuthority is null.",
+    "requiredBeforeBS010": [
+      "one exact approved writable target path",
+      "stable task ID",
+      "complete authoritative field payload",
+      "idempotency key",
+      "expected source snapshot hash",
+      "conflict response that performs no write",
+      "receipt and rollback reference"
+    ]
+  }
+}

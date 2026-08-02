@@ -13,10 +13,10 @@ Keep the vault small, current, useful, and safe while preserving raw captures an
 ## Pipeline
 
 ```text
-save capture -> nightly sync -> local classify -> suggest -> review -> compile -> maintain
+save capture -> documented nightly sync target -> documented local classify target -> suggest -> review -> compile -> maintain
 ```
 
-Save-to-Mind writes captures immediately. Mind Steward classification runs during the nightly local scheduler.
+Save-to-Mind writes captures immediately. Mind Steward classification is planned for the nightly local scheduler; runtime execution is not asserted without Brain evidence.
 
 ## Local Classification
 
@@ -32,13 +32,13 @@ The selected provider must be a local OpenAI-compatible model endpoint such as O
 
 ## Responsibilities
 
-- Classify captures in `capture/inbox/`.
+- Classify captures in `inbox/new/`.
 - Add stable classification frontmatter to captures.
-- Route proposed work to `wiki/log.md` for human review.
-- Compile approved durable knowledge into `wiki/`.
-- Keep active work surfaces in `live/` concise.
-- Preserve raw evidence in `sources/`.
-- Preserve failed or unsafe captures in `capture/failed/`.
+- Route proposed work to `wiki/log.md` for human review while that compatibility proposal ledger remains active.
+- Compile approved durable knowledge into `knowledge/` or the relevant canonical domain authority.
+- Keep active work surfaces in `projects/`, `organizations/`, and `knowledge/` concise.
+- Preserve raw evidence in `resources/` or `faith/resources/`.
+- Preserve failed or unsafe captures in target `inbox/failed/`; verify external failure routing against `system/folder-contract.md` before failed writes or moves.
 - Write Brain-owned runtime reports under `brain/runtime/local/mind-steward/`.
 
 ## Safety

@@ -29,7 +29,7 @@ Use one primary disposition:
 |---|---|---|
 | `ignore_archive` | Not useful enough to keep active; may be ignored or archived by an approved/manual process. | No, unless exact archive/delete action is separately approved. |
 | `deterministic_action` | Simple rule-based handling, such as obvious spam, duplicate, or known notification. | Only if the deterministic action is already approved and bounded. |
-| `knowledge_proposal` | Candidate for durable `wiki/` knowledge or source summary. | No; requires human approval before promotion. |
+| `knowledge_proposal` | Candidate for durable `knowledge/` or source summary. | No; requires human approval before promotion. |
 | `task_proposal` | Candidate for `kanban.md` or a task system. | No; requires human approval before task write. |
 | `project_update_proposal` | Candidate update to an active project or dashboard. | No; requires human approval before project write. |
 | `maintenance_finding` | Candidate stale, conflicting, duplicate, missing-source, or cleanup finding. | No; finding may be reported, not applied. |
@@ -53,7 +53,7 @@ Do not use expensive model reasoning when deterministic rules are enough. Do not
 title: ""
 date: YYYY-MM-DD
 status: proposed | approved | rejected | applied | superseded
-source_path: "capture/inbox/..."
+source_path: "inbox/new/..."
 source_type: transcript | newsletter | email | meeting | web_clip | manual_note | other
 source_name: ""
 observation_summary: ""
@@ -114,7 +114,7 @@ no_write_performed: true
 - A disposition does not authorize a durable write.
 - A finding does not authorize a fix.
 - A task proposal does not authorize editing `kanban.md`.
-- A knowledge proposal does not authorize promotion into `wiki/`.
+- A knowledge proposal does not authorize promotion into `knowledge/`.
 - A project update proposal does not authorize editing project or dashboard files.
 - Archive/delete actions require exact-path approval.
 - Record uncertainty instead of forcing a disposition.

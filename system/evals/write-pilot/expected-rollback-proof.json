@@ -1,0 +1,13 @@
+{
+  "status": "rolled-back",
+  "targetPath": "system/evals/write-pilot/synthetic-frontmatter-target.md",
+  "restoredHash": "2a124e5bdb01bf3b189699e0a9a55198b86f515366315d5f659fedcbd91ea0a8",
+  "expectedBeforeHash": "2a124e5bdb01bf3b189699e0a9a55198b86f515366315d5f659fedcbd91ea0a8",
+  "matchesBefore": true,
+  "report": {
+    "rollbackApplied": true,
+    "appliedAt": "2026-07-31T12:40:00.000Z",
+    "appliedByOperator": "human-review-fixture",
+    "reason": "Synthetic rollback equivalence validation"
+  }
+}

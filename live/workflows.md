@@ -29,8 +29,11 @@ Current public endpoint remains:
 /webhook/mind-inbox
 ```
 
-Target internal folder after validation:
+Verified internal routing:
 
 ```text
-capture/inbox/
+success -> inbox/new/
+failure -> inbox/failed/
 ```
+
+Brain B1.0a verified the guarded live workflow on 2026-07-22. `capture/inbox/` is historical-only.

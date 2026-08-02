@@ -2,39 +2,51 @@
 
 This specification defines the safe future path for adding a clickable visual graph to Mind.
 
-The renderer is implemented and can generate `.graphify-out/graph.html` locally from `.graphify-out/graph.json`.
+The prior renderer and compatibility paths are retained as historical
+documentation. Current Graphify execution state is owned by Brain's live-status
+runbook.
 
 ## Current state
 
-Graphify output currently lives in:
+The canonical future operational output root is:
+
+```text
+runtime/local/graphify/
+```
+
+Compatibility roots are:
 
 ```text
 graphify-out/
+.graphify-out/
 ```
 
-Confirmed current artifacts:
+They are generated/non-authoritative projections, not operational truth.
+
+Historical compatibility artifacts (not evidence of a current run):
 
 - `.graphify-out/graph.json` — generated graph data.
 - `.graphify-out/GRAPH_REPORT.md` — generated human-readable graph report.
 - `.graphify-out/manifest.json` — generated file manifest and hashes.
 - `.graphify-out/cache/` — generated graph cache.
 
-A clickable visual graph artifact is now generated at `.graphify-out/graph.html`.
+No current visual artifact or active run is claimed. A missing Brain receipt
+means freshness is unknown.
 
 The current graph contract records the known refresh command:
 
 ```bash
-graphify update .
+graphify update .  # historical compatibility command; do not invoke while the profile is disabled
 ```
 
 ## Goal
 
 Add a generated visual graph artifact that lets a human click and explore relationships in Mind.
 
-Recommended artifact:
+Recommended future artifact location:
 
 ```text
-graphify-out/graph.html
+runtime/local/graphify/graph.html
 ```
 
 The visual graph should be generated from existing graph data, not hand-maintained.
@@ -49,15 +61,15 @@ The visual graph should be generated from existing graph data, not hand-maintain
 
 ## Renderer tool
 
-A local renderer now exists at:
+A local renderer is retained as historical compatibility tooling at:
 
 ```text
 tools/render-graph-html.mjs
 ```
 
-It reads `.graphify-out/graph.json` and can generate `.graphify-out/graph.html` when run locally.
+It reads `.graphify-out/graph.json` and can generate `.graphify-out/graph.html` only as a local compatibility projection; it is not an active execution path. Current execution state is owned by Brain's live-status runbook.
 
-Default command:
+Historical compatibility command (do not invoke without checking Brain status):
 
 ```bash
 node tools/render-graph-html.mjs
@@ -65,7 +77,7 @@ node tools/render-graph-html.mjs
 
 ## Required behavior
 
-A graph visualization process should:
+A future contained graph visualization process should:
 
 1. read `.graphify-out/graph.json`;
 2. produce `.graphify-out/graph.html`;
@@ -89,7 +101,11 @@ Minimum useful visual graph:
 
 ## Root/index linking
 
-After `.graphify-out/graph.html` exists, update the Mind home or graph overview to link both:
+After a contained-run receipt proves a generated visual artifact exists, update
+the Mind home or graph overview to link the generated report and visual output
+under `runtime/local/graphify/`.
+
+Historical compatibility links may refer to:
 
 ```text
 graphify-out/GRAPH_REPORT.md
@@ -102,8 +118,8 @@ Do not link `graph.html` as current behavior until the file exists and is genera
 
 Before committing any visual graph implementation:
 
-1. Confirm `.graphify-out/graph.html` exists.
-2. Confirm it opens locally in a browser.
+1. Confirm the Brain receipt exists and source hashes match.
+2. Confirm the generated visual artifact exists under `runtime/local/graphify/`.
 3. Confirm it reads generated graph data only.
 4. Confirm no source notes were modified.
 5. Confirm no output was written to the repository root.
@@ -111,6 +127,7 @@ Before committing any visual graph implementation:
 
 ## Relationship to generated-output policy
 
-`.graphify-out/graph.html` should be treated as generated output unless intentionally tracked for convenience.
+`runtime/local/graphify/graph.html` is generated output and non-authoritative.
+Compatibility-root artifacts should be treated as historical/generated output.
 
 If tracked, the reason should be documented in `system/generated-output-policy.md`.

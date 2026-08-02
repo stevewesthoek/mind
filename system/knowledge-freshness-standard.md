@@ -290,7 +290,7 @@ These examples validate the standard without changing the pages yet.
 Path:
 
 ```text
-router/00-current-context.md
+system/agent-context/00-current-context.md
 ```
 
 Observed state:
@@ -325,7 +325,7 @@ This is a recommendation for review, not an applied truth change.
 Path:
 
 ```text
-live/projects/prochat-qa-memory/STRATEGY-PLAN.md
+projects/prochat-qa-memory/STRATEGY-PLAN.md
 ```
 
 Observed state:
@@ -355,40 +355,38 @@ freshness_risk: medium
 
 The `last_reviewed` date should only be applied after an actual content review.
 
-### Example 3 — Canonical business strategy
+### Example 3 — Scoped canonical business strategies
 
-Path:
+Paths:
 
 ```text
-wiki/organisations/prochat/brand/prochat-os-strategy.md
+wiki/organisations/prochat/brand/product-strategy.md
+wiki/organisations/prochat/brand/prochat-workbench-strategy.md
 ```
 
 Observed state:
 
 ```text
-Status: canonical strategy
-Last updated: 2026-06-03
+Each page declares a canonical scope and human owner.
 ```
 
 Assessment:
 
-- this page is canonical and therefore high-impact;
+- each scoped page is canonical and therefore high-impact within its stated scope;
 - canonical does not mean permanent;
 - business strategy should be reviewed after major positioning, offer, product hierarchy, or go-to-market decisions;
-- the page should not be rewritten merely because a review date passed;
-- new niche-product strategy should normally extend or reference this page unless it contradicts the flagship direction;
+- a page should not be rewritten merely because a review date passed;
+- new niche-product strategy should extend or reference the applicable scoped strategy unless it contradicts it;
 - conflicts should trigger an explicit strategy review.
 
 Pilot recommendation:
 
 ```yaml
-status: current
-last_reviewed: 2026-06-13
-review_after: 2026-07-13
+status: current-within-declared-scope
 freshness_risk: high
 ```
 
-Again, this should only be applied after Steve confirms that the strategy remains current.
+Again, this should only be applied after Steve confirms that the applicable scoped strategy remains current.
 
 ## Pilot conclusion
 

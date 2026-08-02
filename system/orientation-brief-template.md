@@ -21,15 +21,14 @@ Prefer these existing Mind surfaces:
 |---|---|
 | Current context | `system/agent-context/00-current-context.md` |
 | Retrieval map | `system/agent-context/00-memory-map.md` |
-| Human entrypoint | `home.md` |
+| Human entrypoint and Mind navigation | `home.md` |
 | Active priorities and tasks | `kanban.md` |
 | Proposals and review log | `wiki/log.md` |
-| Active project dashboard | `live/dashboard.md` |
 | Strategy and operating principles | `system/mind-strategy.md`, `system/mind-roadmap.md`, `system/mind-implementation-plan.md` |
 | Brain/Mind boundaries | `system/brain-mind-bridge.md` |
 | Maintenance status | `system/reports/maintenance-latest.md` |
-| Domain or business knowledge | relevant `wiki/` pages |
-| Raw evidence | relevant `sources/` pages |
+| Domain or business knowledge | relevant canonical domain authority, including documented scoped compatibility exceptions where applicable |
+| Raw evidence | relevant `resources/` pages |
 
 If a needed source is missing, record the gap instead of inventing orientation.
 

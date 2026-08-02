@@ -23,16 +23,16 @@ During the broader top-level folder migration, these old paths are compatibility
 ```text
 capture/inbox/    legacy Save-to-Mind capture path; target is inbox/new/
 capture/failed/   legacy failed-capture path; target is inbox/failed/
-live/             legacy active-state root; targets include projects/, tasks.md, knowledge/, system/reports/
+live/             legacy active-state root; targets include projects/, knowledge/, system/reports/; human tasks remain in authoritative kanban.md
 wiki/             legacy durable-knowledge root; targets include knowledge/, faith/, organizations/
 sources/          legacy source/reference root; target is resources/ or faith/resources/
 archive/          legacy history root; target is history/
 router/           legacy agent-context root; target is system/agent-context/
 ```
 
-## Save-to-Mind flow during compatibility
+## Historical Save-to-Mind compatibility flow
 
-Save-to-Mind still writes to legacy `capture/inbox/` until a later explicit switch to `inbox/new/` is approved and validated.
+Historically, Save-to-Mind wrote to legacy `capture/inbox/`. The active success-intake path is now `inbox/new/`.
 
 Brain may classify and propose destinations, but durable changes remain review-first and approval-gated.
 
@@ -40,13 +40,13 @@ Brain may classify and propose destinations, but durable changes remain review-f
 
 | Classification | Target review/destination | Legacy fallback |
 |---|---|---|
-| `task` | `tasks.md` | `kanban.md` |
+| `task` | exact human-approved write to authoritative `kanban.md` | `tasks.md` is retired and non-authoritative |
 | `project` | `projects/` | `live/projects/` |
 | `decision` | `knowledge/decisions.md` | `live/decisions.md` |
 | `area` | `knowledge/`, `faith/`, `people/`, or `organizations/` | `wiki/areas/` |
 | `research` | `resources/research/` or `faith/resources/` | `sources/research/` |
 | `resource` | `resources/` or `faith/resources/` | `sources/` |
-| `inbox` | keep in `inbox/new/` after Save-to-Mind migration | keep in `capture/inbox/` during compatibility |
+| `inbox` | keep in active `inbox/new/` | historical compatibility-only reference: `capture/inbox/` |
 
 ## Active contract files
 
