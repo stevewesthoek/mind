@@ -193,3 +193,36 @@ QA domain experience
 → licensing and monetization
 → later discipline expansion
 ```
+
+
+
+
+## Verified current public release facts — 2026-07-19
+
+The canonical public repositories are:
+
+```text
+ProChat Memory for QA
+https://github.com/prochattools/memory-qa
+
+ProChat Workbench
+https://github.com/prochattools/workbench
+```
+
+Current distinctions:
+
+- ProChat Memory has no separate general public repository; the QA edition is its current public implementation.
+- ProChat Memory for QA is a public source-available selected beta, not open source.
+- Memory for QA is free for approved beta participants, not an unrestricted free product.
+- Memory for QA code contributions are not accepted during the current beta; Issues and Discussions are the approved feedback channels.
+- ProChat Workbench is a free, self-hosted public prerelease licensed under `AGPL-3.0-only`.
+- Workbench Issues, Discussions, and contribution proposals are accepted, but external pull requests cannot be merged until the contributor-rights workflow is enabled and completed.
+- Separate Workbench commercial or OEM licensing may be requested.
+- No standardized managed-service offer is currently approved for public promotion.
+
+The exact legal and public-copy boundaries are controlled by:
+
+```text
+organizations/prochat/legal/README.md
+wiki/organisations/prochat/brand/public-platform-strategy.md
+```
