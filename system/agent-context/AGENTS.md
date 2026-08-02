@@ -33,7 +33,7 @@ Use Brain for how AI works. Use Mind for what Steve believes, knows, plans, valu
 - people: `people/`;
 - faith: `faith/`;
 - durable non-faith knowledge: `knowledge/`;
-- sources/research: `resources/`;
+- resources/research: `resources/`;
 - completed/superseded history: `history/`;
 - task authority: consult `../task-kanban-contract.md`.
 

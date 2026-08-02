@@ -17,18 +17,22 @@ Do not load the whole vault. Use `system/agent-context/00-memory-map.md`, then s
 ## Structure
 
 ```text
-capture/   Save-to-Mind captures and failure buffer
-live/      Active tasks, projects, decisions, workflows
-wiki/      Compiled durable knowledge
-sources/   Research, references, and evidence
-archive/   Completed or inactive material
-system/agent-context/    AI and Mind Steward contract files
+inbox/                 Capture, processing, and failure lifecycle
+organizations/         Businesses, ministries, and long-lived entities
+projects/              Active outcomes and deliverables
+repos/                 Human-readable repository context
+people/                People and relationships
+faith/                 Bible, theology, apologetics, and ministry
+knowledge/             Durable non-faith knowledge
+resources/             Research, references, and evidence
+history/               Completed, superseded, or inactive material
+system/agent-context/  AI and Mind Steward contract files
 ```
 
 ## Integration Notes
 
-- Capture: n8n writes to GitHub `capture/inbox/`.
-- Sync: the nightly scheduler copies missing inbox captures to this computer.
-- Classification: Mind Steward uses the AI Model Selector with `local_only: true` during the nightly local run.
+- Capture: n8n writes to GitHub `inbox/new/`.
+- Failed processing targets `inbox/failed/`; verify external failure routing against `system/folder-contract.md` before failed writes or moves.
+- Sync and classification are documented target flows; scheduler deployment, observation, and capability verification remain unknown unless Brain evidence proves them.
 - Kanban: `kanban.md` is the working board.
 - Runtime reports: Brain-owned; do not store runtime JSON in Mind.

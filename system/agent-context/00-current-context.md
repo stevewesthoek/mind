@@ -2,8 +2,8 @@
 
 ```yaml
 status: current
-last_reviewed: 2026-07-10
-review_after: 2026-07-24
+last_reviewed: 2026-07-31
+review_after: 2026-08-14
 freshness_risk: high
 owner: Steve Westhoek
 ```
@@ -13,7 +13,7 @@ owner: Steve Westhoek
 - Mind remains the human authority and orientation layer.
 - Brain remains the AI capability and execution layer.
 - The repositories remain separate and use a versioned bridge.
-- `inbox/new/` is the active success-intake path.
+- `inbox/new/` is the canonical success-intake target; external deployment and observation remain Brain-owned and unverified here.
 - `inbox/failed/` is the target failed-processing path; external failure-routing compatibility must be verified against `system/folder-contract.md` before a write or move.
 - `inbox/processed/` is the target proposal and receipt surface.
 - continuous processing remains disabled until a bounded pilot proves value.
@@ -35,6 +35,8 @@ Brain's live machine capability status is authoritative at:
 ```text
 /Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md
 ```
+
+Mind does not infer deployed, observed, or verified capability state from repository configuration or plans.
 
 ## Current seven priorities
 
