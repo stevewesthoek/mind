@@ -1,10 +1,10 @@
 # Live
 
-Current-state and fallback dashboard surfaces for Mind live here.
+**Compatibility-only legacy surface.** Canonical current-state authority now lives in `projects/`, `organizations/`, `knowledge/`, `kanban.md`, and Brain Console.
 
 ## Purpose
 
-Use this folder for compact, human-readable views of current context, decisions, task summaries, business state, and workflow visibility.
+Retain this folder only for compact, human-readable compatibility views of current context, decisions, task summaries, business state, and workflow visibility.
 
 The primary machine/runtime cockpit is Brain Console. The files in `live/` are Markdown fallback and review surfaces, not the source of every runtime fact.
 
@@ -28,6 +28,6 @@ See `system/task-kanban-contract.md` for the current no-data-loss task/Kanban bo
 ## Rules
 
 - Keep live files compact and current.
-- Do not store raw captures here; use `capture/inbox/`.
+- Do not store raw captures here; use `inbox/new/`.
 - Do not duplicate Brain Core runtime state manually when Brain Console already exposes it.
-- Record durable knowledge in `wiki/` or source material in `sources/` instead of bloating live surfaces.
+- Record durable knowledge in `knowledge/` and source material in `resources/` instead of expanding this compatibility surface.

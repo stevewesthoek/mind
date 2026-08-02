@@ -7,7 +7,7 @@ This folder now contains only archival/legacy subfolders. No new captures land h
 ## Folders
 
 - `inbox/` — **legacy empty folder** (all historical captures moved to inbox/new/ or history/ as of 2026-07-09, Batch 8W).
-- `failed/` — **legacy failed-capture archive** (historical failures; contains 3 files; failure routing not yet switched to inbox/failed/).
+- `failed/` — **legacy failed-capture archive**. Historical failures were preserved under `history/capture-failed-historical/`; live failure routing now targets `inbox/failed/` after Brain B1.0a verification.
 - `daily/` — legacy daily capture grouping (not migrated; historical reference only).
 
 ## Migration Status (Batch 8W, 2026-07-09)
@@ -25,7 +25,7 @@ This folder now contains only archival/legacy subfolders. No new captures land h
 
 - **Active Save-to-Mind webhook** writes new captures to `inbox/new/`, not to this legacy folder.
 - `capture/inbox/` receives no new captures (no automation writes here anymore).
-- `capture/failed/` remains unchanged; failure routing is future work (separate batch).
-- Do not delete failed captures without human review.
+- `capture/failed/` is historical-only; live failure routing targets `inbox/failed/`.
+- Do not delete failed captures from `inbox/failed/` or preserved history without human review.
 - Do not add new captures to this folder; use `inbox/new/` for all new material.
-- Processed knowledge should be distilled into `wiki/`, `sources/`, `live/`, or another documented destination while preserving source references when helpful.
+- Processed knowledge should be distilled into `knowledge/`, `resources/`, `projects/`, `organizations/`, or another canonical destination while preserving source references when helpful.

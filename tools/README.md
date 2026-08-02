@@ -42,19 +42,20 @@ node tools/export-kanban-tasks.mjs --write --output system/reports/kanban-export
 
 By default, the renderer now focuses on human-readable Markdown knowledge paths and filters out generated/plugin/code-heavy internals such as `.obsidian/`, `.graphify-out/`, caches, and non-Markdown implementation nodes.
 
-Generate the default visual graph:
+Historical compatibility renderer (not an active Graphify execution path while
+the Brain profile is disabled):
 
 ```bash
 node tools/render-graph-html.mjs
 ```
 
-Default input:
+Historical compatibility input:
 
 ```text
 graphify-out/graph.json
 ```
 
-Default output:
+Historical compatibility output:
 
 ```text
 graphify-out/graph.html
@@ -66,11 +67,12 @@ Render more nodes or links:
 node tools/render-graph-html.mjs --max-nodes 2000 --max-links 5000
 ```
 
-The generated HTML is a refreshable artifact. It should be regenerated from `.graphify-out/graph.json`, not hand-edited.
+The generated HTML is a historical compatibility artifact. If a future Brain receipt authorizes regeneration, derive it from `.graphify-out/graph.json`, never hand-edit it.
 
 ## Graph refresh
 
-`update-graph.sh` refreshes the Graphify graph and regenerates the clickable HTML graph in one command.
+`update-graph.sh` is retained as a historical compatibility wrapper. It must
+not be invoked while the Brain Graphify profile is disabled/fail-closed.
 
 Run from the Mind repo root:
 
@@ -92,13 +94,14 @@ system/reports/graph-refresh-latest.json
 system/reports/graph-refresh-latest.md
 ```
 
-It should not write generated files to the repository root.
+The future contained runner must write only under `runtime/local/graphify/` and
+must not write generated files to the repository root.
 
 ## Safety
 
 - The Kanban exporter reads `kanban.md` and does not modify it.
 - `kanban.md` remains the current task source of truth.
 - Do not use generated exports to overwrite `kanban.md` until the task sync validation rules are implemented.
-- The graph renderer reads `.graphify-out/graph.json` and writes generated HTML only when run locally.
+- The historical graph renderer reads `.graphify-out/graph.json` and writes generated HTML only when explicitly run locally under an authorized future contained profile.
 - Do not manually edit generated graph artifacts as source knowledge.
 - See `../system/task-kanban-contract.md`, `../system/task-sync-spec.md`, and `../system/graph-visualization-spec.md`.
