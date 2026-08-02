@@ -37,15 +37,13 @@ Brain's machine capability status is authoritative in:
 
 ---
 
-## What happens automatically
+## What Mind expects
 
-1. **Save-to-Mind places new captures in `inbox/new/`.** Failed or blocked processing belongs in `inbox/failed/`; generated proposals and receipts belong in `inbox/processed/`.
+1. **New captures belong in `inbox/new/`.** Failed or blocked processing belongs in `inbox/failed/`; generated proposals and receipts belong in `inbox/processed/`.
 
-2. **Brain runs report-only Mind Steward and scheduler workflows.** These workflows inspect, classify, and prepare status or review information without moving captures or changing durable Mind content automatically.
+2. **Brain owns machine status.** For current capability, scheduler, workflow, and maintenance state, consult Brain's canonical live-status runbook. Mind does not duplicate or describe runtime state.
 
-3. **Brain owns machine status.** Use Brain's canonical live-status runbook and supported Brain Console surfaces for capability, approval, scheduler, and maintenance status. Mind does not duplicate runtime status.
-
-Automatic capture moves, automatic durable knowledge writes, automatic task writes, and continuous processing are not enabled.
+3. **Proposals do not authorize durable Mind writes.** Human approval is required for meaningful changes to knowledge, strategy, tasks, commitments, or history. Automatic moves, durable writes, task writes, and continuous processing require explicit human authorization before they are permitted.
 
 ---
 
@@ -70,11 +68,11 @@ A proposal does not authorize an automatic content change.
 
 **Use the current task source of truth.**
 
-Target path after migration: `tasks.md`.
+Authoritative task surface: `kanban.md`.
 
-Compatibility surface during migration: `kanban.md`.
+Retired compatibility snapshot: `tasks.md` (read-only and non-authoritative).
 
-Open the active task surface to see what is to-do, in progress, and done. Add, move, and complete tasks there until a lossless task-sync implementation is validated.
+Open `kanban.md` to see what is to-do, in progress, and done. Add, move, and complete tasks only there. A future authority migration requires separate lossless, reversible validation and explicit approval.
 
 ---
 
@@ -95,7 +93,7 @@ Open the active task surface to see what is to-do, in progress, and done. Add, m
 | Non-faith source material | `resources/` | `sources/` |
 | Completed or inactive material | `history/` | `archive/` |
 | AI/coding-agent context | `system/agent-context/` | `router/` |
-| Generated graph output | `system/generated/graph/` | `graphify-out/` and older `.graphify-out/` references |
+| Graphify operational output | `runtime/local/graphify/` (future contained profile) | `graphify-out/` and `.graphify-out/` are compatibility roots; generated output is non-authoritative |
 
 ---
 
