@@ -1,0 +1,2 @@
+run_id,run_date,useful,correction_minutes,false_positive_count,missing_context_count,observed_elapsed_seconds,source_count,source_bytes,citation_correct,safety_or_scope_violation,notes
+m6-2-run-001,2026-08-02,,,,,,1,6627,true,false,"retrieval stage complete; retrieval_elapsed_seconds=0.316; end-to-end report-ready elapsed not measured; orientation brief complete after this task; human review pending."
