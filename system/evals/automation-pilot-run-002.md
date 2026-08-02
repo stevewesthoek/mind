@@ -10,6 +10,10 @@
 |---|---|
 | Run ID | `m6-2-run-002` |
 | Run date | `2026-08-02` |
+| Pilot window | `1` |
+| Pilot-window dates | `2026-08-01` through `2026-08-07` |
+| Execution within window | `2 of 2` |
+| Window 1 maximum reached | yes — run 3 first eligible `2026-08-08` |
 
 ---
 

@@ -9,7 +9,13 @@
 | Field | Value |
 |---|---|
 | Run ID | <!-- e.g. m6-2-run-003 --> |
-| Run date | <!-- ISO 8601, e.g. 2026-08-05 --> |
+| Run date | <!-- ISO 8601, e.g. 2026-08-08 --> |
+| Pilot window | <!-- e.g. 2 --> |
+| Pilot-window start date | <!-- e.g. 2026-08-08 --> |
+| Pilot-window end date | <!-- e.g. 2026-08-14 --> |
+| Execution within window | <!-- e.g. 1 of 2 --> |
+
+Eligibility must be checked against the explicit window table in `system/automation-pilot.md` before executing. A run may not proceed if the window's maximum of 2 counted executions has already been reached.
 
 ---
 

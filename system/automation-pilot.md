@@ -52,7 +52,20 @@ This pilot proves whether a read-only retrieval report for a recurring ProChat w
 | Final run | 2026-08-30 |
 | Verdict date | 2026-08-31 |
 | Duration | 4 weeks |
-| Sample size | 8 runs, maximum 2 per week |
+| Sample size | 8 runs, maximum 2 per observation window |
+
+### Pilot observation windows
+
+Pilot windows are anchored to the authorized start date (`2026-08-01`). They are not ISO calendar weeks. Unused execution capacity does not carry forward into a later window. Window 4 runs through the existing final-run date.
+
+| Pilot window | Dates | Maximum counted executions |
+|---|---|---:|
+| Window 1 | 2026-08-01 through 2026-08-07 | 2 |
+| Window 2 | 2026-08-08 through 2026-08-14 | 2 |
+| Window 3 | 2026-08-15 through 2026-08-21 | 2 |
+| Window 4 | 2026-08-22 through 2026-08-30 | 2 |
+
+Total capacity: 8 counted executions across 4 windows.
 
 ### Baseline (CTX-PRO-003, manual — 2026-08-01)
 
@@ -214,6 +227,8 @@ The retrieval query is deterministic operator configuration optimized for the ra
 
 **Completion state:** Stage 1 complete (retrieval PASS); Stage 2 complete (orientation brief PASS); Stage 3 complete (human review 2026-08-02). Run 1 counts toward the pilot verdict.
 
+**Pilot window:** Window 1 (2026-08-01 through 2026-08-07); execution 1 of 2.
+
 **Progress:** 1 of 8 counted runs fully evaluated. M6.2 remains pending.
 
 ### Run 2 — `m6-2-run-002`
@@ -235,7 +250,9 @@ The retrieval query is deterministic operator configuration optimized for the ra
 
 **Completion state:** Stage 1 complete (retrieval PASS); Stage 2 complete (orientation brief PASS); Stage 3 complete (human review 2026-08-02). Run 2 counts toward the pilot verdict.
 
-**Progress:** 2 of 8 counted runs fully evaluated. M6.2 remains pending. Six runs remain. No run 3 started. Current weekly count: two counted executions initiated, maximum reached.
+**Pilot window:** Window 1 (2026-08-01 through 2026-08-07); execution 2 of 2. Window 1 maximum reached.
+
+**Progress:** 2 of 8 counted runs fully evaluated. M6.2 remains pending. Six runs remain. No run 3 started. Run 3 first eligible 2026-08-08 (Window 2).
 
 ### Verdict criteria (M6.3)
 
