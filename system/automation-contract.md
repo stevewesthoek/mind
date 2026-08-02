@@ -4,16 +4,18 @@ This document records the current Mind automation boundary.
 
 ## Current capture flow
 
-Save-to-Mind captures use this path:
+Save-to-Mind captures use this verified path:
 
 ```text
 Save-to-Mind
 → n8n webhook
-→ GitHub `capture/inbox/`
+→ GitHub `inbox/new/`
 → local scheduler sync
 → Mind Steward local classification
-→ `wiki/log.md` suggestions
+→ reviewed proposal/log surfaces
 ```
+
+Brain task B1.0a verified the guarded live workflow on 2026-07-22. Success routes to `inbox/new/` and failed processing routes to `inbox/failed/`; compatibility paths under `capture/` are historical-only.
 
 ## Current classification path
 
@@ -30,9 +32,7 @@ Automatic capture classification must use the standardized selector path. Do not
 
 ## Current timing
 
-Current confirmed behavior is nightly classification, not real-time processing.
-
-Real-time or on-arrival processing is a possible future improvement, but it must be implemented through the same standardized path:
+Scheduler and deployment state is owned by Brain's live-status runbook. On-arrival processing is not authorized; any future activation must follow the same standardized path:
 
 ```text
 Brain Core / scheduler
@@ -44,17 +44,17 @@ Brain Core / scheduler
 
 ## Current output surfaces
 
-- `capture/inbox/` — unprocessed or newly synced captures.
-- `capture/failed/` — recoverable failure buffer.
-- `wiki/log.md` — Mind Steward suggestions and classification log surface.
-- `live/tasks.md` — compact Mind Steward task summary surface.
-- `kanban.md` — current daily task source of truth; not overwritten by automation.
+- `inbox/new/` — unprocessed or newly synced captures.
+- `inbox/failed/` — recoverable failure buffer.
+- `inbox/processed/` and `wiki/log.md` — reviewed proposal, receipt, and compatibility-log surfaces under their documented policies.
+- `live/tasks.md` — compact derived Mind Steward task summary surface.
+- `kanban.md` — sole current human task authority; never overwritten by automation.
 
 ## Safety rules
 
 - Do not write generated captures or automation dumps to the repository root.
-- Do not delete from `capture/failed/` without human review.
-- Do not overwrite `kanban.md` from automation until a lossless task sync system exists.
+- Do not delete from `inbox/failed/` without human review.
+- Do not write to `kanban.md` from automation; task changes require exact human action while it remains authority.
 - Do not bypass Brain Core, scheduler, Mind Steward, or AI Model Selector with one-off automation.
 - Do not enable real-time inbox processing until throttling, queueing, and failure handling are documented and tested.
 
@@ -72,7 +72,7 @@ Before on-arrival processing is enabled, define and test:
 2. max concurrent local AI jobs;
 3. queue and retry behavior;
 4. large-file fallback behavior;
-5. failure routing to `capture/failed/`;
-6. log output to `wiki/log.md` or another documented surface;
+5. failure routing to canonical `inbox/failed/`;
+6. log or receipt output to `inbox/processed/`, `wiki/log.md`, or another explicitly documented review surface;
 7. no root writes;
 8. no Kanban overwrite.

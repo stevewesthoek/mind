@@ -2,7 +2,7 @@
 
 **Status:** canonical lightweight template  
 **Purpose:** make capture outcomes auditable when inbox volume or lost-context risk justifies it.  
-**Applies to:** captures from `capture/inbox/`, transcripts, newsletters, emails, meetings, web clips, or other imported observations.  
+**Applies to:** captures from `inbox/new/`, transcripts, newsletters, emails, meetings, web clips, or other imported observations.
 **Does not do:** move files, approve durable writes, or create an automation pipeline.
 
 ## When to use this
@@ -57,7 +57,7 @@ merged_with_other_capture
 ```yaml
 title: ""
 date: YYYY-MM-DD
-capture_path: "capture/inbox/..."
+capture_path: "inbox/new/..."
 source_type: transcript | newsletter | email | meeting | web_clip | manual_note | other
 source_name: ""
 outcome: ignored | summarized | promoted_to_knowledge | converted_to_task | project_update_proposed | maintenance_finding | source_rejected | left_pending | merged_with_other_capture

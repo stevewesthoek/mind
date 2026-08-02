@@ -16,6 +16,12 @@ Mind owns the strategic intent. Brain owns the operational standard and implemen
 
 Graphify is not a one-off Mind feature. It is a cross-repo intelligence layer for the whole working system.
 
+Operational boundary: Mind owns Graphify's human purpose, interpretation, and
+policy. Brain owns execution, profiles, operational storage, retention,
+validation, and machine evidence. Current execution and profile state is
+owned by Brain's live-status runbook. Generated output is non-authoritative
+and source Markdown remains authoritative.
+
 ## Strategic goals
 
 Graphify must serve two primary goals.
@@ -86,8 +92,8 @@ AI assistants should not default to broad repo scans when Graphify outputs are a
 Expected AI behavior:
 
 ```text
-1. read .graphify-out/GRAPH_REPORT.md;
-2. query .graphify-out/graph.json or Graphify query/path/explain commands;
+1. read a Graphify receipt and source-hash record before reading generated output;
+2. query compatibility outputs only when receipt-bound, treating them as non-authoritative;
 3. inspect targeted source files only after graph traversal;
 4. cite or describe the graph path used when relevant.
 ```
@@ -140,8 +146,8 @@ Give AI fast relational context at low token cost.
 
 Canonical inputs:
 
-- `.graphify-out/GRAPH_REPORT.md`;
-- `.graphify-out/graph.json`;
+- receipt-bound `runtime/local/graphify/` output;
+- compatibility `.graphify-out/` output only when receipt-bound;
 - Graphify query/path/explain commands when available;
 - repo-local profile metadata.
 
@@ -232,7 +238,7 @@ Use the same high-quality policy as initial full build.
 
 ### Incremental update
 
-Use the Graphify update/hook/watch path where safe.
+Use the Graphify update/hook/watch path only as a future/deferred path when the Brain-owned contained profile explicitly enables it.
 
 Use local or cheaper AI only when the selector policy says quality and safety are sufficient.
 
@@ -258,14 +264,23 @@ The profile should not implement custom logic. It should only declare which stan
 
 ## Canonical outputs
 
-Every Graphify-enabled repo should use standard output paths unless the Brain standard explicitly allows otherwise:
+Every Graphify-enabled repo should use the Brain-defined operational root when
+the contained runner is available:
 
 ```text
-.graphify-out/GRAPH_REPORT.md
-.graphify-out/graph.json
-.graphify-out/graph.html
-.graphify-out/cache/
+runtime/local/graphify/
 ```
+
+The compatibility roots remain readable only as historical/generated
+projections:
+
+```text
+graphify-out/
+.graphify-out/
+```
+
+Neither compatibility root is canonical authority. A report is fresh only
+when its Brain receipt and source hashes exist; missing receipt means unknown.
 
 Optional outputs for code repos may include architecture/call-flow views.
 

@@ -6,16 +6,18 @@ It does not enable real-time processing yet.
 
 ## Current state
 
-Current confirmed behavior is nightly classification:
+Current confirmed intake routing and classification baseline:
 
 ```text
 Save-to-Mind
 → n8n webhook
-→ GitHub capture/inbox/
+→ GitHub inbox/new/
 → local scheduler sync
 → Mind Steward local classification
-→ wiki/log.md suggestions
+→ documented review, proposal, and receipt surfaces
 ```
+
+This specification does not claim that on-arrival classification is enabled; it defines the controls required before changing the existing scheduling mode. Current deployment and scheduler state is owned by Brain's live-status runbook.
 
 Current confirmed AI Model Selector policy:
 
@@ -26,12 +28,12 @@ local_only: true
 
 ## Goal
 
-Process new files in `capture/inbox/` shortly after they arrive, while preserving current safety and system boundaries.
+Process new files in canonical `inbox/new/` shortly after they arrive, while preserving current safety and system boundaries.
 
 Desired future flow:
 
 ```text
-file lands in capture/inbox/
+file lands in inbox/new/
 → watcher or scheduler detects stable file
 → Brain Core starts Mind Steward job
 → Mind Steward calls AI Model Selector
@@ -63,7 +65,7 @@ Before on-arrival processing is enabled, implement and test:
 3. throttling — limit local AI jobs to a safe concurrency;
 4. retry policy — retry transient failures and stop after a bounded number of attempts;
 5. large-file handling — defer or batch large captures instead of blocking the machine;
-6. failure routing — preserve failures in `capture/failed/` or another documented surface;
+6. failure routing — preserve failures in canonical `inbox/failed/` or another documented surface;
 7. logging — write outcome summaries to `wiki/log.md` or a documented log surface;
 8. no root writes — all outputs use documented destinations;
 9. no Kanban overwrite — task suggestions remain suggestions until lossless task sync exists.
@@ -119,7 +121,7 @@ Disallowed outputs:
 
 Before enabling on-arrival processing:
 
-1. create a small test capture in `capture/inbox/`;
+1. create a small test capture in `inbox/new/`;
 2. confirm the watcher/scheduler detects it once;
 3. confirm the file is stable before processing starts;
 4. confirm Brain Core or scheduler starts the Mind Steward job;

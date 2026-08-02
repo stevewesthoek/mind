@@ -2,9 +2,10 @@
 
 This document records the current Mind graph reality and the safe boundary for future visual graph work.
 
-## Current generated graph
+## Historical compatibility graph surface
 
-Graphify output currently lives in `.graphify-out/`.
+The former Mind graph artifacts are retained only as compatibility/historical
+references. They do not prove a current Graphify run.
 
 Confirmed artifacts:
 
@@ -21,15 +22,18 @@ The current graph report states:
 - built from commit: `79796272`
 - refresh command noted by the report: `graphify update .`
 
-## Current visual status
+## Current operational status
 
-A clickable visual graph artifact is now available at:
+Current Graphify execution and profile state is owned by Brain's live-status
+runbook. A current visual graph run is not claimed by Mind.
 
 ```text
 graphify-out/graph.html
 ```
 
-`GRAPH_REPORT.md` remains the navigational/reporting surface. `graph.html` is the generated visual graph renderer.
+Any compatibility artifact remains a generated, non-authoritative projection.
+`GRAPH_REPORT.md` is a human-facing navigation/evidence surface only, and its
+freshness requires the Brain receipt timestamp plus source hashes.
 
 ## Desired future behavior
 
@@ -46,21 +50,21 @@ Mind should support both:
 
 A future visual graph should be generated from the existing graph data, not hand-maintained.
 
-Recommended future artifact:
+Canonical future operational output root:
 
 ```text
-graphify-out/graph.html
+runtime/local/graphify/
 ```
 
 Recommended root behavior:
 
-- root graph overview links to `.graphify-out/GRAPH_REPORT.md`
-- root graph overview links to `.graphify-out/graph.html` once it exists
+- compatibility-root reports may be linked only as generated evidence;
+- a future contained runner may publish visual artifacts under `runtime/local/graphify/`;
 - generated graph files remain generated outputs, not source-of-truth notes
 
 ## Safety rules
 
 - Do not manually edit generated graph data as the source of truth.
 - Do not move or rename `.graphify-out/` without checking Graphify refresh commands and any Brain/Obsidian references.
-- Do not assume graph visualization exists until a generated visual artifact is present and documented.
+- Do not assume graph visualization exists until a generated visual artifact is present, documented, and bound to a Brain receipt with source hashes.
 - Refreshes should be repeatable and should not require writing captures or reports to the repository root.

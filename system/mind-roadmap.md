@@ -2,8 +2,10 @@
 
 **Status:** canonical cross-repo priority order
 **Version:** 2.0
-**Last reviewed:** 2026-07-10
+**Last reviewed:** 2026-07-31
+**Owner role:** Steve Westhoek (human authority)
 **Depends on:** `system/infinite-brain-philosophy.md`, `system/mind-strategy.md`
+**Conflict rule:** when this roadmap conflicts with philosophy or strategy, those take precedence. Brain's runtime roadmap is an implementation projection and must not reorder these priorities.
 
 ## Roadmap purpose
 
@@ -25,23 +27,47 @@ Later priorities may be researched early but must not be activated before their 
 
 ## Current baseline
 
-Confirmed on 2026-07-10:
+Confirmed on 2026-07-31:
 
-- the two-repo split remains correct;
-- `inbox/new/` is the active success intake;
-- `inbox/failed/` is the target failure surface;
-- Mind's target human-first folder model exists;
-- Brain Core type-checks;
-- the separate `projects/mind-steward` package does not type-check;
-- active Brain instructions and some Mind Steward code still contain retired paths;
-- a bounded single-file metadata write path exists;
-- broad proposal application and continuous execution are not active;
+- the two-repo split remains correct: Mind owns meaning and human authority; Brain owns runtime and machine-operational truth;
+- `inbox/new/` and `inbox/failed/` are the verified live Save-to-Mind success and failure targets;
+- Mind's human-first folder model exists, and `kanban.md` is the sole human task authority;
+- Brain final verification passed its Brain-local Core, Console, Mind Steward, capability, contract, scheduler, retrieval, documentation, recovery, and synthetic-fixture checks;
+- Brain Context Pack 1.0 and Context Gateway are implemented per Brain's live-status authority; thin adapters remain fixture-only until separately activated;
+- active legacy-path producer migration remains Brain BS0.10 work, but its Mind M1.4 authority prerequisite is now satisfied;
+- the Mind M5.1–M5.3 synthetic exact-scope write proof passes;
+- broad proposal application, production write activation, and continuous execution are not authorized;
 - meaningful time savings remain unproven;
-- current Graphify reports are stale and their scopes include low-signal/generated code.
+- current machine capability state (including Codebase Memory, Graphify, and scheduler) is owned by Brain's live-status runbook at `/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md`.
+
+## Pre-1.0 Architecture Stabilization Coordination
+
+Brain's **BS0.1 — Inventory and contain mutable Brain Core capabilities** is
+the current highest-priority system stabilization lane. The Brain
+Pre-1.0 Architecture Stabilization Program is tracked under `BS0.1`–`BS0.23`;
+Mind must reference that program without duplicating Brain runtime work.
+
+- Mind work continues only where it is independent of Brain runtime migration.
+- M1.3 is complete: active path instructions use verified canonical routes, while historical evidence remains explicitly classified.
+- M1.4 is complete: `kanban.md` remains sole human task authority and `tasks.md` is retired and non-authoritative.
+- These decisions satisfy the Mind prerequisites for Brain BS0.10 and BS0.19; the Brain tasks still require Brain-local execution and validation.
+- M1.5 is complete (2026-07-31): authority headers added to all six canonical files after the MS0.10 gate passed.
+- Mind must not duplicate Brain runtime state, deployment status, scheduler
+  truth, schema state, or capability verification.
+- Repository configuration, deployed state, observed state, and verified state
+  remain distinct.
+- Compatibility paths remain non-authoritative unless explicitly documented as
+  compatibility-authoritative exceptions.
+
+Mind-owned coordination tasks use the separate `MS0.1`–`MS0.10` namespace in
+the implementation plan. They authorize documentation, policy, evidence, and
+coordination work only; they do not authorize Brain edits, deployment,
+automation changes, or external writes.
 
 ## Priority 1 — Canonical coherence and migration closure
 
-**Status:** in progress
+**Status:** in progress; M1.1–M1.5 complete, with remaining package retirement and full exit-gate work still open
+**Evidence:** `system/reports/m1-3-m1-4-closure-2026-07-31.md`, `system/reports/documentation-consistency-2026-07-31.md`
 **Goal:** every active document, config, script, test, and runtime contract uses the same current Mind paths and authority rules.
 
 Outcomes:
@@ -62,7 +88,8 @@ No active old-path reference remains unless explicitly marked historical or comp
 
 ## Priority 2 — Vendor-neutral Context Gateway
 
-**Status:** planned
+**Status:** in progress; M2.1–M2.3 complete, M2.4 blocked on Gateway adapter activation
+**Evidence:** `system/reports/m2-context-policy-fixtures-2026-07-31.md`
 **Depends on:** Priority 1
 **Goal:** any authorized LLM can retrieve a small, cited, privacy-scoped orientation pack through one core interface.
 
@@ -84,7 +111,8 @@ The same query and scope return equivalent source selections through CLI and eve
 
 ## Priority 3 — Retrieval evaluation and ground truth
 
-**Status:** planned
+**Status:** complete; M3.1–M3.4 complete; exit gate satisfied — baseline corpus exists for before/after comparison of any future retrieval change
+**Evidence:** `system/reports/m3-1-question-corpus-2026-07-31.md`, `system/reports/m3-2-source-expectations-2026-07-31.md`, `system/reports/m3-3-adversarial-context-cases-2026-08-01.md`, `system/evals/manual-baseline-2026-07.md`
 **Depends on:** Priority 2 core output contract
 **Goal:** measure whether Brain understands Steve accurately before expanding semantic automation.
 
@@ -106,7 +134,8 @@ Retrieval changes cannot ship without before/after results on the same corpus.
 
 ## Priority 4 — Capability truth and observability
 
-**Status:** partially implemented
+**Status:** complete
+**Evidence:** `system/reports/m4-1-capability-truth-audit-2026-08-01.md`, `system/reports/m4-2-system-status-link-verification-2026-08-01.md`
 **Depends on:** Priority 1
 **Goal:** distinguish plans from tested and active capability using machine-verifiable evidence.
 
@@ -125,9 +154,12 @@ Exit gate:
 Every active capability has an owner, evidence command, safety mode, and last-verified timestamp.
 ```
 
+Exit gate satisfied: Brain's generated capability table includes Owner, Safety, Evidence Command, and Last Verified columns. Mind documents carry no duplicate runtime-status claims; all machine-capability questions redirect to Brain's canonical live-status runbook.
+
 ## Priority 5 — Controlled proposal application
 
-**Status:** narrow proof implemented; general path planned
+**Status:** complete
+**Evidence:** `system/reports/m5-controlled-write-pilot-verification-2026-07-31.md` (Mind M5.1–M5.3), `/Users/Office/Repos/stevewesthoek/brain/operations/reports/b5-4-controlled-write-pilot-2026-07-31.md` (Brain B5.4), `system/reports/priority-5-controlled-application-reconciliation-2026-08-01.md`
 **Depends on:** Priorities 1, 3, and 4
 **Goal:** apply small approved Mind changes safely without granting broad autonomy.
 
@@ -147,9 +179,12 @@ Exit gate:
 Repeated write → verify → rollback → verify tests pass on approved fixtures and fail closed elsewhere.
 ```
 
+Exit gate satisfied: Brain B5.4 (2026-07-31) ran three identical repeatability runs of write → verify → rollback → verify on the synthetic fixture; all rejection gates passed; repository mutation was false. Pilot is synthetic and fixture-only; no production writes, batch writes, or broader proposal types are authorized.
+
 ## Priority 6 — Measured automation pilots
 
-**Status:** planned
+**Status:** in progress; M6.1 complete
+**Evidence:** `system/automation-pilot.md`
 **Depends on:** Priorities 3–5
 **Goal:** prove that automation saves time or prevents errors before enabling continuous operation.
 

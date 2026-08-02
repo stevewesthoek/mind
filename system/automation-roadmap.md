@@ -9,22 +9,17 @@ It does not lead Mind strategy. The canonical roadmap is `system/mind-roadmap.md
 
 The cleanup, contract, graph, and report-only Mind Steward preflight foundation is complete. The remaining work should be implemented in small phases with report-only mode first, then approved writes, then automation.
 
-## Current completed foundation
+## Current foundation
 
-Implemented:
+Mind-owned policy boundaries established:
 
 - clear folder/root/capture contracts;
 - `kanban.md` protected as current task source of truth;
-- Graphify visual graph renderer;
-- graph refresh wrapper: `tools/update-graph.sh`;
-- Brain-side inbox inspection preflight;
-- Brain-side classifier dry-run;
-- Brain-side queue dry-run;
-- Brain Core status endpoint: `GET /scheduler/mind-steward/status`;
-- Brain Console read-only visibility;
 - operator runbook for safe preflights.
 
-Not implemented:
+Brain-owned capability implementation status (including scheduler, queue, classifier, watcher, Graphify, and Console) is authoritative only in Brain's live-status runbook at `/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md`.
+
+Not authorized:
 
 - automatic Mind writes;
 - automatic capture moves;
@@ -38,7 +33,7 @@ Not implemented:
 
 Goal:
 
-Create durable queue state for `capture/inbox/` candidates.
+Create durable queue state for canonical `inbox/new/` candidates.
 
 Output:
 
@@ -60,31 +55,31 @@ Output examples:
 - proposed summary;
 - proposed tags;
 - proposed destination;
-- proposed wiki/source/task action;
+- proposed knowledge/resource/task action;
 - confidence and review reason.
 
 Boundary:
 
-Suggestions only. No direct writes to `wiki/`, `sources/`, `tasks/`, or `kanban.md`.
+Suggestions only. No direct writes to `knowledge/`, `resources/`, `projects/`, `organizations/`, or `kanban.md`.
 
-## Phase C — Approved wiki writes
+## Phase C — Approved knowledge writes
 
 Goal:
 
-Allow reviewed suggestions to write durable wiki notes.
+Allow reviewed suggestions to write durable knowledge notes.
 
 Boundary:
 
 - human approval first;
 - preserve source references;
-- write only to documented wiki paths;
+- write only to documented `knowledge/` or canonical domain-authority paths;
 - no root writes.
 
-## Phase D — Approved source routing
+## Phase D — Approved resource routing
 
 Goal:
 
-Move or copy source material from intake to documented `sources/` destinations after approval.
+Move or copy source material from intake to documented `resources/` or `faith/resources/` destinations after approval.
 
 Boundary:
 
@@ -110,13 +105,13 @@ Goal:
 
 Keep the graph data and visual graph fresh.
 
-Current implementation:
+Historical compatibility tooling:
 
 ```bash
 bash tools/update-graph.sh
 ```
 
-This refreshes:
+The legacy wrapper historically refreshed:
 
 - `.graphify-out/GRAPH_REPORT.md`;
 - `.graphify-out/graph.json`;
@@ -124,11 +119,9 @@ This refreshes:
 - `system/reports/graph-refresh-latest.json`;
 - `system/reports/graph-refresh-latest.md`.
 
-Next step:
+Current status:
 
-Run this manually or through a scheduled Brain-side report-only job before any continuous automation is enabled.
-
-Status: implementation tool added; scheduling not enabled.
+Graphify execution status is owned by Brain's live-status runbook. Do not invoke the legacy wrapper or infer current execution from compatibility output. A future contained runner must publish under `runtime/local/graphify/` with receipt and source-hash freshness evidence.
 
 ## Phase G — Scheduled/on-demand runner
 

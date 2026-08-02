@@ -2,7 +2,10 @@
 
 **Status:** canonical philosophy
 **Version:** 2.0
-**Last reviewed:** 2026-07-10
+**Last reviewed:** 2026-07-31
+**Owner role:** Steve Westhoek (human authority)
+**Depends on:** none (root document)
+**Conflict rule:** when another canonical document conflicts with this philosophy, this document takes precedence unless a newer explicit human decision supersedes a specific principle.
 **Purpose:** define the human and knowledge principles that govern Mind, Brain, and their bridge.
 
 ## Core idea
@@ -140,7 +143,7 @@ Current Mind destinations are:
 - `projects/`, `organizations/`, `repos/`, `people/`, `faith/`, and `knowledge/` for reviewed orientation;
 - `resources/` for source material;
 - `history/` for completed, superseded, and historical material;
-- `tasks.md` for the target human task surface, with `kanban.md` retained only while task migration remains incomplete.
+- `kanban.md` as the sole current human task authority; `tasks.md` is a retired, non-authoritative compatibility snapshot unless a future lossless and explicitly approved migration supersedes this decision.
 
 ## Self-maintaining and self-healing
 
@@ -187,3 +190,110 @@ system/infinite-brain-philosophy.md
 → system/mind-implementation-plan.md
 → Brain implementation and live status
 ```
+
+## Founder-confirmed long-term intent — 2026-07-16
+
+The Infinite Brain philosophy is also the long-term philosophy expressed commercially through **ProChat Memory**.
+
+```text
+Infinite Brain = the governing philosophy and architecture
+Mind = the human-owned meaning, identity, strategy, evidence, and history layer
+Brain = the machine-owned capability, retrieval, automation, enforcement, and runtime layer
+ProChat Memory = the customer-facing product expression of this philosophy
+ProChat public platform = the marketing and product-communication expression
+```
+
+These are related but not interchangeable. Mind and Brain remain separate because human meaning must not be collapsed into machine runtime state. ProChat Memory may productize the pattern, but it does not replace the authority boundaries between the repositories.
+
+### Long-term purpose
+
+ProChat Memory should give people and organizations durable, user-owned digital memory that becomes an increasingly capable extension of themselves while remaining independent of any particular model or interface.
+
+The durable asset is memory, not the LLM.
+
+The system should accept varied forms of human input, help structure them into usable knowledge, preserve reviewed conclusions, learn from continued work, identify patterns across time and domains, and make the smallest relevant context available when useful.
+
+### Human agency
+
+```text
+ProChat Memory may produce observations, patterns, conclusions, warnings, and recommendations.
+Humans make foundational decisions.
+```
+
+AI may be proactive, but it must not silently redefine identity, philosophy, faith, business strategy, values, or long-term direction. Autonomy must remain proportional to risk, reversibility, and impact.
+
+### Faithful representation
+
+Faithful representation precedes useful assistance.
+
+ProChat Memory should model the user or organization as accurately as evidence allows. It must not impose a replacement identity or treat its own inferences as authority. Misidentification is a critical failure because it corrupts every later recommendation.
+
+The system must distinguish:
+
+- remembered fact;
+- source evidence;
+- inferred pattern;
+- confidence level;
+- human-approved conclusion;
+- current identity and intent;
+- historical or superseded identity and intent.
+
+### Change and historical memory
+
+The user controls correction, deletion, revision, supersession, and forgetting.
+
+Historical information may remain useful without remaining current truth. The system should preserve history where appropriate while continuously reassessing freshness, relevance, applicability, and authority.
+
+```text
+Preserve history without imprisoning the person inside it.
+```
+
+Current human intent and current evidence outrank historical patterns.
+
+### Compounding recognition
+
+The long-term quality bar is not static utility. It is compounding recognition, relevance, and insight.
+
+Continued use should help the system understand recurring preferences, reasoning, decisions, mistakes, opportunities, and relationships across domains. It should help users recognize patterns they could not easily see alone and reduce repeated mistakes or repeated investigations.
+
+This aspiration creates obligations. Deep personalization must remain inspectable, correctable, portable, contestable, and user-governed. Value may become indispensable through usefulness, but the product must not manufacture dependency through lock-in, manipulation, fear, or reduced human capability.
+
+### Trust
+
+Trust is the product prerequisite.
+
+When trust conflicts with growth, engagement, automation, convenience, revenue, data collection, speed, or feature richness, trust wins.
+
+Trust is earned through:
+
+- reliability;
+- robustness;
+- punctuality;
+- provenance;
+- inspectability;
+- correction and reversibility;
+- contextual timing;
+- appropriate tone and information quantity;
+- transparent confidence and uncertainty;
+- user ownership and portability.
+
+If the memory cannot be trusted, the product has no legitimate use case.
+
+### Natural assistance
+
+The intended experience is not a robotic system displaying all available information. It is an assistant that presents the right evidence, insight, warning, or recommendation at the right time, in the right context, and with the right confidence.
+
+Naturalness should emerge from relevance, timing, restraint, and holistic pattern recognition—not from pretending that the system is human or hiding uncertainty.
+
+### Strategic horizon and current scope
+
+This section defines long-term philosophy. It does not automatically expand the current product scope, market promise, or public claims.
+
+The current ProChat product strategy, product hierarchy, QA entry point, business stage, and public language remain controlled by:
+
+```text
+organizations/prochat/README.md
+wiki/organisations/prochat/brand/
+```
+
+Any change to current positioning or product scope requires separate review and approval in those canonical Mind authorities.

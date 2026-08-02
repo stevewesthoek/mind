@@ -32,10 +32,10 @@ system/reports/maintenance-latest.md
 It may not modify:
 
 ```text
-router/00-current-context.md
-live/projects/prochat-qa-memory/STRATEGY-PLAN.md
-wiki/organisations/prochat/brand/prochat-os-strategy.md
-live/dashboard.md
+system/agent-context/00-current-context.md
+projects/prochat-qa-memory/STRATEGY-PLAN.md
+wiki/organisations/prochat/brand/product-strategy.md
+home.md
 system/automation-roadmap.md
 kanban.md
 capture/
@@ -49,10 +49,10 @@ No capture move, task update, archive action, strategy rewrite, or freshness-sta
 Inspect only these five paths:
 
 ```text
-router/00-current-context.md
-live/projects/prochat-qa-memory/STRATEGY-PLAN.md
-wiki/organisations/prochat/brand/prochat-os-strategy.md
-live/dashboard.md
+system/agent-context/00-current-context.md
+projects/prochat-qa-memory/STRATEGY-PLAN.md
+wiki/organisations/prochat/brand/product-strategy.md
+home.md
 system/automation-roadmap.md
 ```
 
@@ -60,10 +60,10 @@ Why these pages were selected:
 
 | Path | Purpose in pilot |
 |---|---|
-| `router/00-current-context.md` | high-risk current context with explicit freshness metadata |
-| `live/projects/prochat-qa-memory/STRATEGY-PLAN.md` | developing project strategy marked as draft |
-| `wiki/organisations/prochat/brand/prochat-os-strategy.md` | canonical current business strategy |
-| `live/dashboard.md` | active human navigation and current-state surface |
+| `system/agent-context/00-current-context.md` | high-risk current context with explicit freshness metadata |
+| `projects/prochat-qa-memory/STRATEGY-PLAN.md` | developing project strategy marked as draft |
+| `wiki/organisations/prochat/brand/product-strategy.md` | canonical company/product strategy within its declared scope |
+| `home.md` | human navigation and orientation surface; not runtime status |
 | `system/automation-roadmap.md` | technical roadmap subordinate to the human-first strategy |
 
 Do not expand the dataset during the first run.
@@ -129,7 +129,7 @@ If any preflight fails, stop and produce no report.
 Path:
 
 ```text
-router/00-current-context.md
+system/agent-context/00-current-context.md
 ```
 
 Inspect:
@@ -151,7 +151,7 @@ Expected behavior:
 Path:
 
 ```text
-live/projects/prochat-qa-memory/STRATEGY-PLAN.md
+projects/prochat-qa-memory/STRATEGY-PLAN.md
 ```
 
 Inspect:
@@ -167,12 +167,12 @@ Expected behavior:
 - draft status should not be reported as an error;
 - a source-gap finding should only appear for a specific high-impact claim lacking provenance, not for the entire strategy merely because it is strategic.
 
-### ProChat OS strategy
+### Company/product strategy (scoped)
 
 Path:
 
 ```text
-wiki/organisations/prochat/brand/prochat-os-strategy.md
+wiki/organisations/prochat/brand/product-strategy.md
 ```
 
 Inspect:
@@ -181,32 +181,32 @@ Inspect:
 - last reviewed date;
 - review-after date;
 - source or decision references for high-impact claims;
-- whether its flagship role conflicts with the QA Memory draft.
+- whether its declared company/product scope is being extended beyond that scope.
 
 Expected behavior:
 
 - a future review date should not create a stale finding;
-- niche-product strategy should not automatically be treated as a contradiction;
+- a scoped product strategy should not automatically be generalized into another product's authority;
 - source-gap findings must identify an exact claim and explain why provenance matters.
 
-### Live dashboard
+### Mind navigation
 
 Path:
 
 ```text
-live/dashboard.md
+home.md
 ```
 
 Inspect:
 
-- whether links and navigation still represent active surfaces;
-- whether completed or deprecated system surfaces remain presented as primary;
-- whether the page explicitly marks itself as fallback or primary.
+- whether links and navigation still represent active Mind surfaces;
+- whether completed or deprecated Mind surfaces remain presented as primary;
+- whether the page defers runtime status to Brain rather than claiming it.
 
 Expected behavior:
 
 - no completed-but-active finding without direct completion or supersession evidence;
-- technical wording alone is not a maintenance defect;
+- technical wording alone is not a maintenance defect or a runtime claim;
 - ambiguous navigation concerns should be suppressed below the confidence threshold.
 
 ### Automation roadmap
@@ -288,8 +288,8 @@ The pilot should not be designed to force a certain number of findings.
 
 A plausible first result is:
 
-- one stale-page candidate for `router/00-current-context.md` if its review date remains passed;
-- zero stale findings for the two strategy pages while their review dates remain in the future;
+- one stale-page candidate for `system/agent-context/00-current-context.md` if its review date remains passed;
+- zero stale findings for the scoped strategy page while its review date remains in the future;
 - zero completed-but-active findings unless direct completion evidence is found;
 - zero or a small number of source-gap candidates tied to exact high-impact claims;
 - no duplicate, contradiction, or capture-promotion findings because those detectors are disabled.
@@ -303,10 +303,10 @@ id: finding-stale-page-current-context-001
 type: stale-page
 status: open
 paths:
-  - router/00-current-context.md
+  - system/agent-context/00-current-context.md
 trigger: review_after date has passed
 matched_evidence:
-  - path: router/00-current-context.md
+  - path: system/agent-context/00-current-context.md
     location: status block
     summary: The page is marked review-needed and its review date is earlier than the report date.
 comparison_evidence: []

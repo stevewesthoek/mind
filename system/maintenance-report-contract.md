@@ -101,12 +101,12 @@ Each finding must use this shape:
   "sourceRepo": "mind",
   "scope": "system",
   "paths": [
-    "router/00-current-context.md"
+    "system/agent-context/00-current-context.md"
   ],
   "trigger": "review_after date has passed",
   "matched_evidence": [
     {
-      "path": "router/00-current-context.md",
+      "path": "system/agent-context/00-current-context.md",
       "location": "status block",
       "summary": "review_after is earlier than the report date"
     }
@@ -117,7 +117,7 @@ Each finding must use this shape:
   "recommended_action": "Review the page and either confirm current or update the affected sections.",
   "requires_approval": true,
   "noWritePerformed": true,
-  "deduplicationKey": "stale-page:router/00-current-context.md:review_after",
+  "deduplicationKey": "stale-page:system/agent-context/00-current-context.md:review_after",
   "suppressionUntil": null,
   "review": null
 }
@@ -613,10 +613,10 @@ Reasoning:
 Use a small bounded pilot set before any repo-wide scan:
 
 ```text
-router/00-current-context.md
-live/projects/prochat-qa-memory/STRATEGY-PLAN.md
-wiki/organisations/prochat/brand/prochat-os-strategy.md
-live/dashboard.md
+system/agent-context/00-current-context.md
+projects/prochat-qa-memory/STRATEGY-PLAN.md
+wiki/organisations/prochat/brand/product-strategy.md
+home.md
 system/automation-roadmap.md
 ```
 
@@ -624,8 +624,8 @@ The pilot should deliberately include:
 
 - one stale/review-needed page;
 - one draft project strategy;
-- one current canonical strategy;
-- one active dashboard;
+- one current canonical company/product strategy within its declared scope;
+- one human navigation and orientation surface;
 - one technical roadmap.
 
 Do not use the full Mind vault for the first implementation test.

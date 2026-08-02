@@ -1,12 +1,25 @@
 # Task and Kanban Contract
 
+**Status:** canonical task-authority contract
+**Version:** 1.0
+**Last reviewed:** 2026-07-31
+**Owner role:** Steve Westhoek (human task authority)
+**Depends on:** `system/mind-strategy.md`, `system/folder-contract.md`
+**Conflict rule:** when this contract conflicts with strategy or philosophy, those take precedence. When Brain runtime or automation attempts to change task authority, this contract takes precedence unless a lossless, reversible migration is separately validated and explicitly approved.
+
 This document describes the current Mind task/Kanban reality and the safe migration boundary.
 
 ## Current source of truth
 
-`kanban.md` is the current daily task board and source of truth.
+**Decision (2026-07-31): retain current authority.**
+
+`kanban.md` is the sole current human task authority and active daily board. Lossless task synchronization has not been validated, so Mind M1.4 explicitly retains this authority instead of migrating task content.
 
 It uses the Obsidian Kanban plugin format and currently contains the active board columns and cards.
+
+## Retired compatibility snapshot
+
+`tasks.md` is a retired, read-only, non-authoritative compatibility snapshot. It must not receive human or automated task writes, must not be synchronized into `kanban.md`, and must not be used to determine current task state.
 
 ## Summary surface
 

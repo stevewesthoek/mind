@@ -41,7 +41,7 @@ These documents lead the contracts and technical sub-roadmaps below.
 
 ## Runbooks
 
-- `runbooks/mind-steward-preflight-runbook.md` — safe operator sequence for the current report-only Mind Steward preflights.
+- `runbooks/mind-steward-preflight-runbook.md` — safe operator sequence for Mind Steward preflights; consult Brain's live-status runbook for current runtime mode.
 
 ## Reports
 

@@ -1,9 +1,11 @@
 # Mind Strategy
 
 **Status:** canonical strategy
-**Version:** 2.0
-**Last reviewed:** 2026-07-10
+**Version:** 2.1
+**Last reviewed:** 2026-07-31
+**Owner role:** Steve Westhoek (human authority)
 **Depends on:** `system/infinite-brain-philosophy.md`
+**Conflict rule:** when this strategy conflicts with the philosophy, philosophy takes precedence. When lower documents conflict with this strategy, this strategy takes precedence unless a newer explicit human decision supersedes a specific choice.
 
 ## Strategic objective
 
@@ -44,7 +46,7 @@ The target structure is authoritative:
 
 ```text
 home.md
-tasks.md
+kanban.md
 inbox/
 organizations/
 projects/
@@ -57,7 +59,7 @@ history/
 system/
 ```
 
-`kanban.md` and remaining legacy folders are compatibility surfaces only where the current folder contract explicitly says so. New documentation and code plans must use target paths.
+`kanban.md` is the sole current human task authority. `tasks.md` is a retired, non-authoritative compatibility snapshot. Remaining legacy folders are compatibility surfaces only where the current folder contract explicitly says so. New documentation and code plans must use target paths.
 
 ## Information classes
 
@@ -70,7 +72,7 @@ Mind distinguishes these classes:
 | Proposal | AI-generated classification, summary, relation, or change suggestion | `inbox/processed/` |
 | Failed item | Processing failure or blocked item | `inbox/failed/` |
 | Approved orientation | Reviewed current context or durable understanding | domain folder |
-| Commitment | Human-approved decision, task, priority, or project state | `tasks.md`, `projects/`, `organizations/`, or `knowledge/` |
+| Commitment | Human-approved decision, task, priority, or project state | `kanban.md`, `projects/`, `organizations/`, or `knowledge/` |
 | History | Completed, superseded, or inactive material | `history/` |
 
 AI output remains a proposal until its authority is explicitly changed.
@@ -110,7 +112,7 @@ Steve should not need to understand schemas, graphs, model routing, or automatio
 
 ## AI retrieval
 
-Until the Context Gateway exists, agents use:
+Brain's Context Gateway activation status is owned by Brain's live-status runbook. The current default retrieval path for Mind agents is the manual targeted-read fallback:
 
 ```text
 system/agent-context/AGENTS.md
@@ -120,7 +122,7 @@ system/agent-context/AGENTS.md
 → targeted search and reads
 ```
 
-The target interface is one Brain-owned Context Gateway. It should return cited context packs with authority, freshness, conflicts, exclusions, and a token budget. Agent-specific instructions point to the gateway; they do not reimplement retrieval.
+The target interface is one Brain-owned Context Gateway returning cited context packs with authority, freshness, conflicts, exclusions, and a token budget. Agent-specific instructions point to the gateway once activated; they do not reimplement retrieval.
 
 ## Capture and disposition
 

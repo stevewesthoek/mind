@@ -24,7 +24,7 @@ The target structure should be human-first:
 
 ```text
 home.md
-tasks.md
+kanban.md
 inbox/
 organizations/
 projects/
@@ -57,18 +57,18 @@ This is a migration plan only. It does not authorize moving files, deleting old 
 | `resources/` | Non-faith reference material: books, articles, transcripts, documents, meetings, datasets, and external material used as evidence. |
 | `history/` | Completed, superseded, old, inactive, or historical material that remains useful but is not current. |
 | `system/` | How Mind works: philosophy, strategy, roadmap, implementation plan, contracts, templates, reports, router/agent context, generated outputs, and migration notes. |
-| `tasks.md` | Human task source of truth, replacing `kanban.md` once migration is approved and validated. |
+| `kanban.md` | Sole current human task authority. `tasks.md` is a retired, non-authoritative compatibility snapshot. |
 
 ## Old-to-new mapping
 
 | Current path | Target path | Notes |
 |--------------|-------------|-------|
-| `capture/inbox/` | `inbox/new/` | Save-to-Mind and intake queue must write here after migration. |
-| `capture/failed/` | `inbox/failed/` | Failure routing must be updated in Brain. |
+| `capture/inbox/` | `inbox/new/` | Retired historical path; Brain B1.0a verified the live success route to `inbox/new/` on 2026-07-22. |
+| `capture/failed/` | `inbox/failed/` | Retired historical path; Brain B1.0a verified the live failure route to `inbox/failed/` on 2026-07-22. |
 | `capture/` grouped source material | `inbox/raw/` or `resources/` | Raw original intake artifacts go to `inbox/raw/`; durable reference material goes to `resources/` or `faith/resources/`. |
 | `live/projects/` | `projects/` | Active project state becomes human-obvious. |
 | `live/decisions.md` | `projects/decisions.md` or `knowledge/decisions.md` | Decide per decision type during migration. |
-| `live/tasks.md` | `tasks.md` or `inbox/processed/` | Human task board remains `tasks.md`; generated summaries go under `inbox/processed/` or `system/reports/`. |
+| `live/tasks.md` | `kanban.md` or `inbox/processed/` | Human task changes belong only in authoritative `kanban.md`; generated summaries go under `inbox/processed/` or `system/reports/`. |
 | `wiki/organisations/` | `organizations/` | Use US spelling `organizations/` for consistency with tooling and common folder names. |
 | `wiki/areas/` | `knowledge/` or `faith/` | Faith areas move to `faith/`; other durable areas move to `knowledge/`. |
 | `wiki/log.md` | `inbox/processed/proposals.md` or `system/reports/proposals.md` | Capture/project proposals should be user-visible in inbox; system maintenance reports stay in `system/reports/`. |
@@ -78,7 +78,7 @@ This is a migration plan only. It does not authorize moving files, deleting old 
 | `sources/research/apologetics/` | `faith/apologetics/` or `faith/resources/` | Same distinction. |
 | `sources/` non-faith evidence | `resources/` | Preserve provenance; do not confuse sources with conclusions. |
 | `archive/` | `history/` | Historical, completed, superseded, and inactive material. |
-| `kanban.md` | `tasks.md` | Requires task-contract, automation, and Obsidian link migration. |
+| `tasks.md` | `kanban.md` | `tasks.md` is retired and non-authoritative; no task-content migration is authorized. |
 | `router/` | `system/agent-context/` | Requires AI startup/IDE/Brain contract migration. |
 | `graphify-out/` | `system/generated/graph/` | Requires Graphify config and generated-output contract migration. |
 
@@ -307,7 +307,7 @@ Notes:
 
 - Update Brain to understand both old and new paths where necessary.
 - Make Save-to-Mind write to the new `inbox/new/` only after readers support it.
-- Define temporary compatibility behavior for old `capture/inbox/` during cutover.
+- Save-to-Mind intake cutover completed: `inbox/new/` and `inbox/failed/` are verified live; legacy capture paths are historical-only.
 - Avoid symlinks unless explicitly approved; they can confuse mobile, Git, Obsidian, and cross-platform tooling.
 
 ### Phase 3 — Mind documentation and contracts
@@ -355,7 +355,7 @@ Required evidence before declaring migration complete:
 - approval/write gates accept new durable prefixes and reject unsafe paths;
 - Graphify or graph output behavior is validated or explicitly deferred;
 - Obsidian links for migrated files are checked;
-- `tasks.md` replaces `kanban.md` only after task-contract validation;
+- `kanban.md` remains the sole task authority; any future replacement requires separate lossless, reversible validation and explicit approval;
 - no automatic durable writes, deletions, or archives occur during validation.
 
 ### Phase 8 — cleanup and deprecation

@@ -96,8 +96,8 @@ After running preflights, verify:
 - Brain Console shows report status;
 - `writesToMind` remains `false`;
 - `executableActions` remains `false` unless explicitly changed by a future approved phase;
-- no files were moved out of `mind/capture/inbox/`;
-- no files were deleted from `mind/capture/inbox/`;
+- no files were moved out of `mind/inbox/new/`;
+- no files were deleted from `mind/inbox/new/`;
 - `mind/kanban.md` is unchanged;
 - no generated files appeared in the Mind root.
 

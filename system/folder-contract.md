@@ -2,9 +2,13 @@
 
 This document records the Mind root structure, migration status, and root cleanliness rules.
 
-**Last verified:** 2026-07-09
-**Status:** Success inbox migration complete; single unified system (Batch 8X); all intake sources target inbox/new
-**Documentation compatibility:** Batch 8B documented routing; Batch 8R updated for active inbox/new; Batch 8W migrated legacy content; Batch 8X finalized single system (Obsidian + Brain fallback retired).
+**Status:** `inbox/new/` and `inbox/failed/` are the canonical and verified live Save-to-Mind intake targets.
+**Version:** 2.0
+**Last verified:** 2026-07-31
+**Owner role:** Steve Westhoek (structure authority)
+**Depends on:** `system/mind-strategy.md`, `system/brain-mind-bridge.md`
+**Conflict rule:** when this contract conflicts with strategy or philosophy, those take precedence. When Brain runtime paths conflict with this contract's canonical paths, this contract takes precedence for Mind-side routing unless Brain provides verified evidence of a necessary change.
+**Documentation compatibility:** `capture/inbox/` and `capture/failed/` are historical-only Mind paths and must not be used as active defaults. Brain deployment evidence is authoritative in Brain's live-status runbook.
 
 ## Root purpose
 
@@ -13,8 +17,8 @@ The Mind root is the orientation layer. It should stay small, stable, and human-
 Allowed root files:
 
 - `home.md` — primary user manual and navigation entry point.
-- `tasks.md` — target human task source of truth after task migration.
-- `kanban.md` — legacy task board retained until task migration is validated.
+- `kanban.md` — sole current human task authority and active Obsidian board.
+- `tasks.md` — retired, non-authoritative compatibility snapshot; do not write or synchronize it.
 - `.gitignore` — Git ignore rules.
 - `.graphifyignore` — Graphify exclusion rules.
 - `.DS_Store` — local macOS metadata when present; not meaningful knowledge.
@@ -57,16 +61,16 @@ system/
 
 ## Compatibility period
 
-The target folders now exist with README files, but legacy folders remain active until content, Obsidian links, Save-to-Mind, Brain reports, Graphify, task handling, and validation are migrated.
+The target folders are canonical for new Mind documentation and approved Mind writes. Retained legacy paths are historical or compatibility-only surfaces whose removal remains gated by the status recorded below.
 
 | Legacy path | Target path | Status |
 |-------------|-------------|--------|
-| `capture/inbox/` | `inbox/new/` | **✓ FINALIZED (Batch 8X, 2026-07-09).** All 28 files migrated (Batch 8W): 9 to inbox/new (active), 7+2 to history (archived), 9 to history (quarantined). capture/inbox empty. Brain fallback retired; Obsidian config updated. |
-| `capture/failed/` (3 files) | `inbox/failed/` | Legacy routing persists. Failure handling not yet switched; remains in `capture/failed/` (3 local). Future switch is separate batch. |
+| `capture/inbox/` | `inbox/new/` | **Retired historical path.** Brain B1.0a verified the guarded live success route to `inbox/new/` on 2026-07-22. |
+| `capture/failed/` | `inbox/failed/` | **Retired historical path.** Brain B1.0a verified the guarded live failure route to `inbox/failed/` on 2026-07-22. |
 | `capture/` raw/original material | `inbox/raw/` or `resources/` | Move only after source preservation review. |
 | `live/projects/` | `projects/` | Brain supports both; move project content later in small commits. |
 | `live/decisions.md` | `knowledge/decisions.md` | Decide per decision type during migration. |
-| `live/tasks.md` | `tasks.md` or `inbox/processed/` | Human tasks go to `tasks.md`; generated summaries go to review/report surfaces. |
+| `live/tasks.md` | `kanban.md` or `inbox/processed/` | Human task changes belong only in authoritative `kanban.md`; generated summaries belong in review/report surfaces. |
 | `wiki/organisations/` | `organizations/` | Use `organizations/` after migration. |
 | `wiki/` durable knowledge | `knowledge/` or `faith/` | Faith material goes to `faith/`; other durable knowledge goes to `knowledge/`. |
 | `wiki/log.md` | `inbox/processed/` or `system/reports/` | Proposal/review surfaces move later; current local edits must not be overwritten. |
@@ -77,35 +81,31 @@ The target folders now exist with README files, but legacy folders remain active
 | `sources/research/apologetics/` | completed to `faith/resources/apologetics/` | Approved source material moved in Batch 5E1; distilled apologetics may be promoted later after review. |
 | `wiki/areas/theological-studies/dance-of-life/` | completed to `faith/resources/dance-of-life/` | Source-first move completed in Batch 5I2; no content promoted to `faith/studies/dance-of-life/`. |
 | `archive/` | `history/` | Historical content moves only after validation. |
-| `kanban.md` | `tasks.md` | Switch only after lossless task migration is validated. |
+| `tasks.md` | `kanban.md` | `tasks.md` is retired and non-authoritative. `kanban.md` remains authority unless a future lossless, reversible migration is separately validated and approved. |
 | `router/` | `system/agent-context/` | Batch 1 moved tracked agent-context files to `system/agent-context/`; legacy `router/` references are now compatibility/history only until validation cleanup. |
-| `graphify-out/` and `.graphify-out/` references | `system/generated/graph/` | Generated path is blocked for manual writes; use docs/config migration before generating output. |
+| `graphify-out/` and `.graphify-out/` references | `runtime/local/graphify/` | Future contained operational root; compatibility roots are non-authoritative and blocked for manual writes. |
 
 ## Root write rule
 
-**ACTIVE (2026-07-09 onwards):** Save-to-Mind writes new captures to:
+Canonical Mind success-intake path:
 
 ```text
 inbox/new/
 ```
 
-Historical captures (not moved, for reference):
-
-```text
-capture/inbox/  [legacy, 19 files local, active until 2026-07-09, now historical; remote may differ]
-```
-
-If processing fails, the current/legacy path is:
-
-```text
-capture/failed/  [legacy, 3 files local, not yet migrated to inbox/failed/]
-```
-
-Target path for future failure routing (not yet active):
+Canonical Mind failed-processing target:
 
 ```text
 inbox/failed/
 ```
+
+External Save-to-Mind routing is aligned with these targets (deployment evidence in Brain's live-status runbook):
+
+- successful processing routes to `inbox/new/`;
+- failed processing routes to `inbox/failed/`;
+- `capture/inbox/` and `capture/failed/` are historical-only and must not receive new writes.
+
+Use the canonical intake paths directly. Durable writes beyond intake still require review and exact-path approval.
 
 If material is distilled into durable knowledge, it should be linked or moved into the documented destination while preserving source references when useful. Durable writes still require review and exact-path approval.
 
