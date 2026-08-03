@@ -1,12 +1,12 @@
 # Automation Pilot
 
-**Status:** active; 2 of 8 fully evaluated, 6 remaining
-**Task:** M6.1
+**Status:** complete; 8 of 8 fully evaluated; M6.3 verdict `retain` (2026-08-03)
+**Task:** M6.1–M6.3
 **Version:** 1.0
 **Date selected:** 2026-08-01
 **Human owner:** Steve Westhoek
-**Execution role:** lower-tier model under explicit operator trigger
-**Only one pilot is active at a time.**
+**Execution role:** run-scoped model/provider under explicit operator trigger
+**Only one pilot was active. No second pilot or continuous execution is authorized.**
 
 ## Selected pilot — ProChat development-priority orientation brief
 
@@ -56,7 +56,7 @@ This pilot proves whether a read-only retrieval report for a recurring ProChat w
 
 ### Execution policy (updated 2026-08-03)
 
-Runs 1 and 2 are fully evaluated. Runs 3–8 are authorized for immediate serial execution. No date gate remains.
+All eight runs are fully evaluated. Runs 3–8 executed in the authorized immediate serial batch on 2026-08-03. No date gate remains.
 
 **Execution constraints:**
 - Runs execute one at a time
@@ -65,7 +65,7 @@ Runs 1 and 2 are fully evaluated. Runs 3–8 are authorized for immediate serial
 - No run reuse or duplication
 - All existing safety, authority, and no-mutation gates remain binding
 - Kill conditions and verdict thresholds unchanged
-- Verdict occurs immediately after all 8 runs receive human review
+- Verdict recorded after all 8 runs received human review
 
 **Cadence change rationale:** No documented technical dependency requires calendar spacing. Immediate execution satisfies all safety and authority gates. Evidence limitation from compressed timeline must be disclosed in M6.3 verdict.
 
@@ -201,13 +201,13 @@ The retrieval query is deterministic operator configuration optimized for the ra
 **Required-source gate (initial):** FAIL — original query and budget excluded required source
 **Required-source gate (repaired):** PASS — `wiki/organisations/prochat/brand/product-roadmap.md` selected as the sole source object (1,648 tokens of 2,000)
 
-**Status:** active; 2 of 8 fully evaluated, 6 remaining
+**Status:** complete; 8 of 8 fully evaluated; verdict `retain`
 
 **First counted run:** authorized from 2026-08-01 after the readiness gate passed
 
 **Evidence report:** `system/reports/m6-2-read-only-candidate-preflight-2026-08-01.md`
 
-**All preflights and readiness reruns are non-counting. M6.2 status is not updated.**
+**All preflights and readiness reruns are non-counting.**
 
 ## Counted observations
 
@@ -233,7 +233,7 @@ The retrieval query is deterministic operator configuration optimized for the ra
 
 **Pilot window:** Window 1 (2026-08-01 through 2026-08-07); execution 1 of 2.
 
-**Progress:** 1 of 8 counted runs fully evaluated. M6.2 remains pending.
+**Progress at that point:** 1 of 8 counted runs fully evaluated. Final eight-run result is recorded below.
 
 ### Run 2 — `m6-2-run-002`
 
@@ -254,7 +254,20 @@ The retrieval query is deterministic operator configuration optimized for the ra
 
 **Completion state:** Stage 1 complete (retrieval PASS); Stage 2 complete (orientation brief PASS); Stage 3 complete (human review 2026-08-02). Run 2 counts toward the pilot verdict.
 
-**Progress:** 2 of 8 counted runs fully evaluated. Runs 3–8 authorized for immediate serial execution (cadence change 2026-08-03). Six runs remain.
+**Progress at that point:** 2 of 8 counted runs fully evaluated. Runs 3–8 were subsequently completed in the authorized immediate serial batch.
+
+### Runs 3–8 — official immediate serial batch
+
+| Run | Run date | Retrieval seconds | End-to-end seconds | Useful | Correction minutes | False positives | Missing context | Source count | Source bytes | Citation correct | Safety/scope violation | Record |
+|---|---|---:|---:|---|---:|---:|---:|---:|---:|---|---|---|
+| `m6-2-run-003` | 2026-08-03 | 0.297 | 79.101 | true | 0 | 0 | 0 | 1 | 6627 | true | false | `system/evals/automation-pilot-run-003.md` |
+| `m6-2-run-004` | 2026-08-03 | 0.309 | 37.743 | true | 0 | 0 | 0 | 1 | 6627 | true | false | `system/evals/automation-pilot-run-004.md` |
+| `m6-2-run-005` | 2026-08-03 | 0.346 | 24.523 | true | 0 | 0 | 0 | 1 | 6627 | true | false | `system/evals/automation-pilot-run-005.md` |
+| `m6-2-run-006` | 2026-08-03 | 0.313 | 24.117 | true | 0 | 0 | 0 | 1 | 6627 | true | false | `system/evals/automation-pilot-run-006.md` |
+| `m6-2-run-007` | 2026-08-03 | 0.304 | 25.918 | true | 0 | 0 | 0 | 1 | 6627 | true | false | `system/evals/automation-pilot-run-007.md` |
+| `m6-2-run-008` | 2026-08-03 | 0.307 | 25.426 | true | 0 | 0 | 0 | 1 | 6627 | true | false | `system/evals/automation-pilot-run-008.md` |
+
+All six runs completed Stages 1–3. Steve Westhoek explicitly determined that the byte-identical single-source briefs deserved the shared assessment recorded independently in each run file.
 
 ### Verdict criteria (M6.3)
 
@@ -270,3 +283,25 @@ Record one verdict based on completed runs (timing: immediately after all 8 runs
 | `insufficient-evidence` | Fewer than 8 valid runs completed for reasons other than a kill condition |
 
 Do not expand pilot scope, increase sample size, or add a second pilot until a `retain` or `revise` verdict is recorded and reviewed.
+
+### Recorded verdict — `retain` (2026-08-03)
+
+Observed result:
+
+- 8 of 8 runs useful;
+- 7 correction-time measurements at 0 minutes and 1 unmeasured value; measured median 0 minutes;
+- 0 false positives;
+- 0 missing-context findings;
+- 8 of 8 citations correct;
+- 0 safety or scope violations;
+- no kill condition triggered.
+
+All repository-defined `retain` conditions pass. M6.2 and M6.3 are complete.
+
+The seven measured end-to-end results had a median of 25.918 seconds versus the 5-second manual baseline, so this pilot does not establish time savings. The retained value is correct, consistently cited orientation with zero measured correction burden.
+
+Runs 3–8 were completed in an immediate serial batch on 2026-08-03 rather than across four calendar weeks. This compressed timeline provides valid technical evidence for the recorded Stage 1–3 gates but does not establish multi-week stability or detect latent anomalies that would emerge across real operational use. Production deployment requires separate multi-week operational observation and authorization.
+
+**Verdict evidence:** `system/reports/priority-6-automation-pilot-verdict-2026-08-03.md`
+
+Continuous automation, scheduling, deployment, adapter activation, MCP activation, and a second pilot remain unauthorized.

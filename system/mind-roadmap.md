@@ -186,8 +186,8 @@ Exit gate satisfied: Brain B5.4 (2026-07-31) ran three identical repeatability r
 
 ## Priority 6 — Measured automation pilots
 
-**Status:** in progress; M6.1 complete; M6.2 active; M6.3 pending
-**Evidence:** `system/automation-pilot.md`, `system/reports/m6-2-pilot-cadence-decision-2026-08-03.md`
+**Status:** complete; M6.1–M6.3 complete; exit gate satisfied 2026-08-03; verdict `retain`
+**Evidence:** `system/automation-pilot.md`, `system/reports/m6-2-pilot-cadence-decision-2026-08-03.md`, `system/reports/m6-2-run-evidence-repair-2026-08-03.md`, `system/reports/priority-6-automation-pilot-verdict-2026-08-03.md`
 **Depends on:** Priorities 3–5
 **Goal:** prove that automation saves time or prevents errors before enabling continuous operation.
 
@@ -200,18 +200,21 @@ Outcomes:
 - explicit retain, revise, or retire verdict;
 - no expansion when value remains unproven.
 
-**Current state (M6.2):**
-- Runs 1–2 fully evaluated
-- Runs 3–8 authorized for immediate serial execution (cadence change 2026-08-03)
-- Fixed calendar windows retired; no date gate
-- Verdict will follow immediately after all 8 runs receive Stage 3 review
-- All existing safety, authority, and kill conditions unchanged
+**Closure:**
+- all 8 runs fully evaluated through Stage 3 human review;
+- 8 of 8 useful, 8 of 8 citations correct, 0 safety violations, and 0-minute measured median correction time;
+- no kill condition triggered;
+- measured end-to-end time did not beat the 5-second manual baseline;
+- runs 3–8 used the authorized immediate serial cadence, which proves bounded repeatability but not multi-week stability;
+- operator-triggered report-only use retained; continuous automation remains unauthorized.
 
 Exit gate:
 
 ```text
 Steve records that benefit exceeds maintenance and review cost.
 ```
+
+Exit gate satisfied: Steve Westhoek determined that all eight briefs were useful and the seven measured reviews required zero correction time. The repository-defined M6.3 `retain` thresholds passed. This closure does not authorize scheduling, deployment, adapter activation, MCP activation, continuous operation, or a second pilot.
 
 ## Priority 7 — System simplification and performance
 

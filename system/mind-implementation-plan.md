@@ -355,21 +355,27 @@ external writes.
 
 ### M6.2 — Record human review burden
 
-- **Status:** in progress; runs 1–2 fully evaluated; runs 3–8 authorized for immediate serial execution
+- **Status:** complete (2026-08-03); all 8 runs fully evaluated through human review
 - **Cadence change:** 2026-08-03 — fixed calendar windows retired; immediate bounded completion authorized
 - **Files:** `system/evals/automation-pilot-observations.csv`, `system/evals/automation-pilot-run-NNN.md` (for runs 3–8)
 - **Change:** record run ID, useful/not useful, correction minutes, false-positive count, missing-context count, and notes for each run.
 - **Verify:** missing observations are blank, not zero; every run has independent Stage 1–3 evidence.
 - **Constraints:** runs execute serially; one CLI invocation per run; no concurrent or background execution; all existing safety and kill conditions remain binding.
 - **Stop if:** a Stage 1 safety or authority gate fails; the entire batch stops. If a kill condition occurs, mark pilot `retired`.
+- **Result:** 8 of 8 useful; 7 measured correction times at 0 minutes and 1 unmeasured; 0 false positives; 0 missing-context findings; 8 of 8 citations correct; 0 safety or scope violations.
+- **Evidence:** `system/evals/automation-pilot-observations.csv`, run records 001–008, and `system/reports/m6-2-run-evidence-repair-2026-08-03.md`.
 
 ### M6.3 — Record the verdict
 
+- **Status:** complete (2026-08-03); verdict `retain`.
 - **File:** `system/automation-pilot.md`
 - **Change:** append `retain`, `revise`, or `retire` with evidence and next action.
 - **Required disclosure:** Runs 3–8 were completed in an immediate serial batch (cadence change 2026-08-03). This provides valid technical evidence but does not establish multi-week stability. Production deployment requires separate operational observation.
 - **Verify:** verdict cites baseline and observed results; all 8 runs have Stage 3 human review.
 - **Stop if:** evidence is insufficient; verdict must be `insufficient-evidence`, not retain.
+- **Result:** all repository-defined retain thresholds passed. The pilot did not demonstrate end-to-end time savings against the 5-second manual baseline; retention is based on 100% useful reviews, correct citations, zero safety violations, and zero measured correction burden.
+- **Evidence:** `system/reports/priority-6-automation-pilot-verdict-2026-08-03.md`.
+- **Authorization boundary:** operator-triggered, report-only, read-only use retained; no continuous automation, scheduling, deployment, adapter activation, MCP activation, or second pilot authorized.
 
 ## Priority 7 — System simplification and performance
 
@@ -415,6 +421,6 @@ external writes.
 - [ ] Evaluation corpus and manual baseline exist.
 - [ ] Mind contains no duplicate live capability status.
 - [ ] First write pilot fixtures and review checklist pass.
-- [ ] One automation pilot has an evidence-backed verdict.
+- [x] One automation pilot has an evidence-backed verdict.
 - [ ] Graph, generated output, docs, and performance budgets are bounded.
 - [ ] Mind remains fully useful without Brain or a model provider.

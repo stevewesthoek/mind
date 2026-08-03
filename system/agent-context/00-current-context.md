@@ -17,7 +17,7 @@ owner: Steve Westhoek
 - `inbox/new/` is the canonical success-intake target (Brain B1.0a verified 2026-07-22).
 - `inbox/failed/` is the target failed-processing path; verify routing against `system/folder-contract.md` before writes or moves.
 - `inbox/processed/` is the target proposal and receipt surface.
-- continuous processing remains disabled until a bounded pilot proves value.
+- the bounded Priority 6 pilot was retained on 2026-08-03; continuous processing remains disabled pending separate multi-week operational evidence and explicit authorization.
 - broad Mind writes are not active.
 - target folder structure is canonical; legacy folder removal remains gated on separate human approval.
 
@@ -30,7 +30,7 @@ owner: Steve Westhoek
 | 3 — Retrieval evaluation | complete |
 | 4 — Capability truth | complete |
 | 5 — Controlled application | complete |
-| 6 — Measured automation | in progress; M6.1 complete; M6.2 runs 1–2 fully evaluated; runs 3–8 authorized for immediate serial execution (cadence change 2026-08-03); fixed windows retired; 6 runs remain; M6.3 follows after all reviews |
+| 6 — Measured automation | complete; M6.1–M6.3 complete; 8 of 8 runs fully evaluated; verdict `retain` (2026-08-03); 8 of 8 useful, 0 safety violations, 8 of 8 citations correct, and 0-minute measured median correction; immediate-batch evidence does not prove multi-week stability; no continuous automation authorized; evidence: `system/reports/priority-6-automation-pilot-verdict-2026-08-03.md` |
 | 7 — System simplification | planned |
 
 ## Current capability state (from Brain live-status runbook)
