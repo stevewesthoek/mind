@@ -397,10 +397,13 @@ external writes.
 
 ### M7.3 — Run a documentation consistency audit
 
+- **Status:** complete (2026-08-03).
 - **Output:** `system/reports/documentation-consistency-YYYY-MM-DD.md`
 - **Change:** check broken links, duplicate authority, stale paths, unsupported capability claims, missing review dates, and orphan canonical docs.
 - **Verify:** report includes exact searches and counts; findings become separate tasks, not immediate bulk rewrites.
 - **Stop if:** the audit touches historical archives; report without editing them.
+- **Result:** 26 active documents reviewed; 0 confirmed broken active links, authority conflicts, stale active path defaults, unsupported capability claims, or overdue live review dates. Ten canonical documents lack header review dates and two canonical documents lack current non-report inbound links; both are recorded as separate follow-up tasks without bulk edits.
+- **Evidence:** `system/reports/documentation-consistency-2026-08-03.md`.
 
 ### M7.4 — Set Mind performance budgets
 
@@ -424,5 +427,5 @@ external writes.
 - [ ] Mind contains no duplicate live capability status.
 - [ ] First write pilot fixtures and review checklist pass.
 - [x] One automation pilot has an evidence-backed verdict.
-- [ ] Graph, generated output, docs, and performance budgets are bounded. Generated output is complete; graph refresh, documentation audit, and performance budgets remain.
+- [ ] Graph, generated output, docs, and performance budgets are bounded. Generated output and documentation audit are complete; graph refresh and performance budgets remain.
 - [ ] Mind remains fully useful without Brain or a model provider.
