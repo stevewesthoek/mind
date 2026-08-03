@@ -90,10 +90,11 @@ No active old-path reference remains unless explicitly marked historical or comp
 
 ## Priority 2 — Vendor-neutral Context Gateway
 
-**Status:** in progress; M2.1–M2.3 complete, M2.4 blocked on Gateway adapter activation
-**Evidence:** `system/reports/m2-context-policy-fixtures-2026-07-31.md`
+**Status:** in progress; M2.1–M2.3 complete; M2.4 remains blocked, not deferred
+**Evidence:** `system/reports/m2-context-policy-fixtures-2026-07-31.md`, `system/reports/m2-4-context-gateway-adapter-readiness-audit-2026-08-03.md`
 **Depends on:** Priority 1
 **Goal:** any authorized LLM can retrieve a small, cited, privacy-scoped orientation pack through one core interface.
+**Current gate:** core and CLI repository verification is complete; the thin adapter and trust boundary remain fixture-only. Deployment, discovery, provider authentication, live readback, unavailable-service fallback, disable/rollback, and production freshness remain unverified. No activation is authorized.
 
 Outcomes:
 

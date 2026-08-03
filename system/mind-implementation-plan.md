@@ -246,12 +246,15 @@ external writes.
 
 ### M2.4 — Update agent entrypoints after Gateway activation
 
-- **Status:** blocked — Gateway adapter activation not confirmed by Brain live evidence. All capability-table entries for context-gateway-* show `deployed: unknown`.
-- **Files:** `system/agent-context/AGENTS.md`, `00-start-here.md`, `00-memory-map.md`
-- **Prerequisite:** Brain task B2.8 passes AND Gateway adapter deployment is verified (currently `deployed: unknown` per Brain live-status 2026-07-31).
-- **Change:** make Context Gateway the preferred retrieval path; retain the manual targeted-read fallback.
-- **Verify:** instructions work both with and without Brain running.
-- **Stop if:** Gateway health or fallback tests fail.
+- **Status:** blocked — Context Gateway core and CLI are repository-verified, but the adapter remains fixture-only and deployed adapter evidence is absent. M2.4 is not deferred.
+- **Audit date:** 2026-08-03.
+- **Audit evidence:** `system/reports/m2-4-context-gateway-adapter-readiness-audit-2026-08-03.md`.
+- **Files after activation only:** `system/agent-context/AGENTS.md`, `00-start-here.md`, `00-memory-map.md`.
+- **Prerequisites:** Brain must supply one project-scoped read-only adapter registration candidate; explicit provider authentication and secrets boundaries; tracked Claude or Codex discovery configuration or another explicitly approved client; live health/readback; unavailable-service fallback to manual targeted retrieval; disable and rollback procedures; proof that no mutation path is exposed; provider-specific scope and privacy enforcement; production freshness behavior; and explicit Steve Westhoek activation approval.
+- **Change after prerequisites pass:** make Context Gateway the preferred retrieval path while retaining the manual targeted-read fallback.
+- **Verify after activation:** instructions work with the adapter available and unavailable; source selection remains cited, scoped, read-only, and equivalent to the verified core contract.
+- **Stop conditions:** Brain canonical branch unresolved; adapter remains fixture-only; deployment unknown; discovery absent; health/readback unavailable; fallback or rollback unproven; mutation containment unproven; production freshness unproven; or human activation approval absent.
+- **Authorization boundary:** no Mind entrypoint change is authorized yet; Mind must not create `.mcp.json` or provider configuration; Workbench's separate active-local admission is not Context Gateway activation.
 
 ## Priority 3 — Retrieval evaluation and ground truth
 

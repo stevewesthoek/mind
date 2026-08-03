@@ -25,8 +25,8 @@ owner: Steve Westhoek
 
 | Priority | Status |
 |----------|--------|
-| 1 — Canonical coherence | complete; M1.1–M1.6 complete; Mind Steward retained as a separate Brain-owned local deterministic/report-only package with documented boundary and canonical shared path policy; no migration, retirement, deployment, or automation activation occurred; Brain `projects/mind-steward/README.md` requires a separate Brain-owned documentation refresh |
-| 2 — Context Gateway | in progress; M2.1–M2.3 complete; M2.4 blocked on Gateway adapter activation |
+| 1 — Canonical coherence | complete; M1.1–M1.6 complete; Mind Steward retained as a separate Brain-owned local deterministic/report-only package with documented boundary and canonical shared path policy; Brain README refresh completed in commit `a97f4e80` on `origin/release/brain-stabilization-v1`; integration into Brain `main` remains pending in the separate Brain conversation; no migration, retirement, deployment, or automation activation occurred |
+| 2 — Context Gateway | in progress; M2.1–M2.3 complete; M2.4 remains blocked, not deferred; supplied audit passed 58/58 Context Gateway tests; core/CLI are read-only and repository-verified; adapter remains fixture-only; deployment and discovery remain unknown; evidence: `system/reports/m2-4-context-gateway-adapter-readiness-audit-2026-08-03.md` |
 | 3 — Retrieval evaluation | complete |
 | 4 — Capability truth | complete |
 | 5 — Controlled application | complete |
@@ -36,8 +36,9 @@ owner: Steve Westhoek
 ## Current capability state (from Brain live-status runbook)
 
 - Context Gateway CLI/core: repository-verified read-only; deployment unknown.
-- Context Gateway MCP adapter: fixture-only; not activated.
-- Codebase Memory MCP: candidate binary installed; not activated.
+- Context Gateway thin adapter and trust boundary: repository-verified through fixtures only; not activated.
+- Workbench MCP: separate active-local provider; not Context Gateway activation.
+- Codebase Memory MCP: candidate-only; not approved, default, deployed, or activated.
 - Graphify: quiesced; `graphify-transition-governance.json` prohibits deletion.
 - Save-to-Mind: live routing verified (B1.0a, 2026-07-22).
 - Continuous automation: not authorized.
