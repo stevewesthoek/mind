@@ -218,7 +218,7 @@ Exit gate satisfied: Steve Westhoek determined that all eight briefs were useful
 
 ## Priority 7 — System simplification and performance
 
-**Status:** planned; some cleanup already completed
+**Status:** in progress; M7.2 complete; M7.1 and M7.3–M7.5 pending
 **Depends on:** may proceed in small safe batches after Priority 1
 **Goal:** reduce code, context, storage, and operational complexity while preserving capability.
 
@@ -233,6 +233,8 @@ Outcomes:
 - docs are checked for broken links, duplicate authority, stale paths, and unsupported status claims;
 - performance budgets exist for startup, retrieval latency, context tokens, and storage.
 - backup, restore, retention, correction, and deletion procedures are tested without relying on a model provider.
+
+**Current state:** M7.2 generated-output retention is complete. Canonical source, audit records, receipt-bound snapshots, rebuildable outputs, caches, convenience artifacts, captures, and temporary evidence now have explicit retention and Git rules. This did not activate Graphify or authorize deletion. M7.1 still requires a fresh Brain-owned receipt-bound graph and remains pending.
 
 Exit gate:
 

@@ -388,10 +388,12 @@ external writes.
 
 ### M7.2 — Define generated-output retention
 
+- **Status:** complete (2026-08-03).
 - **File:** `system/generated-output-policy.md`
 - **Change:** set retention for Graphify snapshots, caches, generated reports, and convenience artifacts; identify canonical source vs disposable output.
 - **Verify:** policy contains location, owner, retention, regeneration command, and Git tracking rule for each artifact type.
 - **Stop if:** an artifact is required for audit or recovery; retain a bounded deliberate copy.
+- **Result:** canonical source, audit records, receipt-bound snapshots, rebuildable outputs, caches, captures, and temporary evidence now have explicit owners, retention classes, regeneration methods, Git rules, and deletion boundaries. No deletion or Graphify activation was authorized.
 
 ### M7.3 — Run a documentation consistency audit
 
@@ -422,5 +424,5 @@ external writes.
 - [ ] Mind contains no duplicate live capability status.
 - [ ] First write pilot fixtures and review checklist pass.
 - [x] One automation pilot has an evidence-backed verdict.
-- [ ] Graph, generated output, docs, and performance budgets are bounded.
+- [ ] Graph, generated output, docs, and performance budgets are bounded. Generated output is complete; graph refresh, documentation audit, and performance budgets remain.
 - [ ] Mind remains fully useful without Brain or a model provider.
