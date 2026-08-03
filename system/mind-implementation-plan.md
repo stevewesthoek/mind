@@ -407,10 +407,13 @@ external writes.
 
 ### M7.4 — Set Mind performance budgets
 
+- **Status:** complete (2026-08-03); navigation and Graphify baselines remain explicitly provisional.
 - **File:** `system/mind-performance-budgets.md`
 - **Change:** define budgets for startup context files, manual navigation depth, generated storage, Context Gateway tokens, and retrieval latency.
 - **Verify:** every budget has measurement command/method and review date.
 - **Stop if:** no baseline exists; record a provisional budget and a baseline task.
+- **Result:** seven budgets now cover startup bytes/words, manual navigation depth, current generated projections, report evidence, Graphify working storage, Context Gateway response tokens, and retrieval-stage p95. Each has a baseline or an explicit provisional-baseline task, measurement method, and 2026-09-03 review date.
+- **Evidence:** `system/mind-performance-budgets.md`.
 
 ### M7.5 — Define and test Mind recovery and retention
 
@@ -427,5 +430,5 @@ external writes.
 - [ ] Mind contains no duplicate live capability status.
 - [ ] First write pilot fixtures and review checklist pass.
 - [x] One automation pilot has an evidence-backed verdict.
-- [ ] Graph, generated output, docs, and performance budgets are bounded. Generated output and documentation audit are complete; graph refresh and performance budgets remain.
+- [ ] Graph, generated output, docs, and performance budgets are bounded. Generated output, documentation audit, and performance budgets are complete; graph refresh remains.
 - [ ] Mind remains fully useful without Brain or a model provider.

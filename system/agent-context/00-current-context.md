@@ -31,7 +31,7 @@ owner: Steve Westhoek
 | 4 — Capability truth | complete |
 | 5 — Controlled application | complete |
 | 6 — Measured automation | complete; M6.1–M6.3 complete; 8 of 8 runs fully evaluated; verdict `retain` (2026-08-03); 8 of 8 useful, 0 safety violations, 8 of 8 citations correct, and 0-minute measured median correction; immediate-batch evidence does not prove multi-week stability; no continuous automation authorized; evidence: `system/reports/priority-6-automation-pilot-verdict-2026-08-03.md` |
-| 7 — System simplification | in progress; M7.2 generated-output retention and M7.3 documentation consistency complete; M7.1 and M7.4–M7.5 pending; audit follow-ups are 10 missing header review dates and 2 orphan canonical documents; no Graphify activation, deletion, or historical bulk rewrite authorized |
+| 7 — System simplification | in progress; M7.2–M7.4 complete; M7.1 and M7.5 pending; performance budgets are dated and navigation/Graphify baselines are explicitly provisional; audit follow-ups are 10 missing header review dates and 2 orphan canonical documents; no Graphify or Context Gateway activation, deletion, or historical bulk rewrite authorized |
 
 ## Current capability state (from Brain live-status runbook)
 

@@ -218,7 +218,7 @@ Exit gate satisfied: Steve Westhoek determined that all eight briefs were useful
 
 ## Priority 7 — System simplification and performance
 
-**Status:** in progress; M7.2–M7.3 complete; M7.1 and M7.4–M7.5 pending
+**Status:** in progress; M7.2–M7.4 complete; M7.1 and M7.5 pending
 **Depends on:** may proceed in small safe batches after Priority 1
 **Goal:** reduce code, context, storage, and operational complexity while preserving capability.
 
@@ -234,7 +234,7 @@ Outcomes:
 - performance budgets exist for startup, retrieval latency, context tokens, and storage.
 - backup, restore, retention, correction, and deletion procedures are tested without relying on a model provider.
 
-**Current state:** M7.2 generated-output retention and M7.3 documentation consistency are complete. The documentation audit found no confirmed broken active links, authority conflicts, stale active path defaults, unsupported capability claims, or overdue live review dates; ten missing header review dates and two orphan canonical documents are recorded as bounded follow-up tasks. This did not activate Graphify, authorize deletion, or rewrite historical content. M7.1 still requires a fresh Brain-owned receipt-bound graph and remains pending.
+**Current state:** M7.2 generated-output retention, M7.3 documentation consistency, and M7.4 performance budgets are complete. Startup context, navigation depth, generated storage, Context Gateway tokens, and retrieval latency now have dated budgets and reproducible measurement methods; missing navigation and Graphify baselines are explicitly provisional tasks. This did not activate Graphify or Context Gateway, authorize deletion, or rewrite historical content. M7.1 still requires a fresh Brain-owned receipt-bound graph and remains pending.
 
 Exit gate:
 
