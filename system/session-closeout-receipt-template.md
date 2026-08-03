@@ -1,6 +1,7 @@
 # Session Closeout Receipt Template
 
 **Status:** canonical lightweight template  
+**Last reviewed:** 2026-08-03
 **Purpose:** prevent forgotten branches, hidden dirty state, and lost decisions after significant AI/repo work.  
 **Applies to:** meaningful Brain/Mind/ProChat work sessions, especially when a branch, commit, merge, report, or roadmap decision was created.  
 **Does not require:** a full transcript archive.
@@ -16,16 +17,10 @@ Do not use this template for tiny conversational clarifications, one-off notes, 
 Default location:
 
 ```text
-wiki/log.md
+inbox/processed/YYYY-MM-DD-short-session-closeout.md
 ```
 
-Use a dedicated file only when the closeout is long enough to clutter `wiki/log.md`.
-
-Suggested dedicated location, if needed later:
-
-```text
-system/session-closeouts/YYYY-MM-DD-short-title.md
-```
+`wiki/log.md` is a read-only compatibility ledger and is not a current receipt destination.
 
 Do not create a transcript archive unless later evidence shows that receipts are too small to preserve the needed handoff.
 

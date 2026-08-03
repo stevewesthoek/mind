@@ -1,6 +1,7 @@
 # Processed-Capture Receipt Template
 
 **Status:** canonical lightweight template  
+**Last reviewed:** 2026-08-03
 **Purpose:** make capture outcomes auditable when inbox volume or lost-context risk justifies it.  
 **Applies to:** captures from `inbox/new/`, transcripts, newsletters, emails, meetings, web clips, or other imported observations.
 **Does not do:** move files, approve durable writes, or create an automation pipeline.
@@ -25,16 +26,10 @@ Do not create receipts for every trivial capture unless inbox volume proves that
 Default location:
 
 ```text
-wiki/log.md
+inbox/processed/YYYY-MM-DD-short-source-receipt.md
 ```
 
-Use a dedicated file only when capture processing becomes too noisy for `wiki/log.md`.
-
-Suggested dedicated location, if needed later:
-
-```text
-system/capture-receipts/YYYY-MM-DD-short-source.md
-```
+`wiki/log.md` is a read-only compatibility ledger and is not a current receipt destination. Keep the receipt compact and link to the source capture instead of copying raw content.
 
 ## Outcome vocabulary
 

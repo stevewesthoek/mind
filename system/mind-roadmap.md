@@ -234,7 +234,7 @@ Outcomes:
 - performance budgets exist for startup, retrieval latency, context tokens, and storage.
 - backup, restore, retention, correction, and deletion procedures are tested without relying on a model provider.
 
-**Current state:** M7.2–M7.5 are complete. Generated-output retention, documentation consistency, performance budgets, and an isolated 14-file Git restore drill now have bounded policy and evidence. Secondary backup coverage remains unknown and is an explicit follow-up. This did not activate Graphify or Context Gateway, authorize deletion, overwrite the live vault, or rewrite historical content. M7.1 remains blocked because Graphify is quiesced and requires a fresh Brain-owned receipt-bound graph at the current source commit.
+**Current state:** M7.2–M7.5 are complete. Generated-output retention, documentation consistency and its bounded follow-ups, performance budgets including a passing ten-question navigation-depth baseline, and an isolated 14-file Git restore drill now have bounded policy and evidence. Secondary backup coverage remains unknown and is an explicit external recovery-assurance follow-up. This did not activate Graphify or Context Gateway, authorize deletion, overwrite the live vault, or rewrite historical content. M7.1 remains blocked because Graphify is quiesced and requires a fresh Brain-owned receipt-bound graph at the current source commit. Evidence: `system/reports/m2-4-m7-1-completion-audit-2026-08-03.md`.
 
 Exit gate:
 

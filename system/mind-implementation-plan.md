@@ -248,7 +248,7 @@ external writes.
 
 - **Status:** blocked — Context Gateway core and CLI are repository-verified, but the adapter remains fixture-only and deployed adapter evidence is absent. M2.4 is not deferred.
 - **Audit date:** 2026-08-03.
-- **Audit evidence:** `system/reports/m2-4-context-gateway-adapter-readiness-audit-2026-08-03.md`.
+- **Audit evidence:** `system/reports/m2-4-context-gateway-adapter-readiness-audit-2026-08-03.md` and `system/reports/m2-4-m7-1-completion-audit-2026-08-03.md`.
 - **Files after activation only:** `system/agent-context/AGENTS.md`, `00-start-here.md`, `00-memory-map.md`.
 - **Prerequisites:** Brain must supply one project-scoped read-only adapter registration candidate; explicit provider authentication and secrets boundaries; tracked Claude or Codex discovery configuration or another explicitly approved client; live health/readback; unavailable-service fallback to manual targeted retrieval; disable and rollback procedures; proof that no mutation path is exposed; provider-specific scope and privacy enforcement; production freshness behavior; and explicit Steve Westhoek activation approval.
 - **Change after prerequisites pass:** make Context Gateway the preferred retrieval path while retaining the manual targeted-read fallback.
@@ -387,6 +387,7 @@ external writes.
 - **Verify:** fresh report no longer lists Obsidian plugin internals as core Mind modules; graph commit equals current HEAD.
 - **Stop if:** the profile excludes canonical Mind content; adjust before accepting.
 - **Blocker evidence:** the latest committed refresh receipt is dated 2026-06-07, does not bind a source commit, and reports an older 1,306-code-file graph rather than current bounded Markdown evidence; the Brain-managed `.graphifyignore` currently excludes general Markdown except README variants. M7.1 requires separate Brain execution and cannot be completed from Mind policy files alone.
+- **Audit evidence:** `system/reports/m2-4-m7-1-completion-audit-2026-08-03.md`.
 
 ### M7.2 — Define generated-output retention
 
@@ -404,8 +405,8 @@ external writes.
 - **Change:** check broken links, duplicate authority, stale paths, unsupported capability claims, missing review dates, and orphan canonical docs.
 - **Verify:** report includes exact searches and counts; findings become separate tasks, not immediate bulk rewrites.
 - **Stop if:** the audit touches historical archives; report without editing them.
-- **Result:** 26 active documents reviewed; 0 confirmed broken active links, authority conflicts, stale active path defaults, unsupported capability claims, or overdue live review dates. Ten canonical documents lack header review dates and two canonical documents lack current non-report inbound links; both are recorded as separate follow-up tasks without bulk edits.
-- **Evidence:** `system/reports/documentation-consistency-2026-08-03.md`.
+- **Result:** 26 active documents reviewed; 0 confirmed broken active links, authority conflicts, stale active path defaults, unsupported capability claims, or overdue live review dates. The ten missing review dates, two orphan decisions, and post-M7.4/M7.5 rerun recorded by the initial audit are now closed through bounded substantive review and indexing.
+- **Evidence:** `system/reports/documentation-consistency-2026-08-03.md` and `system/reports/documentation-consistency-follow-up-2026-08-03.md`.
 
 ### M7.4 — Set Mind performance budgets
 
@@ -414,8 +415,8 @@ external writes.
 - **Change:** define budgets for startup context files, manual navigation depth, generated storage, Context Gateway tokens, and retrieval latency.
 - **Verify:** every budget has measurement command/method and review date.
 - **Stop if:** no baseline exists; record a provisional budget and a baseline task.
-- **Result:** seven budgets now cover startup bytes/words, manual navigation depth, current generated projections, report evidence, Graphify working storage, Context Gateway response tokens, and retrieval-stage p95. Each has a baseline or an explicit provisional-baseline task, measurement method, and 2026-09-03 review date.
-- **Evidence:** `system/mind-performance-budgets.md`.
+- **Result:** seven budgets now cover startup bytes/words, manual navigation depth, current generated projections, report evidence, Graphify working storage, Context Gateway response tokens, and retrieval-stage p95. The ten-question navigation baseline passes with median 2 and maximum 3 transitions; only the Graphify working-set baseline remains contingent on an authorized Brain-owned refresh. Every budget has a measurement method and 2026-09-03 review date.
+- **Evidence:** `system/mind-performance-budgets.md` and `system/reports/manual-navigation-depth-baseline-2026-08-03.md`.
 
 ### M7.5 — Define and test Mind recovery and retention
 
@@ -429,11 +430,11 @@ external writes.
 
 ## Completion checklist
 
-- [ ] Priority 1 path and authority coherence passes.
-- [ ] Context Gateway policy and fallback are documented.
-- [ ] Evaluation corpus and manual baseline exist.
-- [ ] Mind contains no duplicate live capability status.
-- [ ] First write pilot fixtures and review checklist pass.
+- [x] Priority 1 path and authority coherence passes.
+- [x] Context Gateway policy and fallback are documented.
+- [x] Evaluation corpus and manual baseline exist.
+- [x] Mind contains no duplicate live capability status.
+- [x] First write pilot fixtures and review checklist pass.
 - [x] One automation pilot has an evidence-backed verdict.
 - [ ] Graph, generated output, docs, and performance budgets are bounded. Generated output, documentation audit, and performance budgets are complete; graph refresh remains.
-- [ ] Mind remains fully useful without Brain or a model provider.
+- [x] Mind remains fully useful without Brain or a model provider.

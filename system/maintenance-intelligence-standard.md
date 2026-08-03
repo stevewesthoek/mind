@@ -1,6 +1,7 @@
 # Mind Maintenance Intelligence Standard
 
 **Status:** canonical report-only standard  
+**Last reviewed:** 2026-08-03
 **Depends on:** `system/infinite-brain-philosophy.md`, `system/mind-strategy.md`, `system/brain-mind-bridge.md`, `system/knowledge-freshness-standard.md`  
 **Purpose:** define how Mind detects maintenance needs, presents evidence, and learns from human review before any content-changing automation is allowed.
 
@@ -114,11 +115,11 @@ system/reports/maintenance-<type>-latest.json
 
 Use dated files only when preserving a reviewed audit snapshot is useful.
 
-### `wiki/log.md`
+### `inbox/processed/`
 
-Use for short human-facing review events and accepted/dismissed maintenance actions.
+Use for short human-facing review proposals, receipts, and accepted/dismissed maintenance outcomes. This is a review surface, not durable truth.
 
-A log entry should be compact:
+A review record should be compact:
 
 ```text
 YYYY-MM-DD — maintenance-proposal — <type> — <title> — <paths> — <recommended action>
@@ -131,8 +132,8 @@ status=accepted | dismissed | resolved
 reason=<short human explanation>
 ```
 
-Do not paste full batch reports into `wiki/log.md`.
-Link to the report or exact paths instead.
+Do not paste full batch reports into `inbox/processed/`.
+Link to the report or exact paths instead. `wiki/log.md` remains a read-only compatibility ledger and is not a current write destination.
 
 ## Stale-page candidate
 
@@ -291,7 +292,7 @@ Allowed recommendation:
 
 Disallowed action:
 
-- automatic promotion into trusted `wiki/` knowledge.
+- automatic promotion into trusted `knowledge/`, `faith/`, or another canonical domain.
 
 ## Confidence guidance
 

@@ -1,6 +1,7 @@
 # Mind Maintenance Report Contract
 
 **Status:** canonical implementation contract  
+**Last reviewed:** 2026-08-03
 **Contract version:** 1.0
 **Depends on:** `system/maintenance-intelligence-standard.md`, `system/knowledge-freshness-standard.md`, `system/brain-mind-bridge.md`  
 **Purpose:** define the exact report formats, review states, evidence rules, detector boundaries, and Brain implementation handoff for report-only Mind maintenance intelligence.
@@ -412,7 +413,7 @@ Do not force citations onto personal reflections, self-authored convictions, or 
 - capture age;
 - capture summary;
 - repeated concepts;
-- existing live/wiki/source pages;
+- existing canonical domain pages and explicitly documented compatibility-authoritative pages;
 - prior use or references;
 - destination rules.
 
@@ -440,7 +441,7 @@ Do not force citations onto personal reflections, self-authored convictions, or 
 
 ### Safety
 
-Never promote directly into trusted `wiki/` knowledge without approval.
+Never promote directly into trusted `knowledge/`, `faith/`, or another canonical domain without approval.
 
 ## Deduplication and recurrence
 
@@ -602,7 +603,7 @@ Reasoning:
 
 - `kanban.md` remains unchanged;
 - no capture files move;
-- no wiki pages change;
+- no canonical or compatibility knowledge pages change;
 - no archive writes occur;
 - no root files are created;
 - a detector timeout still produces a partial report with an explicit error;

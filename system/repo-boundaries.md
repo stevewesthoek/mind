@@ -1,6 +1,7 @@
 # Cross-Repo Constitution: Mind, Brain, Brain Core, and Brain Console
 
 **Status:** canonical boundary document  
+**Last reviewed:** 2026-08-03
 **Owner:** Steve Westhoek  
 **Applies to:** `mind`, `brain`, Brain Core, Brain Console, ProChat OS documentation  
 

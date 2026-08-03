@@ -1,6 +1,7 @@
 # Mind Knowledge Freshness Standard
 
 **Status:** canonical standard  
+**Last reviewed:** 2026-08-03
 **Depends on:** `system/infinite-brain-philosophy.md`, `system/mind-strategy.md`, `system/brain-mind-bridge.md`  
 **Purpose:** keep changing knowledge current without making every Mind note schema-heavy or time-sensitive.
 
@@ -296,29 +297,30 @@ system/agent-context/00-current-context.md
 Observed state:
 
 ```yaml
-status: active
-last_reviewed: 2026-05-22
+status: current
+last_reviewed: 2026-08-03
+review_after: 2026-08-16
+freshness_risk: medium
 ```
 
 Assessment:
 
 - this page explicitly represents current context;
 - current-context pages have high freshness risk;
-- its existing `last_reviewed` field is useful;
-- `active` should eventually normalize to `current` or remain as a documented compatibility value;
-- because the page describes current architecture and writing defaults, it should receive a short review interval or event-triggered review;
+- its current metadata uses the approved `current` vocabulary and records both a review date and a next-review trigger;
+- because the page describes current architecture and writing defaults, the short review interval and event-triggered review remain appropriate;
 - a passed review interval should mark it `review-needed`, not automatically rewrite it.
 
-Pilot recommendation:
+Current configuration:
 
 ```yaml
-status: review-needed
-last_reviewed: 2026-05-22
-review_after: 2026-06-05
-freshness_risk: high
+status: current
+last_reviewed: 2026-08-03
+review_after: 2026-08-16
+freshness_risk: medium
 ```
 
-This is a recommendation for review, not an applied truth change.
+This confirms that the selective freshness pattern is now in use on the current-context entrypoint. It does not authorize automatic status changes after the review date.
 
 ### Example 2 — Developing product strategy
 

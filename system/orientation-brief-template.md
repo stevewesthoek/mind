@@ -1,6 +1,7 @@
 # Orientation Brief Template
 
 **Status:** canonical lightweight template  
+**Last reviewed:** 2026-08-03
 **Purpose:** strengthen Mind as Brain's orientation layer without creating a heavy ontology.  
 **Applies to:** significant AI-assisted work where Brain needs current context, strategy, constraints, active projects, decision principles, and evidence before proposing action.  
 **Does not do:** replace source pages, authorize durable writes, or require duplicating the whole vault.
@@ -23,7 +24,7 @@ Prefer these existing Mind surfaces:
 | Retrieval map | `system/agent-context/00-memory-map.md` |
 | Human entrypoint and Mind navigation | `home.md` |
 | Active priorities and tasks | `kanban.md` |
-| Proposals and review log | `wiki/log.md` |
+| Proposals and review records | `inbox/processed/`; `wiki/log.md` is read-only compatibility history |
 | Strategy and operating principles | `system/mind-strategy.md`, `system/mind-roadmap.md`, `system/mind-implementation-plan.md` |
 | Brain/Mind boundaries | `system/brain-mind-bridge.md` |
 | Maintenance status | `system/reports/maintenance-latest.md` |

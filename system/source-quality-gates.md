@@ -1,6 +1,7 @@
 # Source-Quality Gates
 
 **Status:** canonical lightweight gates  
+**Last reviewed:** 2026-08-03
 **Purpose:** prevent mediocre, stale, irrelevant, or untrusted inputs from becoming durable Mind orientation just because they were ingested.  
 **Applies to:** transcripts, newsletters, emails, meetings, web clips, research notes, imported documents, manual notes, and external ideas.  
 **Does not do:** approve promotion, automate ingestion, judge people, or replace human review.
@@ -9,7 +10,7 @@
 
 Ingestion is not endorsement.
 
-A source can be captured, summarized, or routed without becoming durable Mind truth. Promotion into `wiki/`, project files, strategy, task state, or orientation briefs requires source-quality review and approval when approval is required.
+A source can be captured, summarized, or routed without becoming durable Mind truth. Promotion into `knowledge/`, `faith/`, another canonical domain, project files, strategy, task state, or orientation briefs requires source-quality review and approval when approval is required.
 
 ## Promotion gates
 
@@ -120,7 +121,7 @@ no_write_performed: true
 - Do not use stale tactical advice as current operating truth without freshness review.
 - Do not fill evidence gaps with model guesses.
 - Treat marketing, hype, and tool-specific AI advice as provisional unless supported by stronger evidence.
-- Exact-path approval is still required for durable edits to `wiki/`, `live/`, `kanban.md`, strategy, or project files.
+- Exact-path approval is still required for durable edits to `knowledge/`, `faith/`, documented compatibility-authoritative paths, `kanban.md`, strategy, or project files.
 
 ## Relationship to adjacent patterns
 

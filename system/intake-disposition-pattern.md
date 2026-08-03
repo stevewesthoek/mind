@@ -1,6 +1,7 @@
 # Intake-Disposition Pattern
 
 **Status:** canonical lightweight pattern  
+**Last reviewed:** 2026-08-03
 **Purpose:** define how observations become outcomes before adding more ingestion automation.  
 **Applies to:** captures, transcripts, newsletters, emails, meetings, web clips, ideas, research notes, and other observations entering Mind or Brain-assisted review.  
 **Does not do:** ingest automatically, approve durable writes, move files, or replace human review.

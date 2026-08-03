@@ -39,6 +39,16 @@ These documents lead the contracts and technical sub-roadmaps below.
 - `graph-visualization-spec.md` — safe future implementation specification for a clickable visual graph.
 - `generated-output-policy.md` — generated Graphify output, capture inbox handling, and recommended ignore rules.
 - `mind-data-recovery.md` — canonical Git recovery, retention, restore verification, correction, supersession, and deletion boundaries.
+- `repo-boundaries.md` — canonical ownership boundary for Mind, Brain, Brain Core, and Brain Console.
+
+## Review patterns and templates
+
+- `intake-disposition-pattern.md` — classify an observation before proposing a destination or action.
+- `source-quality-gates.md` — review source trust, relevance, evidence, freshness, and approval needs before promotion.
+- `orientation-brief-template.md` — create the smallest useful source-linked orientation brief.
+- `processed-capture-receipt-template.md` — record a capture outcome without authorizing it.
+- `session-closeout-receipt-template.md` — preserve significant repository/session state and follow-up.
+- `wager-verdict-pattern.md` — define expected improvement before a meaningful change and record an evidence-based verdict later.
 
 ## Runbooks
 

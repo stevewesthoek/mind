@@ -1,6 +1,7 @@
 # Wager/Verdict Pattern
 
 **Status:** canonical lightweight pattern  
+**Last reviewed:** 2026-08-03
 **Purpose:** add a small scientific-method layer for significant business or workflow changes.  
 **Applies to:** meaningful strategy, workflow, project, content, product, automation, or business changes where Steve wants to know later whether the change helped.  
 **Does not do:** require a business-intelligence database, automate measurement, authorize implementation, or replace human judgment.
