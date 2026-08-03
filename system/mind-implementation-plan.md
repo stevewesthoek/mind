@@ -381,10 +381,12 @@ external writes.
 
 ### M7.1 — Refresh the Mind graph with a bounded profile
 
+- **Status:** blocked (2026-08-03) — Graphify is quiesced and a current Brain-owned receipt-bound refresh is unavailable; no Mind-only generator or profile change is authorized.
 - **Files:** `.graphifyignore`, Graphify profile documentation
 - **Change:** exclude `.obsidian/plugins`, generated output, history, archive, vendor code, and unrelated binaries; include current high-signal Markdown and Mind-owned scripts only.
 - **Verify:** fresh report no longer lists Obsidian plugin internals as core Mind modules; graph commit equals current HEAD.
 - **Stop if:** the profile excludes canonical Mind content; adjust before accepting.
+- **Blocker evidence:** the latest committed refresh receipt is dated 2026-06-07, does not bind a source commit, and reports an older 1,306-code-file graph rather than current bounded Markdown evidence; the Brain-managed `.graphifyignore` currently excludes general Markdown except README variants. M7.1 requires separate Brain execution and cannot be completed from Mind policy files alone.
 
 ### M7.2 — Define generated-output retention
 
