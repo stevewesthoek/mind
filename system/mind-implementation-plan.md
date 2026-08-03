@@ -417,10 +417,13 @@ external writes.
 
 ### M7.5 — Define and test Mind recovery and retention
 
+- **Status:** complete (2026-08-03); secondary backup coverage remains explicitly unknown.
 - **Files:** `system/mind-data-recovery.md`, existing backup/runbook references
 - **Change:** document canonical Git/backup sources, restore order, verification hashes, retention classes, correction/supersession behavior, and exact human-approved deletion handling.
 - **Verify:** perform a restore drill into a temporary directory and confirm canonical entrypoints plus a bounded sample of source files match expected hashes.
 - **Stop if:** the drill would overwrite the live vault or expose secrets; use an isolated temporary destination.
+- **Result:** an allowlisted 14-file archive from pushed commit `1c592ddcb5c7658f1115ec9c926880e88a8c7c43` was restored into `/tmp/mind-m7-5-restore.Da2thn`; all 14 SHA-256 hashes matched. The live vault and nine protected dirty paths were not changed. Git recovery limits, restore order, retention classes, correction/supersession, exact deletion approval, and the unknown secondary-backup gap are documented.
+- **Evidence:** `system/mind-data-recovery.md`.
 
 ## Completion checklist
 

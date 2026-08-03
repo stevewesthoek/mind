@@ -218,7 +218,7 @@ Exit gate satisfied: Steve Westhoek determined that all eight briefs were useful
 
 ## Priority 7 — System simplification and performance
 
-**Status:** in progress; M7.2–M7.4 complete; M7.1 and M7.5 pending
+**Status:** in progress; M7.2–M7.5 complete; M7.1 blocked on Brain-owned graph-refresh evidence
 **Depends on:** may proceed in small safe batches after Priority 1
 **Goal:** reduce code, context, storage, and operational complexity while preserving capability.
 
@@ -234,7 +234,7 @@ Outcomes:
 - performance budgets exist for startup, retrieval latency, context tokens, and storage.
 - backup, restore, retention, correction, and deletion procedures are tested without relying on a model provider.
 
-**Current state:** M7.2 generated-output retention, M7.3 documentation consistency, and M7.4 performance budgets are complete. Startup context, navigation depth, generated storage, Context Gateway tokens, and retrieval latency now have dated budgets and reproducible measurement methods; missing navigation and Graphify baselines are explicitly provisional tasks. This did not activate Graphify or Context Gateway, authorize deletion, or rewrite historical content. M7.1 still requires a fresh Brain-owned receipt-bound graph and remains pending.
+**Current state:** M7.2–M7.5 are complete. Generated-output retention, documentation consistency, performance budgets, and an isolated 14-file Git restore drill now have bounded policy and evidence. Secondary backup coverage remains unknown and is an explicit follow-up. This did not activate Graphify or Context Gateway, authorize deletion, overwrite the live vault, or rewrite historical content. M7.1 remains blocked because Graphify is quiesced and requires a fresh Brain-owned receipt-bound graph at the current source commit.
 
 Exit gate:
 

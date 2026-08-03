@@ -38,6 +38,7 @@ These documents lead the contracts and technical sub-roadmaps below.
 - `graph-visualization-contract.md` — current Graphify output and future visual graph target.
 - `graph-visualization-spec.md` — safe future implementation specification for a clickable visual graph.
 - `generated-output-policy.md` — generated Graphify output, capture inbox handling, and recommended ignore rules.
+- `mind-data-recovery.md` — canonical Git recovery, retention, restore verification, correction, supersession, and deletion boundaries.
 
 ## Runbooks
 
