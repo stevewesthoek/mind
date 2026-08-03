@@ -355,16 +355,20 @@ external writes.
 
 ### M6.2 — Record human review burden
 
-- **File:** `system/evals/automation-pilot-observations.csv`
-- **Change:** record run ID, useful/not useful, correction minutes, false-positive count, missing-context count, and notes.
-- **Verify:** missing observations are blank, not zero.
-- **Stop if:** collection would require always-on personal monitoring; use bounded manual sampling.
+- **Status:** in progress; runs 1–2 fully evaluated; runs 3–8 authorized for immediate serial execution
+- **Cadence change:** 2026-08-03 — fixed calendar windows retired; immediate bounded completion authorized
+- **Files:** `system/evals/automation-pilot-observations.csv`, `system/evals/automation-pilot-run-NNN.md` (for runs 3–8)
+- **Change:** record run ID, useful/not useful, correction minutes, false-positive count, missing-context count, and notes for each run.
+- **Verify:** missing observations are blank, not zero; every run has independent Stage 1–3 evidence.
+- **Constraints:** runs execute serially; one CLI invocation per run; no concurrent or background execution; all existing safety and kill conditions remain binding.
+- **Stop if:** a Stage 1 safety or authority gate fails; the entire batch stops. If a kill condition occurs, mark pilot `retired`.
 
 ### M6.3 — Record the verdict
 
 - **File:** `system/automation-pilot.md`
 - **Change:** append `retain`, `revise`, or `retire` with evidence and next action.
-- **Verify:** verdict cites baseline and observed results.
+- **Required disclosure:** Runs 3–8 were completed in an immediate serial batch (cadence change 2026-08-03). This provides valid technical evidence but does not establish multi-week stability. Production deployment requires separate operational observation.
+- **Verify:** verdict cites baseline and observed results; all 8 runs have Stage 3 human review.
 - **Stop if:** evidence is insufficient; verdict must be `insufficient-evidence`, not retain.
 
 ## Priority 7 — System simplification and performance

@@ -186,8 +186,8 @@ Exit gate satisfied: Brain B5.4 (2026-07-31) ran three identical repeatability r
 
 ## Priority 6 — Measured automation pilots
 
-**Status:** in progress; M6.1 complete
-**Evidence:** `system/automation-pilot.md`
+**Status:** in progress; M6.1 complete; M6.2 active; M6.3 pending
+**Evidence:** `system/automation-pilot.md`, `system/reports/m6-2-pilot-cadence-decision-2026-08-03.md`
 **Depends on:** Priorities 3–5
 **Goal:** prove that automation saves time or prevents errors before enabling continuous operation.
 
@@ -200,11 +200,12 @@ Outcomes:
 - explicit retain, revise, or retire verdict;
 - no expansion when value remains unproven.
 
-Good first pilots:
-
-1. context-pack retrieval for a recurring project question;
-2. report-only stale-page detection;
-3. report-only inbox disposition.
+**Current state (M6.2):**
+- Runs 1–2 fully evaluated
+- Runs 3–8 authorized for immediate serial execution (cadence change 2026-08-03)
+- Fixed calendar windows retired; no date gate
+- Verdict will follow immediately after all 8 runs receive Stage 3 review
+- All existing safety, authority, and kill conditions unchanged
 
 Exit gate:
 

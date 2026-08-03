@@ -48,24 +48,28 @@ This pilot proves whether a read-only retrieval report for a recurring ProChat w
 
 | Parameter | Value |
 |---|---|
-| Start date | 2026-08-01 — explicitly authorized by the human owner in conversation |
-| Final run | 2026-08-30 |
-| Verdict date | 2026-08-31 |
-| Duration | 4 weeks |
-| Sample size | 8 runs, maximum 2 per observation window |
+| Original start date | 2026-08-01 |
+| Original final-run date | 2026-08-30 |
+| Original verdict date | 2026-08-31 |
+| Cadence change | 2026-08-03 — Steve Westhoek withdrew fixed calendar gating; immediate bounded serial execution authorized |
+| Sample size | 8 runs total |
 
-### Pilot observation windows
+### Execution policy (updated 2026-08-03)
 
-Pilot windows are anchored to the authorized start date (`2026-08-01`). They are not ISO calendar weeks. Unused execution capacity does not carry forward into a later window. Window 4 runs through the existing final-run date.
+Runs 1 and 2 are fully evaluated. Runs 3–8 are authorized for immediate serial execution. No date gate remains.
 
-| Pilot window | Dates | Maximum counted executions |
-|---|---|---:|
-| Window 1 | 2026-08-01 through 2026-08-07 | 2 |
-| Window 2 | 2026-08-08 through 2026-08-14 | 2 |
-| Window 3 | 2026-08-15 through 2026-08-21 | 2 |
-| Window 4 | 2026-08-22 through 2026-08-30 | 2 |
+**Execution constraints:**
+- Runs execute one at a time
+- Each run has one independent CLI invocation
+- No concurrent or background executions
+- No run reuse or duplication
+- All existing safety, authority, and no-mutation gates remain binding
+- Kill conditions and verdict thresholds unchanged
+- Verdict occurs immediately after all 8 runs receive human review
 
-Total capacity: 8 counted executions across 4 windows.
+**Cadence change rationale:** No documented technical dependency requires calendar spacing. Immediate execution satisfies all safety and authority gates. Evidence limitation from compressed timeline must be disclosed in M6.3 verdict.
+
+**Evidence:** `system/reports/m6-2-pilot-cadence-decision-2026-08-03.md`
 
 ### Baseline (CTX-PRO-003, manual — 2026-08-01)
 
@@ -250,13 +254,13 @@ The retrieval query is deterministic operator configuration optimized for the ra
 
 **Completion state:** Stage 1 complete (retrieval PASS); Stage 2 complete (orientation brief PASS); Stage 3 complete (human review 2026-08-02). Run 2 counts toward the pilot verdict.
 
-**Pilot window:** Window 1 (2026-08-01 through 2026-08-07); execution 2 of 2. Window 1 maximum reached.
-
-**Progress:** 2 of 8 counted runs fully evaluated. M6.2 remains pending. Six runs remain. No run 3 started. Run 3 first eligible 2026-08-08 (Window 2).
+**Progress:** 2 of 8 counted runs fully evaluated. Runs 3–8 authorized for immediate serial execution (cadence change 2026-08-03). Six runs remain.
 
 ### Verdict criteria (M6.3)
 
-Record one verdict on 2026-08-31 based on completed runs:
+Record one verdict based on completed runs (timing: immediately after all 8 runs receive Stage 3 human review):
+
+**Required disclosure in verdict:** Runs 3–8 were completed in an immediate serial batch (cadence change 2026-08-03). This compressed timeline provides valid technical evidence but does not establish multi-week stability. Production deployment would require separate multi-week operational observation.
 
 | Verdict | Conditions |
 |---|---|
