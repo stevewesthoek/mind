@@ -1,6 +1,6 @@
 # Priority 1 Exit-Gate Reconciliation — 2026-08-02
 
-**Status:** BLOCKED — one gate unresolved
+**Status:** COMPLETE — Priority 1 exit gate satisfied
 **Scope:** Priority 1 canonical coherence exit-gate evaluation
 **Boundary:** Mind documentation and evidence only; no Brain edit, deletion, or automation activation
 **Evidence base:** Brain live-status runbook (2026-08-01), B1.5 package-boundary report (2026-07-14), BS0.10 legacy-producer migration (2026-07-31), BS0.19 deletion-readiness evaluation (2026-08-01), MS0.5 compatibility-authoritative exceptions (2026-07-14), M1.3–M1.4 closure (2026-07-31), documentation consistency audit (2026-07-31), post-consolidation operational readiness (2026-08-02)
@@ -15,13 +15,13 @@
 | 2 | Active Mind documentation uses canonical target paths | PASS | M1.3 closure (2026-07-31); `rg` scan shows no unexplained active old-path reference (see audit below) | — |
 | 3 | Claude and Codex entrypoints route through `system/agent-context/` | PASS | Root `CLAUDE.md` and `AGENTS.md` (created 2026-08-02, commit `f8ddb3b`); B1.6 confirmed Brain-side instruction paths (2026-07-30) | — |
 | 4 | Existing Gemini, Cursor, Kiro, and IDE instruction surfaces route through `system/agent-context/` | NOT APPLICABLE | No `.cursorrules`, `.gemini/`, `.kiro/`, or IDE agent config exists in this repository. Brain B1.6 governs external instruction files in Brain's `operations/system-configs/`. | — |
-| 5 | Legacy Mind Steward package is migrated, retired, or explicitly dispositioned | **BLOCKED** | Brain B1.5 (2026-07-14) chose "retain with boundary clarification" — a third option not covered by the roadmap's binary outcome. Package builds and tests successfully (verified 2026-07-31). It is neither migrated into Brain Core nor retired. | Human decision required — see `system/reports/priority-1-mind-steward-disposition-decision-2026-08-02.md` |
+| 5 | Legacy Mind Steward package is migrated, retired, or retained as a separate Brain-owned package with documented boundary separation and canonical shared path policy | PASS | Steve Westhoek selected retention on 2026-08-03. Evidence: Brain B1.5 package boundary, Brain BS0.8 Mind Steward registry migration, Brain BS0.9 Brain Core consumer migration, and `system/reports/priority-1-mind-steward-disposition-decision-2026-08-02.md`. No Brain implementation change was required. | — |
 | 6 | Dry-run is the default for classification | PASS | Mind Steward `package.json` description: "Read-only mind-steward dry-run planner"; no `--mode=apply` default; BS0.10 retirement guards exit before any functional code | — |
 | 7 | Raw sources are not rewritten except through exact approved metadata policy | PASS | M5.1–M5.3 and B5.4 pilot is synthetic/fixture-only; no production writes authorized; philosophy and strategy enforce this boundary | — |
 | 8 | Relevant path-contract tests and validations pass | PASS | `node tools/mind-canonical-path-registry.mjs validate` → pass (2026-07-17); `npm --prefix projects/mind-steward run ci` → pass (2026-07-31); `node tools/validate-deletion-readiness.mjs` → 0 SAFE, 2 PARTIAL, 17 BLOCKED (expected) | — |
 | 9 | No active old-path reference remains unless explicitly historical or compatibility-only | PASS | Audit below shows all matches are classified as historical, compatibility-only, compatibility-authoritative (MS0.5), fixture, migration-plan evidence, or false positive. Zero active defects found. | — |
 
-**Summary:** 7 PASS, 1 NOT APPLICABLE, 1 BLOCKED. Priority 1 exit gate is not satisfied.
+**Summary:** 8 PASS, 1 NOT APPLICABLE, 0 BLOCKED. Priority 1 exit gate is satisfied.
 
 ---
 
@@ -145,11 +145,11 @@ It is not:
 
 ### Effect on Priority 1
 
-The Mind roadmap's Priority 1 outcome #5 states: "the legacy Mind Steward package is either migrated into Brain Core or retired."
+Steve Westhoek selected retention on 2026-08-03. The Priority 1 outcome now accepts a third evidence-backed disposition: Mind Steward may be retained as a separate Brain-owned package with documented boundary separation and canonical shared path policy.
 
-B1.5 chose neither. It chose to retain Mind Steward with a clarified boundary separation. This creates a mismatch between the roadmap's binary outcome and the Brain-side evidence.
+The retained package remains local deterministic/report-only tooling. Brain B1.5 defines the package boundary, BS0.8 migrates Mind Steward path policy to the canonical Brain registry, and BS0.9 applies the same registry to Brain Core consumers. No Brain package migration, retirement, deployment, scheduling, continuous execution, production write, or automation activation occurred.
 
-The disposition decision is documented in `system/reports/priority-1-mind-steward-disposition-decision-2026-08-02.md`.
+The disposition decision is documented in `system/reports/priority-1-mind-steward-disposition-decision-2026-08-02.md`. Gate 5 is satisfied.
 
 ---
 
@@ -166,12 +166,14 @@ The disposition decision is documented in `system/reports/priority-1-mind-stewar
 
 ---
 
+## Non-blocking Brain documentation follow-up
+
+Brain `projects/mind-steward/README.md` still describes `mind/router/`, `capture/inbox/`, and an older nightly scheduler flow. Brain BS0.8 shows that active Mind Steward behavior now resolves canonical registry paths including `inbox/new/` and `inbox/failed/`.
+
+Correcting that README is a separate Brain-owned documentation-hardening task. The stale README does not change the retained package disposition, authorize Brain edits from Mind, or reopen Priority 1.
+
 ## Conclusion
 
-Priority 1 exit gate is blocked on exactly one issue: the Mind Steward package disposition does not match the roadmap's stated binary outcome. Steve must decide whether to:
+**COMPLETE — Priority 1 exit gate satisfied.**
 
-- (A) update the roadmap outcome to accept "retain with boundary" as a valid disposition;
-- (B) direct Brain to migrate Mind Steward responsibilities into Brain Core;
-- (C) direct Brain to retire Mind Steward.
-
-See `system/reports/priority-1-mind-steward-disposition-decision-2026-08-02.md` for the neutral options, benefits, risks, and required evidence.
+All nine gates are PASS or NOT APPLICABLE. Steve selected Option A — retain. Mind Steward remains a separate Brain-owned local deterministic/report-only package with documented boundary separation and canonical shared path policy. Producer retirement under BS0.10 remains distinct from package retention, and BS0.19 continues to govern deletion readiness. Priority 1 completion authorizes no deletion.

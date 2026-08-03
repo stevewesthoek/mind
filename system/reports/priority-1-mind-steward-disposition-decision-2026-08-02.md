@@ -1,9 +1,12 @@
 # Priority 1 — Mind Steward Package Disposition Decision
 
-**Status:** human decision required
+**Status:** decided — Option A selected
 **Date:** 2026-08-02
+**Decision date:** 2026-08-03
+**Decision authority:** Steve Westhoek
+**Selected option:** Option A — retain
 **Scope:** resolve the mismatch between Priority 1 outcome #5 and Brain B1.5 evidence
-**Boundary:** Mind documentation and decision preparation only; no Brain edit, package migration, retirement, or deletion authorized by this report
+**Boundary:** Mind documentation and decision record only; no Brain edit, package migration, retirement, deployment, scheduling, continuous execution, production write, or deletion is authorized by this report
 
 ---
 
@@ -27,9 +30,15 @@ The four legacy-path producers (BS0.10) are retired Python scripts — they are 
 
 ---
 
-## Decision required
+## Decision record
 
-Steve must choose one of three options to resolve the Priority 1 exit gate.
+Steve Westhoek selected **Option A — Retain** on 2026-08-03.
+
+Mind Steward remains a separate Brain-owned package. Its active path and policy resolution comes from the canonical Brain-owned path registry and resolver. Its retained boundary is local deterministic/report-only tooling: classification, dry-run reporting, preview presentation, wiki health, maintenance-preview queue, and CLI presentation.
+
+Retention does not imply deployment, active scheduling, continuous execution, production writes, or new automation. Any future migration or retirement requires a separate Brain-owned decision and evidence task.
+
+Options B and C are rejected for the current roadmap cycle. They are not permanently prohibited and may be reconsidered only through a later explicit human decision with current Brain evidence.
 
 ---
 
@@ -115,8 +124,8 @@ Direct Brain to retire Mind Steward: add retirement guards to its entrypoints (a
 
 ---
 
-## Recommendation context (not a selection)
+## Decision outcome
 
 B1.5 was authored by the Brain implementation process and explicitly concluded that retention is the lower-complexity outcome. The roadmap outcome was written before B1.5's analysis existed.
 
-This report does not select an option. Steve's decision is required.
+Steve selected Option A. Mind Steward is retained as a separate Brain-owned local deterministic/report-only package with canonical shared path policy and documented boundary separation. No Brain implementation change was required.

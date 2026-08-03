@@ -2,7 +2,7 @@
 
 **Status:** canonical Mind-owned execution plan
 **Version:** 2.0
-**Last reviewed:** 2026-07-31
+**Last reviewed:** 2026-08-03
 **Owner role:** Steve Westhoek (human authority); lower-tier models execute
 **Depends on:** `system/mind-roadmap.md`
 **Conflict rule:** when this plan conflicts with roadmap, strategy, or philosophy, those take precedence in that order. Task-level disputes are resolved by the roadmap's priority sequencing.
@@ -208,15 +208,14 @@ external writes.
 
 ### M1.6 — Close the Priority 1 exit gate
 
-- **Status:** blocked — Mind Steward package disposition unresolved.
+- **Status:** complete (2026-08-03).
 - **Ownership:** Mind documentation and evidence only.
 - **Purpose:** Reconcile the post-consolidation path gate and package disposition to satisfy all Priority 1 outcomes.
 - **Prerequisites:** M1.1–M1.5 complete; Brain BS0.10 (legacy producer retirement) complete; Brain BS0.19 (deletion-readiness evaluation) complete; Brain B1.5 (package-boundary resolution) complete.
-- **Verification:** exact active-path scan (zero active defects found 2026-08-02), agent-entrypoint inventory (all surfaces route through `system/agent-context/`), package-state evidence from Brain B1.5.
-- **Blocker:** The roadmap outcome #5 requires Mind Steward to be "migrated into Brain Core or retired." Brain B1.5 chose "retain with boundary clarification." Human decision required to resolve the mismatch.
-- **Decision report:** `system/reports/priority-1-mind-steward-disposition-decision-2026-08-02.md`
-- **Exit-gate report:** `system/reports/priority-1-exit-gate-reconciliation-2026-08-02.md`
-- **Stop conditions:** active unexplained old path found; package disposition unresolved; Brain evidence stale or contradictory.
+- **Outcome:** Steve Westhoek selected Option A — retain. Mind Steward remains a separate Brain-owned local deterministic/report-only package with documented boundary separation and canonical shared path policy.
+- **Verification:** exact active-path scan found zero active defects; all configured agent entrypoints route through `system/agent-context/`; Brain B1.5 defines the retained package boundary; Brain BS0.8 migrates Mind Steward to the canonical Brain path registry; Brain BS0.9 applies the same registry to Brain Core consumers.
+- **Evidence:** `system/reports/priority-1-exit-gate-reconciliation-2026-08-02.md`; `system/reports/priority-1-mind-steward-disposition-decision-2026-08-02.md`; Brain `operations/reports/b1-5-mind-steward-package-boundary-2026-07-14.md`; Brain `operations/reports/bs0-8-mind-steward-path-registry-migration-2026-07-14.md`; Brain `operations/reports/bs0-9-brain-core-path-consumer-migration-2026-07-14.md`.
+- **Result:** Priority 1 exit gate satisfied. No Brain package migration, retirement, deployment, scheduling, continuous execution, production write, deletion, or automation activation occurred.
 - **Authorization boundary:** no Brain edit; no package migration or retirement; no deletion; no automation activation.
 
 ## Priority 2 — Context Gateway policy and fixtures

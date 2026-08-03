@@ -2,7 +2,7 @@
 
 **Status:** canonical cross-repo priority order
 **Version:** 2.0
-**Last reviewed:** 2026-07-31
+**Last reviewed:** 2026-08-03
 **Owner role:** Steve Westhoek (human authority)
 **Depends on:** `system/infinite-brain-philosophy.md`, `system/mind-strategy.md`
 **Conflict rule:** when this roadmap conflicts with philosophy or strategy, those take precedence. Brain's runtime roadmap is an implementation projection and must not reorder these priorities.
@@ -67,16 +67,17 @@ automation changes, or external writes.
 
 ## Priority 1 — Canonical coherence and migration closure
 
-**Status:** in progress; M1.1–M1.5 complete; M1.6 blocked on Mind Steward package disposition
+**Status:** complete; M1.1–M1.6 complete; exit gate satisfied 2026-08-03
 **Evidence:** `system/reports/m1-3-m1-4-closure-2026-07-31.md`, `system/reports/documentation-consistency-2026-07-31.md`, `system/reports/priority-1-exit-gate-reconciliation-2026-08-02.md`, `system/reports/priority-1-mind-steward-disposition-decision-2026-08-02.md`
 **Goal:** every active document, config, script, test, and runtime contract uses the same current Mind paths and authority rules.
+**Closure:** zero unexplained active stale-path defects; configured agent entrypoints aligned; Mind Steward explicitly retained with a documented Brain-owned boundary and canonical shared path policy. BS0.10 producer retirement remains distinct from package retention. BS0.19 separately governs deletion readiness; Priority 1 completion authorizes no deletion.
 
 Outcomes:
 
 - one Brain-owned machine-readable Mind path contract;
 - active Mind docs use target paths;
 - Claude, Codex, Gemini, Cursor, Kiro, and IDE context files point to `system/agent-context/`;
-- the legacy Mind Steward package is either migrated into Brain Core or retired;
+- the legacy Mind Steward package is migrated, retired, or explicitly retained with documented Brain-owned boundary separation and canonical shared path policy;
 - dry-run is the default for classification;
 - raw sources are not rewritten unless an exact approved metadata policy allows it;
 - all relevant typechecks and path-contract tests pass.
