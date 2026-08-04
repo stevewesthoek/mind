@@ -1,6 +1,6 @@
 # Context Gateway Operational Observation 002
 
-**Status:** qualifying live observation — one retrieval-quality incident recorded (see correction 2026-08-05)
+**Status:** qualifying live observation — one retrieval-quality incident recorded (see correction 2026-08-04)
 **Observation ID:** 002
 **Execution date:** 2026-08-04
 **Operator question:** What is the current verified operating state of the Mind repository, which external assurance items remain open, and which canonical Mind documents support that answer?
@@ -285,7 +285,7 @@ Divergence: 0 0 (unchanged)
 - [x] workingChangesInScope == 0
 - [x] mutationPathExposed == false
 
-**Source validation (corrected 2026-08-05):**
+**Source validation (corrected 2026-08-04):**
 - [x] No archive, inbox capture, kanban.md, tasks.md, plugin files, or Brain files in returned pack
 - [x] Path SHA-256 values are real (not synthetic) — confirmed by independent local calculation
 - [x] Provider HEAD is not stale — headMatchesExpected=true
@@ -334,7 +334,7 @@ These documents were NOT in the provider pack. The original observation record i
 
 ---
 
-## Dated correction — 2026-08-05
+## Dated correction — 2026-08-04
 
 **Correction type:** Record accuracy; no health evidence, provider identity, or Mind state changed.
 
@@ -366,7 +366,7 @@ The original record stated "No stale-source incidents" and "Operator correction 
 
 **Operator action:** The rejected June source was not used to answer the operator question. The operator read the four canonical documents manually and used them to construct the answer. Correction time: approximately 0 minutes at query time (operator recognized the superseded source and discarded it without correction burden to the session answer). Post-session audit correction time: recorded below.
 
-**Correction minutes (post-session audit):** Non-zero. The inaccurate record required a correction commit on 2026-08-05. Per the operational assurance plan, this is recorded as a non-zero correction burden for observation 002.
+**Correction minutes (post-session audit):** Non-zero. The inaccurate record required a correction commit on 2026-08-04. Per the operational assurance plan, this is recorded as a non-zero correction burden for observation 002.
 
 ### Qualification determination
 
@@ -387,7 +387,7 @@ The rank-1 source issue is a **retrieval-authority incident** (a superseded supp
 
 **Session query execution elapsed:** 0.43 seconds
 **Session operator correction minutes:** 0 (at session time; operator rejected rank-1 source without explicit correction burden)
-**Post-session audit correction minutes:** non-zero (correction commit required 2026-08-05; exact minutes not measured)
+**Post-session audit correction minutes:** non-zero (correction commit required 2026-08-04; exact minutes not measured)
 **Re-run count:** 0 (repair verification was not needed; provider evidence was recoverable from retained explain output)
 **Retrieval-authority incidents:** 1 (rank-1 source was superseded June handoff report)
 
