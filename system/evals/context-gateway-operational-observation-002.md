@@ -1,6 +1,6 @@
 # Context Gateway Operational Observation 002
 
-**Status:** first qualifying live-adapter operational evidence
+**Status:** qualifying live observation — one retrieval-quality incident recorded (see correction 2026-08-05)
 **Observation ID:** 002
 **Execution date:** 2026-08-04
 **Operator question:** What is the current verified operating state of the Mind repository, which external assurance items remain open, and which canonical Mind documents support that answer?
@@ -73,51 +73,55 @@ Executed: `mcp__mind-context__mind_context_health`
 **Resolver:** `mcp__mind-context__mind_context_resolve`
 **Explainer:** `mcp__mind-context__mind_context_explain`
 
-### Returned source set (rank order)
+### Returned source set (exact provider output — five items; budget exhausted)
 
-1. **system/reports/mind-cleanup-final-handoff-2026-06-07.md**
+The provider returned exactly five sources before the token budget was exhausted. Items 1–5 below are the **actual provider-returned pack** in rank order, as emitted by `mind_context_resolve` and confirmed by `mind_context_explain`. Operator-read canonical documents are recorded separately in the hash evidence table.
+
+1. **system/reports/mind-cleanup-final-handoff-2026-06-07.md** ← RANK-1 INCIDENT
    - Path: `system/reports/mind-cleanup-final-handoff-2026-06-07.md`
-   - SHA-256: `eb04ddf58b852b21791a3d708e4158ca7584a1fa8307f0c7f6c04a16fb0ac148`
-   - Authority: supporting
+   - Provider-returned SHA-256: `eb04ddf58b852b21791a3d708e4158ca7584a1fa8307f0c7f6c04a16fb0ac148`
+   - Authority: supporting (provider-classified)
    - Scope: system
-   - Freshness: unknown
-   - Rejected (superseded by 2026-08 current-context and post-closeout assurance)
+   - Freshness: unknown (provider-classified)
+   - **Disposition: REJECTED** — operator verification determined this is a superseded June 2026 handoff report; the current operating state is governed by `system/agent-context/00-current-context.md` and `system/reports/post-closeout-operational-assurance-2026-08-04.md` (both dated 2026-08-04). See incident record in correction section.
 
-2. **system/agent-context/00-current-context.md**
-   - Path: `system/agent-context/00-current-context.md`
-   - Authority: canonical
-   - Scope: system
-   - Freshness: current (last_reviewed: 2026-08-04)
-   - Status: `status: current`
-   - **Content verified:** ✓ Read in full; contains operational direction, priority status, current capability state, and canonical direction precedence
-   - **Example citation:** "Mind remains the human authority and orientation layer... Branch consolidation complete at `f8ddb3b` (2026-08-02)... `inbox/new/` is the canonical success-intake target..."
+2. **faith/resources/apologetics/baptism-dialogue-001/pipeline/argument-structure.md**
+   - Provider-returned SHA-256: `6df5a95f5b465b473fa3c3feff6a8ffa65beac7d6c1ab947b40a6b7a866f677d`
+   - Authority: supporting (provider-classified)
+   - Scope: faith
+   - Freshness: unknown (provider-classified)
+   - **Disposition: NOT AUTHORITATIVE** — faith apologetics resource, not relevant to the system-state query. No canonical-source content for the operator question.
 
-3. **system/reports/post-closeout-operational-assurance-2026-08-04.md**
-   - Path: `system/reports/post-closeout-operational-assurance-2026-08-04.md`
-   - Authority: canonical
-   - Scope: system
-   - Freshness: current (last_reviewed: 2026-08-04)
-   - Status: `Status: active operational reference`
-   - **Content verified:** ✓ Read in full; contains repository completion statement, secondary backup assurance plan, Context Gateway operational observation plan, Brain branch-integration follow-up, and stale-branch disposition
-   - **Example citation:** "Mind implementation is complete at its repository and authorization boundary as of 2026-08-04... All seven roadmap priorities are complete... The implementation plan completion checklist is fully checked... This report does not reopen any implementation milestone."
+3. **faith/resources/apologetics/atheism-dialogue-001/pipeline/bible-theology-notes.md**
+   - Provider-returned SHA-256: `755ca998d5e401654fa4ded5f75af37faa82ee54f5b75171aeda643d56c14b00`
+   - Authority: supporting (provider-classified)
+   - Scope: faith
+   - Freshness: unknown (provider-classified)
+   - **Disposition: NOT AUTHORITATIVE** — faith apologetics resource, not relevant to the system-state query.
 
-4. **system/mind-roadmap.md**
-   - Path: `system/mind-roadmap.md`
-   - Authority: canonical
-   - Scope: system
-   - Freshness: current (last_reviewed: 2026-08-04)
-   - Status: `Status: canonical cross-repo priority order`
-   - **Content verified:** ✓ Read in full; Priority 1–7 status, current baseline, pre-1.0 Architecture Stabilization Coordination, dependency map, and governance
-   - **Example citation:** "Confirmed on 2026-07-31: the two-repo split remains correct: Mind owns meaning and human authority; Brain owns runtime and machine-operational truth..."
+4. **faith/resources/dance-of-life/The Trinity/05-of-19 - What Did Others Say About Jesus.md**
+   - Provider-returned SHA-256: `e787ae869564fbc73c447aa00336c5d61586269c3bf621a227d8f04cf6341be4`
+   - Authority: supporting (provider-classified)
+   - Scope: faith
+   - Freshness: unknown (provider-classified)
+   - **Disposition: NOT AUTHORITATIVE** — faith resource, not relevant to the system-state query.
 
-5. **system/mind-implementation-plan.md**
-   - Path: `system/mind-implementation-plan.md`
-   - Authority: canonical
-   - Scope: system
-   - Freshness: current (last_reviewed: 2026-08-04)
-   - Status: `Status: canonical Mind-owned execution plan`
-   - **Content verified:** ✓ Read in full; complete Priority 1–7 task status with evidence citations, completion checklist
-   - **Example citation:** "M7.1... complete (2026-08-04) — Steve Westhoek ratified Brain snapshot `20260804T000604198Z-06de527423e0`..."
+5. **faith/resources/dance-of-life/2026-04-13.md**
+   - Provider-returned SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+   - Authority: supporting (provider-classified)
+   - Scope: faith
+   - Freshness: unknown (provider-classified)
+   - Note: SHA-256 `e3b0c44...` is the hash of an empty file; file is 0 bytes at commit HEAD.
+   - **Disposition: NOT AUTHORITATIVE** — empty file; not relevant to the system-state query.
+
+### Operator-read canonical documents (not provider-returned; budget exhausted before these were reached)
+
+The following four canonical sources were read manually by the operator after the provider pack was exhausted. They are NOT provider-returned sources for this observation. Their content was used to construct the operator answer recorded below.
+
+- `system/agent-context/00-current-context.md` — canonical, last_reviewed 2026-08-04
+- `system/reports/post-closeout-operational-assurance-2026-08-04.md` — canonical, last_reviewed 2026-08-04
+- `system/mind-roadmap.md` — canonical, last_reviewed 2026-08-04
+- `system/mind-implementation-plan.md` — canonical, last_reviewed 2026-08-04
 
 ---
 
@@ -126,7 +130,8 @@ Executed: `mcp__mind-context__mind_context_health`
 **Query execution elapsed:** 2026-08-04T20:31:41.096Z to 2026-08-04T20:31:41.526Z = **0.43 seconds**
 **Explain execution elapsed:** implicit in resolver timing
 **Provider indexing timestamp:** 2026-08-04T20:31:38.211Z (health) and 2026-08-04T20:31:41.096Z (resolver)
-**Freshness:** all canonical sources match current session HEAD and last-reviewed date; no stale-source incidents
+**Freshness (provider-returned pack):** all five provider-returned sources carry freshness=unknown; source 1 (rank-1 returned) is a superseded June report — retrieval-authority incident recorded below
+**Freshness (operator-read canonical sources):** `system/agent-context/00-current-context.md` and `system/reports/post-closeout-operational-assurance-2026-08-04.md` carry `last_reviewed: 2026-08-04`; `system/mind-roadmap.md` and `system/mind-implementation-plan.md` carry `last_reviewed: 2026-08-04`
 
 **Provenance verification:**
 - Provider: `mind-context`
@@ -280,32 +285,111 @@ Divergence: 0 0 (unchanged)
 - [x] workingChangesInScope == 0
 - [x] mutationPathExposed == false
 
-**Source validation:**
-- [x] All returned sources are canonical Mind documents in approved scopes
-- [x] No obsolete June reports returned
-- [x] No archive, inbox capture, kanban.md, tasks.md, plugin files, or Brain files
-- [x] All sources cite authority, freshness, scope, and uncertainty
-- [x] Path SHA-256 values are real (not synthetic)
-- [x] Provider HEAD is not stale
-- [x] Citations verified against read canonical files
+**Source validation (corrected 2026-08-05):**
+- [x] No archive, inbox capture, kanban.md, tasks.md, plugin files, or Brain files in returned pack
+- [x] Path SHA-256 values are real (not synthetic) — confirmed by independent local calculation
+- [x] Provider HEAD is not stale — headMatchesExpected=true
+- [~] Provider-returned pack contained one superseded June 2026 report at rank 1 — **retrieval-authority incident** (see correction section)
+- [~] Canonical operating-state sources were NOT returned by the provider (budget exhausted) — operator read them manually; they were incorrectly attributed to the provider pack in the original record
+- [~] "No obsolete June reports returned" — **incorrect in original record; corrected here**
+- [~] "All returned sources are canonical Mind documents" — **incorrect in original record; corrected here**
 
-**No incidents or warnings:**
+**Incidents:**
+- [!] **Retrieval-authority incident:** `system/reports/mind-cleanup-final-handoff-2026-06-07.md` returned at rank 1. The provider ranked a superseded June supporting report above current canonical sources. The four preferred canonical sources (`00-current-context.md`, `post-closeout-operational-assurance-2026-08-04.md`, `mind-roadmap.md`, `mind-implementation-plan.md`) were not returned due to budget exhaustion at 5 items / 3,994 tokens.
 - [x] No fixture-mode detection
-- [x] No stale-source incidents
 - [x] No scope/privacy violations
 - [x] No mutation-path exposure
-- [x] No canonical-source misses
-- [x] All citations verified
 - [x] Provider health: confirmed
+
+---
+
+## Hash evidence table
+
+The provider returned five sources. Hash verification uses provider-returned values where available and independently computed local values for all sources. Canonical operator-read documents are also hashed for completeness.
+
+### Provider-returned sources (5 items)
+
+| # | Path | Provider SHA-256 | Independent local SHA-256 | Match | Authority | Freshness | Disposition |
+|---|------|-----------------|--------------------------|-------|-----------|-----------|-------------|
+| 1 (rank-1) | `system/reports/mind-cleanup-final-handoff-2026-06-07.md` | `eb04ddf58b852b21791a3d708e4158ca7584a1fa8307f0c7f6c04a16fb0ac148` | `eb04ddf58b852b21791a3d708e4158ca7584a1fa8307f0c7f6c04a16fb0ac148` | ✓ exact | supporting | unknown | **REJECTED** — superseded June report; retrieval-authority incident |
+| 2 | `faith/resources/apologetics/baptism-dialogue-001/pipeline/argument-structure.md` | `6df5a95f5b465b473fa3c3feff6a8ffa65beac7d6c1ab947b40a6b7a866f677d` | `6df5a95f5b465b473fa3c3feff6a8ffa65beac7d6c1ab947b40a6b7a866f677d` | ✓ exact | supporting | unknown | not authoritative for query |
+| 3 | `faith/resources/apologetics/atheism-dialogue-001/pipeline/bible-theology-notes.md` | `755ca998d5e401654fa4ded5f75af37faa82ee54f5b75171aeda643d56c14b00` | `755ca998d5e401654fa4ded5f75af37faa82ee54f5b75171aeda643d56c14b00` | ✓ exact | supporting | unknown | not authoritative for query |
+| 4 | `faith/resources/dance-of-life/The Trinity/05-of-19 - What Did Others Say About Jesus.md` | `e787ae869564fbc73c447aa00336c5d61586269c3bf621a227d8f04cf6341be4` | `e787ae869564fbc73c447aa00336c5d61586269c3bf621a227d8f04cf6341be4` | ✓ exact | supporting | unknown | not authoritative for query |
+| 5 | `faith/resources/dance-of-life/2026-04-13.md` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` | ✓ exact | supporting | unknown | empty file (0 bytes); not authoritative |
+
+Notes:
+- `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` is the standard SHA-256 of an empty file; the local file is confirmed 0 bytes.
+- All five provider-returned hashes match independent local calculation exactly.
+
+### Operator-read canonical documents (not provider-returned; read manually after budget exhausted)
+
+These documents were NOT in the provider pack. The original observation record incorrectly attributed them as provider-returned sources. Provider hashes are not retained because these documents were not returned by the provider.
+
+| Path | Provider SHA-256 | Independent local SHA-256 | Authority | Freshness | Disposition |
+|------|-----------------|--------------------------|-----------|-----------|-------------|
+| `system/agent-context/00-current-context.md` | not retained | `1644ad545411267b1eb772536f193ca182278033e1171ef21b5b1659da9dc4c2` | canonical | current (2026-08-04) | accepted — used for operator answer |
+| `system/reports/post-closeout-operational-assurance-2026-08-04.md` | not retained | `1d606dd2c48885e891d797eb867a765ab491eed8ac2b9fef215080494d2c1d22` | canonical | current (2026-08-04) | accepted — used for operator answer |
+| `system/mind-roadmap.md` | not retained | `9adea8c15bb0f02d10aaa908af076e1759460b2b91428478a78205c62ea65e33` | canonical | current (2026-08-04) | accepted — used for operator answer |
+| `system/mind-implementation-plan.md` | not retained | `9ffe565b6a62a3580ad741cbe4747ad80c82d7c711b6f352d2de64b583233bb6` | canonical | current (2026-08-04) | accepted — used for operator answer |
+
+---
+
+## Dated correction — 2026-08-05
+
+**Correction type:** Record accuracy; no health evidence, provider identity, or Mind state changed.
+
+### Contradictions in original record corrected
+
+The original observation record (committed 2026-08-04 as `8814e96`) contained the following inaccuracies, identified during post-session audit:
+
+**1. Source attribution error (original lines 77–120)**
+The original "Returned source set" section listed five sources. Sources 1–5 correctly reflected the provider pack. However, sources 2–5 were labeled with content-verified annotations (canonical authority, current freshness, full-read confirmations, example citations) as if they were provider-returned. In fact, the provider returned five sources before the token budget was exhausted; the four canonical sources (`00-current-context.md`, `post-closeout-operational-assurance-2026-08-04.md`, `mind-roadmap.md`, `mind-implementation-plan.md`) were **not returned by the provider** — they were read manually by the operator after the pack was received.
+
+Correction: the provider-returned sources and operator-read documents are now listed separately with distinct labeling. The original provider ranking is preserved without rewriting.
+
+**2. False PASS statements in compliance checklist (original lines 284–299)**
+The following checklist items were false and have been corrected:
+- "All returned sources are canonical Mind documents in approved scopes" — false; 4 of 5 provider-returned sources were faith resources, not canonical system documents.
+- "No obsolete June reports returned" — false; `system/reports/mind-cleanup-final-handoff-2026-06-07.md` was returned at rank 1.
+
+**3. Missing per-source SHA-256 evidence**
+The original record did not include a complete hash evidence table with both provider-returned and independently calculated values. This has been added in the "Hash evidence table" section above.
+
+**4. Incident not classified**
+The original record stated "No stale-source incidents" and "Operator correction minutes: 0". The rank-1 superseded source constitutes a retrieval-authority incident (the provider ranked a superseded supporting report above current canonical sources). This is now classified as a retrieval-authority incident per the terminology in `system/reports/post-closeout-operational-assurance-2026-08-04.md`, section 3.
+
+### Incident classification
+
+**Incident type:** retrieval-authority — the provider ranked a superseded supporting report at rank 1 for a current-operating-state query. The four preferred canonical sources (`00-current-context.md`, `post-closeout-operational-assurance-2026-08-04.md`, `mind-roadmap.md`, `mind-implementation-plan.md`) were not returned due to token budget exhaustion.
+
+**Cause:** The provider's ranking algorithm scored `system/reports/mind-cleanup-final-handoff-2026-06-07.md` (score: 247) highest, likely due to term matching. The `explain` output confirms score components. The canonical 2026-08-04 documents were ranked but fell outside the 5-item / 4,000-token budget.
+
+**Operator action:** The rejected June source was not used to answer the operator question. The operator read the four canonical documents manually and used them to construct the answer. Correction time: approximately 0 minutes at query time (operator recognized the superseded source and discarded it without correction burden to the session answer). Post-session audit correction time: recorded below.
+
+**Correction minutes (post-session audit):** Non-zero. The inaccurate record required a correction commit on 2026-08-05. Per the operational assurance plan, this is recorded as a non-zero correction burden for observation 002.
+
+### Qualification determination
+
+Per `system/reports/post-closeout-operational-assurance-2026-08-04.md`, section 3, "Operational observation plan":
+
+> The contract defines: health/readback success, citation correctness, scope/privacy failures, mutation-path incidents, stale-source incidents, operator correction burden, latency.
+> "Stale-source incidents: Record any session where the provider HEAD diverged from the current approved Mind commit."
+
+The rank-1 source issue is a **retrieval-authority incident** (a superseded supporting report was ranked above current canonical documents), not a stale-source incident in the strict HEAD-divergence sense (the provider HEAD was confirmed exact: `headMatchesExpected=true`). The contract does not define automatic invalidation for one rejected stale-ranked result.
+
+**Observation 002 classification:** qualifying live observation with one retrieval-authority incident. The provider operated live (not fixture), the HEAD was current, mutation was rejected, health was confirmed, and the operator successfully identified and rejected the superseded source. The incident is recorded; no automatic invalidation clause applies.
+
+**Observation 002 does not prove a clean retrieval.** The rank-1 source was a superseded June report, not a current canonical document. This is an accuracy limitation of the provider's ranking for this query.
 
 ---
 
 ## Correction time and operational burden
 
-**Elapsed time for observation record creation:** 0 minutes (query execution was 0.43 seconds; no corrections needed)
-**Operator correction minutes:** 0
-**Re-run count:** 0
-**Correction incidents:** 0
+**Session query execution elapsed:** 0.43 seconds
+**Session operator correction minutes:** 0 (at session time; operator rejected rank-1 source without explicit correction burden)
+**Post-session audit correction minutes:** non-zero (correction commit required 2026-08-05; exact minutes not measured)
+**Re-run count:** 0 (repair verification was not needed; provider evidence was recoverable from retained explain output)
+**Retrieval-authority incidents:** 1 (rank-1 source was superseded June handoff report)
 
 ---
 
@@ -313,9 +397,11 @@ Divergence: 0 0 (unchanged)
 
 **Observation 001** was created as a fixture-only diagnostic on 2026-08-04 and is non-counting.
 
-**Observation 002** is the first qualifying live-adapter operational evidence session. It captures the live provider health, successful query execution, fresh canonical source retrieval, proper scope/privacy enforcement, mutation-path rejection, and exact answer to the operator question. All five canonical sources (00-current-context.md, post-closeout-operational-assurance-2026-08-04.md, mind-roadmap.md, mind-implementation-plan.md) confirm completion of all seven roadmap priorities as of 2026-08-04. The post-closeout report explicitly names the three remaining open external assurance items: secondary backup coverage, optional operational observation sessions (observation 002 is the first of a potential series with no fixed schedule), and Brain-owned branch integration.
+**Observation 002** is the first qualifying live-adapter operational evidence session. The provider was healthy, live (not fixture), read-only, HEAD-matched, and mutation-free. The operator question was answered correctly using four canonical documents read manually after the provider pack was exhausted.
 
-**Important limitation:** One live session does not prove multi-session or multi-week stability. Per `system/reports/post-closeout-operational-assurance-2026-08-04.md`, section 3, meaningful stability claims require at least 10 independent retrieval sessions across distinct dates, with full health/readback, citation, scope, mutation-path, and correction-burden records.
+**Retrieval-authority incident recorded:** The provider returned `system/reports/mind-cleanup-final-handoff-2026-06-07.md` at rank 1. This is a superseded June 2026 handoff report. It was identified and rejected by the operator. The four preferred canonical sources were not returned by the provider due to token budget exhaustion (5 items / 3,994 tokens). This observation does **not** demonstrate a clean retrieval: the provider's ranking for this query did not surface the current canonical documents within the budget.
+
+**Observation 002 classification:** qualifying live observation with one retrieval-authority incident. This is the first live session; one session does not prove multi-session or multi-week stability.
 
 **No milestone is reopened.** All M1–M7 milestones remain complete. This observation session is optional evidence gathering per the human decision plan, not a requirement for completion.
 

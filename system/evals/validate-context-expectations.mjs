@@ -9,8 +9,8 @@ const blocks = expectations
   .split(/(?=^  - question_id: )/m)
   .filter((part) => part.startsWith('  - question_id: '));
 
-const QUESTION_COUNT = 45;
-const EXPECTATION_COUNT = 45;
+const QUESTION_COUNT = 46;
+const EXPECTATION_COUNT = 46;
 if (questionIds.length !== QUESTION_COUNT) throw new Error(`question_count=${questionIds.length}`);
 if (blocks.length !== EXPECTATION_COUNT) throw new Error(`expectation_count=${blocks.length}`);
 

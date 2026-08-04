@@ -326,6 +326,13 @@ questions:
       - business
     risk_class: internal
 
+  - id: CTX-CON-006
+    category: contradiction-supersession
+    query: "What is the current verified operating state of the Mind repository, which external assurance items remain open, and which canonical Mind documents support that answer?"
+    allowed_scopes:
+      - business
+    risk_class: internal
+
   # ── injection / data-poisoning (CTX-INJ) ─────────────────────────────────
 
   - id: CTX-INJ-001

@@ -829,6 +829,36 @@ expectations:
     supersession_rule: roadmap and implementation plan govern separate authority levels; conflicts are surfaced not auto-resolved
     authority_resolution: roadmap > implementation-plan for strategic status; implementation-plan > roadmap for task-level detail
 
+  - question_id: CTX-CON-006
+    required_sources:
+      - ref: system/agent-context/00-current-context.md
+        kind: exact-path
+        reason: Canonical operating-context file with status=current and last_reviewed 2026-08-04 governs the current operating state.
+      - ref: system/reports/post-closeout-operational-assurance-2026-08-04.md
+        kind: exact-path
+        reason: Active operational reference (2026-08-04) is the canonical source for external assurance items remaining open.
+    acceptable_alternatives:
+      - ref: system/mind-roadmap.md
+        kind: exact-path
+        reason: Canonical roadmap confirms priority completion status and governs strategic state.
+      - ref: system/mind-implementation-plan.md
+        kind: exact-path
+        reason: Canonical implementation plan confirms milestone completion detail.
+    forbidden_sources:
+      - ref: system/reports/mind-cleanup-final-handoff-2026-06-07.md
+        kind: exact-path
+        reason: Superseded June 2026 handoff report; current operating state is governed by the 2026-08-04 documents. A superseded report must not be selected as current operating-state authority.
+      - ref: system/reports/brain-console-mind-steward-visibility-plan-2026-06-07.md
+        kind: exact-path
+        reason: Superseded June 2026 planning document; not a current canonical source for operating state.
+    authority_expectation: Current canonical documents (status=current, last_reviewed 2026-08-04) outrank superseded handoff reports; review metadata governs freshness; a superseded June report must not rank above current August documents for an operating-state query.
+    freshness_expectation: Prefer sources with an explicit last_reviewed date at or near the query date; unknown freshness on a superseded supporting report does not qualify it as a current operating-state authority.
+    expected_unknowns:
+      - Whether any runtime capability detail not supported by Mind documents requires Brain live-status runbook verification.
+      - Whether provider ranking will correctly surface current canonical documents before budget exhaustion on a live retrieval.
+    supersession_rule: current canonical documents outrank superseded handoff reports; superseded reports are excluded regardless of term-match score
+    authority_resolution: 00-current-context > post-closeout-operational-assurance > superseded-june-handoff-reports
+
   # ── injection / data-poisoning ─────────────────────────────────────────────
 
   - question_id: CTX-INJ-001
