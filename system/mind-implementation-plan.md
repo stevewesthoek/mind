@@ -2,7 +2,7 @@
 
 **Status:** canonical Mind-owned execution plan
 **Version:** 2.0
-**Last reviewed:** 2026-08-03
+**Last reviewed:** 2026-08-04
 **Owner role:** Steve Westhoek (human authority); lower-tier models execute
 **Depends on:** `system/mind-roadmap.md`
 **Conflict rule:** when this plan conflicts with roadmap, strategy, or philosophy, those take precedence in that order. Task-level disputes are resolved by the roadmap's priority sequencing.
@@ -247,7 +247,7 @@ external writes.
 ### M2.4 — Update agent entrypoints after Gateway activation
 
 - **Status:** complete (2026-08-04) — Steve Westhoek explicitly approved the exact read-only activation; Brain verified active-local client discovery, health/readback, freshness, privacy scope, unavailable fallback, mutation rejection, and disable/restore behavior.
-- **Evidence:** `system/reports/m2-4-m7-1-closure-2026-08-04.md` and Brain `operations/reports/m2-4-context-gateway-activation-2026-08-04.md` on canonical branch `main`.
+- **Evidence:** `system/reports/m2-4-m7-1-closure-2026-08-04.md` and Brain `operations/reports/m2-4-context-gateway-activation-2026-08-04.md` on pushed evidence branch `origin/codex/mind-m7-m2-unblock` at `103440945a720f0a1ea973b93b5c82155a171784`; Brain `main` integration remains a separate Brain-owned follow-up.
 - **Files after activation only:** `system/agent-context/AGENTS.md`, `00-start-here.md`, `00-memory-map.md`.
 - **Prerequisites:** Brain must supply one project-scoped read-only adapter registration candidate; explicit provider authentication and secrets boundaries; tracked Claude or Codex discovery configuration or another explicitly approved client; live health/readback; unavailable-service fallback to manual targeted retrieval; disable and rollback procedures; proof that no mutation path is exposed; provider-specific scope and privacy enforcement; production freshness behavior; and explicit Steve Westhoek activation approval.
 - **Change after prerequisites pass:** make Context Gateway the preferred retrieval path while retaining the manual targeted-read fallback.
@@ -414,7 +414,7 @@ external writes.
 - **Change:** define budgets for startup context files, manual navigation depth, generated storage, Context Gateway tokens, and retrieval latency.
 - **Verify:** every budget has measurement command/method and review date.
 - **Stop if:** no baseline exists; record a provisional budget and a baseline task.
-- **Result:** seven budgets now cover startup bytes/words, manual navigation depth, current generated projections, report evidence, Graphify working storage, Context Gateway response tokens, and retrieval-stage p95. The ten-question navigation baseline passes with median 2 and maximum 3 transitions; only the Graphify working-set baseline remains contingent on an authorized Brain-owned refresh. Every budget has a measurement method and 2026-09-03 review date.
+- **Result:** seven budgets now cover startup bytes/words, manual navigation depth, current generated projections, report evidence, Graphify working storage, Context Gateway response tokens, and retrieval-stage p95. The ten-question navigation baseline passes with median 2 and maximum 3 transitions; the owner-ratified Graphify run established an 8,972 KiB allocated working-set baseline. Every budget has a measurement method and 2026-09-03 review date.
 - **Evidence:** `system/mind-performance-budgets.md` and `system/reports/manual-navigation-depth-baseline-2026-08-03.md`.
 
 ### M7.5 — Define and test Mind recovery and retention
