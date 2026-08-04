@@ -246,15 +246,14 @@ external writes.
 
 ### M2.4 — Update agent entrypoints after Gateway activation
 
-- **Status:** blocked — Context Gateway core and CLI are repository-verified, but the adapter remains fixture-only and deployed adapter evidence is absent. M2.4 is not deferred.
-- **Audit date:** 2026-08-03.
-- **Audit evidence:** `system/reports/m2-4-context-gateway-adapter-readiness-audit-2026-08-03.md` and `system/reports/m2-4-m7-1-completion-audit-2026-08-03.md`.
+- **Status:** complete (2026-08-04) — Steve Westhoek explicitly approved the exact read-only activation; Brain verified active-local client discovery, health/readback, freshness, privacy scope, unavailable fallback, mutation rejection, and disable/restore behavior.
+- **Evidence:** `system/reports/m2-4-m7-1-closure-2026-08-04.md` and Brain `operations/reports/m2-4-context-gateway-activation-2026-08-04.md` on canonical branch `main`.
 - **Files after activation only:** `system/agent-context/AGENTS.md`, `00-start-here.md`, `00-memory-map.md`.
 - **Prerequisites:** Brain must supply one project-scoped read-only adapter registration candidate; explicit provider authentication and secrets boundaries; tracked Claude or Codex discovery configuration or another explicitly approved client; live health/readback; unavailable-service fallback to manual targeted retrieval; disable and rollback procedures; proof that no mutation path is exposed; provider-specific scope and privacy enforcement; production freshness behavior; and explicit Steve Westhoek activation approval.
 - **Change after prerequisites pass:** make Context Gateway the preferred retrieval path while retaining the manual targeted-read fallback.
 - **Verify after activation:** instructions work with the adapter available and unavailable; source selection remains cited, scoped, read-only, and equivalent to the verified core contract.
 - **Stop conditions:** Brain canonical branch unresolved; adapter remains fixture-only; deployment unknown; discovery absent; health/readback unavailable; fallback or rollback unproven; mutation containment unproven; production freshness unproven; or human activation approval absent.
-- **Authorization boundary:** no Mind entrypoint change is authorized yet; Mind must not create `.mcp.json` or provider configuration; Workbench's separate active-local admission is not Context Gateway activation.
+- **Result:** the three authorized entrypoints now prefer healthy/current Gateway retrieval and fail over only to manual targeted reads; Mind contains no provider registration or `.mcp.json`, and the Gateway exposes no mutation path.
 
 ## Priority 3 — Retrieval evaluation and ground truth
 
@@ -381,13 +380,13 @@ external writes.
 
 ### M7.1 — Refresh the Mind graph with a bounded profile
 
-- **Status:** blocked (2026-08-03) — Graphify is quiesced and a current Brain-owned receipt-bound refresh is unavailable; no Mind-only generator or profile change is authorized.
+- **Status:** complete (2026-08-04) — Steve Westhoek ratified Brain snapshot `20260804T000604198Z-06de527423e0` and classified `20260804T000530178Z-06de527423e0` as a superseded post-publication-cleanup diagnostic.
 - **Files:** `.graphifyignore`, Graphify profile documentation
 - **Change:** exclude `.obsidian/plugins`, generated output, history, archive, vendor code, and unrelated binaries; include current high-signal Markdown and Mind-owned scripts only.
-- **Verify:** fresh report no longer lists Obsidian plugin internals as core Mind modules; graph commit equals current HEAD.
+- **Verify:** fresh report no longer lists Obsidian plugin internals as core Mind modules; receipt source equals the audited execution HEAD; any later HEAD is explicitly dispositioned before closure.
 - **Stop if:** the profile excludes canonical Mind content; adjust before accepting.
-- **Blocker evidence:** the latest committed refresh receipt is dated 2026-06-07, does not bind a source commit, and reports an older 1,306-code-file graph rather than current bounded Markdown evidence; the Brain-managed `.graphifyignore` currently excludes general Markdown except README variants. M7.1 requires separate Brain execution and cannot be completed from Mind policy files alone.
-- **Audit evidence:** `system/reports/m2-4-m7-1-completion-audit-2026-08-03.md`.
+- **Result:** the accepted Brain-owned exact-commit export included 591 Markdown files and 10 Mind-owned scripts, represented all 601 corpus files, and excluded all 29 committed plugin-internal files. The graph contains 6,202 nodes and 5,672 edges. The accepted run matched Mind HEAD `06de5274...`; subsequent commit `d64e8bd1...` only preserved the pre-existing `wiki/log.md` audit history and was explicitly dispositioned as not invalidating the ratified one-time baseline.
+- **Evidence:** `system/reports/graph-refresh-latest.md`, `system/reports/graph-refresh-latest.json`, `system/reports/m2-4-m7-1-closure-2026-08-04.md`, and Brain `operations/reports/m7-1-mind-contained-graphify-2026-08-04.md`.
 
 ### M7.2 — Define generated-output retention
 

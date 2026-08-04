@@ -41,15 +41,23 @@ Legacy folders may remain for migration or history. They are not default destina
 
 ## Retrieval rules
 
-1. Classify the request.
-2. Use `00-memory-map.md` to select the smallest area.
-3. Prefer current canonical pages over captures, historical material, model output, or generated graphs.
-4. Check freshness and source evidence when the topic can change.
-5. Surface contradictions and missing evidence.
-6. Cite the Mind paths used when it helps verification.
-7. Do not expose unrelated private context.
+1. Classify the request and required privacy boundary.
+2. When the client exposes Brain's `mind-context` provider, call
+   `mind_context_health` and use the Gateway only when it reports healthy,
+   current, and read-only.
+3. Prefer `mind_context_resolve` for bounded cited retrieval and use
+   `mind_context_explain` only when ranking or exclusion evidence is needed.
+4. If the provider is absent, unhealthy, stale, or returns unavailable, use
+   `00-memory-map.md` and manual targeted reads. Do not broaden scope or infer a
+   Gateway result.
+5. Prefer current canonical pages over captures, historical material, model output, or generated graphs.
+6. Check freshness and source evidence when the topic can change.
+7. Surface contradictions and missing evidence.
+8. Cite the Mind paths used when it helps verification.
+9. Do not expose unrelated private context.
 
-The future preferred interface is Brain's Context Gateway. Until it is active, use targeted reads from this entrypoint.
+The Context Gateway is a preferred read-only retrieval interface, not a write
+authority. It exposes no Mind mutation path; all write rules below still apply.
 
 ## Write rules
 

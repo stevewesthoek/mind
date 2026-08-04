@@ -4,11 +4,19 @@ Use the smallest relevant area first.
 
 ## Default protocol
 
-1. Classify the request.
-2. Search the first location in the table.
-3. Read the most relevant current pages.
-4. Expand to evidence or history only when needed.
-5. Report missing, stale, or contradictory context.
+1. Classify the request and required privacy boundary.
+2. If the client exposes Brain's `mind-context` provider, check health first.
+3. When healthy and current, use its bounded cited resolve result as the
+   preferred first retrieval; explain ranking only when needed.
+4. If absent, unhealthy, stale, or unavailable, search the first location in
+   the table and continue with manual targeted reads. Never broaden scope to
+   compensate for provider unavailability.
+5. Read the most relevant current pages.
+6. Expand to evidence or history only when needed.
+7. Report missing, stale, or contradictory context.
+
+The Gateway is read-only and non-authoritative. Its citations point back to the
+canonical files governed by the authority order below.
 
 ## Routing table
 

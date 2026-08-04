@@ -1,13 +1,79 @@
 {
-  "status": "ok",
-  "startedAt": "2026-06-07T10:45:40+01:00",
-  "endedAt": "2026-06-07T10:45:56+01:00",
-  "writesToRoot": false,
-  "updatesGraphifyOut": true,
-  "updatesVisualGraph": true,
-  "graphReport": "graphify-out/GRAPH_REPORT.md",
-  "graphData": "graphify-out/graph.json",
-  "visualGraph": "graphify-out/graph.html",
-  "graphifyLogTail": "Re-extracting code files in . (no LLM needed)...\n  AST extraction: 1306/1306 files (100%)\n[graphify watch] Skipped graph.html: Graph has 12993 nodes - too large for HTML viz (limit: 5000). Use --no-viz, raise GRAPHIFY_VIZ_NODE_LIMIT, or reduce input size.\n[graphify watch] Rebuilt: 12993 nodes, 22126 edges, 1456 communities\n[graphify watch] graph.json and GRAPH_REPORT.md updated in graphify-out\nCode graph updated. For doc/paper/image changes run /graphify --update in your AI assistant.\nTip: set GEMINI_API_KEY or GOOGLE_API_KEY to use Gemini for semantic extraction.\n",
-  "rendererLogTail": "Wrote /Users/Office/Repos/stevewesthoek/mind/graphify-out/graph.html\nRendered 1200/6259 nodes and 166/4998 links.\n"
+  "schemaVersion": "2.0.0",
+  "status": "accepted-owner-ratified",
+  "acceptedRunId": "20260804T000604198Z-06de527423e0",
+  "supersededDiagnosticRunId": "20260804T000530178Z-06de527423e0",
+  "ownerDisposition": {
+    "approvedBy": "Steve Westhoek",
+    "approvedAt": "2026-08-04",
+    "decision": "Ratify the 00:06:04 snapshot and classify 00:05:30 as the superseded post-publication-cleanup diagnostic."
+  },
+  "timestamps": {
+    "startedAt": "2026-08-04T00:06:04.198Z",
+    "completedAt": "2026-08-04T00:06:06.991Z",
+    "durationMs": 2793
+  },
+  "source": {
+    "repository": "mind",
+    "commit": "06de527423e05d4208cdcf485be92a2d1028c46d",
+    "exactHead": true,
+    "workingTreeRead": false,
+    "postRunDispositionCommit": "d64e8bd1fd3666758ce140b1c1d8fb147fb39e1f",
+    "postRunDisposition": "Preserved only the pre-existing wiki/log.md compile-loop audit history; owner ratification keeps the one-time baseline accepted."
+  },
+  "runner": {
+    "owner": "brain-runtime",
+    "commit": "38464719d96e9eced962c16982ed8bd4597dee66",
+    "sha256": "cdcfafe45ed9ecbd28beaf2fd783c37a907a7bb0a7f2b8eafe4ebb08dec3e428"
+  },
+  "profile": {
+    "id": "graphify-mind-knowledge",
+    "catalogVersion": "1.1.0",
+    "sha256": "8a9f1b142c005ae1cc9a1196e3339ef681ed663fb039c1ccf41eb51002e1f202"
+  },
+  "generator": {
+    "name": "graphifyy",
+    "version": "0.8.36",
+    "sha256": "e04e632a74629399b6db20a2e761f2ef8d8aa069e3f96f372fdb46ed884b47cf",
+    "modelAccess": false,
+    "networkAccess": false
+  },
+  "corpus": {
+    "fileCount": 601,
+    "includedMarkdownFiles": 591,
+    "includedMindOwnedScripts": 10,
+    "totalBytes": 31206994,
+    "sourceManifestSha256": "6ce98a5b420efeaf8c15cc4654a10358456f6453b75f5ab081d7eaa5222ec912",
+    "mode": "explicit-allowlist-exact-commit-git-archive"
+  },
+  "graph": {
+    "nodeCount": 6202,
+    "edgeCount": 5672,
+    "referencedSourceCount": 601,
+    "sha256": "c17786ed9af9aa5bd49ce9103b1dd98250ea8b82c8a77cca99abce200cf54ea4"
+  },
+  "acceptance": {
+    "status": "pass",
+    "pluginInternalsAtCommit": 29,
+    "includedPluginInternals": 0,
+    "pluginInternalsExcluded": true,
+    "exactMindHead": true,
+    "gitObjectExportOnly": true
+  },
+  "storageBaseline": {
+    "operationalRunRegularFileBytes": 4359884,
+    "operationalRunAllocatedKiB": 8972,
+    "operationalRunFileCount": 600,
+    "budgetKiB": 25600,
+    "withinBudget": true
+  },
+  "receipt": {
+    "sha256": "d03f2fb3f16dfda2edc323f5166669607fc51389dac7e1ab387c88bae3379bee",
+    "acceptanceSha256": "a27431d3381fd9131070627ddf58d60d7ed8d850a3a75b9d00565b8f32ac42b6",
+    "operationalOutputRoot": "/Users/Office/Repos/stevewesthoek/brain/runtime/local/graphify/mind-knowledge",
+    "selectedRun": "runs/20260804T000604198Z-06de527423e0"
+  },
+  "writesToMind": false,
+  "generatedOutputAuthority": "non-authoritative",
+  "futureExecutionAuthority": "none"
 }

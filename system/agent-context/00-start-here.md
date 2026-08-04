@@ -34,11 +34,19 @@ Legacy folders are compatibility or historical surfaces. Use `system/folder-cont
 
 ## Retrieval order
 
+When Brain's `mind-context` provider is available, healthy, current, and
+read-only, it is the preferred retrieval interface. Use its bounded cited
+resolve result for orientation. If it is absent, unhealthy, stale, or
+unavailable, fall back manually without broadening scope:
+
 1. `00-current-context.md` for current priorities.
 2. `00-memory-map.md` for routing.
 3. canonical domain pages.
 4. `resources/` for evidence.
 5. `history/` only when historical context is relevant.
+
+Gateway retrieval does not authorize writes. Canonical Mind files remain the
+authority, and the manual route remains fully supported.
 
 ## Authority rule
 

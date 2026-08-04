@@ -2,7 +2,7 @@
 
 **Status:** canonical cross-repo priority order
 **Version:** 2.0
-**Last reviewed:** 2026-08-03
+**Last reviewed:** 2026-08-04
 **Owner role:** Steve Westhoek (human authority)
 **Depends on:** `system/infinite-brain-philosophy.md`, `system/mind-strategy.md`
 **Conflict rule:** when this roadmap conflicts with philosophy or strategy, those take precedence. Brain's runtime roadmap is an implementation projection and must not reorder these priorities.
@@ -33,7 +33,9 @@ Confirmed on 2026-07-31:
 - `inbox/new/` and `inbox/failed/` are the verified live Save-to-Mind success and failure targets;
 - Mind's human-first folder model exists, and `kanban.md` is the sole human task authority;
 - Brain final verification passed its Brain-local Core, Console, Mind Steward, capability, contract, scheduler, retrieval, documentation, recovery, and synthetic-fixture checks;
-- Brain Context Pack 1.0 and Context Gateway are implemented per Brain's live-status authority; thin adapters remain fixture-only until separately activated;
+- Brain Context Pack 1.0 and Context Gateway are implemented; the exact
+  project-scoped read-only Codex adapter is active-local with owner-approved
+  live, unavailable, and disable/restore evidence dated 2026-08-04;
 - active legacy-path producer migration (Brain BS0.10) is complete: four legacy producers retired with exit guards (2026-07-31). Producer retirement is not package retirement; Mind Steward remains a separate active Brain-owned package per B1.5;
 - deletion readiness (Brain BS0.19) is complete: 0 SAFE, 2 PARTIAL, 17 BLOCKED; deletion is separately governed and not authorized;
 - the Mind M5.1–M5.3 synthetic exact-scope write proof passes;
@@ -90,11 +92,11 @@ No active old-path reference remains unless explicitly marked historical or comp
 
 ## Priority 2 — Vendor-neutral Context Gateway
 
-**Status:** in progress; M2.1–M2.3 complete; M2.4 remains blocked, not deferred
-**Evidence:** `system/reports/m2-context-policy-fixtures-2026-07-31.md`, `system/reports/m2-4-context-gateway-adapter-readiness-audit-2026-08-03.md`
+**Status:** complete; M2.1–M2.4 complete; exit gate satisfied 2026-08-04
+**Evidence:** `system/reports/m2-context-policy-fixtures-2026-07-31.md`, `system/reports/m2-4-m7-1-closure-2026-08-04.md`, Brain `operations/reports/m2-4-context-gateway-activation-2026-08-04.md`
 **Depends on:** Priority 1
 **Goal:** any authorized LLM can retrieve a small, cited, privacy-scoped orientation pack through one core interface.
-**Current gate:** core and CLI repository verification is complete; the thin adapter and trust boundary remain fixture-only. Deployment, discovery, provider authentication, live readback, unavailable-service fallback, disable/rollback, and production freshness remain unverified. No activation is authorized.
+**Closure:** the core contract, fixed-scope read-only adapter, tracked Codex discovery, owner approval, live health/readback, source freshness, unavailable manual fallback, mutation rejection, and disable/restore path are verified. The three Mind entrypoints prefer the healthy Gateway and preserve manual targeted retrieval.
 
 Outcomes:
 
@@ -218,7 +220,7 @@ Exit gate satisfied: Steve Westhoek determined that all eight briefs were useful
 
 ## Priority 7 — System simplification and performance
 
-**Status:** in progress; M7.2–M7.5 complete; M7.1 blocked on Brain-owned graph-refresh evidence
+**Status:** complete; M7.1–M7.5 complete; exit gate satisfied 2026-08-04
 **Depends on:** may proceed in small safe batches after Priority 1
 **Goal:** reduce code, context, storage, and operational complexity while preserving capability.
 
@@ -234,7 +236,7 @@ Outcomes:
 - performance budgets exist for startup, retrieval latency, context tokens, and storage.
 - backup, restore, retention, correction, and deletion procedures are tested without relying on a model provider.
 
-**Current state:** M7.2–M7.5 are complete. Generated-output retention, documentation consistency and its bounded follow-ups, performance budgets including a passing ten-question navigation-depth baseline, and an isolated 14-file Git restore drill now have bounded policy and evidence. Secondary backup coverage remains unknown and is an explicit external recovery-assurance follow-up. This did not activate Graphify or Context Gateway, authorize deletion, overwrite the live vault, or rewrite historical content. M7.1 remains blocked because Graphify is quiesced and requires a fresh Brain-owned receipt-bound graph at the current source commit. Evidence: `system/reports/m2-4-m7-1-completion-audit-2026-08-03.md`.
+**Current state:** M7.1–M7.5 are complete. Steve ratified the exact-commit Brain snapshot `20260804T000604198Z-06de527423e0`; it included 591 Markdown files and 10 Mind-owned scripts, excluded all plugin internals, and established an 8,972 KiB allocated working-set baseline. Generated-output retention, documentation consistency, performance budgets, the navigation-depth baseline, and the isolated Git restore drill remain bounded and evidenced. Future Graphify execution authority is `none`; generated output is non-authoritative. Secondary backup coverage remains an external recovery-assurance follow-up, not a milestone blocker. Evidence: `system/reports/graph-refresh-latest.md` and `system/reports/m2-4-m7-1-closure-2026-08-04.md`.
 
 Exit gate:
 

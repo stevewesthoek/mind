@@ -2,7 +2,7 @@
 
 ```yaml
 status: current
-last_reviewed: 2026-08-03
+last_reviewed: 2026-08-04
 review_after: 2026-08-16
 freshness_risk: medium
 owner: Steve Westhoek
@@ -26,20 +26,22 @@ owner: Steve Westhoek
 | Priority | Status |
 |----------|--------|
 | 1 — Canonical coherence | complete; M1.1–M1.6 complete; Mind Steward retained as a separate Brain-owned local deterministic/report-only package with documented boundary and canonical shared path policy; Brain README refresh completed in commit `a97f4e80` on `origin/release/brain-stabilization-v1`; integration into Brain `main` remains pending in the separate Brain conversation; no migration, retirement, deployment, or automation activation occurred |
-| 2 — Context Gateway | in progress; M2.1–M2.3 complete; M2.4 remains blocked, not deferred; supplied audit passed 58/58 Context Gateway tests; core/CLI are read-only and repository-verified; adapter remains fixture-only; deployment and discovery remain unknown; evidence: `system/reports/m2-4-context-gateway-adapter-readiness-audit-2026-08-03.md` |
+| 2 — Context Gateway | complete; M2.1–M2.4 complete; exact project-scoped read-only Codex adapter active-local with Steve approval; live health/readback, freshness, privacy scope, mutation rejection, unavailable manual fallback, and disable/restore verified; evidence: `system/reports/m2-4-m7-1-closure-2026-08-04.md` |
 | 3 — Retrieval evaluation | complete |
 | 4 — Capability truth | complete |
 | 5 — Controlled application | complete |
 | 6 — Measured automation | complete; M6.1–M6.3 complete; 8 of 8 runs fully evaluated; verdict `retain` (2026-08-03); 8 of 8 useful, 0 safety violations, 8 of 8 citations correct, and 0-minute measured median correction; immediate-batch evidence does not prove multi-week stability; no continuous automation authorized; evidence: `system/reports/priority-6-automation-pilot-verdict-2026-08-03.md` |
-| 7 — System simplification | in progress; M7.2–M7.5 complete; M7.1 blocked on a fresh Brain-owned receipt-bound graph while Graphify is quiesced; the 14-file isolated Git restore drill passed; the 10-question manual-navigation baseline passed at median 2 and maximum 3 transitions; documentation-audit follow-ups are closed; secondary backup coverage and the Graphify working-set baseline remain externally contingent; no Graphify or Context Gateway activation, deletion, live-vault overwrite, or historical bulk rewrite authorized |
+| 7 — System simplification | complete; M7.1–M7.5 complete; owner-ratified receipt-bound Graphify baseline excludes plugin internals and records an 8,972 KiB allocated working set; the restore drill and navigation baseline passed; future Graphify authority remains none; secondary backup coverage remains an external recovery-assurance follow-up |
 
 ## Current capability state (from Brain live-status runbook)
 
-- Context Gateway CLI/core: repository-verified read-only; deployment unknown.
-- Context Gateway thin adapter and trust boundary: repository-verified through fixtures only; not activated.
+- Context Gateway CLI/core: repository-verified read-only.
+- Context Gateway adapter: project-scoped `active-local`, owner-approved, fixed to
+  provider `51e9091c...` and Mind `d64e8bd1...`; no mutation path.
 - Workbench MCP: separate active-local provider; not Context Gateway activation.
 - Codebase Memory MCP: candidate-only; not approved, default, deployed, or activated.
-- Graphify: quiesced; `graphify-transition-governance.json` prohibits deletion.
+- Graphify: one-time Mind baseline accepted at `20260804T000604198Z-06de527423e0`;
+  future execution authority `none`; deletion remains separately governed.
 - Save-to-Mind: live routing verified (B1.0a, 2026-07-22).
 - Continuous automation: not authorized.
 
@@ -58,7 +60,11 @@ system/infinite-brain-philosophy.md
 
 ## Current retrieval rule
 
-Use `00-memory-map.md`, current canonical domain files, and targeted search. Do not treat captures, generated reports, graphs, or model summaries as approved truth.
+Prefer the healthy/current Brain `mind-context` provider for bounded cited
+retrieval. If absent, unhealthy, stale, or unavailable, use `00-memory-map.md`,
+current canonical domain files, and manual targeted search without broadening
+scope. Do not treat captures, generated reports, graphs, or model summaries as
+approved truth.
 
 ## Maintenance
 
