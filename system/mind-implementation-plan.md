@@ -435,5 +435,5 @@ external writes.
 - [x] Mind contains no duplicate live capability status.
 - [x] First write pilot fixtures and review checklist pass.
 - [x] One automation pilot has an evidence-backed verdict.
-- [ ] Graph, generated output, docs, and performance budgets are bounded. Generated output, documentation audit, and performance budgets are complete; graph refresh remains.
+- [x] Graph, generated output, docs, and performance budgets are bounded.
 - [x] Mind remains fully useful without Brain or a model provider.
