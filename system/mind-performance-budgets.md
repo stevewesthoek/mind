@@ -17,7 +17,7 @@ runtime state.
 
 | Concern | Budget | 2026-08-03 baseline | Measurement | Review date |
 |---|---|---|---|---|
-| Startup context files | The four required files total no more than 16 KiB and 2,000 whitespace-delimited words | 13,893 bytes, 1,818 words after the M2.4/M7.1 closure update; PASS | `wc -c -w system/agent-context/AGENTS.md system/agent-context/00-start-here.md system/agent-context/00-current-context.md system/agent-context/00-memory-map.md` | 2026-09-03 |
+| Startup context files | The four required files total no more than 16 KiB and 2,000 whitespace-delimited words | 13,905 bytes, 1,821 words after the M2.4/M7.1 closure update; PASS | `wc -c -w system/agent-context/AGENTS.md system/agent-context/00-start-here.md system/agent-context/00-current-context.md system/agent-context/00-memory-map.md` | 2026-09-03 |
 | Manual navigation depth | At most 3 link transitions from an entrypoint to the canonical domain source for a routine question | 10 representative questions; median 2 transitions, maximum 3; PASS | Re-run the path-chain method in `system/reports/manual-navigation-depth-baseline-2026-08-03.md` and report median/max | 2026-09-03 |
 | Generated storage — current projections | Current receipt and compatibility projections tracked in Git stay below 1 MiB total | `graph-refresh-latest.md` plus `.json` use 8 KiB by filesystem blocks | `du -ck system/reports/graph-refresh-latest.md system/reports/graph-refresh-latest.json | tail -1` | 2026-09-03 |
 | Generated storage — report evidence | `system/reports/` stays below 5 MiB; growth beyond the budget requires retention review, not automatic deletion | 856 KiB after M2.4/M7.1 closure evidence; PASS | `du -sk system/reports` | 2026-09-03 |

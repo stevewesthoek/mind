@@ -37,7 +37,7 @@ owner: Steve Westhoek
 
 - Context Gateway CLI/core: repository-verified read-only.
 - Context Gateway adapter: project-scoped `active-local`, owner-approved, fixed to
-  provider `51e9091c...` and Mind `d64e8bd1...`; no mutation path.
+  provider `51e9091c...` and the current approved Mind HEAD; no mutation path.
 - Workbench MCP: separate active-local provider; not Context Gateway activation.
 - Codebase Memory MCP: candidate-only; not approved, default, deployed, or activated.
 - Graphify: one-time Mind baseline accepted at `20260804T000604198Z-06de527423e0`;
