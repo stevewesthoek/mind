@@ -851,6 +851,9 @@ expectations:
       - ref: system/reports/brain-console-mind-steward-visibility-plan-2026-06-07.md
         kind: exact-path
         reason: Superseded June 2026 planning document; not a current canonical source for operating state.
+      - ref: system/templates/area.md
+        kind: exact-path
+        reason: Generic area template with no operating-state content or canonical authority. Fresh metadata and canonical classification do not qualify an unrelated template as acceptable for an operating-state query. Unrelated templates must not appear in a current-operating-state pack regardless of their metadata freshness.
     authority_expectation: Current canonical documents (status=current, last_reviewed 2026-08-04) outrank superseded handoff reports; review metadata governs freshness; a superseded June report must not rank above current August documents for an operating-state query.
     freshness_expectation: Prefer sources with an explicit last_reviewed date at or near the query date; unknown freshness on a superseded supporting report does not qualify it as a current operating-state authority.
     expected_unknowns:
