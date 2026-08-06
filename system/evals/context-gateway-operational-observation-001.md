@@ -12,6 +12,18 @@ This record covers one real retrieval session. It does not prove multi-week
 stability, production readiness, or meaningful time savings. It does not reopen
 any completed roadmap milestone.
 
+## Ledger metadata
+
+- observation_id: 001
+- session_date: 2026-08-04
+- classification: fixture-only
+- qualifying: false
+- incident_type: none
+- qualifying_count: 0
+- target_count: 10
+- remaining_sessions: 10
+- next_observation: 002
+
 ---
 
 ## Session metadata

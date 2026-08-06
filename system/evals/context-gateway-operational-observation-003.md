@@ -9,6 +9,18 @@
 **Mind HEAD requirement:** a21f9ed5d7270ae7dd939b93c5df525c933091f8
 **Provider revision:** 076b9f97030e1c90bc66ffbb61d29456b41ed69f
 
+## Ledger metadata
+
+- observation_id: 003
+- session_date: 2026-08-05
+- classification: qualifying-live
+- qualifying: true
+- incident_type: retrieval-relevance
+- qualifying_count: 2
+- target_count: 10
+- remaining_sessions: 8
+- next_observation: 004
+
 ---
 
 ## Operator Question and Request Payload

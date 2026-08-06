@@ -19,6 +19,18 @@
 **Activation state:** `active-local`, project-scoped read-only with fixed provider and approved Mind commit pin
 **Boundary classification:** `project-scoped-read-only-activation-candidate`
 
+## Ledger metadata
+
+- observation_id: 002
+- session_date: 2026-08-04
+- classification: qualifying-live
+- qualifying: true
+- incident_type: retrieval-authority
+- qualifying_count: 1
+- target_count: 10
+- remaining_sessions: 9
+- next_observation: 003
+
 ---
 
 ## Health evidence

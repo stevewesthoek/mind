@@ -2,6 +2,18 @@
 
 **Status:** qualifying live observation — clean retrieval (no incidents)
 
+## Ledger metadata
+
+- observation_id: 004
+- session_date: 2026-08-06
+- classification: qualifying-live
+- qualifying: true
+- incident_type: none
+- qualifying_count: 3
+- target_count: 10
+- remaining_sessions: 7
+- next_observation: 005
+
 ## Observation metadata
 
 - **observation_id**: 004
