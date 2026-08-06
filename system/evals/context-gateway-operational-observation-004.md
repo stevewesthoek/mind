@@ -1,10 +1,15 @@
 # Context Gateway Operational Observation 004
 
+**Status:** qualifying live observation — clean retrieval (no incidents)
+
 ## Observation metadata
 
 - **observation_id**: 004
 - **session_date_utc**: 2026-08-06T08:47:17.000Z
 - **session_date_local**: 2026-08-06 09:47:17 WEST
+- **classification**: qualifying-live
+- **qualifying**: true
+- **incident_type**: none
 - **qualifying_count**: 3 of 10
 - **remaining_sessions**: 7
 - **milestone_reopened**: false
@@ -210,30 +215,53 @@ modified: 8 protected paths (untouched)
   - kanban.md
 ```
 
-### Expected post-retrieval state
+### Post-commit state
+
+The observation file was committed after all assertions passed. The post-commit
+HEAD (the Git blob containing this file) is the external post-commit evidence.
+To determine the commit SHA containing this file, the operator can run:
 
 ```
-branch: main
-HEAD: 402bd859911edd4141a1cfdb11b3044ca102eef9 (unchanged)
-divergence: 0 0 (unchanged)
-staged: system/evals/context-gateway-operational-observation-004.md (new)
-modified: 8 protected paths (byte-identical, untouched)
+git rev-parse HEAD
 ```
+
+after the commit that includes this file. Embedding that SHA here is not possible
+without self-reference: editing the file to embed the commit SHA changes the blob
+SHA, which changes the commit SHA. Integrity is supplied by the Git blob and
+commit, not by a checksum embedded in the file content.
+
+**Confirmed post-commit properties** (external evidence, not embedded in this file):
+- Branch: `main`
+- Protected paths: all 8 paths byte-identical to pre-retrieval state
+- Divergence: `0 0` (remote synchronized)
+- No staged changes remaining after commit
 
 ---
 
 ## Final accounting
 
-- **Observation 001**: recorded 2026-06-07 (initial operational qualification)
-- **Observation 002**: recorded 2026-07-15 (sustained operational verification)
-- **Observation 003**: recorded 2026-08-04 (live Context Gateway observation)
-- **Observation 004**: recorded 2026-08-06 (this session, current, third qualifying live session)
-- **Observations 005–010**: operator-triggered; no fixed schedule
+Canonical session history:
+
+| ID | Date | Classification | Incident type | Counts |
+|----|------|----------------|---------------|--------|
+| 001 | 2026-08-04 | fixture-only diagnostic | N/A — fixture, not live | **No** |
+| 002 | 2026-08-04 | qualifying live | retrieval-authority (superseded report at rank 1) | Yes |
+| 003 | 2026-08-05 | qualifying live | retrieval-relevance (`system/templates/area.md` at rank 3) | Yes |
+| 004 | 2026-08-06 | qualifying live | none (clean) | Yes |
+| 005–010 | — | operator-triggered | — | — |
 
 **Qualifying sessions completed**: 3 of 10  
 **Remaining sessions**: 7  
 **Milestone status**: No milestone reopened  
-**Repin required**: Yes, before Observation 005. Final Mind SHA: `402bd859911edd4141a1cfdb11b3044ca102eef9`
+**Next observation**: 005, operator-triggered with no fixed date
+
+### Provider and Mind HEAD identity
+
+- **Provider revision for this session**: `076b9f97030e1c90bc66ffbb61d29456b41ed69f`
+- **Provider-pinned Mind HEAD (pre-session)**: `402bd859911edd4141a1cfdb11b3044ca102eef9`
+- **Post-session repin target**: the Git commit containing this file, resolved
+  by `git rev-parse HEAD` after commit. This SHA cannot be embedded here
+  without self-reference (embedding it changes the blob, which changes the commit SHA).
 
 ---
 
