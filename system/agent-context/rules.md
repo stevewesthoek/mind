@@ -4,12 +4,12 @@
 
 - Prefer compact indexes and durable pages over many tiny notes.
 - New raw captures use the active success-intake path `inbox/new/`.
-- Failed raw captures target verified live path `inbox/failed/`; `capture/failed/` is historical-only.
+- Failed raw captures target verified live path `inbox/failed/`; `history/legacy-capture/failed/` is historical evidence only.
 - Durable non-faith facts compile into `knowledge/`.
 - Faith, Bible, theology, apologetics, ministry, and studies compile into `faith/`.
 - Current human tasks use authoritative `kanban.md`. `tasks.md` is a retired, non-authoritative snapshot and must not receive writes.
-- Current projects target `projects/`; use legacy `live/projects/` until project migration.
-- Sources target `resources/` or `faith/resources/`; legacy `sources/` remains during migration.
+- Current projects target `projects/`.
+- Sources target `resources/` or `faith/resources/`.
 - Raw sources and original captures are source-of-truth material and must not be silently rewritten.
 - Compiled knowledge links back to sources or captures when useful.
 - `inbox/processed/` is the target proposal/review surface; `wiki/log.md` remains the compatibility ledger until resolved and migrated.

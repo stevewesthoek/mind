@@ -19,26 +19,25 @@ Target paths:
 
 Historical or compatibility-only paths:
 
-- `capture/inbox/` — historical only; retired success-intake path.
-- `capture/failed/` — historical-only failed-routing path.
+- `history/legacy-capture/inbox/` — migrated; retired success-intake path (was `capture/inbox/`).
+- `history/legacy-capture/failed/` — migrated; historical-only failed-routing path (was `capture/failed/`).
 - `tasks.md` — retired, non-authoritative compatibility snapshot.
-- `live/tasks.md`
-- `live/projects.md`
-- `live/workflows.md`
-- `live/decisions.md`
-- `wiki/`
-- `wiki/log.md`
-- `sources/`
-- `archive/`
+- `history/legacy-live/tasks.md` — migrated (was `live/tasks.md`).
+- `history/legacy-live/projects.md` — migrated (was `live/projects.md`).
+- `history/legacy-live/workflows.md` — migrated (was `live/workflows.md`).
+- `history/legacy-live/decisions.md` — migrated (was `live/decisions.md`; file absent, not created).
+- `wiki/` — pending Phase 2 migration.
+- `wiki/log.md` — pending Phase 2 migration.
+- `archive/` — pending Phase 2 migration.
 
 ## Search Order
 
 1. `system/agent-context/current.md`
 2. `system/agent-context/00-current-context.md`
-3. `projects/`, with `live/` fallback during migration
-4. `knowledge/index.md`, with `wiki/index.md` fallback during migration
+3. `projects/`
+4. `knowledge/index.md`, with `wiki/index.md` fallback during wiki migration
 5. Domain files in `knowledge/`, `faith/`, `organizations/`, `people/`, and `repos/`
-6. `resources/index.md`, with `sources/index.md` fallback during migration
+6. `resources/index.md`, with `sources/index.md` fallback during wiki migration (note: `sources/` root removed; `sources/index.md` was never present)
 7. `inbox/processed/` and `wiki/log.md` proposal surfaces
 
 ## Write Policy
@@ -57,7 +56,7 @@ Failed-processing target:
 inbox/failed/
 ```
 
-Failed writes and moves use verified canonical `inbox/failed/`; historical `capture/failed/` must not receive new writes.
+Failed writes and moves use verified canonical `inbox/failed/`; `history/legacy-capture/failed/` is historical evidence only and must not receive new writes.
 
 Mind Steward review suggestions target `inbox/processed/` after migration and `wiki/log.md` as the compatibility surface until proposal-surface migration is approved.
 

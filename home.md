@@ -80,18 +80,18 @@ Open `kanban.md` to see what is to-do, in progress, and done. Add, move, and com
 
 | What | Target path | Migration note |
 |------|-------------|----------------|
-| New captures | `inbox/new/` | `capture/inbox/` is retired historical intake |
-| Raw originals | `inbox/raw/` | selected `capture/` or source paths after review |
+| New captures | `inbox/new/` | `history/legacy-capture/inbox/` is migrated historical evidence |
+| Raw originals | `inbox/raw/` | source paths reviewed and migrated to `history/legacy-capture/` |
 | Processed proposals and receipts | `inbox/processed/` | `wiki/log.md` and current reports |
 | Failed intake | `inbox/failed/` | verify current external failure routing in `system/folder-contract.md` |
-| Organizations | `organizations/` | `wiki/organisations/` |
-| Active projects | `projects/` | `live/projects/` |
+| Organizations | `organizations/` | `wiki/organisations/` (pending Phase 2) |
+| Active projects | `projects/` | `history/legacy-live/projects.md` is migrated historical evidence |
 | Repos and apps | `repos/` | none; new target area |
 | People | `people/` | selected legacy research/source notes after review |
-| Faith, Bible, theology, apologetics, ministry | `faith/` | `sources/research/bible/`, `sources/research/theology/`, `sources/research/apologetics/`, selected `wiki/areas/` |
-| Durable non-faith knowledge | `knowledge/` | `wiki/` |
-| Non-faith source material | `resources/` | `sources/` |
-| Completed or inactive material | `history/` | `archive/` |
+| Faith, Bible, theology, apologetics, ministry | `faith/` | source material migrated from `sources/research/` prior batches; `wiki/areas/` pending Phase 2 |
+| Durable non-faith knowledge | `knowledge/` | `wiki/` (pending Phase 2) |
+| Non-faith source material | `resources/` | `sources/` root removed Phase 1 |
+| Completed or inactive material | `history/` | `archive/` (pending Phase 2) |
 | AI/coding-agent context | `system/agent-context/` | `router/` |
 | Graphify operational output | `runtime/local/graphify/` (future contained profile) | `graphify-out/` and `.graphify-out/` are compatibility roots; generated output is non-authoritative |
 

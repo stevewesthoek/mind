@@ -515,9 +515,12 @@ expectations:
         kind: exact-path
         reason: User manual summarizes canonical intake routes but is subordinate to the contracts.
     forbidden_sources:
-      - ref: capture/
+      - ref: missing:capture/
+        kind: intentionally-missing
+        reason: capture/ was migrated to history/legacy-capture/ in Phase 1 (2026-08-06); the root no longer exists.
+      - ref: history/legacy-capture/
         kind: path-prefix
-        reason: Legacy capture paths are historical or compatibility surfaces, not active defaults.
+        reason: history/legacy-capture/ is historical evidence only; it must not be used as an active intake default.
     authority_expectation: Folder contract governs Mind paths; Brain evidence is required only for live routing verification.
     freshness_expectation: Intake routing is high-freshness and must retain dated verification evidence.
     expected_unknowns:
@@ -539,14 +542,13 @@ expectations:
       - ref: tasks.md
         kind: exact-path
         reason: Retired non-authoritative snapshot must not supply current task state.
-      - ref: live/tasks.md
-        kind: exact-path
-        reason: Derived summary cannot replace complete human task authority.
+      - ref: missing:live/tasks.md
+        kind: intentionally-missing
+        reason: live/tasks.md was migrated to history/legacy-live/tasks.md in Phase 1 (2026-08-06); the path no longer exists.
     authority_expectation: The task contract determines authority; project-specific canonical pages determine project state.
     freshness_expectation: Task and project state are high-freshness and require current source inspection.
     expected_unknowns:
       - Which specific project page governs a project not named in the query.
-      - Whether compatibility project state remains under live/projects/.
 
   - question_id: CTX-AIS-004
     required_sources:

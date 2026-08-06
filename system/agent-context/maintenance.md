@@ -10,12 +10,11 @@ Target inputs after migration:
 - `resources/`
 - `faith/resources/`
 
-Historical or compatibility-only inputs:
+Historical-only inputs (migrated; do not write):
 
-- `capture/inbox/` — historical only; retired success-intake path.
-- `sources/` — compatibility-only source path during migration.
+- `history/legacy-capture/inbox/` — migrated historical evidence (was `capture/inbox/`).
 
-Target outputs after migration:
+Target outputs:
 
 - `knowledge/`
 - `faith/`
@@ -25,15 +24,12 @@ Target outputs after migration:
 Task output boundary:
 
 - Human task changes require exact review and write only to authoritative `kanban.md`.
-- `live/tasks.md` may remain a derived summary surface.
 - `tasks.md` is retired and non-authoritative.
 
-Compatibility outputs during migration:
+Compatibility outputs during remaining wiki/archive migration:
 
-- `wiki/`
-- `sources/index.md`
-- `live/tasks.md`
-- `live/decisions.md`
+- `wiki/` — pending Phase 2 migration.
+- `wiki/log.md` — pending Phase 2 migration.
 
 ## Memory loop
 

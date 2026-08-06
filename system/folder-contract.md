@@ -65,17 +65,15 @@ The target folders are canonical for new Mind documentation and approved Mind wr
 
 | Legacy path | Target path | Status |
 |-------------|-------------|--------|
-| `capture/inbox/` | `inbox/new/` | **Retired historical path.** Brain B1.0a verified the guarded live success route to `inbox/new/` on 2026-07-22. |
-| `capture/failed/` | `inbox/failed/` | **Retired historical path.** Brain B1.0a verified the guarded live failure route to `inbox/failed/` on 2026-07-22. |
-| `capture/` raw/original material | `inbox/raw/` or `resources/` | Move only after source preservation review. |
-| `live/projects/` | `projects/` | Brain supports both; move project content later in small commits. |
-| `live/decisions.md` | `knowledge/decisions.md` | Decide per decision type during migration. |
-| `live/tasks.md` | `kanban.md` or `inbox/processed/` | Human task changes belong only in authoritative `kanban.md`; generated summaries belong in review/report surfaces. |
+| `capture/inbox/` | `inbox/new/` | **Migrated 2026-08-06.** Phase 1: moved to `history/legacy-capture/inbox/` as historical evidence. Brain B1.0a verified the guarded live success route to `inbox/new/` on 2026-07-22. |
+| `capture/failed/` | `inbox/failed/` | **Migrated 2026-08-06.** Phase 1: moved to `history/legacy-capture/failed/` as historical evidence. Brain B1.0a verified the guarded live failure route to `inbox/failed/` on 2026-07-22. |
+| `capture/` root | `history/legacy-capture/` | **Migrated 2026-08-06.** Phase 1 complete; all files moved to `history/legacy-capture/` with SHA-256 verification. |
+| `live/` root | `history/legacy-live/` | **Migrated 2026-08-06.** Phase 1 complete; all files moved to `history/legacy-live/` with SHA-256 verification. |
 | `wiki/organisations/` | `organizations/` | Use `organizations/` after migration. |
 | `wiki/` durable knowledge | `knowledge/` or `faith/` | Faith material goes to `faith/`; other durable knowledge goes to `knowledge/`. |
 | `wiki/log.md` | `inbox/processed/` or `system/reports/` | Proposal/review surfaces move later; current local edits must not be overwritten. |
 | `sources/books/`, `sources/files/`, `sources/papers/`, `sources/transcripts/`, `sources/web/`, `sources/research/`, `sources/index.md` | completed to `resources/` | Non-faith source/resource scaffolding moved in Batch 7A; `.DS_Store` metadata was not migrated. |
-| `sources/` remaining local metadata | cleanup candidate | Preserve provenance and keep raw evidence separate from conclusions; do not migrate `.DS_Store` as knowledge. |
+| `sources/` root | removed | **Deleted 2026-08-06.** Phase 1: contained only `.DS_Store` (untracked local macOS metadata); deleted and root removed. |
 | `sources/research/bible/` | completed to `faith/resources/bible/` | Source material moved in Batch 5C1; distilled Bible notes may be promoted later after review. |
 | `sources/research/theology/` | completed to `faith/resources/theology/` | Source material moved in Batch 5D1; distilled theology may be promoted later after review. |
 | `sources/research/apologetics/` | completed to `faith/resources/apologetics/` | Approved source material moved in Batch 5E1; distilled apologetics may be promoted later after review. |
@@ -103,7 +101,7 @@ External Save-to-Mind routing is aligned with these targets (deployment evidence
 
 - successful processing routes to `inbox/new/`;
 - failed processing routes to `inbox/failed/`;
-- `capture/inbox/` and `capture/failed/` are historical-only and must not receive new writes.
+- `capture/` and `live/` roots have been migrated to `history/legacy-capture/` and `history/legacy-live/` respectively; `sources/` root has been removed. Do not write to these paths.
 
 Use the canonical intake paths directly. Durable writes beyond intake still require review and exact-path approval.
 
