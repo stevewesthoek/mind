@@ -1,7 +1,7 @@
 # Mind Legacy Root Migration Closeout
 
-**Status:** Phase 1 complete; Phases 2–4 pending
-**Version:** 1.0 (Phase 1)
+**Status:** Phases 1 and 2 complete; Phases 3–5 pending
+**Version:** 2.0 (Phase 2)
 **Date:** 2026-08-06
 **Owner role:** Steve Westhoek (human authority)
 **Scope:** Staged retirement of six legacy root folders: `capture/`, `live/`, `sources/`, `wiki/`, `archive/`, `graphify-out/`
@@ -191,7 +191,7 @@ Total: 60 files, 1,460,354 bytes (independently verified; matches prior audit).
 | `wiki/organisations/prochat/playbooks/saas-reference.md` | `a414e257` | canonical reference | `organizations/prochat/playbooks/saas-reference.md` |
 | `wiki/organisations/prochat/playbooks/waas-to-saas.md` | `3d9e4ab3` | canonical reference | `organizations/prochat/playbooks/waas-to-saas.md` |
 
-#### wiki/organisations/prochat/youtube/ — 15 files
+#### wiki/organisations/prochat/youtube/ — 14 files
 
 | Source path | SHA-256 | Classification | Target |
 |-------------|---------|----------------|--------|
@@ -271,7 +271,9 @@ Total: 60 files, 1,460,354 bytes (independently verified; matches prior audit).
 | `inbox/processed/` (log added) | existing | existing | +1 | — |
 | `history/legacy-wiki/` | 0 (absent) | 0 | 4 | — |
 
-Note: 2 untracked `.DS_Store` files deleted, not preserved. 57 tracked files moved. 1 collision resolved (canonical target retained; wiki version moved to `history/legacy-wiki/`).
+Note: 2 untracked `.DS_Store` files deleted, not preserved. 58 tracked files moved. 1 collision resolved (canonical target retained; wiki version moved to `history/legacy-wiki/`).
+
+**Accounting verification (2026-08-07):** `git ls-tree -r --name-only 8a5aabc -- wiki/` returns 58 tracked files. `git diff-tree --no-commit-id -r --name-status 272cd03` confirms 58 deletions from `wiki/` and 58 additions to destination paths. The report previously stated 57; corrected to 58. The discrepancy was a counting error in the original closeout narrative.
 
 ### 2.3 Collision report
 
@@ -322,14 +324,81 @@ The Phase 1 commit (`8a5aabc`) is the clean pre-Phase-2 restore point.
 
 ---
 
-## Phase 3 — `archive/` (pending)
+## Phase 3 — `archive/`
 
-**Status:** pending
+**Status:** complete — 2026-08-07
 
-Scope:
-- `archive/` → `history/archive/`
+### 3.1 Pre-migration inventory
 
-Prerequisites: Phases 1–2 complete (both satisfied).
+Total: 846 files, 1,952,280 bytes (independently verified; matches prior audit).
+
+- 841 tracked files: `historical-archive` classification → moved to `history/archive/`
+- 5 untracked `.DS_Store` files: `local-metadata` classification → deleted
+
+`.DS_Store` locations deleted:
+- `archive/.DS_Store`
+- `archive/old/legacy-06-resources/.DS_Store`
+- `archive/old/legacy-06-resources/research/.DS_Store`
+- `archive/old/legacy-03-projects/04-tasks/.DS_Store`
+- `archive/old/legacy-06-resources/research/notes/.DS_Store`
+
+Complete machine-readable manifest: `system/reports/mind-legacy-root-migration-archive-manifest.jsonl` (846 records).
+
+### 3.2 Filesystem artifact: empty `wiki/` directory tree
+
+The `wiki/` directory was absent from git (all files migrated in Phase 2) but retained empty subdirectory scaffolding as a filesystem artifact (12 empty directories, 0 files, all untracked). Removed with `rmdir` before beginning Phase 3 migration. Git does not track empty directories, so no git operation was required. This cleanup is recorded here as a filesystem-only change.
+
+### 3.3 Before/after counts
+
+| Root | Before files | Before bytes | After files | After bytes |
+|------|-------------|-------------|------------|------------|
+| `archive/` | 846 | 1,952,280 | 0 (absent) | 0 |
+| `history/archive/` | 0 (absent) | 0 | 841 | 1,921,540 |
+
+Note: 5 untracked `.DS_Store` files deleted (30,740 bytes), not preserved. 841 tracked files moved.
+
+### 3.4 Collision report
+
+**No collisions.** `history/archive/` was absent before migration. No existing target file was overwritten. Manifest confirmed 0 collision entries.
+
+### 3.5 Hash verification
+
+- Method: SHA-256 on target files after `git mv`; compared against manifest-recorded source hashes
+- Verified: **841/841 SHA-256 matches — all PASS**
+- Deleted (`.DS_Store`): 5 files; deleted, not preserved, no SHA-256 required
+
+### 3.6 Active-reference updates
+
+| File | Change |
+|------|--------|
+| `system/folder-contract.md` | Updated `archive/` row to record Phase 3 complete; updated documentation compatibility note; updated root write rule; version bumped to 3.0 |
+| `system/agent-context/map.md` | Changed `archive/` pending entry to `history/archive/` migrated 2026-08-07 |
+| `system/agent-context/rules.md` | Changed `archive/` pending note to reflect Phase 3 complete |
+| `system/agent-context/maintenance.md` | Removed `archive/` compatibility-output section (was pending Phase 3) |
+| `home.md` | Updated target structure table: `archive/ pending Phase 3` → `history/archive/ migrated Phase 3` |
+| `system/reports/mind-legacy-root-migration-closeout.md` (this file) | Phase 2 accounting corrected (57→58 tracked files); metadata version bumped to 2.0 (Phase 2); Phase 3 section populated |
+
+### 3.7 Remaining `archive/` references (classified)
+
+| File | Reference | Classification |
+|------|-----------|----------------|
+| `system/folder-contract.md` | `archive/` in compatibility table | migration documentation — records completed status |
+| `system/reports/mind-legacy-root-migration-closeout.md` (this file) | all archive paths | migration documentation |
+| `system/reports/mind-legacy-root-migration-archive-manifest.jsonl` | source paths begin with `archive/` | historical manifest evidence |
+| Various `system/reports/` | `archive/` in historical evidence | historical evidence |
+| `.graphifyignore` | `archive/` and `**/archive/` exclusion patterns | explicit negative assertion — these patterns now match `history/archive/` sub-path as well, which is the correct behavior since archived historical content should not be graphed |
+
+No active agent-context contract, script, template, validator, runbook, or navigation document retains a live reader/writer/fallback reference to `archive/`.
+
+### 3.8 Rollback instructions
+
+To roll back Phase 3 entirely:
+
+```bash
+git revert HEAD --no-edit
+```
+
+The Phase 2 commit (`272cd03`) is the clean pre-Phase-3 restore point.
 
 ---
 

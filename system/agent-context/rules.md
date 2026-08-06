@@ -13,7 +13,7 @@
 - Raw sources and original captures are source-of-truth material and must not be silently rewritten.
 - Compiled knowledge links back to sources or captures when useful.
 - `inbox/processed/` is the target proposal/review surface.
-- Historical material targets `history/`; legacy `archive/` remains pending Phase 3 migration.
+- Historical material targets `history/`; `archive/` migrated Phase 3 to `history/archive/`.
 
 ## Safety rules
 

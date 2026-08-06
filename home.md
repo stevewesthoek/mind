@@ -89,7 +89,7 @@ Open `kanban.md` to see what is to-do, in progress, and done. Add, move, and com
 | Faith, Bible, theology, apologetics, ministry | `faith/` | source material migrated from `sources/research/` prior batches |
 | Durable non-faith knowledge | `knowledge/` | `knowledge/personal/` migrated Phase 2 from `wiki/family.md`, `wiki/finance.md`, `wiki/health.md` |
 | Non-faith source material | `resources/` | `sources/` root removed Phase 1 |
-| Completed or inactive material | `history/` | `history/legacy-wiki/` migrated Phase 2; `archive/` pending Phase 3 |
+| Completed or inactive material | `history/` | `history/legacy-wiki/` migrated Phase 2; `history/archive/` migrated Phase 3 |
 | AI/coding-agent context | `system/agent-context/` | `router/` |
 | Graphify operational output | `runtime/local/graphify/` (future contained profile) | `graphify-out/` and `.graphify-out/` are compatibility roots; generated output is non-authoritative |
 

@@ -3,12 +3,12 @@
 This document records the Mind root structure, migration status, and root cleanliness rules.
 
 **Status:** `inbox/new/` and `inbox/failed/` are the canonical and verified live Save-to-Mind intake targets.
-**Version:** 2.0
-**Last verified:** 2026-08-06
+**Version:** 3.0
+**Last verified:** 2026-08-07
 **Owner role:** Steve Westhoek (structure authority)
 **Depends on:** `system/mind-strategy.md`, `system/brain-mind-bridge.md`
 **Conflict rule:** when this contract conflicts with strategy or philosophy, those take precedence. When Brain runtime paths conflict with this contract's canonical paths, this contract takes precedence for Mind-side routing unless Brain provides verified evidence of a necessary change.
-**Documentation compatibility:** `capture/`, `live/`, `sources/`, and `wiki/` roots are fully migrated and absent. Brain deployment evidence is authoritative in Brain's live-status runbook.
+**Documentation compatibility:** `capture/`, `live/`, `sources/`, `wiki/`, and `archive/` roots are fully migrated and absent. Brain deployment evidence is authoritative in Brain's live-status runbook.
 
 ## Root purpose
 
@@ -79,7 +79,7 @@ The target folders are canonical for new Mind documentation and approved Mind wr
 | `sources/research/apologetics/` | completed to `faith/resources/apologetics/` | Approved source material moved in Batch 5E1; distilled apologetics may be promoted later after review. |
 | `wiki/areas/theological-studies/dance-of-life/` | completed to `faith/resources/dance-of-life/` | Source-first move completed in Batch 5I2; no content promoted to `faith/studies/dance-of-life/`. |
 | `wiki/` root | `history/legacy-wiki/` | **Migrated 2026-08-06.** Phase 2 complete; all files accounted for; root absent. |
-| `archive/` | `history/` | Pending Phase 3 migration. |
+| `archive/` | `history/archive/` | **Migrated 2026-08-07.** Phase 3 complete; all files moved to `history/archive/` with SHA-256 verification. |
 | `tasks.md` | `kanban.md` | `tasks.md` is retired and non-authoritative. `kanban.md` remains authority unless a future lossless, reversible migration is separately validated and approved. |
 | `router/` | `system/agent-context/` | Batch 1 moved tracked agent-context files to `system/agent-context/`; legacy `router/` references are now compatibility/history only until validation cleanup. |
 | `graphify-out/` and `.graphify-out/` references | `runtime/local/graphify/` | Future contained operational root; compatibility roots are non-authoritative and blocked for manual writes. |
@@ -102,7 +102,7 @@ External Save-to-Mind routing is aligned with these targets (deployment evidence
 
 - successful processing routes to `inbox/new/`;
 - failed processing routes to `inbox/failed/`;
-- `capture/` and `live/` roots have been migrated to `history/legacy-capture/` and `history/legacy-live/` respectively; `sources/` and `wiki/` roots have been removed. Do not write to these paths.
+- `capture/` and `live/` roots have been migrated to `history/legacy-capture/` and `history/legacy-live/` respectively; `sources/`, `wiki/`, and `archive/` roots have been migrated and are absent. Do not write to these paths.
 
 Use the canonical intake paths directly. Durable writes beyond intake still require review and exact-path approval.
 

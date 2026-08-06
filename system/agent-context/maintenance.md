@@ -26,10 +26,6 @@ Task output boundary:
 - Human task changes require exact review and write only to authoritative `kanban.md`.
 - `tasks.md` is retired and non-authoritative.
 
-Compatibility outputs during remaining archive migration:
-
-- `archive/` — pending Phase 3 migration.
-
 ## Memory loop
 
 Maintains:

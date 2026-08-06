@@ -28,7 +28,7 @@ Historical or compatibility-only paths:
 - `history/legacy-live/decisions.md` — migrated (was `live/decisions.md`; file absent, not created).
 - `history/legacy-wiki/` — migrated 2026-08-06; retired wiki root (was `wiki/`).
 - `inbox/processed/legacy-wiki-proposal-log.md` — migrated 2026-08-06 (was `wiki/log.md`).
-- `archive/` — pending Phase 3 migration.
+- `history/archive/` — migrated 2026-08-07; retired archive root (was `archive/`).
 
 ## Search Order
 
