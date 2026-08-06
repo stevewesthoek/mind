@@ -12,8 +12,8 @@
 - Sources target `resources/` or `faith/resources/`.
 - Raw sources and original captures are source-of-truth material and must not be silently rewritten.
 - Compiled knowledge links back to sources or captures when useful.
-- `inbox/processed/` is the target proposal/review surface; `wiki/log.md` remains the compatibility ledger until resolved and migrated.
-- Historical material targets `history/`; legacy `archive/` remains during migration.
+- `inbox/processed/` is the target proposal/review surface.
+- Historical material targets `history/`; legacy `archive/` remains pending Phase 3 migration.
 
 ## Safety rules
 

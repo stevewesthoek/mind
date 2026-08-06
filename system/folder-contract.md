@@ -4,11 +4,11 @@ This document records the Mind root structure, migration status, and root cleanl
 
 **Status:** `inbox/new/` and `inbox/failed/` are the canonical and verified live Save-to-Mind intake targets.
 **Version:** 2.0
-**Last verified:** 2026-07-31
+**Last verified:** 2026-08-06
 **Owner role:** Steve Westhoek (structure authority)
 **Depends on:** `system/mind-strategy.md`, `system/brain-mind-bridge.md`
 **Conflict rule:** when this contract conflicts with strategy or philosophy, those take precedence. When Brain runtime paths conflict with this contract's canonical paths, this contract takes precedence for Mind-side routing unless Brain provides verified evidence of a necessary change.
-**Documentation compatibility:** `capture/inbox/` and `capture/failed/` are historical-only Mind paths and must not be used as active defaults. Brain deployment evidence is authoritative in Brain's live-status runbook.
+**Documentation compatibility:** `capture/`, `live/`, `sources/`, and `wiki/` roots are fully migrated and absent. Brain deployment evidence is authoritative in Brain's live-status runbook.
 
 ## Root purpose
 
@@ -69,16 +69,17 @@ The target folders are canonical for new Mind documentation and approved Mind wr
 | `capture/failed/` | `inbox/failed/` | **Migrated 2026-08-06.** Phase 1: moved to `history/legacy-capture/failed/` as historical evidence. Brain B1.0a verified the guarded live failure route to `inbox/failed/` on 2026-07-22. |
 | `capture/` root | `history/legacy-capture/` | **Migrated 2026-08-06.** Phase 1 complete; all files moved to `history/legacy-capture/` with SHA-256 verification. |
 | `live/` root | `history/legacy-live/` | **Migrated 2026-08-06.** Phase 1 complete; all files moved to `history/legacy-live/` with SHA-256 verification. |
-| `wiki/organisations/` | `organizations/` | Use `organizations/` after migration. |
-| `wiki/` durable knowledge | `knowledge/` or `faith/` | Faith material goes to `faith/`; other durable knowledge goes to `knowledge/`. |
-| `wiki/log.md` | `inbox/processed/` or `system/reports/` | Proposal/review surfaces move later; current local edits must not be overwritten. |
+| `wiki/organisations/` | `organizations/` | **Migrated 2026-08-06.** Phase 2: all files moved to `organizations/prochat/brand/`, `playbooks/`, and `youtube/` with SHA-256 verification. Legacy `wiki/organisations/README.md` moved to `history/legacy-wiki/` (differing from canonical `organizations/README.md`). |
+| `wiki/` durable knowledge | `knowledge/` or `faith/` | **Migrated 2026-08-06.** Phase 2: personal knowledge (`family.md`, `finance.md`, `health.md`) moved to `knowledge/personal/`; personal-identity area moved to `people/steve/personal-identity/`; wiki navigation stubs moved to `history/legacy-wiki/`. |
+| `wiki/log.md` | `inbox/processed/` | **Migrated 2026-08-06.** Phase 2: moved to `inbox/processed/legacy-wiki-proposal-log.md`. |
 | `sources/books/`, `sources/files/`, `sources/papers/`, `sources/transcripts/`, `sources/web/`, `sources/research/`, `sources/index.md` | completed to `resources/` | Non-faith source/resource scaffolding moved in Batch 7A; `.DS_Store` metadata was not migrated. |
 | `sources/` root | removed | **Deleted 2026-08-06.** Phase 1: contained only `.DS_Store` (untracked local macOS metadata); deleted and root removed. |
 | `sources/research/bible/` | completed to `faith/resources/bible/` | Source material moved in Batch 5C1; distilled Bible notes may be promoted later after review. |
 | `sources/research/theology/` | completed to `faith/resources/theology/` | Source material moved in Batch 5D1; distilled theology may be promoted later after review. |
 | `sources/research/apologetics/` | completed to `faith/resources/apologetics/` | Approved source material moved in Batch 5E1; distilled apologetics may be promoted later after review. |
 | `wiki/areas/theological-studies/dance-of-life/` | completed to `faith/resources/dance-of-life/` | Source-first move completed in Batch 5I2; no content promoted to `faith/studies/dance-of-life/`. |
-| `archive/` | `history/` | Historical content moves only after validation. |
+| `wiki/` root | `history/legacy-wiki/` | **Migrated 2026-08-06.** Phase 2 complete; all files accounted for; root absent. |
+| `archive/` | `history/` | Pending Phase 3 migration. |
 | `tasks.md` | `kanban.md` | `tasks.md` is retired and non-authoritative. `kanban.md` remains authority unless a future lossless, reversible migration is separately validated and approved. |
 | `router/` | `system/agent-context/` | Batch 1 moved tracked agent-context files to `system/agent-context/`; legacy `router/` references are now compatibility/history only until validation cleanup. |
 | `graphify-out/` and `.graphify-out/` references | `runtime/local/graphify/` | Future contained operational root; compatibility roots are non-authoritative and blocked for manual writes. |
@@ -101,7 +102,7 @@ External Save-to-Mind routing is aligned with these targets (deployment evidence
 
 - successful processing routes to `inbox/new/`;
 - failed processing routes to `inbox/failed/`;
-- `capture/` and `live/` roots have been migrated to `history/legacy-capture/` and `history/legacy-live/` respectively; `sources/` root has been removed. Do not write to these paths.
+- `capture/` and `live/` roots have been migrated to `history/legacy-capture/` and `history/legacy-live/` respectively; `sources/` and `wiki/` roots have been removed. Do not write to these paths.
 
 Use the canonical intake paths directly. Durable writes beyond intake still require review and exact-path approval.
 

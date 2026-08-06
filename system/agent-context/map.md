@@ -26,19 +26,19 @@ Historical or compatibility-only paths:
 - `history/legacy-live/projects.md` — migrated (was `live/projects.md`).
 - `history/legacy-live/workflows.md` — migrated (was `live/workflows.md`).
 - `history/legacy-live/decisions.md` — migrated (was `live/decisions.md`; file absent, not created).
-- `wiki/` — pending Phase 2 migration.
-- `wiki/log.md` — pending Phase 2 migration.
-- `archive/` — pending Phase 2 migration.
+- `history/legacy-wiki/` — migrated 2026-08-06; retired wiki root (was `wiki/`).
+- `inbox/processed/legacy-wiki-proposal-log.md` — migrated 2026-08-06 (was `wiki/log.md`).
+- `archive/` — pending Phase 3 migration.
 
 ## Search Order
 
 1. `system/agent-context/current.md`
 2. `system/agent-context/00-current-context.md`
 3. `projects/`
-4. `knowledge/index.md`, with `wiki/index.md` fallback during wiki migration
+4. `knowledge/index.md`
 5. Domain files in `knowledge/`, `faith/`, `organizations/`, `people/`, and `repos/`
-6. `resources/index.md`, with `sources/index.md` fallback during wiki migration (note: `sources/` root removed; `sources/index.md` was never present)
-7. `inbox/processed/` and `wiki/log.md` proposal surfaces
+6. `resources/index.md`
+7. `inbox/processed/` proposal surface
 
 ## Write Policy
 
@@ -58,6 +58,6 @@ inbox/failed/
 
 Failed writes and moves use verified canonical `inbox/failed/`; `history/legacy-capture/failed/` is historical evidence only and must not receive new writes.
 
-Mind Steward review suggestions target `inbox/processed/` after migration and `wiki/log.md` as the compatibility surface until proposal-surface migration is approved.
+Mind Steward review suggestions target `inbox/processed/`.
 
 All promotion into `projects/`, `knowledge/`, `faith/`, `organizations/`, `resources/`, `history/`, or their legacy fallbacks is review-first and approval-gated.

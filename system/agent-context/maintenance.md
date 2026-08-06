@@ -26,10 +26,9 @@ Task output boundary:
 - Human task changes require exact review and write only to authoritative `kanban.md`.
 - `tasks.md` is retired and non-authoritative.
 
-Compatibility outputs during remaining wiki/archive migration:
+Compatibility outputs during remaining archive migration:
 
-- `wiki/` — pending Phase 2 migration.
-- `wiki/log.md` — pending Phase 2 migration.
+- `archive/` — pending Phase 3 migration.
 
 ## Memory loop
 
@@ -37,9 +36,8 @@ Maintains:
 
 - `system/agent-context/current.md`
 - `system/agent-context/00-current-context.md`
-- `knowledge/index.md` after migration, with `wiki/index.md` as fallback
+- `knowledge/index.md`
 - `inbox/processed/` as the target review/proposal surface
-- `wiki/log.md` as the compatibility proposal ledger until its local edits and migration are resolved
 
 Purpose: keep short-term memory fresh, long-term memory compact, and the Mind evolution auditable without storing Brain runtime logs in Mind.
 

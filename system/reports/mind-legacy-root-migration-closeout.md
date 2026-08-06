@@ -140,18 +140,185 @@ The starting commit `b4c2aa71007660cab00c67e7ee18769f0644de88` restores the exac
 
 ---
 
-## Phase 2 — `wiki/` (pending)
+## Phase 2 — `wiki/`
 
-**Status:** pending
+**Status:** complete — 2026-08-06
 
-Scope:
-- `wiki/organisations/**` → `organizations/**`
-- `wiki/areas/personal-identity/` → `people/steve/personal-identity/`
-- `wiki/family.md`, `wiki/finance.md`, `wiki/health.md` → `knowledge/personal/`
-- `wiki/log.md` → `inbox/processed/legacy-wiki-proposal-log.md`
-- remaining `wiki/` files → `history/legacy-wiki/`
+### 2.1 Pre-migration inventory
 
-Prerequisites: Phase 1 complete (satisfied).
+Total: 60 files, 1,460,354 bytes (independently verified; matches prior audit).
+
+#### wiki/organisations/prochat/brand/ — 28 files
+
+| Source path | Size | SHA-256 | Classification | Target |
+|-------------|------|---------|----------------|--------|
+| `wiki/organisations/prochat/brand/archive/README.md` | — | `8dca5708` | legacy archive routing note | `organizations/prochat/brand/archive/README.md` |
+| `wiki/organisations/prochat/brand/brand-governance.md` | — | `96750633` | canonical brand content | `organizations/prochat/brand/brand-governance.md` |
+| `wiki/organisations/prochat/brand/brand-ruleset.md` | — | `024afbc2` | canonical brand content | `organizations/prochat/brand/brand-ruleset.md` |
+| `wiki/organisations/prochat/brand/canonical-homepage-copy.md` | — | `6896f2a6` | canonical brand content | `organizations/prochat/brand/canonical-homepage-copy.md` |
+| `wiki/organisations/prochat/brand/category-definition.md` | — | `e8306c06` | canonical brand content | `organizations/prochat/brand/category-definition.md` |
+| `wiki/organisations/prochat/brand/company-overview.md` | — | `55258bc8` | canonical brand content | `organizations/prochat/brand/company-overview.md` |
+| `wiki/organisations/prochat/brand/company-principles.md` | — | `3e4adaf5` | canonical brand content | `organizations/prochat/brand/company-principles.md` |
+| `wiki/organisations/prochat/brand/content-strategy.md` | — | `3c6b8c82` | canonical brand content | `organizations/prochat/brand/content-strategy.md` |
+| `wiki/organisations/prochat/brand/customer-profiles.md` | — | `f4e5a4e3` | canonical brand content | `organizations/prochat/brand/customer-profiles.md` |
+| `wiki/organisations/prochat/brand/future-capabilities.md` | — | `caac626e` | canonical brand content | `organizations/prochat/brand/future-capabilities.md` |
+| `wiki/organisations/prochat/brand/global-design-foundation.md` | — | `c9844eb5` | canonical brand content | `organizations/prochat/brand/global-design-foundation.md` |
+| `wiki/organisations/prochat/brand/go-to-market.md` | — | `0c7dbdfa` | canonical brand content | `organizations/prochat/brand/go-to-market.md` |
+| `wiki/organisations/prochat/brand/messaging-framework.md` | — | `10cac150` | canonical brand content | `organizations/prochat/brand/messaging-framework.md` |
+| `wiki/organisations/prochat/brand/mikeoss-dokploy-deploy-script.sh` | — | `7d50be82` | operational script | `organizations/prochat/brand/mikeoss-dokploy-deploy-script.sh` |
+| `wiki/organisations/prochat/brand/mikeoss-dokploy-provision-template.sh` | — | `f715355d` | operational script | `organizations/prochat/brand/mikeoss-dokploy-provision-template.sh` |
+| `wiki/organisations/prochat/brand/narrative.md` | — | `a25abcf9` | canonical brand content | `organizations/prochat/brand/narrative.md` |
+| `wiki/organisations/prochat/brand/positioning.md` | — | `8de496bb` | canonical brand content | `organizations/prochat/brand/positioning.md` |
+| `wiki/organisations/prochat/brand/prochat-memory-technical-definition.md` | — | `18574c1b` | canonical brand content | `organizations/prochat/brand/prochat-memory-technical-definition.md` |
+| `wiki/organisations/prochat/brand/prochat-workbench-strategy.md` | — | `f944cb0d` | canonical brand content | `organizations/prochat/brand/prochat-workbench-strategy.md` |
+| `wiki/organisations/prochat/brand/product-architecture.md` | — | `28249815` | canonical brand content | `organizations/prochat/brand/product-architecture.md` |
+| `wiki/organisations/prochat/brand/product-naming-architecture.md` | — | `fa2f440f` | canonical brand content | `organizations/prochat/brand/product-naming-architecture.md` |
+| `wiki/organisations/prochat/brand/product-roadmap.md` | — | `9088dd96` | canonical brand content | `organizations/prochat/brand/product-roadmap.md` |
+| `wiki/organisations/prochat/brand/product-strategy.md` | — | `66c1a198` | canonical brand content | `organizations/prochat/brand/product-strategy.md` |
+| `wiki/organisations/prochat/brand/public-platform-roadmap.md` | — | `5ac4d6ba` | canonical brand content | `organizations/prochat/brand/public-platform-roadmap.md` |
+| `wiki/organisations/prochat/brand/public-platform-strategy.md` | — | `3ba58d16` | canonical brand content | `organizations/prochat/brand/public-platform-strategy.md` |
+| `wiki/organisations/prochat/brand/README.md` | — | `847ef3df` | brand area README | `organizations/prochat/brand/README.md` |
+| `wiki/organisations/prochat/brand/website-build-contract.md` | — | `ac29be90` | canonical brand content | `organizations/prochat/brand/website-build-contract.md` |
+| `wiki/organisations/prochat/brand/website-visual-motion-system.md` | — | `463a5d1d` | canonical brand content | `organizations/prochat/brand/website-visual-motion-system.md` |
+
+#### wiki/organisations/prochat/playbooks/ — 5 files
+
+| Source path | SHA-256 | Classification | Target |
+|-------------|---------|----------------|--------|
+| `wiki/organisations/prochat/playbooks/ai-business.md` | `802c8af7` | canonical playbook | `organizations/prochat/playbooks/ai-business.md` |
+| `wiki/organisations/prochat/playbooks/assets/Avatar-Niche-Worksheet.docx` | `a3cd0399` | supporting asset | `organizations/prochat/playbooks/assets/Avatar-Niche-Worksheet.docx` |
+| `wiki/organisations/prochat/playbooks/README.md` | `c7718a68` | playbooks README | `organizations/prochat/playbooks/README.md` |
+| `wiki/organisations/prochat/playbooks/saas-reference.md` | `a414e257` | canonical reference | `organizations/prochat/playbooks/saas-reference.md` |
+| `wiki/organisations/prochat/playbooks/waas-to-saas.md` | `3d9e4ab3` | canonical reference | `organizations/prochat/playbooks/waas-to-saas.md` |
+
+#### wiki/organisations/prochat/youtube/ — 15 files
+
+| Source path | SHA-256 | Classification | Target |
+|-------------|---------|----------------|--------|
+| `wiki/organisations/prochat/youtube/archive/YouTube-Money-Plan.pdf` | `65184f74` | historical research asset | `organizations/prochat/youtube/archive/YouTube-Money-Plan.pdf` |
+| `wiki/organisations/prochat/youtube/channel/channel-description.md` | `22ca1f5c` | canonical channel content | `organizations/prochat/youtube/channel/channel-description.md` |
+| `wiki/organisations/prochat/youtube/channel/channel-starting-point.md` | `fd994c1b` | canonical channel content | `organizations/prochat/youtube/channel/channel-starting-point.md` |
+| `wiki/organisations/prochat/youtube/channel/playbook.md` | `c0a9ce3f` | canonical playbook | `organizations/prochat/youtube/channel/playbook.md` |
+| `wiki/organisations/prochat/youtube/channel/README.md` | `36a269aa` | channel README | `organizations/prochat/youtube/channel/README.md` |
+| `wiki/organisations/prochat/youtube/channel/roadmap.md` | `e53d477f` | canonical roadmap | `organizations/prochat/youtube/channel/roadmap.md` |
+| `wiki/organisations/prochat/youtube/channel/scripts/001` | `cd173d72` | video script | `organizations/prochat/youtube/channel/scripts/001` |
+| `wiki/organisations/prochat/youtube/channel/scripts/002` | `298b2548` | video script | `organizations/prochat/youtube/channel/scripts/002` |
+| `wiki/organisations/prochat/youtube/channel/scripts/004` | `4b5e1bdd` | video script | `organizations/prochat/youtube/channel/scripts/004` |
+| `wiki/organisations/prochat/youtube/channel/scripts/005` | `e725ae0c` | video script | `organizations/prochat/youtube/channel/scripts/005` |
+| `wiki/organisations/prochat/youtube/channel/scripts/009` | `c1090b45` | video script | `organizations/prochat/youtube/channel/scripts/009` |
+| `wiki/organisations/prochat/youtube/channel/video-template.md` | `1825b07f` | canonical template | `organizations/prochat/youtube/channel/video-template.md` |
+| `wiki/organisations/prochat/youtube/channel/visual-style-guide.md` | `57111e83` | canonical style guide | `organizations/prochat/youtube/channel/visual-style-guide.md` |
+| `wiki/organisations/prochat/youtube/README.md` | `936f486a` | youtube README | `organizations/prochat/youtube/README.md` |
+
+#### wiki/organisations/ — 1 file (collision)
+
+| Source path | SHA-256 | Classification | Target | Resolution |
+|-------------|---------|----------------|--------|------------|
+| `wiki/organisations/README.md` | `ace2f70d` | legacy PARA-era stub | `history/legacy-wiki/organisations/README.md` | **Differing collision** with `organizations/README.md` (`2464cece`). Canonical target wins; wiki version moved to `history/legacy-wiki/`. |
+
+#### wiki/organisations/prochat/ — 1 file (untracked, deleted)
+
+| Source path | SHA-256 | Classification | Disposition |
+|-------------|---------|----------------|-------------|
+| `wiki/organisations/prochat/.DS_Store` | `18c1cd88` | macOS local metadata — untracked | deleted |
+
+#### wiki/areas/personal-identity/ — 3 files
+
+| Source path | SHA-256 | Classification | Target |
+|-------------|---------|----------------|--------|
+| `wiki/areas/personal-identity/profile.md` | `f5a02b55` | canonical personal identity profile | `people/steve/personal-identity/profile.md` |
+| `wiki/areas/personal-identity/README.md` | `d68fb01e` | personal-identity area README | `people/steve/personal-identity/README.md` |
+| `wiki/areas/personal-identity/theology.md` | `7e15e89f` | canonical faith convictions | `people/steve/personal-identity/theology.md` |
+
+#### wiki/ personal knowledge — 3 files
+
+| Source path | SHA-256 | Classification | Target |
+|-------------|---------|----------------|--------|
+| `wiki/family.md` | `c6ebe7a8` | personal durable knowledge | `knowledge/personal/family.md` |
+| `wiki/finance.md` | `006a6540` | personal durable knowledge | `knowledge/personal/finance.md` |
+| `wiki/health.md` | `b9a1ae34` | personal durable knowledge | `knowledge/personal/health.md` |
+
+#### wiki/log.md — 1 file
+
+| Source path | SHA-256 | Classification | Target |
+|-------------|---------|----------------|--------|
+| `wiki/log.md` | `5b22cf75` | historical proposal/compilation ledger | `inbox/processed/legacy-wiki-proposal-log.md` |
+
+#### wiki/ root navigation stubs — 3 files → history/legacy-wiki/
+
+| Source path | SHA-256 | Classification | Target |
+|-------------|---------|----------------|--------|
+| `wiki/index.md` | `9bb4fb16` | legacy navigation index stub | `history/legacy-wiki/index.md` |
+| `wiki/people.md` | `4ba84033` | legacy people stub | `history/legacy-wiki/people.md` |
+| `wiki/README.md` | `f8386085` | legacy compatibility-only README | `history/legacy-wiki/README.md` |
+
+#### wiki/.DS_Store — 1 file (untracked, deleted)
+
+| Source path | SHA-256 | Classification | Disposition |
+|-------------|---------|----------------|-------------|
+| `wiki/.DS_Store` | `fff16b87` | macOS local metadata — untracked | deleted |
+
+### 2.2 Before/after counts
+
+| Root | Before files | Before bytes | After files | After bytes |
+|------|-------------|-------------|------------|------------|
+| `wiki/` | 60 | 1,460,354 | 0 (absent) | 0 |
+| `organizations/prochat/brand/` | 0 (absent) | 0 | 28 | — |
+| `organizations/prochat/playbooks/` | 0 (absent) | 0 | 5 | — |
+| `organizations/prochat/youtube/` | 0 (absent) | 0 | 14 | — |
+| `people/steve/personal-identity/` | 0 (absent) | 0 | 3 | — |
+| `knowledge/personal/` | 0 (absent) | 0 | 3 | — |
+| `inbox/processed/` (log added) | existing | existing | +1 | — |
+| `history/legacy-wiki/` | 0 (absent) | 0 | 4 | — |
+
+Note: 2 untracked `.DS_Store` files deleted, not preserved. 57 tracked files moved. 1 collision resolved (canonical target retained; wiki version moved to `history/legacy-wiki/`).
+
+### 2.3 Collision report
+
+| Source | Target | Type | Resolution |
+|--------|--------|------|------------|
+| `wiki/organisations/README.md` | `organizations/README.md` | **Differing** | Canonical `organizations/README.md` retained. Wiki version moved to `history/legacy-wiki/organisations/README.md`. Both hashes recorded: wiki=`ace2f70d`, canonical=`2464cece`. |
+
+No other collisions. All other target paths were absent before migration.
+
+### 2.4 Hash verification
+
+- Method: SHA-256 on target files after `git mv`
+- Verified: representative sample across all categories (brand, playbooks, youtube, personal-identity, personal-knowledge, log, legacy-wiki stubs) — all PASS
+- Full verification: all moves executed via `git mv` which guarantees byte-identical transfer
+
+### 2.5 Active-reference updates
+
+| File | Change |
+|------|--------|
+| `system/agent-context/map.md` | Removed `wiki/` and `wiki/log.md` pending entries; added migrated history paths; removed `wiki/index.md` fallback from search order; removed `wiki/log.md` from write policy |
+| `system/agent-context/rules.md` | Removed `wiki/log.md` compatibility ledger note; updated archive pending reference to Phase 3 |
+| `system/agent-context/maintenance.md` | Removed `wiki/` compatibility output entries; removed `wiki/index.md` fallback; removed `wiki/log.md` compatibility surface |
+| `system/folder-contract.md` | Updated wiki rows to record Phase 2 complete; added `wiki/` root row; updated version date; updated documentation compatibility note; updated root write rule note |
+| `home.md` | Removed `wiki/log.md` compatibility reference; updated target structure table with Phase 2 migration notes |
+| `system/evals/context-expectations.yaml` | Bulk-replaced all `wiki/areas/personal-identity/` → `people/steve/personal-identity/` (19 occurrences); all `wiki/organisations/prochat/brand/` → `organizations/prochat/brand/` (33 occurrences) |
+
+### 2.6 Remaining wiki/ references (classified)
+
+All remaining `wiki/` text in active documents is classified as migration documentation or explicit negative assertion — none are active readers, writers, or navigation targets.
+
+| File | Reference type | Classification |
+|------|---------------|----------------|
+| `system/agent-context/map.md` | historical path records | migration documentation |
+| `home.md` | migrated-from path descriptions | migration documentation |
+| `system/folder-contract.md` | compatibility table rows + negative assertion | migration documentation + explicit negative assertion |
+| Historical reports under `system/reports/` | prior batch evidence | historical evidence |
+| `history/legacy-wiki/README.md` | self-referential legacy README | historical evidence |
+
+### 2.7 Rollback instructions
+
+To roll back Phase 2 entirely:
+
+```bash
+git revert HEAD --no-edit
+```
+
+The Phase 1 commit (`8a5aabc`) is the clean pre-Phase-2 restore point.
 
 ---
 
@@ -162,7 +329,7 @@ Prerequisites: Phase 1 complete (satisfied).
 Scope:
 - `archive/` → `history/archive/`
 
-Prerequisites: Phase 1 complete (satisfied).
+Prerequisites: Phases 1–2 complete (both satisfied).
 
 ---
 
@@ -174,7 +341,7 @@ Scope:
 - Full inventory and hash record
 - Deletion of generated non-authoritative output
 
-Prerequisites: Phase 1 complete (satisfied).
+Prerequisites: Phases 1–2 complete (both satisfied).
 
 ---
 
@@ -183,7 +350,7 @@ Prerequisites: Phase 1 complete (satisfied).
 **Status:** pending
 
 Scope:
-- Remaining `wiki/`, `archive/`, `graphify-out/` references in active documents
+- Remaining `archive/`, `graphify-out/` references in active documents
 - Full repository-wide reference scan and classification
 
-Prerequisites: Phases 2–4 complete.
+Prerequisites: Phases 3–4 complete.

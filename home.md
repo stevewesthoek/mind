@@ -55,9 +55,7 @@ Open the Obsidian Brain Console plugin when you need runtime status, maintenance
 
 **Review proposals in the current proposal surface.**
 
-Target review surface after migration: `inbox/processed/`.
-
-Compatibility surface during migration: `wiki/log.md`.
+Target review surface: `inbox/processed/`.
 
 For each proposal:
 - **Accept** — approve or perform the documented exact-path action.
@@ -82,16 +80,16 @@ Open `kanban.md` to see what is to-do, in progress, and done. Add, move, and com
 |------|-------------|----------------|
 | New captures | `inbox/new/` | `history/legacy-capture/inbox/` is migrated historical evidence |
 | Raw originals | `inbox/raw/` | source paths reviewed and migrated to `history/legacy-capture/` |
-| Processed proposals and receipts | `inbox/processed/` | `wiki/log.md` and current reports |
+| Processed proposals and receipts | `inbox/processed/` | `inbox/processed/legacy-wiki-proposal-log.md` retains migrated wiki log |
 | Failed intake | `inbox/failed/` | verify current external failure routing in `system/folder-contract.md` |
-| Organizations | `organizations/` | `wiki/organisations/` (pending Phase 2) |
+| Organizations | `organizations/` | `wiki/organisations/` migrated Phase 2; `history/legacy-wiki/organisations/README.md` retains legacy organisations README |
 | Active projects | `projects/` | `history/legacy-live/projects.md` is migrated historical evidence |
 | Repos and apps | `repos/` | none; new target area |
-| People | `people/` | selected legacy research/source notes after review |
-| Faith, Bible, theology, apologetics, ministry | `faith/` | source material migrated from `sources/research/` prior batches; `wiki/areas/` pending Phase 2 |
-| Durable non-faith knowledge | `knowledge/` | `wiki/` (pending Phase 2) |
+| People | `people/` | `people/steve/personal-identity/` migrated Phase 2 from `wiki/areas/personal-identity/` |
+| Faith, Bible, theology, apologetics, ministry | `faith/` | source material migrated from `sources/research/` prior batches |
+| Durable non-faith knowledge | `knowledge/` | `knowledge/personal/` migrated Phase 2 from `wiki/family.md`, `wiki/finance.md`, `wiki/health.md` |
 | Non-faith source material | `resources/` | `sources/` root removed Phase 1 |
-| Completed or inactive material | `history/` | `archive/` (pending Phase 2) |
+| Completed or inactive material | `history/` | `history/legacy-wiki/` migrated Phase 2; `archive/` pending Phase 3 |
 | AI/coding-agent context | `system/agent-context/` | `router/` |
 | Graphify operational output | `runtime/local/graphify/` (future contained profile) | `graphify-out/` and `.graphify-out/` are compatibility roots; generated output is non-authoritative |
 
