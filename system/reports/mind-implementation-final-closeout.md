@@ -158,7 +158,7 @@ It does not substitute for a live-adapter session.
 
 **Implementation is complete.** The following are not open implementation tasks:
 
-- the seven remaining qualifying observations (005–010);
+- the seven remaining qualifying observations (005–011);
 - the multi-session stability threshold (10 of 10);
 - secondary backup assurance.
 
@@ -277,8 +277,9 @@ sessions. Fixture-only sessions do not count.
 | 008 | pending — operator-triggered | after 007's date |
 | 009 | pending — operator-triggered | after 008's date |
 | 010 | pending — operator-triggered | after 009's date |
+| 011 | pending — operator-triggered | after 010's date |
 
-Observations 005–010 are not unfinished implementation work. They are optional
+Observations 005–011 are not unfinished implementation work. They are optional
 operational evidence for multi-week stability, latent failure detection, and
 expanded reliability confidence. They are not required to claim implementation
 complete. Once all 10 qualifying sessions are recorded, a separate
@@ -336,6 +337,6 @@ work unless one of the following is introduced by Steve Westhoek:
   fallback failure, mutation-path exposure, or confirmed documentation
   contradiction).
 
-Ongoing operational monitoring (Observations 005–010), secondary backup
+Ongoing operational monitoring (Observations 005–011), secondary backup
 assurance, and Brain branch-integration follow-up are external activities
 that do not constitute implementation work and do not reopen milestones.
