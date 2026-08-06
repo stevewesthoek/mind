@@ -439,5 +439,6 @@ const output = {
   results: sortedResults,
 };
 
-process.stdout.write(JSON.stringify(output, null, 2) + '\n');
-process.exit(passed ? 0 : 1);
+const outputStr = JSON.stringify(output, null, 2) + '\n';
+process.exitCode = passed ? 0 : 1;
+process.stdout.write(outputStr);

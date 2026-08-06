@@ -572,10 +572,60 @@ test('synthetic Observation 005 with valid metadata passes without modifying val
 Provider revision: 076b9f97030e1c90bc66ffbb61d29456b41ed69f
 `;
   const set = { ...validObsSet(), 5: obs005 };
-  const { exitCode, json } = runSynthetic(set);
+  const { exitCode, json, stdout } = runSynthetic(set);
   const failures = json?.results?.filter(r => r.status === 'FAIL') ?? [];
+
+  // exit code must be 0
   assert.equal(exitCode, 0,
     `Synthetic obs-005 should pass with exit 0; failures: ${JSON.stringify(failures)}`);
-  assert.equal(json?.passed, true, 'Should report passed=true for valid obs-005');
-  assert.equal(json?.failCount, 0, `No failures expected; got: ${JSON.stringify(failures)}`);
+
+  // stdout must be non-empty
+  assert.ok(stdout && stdout.length > 0, 'stdout must be non-empty');
+
+  // stdout must be fully parseable JSON (no truncation)
+  assert.ok(json !== null, 'stdout must parse as complete JSON without truncation');
+
+  // top-level fields
+  assert.equal(json.passed, true, 'Should report passed=true for valid obs-005');
+  assert.equal(json.failCount, 0, `No failures expected; got: ${JSON.stringify(failures)}`);
+
+  // result checks for Observation 005 must exist
+  const obs005Checks = json.results?.filter(r => r.check.includes('obs-005')) ?? [];
+  assert.ok(obs005Checks.length > 0, 'results must include checks for obs-005');
+});
+
+// ── Regression: large output must be complete and parseable ──────────────────
+
+test('large validator output is complete and fully parseable JSON', () => {
+  // Build 9 observations (001 fixture + 008 qualifying) to produce a large result set
+  // with many checks, ensuring stdout flush is not truncated even for bulk output.
+  const set = { 1: obs001() };
+  const dates = [
+    '2026-08-04', '2026-08-05', '2026-08-06', '2026-08-07',
+    '2026-08-08', '2026-08-09', '2026-08-10', '2026-08-11',
+  ];
+  for (let id = 2; id <= 9; id++) {
+    const q = id - 1; // qualifying_count
+    set[id] = obsN(id, dates[id - 2], 'none', q, 10 - q);
+  }
+  const { exitCode, json, stdout } = runSynthetic(set);
+
+  // stdout must be non-empty and fully parseable
+  assert.ok(stdout && stdout.length > 0, 'stdout must be non-empty for large output');
+  assert.ok(json !== null,
+    `stdout must parse as complete JSON for large output; raw length=${stdout?.length}`);
+
+  // output must represent a genuine result set (not a stub)
+  assert.ok(json.results && json.results.length > 20,
+    `Expected >20 result entries for 9 observations; got ${json.results?.length}`);
+
+  // no truncation: re-serialising must round-trip cleanly
+  const roundTripped = JSON.parse(JSON.stringify(json));
+  assert.deepEqual(roundTripped, json, 'Round-trip serialization must be stable');
+
+  // must exit 0 for a fully valid set
+  const failures = json.results?.filter(r => r.status === 'FAIL') ?? [];
+  assert.equal(exitCode, 0,
+    `Large valid set should exit 0; failures: ${JSON.stringify(failures)}`);
+  assert.equal(json.passed, true, 'Large valid set must report passed=true');
 });
