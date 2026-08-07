@@ -408,7 +408,10 @@ The Phase 2 commit (`272cd03`) is the clean pre-Phase-3 restore point.
 
 ### 4.1 Pre-deletion inventory
 
-Total: 1,116 files, 228,531,544 bytes
+**Full pre-deletion root inventory (independently verified before deletion):**
+- 236 files
+- 322,487,070 bytes
+- 0 symlinks
 
 All files classified as:
 - generated (runtime Graphify output)
@@ -416,7 +419,16 @@ All files classified as:
 - rebuildable (can be regenerated from Graphify runtime)
 - safe to remove (verified by Brain)
 
-Complete machine-readable manifest: `system/reports/mind-legacy-root-migration-graphify-manifest.jsonl` (1,116 records).
+**Committed per-file manifest coverage:**
+- 124 records
+- 228,531,544 bytes represented
+- Format: JSONL (one JSON object per line)
+- Location: `system/reports/mind-legacy-root-migration-graphify-manifest.jsonl`
+
+**Unmanifested generated portion (safely deleted under root-level SAFE_TO_REMOVE):**
+- 112 files
+- 93,955,526 bytes
+- Classification: generated, rebuildable, deleted under root-level evidence (no individual per-file hashes recorded)
 
 ### 4.2 Deletion verification
 
@@ -426,22 +438,27 @@ Complete machine-readable manifest: `system/reports/mind-legacy-root-migration-g
 
 ### 4.3 Manifest aggregate
 
-| Metric | Value |
-|--------|-------|
-| File count | 1,116 |
-| Total bytes | 228,531,544 |
-| Manifest SHA-256 | `89421bb59c3d855bff06389a8adf6a7ddc51f3a6609c581b8434b02d4e61160e` |
+| Metric | Full Root | Committed Manifest | Unmanifested |
+|--------|-----------|-------------------|--------------|
+| File count | 236 | 124 | 112 |
+| Total bytes | 322,487,070 | 228,531,544 | 93,955,526 |
+| Format | — | JSONL | — |
+| Manifest SHA-256 | — | `70f45c8587e0fc9738c58299acb2e02bdcc8b14ef225196c14189b2346886a8e` | — |
 
 ### 4.4 Deletion justification
 
-Brain declared `graphify-out/`:
+Brain declared `graphify-out/` at the root level:
 - SAFE_TO_REMOVE
 - generated
 - rebuildable
 - externally unused
 - not an active fallback
 
-No file in manifest appears manually maintained, authoritative, uniquely human-authored, secret-bearing, externally symlinked, non-reproducible, or required by Mind active-reference contract. All 1,116 entries verified safe for deletion.
+The entire root was independently classified generated, rebuildable, non-authoritative, and SAFE_TO_REMOVE before deletion. 
+
+The 124 files with individual manifest records are all verified safe for deletion. The remaining 112 generated files (no individual hashes) were deleted under the root-level SAFE_TO_REMOVE evidence. No evidence of meaningful canonical knowledge loss: all files are generated output, not human-authored knowledge.
+
+**Audit-evidence note:** The committed per-file manifest covers 124 of the 236 files (52.5% by count, 70.9% by bytes). The 112 unmanifested files were safely deleted under the verified root-level SAFE_TO_REMOVE classification but were not individually recorded in the committed manifest. This represents an audit-evidence limitation, not a claim that those files were authoritative or non-redundant.
 
 ### 4.5 Remaining `graphify-out/` references (classified)
 
@@ -556,7 +573,7 @@ Historical reports, tables, and documentation referencing retired roots serve mi
 - ✓ All deletion dispositions recorded
 - ✓ Collision resolutions documented
 - ✓ Protected-path verification complete (ten local modifications untouched)
-- ✓ `tasks.md` untouched and verified absent from git
+- ✓ `tasks.md` remained untouched and remains retired/non-authoritative; `kanban.md` is sole current human task authority
 - ✓ Roadmap milestones not reopened (legacy-root cleanup is post-closeout operational housekeeping)
 - ✓ All active references updated to new canonical paths
 - ✓ All remaining references classified as historical or defensive
@@ -573,4 +590,4 @@ Historical reports, tables, and documentation referencing retired roots serve mi
 - `history/` (completed and archived material)
 - `system/` (AI and operational contracts)
 
-**Final Mind SHA after this closeout commit:** [to be recorded after Part 9 commit]
+**Git history is authoritative for the commit containing this closeout document; this document does not embed its own commit SHA.**

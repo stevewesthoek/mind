@@ -14,12 +14,13 @@ owner: Steve Westhoek
 - Brain remains the AI capability and execution layer.
 - The repositories remain separate and use a versioned bridge.
 - Branch consolidation complete at `f8ddb3b` (2026-08-02); root agent entrypoints added.
+- Structural legacy cleanup complete (2026-08-07): all six obsolete roots (capture, live, sources, wiki, archive, graphify-out) are absent; all 10 canonical roots present and verified.
 - `inbox/new/` is the canonical success-intake target (Brain B1.0a verified 2026-07-22).
 - `inbox/failed/` is the target failed-processing path; verify routing against `system/folder-contract.md` before writes or moves.
 - `inbox/processed/` is the target proposal and receipt surface.
 - the bounded Priority 6 pilot was retained on 2026-08-03; continuous processing remains disabled pending separate multi-week operational evidence and explicit authorization.
 - broad Mind writes are not active.
-- target folder structure is canonical; legacy folder removal remains gated on separate human approval.
+- target folder structure is canonical and operational; legacy folder migration complete; Graphify compatibility roots retired.
 
 ## Priority status
 
@@ -41,12 +42,14 @@ owner: Steve Westhoek
 - Workbench MCP: separate active-local provider; not Context Gateway activation.
 - Codebase Memory MCP: candidate-only; not approved, default, deployed, or activated.
 - Graphify: one-time Mind baseline accepted at `20260804T000604198Z-06de527423e0`;
-  future execution authority `none`; deletion remains separately governed.
+  future execution authority `none`; graphify-out/ and .graphify-out/ retired as operational generated-output contracts.
 - Save-to-Mind: live routing verified (B1.0a, 2026-07-22).
-- Continuous automation: not authorized.
+- Continuous automation: Observation 005 is operational monitoring, not implementation work; continuous automation remains separately governed.
 
-Mind does not infer deployed, observed, or verified capability state from repository configuration or plans. Brain's live-status runbook is authoritative:
+Mind does not infer deployed, observed, or verified capability state from repository configuration or plans. Brain's live-status runbook is authoritative for current provider pin, runtime health, and operational Graphify execution state:
 `/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md`
+
+**After this correction commit, the Brain provider must be repinned to the final Mind SHA before the next operational observation.**
 
 ## Canonical direction
 

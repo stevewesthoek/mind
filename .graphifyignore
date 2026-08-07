@@ -5,7 +5,9 @@
 node_modules/
 **/node_modules/
 
-# Graphify generated output — never scan your own graph/report/html/cache
+# Graphify generated output — defensive exclusion patterns
+# Retired compatibility roots (graphify-out/, .graphify-out/) and current runtime output
+# prevention to ensure they are not included in future Graphify runs
 graphify-out/
 .graphify-out/
 
