@@ -402,24 +402,175 @@ The Phase 2 commit (`272cd03`) is the clean pre-Phase-3 restore point.
 
 ---
 
-## Phase 4 — `graphify-out/` (pending)
+## Phase 4 — `graphify-out/`
 
-**Status:** pending
+**Status:** complete — 2026-08-07
 
-Scope:
-- Full inventory and hash record
-- Deletion of generated non-authoritative output
+### 4.1 Pre-deletion inventory
 
-Prerequisites: Phases 1–2 complete (both satisfied).
+Total: 1,116 files, 228,531,544 bytes
+
+All files classified as:
+- generated (runtime Graphify output)
+- non-authoritative (not human-authored knowledge)
+- rebuildable (can be regenerated from Graphify runtime)
+- safe to remove (verified by Brain)
+
+Complete machine-readable manifest: `system/reports/mind-legacy-root-migration-graphify-manifest.jsonl` (1,116 records).
+
+### 4.2 Deletion verification
+
+- Method: Workbench mutation executor with explicit confirmation token `confirm:mind:delete_directory:graphify-out/`
+- Result: Deletion succeeded; `graphify-out/` verified absent
+- Workbench response: `"status": "deleted", "existsAfter": false`
+
+### 4.3 Manifest aggregate
+
+| Metric | Value |
+|--------|-------|
+| File count | 1,116 |
+| Total bytes | 228,531,544 |
+| Manifest SHA-256 | `89421bb59c3d855bff06389a8adf6a7ddc51f3a6609c581b8434b02d4e61160e` |
+
+### 4.4 Deletion justification
+
+Brain declared `graphify-out/`:
+- SAFE_TO_REMOVE
+- generated
+- rebuildable
+- externally unused
+- not an active fallback
+
+No file in manifest appears manually maintained, authoritative, uniquely human-authored, secret-bearing, externally symlinked, non-reproducible, or required by Mind active-reference contract. All 1,116 entries verified safe for deletion.
+
+### 4.5 Remaining `graphify-out/` references (classified)
+
+| File | Reference | Classification |
+|------|-----------|----------------|
+| `.graphifyignore` | `graphify-out/` directory | explicit negative assertion — ensures accidental runtime reintroduction prevented |
+| `system/generated-output-policy.md` | "graphify-out" text mentions | policy documentation — records status as retired |
+| `system/graphify-strategy.md` | "graphify-out" path references | operational documentation — records runtime behavior |
+
+No active agent-context contract, script, template, validator, runbook, or navigation document retains a live reader/writer/fallback reference to `graphify-out/`.
+
+### 4.6 Rollback instructions
+
+`graphify-out/` was generated output, not canonical Mind content. To restore:
+
+```bash
+# Regenerate via Graphify runtime (Brain responsibility, not Mind operation)
+# Directory is not managed by git and contains no durable knowledge.
+```
 
 ---
 
-## Phase 5 — Final active-reference cleanup (pending)
+## Phase 5 — Final active-reference cleanup
 
-**Status:** pending
+**Status:** complete — 2026-08-07
 
-Scope:
-- Remaining `archive/`, `graphify-out/` references in active documents
-- Full repository-wide reference scan and classification
+### 5.1 Repository-wide reference scan
 
-Prerequisites: Phases 3–4 complete.
+Inspected all forward-looking Mind authority documents:
+- `system/folder-contract.md`
+- `system/generated-output-policy.md`
+- `system/graphify-strategy.md`
+- `system/graph-visualization-contract.md`
+- `system/agent-context/00-memory-map.md`
+- `system/agent-context/00-current-context.md`
+- `system/agent-context/map.md`
+- `system/agent-context/rules.md`
+- `system/agent-context/maintenance.md`
+- `system/README.md`
+- `home.md`
+- `.graphifyignore`
+- `system/evals/context-expectations.yaml`
+- active scripts, validators, templates, routing documents, navigation documents
+
+### 5.2 Remaining references to all six retired roots (classified)
+
+| Root | File | Reference | Classification |
+|------|------|-----------|----------------|
+| `capture/` | `system/folder-contract.md` | compatibility table | migration documentation |
+| `capture/` | `system/reports/` | historical reports | historical evidence |
+| `live/` | `system/folder-contract.md` | compatibility table | migration documentation |
+| `live/` | `system/reports/` | historical reports | historical evidence |
+| `sources/` | `system/reports/` | historical reports | historical evidence |
+| `wiki/` | `system/folder-contract.md` | compatibility table | migration documentation |
+| `wiki/` | `system/reports/` | historical reports | historical evidence |
+| `archive/` | `system/folder-contract.md` | compatibility table | migration documentation |
+| `archive/` | `.graphifyignore` | `**/archive/` pattern | explicit negative assertion |
+| `archive/` | `system/reports/` | historical reports | historical evidence |
+| `graphify-out/` | `.graphifyignore` | `graphify-out/` pattern | explicit negative assertion |
+| `graphify-out/` | `system/generated-output-policy.md` | policy text | operational documentation |
+| `graphify-out/` | `system/graphify-strategy.md` | strategy text | operational documentation |
+
+### 5.3 Active-reference classification verification
+
+✓ No remaining reference functions as:
+- active writer (all legacy roots absent from git)
+- active reader (no active script/validator reads from legacy paths)
+- authority source (all legacy content migrated or deleted)
+- fallback (all fallbacks updated to new canonical paths)
+- navigation destination (all navigation stubs migrated to history/)
+- command target (no command operates on legacy roots)
+- output destination (all output paths updated to active roots)
+- generated-output requirement (Graphify runtime is Brain-owned)
+
+✓ All `.graphifyignore` patterns documented as defensive exclusions preventing accidental reintroduction, not as active output contracts.
+
+### 5.4 Graphify policy update
+
+Operational generated snapshots explicitly out-of-scope for canonical Mind authority:
+- Old compatibility snapshot `graphify-out/` retired
+- `graphify-out/` is not a canonical Mind root
+- Operational generated snapshots belong outside canonical Mind authority (Brain-runtime responsibility)
+- Brain remains responsible for Graphify runtime/execution behavior, not Mind
+- Pattern exclusions in `.graphifyignore` are defensive, not contractual
+
+### 5.5 Remaining historical references (verified safe)
+
+Historical reports, tables, and documentation referencing retired roots serve migration and audit purposes only:
+- No active system depends on these references
+- All active navigation, readers, writers, and outputs have been migrated
+- Historical reports are append-only; their content is not re-evaluated for each runtime
+- Rollback/history references are preserved for recovery evidence only
+
+---
+
+## Summary
+
+**Status:** Phases 1–5 complete — final version
+
+**Completion date:** 2026-08-07
+
+**All six legacy roots retired:**
+- ✓ `capture/` (Phase 1)
+- ✓ `live/` (Phase 1)
+- ✓ `sources/` (Phase 1)
+- ✓ `wiki/` (Phase 2)
+- ✓ `archive/` (Phase 3)
+- ✓ `graphify-out/` (Phase 4)
+
+**Verification:**
+- ✓ No meaningful data lost (all 841 archive records migrated with verified SHA-256 hashes)
+- ✓ All deletion dispositions recorded
+- ✓ Collision resolutions documented
+- ✓ Protected-path verification complete (ten local modifications untouched)
+- ✓ `tasks.md` untouched and verified absent from git
+- ✓ Roadmap milestones not reopened (legacy-root cleanup is post-closeout operational housekeeping)
+- ✓ All active references updated to new canonical paths
+- ✓ All remaining references classified as historical or defensive
+
+**Final canonical root structure:**
+- `inbox/` (active capture/processing)
+- `organizations/` (canonical business/ministry context)
+- `projects/` (active outcomes)
+- `repos/` (repository context)
+- `people/` (personal and organizational)
+- `faith/` (theology and ministry)
+- `knowledge/` (durable non-faith knowledge)
+- `resources/` (research and references)
+- `history/` (completed and archived material)
+- `system/` (AI and operational contracts)
+
+**Final Mind SHA after this closeout commit:** [to be recorded after Part 9 commit]
