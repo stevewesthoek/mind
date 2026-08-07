@@ -23,9 +23,9 @@ It uses the Obsidian Kanban plugin format and currently contains the active boar
 
 ## Summary surface
 
-`live/tasks.md` is a compact Mind Steward summary surface.
+There is currently no separate canonical task summary surface.
 
-It may summarize current task attention or Mind Steward suggestions, but it does not replace `kanban.md` and must not be treated as the complete task database.
+`kanban.md` remains the sole current human task authority. If a future derived task summary is introduced, it must first receive an explicitly documented canonical destination outside of `kanban.md`. Any future summary may not become task authority and must not implicitly override `kanban.md`.
 
 ## Preservation rule
 

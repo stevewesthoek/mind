@@ -44,11 +44,10 @@ Brain Core / scheduler
 
 ## Current output surfaces
 
-- `inbox/new/` — unprocessed or newly synced captures.
+- `inbox/new/` — newly synced/unprocessed captures.
 - `inbox/failed/` — recoverable failure buffer.
-- `inbox/processed/` and `wiki/log.md` — reviewed proposal, receipt, and compatibility-log surfaces under their documented policies.
-- `live/tasks.md` — compact derived Mind Steward task summary surface.
-- `kanban.md` — sole current human task authority; never overwritten by automation.
+- `inbox/processed/` — reviewed proposal, receipt, and processing/log evidence.
+- `kanban.md` — sole current human task authority; never an automation-write target.
 
 ## Safety rules
 
@@ -73,6 +72,6 @@ Before on-arrival processing is enabled, define and test:
 3. queue and retry behavior;
 4. large-file fallback behavior;
 5. failure routing to canonical `inbox/failed/`;
-6. log or receipt output to `inbox/processed/`, `wiki/log.md`, or another explicitly documented review surface;
+6. log or receipt output to `inbox/processed/` or another explicitly documented canonical review surface;
 7. no root writes;
 8. no Kanban overwrite.

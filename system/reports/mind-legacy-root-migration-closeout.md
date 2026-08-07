@@ -1,8 +1,8 @@
 # Mind Legacy Root Migration Closeout
 
-**Status:** Phases 1 and 2 complete; Phases 3–5 pending
-**Version:** 2.0 (Phase 2)
-**Date:** 2026-08-06
+**Status:** Phases 1–5 complete — final closeout version
+**Version:** final
+**Date:** 2026-08-07
 **Owner role:** Steve Westhoek (human authority)
 **Scope:** Staged retirement of six legacy root folders: `capture/`, `live/`, `sources/`, `wiki/`, `archive/`, `graphify-out/`
 **Brain audit basis:** Brain declared all six roots SAFE_TO_REMOVE; no active Brain runtime writes or fallbacks depend on these roots.
