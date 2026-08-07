@@ -92,11 +92,14 @@ AI assistants should not default to broad repo scans when Graphify outputs are a
 Expected AI behavior:
 
 ```text
-1. read a Graphify receipt and source-hash record before reading generated output;
-2. query compatibility outputs only when receipt-bound, treating them as non-authoritative;
-3. inspect targeted source files only after graph traversal;
-4. cite or describe the graph path used when relevant.
+1. read a valid Brain Graphify receipt and source-hash record before reading generated output;
+2. query current Brain-owned operational Graphify output only when receipt-bound and available;
+3. never treat retired graphify-out/ or .graphify-out/ paths as current output;
+4. inspect targeted canonical source files only after graph traversal;
+5. treat generated graph data as non-authoritative.
 ```
+
+Historical compatibility artifacts may be discussed only when reading historical audit evidence or migration documentation.
 
 ### Quality first for canonical builds
 

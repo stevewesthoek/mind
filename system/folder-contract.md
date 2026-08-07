@@ -59,9 +59,9 @@ system/
 | `history/` | Completed, superseded, inactive, old, or historical material. |
 | `system/` | Mind operating documentation, contracts, reports, templates, agent context, and generated-output notes. |
 
-## Compatibility period
+## Historical migration record
 
-The target folders are canonical for new Mind documentation and approved Mind writes. Retained legacy paths are historical or compatibility-only surfaces whose removal remains gated by the status recorded below.
+The target folders are canonical for all new Mind documentation and approved Mind writes. All legacy roots have been fully migrated and are absent. The table below records the historical migration dispositions and target paths for reference. No removal gate remains; all six legacy roots are retired.
 
 | Legacy path | Target path | Status |
 |-------------|-------------|--------|
@@ -82,7 +82,7 @@ The target folders are canonical for new Mind documentation and approved Mind wr
 | `archive/` | `history/archive/` | **Migrated 2026-08-07.** Phase 3 complete; all files moved to `history/archive/` with SHA-256 verification. |
 | `tasks.md` | `kanban.md` | `tasks.md` is retired and non-authoritative. `kanban.md` remains authority unless a future lossless, reversible migration is separately validated and approved. |
 | `router/` | `system/agent-context/` | Batch 1 moved tracked agent-context files to `system/agent-context/`; legacy `router/` references are now compatibility/history only until validation cleanup. |
-| `graphify-out/` and `.graphify-out/` references | `runtime/local/graphify/` | Future contained operational root; compatibility roots are non-authoritative and blocked for manual writes. |
+| `graphify-out/` and `.graphify-out/` | `runtime/local/graphify/` | **Retired 2026-08-07.** Both compatibility roots deleted under Brain SAFE_TO_REMOVE classification. Current operational Graphify output, when Brain authorizes it, belongs under the Brain-owned runtime root. Do not recreate retired roots. |
 
 ## Root write rule
 

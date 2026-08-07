@@ -2,38 +2,42 @@
 
 This document records the current Mind graph reality and the safe boundary for future visual graph work.
 
-## Historical compatibility graph surface
+## Retired compatibility graph surface
 
-The former Mind graph artifacts are retained only as compatibility/historical
-references. They do not prove a current Graphify run.
+**Status:** Retired and absent as of 2026-08-07.
 
-Confirmed artifacts:
+The former Mind compatibility graph roots `.graphify-out/` and `graphify-out/` have been retired. The historical artifacts listed below are documented for evidence purposes only and do not currently exist:
 
-- `.graphify-out/graph.json` — generated machine-readable graph data.
-- `.graphify-out/GRAPH_REPORT.md` — generated human-readable graph report.
-- `.graphify-out/manifest.json` — generated file manifest and hashes.
-- `.graphify-out/cache/` — generated cache.
+Former artifacts (retired):
 
-The current graph report states:
+- `.graphify-out/graph.json` — retired generated machine-readable graph data.
+- `.graphify-out/GRAPH_REPORT.md` — retired generated human-readable graph report.
+- `.graphify-out/manifest.json` — retired generated file manifest and hashes.
+- `.graphify-out/cache/` — retired generated cache.
+
+Historical graph report metrics (no longer current):
 
 - corpus: 1,279 files and about 4,760,699 words
 - graph size: 12,185 nodes and 20,025 edges
 - communities: 1,420 total, with 466 shown and 954 thin omitted
-- built from commit: `79796272`
-- refresh command noted by the report: `graphify update .`
+- built from commit: `79796272` (historical evidence only)
+- refresh command noted by the report: `graphify update .` (do not execute on absent roots)
+
+These retired paths must not be recreated merely to satisfy historical documentation. All artifact data has been deleted under the Brain SAFE_TO_REMOVE classification.
 
 ## Current operational status
 
-Current Graphify execution and profile state is owned by Brain's live-status
-runbook. A current visual graph run is not claimed by Mind.
+Current Graphify execution, profile state, and output location are owned by
+Brain's live-status runbook. Mind does not claim a current visual graph.
 
-```text
-graphify-out/graph.html
-```
+When Brain authorizes a future Graphify run, output belongs under the
+Brain-owned operational root `runtime/local/graphify/`, not under retired
+compatibility roots.
 
-Any compatibility artifact remains a generated, non-authoritative projection.
-`GRAPH_REPORT.md` is a human-facing navigation/evidence surface only, and its
-freshness requires the Brain receipt timestamp plus source hashes.
+Any former compatibility artifact (`graphify-out/`, `.graphify-out/`) remains
+a generated, non-authoritative projection and must not be mistaken for current
+output. Historical `GRAPH_REPORT.md` is evidence-only and requires the Brain
+receipt timestamp plus source hashes to be interpreted as fresh.
 
 ## Desired future behavior
 
@@ -65,6 +69,6 @@ Recommended root behavior:
 ## Safety rules
 
 - Do not manually edit generated graph data as the source of truth.
-- Do not move or rename `.graphify-out/` without checking Graphify refresh commands and any Brain/Obsidian references.
-- Do not assume graph visualization exists until a generated visual artifact is present, documented, and bound to a Brain receipt with source hashes.
-- Refreshes should be repeatable and should not require writing captures or reports to the repository root.
+- Retired compatibility roots (`.graphify-out/`, `graphify-out/`) must not be recreated merely to satisfy historical documentation.
+- Do not assume graph visualization exists until a generated visual artifact is present, documented, bound to a Brain receipt with source hashes, and located under the current operational root.
+- Future Graphify refreshes should be repeatable and should not require writing artifacts to the repository root; all output belongs under Brain-owned `runtime/local/graphify/` or similar contained storage.

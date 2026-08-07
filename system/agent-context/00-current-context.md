@@ -37,19 +37,21 @@ owner: Steve Westhoek
 ## Current capability state (from Brain live-status runbook)
 
 - Context Gateway CLI/core: repository-verified read-only.
-- Context Gateway adapter: project-scoped `active-local`, owner-approved, fixed to
-  provider `51e9091c...` and the current approved Mind HEAD; no mutation path.
+- Context Gateway adapter: project-scoped `active-local`, owner-approved; no mutation path.
 - Workbench MCP: separate active-local provider; not Context Gateway activation.
 - Codebase Memory MCP: candidate-only; not approved, default, deployed, or activated.
-- Graphify: one-time Mind baseline accepted at `20260804T000604198Z-06de527423e0`;
-  future execution authority `none`; graphify-out/ and .graphify-out/ retired as operational generated-output contracts.
+- Graphify: one-time Mind baseline historical; future execution authority `none`; graphify-out/ and .graphify-out/ retired.
 - Save-to-Mind: live routing verified (B1.0a, 2026-07-22).
 - Continuous automation: Observation 005 is operational monitoring, not implementation work; continuous automation remains separately governed.
 
-Mind does not infer deployed, observed, or verified capability state from repository configuration or plans. Brain's live-status runbook is authoritative for current provider pin, runtime health, and operational Graphify execution state:
-`/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md`
+**Mind does not infer deployed, observed, or verified capability state from repository configuration or plans. Brain's live-status runbook is authoritative for:**
+- current provider revision and approved Mind HEAD
+- provider health and registration state
+- operational Graphify execution state and output location
 
-**After this correction commit, the Brain provider must be repinned to the final Mind SHA before the next operational observation.**
+Reference: `/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md`
+
+**After this documentation commit, Brain must repin the provider to this final Mind SHA before the next operational observation.**
 
 ## Canonical direction
 
