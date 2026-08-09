@@ -247,7 +247,7 @@ external writes.
 ### M2.4 — Update agent entrypoints after Gateway activation
 
 - **Status:** complete (2026-08-04) — Steve Westhoek explicitly approved the exact read-only activation; Brain verified active-local client discovery, health/readback, freshness, privacy scope, unavailable fallback, mutation rejection, and disable/restore behavior.
-- **Evidence:** `system/reports/m2-4-m7-1-closure-2026-08-04.md` and Brain `operations/reports/m2-4-context-gateway-activation-2026-08-04.md` on pushed evidence branch `origin/codex/mind-m7-m2-unblock` at `103440945a720f0a1ea973b93b5c82155a171784`; Brain `main` integration remains a separate Brain-owned follow-up.
+- **Evidence:** `system/reports/m2-4-m7-1-closure-2026-08-04.md` and Brain `operations/reports/m2-4-context-gateway-activation-2026-08-04.md`; Brain canonical main published the final provider repin at `07040963` (2026-08-07).
 - **Files after activation only:** `system/agent-context/AGENTS.md`, `00-start-here.md`, `00-memory-map.md`.
 - **Prerequisites:** Brain must supply one project-scoped read-only adapter registration candidate; explicit provider authentication and secrets boundaries; tracked Claude or Codex discovery configuration or another explicitly approved client; live health/readback; unavailable-service fallback to manual targeted retrieval; disable and rollback procedures; proof that no mutation path is exposed; provider-specific scope and privacy enforcement; production freshness behavior; and explicit Steve Westhoek activation approval.
 - **Change after prerequisites pass:** make Context Gateway the preferred retrieval path while retaining the manual targeted-read fallback.

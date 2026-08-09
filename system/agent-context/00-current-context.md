@@ -2,7 +2,7 @@
 
 ```yaml
 status: current
-last_reviewed: 2026-08-04
+last_reviewed: 2026-08-09
 review_after: 2026-08-16
 freshness_risk: medium
 owner: Steve Westhoek
@@ -26,7 +26,7 @@ owner: Steve Westhoek
 
 | Priority | Status |
 |----------|--------|
-| 1 — Canonical coherence | complete; M1.1–M1.6 complete; Mind Steward retained as a separate Brain-owned local deterministic/report-only package with documented boundary and canonical shared path policy; Brain README refresh completed in commit `a97f4e80` on `origin/release/brain-stabilization-v1`; integration into Brain `main` remains pending in the separate Brain conversation; no migration, retirement, deployment, or automation activation occurred |
+| 1 — Canonical coherence | complete; M1.1–M1.6 complete; Mind Steward retained as a separate Brain-owned local deterministic/report-only package with documented boundary and canonical shared path policy; Brain canonical main published the final provider repin at `07040963` (2026-08-07); no migration, retirement, deployment, or automation activation occurred |
 | 2 — Context Gateway | complete; M2.1–M2.4 complete; exact project-scoped read-only Codex adapter active-local with Steve approval; live health/readback, freshness, privacy scope, mutation rejection, unavailable manual fallback, and disable/restore verified; evidence: `system/reports/m2-4-m7-1-closure-2026-08-04.md` |
 | 3 — Retrieval evaluation | complete |
 | 4 — Capability truth | complete |
@@ -50,8 +50,6 @@ owner: Steve Westhoek
 - operational Graphify execution state and output location
 
 Reference: `/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md`
-
-**After this documentation commit, Brain must repin the provider to this final Mind SHA before the next operational observation.**
 
 ## Canonical direction
 
