@@ -2,7 +2,7 @@
 
 **Status:** canonical cross-repo priority order
 **Version:** 2.0
-**Last reviewed:** 2026-08-04
+**Last reviewed:** 2026-08-11
 **Owner role:** Steve Westhoek (human authority)
 **Depends on:** `system/infinite-brain-philosophy.md`, `system/mind-strategy.md`
 **Conflict rule:** when this roadmap conflicts with philosophy or strategy, those take precedence. Brain's runtime roadmap is an implementation projection and must not reorder these priorities.
@@ -27,45 +27,42 @@ Later priorities may be researched early but must not be activated before their 
 
 ## Current baseline
 
-Confirmed on 2026-07-31:
+Confirmed on 2026-08-11:
 
 - the two-repo split remains correct: Mind owns meaning and human authority; Brain owns runtime and machine-operational truth;
-- `inbox/new/` and `inbox/failed/` are the verified live Save-to-Mind success and failure targets;
-- Mind's human-first folder model exists, and `kanban.md` is the sole human task authority;
-- Brain final verification passed its Brain-local Core, Console, Mind Steward, capability, contract, scheduler, retrieval, documentation, recovery, and synthetic-fixture checks;
-- Brain Context Pack 1.0 and Context Gateway are implemented; the exact
-  project-scoped read-only Codex adapter is active-local with owner-approved
-  live, unavailable, and disable/restore evidence dated 2026-08-04;
-- active legacy-path producer migration (Brain BS0.10) is complete: four legacy producers retired with exit guards (2026-07-31). Producer retirement is not package retirement; Mind Steward remains a separate active Brain-owned package per B1.5;
-- deletion readiness (Brain BS0.19) is complete: 0 SAFE, 2 PARTIAL, 17 BLOCKED; deletion is separately governed and not authorized;
+- `inbox/new/` and `inbox/failed/` remain the verified live Save-to-Mind success and failure targets;
+- Mind's human-first folder model remains authoritative, and `kanban.md` is the sole human task authority;
+- all seven Mind roadmap priorities and the Mind implementation-plan completion checklist are complete;
+- Brain stabilization BS0.1–BS0.23 and runtime priorities P1–P8 are complete; the canonical Brain runtime roadmap reports 0 remaining required tasks;
+- Brain Context Pack 1.0 and Context Gateway are implemented and final Brain package/cross-repo/Context Gateway/capability/MCP/Graphify/scheduler verification passes;
+- Codebase Memory MCP `0.9.0` is Brain's bounded structural-navigation layer for explicitly admitted repositories; exact current source remains authority;
+- structural Graphify remains frozen; bounded semantic Graphify is Brain-only and non-authoritative, with no Mind semantic scope approved;
+- the optimized Brain+ProChat B8.6 pilot passed 2/2, while blanket automatic global rollout was explicitly rejected in favor of per-repository admission;
+- Mind Steward remains a separate active Brain-owned package with canonical shared-path boundaries;
+- deletion remains separately governed and is not implied by roadmap completion;
 - the Mind M5.1–M5.3 synthetic exact-scope write proof passes;
-- broad proposal application, production write activation, and continuous execution are not authorized;
-- meaningful time savings remain unproven;
-- current machine capability state (including Codebase Memory, Graphify, and scheduler) is owned by Brain's live-status runbook at `/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md`.
+- broad proposal application, production write activation, and continuous execution remain separately authorized capabilities rather than consequences of roadmap closure;
+- current machine capability state is owned by Brain's live-status runbook at `/Users/Office/Repos/stevewesthoek/brain/operations/runbooks/infinite-brain-roadmap-status.md`.
 
 ## Pre-1.0 Architecture Stabilization Coordination
 
-Brain's **BS0.1 — Inventory and contain mutable Brain Core capabilities** is
-the current highest-priority system stabilization lane. The Brain
-Pre-1.0 Architecture Stabilization Program is tracked under `BS0.1`–`BS0.23`;
-Mind must reference that program without duplicating Brain runtime work.
+Brain's Pre-1.0 Architecture Stabilization Program (`BS0.1`–`BS0.23`) and
+runtime priorities P1–P8 are complete as of 2026-08-11. Mind references the
+final Brain runtime state without duplicating machine-operational truth.
 
-- Mind work continues only where it is independent of Brain runtime migration.
-- M1.3 is complete: active path instructions use verified canonical routes, while historical evidence remains explicitly classified.
-- M1.4 is complete: `kanban.md` remains sole human task authority and `tasks.md` is retired and non-authoritative.
-- These decisions satisfy the Mind prerequisites for Brain BS0.10 and BS0.19; the Brain tasks still require Brain-local execution and validation.
-- M1.5 is complete (2026-07-31): authority headers added to all six canonical files after the MS0.10 gate passed.
-- Mind must not duplicate Brain runtime state, deployment status, scheduler
-  truth, schema state, or capability verification.
-- Repository configuration, deployed state, observed state, and verified state
-  remain distinct.
-- Compatibility paths remain non-authoritative unless explicitly documented as
-  compatibility-authoritative exceptions.
+- M1.3–M1.6 and MS0.1–MS0.10 are complete.
+- `kanban.md` remains the sole human task authority; `tasks.md` remains retired and non-authoritative.
+- Brain owns live runtime, scheduler, provider, deployment, schema, and capability verification.
+- Mind owns meaning, human authority, durable personal truth, and its seven-priority roadmap order.
+- Codebase Memory structural navigation and Graphify semantic state are Brain-owned runtime concerns; exact current source remains authoritative for machine claims.
+- No Mind semantic Graphify scope is approved by Brain P8 closure.
+- Repository configuration, deployed state, observed state, and verified state remain distinct.
+- Compatibility paths remain non-authoritative unless explicitly documented as compatibility-authoritative exceptions.
 
-Mind-owned coordination tasks use the separate `MS0.1`–`MS0.10` namespace in
-the implementation plan. They authorize documentation, policy, evidence, and
-coordination work only; they do not authorize Brain edits, deployment,
-automation changes, or external writes.
+The `MS0.1`–`MS0.10` coordination namespace is closed and retained for historical
+evidence. Any future work requires a new documented gap or priority decision; roadmap
+closure itself authorizes no Brain edits, deployment, automation change, broad Mind
+write, deletion, external action, or blanket repository rollout.
 
 ## Priority 1 — Canonical coherence and migration closure
 

@@ -2,7 +2,7 @@
 
 **Status:** canonical Mind-owned execution plan
 **Version:** 2.0
-**Last reviewed:** 2026-08-04
+**Last reviewed:** 2026-08-11
 **Owner role:** Steve Westhoek (human authority); lower-tier models execute
 **Depends on:** `system/mind-roadmap.md`
 **Conflict rule:** when this plan conflicts with roadmap, strategy, or philosophy, those take precedence in that order. Task-level disputes are resolved by the roadmap's priority sequencing.
@@ -28,11 +28,15 @@ Do not move, delete, or rewrite personal truth unless the task explicitly names 
 
 ## Pre-1.0 Architecture Stabilization Coordination
 
-The Brain stabilization program is authoritative for Brain runtime work and is
-tracked under `BS0.1`–`BS0.23` in Brain's implementation plan. The tasks below
-are Mind-owned coordination tasks only. They do not duplicate Brain tasks or
-authorize Brain edits, deployment, automation changes, runtime changes, or
-external writes.
+Brain stabilization (`BS0.1`–`BS0.23`) and runtime priorities P1–P8 are complete
+as of 2026-08-11. The Mind coordination tasks below are also complete and are
+retained as historical execution evidence. They never duplicated Brain runtime
+work or authorized Brain edits, deployment, automation changes, runtime changes,
+or external writes.
+
+There is no remaining required task under this implementation plan. Future Mind
+work must begin from a newly documented gap or owner decision and continue to
+respect Mind's human-authority boundary and Brain's machine-runtime authority.
 
 ### MS0.1 — Establish the authority-precedence matrix
 
