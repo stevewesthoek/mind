@@ -2,7 +2,7 @@
 
 ```yaml
 status: current
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-14
 review_after: 2026-08-16
 freshness_risk: medium
 owner: Steve Westhoek
@@ -39,7 +39,7 @@ owner: Steve Westhoek
 - Context Gateway CLI/core: repository-verified read-only.
 - Context Gateway adapter: project-scoped `active-local`, owner-approved; no mutation path.
 - Workbench MCP: separate active-local provider; not Context Gateway activation.
-- Codebase Memory MCP: candidate-only; not approved, default, deployed, or activated.
+- Codebase Memory MCP: `active-local` for Brain only under explicit provider admission, isolated indexes, `auto_index=false`, and `auto_watch=false`; exact current source remains authority and wider repository rollout requires separate per-repository admission.
 - Graphify: one-time Mind baseline historical; future execution authority `none`; graphify-out/ and .graphify-out/ retired.
 - Save-to-Mind: live routing verified (B1.0a, 2026-07-22).
 - Continuous automation: Observation 005 is operational monitoring, not implementation work; continuous automation remains separately governed.
