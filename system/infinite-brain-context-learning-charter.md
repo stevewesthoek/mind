@@ -47,7 +47,7 @@ This feedback should happen in the conversation without requiring a special prom
 
 All unresolved durable human decisions must converge into **one logical Decision Center**.
 
-For Steve's deployment, the preferred human interface is a dedicated Decision Center surface in the Obsidian Brain Console. The queue itself is Brain-owned runtime state; Obsidian is a presentation and approval adapter, not the source of truth.
+For Steve's deployment, the preferred human interface is a dedicated Decision Center surface in the **Obsidian Brain Console plugin/cockpit**. This does not mean the separate standalone Brain Console web app on port `4881`; Steve's preferred primary human portal remains Obsidian. The queue itself is Brain-owned runtime state; Obsidian is a presentation and approval adapter, not the source of truth.
 
 The Decision Center should cover at least:
 
