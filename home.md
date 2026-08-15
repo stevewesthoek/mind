@@ -28,6 +28,7 @@ Canonical direction:
 3. `system/mind-roadmap.md`
 4. `system/mind-implementation-plan.md`
 5. `system/brain-mind-bridge.md`
+6. `system/infinite-brain-context-learning-charter.md` — post-closure owner charter for the Context & Learning Runtime; architecture/specification only until later phases are explicitly authorized.
 
 Brain's machine capability status is authoritative in:
 
