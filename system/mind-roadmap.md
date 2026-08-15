@@ -2,7 +2,7 @@
 
 **Status:** canonical cross-repo priority order
 **Version:** 2.0
-**Last reviewed:** 2026-08-11
+**Last reviewed:** 2026-08-15
 **Owner role:** Steve Westhoek (human authority)
 **Depends on:** `system/infinite-brain-philosophy.md`, `system/mind-strategy.md`
 **Conflict rule:** when this roadmap conflicts with philosophy or strategy, those take precedence. Brain's runtime roadmap is an implementation projection and must not reorder these priorities.
@@ -63,6 +63,46 @@ The `MS0.1`–`MS0.10` coordination namespace is closed and retained for histori
 evidence. Any future work requires a new documented gap or priority decision; roadmap
 closure itself authorizes no Brain edits, deployment, automation change, broad Mind
 write, deletion, external action, or blanket repository rollout.
+
+## Post-closure CLR coordination program
+
+The completed seven-priority Mind roadmap remains closed. The owner-approved
+**Context & Learning Runtime (CLR)** is a separate post-closure program and does
+not become an eighth historical priority.
+
+Current coordination state:
+
+```text
+CLR0 architecture/charter: COMPLETE
+CLR1 authority/freshness/storage foundation: COMPLETE
+CLR2-CLR8: NOT AUTHORIZED
+```
+
+Mind owns the human requirements for this program through
+`system/infinite-brain-context-learning-charter.md`. Brain owns the technical CLR
+architecture, implementation, runtime evidence, and capability truth.
+
+A specific cross-repo requirement is now canonical: supported consumers such as
+Workbench must be able to obtain fresh bounded Mind context **and** discover
+applicable Brain skills, orchestrators, runbooks, named CLI capabilities,
+validators, and admitted MCP servers/tools through versioned neutral provider
+contracts. Steve's Brain/Mind pair is one deployment profile, not a product-wide
+hard dependency. Other users and businesses may attach different context and
+capability sources through the same contracts.
+
+This requirement is ordered as follows:
+
+1. Brain CLR2 defines read-only context and capability discovery contracts.
+2. Brain CLR4 proves host/source-neutral packaging with alternate-provider fixtures.
+3. Workbench implements its own generic context/capability federation only after
+   its current reliability and context-compaction gates are accepted.
+4. Brain CLR8 proves Workbench conformance against both Steve's Brain/Mind profile
+   and at least one non-Brain provider fixture.
+5. ChatGPT/Workbench conversation ingestion remains a later CLR5 evidence-source
+   concern and requires a supported export/event/capture interface.
+
+No Workbench product code, new provider activation, conversation ingestion, or
+broad Mind write is authorized by this roadmap note.
 
 ## Priority 1 — Canonical coherence and migration closure
 

@@ -2,7 +2,7 @@
 
 **Status:** canonical roadmap  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-07-01
+**Last updated:** 2026-08-15
 
 ## Roadmap scope
 
@@ -202,6 +202,22 @@ wiki/organisations/prochat/brand/prochat-workbench-strategy.md
 ### Phase 1 — Reliability
 
 Maintain exact context reads, guarded file changes, allowlisted commands, persistent runs, targeted validation, and explicit Git operations.
+
+### Phase 1.5 — Portable context and capability federation
+
+After the local reliability baseline is accepted and before broadening onboarding or managed use, make Workbench able to consume context and capabilities through neutral versioned provider contracts rather than customer-specific integrations.
+
+Required direction:
+
+- context sources are pluggable and source-agnostic;
+- skills, orchestrators, runbooks, named CLIs, validators, MCP servers/tools, and future capabilities use compact discoverable provider descriptors;
+- Steve's Brain/Mind integration is a reference installation profile, not a Workbench product dependency;
+- at least one non-Brain/Mind fixture proves portability;
+- provider discovery cannot bypass Workbench policy, confirmation, validation, source locking, or Git discipline;
+- capability bodies are progressively retrieved rather than injected wholesale into every ChatGPT conversation;
+- installation, upgrade, migration, backup, and provider removal remain deterministic and reversible.
+
+This phase is technically queued behind the current Workbench reliability and context-compaction release gates. It does not authorize implementation merely because it appears in this Mind roadmap.
 
 ### Phase 2 — Onboarding
 

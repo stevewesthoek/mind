@@ -18,8 +18,8 @@ The system should make these statements true:
 1. Every supported AI session starts with a small, current, trusted orientation to Mind first and Brain second.
 2. The user does not have to prompt an LLM to "load Mind" or "load Brain" before useful work can begin.
 3. Context is retrieved progressively and atomically. The system sends the smallest useful cited context pack, then expands only when the task requires it.
-4. Claude Code, Codex, Gemini, Cursor, Kiro, Workbench, terminal clients, and future supported clients can use the same logical context interface.
-5. Local Office, MacBook, home-network, Tailscale, and future single-tenant VPS deployments use the same contracts even when transport differs.
+4. Claude Code, Codex, Gemini, Cursor, Kiro, Workbench, terminal clients, and future supported clients can use the same logical context interface; capable consumers such as Workbench should also discover applicable Brain skills, orchestrators, runbooks, named CLI capabilities, validators, and admitted MCP servers/tools through the same bounded provider architecture.
+5. Local Office, MacBook, home-network, Tailscale, and future single-tenant VPS deployments use the same contracts even when transport differs. Steve's Brain/Mind setup is one installation profile, not the generic product contract; other users may attach different context and capability sources through versioned adapters.
 6. Conversation evidence is mined for useful learning: repeated preferences, repeated workflows, decisions, corrections, failure episodes, successful repairs, reusable skills, runbook lessons, and strategy conflicts.
 7. A model should challenge Steve in the live conversation when a proposed direction conflicts with current canonical Mind strategy. The model must distinguish "this conflicts with current strategy" from "you are not allowed to change strategy."
 8. Durable learning remains reviewable, provenance-cited, freshness-aware, reversible, and approval-gated according to authority.

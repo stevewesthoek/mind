@@ -2,8 +2,8 @@
 
 **Status:** canonical product strategy  
 **Owner:** Steve Westhoek  
-**Last updated:** 2026-07-05  
-**Review after:** 2026-08-05  
+**Last updated:** 2026-08-15  
+**Review after:** 2026-09-15  
 **Freshness risk:** high
 
 ## Naming source of truth
@@ -107,6 +107,13 @@ Give Workbench a roadmap and a policy. It will execute locally until the goal is
 ## Capability broker direction
 
 Workbench should add a capability broker instead of raw integrations.
+
+Context and capability sources must also be provider-driven. Workbench may use
+Steve's Mind/Brain repositories as a high-value reference integration, but the
+product core must not encode those repository names, paths, taxonomy, host
+topology, or Steve-specific skills. Other users must be able to attach their own
+knowledge/context sources and capability catalogs through the same versioned
+contracts.
 
 ```text
 Workbench Core
@@ -272,6 +279,7 @@ The canonical product sequence is now stability-first. Workbench should become r
 15. Codex isolated worktree adapter.
 16. MCP client broker.
 17. Workbench MCP server.
+17.5. Source-agnostic context and capability federation: Workbench can consume bounded context plus skills, orchestrators, runbooks, named CLIs, validators, and MCP capabilities through neutral provider contracts; Steve's Brain/Mind integration is one profile, not product core.
 18. Cross-device ChatGPT/Codex handoff.
 19. Managed/team control plane only after repeated local value is proven.
 
