@@ -57,6 +57,27 @@ capture → normalize → brief → review → decide → prepare promotion → 
 
 Derived indexes, briefings, workflow files, calibration reports, and readiness reports are navigation and operational evidence. They do not replace Mind source files or Brain canonical contracts.
 
+### What Infinite Brain is
+
+Infinite Brain is the operating relationship between the human-owned Mind vault and the capability-owned Brain repository:
+
+- **Mind and Obsidian** hold human meaning, source material, priorities, decisions, and approved knowledge. `inbox/new/` is the normal entry point for unreviewed information.
+- **Brain Core** is the machine boundary. It exposes bounded evidence, review, projection, validation, and safety contracts; it is not a second Mind.
+- **Brain Console** is an optional read-oriented operations surface over Brain Core. It presents projections and status; it does not bypass Brain Core or become a knowledge store.
+- **Claude Code, Codex, and Workbench** are bounded adapters for reasoning, implementation, validation, and controlled execution. Explicitly selected session output is evidence only when routed through the existing review boundary.
+
+The current path is:
+
+```text
+Mind inbox/new, GitHub reference, selected AI-session evidence, or document
+  → bounded ingestion/evidence envelope
+  → unified review inbox and briefing
+  → daily review and human decision
+  → optional, explicitly approved promotion
+```
+
+Only a human can decide that information changes Mind knowledge, meaning, priorities, or commitments.
+
 ## Active now
 
 The following capabilities are active as bounded, human-controlled workflows:
@@ -74,15 +95,21 @@ The following capabilities are active as bounded, human-controlled workflows:
 - **Operational feedback calibration:** real workflow artifacts can produce report-only signals about repeated reviews, stale evidence, missing context, duplicates, failed ingestion, and friction.
 - **Readiness checks:** the system can report capability availability, data health, workflow health, empty runtime state, and operator guidance without repairing anything automatically.
 - **Operational learning checkpoint:** after real usage, observations can be separated into immediate fixes, future capabilities, and experimental ideas. These remain observations until separately reviewed.
+- **GitHub repository intelligence:** explicitly supplied public repository references can receive bounded metadata, documentation, architecture, and fit evidence through the existing review workflow. It is advisory and does not clone, execute, inspect source, or adopt a repository.
+- **Conversation intelligence:** explicitly selected Claude, Codex, or Workbench session evidence can become bounded review candidates without transcript databases, broad scanning, automatic discovery, or automatic promotion.
+- **Brain Console projections:** the optional Console exposes current Brain Core projections and operational status through the existing safety boundary.
+- **Operational adoption:** real Mind inbox usage, review decisions, calibration, friction, and readiness evidence have been collected. Feature expansion is paused while operational learning continues.
 
 These capabilities support review and preparation. They do not autonomously write Mind, rewrite Brain canonical state, call providers, schedule themselves, or promote knowledge.
+
+**Current state:** Infinite Brain is ready for daily usage. Feature expansion is paused; the focus is operational learning, measurement, stabilization, and ergonomics.
 
 ## Planned / future
 
 The following are not active capabilities and must not be represented as operational:
 
-- GitHub repository intelligence;
-- deeper automatic conversation mining;
+- automatic GitHub discovery, repository cloning, source/dependency analysis, or undocumented architecture inference;
+- automatic conversation mining, historical session ingestion, or transcript storage;
 - multimodal or video understanding;
 - autonomous maintenance or predictive actions;
 - automatic memory creation or learning;
@@ -108,6 +135,8 @@ Put human-owned information in Mind and use Brain to process, retrieve, validate
 6. Run calibration and readiness after meaningful review activity.
 7. Leave unresolved or uncertain items visible; do not force a conclusion.
 
+Weekly, review calibration signals, friction notes, capability health, unresolved decisions, and any unused or unstable capability. Do not turn one friction observation into a feature request until it repeats in real work and is separately authorized.
+
 The Brain-side commands are documented in:
 
 ```text
@@ -115,6 +144,21 @@ The Brain-side commands are documented in:
 /Users/Office/Repos/stevewesthoek/brain/operations/runbooks/mind-steward-operational-feedback-calibration.md
 /Users/Office/Repos/stevewesthoek/brain/operations/runbooks/mind-steward-operational-readiness.md
 ```
+
+The verified complete daily-review entrypoint is:
+
+```bash
+MIND_STEWARD_MIND_ROOT=/Users/Office/Repos/stevewesthoek/mind \
+node tools/scripts/mind-steward-daily-review.mjs
+```
+
+For the read-only daily view alone:
+
+```bash
+node tools/scripts/mind-steward-daily-intelligence-loop.mjs
+```
+
+Daily review composes ingestion, briefing, workflow, daily loop, calibration, and readiness artifacts. Read the generated attention queue and runtime-local reports; readiness identifies blockers but does not repair, decide, promote, or write canonical state.
 
 ### Where do I put information?
 
@@ -137,6 +181,11 @@ Ask the relevant environment to retrieve the smallest context pack and cite its 
 - “What changed recently?”
 - “What does Infinite Brain know about this?”
 - “What decisions were made?”
+- “What did we learn yesterday?”
+- “What needs my attention?”
+- “What GitHub repositories were analyzed?”
+- “What evidence is waiting for review?”
+- “What changed in the system?”
 - “What should be improved?”
 
 When an answer affects beliefs, strategy, identity, priorities, or commitments, verify it against canonical Mind sources before treating it as truth.
@@ -191,6 +240,30 @@ Significant evolution history:
 | 2026-08-23 | This human operating manual synchronized with the current architecture | Keep the highest-level entry point accurate | Active and future capabilities are clearly separated | Treat this page as the starting orientation |
 
 Future entries should capture the date, change, reason, operational impact, and user action required. Historical entries describe what changed at the time; they do not authorize future capability.
+
+### Infinite Brain capability release history
+
+“Active” means available for bounded human-controlled use; it does not mean automatic or autonomous. Testing remains continuous against Brain contracts and real operational evidence.
+
+| Milestone / released | Capability and purpose | Status | How to use | Still needs testing |
+|---|---|---|---|---|
+| MRU0-P3.17–P3.20 · 2026-08-23 | Unified review inbox, briefing, review workflow, and controlled promotion boundary | Active | Run daily review, inspect evidence, record an explicit decision, and prepare promotion only after acceptance | Repeated real review outcomes and promotion receipts |
+| MRU0-P3.21–P3.24 · 2026-08-23 | Daily loop, calibration, readiness, and operational learning checkpoint | Active | Run the daily loop after review activity; inspect calibration and readiness | At least two weeks or ten completed review sessions |
+| MRU0-P3.25 · 2026-08-23 | Brain Core projections and Brain Console operational views | Active | Use the optional Console for read-oriented status and projections through Brain Core | Continued UI/runtime compatibility and operator ergonomics |
+| MRU0-P3.26–P3.32 · 2026-08-24 | Human review cycles, evidence preview, cockpit refinement, and review-intelligence quality | Active | Follow source/evidence references, record decisions, and use calibration to identify friction | More real workload and usefulness measurements |
+| MRU0-P3.33–P3.41 · 2026-08-24 | GitHub evidence, metadata, fit, documentation, and bounded architecture intelligence | Active, advisory | Supply an explicit public GitHub reference and request bounded enrichment during daily review | More real candidates and fit calibration; no source inspection or automatic adoption |
+| MRU0-P3.42–P3.47 · 2026-08-24 | Conversation evidence, operator evaluation, privacy benchmark, and structured extraction improvement | Active, review-only | Supply explicitly selected session evidence and inspect candidates in the existing review workflow | More privacy-safe real usage before any controlled discovery decision |
+| MRU0-P3.48 · 2026-08-24 | Operational adoption, health stabilization, usage, friction, and capability reporting | Active, feature-frozen | Use real Mind inbox work, record decisions, review calibration/friction, and reassess later | Two weeks or ten completed sessions before the next roadmap decision |
+
+Experimental or deferred work requires separate authorization. No hidden release is implied by a passing test or available adapter.
+
+### Release discipline
+
+```text
+Build → Test → Validate → Document → Activate → Use → Improve
+```
+
+Capabilities become live only after their evidence, safety boundary, documentation, and human workflow are validated. Large hidden releases, automatic promotion, and silent authority changes are not part of the operating model.
 
 ## Canonical references
 
