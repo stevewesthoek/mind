@@ -46,7 +46,7 @@ Key technical details:
 - `page.route('**syncusercontent**')` — intercepts the signed download URL before the browser starts downloading
 - `curl -C -` — resumes partial downloads; handles files up to 4 hours
 - `com.google.drivefs.item-id` xattr — detects files on Google Drive (including offloaded 0-byte stubs)
-- Source availability check runs on every nightly run; if the sync.com link is unreachable or returns 0 items, the job fails immediately with a clear error visible in the ProBot dashboard
+- Source availability check runs on every nightly run; if the sync.com link is unreachable or returns 0 items, the job fails immediately with a clear error visible in Brain Console job status or logs
 
 ## Running it
 
