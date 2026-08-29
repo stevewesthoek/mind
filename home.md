@@ -98,9 +98,12 @@ The following capabilities are active as bounded, human-controlled workflows:
 - **GitHub repository intelligence:** explicitly supplied public repository references can receive bounded metadata, documentation, architecture, and fit evidence through the existing review workflow. It is advisory and does not clone, execute, inspect source, or adopt a repository.
 - **Conversation intelligence:** explicitly selected Claude, Codex, or Workbench session evidence can become bounded review candidates without transcript databases, broad scanning, automatic discovery, or automatic promotion.
 - **Brain Console projections:** the optional Console exposes current Brain Core projections and operational status through the existing safety boundary.
-- **Operational adoption:** real Mind inbox usage, review decisions, calibration, friction, and readiness evidence have been collected. Feature expansion is paused while operational learning continues.
+- **Unified Save-to-Mind video ingestion:** a captured video reference can enter through Save-to-Mind, be selected by the existing asynchronous Brain queue, normalized into the canonical video-analysis request, enriched with transcript plus timestamped visual observations, and written as an audited processed Mind artifact through the bounded Apply-one writer. Compatible completed analyses can be reused instead of invoking a provider again.
+- **Brain Console Video Analyzer:** the Console uses the same canonical Brain video-analysis backend rather than a separate analyzer. It can show transcript, summary, timestamped visual findings, recent history, and provider/frame evidence from the canonical result.
+- **Agent/CLI video access:** Codex and Claude Code can use the same Brain-owned video operation and cache. The agent is a client of the capability; neither Codex nor Claude owns a separate video implementation.
+- **Operational adoption:** real Mind inbox usage, review decisions, calibration, friction, readiness, and accepted video-ingestion evidence have been collected. New expansion remains a separate decision from operating the accepted capabilities.
 
-These capabilities support review and preparation. They do not autonomously write Mind, rewrite Brain canonical state, call providers, schedule themselves, or promote knowledge.
+These capabilities support bounded processing and controlled writes. They do not autonomously redefine Mind meaning, priorities, identity, strategy, or commitments. Provider calls, writes, and promotion remain subject to Brain capability, policy, audit, and human-governance boundaries.
 
 **Current state:** Infinite Brain is ready for daily usage. Feature expansion is paused; the focus is operational learning, measurement, stabilization, and ergonomics.
 
@@ -110,7 +113,6 @@ The following are not active capabilities and must not be represented as operati
 
 - automatic GitHub discovery, repository cloning, source/dependency analysis, or undocumented architecture inference;
 - automatic conversation mining, historical session ingestion, or transcript storage;
-- multimodal or video understanding;
 - autonomous maintenance or predictive actions;
 - automatic memory creation or learning;
 - automatic daily scheduling;
@@ -118,6 +120,46 @@ The following are not active capabilities and must not be represented as operati
 - any new provider, ingestion system, dashboard, analytics store, or authority layer without a separate authorization and acceptance gate.
 
 Future work must preserve the Mind/Brain boundary, provenance, reversibility, privacy, and human approval.
+
+## Save-to-Mind and Video Analyzer manual
+
+The accepted video workflow has one Brain-owned analysis pipeline with multiple entry points. The entry point changes how a request starts; it does not change the canonical analysis engine.
+
+```text
+macOS Save-to-Mind / Brain Console Video Analyzer / Codex / Claude Code
+  → canonical Brain video-analysis request
+  → asynchronous queue or direct canonical call
+  → source acquisition
+  → transcript/captions
+  → selected timestamped frames
+  → visual analysis when required
+  → canonical cached result
+  → optional audited Apply-one Mind write
+```
+
+### Using Save-to-Mind for video
+
+Send the video reference through the normal Save-to-Mind capture workflow. Capture should return promptly; video processing happens through the existing Brain queue rather than inside the capture request. Brain normalizes the request, looks for a compatible completed analysis, and reuses it when the source and analysis semantics match. If new analysis is required, transcript and selected visual frames are processed under the active provider and cost policy. A successful persisted result is written under `inbox/processed/video-analysis/` through the audited Apply-one writer, with the original capture remaining traceable.
+
+The verified end-to-end acceptance used a public YouTube source. Other source adapters must be treated according to their own tested/accepted status rather than assumed equivalent.
+
+### Using Brain Console Video Analyzer
+
+Open **Brain Console → Video Analyzer** and submit the video source plus an optional focus. The Console is a client of the canonical Brain service. It should show the transcript, summary, timestamped visual findings, recent analysis history, and frame/provider evidence. Reopening a compatible completed job should reuse the canonical result rather than create a second analyzer or unnecessary paid inference.
+
+### Using Codex or Claude Code
+
+Ask the agent to use the repository-owned Brain video-analysis operation for the supplied video and, when desired, persist the accepted result to Mind. Codex and Claude Code are clients of the same operation and cache; neither should reimplement the analyzer. A useful request is: `Analyze this video with Brain, include transcript and timestamped visual findings, and save the result to Mind if the bounded writer policy permits.`
+
+### What happens during analysis
+
+Brain prefers existing captions/transcript evidence when available, extracts scene-aware timestamped frames locally, and sends only the bounded selected visual evidence required by the active analysis policy. Cache identity is semantic: compatible callers can share a completed result, while focus differences remain part of the analysis identity. Partial/stale work must not block a compatible completed result. Provider use is not assumed free; the accepted production path can use Bedrock vision, while completed cache reuse avoids repeated inference where valid.
+
+### Human intervention and safety
+
+Human intervention is still required when a workflow crosses an authority or approval boundary. In particular, a generated analysis does not by itself change canonical beliefs, priorities, strategy, identity, commitments, or other human-owned Mind knowledge. Provider/cost authorization, writer scope, destination allowlists, preview/hash binding, audit evidence, rollback, and post-write validation remain governed by Brain policy. If a workflow reports `blocked`, a policy confirmation is required, or a source/provider is outside its accepted scope, do not bypass the control; resolve or authorize that bounded step explicitly.
+
+Operational troubleshooting should distinguish these layers: capture success, queue selection, canonical request identity, cached/computed analysis, and Apply-one persistence. Failed or blocked intake remains visible in `inbox/failed/`; processed video-analysis artifacts belong under `inbox/processed/video-analysis/`.
 
 ## Daily operating guide
 
@@ -238,6 +280,7 @@ Significant evolution history:
 | 2026-07-31 | Philosophy and Mind/Brain authority model reviewed | Preserve human meaning and machine capability boundaries | Mind remains human-owned; Brain remains operational | Use the correct repository for the question |
 | 2026-08-23 | Unified inbox, briefing, review, promotion, daily loop, calibration, readiness, and learning checkpoint aligned | Make the review loop usable and measurable without autonomous learning | Evidence can be reviewed and prepared for promotion with explicit human control | Run the daily loop, review evidence, and reassess after real usage |
 | 2026-08-23 | This human operating manual synchronized with the current architecture | Keep the highest-level entry point accurate | Active and future capabilities are clearly separated | Treat this page as the starting orientation |
+| 2026-08-29 | Unified Save-to-Mind video ingestion and Brain Console Video Analyzer accepted end-to-end and integrated into Brain `main` | Provide one canonical transcript + visual-analysis pipeline across capture, Console, Codex, and Claude Code | Video captures can be queued asynchronously, reuse compatible cached analysis, and persist an audited processed artifact through the bounded Apply-one writer | Use Save-to-Mind or Video Analyzer normally; intervene only for policy/cost/authority blocks or review of resulting knowledge |
 
 Future entries should capture the date, change, reason, operational impact, and user action required. Historical entries describe what changed at the time; they do not authorize future capability.
 
